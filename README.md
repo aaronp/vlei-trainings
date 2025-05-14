@@ -48,7 +48,7 @@ To deploy the training environment, we use Docker to create a local instance of 
 1.  **Jupyter Lab:**
     Open your web browser and navigate to [http://localhost:8888](http://localhost:8888).
 
-## Report improvement points and Feedback
+## Report issues and Feedback
 We welcome your feedback to improve these training materials!
 
 If you find any errors, typos, or areas that could be clearer, or if you have suggestions for new content or improvements, please let us know. The way to do this is by creating an issue on our GitHub repository.
