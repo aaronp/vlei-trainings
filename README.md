@@ -27,7 +27,7 @@ To deploy the training environment, we use Docker to create a local instance of 
 
 1.  **Clone the Repository:**
     ```bash
-    git clone git clone https://github.com/GLEIF-IT/vlei-trainings.git
+    git clone https://github.com/GLEIF-IT/vlei-trainings.git
     cd vlei-trainings
     ```
 
@@ -48,6 +48,18 @@ To deploy the training environment, we use Docker to create a local instance of 
 1.  **Jupyter Lab:**
     Open your web browser and navigate to [http://localhost:8888](http://localhost:8888).
 
+## Report issues and Feedback
+We welcome your feedback to improve these training materials!
+
+If you find any errors, typos, or areas that could be clearer, or if you have suggestions for new content or improvements, please let us know. The way to do this is by creating an issue on our GitHub repository.
+
+How to report an issue or provide feedback:
+- Go to the Issues tab of the vlei-trainings repository **[(or click here)](https://github.com/GLEIF-IT/vlei-trainings/issues)**.
+- Click on the "New issue" button.
+- Provide a descriptive title and a clear explanation of the issue or your feedback. If you are reporting a bug, please include steps to reproduce - it if possible.
+- Submit the issue.
+
+We appreciate your help in making these training materials as accurate and effective as possible!
 
 ### Authors
 - Esteban Garcia (GLEIF)
