@@ -13,7 +13,14 @@ import {
 export const DEFAULT_ADMIN_URL = 'http://keria:3901'; 
 export const DEFAULT_BOOT_URL = 'http://keria:3903';  
 export const DEFAULT_TIMEOUT_MS = 30000; // 30 seconds for operations
+export const DEFAULT_DELAY_MS = 5000; // 5 seconds for operations
+export const DEFAULT_RETRIES = 5;     // For retries
 export const ROLE_AGENT = 'agent'
+export const IPEX_GRANT_ROUTE = '/exn/ipex/grant'
+export const IPEX_ADMIT_ROUTE = '/exn/ipex/admit'
+export const IPEX_APPLY_ROUTE = '/exn/ipex/apply'
+export const IPEX_OFFER_ROUTE = '/exn/ipex/offer'
+export const SCHEMA_SERVER_HOST = 'http://vlei-server:7723/';
 
 export const DEFAULT_IDENTIFIER_ARGS = {
     toad: 3,
