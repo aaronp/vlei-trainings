@@ -6,7 +6,8 @@ import {
     CreateIdentiferArgs,
     State,
     Operation,
-    Contact
+    Contact,
+    Serder
 } from 'npm:signify-ts';
 
 // Default Keria connection parameters (adjust as needed for your environment)
@@ -324,6 +325,522 @@ export async function markChallengeAuthenticated(
 export function createTimestamp() {
     return new Date().toISOString().replace('Z', '000+00:00');
 }
+
+/**
+ * Creates a new credential registry for an AID.
+ * @param {SignifyClient} client - The SignifyClient instance.
+ * @param {string} aidAlias - The alias of the AID creating the registry.
+ * @param {string} registryName - A human-readable name for the registry.
+ * @returns {Promise<{ registry: any; operation: Operation<any> }>} The created registry details and operation.
+ */
+export async function createCredentialRegistry(
+    client: SignifyClient,
+    aidAlias: string,
+    registryName: string
+): Promise<{ registrySaid: any; operation: Operation<any> }> {
+    console.log(`Creating credential registry "${registryName}" for AID alias "${aidAlias}"...`);
+    try {
+        const createRegistryResult = await client
+            .registries()
+            .create({ name: aidAlias, registryName: registryName });
+
+        const operationDetails = await createRegistryResult.op();
+        const completedOperation = await client
+            .operations()
+            .wait(operationDetails, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+        if (completedOperation.error) {
+            throw new Error(`Credential registry creation failed: ${JSON.stringify(completedOperation.error)}`);
+        }
+
+        const registrySaid = completedOperation?.response?.anchor?.i;
+        console.log(`Successfully created credential registry: ${registrySaid}`);
+        
+        await client.operations().delete(completedOperation.name);
+        return { registrySaid, operation: completedOperation };
+    } catch (error) {
+        console.error(`Failed to create credential registry "${registryName}":`, error);
+        throw error;
+    }
+}
+
+/**
+ * Retrieves a schema by its SAID.
+ * @param {SignifyClient} client - The SignifyClient instance.
+ * @param {string} schemaSaid - The SAID of the schema to retrieve.
+ * @returns {Promise<any>} The schema object.
+ */
+export async function getSchema(
+    client: SignifyClient,
+    schemaSaid: string
+): Promise<any> {
+    console.log(`Retrieving schema with SAID: ${schemaSaid}...`);
+    try {
+        const schema = await client.schemas().get(schemaSaid);
+        console.log(`Successfully retrieved schema: ${schemaSaid}`);
+        return schema;
+    } catch (error) {
+        console.error(`Failed to retrieve schema "${schemaSaid}":`, error);
+        throw error;
+    }
+}
+
+/**
+ * Issues a new credential.
+ * @param {SignifyClient} client - The SignifyClient instance.
+ * @param {string} issuerAidAlias - The alias of the issuing AID.
+ * @param {string} registryIdentifier - The identifier (regk) of the registry.
+ * @param {string} schemaSaid - The SAID of the credential's schema.
+ * @param {string} holderAidPrefix - The prefix of the AID to whom the credential will be issued.
+ * @param {any} credentialClaims - The claims/attributes of the credential.
+ * @returns {Promise<{ credentialSad: any; credentialSaid: string; operation: Operation<any> }>} The issued credential's SAD, SAID, and operation.
+ */
+export async function issueCredential(
+    client: SignifyClient,
+    issuerAidAlias: string,
+    registryIdentifier: string,
+    schemaSaid: string,
+    holderAidPrefix: string,
+    credentialClaims: any
+): Promise<{ credentialSaid: string; operation: Operation<any> }> {
+    console.log(`Issuing credential from AID "${issuerAidAlias}" to AID "${holderAidPrefix}"...`);
+    try {
+        const issueResult = await client
+            .credentials()
+            .issue(
+                issuerAidAlias,
+                {
+                    ri: registryIdentifier,
+                    s: schemaSaid,
+                    a: {
+                        i: holderAidPrefix,
+                        ...credentialClaims
+                    }
+                });
+
+        const operationDetails = await issueResult.op;
+        const completedOperation = await client
+            .operations()
+            .wait(operationDetails, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+        if (completedOperation.error) {
+            throw new Error(`Credential issuance failed: ${JSON.stringify(completedOperation.error)}`);
+        }
+        console.log(completedOperation) // ************
+        const credentialSad = completedOperation.response; // The full Self-Addressing Data (SAD) of the credential
+        const credentialSaid = credentialSad?.ced?.d; // The SAID of the credential
+        console.log(`Successfully issued credential with SAID: ${credentialSaid}`);
+
+        await client.operations().delete(completedOperation.name);
+        return { credentialSaid, operation: completedOperation };
+    } catch (error) {
+        console.error('Failed to issue credential:', error);
+        throw error;
+    }
+}
+
+/**
+ * Submits an IPEX grant for a credential.
+ * @param {SignifyClient} client - The SignifyClient instance of the issuer.
+ * @param {string} senderAidAlias - The alias of the AID granting the credential.
+ * @param {string} recipientAidPrefix - The AID prefix of the recipient (holder).
+ * @param {any} acdc - The ACDC (credential).
+ * @returns {Promise<{ operation: Operation<any> }>} The operation details.
+ */
+export async function ipexGrantCredential(
+    client: SignifyClient,
+    senderAidAlias: string,
+    recipientAidPrefix: string,
+    acdc: any
+): Promise<{ operation: Operation<any> }> {
+    console.log(`AID "${senderAidAlias}" granting credential to AID "${recipientAidPrefix}" via IPEX...`);
+    try {
+       
+        const [grant, gsigs, gend] = await client.ipex().grant({
+            senderName: senderAidAlias,
+            acdc: new Serder(acdc?.sad),
+            iss: new Serder(acdc?.iss),
+            anc: new Serder(acdc?.anc),
+            ancAttachment: acdc.ancatc,
+            recipient: recipientAidPrefix,
+            datetime: createTimestamp(),
+        });
+
+        const submitGrantOperationDetails = await client
+            .ipex()
+            .submitGrant(senderAidAlias, grant, gsigs, gend, [recipientAidPrefix]);
+        
+        const completedOperation = await client
+            .operations()
+            .wait(submitGrantOperationDetails, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+        if (completedOperation.error) {
+            throw new Error(`IPEX grant submission failed: ${JSON.stringify(completedOperation.error)}`);
+        }
+
+        console.log(`Successfully submitted IPEX grant from "${senderAidAlias}" to "${recipientAidPrefix}".`);
+        await client.operations().delete(completedOperation.name);
+        return { operation: completedOperation };
+    } catch (error) {
+        console.error('Failed to submit IPEX grant:', error);
+        throw error;
+    }
+}
+
+/**
+ * Retrieves the state of a credential.
+ * Includes retry logic as this might be called before the information has propagated.
+ * @param {SignifyClient} client - The SignifyClient instance.
+ * @param {string} registryIdentifier - The registry identifier (regk).
+ * @param {string} credentialSaid - The SAID of the credential.
+ * @param {number} [retries=DEFAULT_RETRIES] - Number of retry attempts.
+ * @param {number} [delayMs=DEFAULT_DELAY_MS] - Delay between retries in milliseconds.
+ * @returns {Promise<any>} The credential state.
+ */
+export async function getCredentialState(
+    client: SignifyClient,
+    registryIdentifier: string,
+    credentialSaid: string,
+    retries: number = DEFAULT_RETRIES,
+    delayMs: number = DEFAULT_DELAY_MS
+): Promise<any> {
+    console.log(`Querying credential state for SAID "${credentialSaid}" in registry "${registryIdentifier}"...`);
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            const credentialState = await client.credentials().state(registryIdentifier, credentialSaid);
+            console.log('Successfully retrieved credential state.');
+            return credentialState;
+        } catch (error: any) {
+            console.warn(`[Attempt ${attempt}/${retries}] Failed to get credential state: ${error.message}`);
+            if (attempt === retries) {
+                console.error(`Max retries (${retries}) reached for getting credential state.`);
+                throw error;
+            }
+            await new Promise(resolve => setTimeout(resolve, delayMs));
+        }
+    }
+    // Should not be reached if retries > 0
+    throw new Error('Failed to get credential state after all retries.');
+}
+
+/**
+ * Waits for and retrieves a specific notification.
+ * @param {SignifyClient} client - The SignifyClient instance.
+ * @param {string} expectedRoute - The expected route in the notification attributes (e.g., IPEX_GRANT_ROUTE).
+ * @param {number} [retries=DEFAULT_RETRIES] - Number of retry attempts.
+ * @param {number} [delayMs=DEFAULT_DELAY_MS] - Delay between retries in milliseconds.
+ * @returns {Promise<any>} The first matching unread notification.
+ */
+export async function waitForAndGetNotification(
+    client: SignifyClient,
+    expectedRoute: string,
+    retries: number = DEFAULT_RETRIES,
+    delayMs: number = DEFAULT_DELAY_MS
+): Promise<any> {
+    console.log(`Waiting for notification with route "${expectedRoute}"...`);
+    
+    let notifications;
+    
+    // Retry loop to fetch notifications.
+    for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
+        try{
+            // List notifications, filtering for unread IPEX_GRANT_ROUTE messages.
+            let allNotifications = await client.notifications().list()
+            notifications = allNotifications.notes.filter(
+                (n) => n.a.r === expectedRoute && n.r === false // n.r is 'read' status
+            );
+            if(notifications.length === 0){ 
+                throw new Error("Notification not found yet."); // Throw error to trigger retry
+            }
+            return notifications;     
+        }
+        catch (error){    
+             console.log(`[Retry] Grant notification not found on attempt #${attempt} of ${DEFAULT_RETRIES}`);
+             if (attempt === DEFAULT_RETRIES) {
+                 console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for grant notification.`);
+                 throw error; 
+             }
+             console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
+             await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
+        }
+    }
+}
+
+/**
+ * Submits an IPEX admit (accepts a grant).
+ * @param {SignifyClient} client - The SignifyClient instance of the holder.
+ * @param {string} senderAidAlias - The alias of the AID admitting the grant.
+ * @param {string} recipientAidPrefix - The AID prefix of the original grantor.
+ * @param {string} grantSaid - The SAID of the grant being admitted.
+ * @param {string} [message=''] - Optional message for the admit.
+ * @returns {Promise<{ operation: Operation<any> }>} The operation details.
+ */
+export async function ipexAdmitGrant(
+    client: SignifyClient,
+    senderAidAlias: string,
+    recipientAidPrefix: string,
+    grantSaid: string,
+    message: string = ''
+): Promise<{ operation: Operation<any> }> {
+    console.log(`AID "${senderAidAlias}" admitting IPEX grant "${grantSaid}" from AID "${recipientAidPrefix}"...`);
+    try {
+        const [admit, sigs, aend] = await client.ipex().admit({
+            senderName: senderAidAlias,
+            message: message,
+            grantSaid: grantSaid,
+            recipient: recipientAidPrefix,
+            datetime: createTimestamp(),
+        });
+
+        const admitOperationDetails = await client
+            .ipex()
+            .submitAdmit(senderAidAlias, admit, sigs, aend, [recipientAidPrefix]);
+        
+        const completedOperation = await client
+            .operations()
+            .wait(admitOperationDetails, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+        if (completedOperation.error) {
+            throw new Error(`IPEX admit submission failed: ${JSON.stringify(completedOperation.error)}`);
+        }
+        console.log(`Successfully submitted IPEX admit for grant "${grantSaid}".`);
+        await client.operations().delete(completedOperation.name);
+        return { operation: completedOperation };
+    } catch (error) {
+        console.error('Failed to submit IPEX admit:', error);
+        throw error;
+    }
+}
+
+/**
+ * Marks a notification as read.
+ * @param {SignifyClient} client - The SignifyClient instance.
+ * @param {string} notificationId - The ID of the notification to mark.
+ * @returns {Promise<void>}
+ */
+export async function markNotificationRead(
+    client: SignifyClient,
+    notificationId: string
+): Promise<void> {
+    console.log(`Marking notification "${notificationId}" as read...`);
+    try {
+        await client.notifications().mark(notificationId);
+        console.log(`Notification "${notificationId}" marked as read.`);
+    } catch (error) {
+        console.error(`Failed to mark notification "${notificationId}" as read:`, error);
+        throw error;
+    }
+}
+
+/**
+ * Deletes a notification.
+ * @param {SignifyClient} client - The SignifyClient instance.
+ * @param {string} notificationId - The ID of the notification to delete.
+ * @returns {Promise<void>}
+ */
+export async function deleteNotification(
+    client: SignifyClient,
+    notificationId: string
+): Promise<void> {
+    console.log(`Deleting notification "${notificationId}"...`);
+    try {
+        await client.notifications().delete(notificationId);
+        console.log(`Notification "${notificationId}" deleted.`);
+    } catch (error) {
+        console.error(`Failed to delete notification "${notificationId}":`, error);
+        throw error;
+    }
+}
+
+
+//--------------------------------------------------------------------------------
+
+// --- Credential Presentation Functions ---
+
+/**
+ * Submits an IPEX apply (presentation request).
+ * @param {SignifyClient} client - The SignifyClient instance of the verifier.
+ * @param {string} senderAidAlias - The alias of the AID applying for presentation.
+ * @param {string} recipientAidPrefix - The AID prefix of the holder.
+ * @param {string} schemaSaid - The SAID of the schema being requested.
+ * @param {any} attributes - The attributes being requested for the credential.
+ * @param {string} datetime - The timestamp for the apply.
+ * @returns {Promise<{ operation: Operation<any>; applySaid: string }>} The operation details and SAID of the apply exn.
+ */
+export async function ipexApplyForCredential(
+    client: SignifyClient,
+    senderAidAlias: string,
+    recipientAidPrefix: string,
+    schemaSaid: string,
+    attributes: any,
+    datetime: string
+): Promise<{ operation: Operation<any>; applySaid: string }> {
+    console.log(`AID "${senderAidAlias}" applying for credential presentation from AID "${recipientAidPrefix}"...`);
+    try {
+        const [apply, sigs, _] = await client.ipex().apply({
+            senderName: senderAidAlias,
+            schemaSaid: schemaSaid,
+            attributes: attributes,
+            recipient: recipientAidPrefix,
+            datetime: datetime,
+        });
+        
+        const applySaid = new Serder(apply).said; // Get SAID of the apply message itself
+
+        const applyOperationDetails = await client
+            .ipex()
+            .submitApply(senderAidAlias, apply, sigs, [recipientAidPrefix]);
+
+        const completedOperation = await client
+            .operations()
+            .wait(applyOperationDetails, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+        if (completedOperation.error) {
+            throw new Error(`IPEX apply submission failed: ${JSON.stringify(completedOperation.error)}`);
+        }
+        console.log(`Successfully submitted IPEX apply with SAID "${applySaid}".`);
+        await client.operations().delete(completedOperation.name);
+        return { operation: completedOperation, applySaid };
+    } catch (error) {
+        console.error('Failed to submit IPEX apply:', error);
+        throw error;
+    }
+}
+
+/**
+ * Finds matching credentials based on a filter.
+ * @param {SignifyClient} client - The SignifyClient instance of the holder.
+ * @param {any} filter - The filter object to apply (e.g., { '-s': schemaSaid, '-a-attributeName': value }).
+ * @returns {Promise<any[]>} An array of matching credentials.
+ */
+export async function findMatchingCredentials(
+    client: SignifyClient,
+    filter: any
+): Promise<any[]> {
+    console.log('Finding matching credentials with filter:', filter);
+    try {
+        const matchingCredentials = await client.credentials().list({ filter });
+        console.log(`Found ${matchingCredentials.length} matching credentials.`);
+        return matchingCredentials;
+    } catch (error) {
+        console.error('Failed to find matching credentials:', error);
+        throw error;
+    }
+}
+
+/**
+ * Submits an IPEX offer (presents a credential).
+ * @param {SignifyClient} client - The SignifyClient instance of the holder.
+ * @param {string} senderAidAlias - The alias of the AID offering the credential.
+ * @param {string} recipientAidPrefix - The AID prefix of the verifier.
+ * @param {any} acdcSad - The Self-Addressing Data (SAD) of the ACDC being offered.
+ * @param {string} applySaid - The SAID of the IPEX apply message this offer is responding to.
+ * @param {string} datetime - The timestamp for the offer.
+ * @returns {Promise<{ operation: Operation<any> }>} The operation details.
+ */
+export async function ipexOfferCredential(
+    client: SignifyClient,
+    senderAidAlias: string,
+    recipientAidPrefix: string,
+    acdcSad: any, // This is the SAD of the credential to be offered
+    applySaid: string,
+    datetime: string
+): Promise<{ operation: Operation<any> }> {
+    console.log(`AID "${senderAidAlias}" offering credential to AID "${recipientAidPrefix}" in response to apply "${applySaid}"...`);
+    try {
+        const [offer, sigs, end] = await client.ipex().offer({
+            senderName: senderAidAlias,
+            recipient: recipientAidPrefix,
+            acdc: new Serder(acdcSad), // The credential SAD needs to be wrapped in Serder
+            applySaid: applySaid,
+            datetime: datetime,
+        });
+
+        const offerOperationDetails = await client
+            .ipex()
+            .submitOffer(senderAidAlias, offer, sigs, end, [recipientAidPrefix]);
+        
+        const completedOperation = await client
+            .operations()
+            .wait(offerOperationDetails, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+        if (completedOperation.error) {
+            throw new Error(`IPEX offer submission failed: ${JSON.stringify(completedOperation.error)}`);
+        }
+        console.log(`Successfully submitted IPEX offer in response to apply "${applySaid}".`);
+        await client.operations().delete(completedOperation.name);
+        return { operation: completedOperation };
+    } catch (error) {
+        console.error('Failed to submit IPEX offer:', error);
+        throw error;
+    }
+}
+
+/**
+ * Submits an IPEX agree (verifier agrees to the offered credential).
+ * @param {SignifyClient} client - The SignifyClient instance of the verifier.
+ * @param {string} senderAidAlias - The alias of the AID agreeing to the offer.
+ * @param {string} recipientAidPrefix - The AID prefix of the holder who made the offer.
+ * @param {string} offerSaid - The SAID of the IPEX offer message being agreed to.
+ * @param {string} datetime - The timestamp for the agree.
+ * @returns {Promise<{ operation: Operation<any> }>} The operation details.
+ */
+export async function ipexAgreeToOffer(
+    client: SignifyClient,
+    senderAidAlias: string,
+    recipientAidPrefix: string,
+    offerSaid: string,
+    datetime: string
+): Promise<{ operation: Operation<any> }> {
+    console.log(`AID "${senderAidAlias}" agreeing to IPEX offer "${offerSaid}" from AID "${recipientAidPrefix}"...`);
+    try {
+        const [agree, sigs, _] = await client.ipex().agree({
+            senderName: senderAidAlias,
+            recipient: recipientAidPrefix,
+            offerSaid: offerSaid,
+            datetime: datetime,
+        });
+
+        const agreeOperationDetails = await client
+            .ipex()
+            .submitAgree(senderAidAlias, agree, sigs, [recipientAidPrefix]);
+
+        const completedOperation = await client
+            .operations()
+            .wait(agreeOperationDetails, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+        if (completedOperation.error) {
+            throw new Error(`IPEX agree submission failed: ${JSON.stringify(completedOperation.error)}`);
+        }
+        console.log(`Successfully submitted IPEX agree for offer "${offerSaid}".`);
+        await client.operations().delete(completedOperation.name);
+        return { operation: completedOperation };
+    } catch (error) {
+        console.error('Failed to submit IPEX agree:', error);
+        throw error;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // --- Example Usage ---
 export async function test() {
