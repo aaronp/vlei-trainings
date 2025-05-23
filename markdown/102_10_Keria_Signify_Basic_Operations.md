@@ -1,4 +1,4 @@
-# SignifyTS - Keria Basic Operations
+# Signify-ts Basics: Client Setup and AID Management
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
@@ -7,7 +7,7 @@
     Familiarity with core KERI concepts (AIDs, KELs, digital signatures, witnesses, OOBIs) is assumed.
 </div>
 
-## Create a Client and Connect to the Keria Agent
+## Connecting to a Keria Agent
 
 Now that we understand the architecture, let's see how to use the `signify-ts` library to establish a connection with a Keria agent. This process involves three main steps:
 1.  Initializing the `signify-ts` library.
@@ -21,7 +21,7 @@ Now that we understand the architecture, let's see how to use the `signify-ts` l
 </div>
 
 
-### Library Initialization
+### Initializing the Signify-ts Library
 
 The `signify-ts` library contains components for cryptographic operations using libsodium. Before any of its functionalities can be used, these components must be initialized. This is achieved by calling and the `ready()` function.
 
@@ -38,7 +38,7 @@ console.log("Signify-ts library initialized and ready.");
     Signify-ts library initialized and ready.
 
 
-### Creating a SignifyClient Instance
+### Creating the Client Instance
 Once the library is initialized, you can create an instance of `SignifyClient`. This object will be your primary interface for all interactions with the Keria agent. It requires several parameters:
 
 - **url**: The URL of the Keria agent's Admin Interface. The client uses this for most command and control operations after the initial connection is established.
@@ -68,7 +68,9 @@ console.log('Using Passcode (bran):', bran);
 ```
 
     SignifyClient instance created.
-    Using Passcode (bran): CcRRqj0TePDA55SABx2RC
+
+
+    Using Passcode (bran): BgafJOu2szLQrBxpDfFwE
 
 
 <div class="alert alert-info">
@@ -113,17 +115,37 @@ console.log('Agent AID Delegator:', state.agent.di); // Should be the Client AID
 ```
 
     Client boot process initiated with Keria agent.
+
+
     Client connected to Keria agent.
+
+
     
     Connection State Details:
+
+
     -------------------------
-    Client AID Prefix:  ENr0SirmygYNXmDWVfA1nIPEuJ8cuuERF3tdrABVygQ0
-    Client AID Keys:    [ "DJrMmAvxtxUp87pqmPsm4GplkyHXAhQDP2nt2741BVHQ" ]
-    Client AID Next Keys Digest:  [ "EDD26Ke2xcwS5LHEt9VwPyYnJz36BYD0l4c4JBOr_jr2" ]
+
+
+    Client AID Prefix:  ECkRRfX1cFbgR3zAZXw1M2671KtW2hVj5rIbHYZSe2zH
+
+
+    Client AID Keys:    [ [32m"DPPwjhf0EBPF5hdEx69OPwdvGJDmgw-i5QKiByTj4D22"[39m ]
+
+
+    Client AID Next Keys Digest:  [ [32m"EDZPIKPcsWJiUFSIjtdtiR9GV77aWNNgRDqPLW0fJGv8"[39m ]
+
+
     
-    Agent AID Prefix:    EMXvyic779GNcGhexQLeY2_WC-0uuqOcnnDXRR9iV0MB
+
+
+    Agent AID Prefix:    ELSFXmQcV8x-tXAhLugCrOoX2wW-WHN1SLMieBzq6xsZ
+
+
     Agent AID Type:      dip
-    Agent AID Delegator: ENr0SirmygYNXmDWVfA1nIPEuJ8cuuERF3tdrABVygQ0
+
+
+    Agent AID Delegator: ECkRRfX1cFbgR3zAZXw1M2671KtW2hVj5rIbHYZSe2zH
 
 
 **Output Explanation:**
@@ -135,7 +157,7 @@ console.log('Agent AID Delegator:', state.agent.di); // Should be the Client AID
 - **Agent AID Type:** dip indicates a "delegated inception" event, signifying that this Agent AID's authority is delegated by another AID.
 - **Agent AID Delegator:** This crucial field shows the prefix of the Client AID, confirming that the Agent AID is indeed delegated by your Client AID.
 
-## Reconnecting to an Existing Agent
+### Reconnecting to an Existing Agent
 If the Keria agent has already been booted for a specific `bran` (Client AID), you don't need to call `client.boot()` again when using the same bran. You directly use `client.connect()`. Signify-ts will detect the existing state and reconnect.
 
 
@@ -162,13 +184,25 @@ console.log('Agent AID Delegator:', state2.agent.di); // Should be the same Clie
 ```
 
     Second SignifyClient instance created with the same bran.
+
+
     Second client connected to the existing Keria agent.
+
+
     
     Reconnection State Details:
+
+
     ---------------------------
-    Client AID Prefix:   ENr0SirmygYNXmDWVfA1nIPEuJ8cuuERF3tdrABVygQ0
-    Agent AID Prefix:    EMXvyic779GNcGhexQLeY2_WC-0uuqOcnnDXRR9iV0MB
-    Agent AID Delegator: ENr0SirmygYNXmDWVfA1nIPEuJ8cuuERF3tdrABVygQ0
+
+
+    Client AID Prefix:   ECkRRfX1cFbgR3zAZXw1M2671KtW2hVj5rIbHYZSe2zH
+
+
+    Agent AID Prefix:    ELSFXmQcV8x-tXAhLugCrOoX2wW-WHN1SLMieBzq6xsZ
+
+
+    Agent AID Delegator: ECkRRfX1cFbgR3zAZXw1M2671KtW2hVj5rIbHYZSe2zH
 
 
 <div class="alert alert-primary">
@@ -184,7 +218,7 @@ To connect to a Keria agent using Signify-ts:
 The <code>bran</code> is critical for deriving the Client AID's keys and must be kept secure and reused consistently for the same identity.
 </div>
 
-## Add an Autonomic Identifier (AID)
+## Adding an Autonomic Identifier (AID)
 
 Once your Signify client is connected to the Keria agent, you can instruct the agent to create and manage new Autonomic Identifiers (AIDs) on your behalf. These AIDs will be controlled by your Client AID (established during the `connect()` phase) through the delegation mechanism.
 
@@ -209,7 +243,7 @@ const aidAlias = 'newAid';
 
 // Inception request parameters
 const identifierArgs = {
-    toad: 3, // Threshold of Accountable Duplicity: minimum number of witness receipts required
+    toad: 2, // Threshold of Accountable Duplicity: minimum number of witness receipts required
     wits: [   // List of witness AID prefixes to use for this AID
         'BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha',
         'BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM',
@@ -230,13 +264,17 @@ console.log(inceptionOperation);
 ```
 
     AID inception initiated for alias: newAid
+
+
     Inception Operation Details:
+
+
     {
-      name: "witness.EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX",
-      metadata: { pre: "EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX", sn: 0 },
-      done: false,
-      error: null,
-      response: null
+      name: [32m"witness.EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd"[39m,
+      metadata: { pre: [32m"EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd"[39m, sn: [33m0[39m },
+      done: [33mfalse[39m,
+      error: [1mnull[22m,
+      response: [1mnull[22m
     }
 
 
@@ -272,35 +310,43 @@ console.log(`Witnesses specified: ${JSON.stringify(newAidInceptionEvent.b)}`);
 ```
 
     Waiting for inception operation to complete...
+
+
     
     Inception Operation Completed:
+
+
     {
-      name: "witness.EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX",
-      metadata: { pre: "EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX", sn: 0 },
-      done: true,
-      error: null,
+      name: [32m"witness.EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd"[39m,
+      metadata: { pre: [32m"EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd"[39m, sn: [33m0[39m },
+      done: [33mtrue[39m,
+      error: [1mnull[22m,
       response: {
-        v: "KERI10JSON0001b7_",
-        t: "icp",
-        d: "EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX",
-        i: "EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX",
-        s: "0",
-        kt: "1",
-        k: [ "DKJtw7dBxxp2MfJo5TLqH3AK8hChBMBuGyPvSd1fT3zE" ],
-        nt: "1",
-        n: [ "EG2z1Vsli6k0weJOk8ul_e1KaiQRZrvsFe-VBdPL1gGD" ],
-        bt: "3",
+        v: [32m"KERI10JSON0001b7_"[39m,
+        t: [32m"icp"[39m,
+        d: [32m"EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd"[39m,
+        i: [32m"EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd"[39m,
+        s: [32m"0"[39m,
+        kt: [32m"1"[39m,
+        k: [ [32m"DIOgb-UYhCmLWm4sMKTvQdIgRd8Yx8y421jUvaHOCL9w"[39m ],
+        nt: [32m"1"[39m,
+        n: [ [32m"EH7nG2RPJDutLHI-Eu2aL1fHdj7A0s02Bbg4s0NCLivt"[39m ],
+        bt: [32m"2"[39m,
         b: [
-          "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
-          "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
-          "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
+          [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m,
+          [32m"BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM"[39m,
+          [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m
         ],
         c: [],
         a: []
       }
     }
+
+
     
-    Successfully created AID with prefix: EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX
+    Successfully created AID with prefix: EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd
+
+
     Witnesses specified: ["BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM","BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"]
 
 
@@ -314,12 +360,12 @@ console.log(`Witnesses specified: ${JSON.stringify(newAidInceptionEvent.b)}`);
 - `b`: The list of witness AIDs that this AID is configured to use.
 - `bt`: The Threshold of Accountable Duplicity (TOAD) specified during creation (matches toad: 2 from our request).
 
-The Keria agent has successfully incepted the AID, and its KEL (starting with this inception event) is now managed by the agent and anchored with the specified witnesses.
+The Keria agent has successfully incepted the AID, and its KEL (starting with this inception event) is now managed by the agent and receipted by the specified witnesses.
 
-## Managing Operations
+## Managing Agent Operations
 Signify-ts also provides methods to list and delete operations tracked by the Keria agent for your client.
 
-### List Operations
+### Listing Operations
 
 
 ```typescript
@@ -331,11 +377,13 @@ console.log(JSON.stringify(operationsList, null, 2));
 
     
     Current Operations List:
+
+
     [
       {
-        "name": "witness.EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX",
+        "name": "witness.EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd",
         "metadata": {
-          "pre": "EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX",
+          "pre": "EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd",
           "sn": 0
         },
         "done": true,
@@ -343,18 +391,18 @@ console.log(JSON.stringify(operationsList, null, 2));
         "response": {
           "v": "KERI10JSON0001b7_",
           "t": "icp",
-          "d": "EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX",
-          "i": "EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX",
+          "d": "EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd",
+          "i": "EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd",
           "s": "0",
           "kt": "1",
           "k": [
-            "DKJtw7dBxxp2MfJo5TLqH3AK8hChBMBuGyPvSd1fT3zE"
+            "DIOgb-UYhCmLWm4sMKTvQdIgRd8Yx8y421jUvaHOCL9w"
           ],
           "nt": "1",
           "n": [
-            "EG2z1Vsli6k0weJOk8ul_e1KaiQRZrvsFe-VBdPL1gGD"
+            "EH7nG2RPJDutLHI-Eu2aL1fHdj7A0s02Bbg4s0NCLivt"
           ],
-          "bt": "3",
+          "bt": "2",
           "b": [
             "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
             "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
@@ -367,7 +415,7 @@ console.log(JSON.stringify(operationsList, null, 2));
     ]
 
 
-### Delete Operations
+### Deleting Operations
 
 
 ```typescript
@@ -378,7 +426,7 @@ console.log(`\nDeleted operation: ${opNameToDelete}`);
 ```
 
     
-    Deleted operation: witness.EBKArnSgsnEh3Pd5JAk0ctVNaPrjtfX_N27Xz3MttmgX
+    Deleted operation: witness.EEDNBVCauw828y60tSfi-G_sSpiGHs_eMpNB2h4jKaxd
 
 
 <div class="alert alert-primary">

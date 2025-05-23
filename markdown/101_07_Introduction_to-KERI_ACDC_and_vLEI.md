@@ -1,4 +1,4 @@
-# Introduction to KERI, ACDC, and vLEI
+# Foundations: KERI, ACDC, and the vLEI Ecosystem
 
 <div class="alert alert-prymary">
   <b>🎯 OBJECTIVE</b><hr>
@@ -12,7 +12,7 @@ Consider this a starting point; we'll dive into the details, practical examples,
 
 ## The KERI Protocol
 
-**KERI** stands for **Key Event Receipt Infrastructure**. It's a decentralized key management infrastructure (DKMI) designed to provide a secure identity layer for the internet, focusing on establishing trust through cryptographic proof rather than relying solely on centralized authorities.
+**KERI** stands for **Key Event Receipt Infrastructure**. It's a decentralized key management infrastructure (DKMI) that aims to provide a secure and decentralized identity layer for the internet, focusing on establishing trust through cryptographic proof rather than relying solely on centralized authorities.
 
 Core Ideas:
 
@@ -24,7 +24,7 @@ Core Ideas:
 
 ## The ACDC Protocol
 
-**ACDC** stands for **Authentic Chained Data Container**. It is KERI's implementation of Verifiable Credentials (VCs), designed to work within KERI-based ecosystems.
+**ACDC** stands for **Authentic Chained Data Container**. It is KERI's native format for Verifiable Credentials (VCs), designed to work within KERI-based ecosystems.
 
 **Core Ideas:**
 
@@ -35,7 +35,7 @@ Core Ideas:
 * **Rules:** ACDCs can optionally include embedded machine-readable rules or legal prose (like Ricardian Contracts).
 * **IPEX (Issuance and Presentation Exchange):** to define uniform mechanisms for how ACDCs are issued between parties and how they are presented for verification in a securely attributable way.
 
-## GLEIF vLEI Ecosystem
+## The GLEIF vLEI Ecosystem
 
 The **verifiable Legal Entity Identifier (vLEI)** is a system pioneered by the Global Legal Entity Identifier Foundation (GLEIF) to create a secure, digitized version of the traditional LEI used for organizational identity. It aims to enable automated authentication and verification of organizations globally.
 
@@ -44,11 +44,11 @@ The **verifiable Legal Entity Identifier (vLEI)** is a system pioneered by the G
 * **Digital Counterpart to LEI:** The vLEI acts as a digitally trustworthy representation of an organization's LEI code, enabling automated verification.
 * **Built on KERI/ACDC:** The vLEI infrastructure is built using the KERI protocol and represents vLEI credentials as ACDCs. This leverages KERI's security and ACDC's verifiable credential format.
 * **Trust Chain / Ecosystem:** The vLEI system establishes a chain of trust:
-    * **GLEIF (Root of Trust):** GLEIF operates as the root of the ecosystem, managing its own KERI AID.
+    * **GLEIF (Root of Trust):** GLEIF operates as the root of the ecosystem; its AID and KEL serve as the ultimate anchor for verifying the authority of QVIs.
     * **Qualified vLEI Issuers (QVIs):** GLEIF uses its KERI identity to issue credentials (delegate authority) to a trusted network of QVIs.
     * **Organizations:** QVIs are qualified to issue vLEI credentials (representing the organization's identity) to legal entities.
     * **Organizational Roles:** An organization holding a vLEI can then issue specific **vLEI Role Credentials** to individuals representing the organization in official or functional capacities (e.g., CEO, authorized signatory, supplier). These role credentials cryptographically bind the person's identity in that role to the organization's vLEI.
-* **QVI Workflow:** The workflow centrally involves the QVIs. GLEIF qualifies these issuers. A QVI interacts with an organization to verify its identity information (linked to its traditional LEI) and then uses its delegated authority from GLEIF to issue the organization its primary vLEI credential. This QVI issuance step is crucial for establishing the organization's verifiable digital identity within the ecosystem.
+* **QVI Workflow:** The workflow centrally involves the QVIs. GLEIF qualifies these issuers. A QVI interacts with an organization to verify its identity information (linked to its traditional LEI) and then uses its verifiable delegated authority from GLEIF to issue the organization its primary vLEI credential. This QVI issuance step is crucial for establishing the organization's verifiable digital identity within the ecosystem.
 
 The vLEI ecosystem uses KERI and ACDC to extend the existing LEI system into the digital realm, creating a globally verifiable system for organizational identity and the roles individuals hold within those organizations, all anchored back to GLEIF as the root of trust.
 

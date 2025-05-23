@@ -1,11 +1,11 @@
-# Saidifying
+# SAIDifying ACDC Schemas
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
     Explain the purpose and benefits of using Self-Addressing Identifiers (SAIDs) for ACDC schemas and demonstrate the practical process of calculating and embedding these SAIDs into a schema file ("SAIDifying").
 </div>
 
-## Schema SAIDs
+## Role of Schema SAIDs
 
 A key feature of KERI and ACDCs is the use of SAIDs (Self-Addressing Identifiers) for schemas. The SAID in a schema's `$id` field is a hash of the canonical form of that schema block.
 
@@ -16,15 +16,15 @@ Why it matters:
       
 Calculating and embedding these SAIDs requires a specific process, often called **"SAIDifying"**. This involves calculating the SAIDs for the innermost blocks (like attributes, edges, rules) first, embedding them, and then calculating the SAID for the next level up, until the top-level schema SAID is computed.
 
-## SAIDifying a Schema
+## The SAIDification Process
 
 We have provided a sample schema and a utility function to help you SAIDfy the schema. Here are the steps.
 
-### Write the Schema JSON
+### Step 1: Write Schema JSON
 
 First, you will create a JSON file with the basic structure as seen in the previous notebook. Since we provide the schema, you don't need to worry about it. But check the file **[sample_credential_schema.json](config/schemas/sample_schema.bak.json)**, is the schema you will use. Notice the `$id` fields are initially empty strings `""` 
 
-### SAIDify the Schema
+### Step 2: Process and Embed SAIDs
 
 Now, you need to process the schema to embed the Self-Addressing Identifiers (SAIDs). For this, we use the provided **[Python script](scripts/saidify.py)** available in the scripts folder. It calculates the required digests from the content and adds the SAIDs to the file. 
 
@@ -59,12 +59,12 @@ You now have a cryptographically verifiable schema identified by its top-level S
     However, automatically processing nested structures and dependencies within complex ACDC schemas typically requires helper tools or custom scripts to ensure all inner SAIDs are calculated and embedded correctly before the final outer SAID is generated.
 </div>
 
-## Caching Schemas
+## Making Schemas Discoverable
 For an issuer to issue an ACDC using this schema, and for a recipient/verifier to validate it, they need access to this exact, SAIDified schema definition.
 
 How do they get it? The SAID acts as a universal lookup key. Common ways to make schemas available include:
 
-- Simple Web Server: Host the SAIDified JSON file on a basic web server (like the vLEI-server mentioned in the tutorial ). Controllers can be configured (often via OOBIs, covered later) to fetch the schema from that URL using its SAID.   
+- Simple Web Server: Host the SAIDified JSON file on a basic web server. Controllers can be configured (often via OOBIs, covered later) to fetch the schema from that URL using its SAID.   
 - Content-Addressable Network: Store the schema on a network like IPFS, where the SAID naturally aligns with the content hash used for retrieval.
 - Direct Exchange: For specific interactions, the schema could potentially be exchanged directly between parties (though less common for widely used schemas).
 The key point is that the schema, identified by its SAID, must be retrievable by parties needing to issue or verify credentials based on it.

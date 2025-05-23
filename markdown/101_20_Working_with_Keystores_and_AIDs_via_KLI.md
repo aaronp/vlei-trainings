@@ -1,11 +1,11 @@
-# Working with Keystores and AIDs via KLI
+# KLI Operations: Managing Keystores and Identifiers
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
     Demonstrate how to create a KERI keystore and then manage identifiers within it using the <code>kli init</code>, <code>kli incept</code>, and <code>kli list</code> commands.
 </div>
 
-## Initializing a Keystore
+## Initializing Keystores
 
 Before you can create identifiers or perform many other actions with KLI, you need a keystore. The keystore is an encrypted data store that holds the keys for your identifiers. To initialize a keystore, you give it a name, protect it with a passcode, and provide a salt for generating the keys.
 
@@ -42,7 +42,7 @@ The command sets up the necessary file structures for your keystore, so once exe
 </ul>
 </div>
 
-## Creating an Identifier
+## Creating Identifiers (Inception)
 
 Now that your keystore is set, you can create your first identifier (AID) within it using the `kli incept` command. You'll need to provide: 
 - `--name` and `--passcode`: Think of it as the keystore access credentials `keystore_name` and `keystore_passcode`
@@ -76,9 +76,9 @@ aid_alias = "my-first-aid"
     
 
 
-## The Prefix
+## Understanding Prefixes
 
-The `kli incept` command generated an AID. The unique string produced, `BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC`, is known as the Prefix. While closely related, they represent different aspects of the identifier:
+The `kli incept` command generated an AID, which is represented by a unique string, e.g., `BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC`, known as the Prefix. While closely related, they represent different aspects of the identifier:
 
 - AID: This is the formal concept of the self-governing identifier, representing the entity and its control.
 - Prefix: This is the practical, usable string representation of the AID. It's derived directly from the AID's initial cryptographic keys and is constructed by combining:
@@ -96,15 +96,12 @@ KERI AIDs are self-certifying. This works because the identifier's prefix embeds
     <li>The terms AID, identifier, prefix, and alias tend to be used interchangeably</li>
 </div>
 
-
-
-
 <div class="alert alert-info">
   <b>ℹ️ NOTE</b><hr>
     As you may have figured out, most of the <code>kli</code> commands require a keystore. Assume from now on that <code>--name</code> and <code>--passcode</code> refer to the keystore access.  
 </div>
 
-## Displaying the Identifier
+## Displaying Identifier Status
 You can check the status of the identifier you just created using `kli status` and its `alias`. This command will show details about the AID's current state, including its Alias, prefix, sequence number, public keys, and additional information. More details on what all this data means will be explained later
 
 
@@ -129,7 +126,7 @@ You can check the status of the identifier you just created using `kli status` a
     
 
 
-## Displaying the KEL
+## Displaying Key Event Logs (KELs)
 You can use `kli status` with the `--verbose` parameter to show the key event log.
 
 
@@ -178,20 +175,16 @@ You can use `kli status` with the `--verbose` parameter to show the key event lo
 Here are some descriptions of the KEL fields:
 - `v`: Version String
 - `t`: Message type (`icp` means inception)
-- `i`: Identifier Prefix
+- `i`: AID Prefix
 - `kt`: Keys Signing Threshold (the `isith` value used in `kli inception`)
 - `k`: List of Signing Keys (You get as many keys as defined by the `icount` value used in `kli inception`)
-
-
-
-
 
 <div class="alert alert-info">
   <b>📚 REFERENCE</b><hr>
     To see the full details of the key event fields, refer to <a href="https://trustoverip.github.io/tswg-keri-specification/#keri-data-structures-and-labels" target="_blank">KERI Data Structures and Labels</a> 
 </div>
 
-## Displaying the keystore Identifiers
+## Listing Identifiers in a Keystore
 
 You can also list all the identifiers managed within this keystore. To illustrate this, let's create an additional Identifier
 
@@ -223,8 +216,6 @@ Now use `kli list` to list all the identifiers managed by the keystore
     my-second-aid (BBuVNJvbJD2WNduQ0JUGRVGb6uKYrF5bO5T4gdGt_ezO)
     my-first-aid (BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC)
 
-
---------------------------------------------------------------------------------------
 
 <div class="alert alert-info">
   <b>💡 TIP</b><hr>

@@ -5,7 +5,7 @@
     Understandd the importance of key rotation, learn about the pre-rotation mechanism, and see how to execute and verify a rotation using KLI commands.
 </div>
 
-## Why is Key Rotation Important?
+## Importance of Key Rotation
 
 Securing AIDs involves more than just signing data; robust long-term management relies on key rotation. This fundamental practice involves changing the cryptographic keys associated with an identifier over time.
 
@@ -16,7 +16,7 @@ Rotating keys isn't just about changing them arbitrarily; it's a crucial practic
 - **Recovery and Delegation:** You might need to recover control of an identifier if the current keys are lost or compromised, or delegate authority to another entity. Both scenarios typically involve establishing new keys, which is achieved through rotation events
 
 
-## Establishment Events
+## Understanding Establishment Events
 
 Before diving into key rotation, it's helpful to explain Establishment Events. Not all events recorded in a KEL are the same. Some events specifically define or change the set of cryptographic keys that are authorized to control an identifier (AID) at a particular point in time. These crucial events are called Establishment Events. The two primary types are:   
 - **Inception Event (icp):** The very first event that creates the AID and establishes its initial controlling keys
@@ -24,7 +24,7 @@ Before diving into key rotation, it's helpful to explain Establishment Events. N
 
 These Establishment Events form the backbone of an AID's security history, allowing anyone to verify who had control at what time. Other event types exist (like interaction events), but they rely on the authority defined by the latest Establishment Event.
 
-## Pre-Rotation
+## The Pre-Rotation Mechanism
 
 KERI utilizes a strategy called pre-rotation, which decouples the act of key rotation from the preparation for it. With pre-rotation, the cryptographic commitment (a digest of the public keys) for the next key set is embedded within the current key establishment event. This means the next keys can be generated and secured in advance, separate from the currently active operational keys. This pre-commitment acts as a safeguard, as the active private key doesn't grant an attacker the ability to perform the next rotation, as they won't have the corresponding pre-committed private key.
 
@@ -33,7 +33,7 @@ KERI utilizes a strategy called pre-rotation, which decouples the act of key rot
 A potential question arises: "If the next keys are kept in the same place as the active operational keys, doesn't that defeat the purpose?" Pre-rotation enables stronger security by decoupling preparation from rotation, but realizing this benefit depends on sound operational practices. Specifically, the pre-committed keys must be stored more securely than the active ones. KERI provides the mechanism; effective key management brings it to life.
 </div>
 
-## Key rotation with KLI 
+## Performing Key Rotation with KLI
 
 Next, you will complete a key rotation example. Start by setting up a keystore and an identifier.
 
@@ -64,6 +64,8 @@ aid_alias_non_transferable = "aid-non-transferable"
     KERI Database created at: /usr/local/var/keri/db/rotation-keystore
     KERI Credential Store created at: /usr/local/var/keri/reg/rotation-keystore
     	aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
+
+
     Prefix  BEG5uWt6xB94bIkdGUCjYcBf_ryDgPa7t1GUtVc7lerw
     	Public key 1:  BEG5uWt6xB94bIkdGUCjYcBf_ryDgPa7t1GUtVc7lerw
     
@@ -87,15 +89,16 @@ The error message says we tried to rotate a nontransferable prefix. What does th
 Not all KERI identifiers are designed to have their keys rotated. By default, `kli incept` creates a non-transferable identifier. Here is the difference:
 
 **Non-Transferable AID:**
-- Its control is permanently bound to the initial set of keys established at inception.
-- The prefix itself is derived only from these initial keys.
 - Key rotation is not possible. Think of it as a fixed identifier.
-- The public key is directly derivable from the AID prefix itself, typically confirmed via the inception event.
+- Its control is permanently bound to the initial set of keys established at inception.
+- The prefix is derived from these initial keys, and since key rotation is not possible, control is permanently tied to this initial key set.
+- The public key is directly derivable from the AID prefix itself.
 
 **Transferable AID:**
+- Key rotation is possible. 
 - Its control can be transferred (rotated) to new sets of keys over time.
-- It uses the pre-rotation mechanism, committing to the next set of keys in each establishment event.
-- Key rotation is possible. This allows the identity to persist even as underlying keys change.
+- It uses the pre-rotation mechanism, committing to the next set of keys in each rotation event.
+- The prefix is derived from the initial keys, although authoritative keys will change after rotation, the prefix will remain the same. This allows the identity to persist even as underlying keys change.
 
 How does KERI know the difference?
 
@@ -147,7 +150,7 @@ Look closely at the JSON output at the end (representing the inception event). Y
 
 These two fields mark the AID as non-transferable. No commitment to future keys was made.
 
-### Creating and Rotating a Transferable Identifier
+### Incepting and Rotating a Transferable Identifier
 
 To enable key rotation, we need to explicitly create a transferable AID using the `--transferable` option during inception and using `--ncount` and `--nsith` equal to 1 (or greater). This tells KLI to:
 
@@ -247,7 +250,7 @@ With the commitment to the next keys in place, we can now successfully rotate th
     	Public key 1:  DOkM4enfZoc7w8oVdkXzRaVoCdz8f9aAm2u4kA5CHNcQ
 
 
-### The Rotation Event (rot)
+### Examining the Rotation (rot) Event
 
 The kli rotate command performed the key rotation by creating and signing a new establishment event of type `rot`. Let's examine the state of the AID after the rotation:
 

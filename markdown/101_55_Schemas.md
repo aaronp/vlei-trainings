@@ -1,11 +1,11 @@
-# ACDC Schemas
+# ACDC Schemas: Defining Verifiable Structures
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
     Explain the role of schemas in defining ACDC structures, how they leverage Self-Addressing Identifiers (SAIDs) for verifiability, and learn how to create and process a basic schema.
 </div>
 
-## What is a Schema?
+## Purpose of Schemas
 
 Before we can issue or verify an Authentic Chained Data Container, we need a blueprint that describes exactly what information it should contain and how that information should be structured. This blueprint is called a **Schema**.
 
@@ -112,7 +112,7 @@ Let's look at the main parts of a typical ACDC schema:
         * `a`: Defines the structure for the **attributes block**, which holds the actual data or claims being made by the credential.
             * **`oneOf`**: This standard JSON Schema keyword indicates that the value for the `a` block in an actual ACDC instance can be *one of* the following two formats:
                 1.  **Compact Form (String):**
-                    * `{"description": "Attributes block SAID", "type": "string"}`: This option defines the *compact* representation. Instead of including the full attributes object, the ACDC can simply contain a single string value: the SAID of the attributes block itself. This SAID acts as a verifiable reference to the full attribute data, which might be stored elsewhere. (We won't cover compact ACDCs in this material.)
+                    * `{"description": "Attributes block SAID", "type": "string"}`: This option defines the *compact* representation. Instead of including the full attributes object, the ACDC can simply contain a single string value: the SAID of the attributes block itself. This SAID acts as a verifiable reference to the full attribute data, which might be stored elsewhere. **(We won't cover compact ACDCs in this material.)**
                 2.  **Un-compact Form (Object):**
                     * `{"$id": "", "description": "Attributes block", "type": "object", ...}`: This option defines the full or un-compacted representation, where the ACDC includes the complete attributes object directly.
                         * **`$id`**: This field will hold the SAID calculated for *this specific attributes block structure* after the schema is processed (`SAIDified`). Initially empty `""` when writing the schema.
@@ -138,5 +138,16 @@ To write your schema, most of the customization will happen inside the payload a
 
 <div class="alert alert-primary">
   <b>📝 SUMMARY</b><hr>
-An ACDC Schema acts as a verifiable blueprint defining the structure, data types, and rules for an Authentic Chained Data Container (ACDC). Written using the JSON Schema specification, they ensure ACDCs have the expected format (validation) and enable different parties to understand exchanged credentials (interoperability). Key components include top-level metadata (like the schema's SAID in $id, title, credentialType, version) and a properties section defining the ACDC envelope fields (v, d, i, s, etc.) and payload sections. The main payload section is attributes (a), containing issuer/issuee info and custom claims, with optional sections for edges (e) linking other ACDCs and rules (r).
+An ACDC Schema acts as a verifiable blueprint defining the structure, data types, and rules for an Authentic Chained Data Container (ACDC). Written using the JSON Schema specification, they ensure ACDCs have the expected format (validation) and enable different parties to understand exchanged credentials (interoperability). 
+<br><br>
+Key components include: 
+    <li>top-level metadata (like the schema's SAID in <code>$id</code>, <code>title</code>, <code>credentialType</code>, <code>version</code>)</li> 
+    <li> a properties section defining the ACDC envelope fields (<code>v</code>, <code>d</code>, <code>i</code>, <code>s</code>, etc.)</li> 
+    <li> A payload section. The main payload section is attributes (<code>a</code>), containing issuer/issuee info and custom claims, with optional sections for edges (<code>e</code>) linking other ACDCs and rules (<code>r</code>).</li>
+    
 </div>
+
+
+```python
+
+```

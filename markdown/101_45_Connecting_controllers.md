@@ -1,18 +1,18 @@
-# Connecting controllers
+# KLI Operations: Connecting Controllers
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
 Explain how to establish a secure, mutually authenticated connection between two KERI controllers using Out-of-Band Introductions (OOBIs) and challenge/response protocol to enhance trust.
 </div>
 
-## Controllers setup
+## Initial Controller Setup
 
 So far, we have only done basic operations with AIDs in an isolated way. That has limited use in practical applications; after all, establishing identity verification only becomes meaningful when interacting with others. In KERI, this interaction starts with controllers needing to discover and securely connect with each other.
 
 In our context, this means we need to establish connections between controllers. We've already seen a similar process when pairing transferable AIDs with witnesses. Now, let's explore how two controllers (a and b) can connect using Out-of-Band Introductions (OOBIs) and enhance trust with **challenge/response**.
 
-### Initializing Keystores
-For the example you need to use two different keystores called `keystore-a` and `keystore-b`, both initialized using the `keystore_init_config.json` configuration. This means they will both load the same initial set of three witness contacts, providing a medium for discovering AID key states.
+### Keystore Initialization
+For the example, you need to use two different keystores called `keystore-a` and `keystore-b`, both initialized using the `keystore_init_config.json` configuration. This means they will both load the same initial set of three witness contacts, providing endpoints where each controller's KEL (and thus key state) can be published and retrieved.
 
 
 
@@ -33,6 +33,8 @@ salt_a="0ABeuT2dErMrqFE5Dmrnc2Bq"
     	aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
     
     Loading 3 OOBIs...
+
+
     http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
@@ -57,12 +59,14 @@ salt_b="0ADzG7sbUyw-MYIoUyQe5wxB"
     	aeid: BPJYwdaLcdcbB6pTpRal-IhbV_Vb8bD6vq_qiMFojHNG
     
     Loading 3 OOBIs...
+
+
     http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
 
 
-### Creating controller identifiers 
+### Identifier Inception
 Now, you need AIDs to represent the controllers. Create one transferable AID in each keystore, aliased `aid_a` and `aid_b` respectively. Use the aid_inception_config.json file, which specifies the initial set of witnesses for both AIDs. (While they share witnesses here, controllers could use different witness sets).
 
 
@@ -77,6 +81,8 @@ aid_a = "aid_a"
 ```
 
     Waiting for witness receipts...
+
+
     Prefix  EML-Hx1ivj6CSkPTM80xCqFmabG9l9ZrVxPe9omW2cWl
     	Public key 1:  DDiMxDbmRMjC0mDSkzlwEbYveGozxRXXIsFUo3ixQaU4
     
@@ -93,17 +99,19 @@ aid_b = "aid_b"
 ```
 
     Waiting for witness receipts...
+
+
     Prefix  EAJR7SlFds3hQpH8kj8HySFRdhW6DcC7m9KdELNJIUma
     	Public key 1:  DHEa1ktRvZUjdRitkgJ5u3tNjitiw9Ba0cgz-fMhTS4c
     
 
 
-## OOBI setup
+## OOBI Exchange for Discovery
 
 With your AIDs established, you need a way for them to find each other. This is where Out-of-Band Introductions (OOBIs) come in. You have used OOBIs before; to recapitulate, an OOBI is a specialized URL associated with an AID and how to reach one of its endpoints (like a witness). 
 
 
-### Generating OOBIs 
+### Generating OOBI URLs
 
 Use the `kli oobi generate` command to create OOBIs for your AIDs. Specify which AID (`--alias`) within which keystore (`--name`) should generate the OOBI, and importantly, the role associated with the endpoint included in the OOBI URL. Here, `--role witness` means the OOBI URL will point to one of the AID's designated witnesses, providing an indirect way to fetch the AID's KEL.
 
@@ -145,7 +153,7 @@ command_b = f"kli oobi generate --name {keystore_b_name} --alias {aid_b} --passc
 oobi_b = exec(command_b)
 ```
 
-### Resolving OOBIs  
+### Resolving OOBI URLs 
 
 Now that `aid_a` and `aid_b` each have an OOBI, they need to resolve them. The `kli oobi resolve` command handles this.
 
@@ -214,7 +222,7 @@ After successful resolution, the other AID appears in the keystore's contact lis
     }
 
 
-## Challenge-response
+## Authenticating Control with Challenge-Response
 
 Resolving an OOBI and verifying the KEL is a crucial first step. It confirms that the AID exists and that its key state history is cryptographically sound. However, it doesn't definitively prove that the entity you just connected with over the network is the legitimate controller you intend to interact with. You've verified the identifier, but not necessarily the authenticity of the current operator at the other end of the connection. Network connections can be vulnerable to Man-in-the-Middle (MITM) attacks or other deceptions.
 
@@ -223,7 +231,7 @@ This is where the challenge-response mechanism becomes essential. It provides a 
 This is how it works:
 
 One party (the challenger, say `aid_b`) generates a random challenge phrase.
-The challenger sends this phrase to the other party (`aid_a`) through an Out-of-Band (OOB) channel. This means using a communication method different from the KERI network connection (e.g., a video call chat, phone call, secure email) to prevent an attacker on the main channel from intercepting or modifying the challenge. Using the same channel for both the challenge words and the response defeats the purpose of protecting against MITM attacks. 
+The challenger sends this phrase to the other party (`aid_a`) through an Out-of-Band (OOB) channel. This means using a communication method different from the KERI network connection (e.g., a video call chat, phone call, secure email) to prevent an attacker on the  KERI network channel from intercepting or modifying the challenge. Using the same channel for both the challenge words and the response defeats the purpose of protecting against MITM attacks. 
 
 The challenged party (`aid_a`) receives the phrase and uses their current private key to sign it.
 `aid_a` sends the original phrase and the resulting signature back to `aid_b` over the KERI connection.
@@ -244,7 +252,7 @@ phrase_a = exec("kli challenge generate --out string")
 phrase_b = exec("kli challenge generate --out string")
 ```
 
-    dad shy dry save skate poem minute smart again file badge jelly
+    vapor guitar foam unveil diary pudding maple panic glide print state educate
 
 
 Now, simulate the OOB exchange: `aid_b` sends `phrase_b` to `aid_a`, and `aid_a` sends `phrase_a` to `aid_b`. Each party then uses `kli challenge respond` to sign the phrase they received and `kli challenge verify` to check the response from the other party.
@@ -261,7 +269,7 @@ print(phrase_a)
     --recipient {aid_a}
 ```
 
-    thought vacant sauce chalk crucial cigar chaos manage solve film text design
+    struggle amazing soon pave situate repeat garbage language judge frown original bus
 
 
 
@@ -273,9 +281,11 @@ print(phrase_a)
     --signer {aid_b}
 ```
 
-    Checking mailboxes for any challenge responses..
+    Checking mailboxes for any challenge responses.
+
+    .
     
-    Signer aid_b successfully responded to challenge words: '['thought', 'vacant', 'sauce', 'chalk', 'crucial', 'cigar', 'chaos', 'manage', 'solve', 'film', 'text', 'design']'
+    Signer aid_b successfully responded to challenge words: '['struggle', 'amazing', 'soon', 'pave', 'situate', 'repeat', 'garbage', 'language', 'judge', 'frown', 'original', 'bus']'
     
 
 
@@ -290,7 +300,7 @@ print(phrase_b)
     --recipient {aid_b}
 ```
 
-    farm regret diagram visa object gloom kitten velvet excuse maze end screen
+    chat hawk wrong roof melody regret tumble tobacco junior finger voice robust
 
 
 
@@ -302,9 +312,11 @@ print(phrase_b)
     --signer {aid_a}
 ```
 
-    Checking mailboxes for any challenge responses..
+    Checking mailboxes for any challenge responses.
+
+    .
     
-    Signer aid_a successfully responded to challenge words: '['farm', 'regret', 'diagram', 'visa', 'object', 'gloom', 'kitten', 'velvet', 'excuse', 'maze', 'end', 'screen']'
+    Signer aid_a successfully responded to challenge words: '['chat', 'hawk', 'wrong', 'roof', 'melody', 'regret', 'tumble', 'tobacco', 'junior', 'finger', 'voice', 'robust']'
     
 
 
@@ -325,8 +337,3 @@ clear_keri()
     Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
     ✅ Successfully removed: /usr/local/var/keri/
 
-
-
-```python
-
-```

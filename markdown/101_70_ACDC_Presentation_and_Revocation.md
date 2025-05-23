@@ -1,15 +1,15 @@
-# ACDC Presentation and Rovocation
+# ACDC Presentation and Revocation with KLI: Using the IPEX Protocol
 
 <div class="alert alert-primary">
 <b>🎯 OBJECTIVE</b><hr>
 Demonstrate how a Holder presents a previously issued ACDC or Verifiable Credential (VC) to a Verifier using the Issuance and Presentation Exchange (IPEX) protocol. And also covers the process of credential revocation by the Issuer.
 </div>
 
-## IPEX Credential Presentation
+## Credential Presentation Overview
 
 In the previous notebook, you saw how an Issuer creates and sends an ACDC to a Holder. Now, we'll focus on the next step in the typical verifiable credential lifecycle: presentation. The Holder, possessing the credential, needs to present it to another party (the Verifier) to prove certain claims or gain access to something. You will again use the IPEX protocol for this exchange, but this time initiated by the Holder. Finally, you will see how the original Issuer can revoke the credential.
 
-### Issue a Credential (Recap)
+### Recap: Issuing the Prerequisite Credential
 
 To present a credential, you first need one! The following code block is a condensed recap of the ACDC Issuance workflow covered in the previous notebook. It quickly sets up an Issuer and a Holder, creates a Credential Registry, defines and resolves a schema, issues an `EventPass` credential from the Issuer to the Holder using IPEX, and ensures the Holder admits it.
 
@@ -128,50 +128,94 @@ print("\n\nYou can continue ✅")
     KERI Keystore created at: /usr/local/var/keri/ks/holder_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/holder_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/holder_presentation_ks
-    	aeid: BGfpc_uevjQFl2iTLUcjyb2VHwwtVRqvV9IpxvMBH9-O
+    	aeid: BEsIyrLrc4iQalqsNyh_bukbFJvV8ojY1yh_DRKhmG5B
     
     Loading 3 OOBIs...
+
+
     http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
+
+
     Waiting for witness receipts...
-    Prefix  EPxyXbKU_eUNVlwbqoGqmoMOd6IqI6Y0YyTKLSgIuAmS
-    	Public key 1:  DGaLQTtvbmG_--Tcmc7DFYvpO-JvBv4fbQizOux-8PMW
+
+
+    Prefix  EB9gYHDbKlGvrbb5CfDGKVHwGeN0k9zH9CPGEkx7dUcS
+    	Public key 1:  DHeCuSapHnWy89JxAZV5nVKsQCxPYRoPmCsLwpl-_4vJ
     
+
+
     KERI Keystore created at: /usr/local/var/keri/ks/issuer_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/issuer_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/issuer_presentation_ks
-    	aeid: BEgMWoMETIsjhC3HfyWa2OUzi3hHUOe6xobrW3qFUJs2
+    	aeid: BGXd9HrlZgOOTXLESFHEWXCvKi_UlRcBXzi_kexZAu65
     
     Loading 3 OOBIs...
+
+
     http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
+
+
     Waiting for witness receipts...
-    Prefix  EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd
-    	Public key 1:  DAdnUjESRdh758QVxiaL2SLy_dFIwF4QxJ47GwNUurmB
+
+
+    Prefix  EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX
+    	Public key 1:  DJMxkrWPLZe1-zHdDw2NBTUmwNed4YguObWcueGd0To1
     
+
+
     Waiting for TEL event witness receipts
+
+
     Sending TEL events to witnesses
-    Registry:  issuer_registry(ED4FdmqnqPSIjxMZY-ksPFCnUixsthcp7E6dwxQRkc-C) 
-    	created for Identifier Prefix:  EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd
-    http://witness-demo:5642/oobi/EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd/witness resolved
-    http://witness-demo:5642/oobi/EPxyXbKU_eUNVlwbqoGqmoMOd6IqI6Y0YyTKLSgIuAmS/witness resolved
+
+
+    Registry:  issuer_registry(EEMnY-XQ68MHMCtWbkfLj2qNkdw9BXocPxlUhDnQrqf4) 
+    	created for Identifier Prefix:  EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX
+
+
+    http://witness-demo:5642/oobi/EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX/witness resolved
+
+
+    http://witness-demo:5642/oobi/EB9gYHDbKlGvrbb5CfDGKVHwGeN0k9zH9CPGEkx7dUcS/witness resolved
+
+
     http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK resolved
+
+
     http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK resolved
+
+
     Waiting for TEL event witness receipts
+
+
     Sending TEL events to witnesses
-    EBLel5XDh_59FzvgDbZjNsEmnmIflHUgS-XUKut5Eo7S has been created.
-    Sending message EPztNMpnMNAFIs9SfE8QOq0z_pyRSiSZxCCuN3g2XvAn to EPxyXbKU_eUNVlwbqoGqmoMOd6IqI6Y0YyTKLSgIuAmS
+
+
+    EJBKV2sEZTTEVQVsUDwHCnQfZ1svzLbvjm0dDbW9JcT9 has been created.
+
+
+    Sending message EOnxSt-LgfkFdVUeK-J9-eIKIEwIyR-kuQfCJviiwHPP to EB9gYHDbKlGvrbb5CfDGKVHwGeN0k9zH9CPGEkx7dUcS
+
+
     ... grant message sent
-    Sending admit message to EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd
+
+
+    Sending admit message to EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX
+
+
     ... admit message sent
+
+
     
     
     You can continue ✅
 
 
-## Credential Presentation Flow
+## The IPEX Presentation Flow
 
 Now that the Holder (`holder_aid`) possesses the `EventPass` credential, you must present it to a Verifier (`verifier_aid`) to prove they have access.
 
@@ -184,24 +228,24 @@ First, confirm the Holder has the credential:
     --verbose
 ```
 
-    Current received credentials for holder_aid (EPxyXbKU_eUNVlwbqoGqmoMOd6IqI6Y0YyTKLSgIuAmS):
+    Current received credentials for holder_aid (EB9gYHDbKlGvrbb5CfDGKVHwGeN0k9zH9CPGEkx7dUcS):
     
-    Credential #1: EBLel5XDh_59FzvgDbZjNsEmnmIflHUgS-XUKut5Eo7S
+    Credential #1: EJBKV2sEZTTEVQVsUDwHCnQfZ1svzLbvjm0dDbW9JcT9
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd
-        Issued on 2025-05-13T20:30:30.493066+00:00
+        Issued by EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX
+        Issued on 2025-05-23T23:35:26.256460+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EBLel5XDh_59FzvgDbZjNsEmnmIflHUgS-XUKut5Eo7S",
-    	  "i": "EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd",
-    	  "ri": "ED4FdmqnqPSIjxMZY-ksPFCnUixsthcp7E6dwxQRkc-C",
+    	  "d": "EJBKV2sEZTTEVQVsUDwHCnQfZ1svzLbvjm0dDbW9JcT9",
+    	  "i": "EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX",
+    	  "ri": "EEMnY-XQ68MHMCtWbkfLj2qNkdw9BXocPxlUhDnQrqf4",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "EKNwucpfUZu-_9g8ZETkzzL153L7tDHVH1XjmYpeCNx0",
-    	    "i": "EPxyXbKU_eUNVlwbqoGqmoMOd6IqI6Y0YyTKLSgIuAmS",
-    	    "dt": "2025-05-13T20:30:30.493066+00:00",
+    	    "d": "EHnFiXqKWykyZxSirwQfJGljU186MYq1o3tE1923LhOy",
+    	    "i": "EB9gYHDbKlGvrbb5CfDGKVHwGeN0k9zH9CPGEkx7dUcS",
+    	    "dt": "2025-05-23T23:35:26.256460+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -209,7 +253,7 @@ First, confirm the Holder has the credential:
     	}
 
 
-### Verifier setup
+### Verifier AID Setup
 
 Just like the Issuer and Holder, the Verifier needs its own AID to participate in the protocol securely. Initialize its keystore and incept its AID.
 
@@ -235,19 +279,25 @@ verifier_aid = "verifier_aid"
     KERI Keystore created at: /usr/local/var/keri/ks/verifier_ks
     KERI Database created at: /usr/local/var/keri/db/verifier_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/verifier_ks
-    	aeid: BFXYDco2ToaYfufLiVFgx05pYDly37TL3llHWtYozaDY
+    	aeid: BGISZem2lud5mfmnL_-VGdGYtMI6WpYRhuCG-3h0-4fZ
     
     Loading 3 OOBIs...
+
+
     http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
+
+
     Waiting for witness receipts...
-    Prefix  ECq_pSLp50jaJYNNAr7coViVdB3gOQEVJev2hleD9CDR
-    	Public key 1:  DGVQDHI7z2BfhFbl_ugiGQh364N0954lbawiQoZhoNvv
+
+
+    Prefix  EHuBJHeuVGO7OwKikJBalLNu374QSw2o_2bHKzsAFjrG
+    	Public key 1:  DOWaCW0fM7-sP5jiMwgcJI2go_OLgPVSp4WLu-oE00ax
     
 
 
-### Holder/Verifier OOBI
+### Establishing Holder-Verifier Connection (OOBI)
 
 Similar to the Issuer/Holder exchange, the Holder and Verifier must exchange and resolve OOBIs to establish a secure communication channel and verify each other's key states (KELs).
 
@@ -268,11 +318,13 @@ verifier_oobi = exec(verifier_oobi_gen)
 
 ```
 
-    http://witness-demo:5642/oobi/ECq_pSLp50jaJYNNAr7coViVdB3gOQEVJev2hleD9CDR/witness resolved
-    http://witness-demo:5642/oobi/EPxyXbKU_eUNVlwbqoGqmoMOd6IqI6Y0YyTKLSgIuAmS/witness resolved
+    http://witness-demo:5642/oobi/EHuBJHeuVGO7OwKikJBalLNu374QSw2o_2bHKzsAFjrG/witness resolved
 
 
-### Verifier resolve schema OOBI
+    http://witness-demo:5642/oobi/EB9gYHDbKlGvrbb5CfDGKVHwGeN0k9zH9CPGEkx7dUcS/witness resolved
+
+
+### Verifier Resolves Schema OOBI
 
 The Verifier also needs to resolve the OOBI for the ACDC's schema (`event_pass_schema`). This allows the Verifier to retrieve the schema definition and validate that the presented credential conforms to the expected structure and data types. Without the schema, the Verifier wouldn't know how to interpret or validate the credential's content.
 
@@ -285,7 +337,7 @@ The Verifier also needs to resolve the OOBI for the ACDC's schema (`event_pass_s
     http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK resolved
 
 
-### Holder present Credential
+### Step 1: Holder Presents Credential (Grant)
 
 Now, the Holder initiates the IPEX exchange to present the credential to the Verifier. The Holder acts as the "Discloser" in this context. The command used is `kli ipex grant`, just like in issuance, but the roles are reversed in intent.
 
@@ -309,11 +361,13 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending message EKzWFij8tSJX6nBxNwq9sup7mi0jN-6D5OjHB9KBbsp4 to ECq_pSLp50jaJYNNAr7coViVdB3gOQEVJev2hleD9CDR
+    Sending message EFjhyd40qxKx1sG4TxtF7-8QznxD4X4cFhyDh1P4IjcU to EHuBJHeuVGO7OwKikJBalLNu374QSw2o_2bHKzsAFjrG
+
+
     ... grant message sent
 
 
-### Verifier Polls Mailbox
+### Step 2: Verifier Receives Presentation
 
 The Verifier needs to check its KERI mailbox for the incoming grant message containing the credential presentation.Use `kli ipex list --poll` and extract the SAID of the message.
 
@@ -325,10 +379,10 @@ ipex_said=exec(get_ipex_said)
 print(ipex_said)
 ```
 
-    EKzWFij8tSJX6nBxNwq9sup7mi0jN-6D5OjHB9KBbsp4
+    EFjhyd40qxKx1sG4TxtF7-8QznxD4X4cFhyDh1P4IjcU
 
 
-### Verifier displays credential
+**Verifier displays credential (Optional)**
 
 Before formally admitting the credential, the Verifier can inspect the received presentation using `kli ipex list --verbose`. This shows the credential details and the status of the IPEX exchange.
 
@@ -344,24 +398,24 @@ Before formally admitting the credential, the Verifier can inspect the received 
     
     Received IPEX Messages:
     
-    GRANT - SAID: EKzWFij8tSJX6nBxNwq9sup7mi0jN-6D5OjHB9KBbsp4
-    Credential EBLel5XDh_59FzvgDbZjNsEmnmIflHUgS-XUKut5Eo7S:
+    GRANT - SAID: EFjhyd40qxKx1sG4TxtF7-8QznxD4X4cFhyDh1P4IjcU
+    Credential EJBKV2sEZTTEVQVsUDwHCnQfZ1svzLbvjm0dDbW9JcT9:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd
-        Issued on 2025-05-13T20:30:30.493066+00:00
+        Issued by EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX
+        Issued on 2025-05-23T23:35:26.256460+00:00
         Already responded? No [91m✘[0m
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EBLel5XDh_59FzvgDbZjNsEmnmIflHUgS-XUKut5Eo7S",
-    	  "i": "EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd",
-    	  "ri": "ED4FdmqnqPSIjxMZY-ksPFCnUixsthcp7E6dwxQRkc-C",
+    	  "d": "EJBKV2sEZTTEVQVsUDwHCnQfZ1svzLbvjm0dDbW9JcT9",
+    	  "i": "EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX",
+    	  "ri": "EEMnY-XQ68MHMCtWbkfLj2qNkdw9BXocPxlUhDnQrqf4",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "EKNwucpfUZu-_9g8ZETkzzL153L7tDHVH1XjmYpeCNx0",
-    	    "i": "EPxyXbKU_eUNVlwbqoGqmoMOd6IqI6Y0YyTKLSgIuAmS",
-    	    "dt": "2025-05-13T20:30:30.493066+00:00",
+    	    "d": "EHnFiXqKWykyZxSirwQfJGljU186MYq1o3tE1923LhOy",
+    	    "i": "EB9gYHDbKlGvrbb5CfDGKVHwGeN0k9zH9CPGEkx7dUcS",
+    	    "dt": "2025-05-23T23:35:26.256460+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -370,12 +424,12 @@ Before formally admitting the credential, the Verifier can inspect the received 
     
 
 
-### Verifier Admits credential
+### Step 3: Verifier Admits and Validates Presentation
 
-The Verifier uses the `kli ipex admit` command to accept the presentation. This triggers the Verifier's KERI controller to perform several validation checks automatically:
+The Verifier uses the `kli ipex admit` command to accept the presentation. This triggers the Verifier's KERI controller to perform several checks automatically:
 
-- Schema Validation: Checks if the credential structure and data types match the resolved schema.
-- Issuer Authentication: Verifies the credential signature against the Issuer's KEL (retrieved previously via OOBI).
+- Schema Validation: Checks whether the credential structure and data types match the resolved schema.
+- Issuer Authentication: Verifies the credential signature against the Issuer's KEL (previously retrieved via OOBI) and, importantly, checks the credential's status (e.g., not revoked) against the Issuer's registry (TEL).
 
 If all checks pass, the Verifier sends an admit message back to the Holder and stores the validated credential information.
 
@@ -391,11 +445,13 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending admit message to EPxyXbKU_eUNVlwbqoGqmoMOd6IqI6Y0YyTKLSgIuAmS
+    Sending admit message to EB9gYHDbKlGvrbb5CfDGKVHwGeN0k9zH9CPGEkx7dUcS
+
+
     ... admit message sent
 
 
-### Verifier check response
+**Verifier Confirms Admission**
 
 Finally, the Verifier can check the status of the received IPEX message again. The Already responded? field should now show Yes ✔ and indicate the response was Admit, confirming the successful presentation and validation.
 
@@ -411,25 +467,25 @@ Finally, the Verifier can check the status of the received IPEX message again. T
     
     Received IPEX Messages:
     
-    GRANT - SAID: EKzWFij8tSJX6nBxNwq9sup7mi0jN-6D5OjHB9KBbsp4
-    Credential EBLel5XDh_59FzvgDbZjNsEmnmIflHUgS-XUKut5Eo7S:
+    GRANT - SAID: EFjhyd40qxKx1sG4TxtF7-8QznxD4X4cFhyDh1P4IjcU
+    Credential EJBKV2sEZTTEVQVsUDwHCnQfZ1svzLbvjm0dDbW9JcT9:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd
-        Issued on 2025-05-13T20:30:30.493066+00:00
+        Issued by EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX
+        Issued on 2025-05-23T23:35:26.256460+00:00
         Already responded? Yes [92m✔[0m
-        Response: [92mAdmit[0m (EGtlbYhtODIpxWjN3QXxpBX3P6eyV9TI1GcgpEKLRWN9)
+        Response: [92mAdmit[0m (EHdLMVNoD1sAfoxLmfAQBg2xn9LTVa_PLOizOyrKLtd3)
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EBLel5XDh_59FzvgDbZjNsEmnmIflHUgS-XUKut5Eo7S",
-    	  "i": "EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd",
-    	  "ri": "ED4FdmqnqPSIjxMZY-ksPFCnUixsthcp7E6dwxQRkc-C",
+    	  "d": "EJBKV2sEZTTEVQVsUDwHCnQfZ1svzLbvjm0dDbW9JcT9",
+    	  "i": "EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX",
+    	  "ri": "EEMnY-XQ68MHMCtWbkfLj2qNkdw9BXocPxlUhDnQrqf4",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "EKNwucpfUZu-_9g8ZETkzzL153L7tDHVH1XjmYpeCNx0",
-    	    "i": "EPxyXbKU_eUNVlwbqoGqmoMOd6IqI6Y0YyTKLSgIuAmS",
-    	    "dt": "2025-05-13T20:30:30.493066+00:00",
+    	    "d": "EHnFiXqKWykyZxSirwQfJGljU186MYq1o3tE1923LhOy",
+    	    "i": "EB9gYHDbKlGvrbb5CfDGKVHwGeN0k9zH9CPGEkx7dUcS",
+    	    "dt": "2025-05-23T23:35:26.256460+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -438,7 +494,7 @@ Finally, the Verifier can check the status of the received IPEX message again. T
     
 
 
-## Credential revocation
+## Credential Revocation by Issuer
 
 Credentials may need to be invalidated before their natural expiry (if any). This process is called revocation. In KERI/ACDC, revocation is performed by the original Issuer of the credential. The Issuer records a revocation event in the credential registry's Transaction Event Log (TEL), which is anchored to the Issuer's main KEL.
 
@@ -459,6 +515,8 @@ The `kli vc revoke` command is used by the Issuer:
 ```
 
     Waiting for TEL event witness receipts
+
+
     Sending TEL events to witnesses
 
 
@@ -471,13 +529,13 @@ Now, if the Issuer lists their issued credentials again, the status will reflect
     -i
 ```
 
-    Current issued credentials for issuer_aid (EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd):
+    Current issued credentials for issuer_aid (EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX):
     
-    Credential #1: EBLel5XDh_59FzvgDbZjNsEmnmIflHUgS-XUKut5Eo7S
+    Credential #1: EJBKV2sEZTTEVQVsUDwHCnQfZ1svzLbvjm0dDbW9JcT9
         Type: EventPass
         Status: Revoked [91m✘[0m
-        Issued by EPGCQtsAc-XIZCxu__n9NGe4yCrYy_9Cvqar1R_sl4bd
-        Issued on 2025-05-13T20:30:56.981298+00:00
+        Issued by EDwd3h3DuajeZNkbcvWY_eDAf_JR8U8pG2XNgE4bRvcX
+        Issued on 2025-05-23T23:35:52.394220+00:00
 
 
 <div class="alert alert-primary">
