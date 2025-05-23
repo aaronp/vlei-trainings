@@ -24,7 +24,7 @@ def generate_anchor(heading_text, existing_anchors):
     """
     # Keep alphanumeric, replace space with hyphen, remove others
     # Allows hyphens within the heading text to persist
-    anchor = re.sub(r'[^\w\s-]', '', heading_text).strip()
+    anchor = re.sub(r'[^\w\s:-]', '', heading_text).strip()
     anchor = re.sub(r'\s+', '-', anchor)
     # Do not lowercase - keep original case as requested
 
