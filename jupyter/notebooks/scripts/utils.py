@@ -1,5 +1,6 @@
 import subprocess
 import os
+import shlex 
 
 def clear_keri(prompt_confirmation=False):
 
@@ -52,3 +53,28 @@ def exec(command_string: str, return_all_lines: bool = False):
     else:
         # We already checked output_lines is not empty
         return stripped_lines[0]
+
+def exec_bg(command_string):
+    """
+    Runs a shell command in the background.
+
+    Args:
+        command_string (str): The shell command to execute.
+
+    Returns:
+        subprocess.Popen: The Popen object for the started process.
+                          This can be used to check status, wait, or terminate.
+    """
+    try:
+        print(f"Starting command in background: {command_string}")
+        process = subprocess.Popen(
+            command_string,
+            shell=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        )
+        print(f"Command '{command_string}' started with PID: {process.pid}")
+        return process
+    except Exception as e:
+        print(f"Error starting command '{command_string}': {e}")
+        return None
