@@ -26,7 +26,8 @@ ENV PATH="/root/.deno/bin:${PATH}"
 # Using --no-cache-dir helps keep the image smaller
 RUN pip install --no-cache-dir \
     jupyterlab==4.* \
-    hio==0.6.14
+    hio==0.6.14 \
+    rich[jupyter]
 
 # Install the Deno Jupyter kernel
 RUN deno jupyter --install && \
