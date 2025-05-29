@@ -19,15 +19,20 @@ The training aims to be accessible, but having background knowledge will certain
 
 3.  **Basic Cryptography Concepts:** Having a basic understanding of what public and private keys are and the general idea behind digital signatures and hash functions will give you a head start.
 
-5.  **Python Programming:** Eventually, the training will involve Python scripting. Knowledge of Python will be helpful at that stage.
+4.  **Python Programming:** The training includes several Python scripts.
+
+5.  **TypeScript Programming:** Code snippets from the 102 module notebooks utilize TypeScript code. 
 
 6.  **Docker Basics:** For setting up and troubleshooting more complex KERI environments or running components like witnesses or agents, a basic understanding of Docker concepts (containers, images, `docker-compose`) will be useful.
 
-## Versions
+## Software Versions
 
 This material was created and tested to work with:
 
-- **Keripy v1.2.6**
+- **keri:1.2.6**
+- **keria:0.2.0-rc2**
+- **signify:?**
+- **vlei:0.2.0**
 
 <div class="alert alert-info">
   <b>🧩 DID YOU KNOW?</b><hr>

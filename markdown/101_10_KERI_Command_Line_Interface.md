@@ -1,11 +1,11 @@
-# KERI Command Line Interface
+# Understanding the KERI Command Line Interface (KLI)
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
 Introduce the KERI Command Line Interface (KLI) and demonstrate some of its basic utility commands.
 </div>
 
-## How to use KLI in Notebooks?
+## Using KLI in Notebooks
 
 Throughout these notebooks, you will interact with the KERI protocol using the **KLI**. The KLI is the standard text-based tool for managing identifiers and infrastructure directly from your computer's terminal. 
 
@@ -21,7 +21,7 @@ The KLI provides a wide range of functionalities. Key capabilities include:
 - **Credential management**: Creation of credentials
 - **Comunication operations**: Establishing connections between AIDs
 - **IPEX actions**: To issue and present credentials
-- **Others**: The KLI provides commands for most of the features available in the KERI and ACDC protocol implementation.
+- **Others**: The KLI provides commands for most of the features available in the KERI and ACDC protocol implementations.
 
 
 
@@ -30,13 +30,13 @@ The KLI provides a wide range of functionalities. Key capabilities include:
     There are UI based methods to manage Identifiers, known as wallets, but for the purpose of this training, the KLI offers a good compromise between ease of use and visibility of technical details. 
 </div>
 
-## Basic Utility Commands
+## Overview of Basic Utilities
 
 Let's explore some helpful commands available in the **KERI Command Line Interface (KLI)**.
 
 This isn't a complete list of every command, but it covers some essential utilities that you'll find useful as you work with KERI.
 
-### KERI library version
+**KERI library version**
 
 
 ```python
@@ -46,8 +46,7 @@ This isn't a complete list of every command, but it covers some essential utilit
     Library version: 1.2.6
 
 
-### Generate a salt 
-Create a new random salt (or seed). A salt is a random value used as an input when generating cryptographic key pairs to help ensure their uniqueness and security.
+**Generate a salt**: Create a new random salt (or seed). A salt is a random value used as an input when generating cryptographic key pairs to help ensure their uniqueness and security.
 
 
 ```python
@@ -55,11 +54,10 @@ Create a new random salt (or seed). A salt is a random value used as an input wh
 !kli salt
 ```
 
-    0AA9Cg3vi093PkOg5ejaVKzf
+    0AB6Xek4hrO91s-dl5bKUfFE
 
 
-### Generate a passcode
-The passcode is used to encrypt your keystore, providing an additional layer of protection.
+**Generate a passcode**: The passcode is used to encrypt your keystore, providing an additional layer of protection.
 
 
 ```python
@@ -67,20 +65,20 @@ The passcode is used to encrypt your keystore, providing an additional layer of 
 !kli passcode generate
 ```
 
-    LAwNSEX5SeJ35C4ZYeJV7
+    jpizpOi1XSWgfOxIj8cKK
 
 
-### Print a timestamp
+**Print a timestamp**
 
 
 ```python
 !kli time
 ```
 
-    2025-05-13T20:26:12.061378+00:00
+    2025-05-23T23:34:03.073207+00:00
 
 
-### Display help menu
+**Display help menu**
 
 
 ```python

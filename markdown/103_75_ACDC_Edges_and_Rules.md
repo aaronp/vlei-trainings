@@ -1,11 +1,11 @@
-# ACDC Edges and Rules
+# Advanced ACDC Features: Edges, Edge Operators, and Rules
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
     Introduce the concept of Edges in ACDCs, explain the Edge operators (I2I, NI2I, DI2I) that define relationships between chained ACDCs, illustrate their use with conceptual scenarios, and briefly introduce Rules as another component for embedding conditions within the ACDC.
 </div>
 
-## Edges, Edge Operators and Rules 
+## Understanding Edges and Rules
  
 Authentic Chained Data Containers (ACDCs) are not always standalone credentials. One of their features is the ability to be cryptographically linked to other ACDCs, forming verifiable chains of information. These links are defined in the `e` (edges) section of an ACDC's payload.
 
@@ -23,7 +23,7 @@ Beyond these structural links, ACDCs also feature a dedicated `r` (rules) sectio
 
 Edge operators provide the logic for validating the link between two ACDCs. They answer questions like: "Does the issuer of this ACDC need to be the subject of the ACDC it's pointing to?" or "Can the issuer be someone delegated by the subject of the linked ACDC?"
 
-## I2I (Issuer-To-Issuee)
+## I2I Operator: Issuer-To-Issuee
 
 The core idea behind an I2I edge is to represent a direct chain of authority. The issuer of the current ACDC (the "near" ACDC containing the edge) is asserting its claims based on its status as the issuee of the ACDC it's pointing to (the "far" ACDC).
 
@@ -41,7 +41,7 @@ I2I signifies: "My authority to issue this current ACDC comes from the fact that
     * **Chain:** Organization (Issuer) -> "Gold Member" ACDC (Issuee: Individual) -> Individual (Issuer, using their Gold Member privilege) -> "Guest Pass" ACDC (Issuee: The Guest).
     * **Significance:** The validity of the guest pass relies on the issuer being a verified Gold Member, as established by the I2I link, and governed by additional rules specified in the r section (e.g., limit on number of guest passes).
 
-### When to use I2I?
+### Use Cases for I2I
 
 1.  **Delegation of Authority:** When an entity that was the subject (issuee) of a credential (e.g., "Manager Role") now needs to issue a subsequent credential by leveraging that conferred authority (e.g., "Project Approval" issued by the manager). 
 2.  **Endorsement:** If one credential's authority directly enables the issuance of another by the same entity acting in a new capacity.
@@ -49,7 +49,7 @@ I2I signifies: "My authority to issue this current ACDC comes from the fact that
 4.  **Sequential Processes:** In workflows where an entity receives a credential (making them an issuee) and then, as a next step in the process, issues another credential related to that item.
 5.  **Default Expectation for Targeted ACDCs:** If the far node (the ACDC being pointed to) is a "Targeted ACDC" (i.e., has an issuee), the I2I operator is the default assumption unless otherwise specified. This implies a natural flow where the issuee of one ACDC becomes the issuer of the next related ACDC.
 
-## NI2I (Not-Issuer-To-Issuee)
+## NI2I Operator: Not-Issuer-To-Issuee
 
 The purpose of the NI2I edge is to reference, associate, or link to another ACDC for context, support, or related information, where there isn't a direct delegation of authority or a requirement for the issuer of the current ACDC to be the subject of the referenced ACDC.
 
@@ -67,7 +67,7 @@ NI2I means that this ACDC I am pointing to provides relevant context, support, o
     * **Relationship:** Rental Agency (Issuer) -> "Rental Agreement" ACDC (Issuee: Customer) --NI2I Edge--> "Proof of Insurance" ACDC (Issued by: Insurance Company, Issuee: Customer).
     * **Significance:** The rental agreement relies on the existence of an insurance policy. The `r` section of the "Rental Agreement" ACDC would likely contain critical rules defining the terms of the rental, insurance coverage requirements (e.g., minimum liability), and consequences of non-compliance, which are legally binding.
 
-### When to use NI2I?
+### Use Cases for NI2I
 
 1.  **Referencing External Information:** When an ACDC needs to point to an ACDC that was issued by a third party and not specifically to the issuer of the current ACDC. The r (rules) section of the referencing ACDC might contain specific clauses on how that external information applies.
 2.  **Providing Supporting Evidence from Third Parties:** Linking to credentials issued by other, independent parties that support a claim in the current ACDC.
@@ -75,13 +75,13 @@ NI2I means that this ACDC I am pointing to provides relevant context, support, o
 4.  **Linking to Untargeted ACDCs:** If the ACDC being pointed to is an "Untargeted ACDC" (i.e., does not have a specific issuee, representing a thing, a concept, or a general statement), then NI2I is appropriate. The issuer of the current ACDC isn't the "issuee" of a general concept.
 5.  **Relaxing the I2I Constraint:** When you explicitly want to state that the issuer of the current ACDC is not necessarily the issuee of the linked ACDC, even if the linked ACDC is targeted.
 
-## DI2I (Delegated-Issuer-To-Issuee)
+## DI2I Operator: Delegated-Issuer-To-Issuee
 
 The idea behind a DI2I edge is to represent a chain of authority where the issuer of the current ACDC is either the direct issuee of the referenced ACDC or a recognized delegate of that issuee. This allows for more flexible delegation chains than a strict I2I relationship.
 
 DI2I signifies: My authority to issue this current ACDC comes from the fact that I am EITHER the subject of the ACDC I am pointing to OR I am a formally recognized delegate of that subject.
 
-### DI2I Scenario Example:
+### DI2I Scenario Example
 
 1.  **Supply Chain: Quality Control Release by Delegated Plant Manager:**
     * **Scenario:**
@@ -89,9 +89,9 @@ DI2I signifies: My authority to issue this current ACDC comes from the fact that
         * The GM of Plant A (AID: `GM_PlantA_AID`) delegates the authority for final quality control (QC) release of specific product lines (e.g., "Widget Model X") to the QC Shift Supervisor, Ms. Lee (AID: `QC_Lee_AID`), via KERI AID delegation.
         * Ms. Lee's team completes QC checks on a batch of Widget Model X, and she issues a "Batch Quality Approved" ACDC.
     * **Edge:** The "Batch Quality Approved" ACDC (issued by `QC_Lee_AID`) will have a DI2I edge pointing to the "Plant Operations Authority" ACDC (issuee: `GM_PlantA_AID`).
-    * **Significance (Why DI2I?):** Ms. Lee's authority is a verifiable delegation from the GM. The r (rules) section of the "Batch Quality Approved" ACDC or its schema might further specify the exact QC standards that must be met for the approval to be valid, linking the delegated action to concrete operational requirements.
+    * **Significance (Why DI2I?):** Ms. Lee's authority is a verifiable delegation from the GM. The `r` (rules) section of the "Batch Quality Approved" ACDC might further specify the exact QC standards that must be met for the approval to be valid, linking the delegated action to concrete operational requirements.
 
-### When to use DI2I?
+### Use Cases for DI2I
 
 1.  **Delegation:** When authority is passed down through an intermediary. The entity issuing the current credential isn't the direct subject of the credential conferring original authority but is operating under a valid delegation from that subject.
 2.  **Flexible Hierarchical Authority:** In complex organizations, the person signing off on something (issuing an ACDC) might not be the person who holds the primary credential for that domain but is acting on their behalf through a formal delegation chain verified via KERI's AID delegation mechanisms.

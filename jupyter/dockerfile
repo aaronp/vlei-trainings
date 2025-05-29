@@ -34,12 +34,23 @@ RUN deno jupyter --install && \
 
 
 # Clone and install KERIpy
-RUN git clone --depth 1 --branch 1.2.6 https://github.com/WebOfTrust/keripy.git /keripy && \
+# RUN git clone --depth 1 --branch 1.2.6 https://github.com/WebOfTrust/keripy.git /keripy && \
+#     cd keripy && \
+#     pip install --no-cache-dir -r requirements.txt
+RUN git clone --depth 1 https://github.com/WebOfTrust/keripy.git /keripy && \
     cd keripy && \
+    git fetch --depth 1 origin 1d02a1dbe6a35e139c129791779a05468522e4bd && \
+    git checkout 1d02a1dbe6a35e139c129791779a05468522e4bd && \
     pip install --no-cache-dir -r requirements.txt
 
+
 # Clone the signify-ts library
-RUN git clone --depth 1 https://github.com/WebOfTrust/signify-ts.git /app/signify-ts
+# RUN git clone --depth 1 https://github.com/WebOfTrust/signify-ts.git /app/signify-ts
+RUN git clone --depth 1 https://github.com/WebOfTrust/signify-ts.git /app/signify-ts && \
+    cd /app/signify-ts && \
+    git fetch --depth 1 origin 9ec2bf47f3a2074519d8fdbdcd955ad72934cf93 && \
+    git checkout 9ec2bf47f3a2074519d8fdbdcd955ad72934cf93
+
 
 # Set up a working directory for notebooks
 WORKDIR /app/notebooks

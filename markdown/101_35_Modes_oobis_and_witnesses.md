@@ -1,11 +1,11 @@
-# Modes, OOBIs, and Witnesses
+# KERI Infrastructure: Modes, OOBIs, and Witnesses
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
 Explain KERI's Direct and Indirect modes and the key components enabling Indirect Mode: Out-of-Band Introductions (OOBIs) for discovery, Witnesses for availability and consistency, and the Threshold of Accountable Duplicity (TOAD) for managing accountability.
 </div>
 
-## Direct and Indirect Modes
+## Operational Modes: Direct and Indirect
 KERI provides a secure way to manage Identifiers and track control using verifiable logs of key events (KEL). How these logs are shared and verified between the controller and someone verifying that identifier leads to two operational modes: Direct and Indirect.
 
 
@@ -31,7 +31,7 @@ Trust extends beyond the controller’s signature, relying on a network of Witne
 
 This mode is ideal for public identifiers, always-verifiable services, one-to-many interactions, or any situation where the controller can’t be constantly online.
 
-## Out-of-Band Introductions
+## OOBIs: Discovery Mechanism
 
 When an AID controller is operating in indirect mode, you need a way to tell others where they can find information about it, like its Key Event Log (KEL). This is where Out-of-Band Introductions (OOBIs) come in.
 
@@ -57,17 +57,17 @@ http://8.8.5.6:8080/oobi/EaU6JR2nmwyZ-i0d8JZAoTNZH3ULvYAfSVPzhzS6b5CM
 
 In short, OOBIs help you find potential information; verification ensures you can trust it.
 
-## Witnesses
+## Role of Witnesses
 
-Witnesses are entities designated by the controller within their AID key event log, acting much like trusted notaries. Their role is to receive key events directly from the controller, verify the controller’s signature, and check that each event aligns with the historical log they maintain.
+Witnesses are entities designated by the controller within their AID key event log, acting much like trusted notaries. Their role is to receive key events directly from the controller, verify the controller’s signature, and check that each event aligns with the event history they have recorded for that AID.
 
 Once a witness confirms an event is valid and encounters it for the first time, it generates a receipt by signing the event (Witnesses also have their own AID). The witness then stores both the original event and its receipt, alongside receipts from other witnesses, in a local copy of the KEL known as the **Key Event Receipt Log (KERL)**.
 
-Witnesses play a critical role in ensuring the system’s reliability and integrity. They provide availability by forming a distributed service that validators can query to access the KEL of a given prefix, even if the controller itself is unavailable. Additionally, they help ensure consistency: since honest witnesses only sign the first valid version of an event they observe, it becomes significantly harder for a controller to present conflicting log versions (**duplicity**).
+Witnesses play a critical role in ensuring the system’s reliability and integrity. They provide availability by forming a distributed service that validators can query to access the KEL of a given prefix, even if the controller itself is unavailable. Additionally, they help ensure consistency: since honest witnesses only sign the first valid version of an event at a given sequence number they observe, it becomes significantly harder for a controller to present conflicting log versions (**duplicity**).
 
 It's important to note that witnesses are software components. For the system to improve security and availability, the witness should be deployed independently, ideally operated by different entities, on different infrastructure, from both the controller and each other.
 
-## Threshold of Accountable Duplicity
+## TOAD: Ensuring Accountability
 
 A key challenge in maintaining the integrity of an identifier's history is preventing the controller from presenting conflicting versions of events. This situation, known as **duplicity**, occurs if a controller improperly signs two or more different key events purporting to be at the same sequence number in their Key Event Log (KEL) – for example, signing two different rotation events both claiming to be sequence number 3. Such conflicting statements undermine trust in the identifier's true state and control. Reasons for duplicity may be due to malicious intent or operational errors. KERI addresses this partly through the behavior of witnesses (who should only sign the first valid event they see per sequence number) and manages the *accountability* for potential duplicity using a specific threshold.
 

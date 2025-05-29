@@ -1,4 +1,4 @@
-# SignifyTS - Keria Basics
+# Introducing Keria and Signify-ts: Architecture and Concepts
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
@@ -11,9 +11,9 @@
     </ul>
 </div>
 
-## Keria/Signify Architecture Overview
+## Client-Agent Architecture
 
-KERI is a protocol for secure, self-certifying identifiers. **Keria** is an agent implementation of KERI, designed to run as a service (in the cloud) that manages AIDs on behalf of a controller. **Signify-ts** is a TypeScript library that acts as a client, enabling applications to interact with a Keria agent.
+KERI is a protocol for secure, self-certifying identifiers. **Keria** is an agent implementation of KERI, designed to run as a service (e.g., in the cloud or self-hosted) that manages AIDs on behalf of a controller. **Signify-ts** is a TypeScript library that acts as a client, enabling applications to interact with a Keria agent.
 
 The idea behind this client-agent architecture is to enable "signing at the edge". Your sensitive private keys, used for signing key events and other data, remain on the client-side (managed by Signify client library). The Keria agent, running remotely, handles tasks like:
 * Storing encrypted key material (salts, encrypted private keys)
@@ -29,7 +29,7 @@ This architecture separates key management and signing authority (client-side) f
 
 In a typical deployment, Keria starts up and often loads its configuration, including a list of default witnesses, from a JSON configuration file (e.g., **[keria configuration file](config/keria/keria-docker.json)**). This allows the agent to be pre-configured with a set of trusted witnesses that any AIDs it manages can use.
 
-## Keria Service Endpoint Interfaces
+## Agent Service Endpoints
 
 A Keria service instance exposes distinct HTTP endpoints to handle different types of interactions:
 
@@ -50,7 +50,7 @@ A Keria service instance exposes distinct HTTP endpoints to handle different typ
 
 This separation of interfaces enhances security and deployment flexibility.
 
-## End Roles
+## Understanding End Roles
 
 An **end role** in KERI is an authorization that one AID grants to another AID to act in a specific capacity on its behalf. Think of it as assigning a specific job to another identifier.
 
@@ -63,7 +63,7 @@ Declaring an end role typically involves creating a KERI event, often an interac
 
 This signed authorization is recorded in the KEL of the authorizing AID, making the role assignment verifiable by anyone who can access and validate that KEL.
 
-## Client AID and Agent AID
+## Client and Agent AIDs Explained
 
 When you use Signify-ts to connect to a Keria agent, two primary AIDs are involved:
 
@@ -79,7 +79,7 @@ When you use Signify-ts to connect to a Keria agent, two primary AIDs are involv
     * It's also typically a transferable AID.
     * The Keria service uses this Agent AID to perform actions for your Client AID, such as interacting with witnesses or other agents, without needing direct access to your Client AID's private keys.
 
-The Signify client generates the Client AID and sends its inception event to the Keria agent's Boot Interface. The Keria service then creates the delegated Agent AID and returns its inception event to the client [Source 14]. Finally, the Signify client approves this delegation by sending an interaction event back to the Keria agent's Admin Interface.
+The Signify client generates the Client AID and sends its inception event to the Keria agent's Boot Interface. The Keria service then creates the delegated Agent AID and returns its inception event to the client. Finally, the Signify client approves this delegation by sending an interaction event back to the Keria agent's Admin Interface.
 
 This delegation model is fundamental to Keria's security: your primary controlling keys (for the Client AID) remain "at the edge," while the Keria agent operates with a delegated authority (via the Agent AID) that is always traceable back to your Client AID.
 
@@ -98,8 +98,3 @@ This delegation model is fundamental to Keria's security: your primary controlli
     The connection process involves a <b>Client AID</b> (controlled by the user via Signify) delegating authority to an <b>Agent AID</b> (managed by Keria). 
   </p>
 </div>
-
-
-```typescript
-
-```

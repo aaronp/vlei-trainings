@@ -1,4 +1,4 @@
-# Signatures
+# Digital Signatures in KERI
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
@@ -6,7 +6,7 @@
 </div>
 
 
-## What is a Digital Signature?
+## Fundamentals of Digital Signatures
 
 Having explored KERI Identifiers (AIDs) and their management, we now focus on digital signatures. This section explains what digital signatures are, their crucial properties, and how they operate within KERI.
 
@@ -35,7 +35,7 @@ Successful verification confirms:
 * **Integrity:** The information has not been altered since it was signed.
 * **non-repudiability**: The signer cannot successfully deny signing the information. Because generating the signature requires the private key (which should be kept secret by the owner), a valid signature serves as strong evidence of the signer's action.
 
-## Signatures and Verification
+## Verification Process in KERI
 
 In KERI, digital signatures are fundamental for establishing trust and verifying the authenticity of Key Events and other interactions associated with an AID. They cryptographically link actions and data back to the identifier's controlling keys.
 
@@ -57,11 +57,11 @@ This reliance on the KEL to track key state over time is crucial for maintaining
     There's a subtle difference between a <b>Verifier</b> (who checks cryptographic correctness according to KERI rules) and a <b>Validator</b> (who might perform broader checks, including business logic, and broader trust policies in addition to verification). In KERI discussions, "Verifier" typically emphasizes the cryptographic checks.
 </div>
 
-## Signing and Verifying with KLI
+## KLI Examples: Signing and Verifying
 
 Let's see how signing and verification work using the KLI commands.
 
-### Setup Keystore and Identifier
+### Initial Setup
 
 First, create a keystore and an identifier.
 
@@ -93,12 +93,14 @@ aid_alias = "aid-signature"
     KERI Database created at: /usr/local/var/keri/db/signature-keystore
     KERI Credential Store created at: /usr/local/var/keri/reg/signature-keystore
     	aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
+
+
     Prefix  BCtRkWLNdWNRvB8L5gYMaLkanJQWi8wGbmmAtEw9XSWw
     	Public key 1:  BCtRkWLNdWNRvB8L5gYMaLkanJQWi8wGbmmAtEw9XSWw
     
 
 
-### Sign a Message 
+### Signing Data
 
 Now, sign a simple text message using the private key associated with the `aid-signature` identifier. To do so use the command `kli sign` presented below:
 
@@ -115,7 +117,7 @@ Now, sign a simple text message using the private key associated with the `aid-s
 
 The output is the digital signature generated for the text "hello world" using the private key of the AID  
 
-### Verify the Signature 
+### Verifying a Valid Signature
 
 You can now use the `kli verify` command to check if the signature is valid for the given message and identifier (prefix). The relevant parameters here are:
 - `--prefix`: The prefix of the signer
@@ -138,7 +140,7 @@ You can now use the `kli verify` command to check if the signature is valid for 
 
 The command confirms the signature is valid. It used the public key associated with the prefix to verify the signature against the provided text.
 
-### Tampered Signature
+### Impact of Tampering
 
 What happens if the signature is altered even slightly? The next command has the last character of the signature modified. Try to verify again.
 
