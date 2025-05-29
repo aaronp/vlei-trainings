@@ -252,7 +252,7 @@ phrase_a = exec("kli challenge generate --out string")
 phrase_b = exec("kli challenge generate --out string")
 ```
 
-    vapor guitar foam unveil diary pudding maple panic glide print state educate
+    almost engine genre plastic cycle right benefit ten express hand pipe jeans
 
 
 Now, simulate the OOB exchange: `aid_b` sends `phrase_b` to `aid_a`, and `aid_a` sends `phrase_a` to `aid_b`. Each party then uses `kli challenge respond` to sign the phrase they received and `kli challenge verify` to check the response from the other party.
@@ -269,7 +269,7 @@ print(phrase_a)
     --recipient {aid_a}
 ```
 
-    struggle amazing soon pave situate repeat garbage language judge frown original bus
+    main rhythm february edge that educate green win affair paper inform spawn
 
 
 
@@ -285,7 +285,7 @@ print(phrase_a)
 
     .
     
-    Signer aid_b successfully responded to challenge words: '['struggle', 'amazing', 'soon', 'pave', 'situate', 'repeat', 'garbage', 'language', 'judge', 'frown', 'original', 'bus']'
+    Signer aid_b successfully responded to challenge words: '['main', 'rhythm', 'february', 'edge', 'that', 'educate', 'green', 'win', 'affair', 'paper', 'inform', 'spawn']'
     
 
 
@@ -300,7 +300,7 @@ print(phrase_b)
     --recipient {aid_b}
 ```
 
-    chat hawk wrong roof melody regret tumble tobacco junior finger voice robust
+    dinner stick promote can journey unlock wrong depth limb clog chapter seed
 
 
 
@@ -316,7 +316,7 @@ print(phrase_b)
 
     .
     
-    Signer aid_a successfully responded to challenge words: '['chat', 'hawk', 'wrong', 'roof', 'melody', 'regret', 'tumble', 'tobacco', 'junior', 'finger', 'voice', 'robust']'
+    Signer aid_a successfully responded to challenge words: '['dinner', 'stick', 'promote', 'can', 'journey', 'unlock', 'wrong', 'depth', 'limb', 'clog', 'chapter', 'seed']'
     
 
 
