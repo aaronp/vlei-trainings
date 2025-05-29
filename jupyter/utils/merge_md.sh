@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /app/markdown
 # Remove all.md if it already exists to ensure a clean merge
 if [ -f all.md ]; then
   rm all.md

@@ -1,6 +1,17 @@
+from rich import print as rprint
 import subprocess
 import os
 import shlex 
+
+
+def pr_continue():
+    rprint(f"[green]You can continue ✅\n[/green]")
+
+def pr_title(message):
+    rprint(f"[bold bright_blue]{message}[/bold bright_blue]")
+
+def pr_message(message):
+    rprint(f"[bold royal_blue1]{message}[/bold royal_blue1]")
 
 def clear_keri(prompt_confirmation=False):
 
@@ -66,14 +77,13 @@ def exec_bg(command_string):
                           This can be used to check status, wait, or terminate.
     """
     try:
-        print(f"Starting command in background: {command_string}")
         process = subprocess.Popen(
             command_string,
             shell=True,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
-        print(f"Command '{command_string}' started with PID: {process.pid}")
+        print(f"Command {command_string} started with PID: {process.pid}")
         return process
     except Exception as e:
         print(f"Error starting command '{command_string}': {e}")

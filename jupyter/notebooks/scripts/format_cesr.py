@@ -1,5 +1,9 @@
 import json
 
+# from scripts.format_cesr import format_cesr
+# cesr = exec("curl -s http://witness-demo:5642/oobi/EJcceEYdyHdynNaztmRgWkOZ86MIgFqj8gr9ML878o3x/witness")
+# print(format_cesr(cesr))
+
 def format_cesr(stream_data: str) -> str:
     formatted_parts = []
     current_pos = 0
