@@ -54,7 +54,7 @@ This isn't a complete list of every command, but it covers some essential utilit
 !kli salt
 ```
 
-    0ACIEmCwI3143BaddDKVJfkT
+    0ACKVwq9kPVbl421sH50Iwub
 
 
 **Generate a passcode**: The passcode is used to encrypt your keystore, providing an additional layer of protection.
@@ -65,7 +65,7 @@ This isn't a complete list of every command, but it covers some essential utilit
 !kli passcode generate
 ```
 
-    sdxd2dyQOmVyS2JOA2zCE
+    MuKgq7Ej6m8JbuWvTCb43
 
 
 **Print a timestamp**
@@ -75,7 +75,7 @@ This isn't a complete list of every command, but it covers some essential utilit
 !kli time
 ```
 
-    2025-05-29T20:05:19.802139+00:00
+    2025-05-30T22:26:46.188402+00:00
 
 
 **Display help menu**

@@ -92,12 +92,9 @@ pr_continue()
 
     Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
     ✅ Successfully removed: /usr/local/var/keri/
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Initializing keystores</span>
-</pre>
-
+    
+    [1m[4m[44m[90m  Initializing keystores  [0m
+    
 
 
     KERI Keystore created at: /usr/local/var/keri/ks/delegate_keystore
@@ -105,73 +102,56 @@ pr_continue()
     KERI Credential Store created at: /usr/local/var/keri/reg/delegate_keystore
     
     Loading 3 OOBIs...
+
+
     http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
+
+
     KERI Keystore created at: /usr/local/var/keri/ks/delegator_keystore
     KERI Database created at: /usr/local/var/keri/db/delegator_keystore
     KERI Credential Store created at: /usr/local/var/keri/reg/delegator_keystore
     
     Loading 3 OOBIs...
+
+
     http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Incepting delegator AID</span>
-</pre>
-
-
-
-    Waiting for witness receipts...
-    Prefix  EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1
-    	Public key 1:  DGpJPebl-NON52cCAK7FwknNbCtkDkxl1rdBlSCqAJub
+    
+    [1m[4m[44m[90m  Incepting delegator AID  [0m
     
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Generating OOBIs</span>
-</pre>
+    Waiting for witness receipts...
 
 
-
-    Delegator OOBI: http://witness-demo:5642/oobi/EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1/witness
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Resolving OOBIs</span>
-</pre>
+    Prefix  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS
+    	Public key 1:  DAHdXK8xFMWZdKEW_lynR6g2dyyXMUir4hwZpr0Gjho_
+    
 
 
-
-    http://witness-demo:5642/oobi/EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1/witness resolved
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
+    
+    [1m[4m[44m[90m  Generating OOBIs  [0m
+    
 
 
-
-    Delegator OOBI: http://witness-demo:5642/oobi/ELHViCL-OJjigPoy3fVkLzFjRkjo3ZuERTveluafMdRW/witness
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Resolving OOBIs</span>
-</pre>
+    Delegator OOBI: http://witness-demo:5642/oobi/EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS/witness
+    
+    [1m[4m[44m[90m  Resolving OOBIs  [0m
+    
 
 
-
-    http://witness-demo:5642/oobi/ELHViCL-OJjigPoy3fVkLzFjRkjo3ZuERTveluafMdRW/witness resolved
-
+    http://witness-demo:5642/oobi/EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS/witness resolved
 
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ## Creating Delegated Identifiers
@@ -202,30 +182,23 @@ delegate_proxy_alias = "delegate_proxy_alias"
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Incepting delegate proxy AID</span>
-</pre>
-
-
-
-    Waiting for witness receipts...
-    Prefix  EKjPT6AlddiVmu3-Tlr987MlLxAhFhSc2IVaWk8zlD8K
-    	Public key 1:  DPgaVau8J1-ORM6eWbYbPkxP_dm1BL45mJO3HEuB1FEG
+    
+    [1m[4m[44m[90m  Incepting delegate proxy AID  [0m
     
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
+    Waiting for witness receipts...
 
 
+    Prefix  EGRrKqc5MYLJnW6Z4q61jMrpW3dyz5GKfDuVANMY25gk
+    	Public key 1:  DD2BuIvQ8twvPCd3POqYTdAdtcbxaAIqC752e4IPG6Q8
+    
 
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ### Step 2: Delegate request delegated AID Inception
@@ -269,28 +242,21 @@ exec_bg(command)
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Incepting delegated AID</span>
-</pre>
-
-
+    
+    [1m[4m[44m[90m  Incepting delegated AID  [0m
+    
 
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Delegator prefix: EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1</span>
-</pre>
-
-
-
+    
+    [1m[94mDelegator prefix: EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS[0m
+    
     Command 
-    kli incept --name delegate_keystore     --alias delegate_alias     --icount 1     --isith 1     --ncount 1     --nsith 1     --wits BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha     --toad 1     --transferable     --delpre EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1     --proxy delegate_proxy_alias > ./logs/delegate_incept.log
-     started with PID: 14304
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    kli incept --name delegate_keystore     --alias delegate_alias     --icount 1     --isith 1     --ncount 1     --nsith 1     --wits BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha     --toad 1     --transferable     --delpre EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS     --proxy delegate_proxy_alias > ./logs/delegate_incept.log
+     started with PID: 17092
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ### Step 3: Delegator confirms delegation 
@@ -314,25 +280,18 @@ pr_message(output)
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Confirming delegation</span>
-</pre>
-
-
+    
+    [1m[4m[44m[90m  Confirming delegation  [0m
+    
 
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">[</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">'Delegagtor Prefix  EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1'</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">, </span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">'Delegate </span>
-<span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a inception Anchored at Seq. No.  1'</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">, </span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">'Delegate </span>
-<span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a inception event committed.'</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">]</span>
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[94m['Delegagtor Prefix  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS', 'Delegate ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce inception Anchored at Seq. No.  1', 'Delegate ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce inception event committed.'][0m
+    
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 Now, let's examine the status of the newly created delegated AID.
@@ -343,17 +302,16 @@ pr_title(f"Delegated AID status")
 !kli status --name delegate_keystore --alias delegate_alias --verbose
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Delegated AID status</span>
-</pre>
-
+    
+    [1m[4m[44m[90m  Delegated AID status  [0m
+    
 
 
     Alias: 	delegate_alias
-    Identifier: EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a
+    Identifier: ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce
     Seq No:	0
     Delegated Identifier
-        Delegator:  EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1 [92m✔ Anchored[0m
+        Delegator:  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS [92m✔ Anchored[0m
     
     
     Witnesses:
@@ -362,7 +320,7 @@ pr_title(f"Delegated AID status")
     Threshold:	1
     
     Public Keys:	
-    	1. DJZO6kCWGWXvLVSyiTnkI3E1qnDRF86-QBPp-67OY2-P
+    	1. DOS76wt7y1yoBiQZVC33zMy7JzEApdj_skNTNdDjdIGf
     
     
     Witnesses:	
@@ -371,16 +329,16 @@ pr_title(f"Delegated AID status")
     {
      "v": "KERI10JSON00018d_",
      "t": "dip",
-     "d": "EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a",
-     "i": "EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a",
+     "d": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
+     "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
      "s": "0",
      "kt": "1",
      "k": [
-      "DJZO6kCWGWXvLVSyiTnkI3E1qnDRF86-QBPp-67OY2-P"
+      "DOS76wt7y1yoBiQZVC33zMy7JzEApdj_skNTNdDjdIGf"
      ],
      "nt": "1",
      "n": [
-      "EHos1UUVdj-9Mu5DEvFR_c-47NtcFrnc7LH30rBVloK_"
+      "EIW0R6ISrCSVcDX2la_xByvAnaM6HtxkGGakP3rSysvb"
      ],
      "bt": "1",
      "b": [
@@ -388,7 +346,7 @@ pr_title(f"Delegated AID status")
      ],
      "c": [],
      "a": [],
-     "di": "EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1"
+     "di": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS"
     }
     
 
@@ -434,36 +392,24 @@ pr_message(output)
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Rotating delegated AID</span>
-</pre>
-
-
-
+    
+    [1m[4m[44m[90m  Rotating delegated AID  [0m
+    
     Command 
     kli rotate --name delegate_keystore     --alias delegate_alias     --proxy delegate_proxy_alias
-     started with PID: 14313
+     started with PID: 17101
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Rotation</span>
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">[</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">'Delegagtor Prefix  EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1'</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">, </span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">'Delegate </span>
-<span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a rotation Anchored at Seq. No.  2'</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">, </span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">'Delegate </span>
-<span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a rotation event committed.'</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">]</span>
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[94mRotation[0m
+    
+    
+    [1m[94m['Delegagtor Prefix  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS', 'Delegate ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce rotation Anchored at Seq. No.  2', 'Delegate ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce rotation event committed.'][0m
+    
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 Now, let's examine the status of the delegate AID after the rotation.
@@ -474,17 +420,16 @@ pr_title(f"Delegated AID status")
 !kli status --name delegate_keystore --alias delegate_alias --verbose
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Delegated AID status</span>
-</pre>
-
+    
+    [1m[4m[44m[90m  Delegated AID status  [0m
+    
 
 
     Alias: 	delegate_alias
-    Identifier: EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a
+    Identifier: ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce
     Seq No:	1
     Delegated Identifier
-        Delegator:  EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1 [92m✔ Anchored[0m
+        Delegator:  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS [92m✔ Anchored[0m
     
     
     Witnesses:
@@ -493,7 +438,7 @@ pr_title(f"Delegated AID status")
     Threshold:	1
     
     Public Keys:	
-    	1. DJjHlJKFDz0o68V63XIR88u2BDWZr5ARAs76Dop2xJko
+    	1. DFFiw3TgJ9rsy4Nr0e8hOKg6fmQWdrHrK5_N5oAOzaOx
     
     
     Witnesses:	
@@ -502,16 +447,16 @@ pr_title(f"Delegated AID status")
     {
      "v": "KERI10JSON00018d_",
      "t": "dip",
-     "d": "EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a",
-     "i": "EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a",
+     "d": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
+     "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
      "s": "0",
      "kt": "1",
      "k": [
-      "DJZO6kCWGWXvLVSyiTnkI3E1qnDRF86-QBPp-67OY2-P"
+      "DOS76wt7y1yoBiQZVC33zMy7JzEApdj_skNTNdDjdIGf"
      ],
      "nt": "1",
      "n": [
-      "EHos1UUVdj-9Mu5DEvFR_c-47NtcFrnc7LH30rBVloK_"
+      "EIW0R6ISrCSVcDX2la_xByvAnaM6HtxkGGakP3rSysvb"
      ],
      "bt": "1",
      "b": [
@@ -519,23 +464,23 @@ pr_title(f"Delegated AID status")
      ],
      "c": [],
      "a": [],
-     "di": "EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1"
+     "di": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS"
     }
     
     {
      "v": "KERI10JSON000160_",
      "t": "drt",
-     "d": "EEcfMiEyr4TdfkWK1FR6ZNtfP5-qSejoovKvzWD5cJc7",
-     "i": "EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a",
+     "d": "EPGvOlVX9B35JSaIjXiq2MgdaFAKVjYRS6VUkPYyKCRJ",
+     "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
      "s": "1",
-     "p": "EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a",
+     "p": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
      "kt": "1",
      "k": [
-      "DJjHlJKFDz0o68V63XIR88u2BDWZr5ARAs76Dop2xJko"
+      "DFFiw3TgJ9rsy4Nr0e8hOKg6fmQWdrHrK5_N5oAOzaOx"
      ],
      "nt": "1",
      "n": [
-      "EJ1nr1WrKW8s5wJFrbL7JnmzpDC3Alwn65wVp3KCFXPM"
+      "ELMlJDnqRE3VUA8_5kYQeT26lTM052Mom7TPeThnRdZn"
      ],
      "bt": "1",
      "br": [],
@@ -560,14 +505,13 @@ pr_title(f"Delegator AID status")
 !kli status --name delegator_keystore --alias delegator_alias --verbose
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Delegator AID status</span>
-</pre>
-
+    
+    [1m[4m[44m[90m  Delegator AID status  [0m
+    
 
 
     Alias: 	delegator_alias
-    Identifier: EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1
+    Identifier: EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS
     Seq No:	2
     
     Witnesses:
@@ -576,7 +520,7 @@ pr_title(f"Delegator AID status")
     Threshold:	3
     
     Public Keys:	
-    	1. DAdOW5ILCom8II4IqzTiXBj5hUAk9B4aC3KINOlcbGCd
+    	1. DK893JfjZJKRrVeV_5Rp1j7S1zd746lg2vOyvxXPy__r
     
     
     Witnesses:	
@@ -587,16 +531,16 @@ pr_title(f"Delegator AID status")
     {
      "v": "KERI10JSON0001b7_",
      "t": "icp",
-     "d": "EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1",
-     "i": "EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1",
+     "d": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
+     "i": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
      "s": "0",
      "kt": "1",
      "k": [
-      "DGpJPebl-NON52cCAK7FwknNbCtkDkxl1rdBlSCqAJub"
+      "DAHdXK8xFMWZdKEW_lynR6g2dyyXMUir4hwZpr0Gjho_"
      ],
      "nt": "1",
      "n": [
-      "EPz8nyDj7YCQ7D9i7Quqo7bMlf3PNayt1UVjizjOzh6X"
+      "EPLRq0SznqxZxNOlgoFkX2gOjZT9tRhVyv49SLGB5ddY"
      ],
      "bt": "2",
      "b": [
@@ -611,26 +555,26 @@ pr_title(f"Delegator AID status")
     {
      "v": "KERI10JSON0001cf_",
      "t": "rot",
-     "d": "ENRA2L1d9ocXx391UyLlLnBx9Xukw_Ck02y4JO5g9nCi",
-     "i": "EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1",
+     "d": "EB95J4WOTqa1j5cjne3o_zoZ9_gQapHDCVhjgU3lqF7w",
+     "i": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
      "s": "1",
-     "p": "EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1",
+     "p": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
      "kt": "1",
      "k": [
-      "DN0GKt2uJ4TtQDsWlypRiT9RU890wKgcIjYU9Hw5tZRB"
+      "DGeHiAmo7du8TB5SThYhxWdP-0GxWtcDSNOlU_I-bxJk"
      ],
      "nt": "1",
      "n": [
-      "EM2fAQECUHDNU1asCTYurGDawEdH2YLTXm7E8xWIpH96"
+      "EJPeDQBXATIi2YH_iElN3yFxhrPMRM8wMozBgLN2VRso"
      ],
      "bt": "3",
      "br": [],
      "ba": [],
      "a": [
       {
-       "i": "EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a",
+       "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
        "s": "0",
-       "d": "EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a"
+       "d": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce"
       }
      ]
     }
@@ -638,26 +582,26 @@ pr_title(f"Delegator AID status")
     {
      "v": "KERI10JSON0001cf_",
      "t": "rot",
-     "d": "EKEu2mGjm_GV69-BSMOXX3pfcOms-agDZk_GK2PRbd0-",
-     "i": "EPS6ruHeTeQDkhnYlPvaJ3YuT1mzWdooUO4Afl_82HH1",
+     "d": "ELdrRNS3A95tTmAy1cTeMzVMQWZQgHitDRPqf_sOtpEm",
+     "i": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
      "s": "2",
-     "p": "ENRA2L1d9ocXx391UyLlLnBx9Xukw_Ck02y4JO5g9nCi",
+     "p": "EB95J4WOTqa1j5cjne3o_zoZ9_gQapHDCVhjgU3lqF7w",
      "kt": "1",
      "k": [
-      "DAdOW5ILCom8II4IqzTiXBj5hUAk9B4aC3KINOlcbGCd"
+      "DK893JfjZJKRrVeV_5Rp1j7S1zd746lg2vOyvxXPy__r"
      ],
      "nt": "1",
      "n": [
-      "ELSXvY0BNhEw-BBxUFihpCbtth2UnnKyzRdbGquFJ6Ld"
+      "EHOMY5uZRRzIrUFJqZKu9XK9-1gLwyAdDeowEvHbCDv4"
      ],
      "bt": "3",
      "br": [],
      "ba": [],
      "a": [
       {
-       "i": "EPc6dLcAtnkmOxKzXiHL8n8dHr4JL-ZtqmQsmXPM671a",
+       "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
        "s": "1",
-       "d": "EEcfMiEyr4TdfkWK1FR6ZNtfP5-qSejoovKvzWD5cJc7"
+       "d": "EPGvOlVX9B35JSaIjXiq2MgdaFAKVjYRS6VUkPYyKCRJ"
       }
      ]
     }

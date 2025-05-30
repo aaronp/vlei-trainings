@@ -22,6 +22,9 @@ For a detailed explanation of these issuance steps, please refer to the previous
 ```python
 from scripts.utils import exec
 from scripts.saidify import process_schema_file, get_schema_said
+from scripts.utils import pr_title, pr_message, pr_continue, clear_keri
+
+clear_keri()
 
 # Holder keystore init and AID inception
 
@@ -122,13 +125,17 @@ time = exec("kli time")
     --said {ipex_said} \
     --time {time}
 
-print("\n\nYou can continue ✅")
+pr_continue()
 ```
+
+    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
+    ✅ Successfully removed: /usr/local/var/keri/
+
 
     KERI Keystore created at: /usr/local/var/keri/ks/holder_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/holder_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/holder_presentation_ks
-    	aeid: BJU1StasF6fQOShKnHpkWjNPlPTpmqrk4o3QapAd9VFV
+    	aeid: BDB0RaCfC01zC5ofjJoU6VsWvLkdDj35t7FAFI3Ykx5s
     
     Loading 3 OOBIs...
 
@@ -141,15 +148,15 @@ print("\n\nYou can continue ✅")
     Waiting for witness receipts...
 
 
-    Prefix  EMWZ4G0EU2HMNgiprVnRTjMHos0f9_bl4Voc3aLRhVql
-    	Public key 1:  DCq5jiO_wR4dti1CDn8jhMtzmXzN4K2682MIfy-khSU-
+    Prefix  ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb
+    	Public key 1:  DOF_LhXLyHpXZIO_DF26rE3LfwFvE7dMLejReTFhQ2Rs
     
 
 
     KERI Keystore created at: /usr/local/var/keri/ks/issuer_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/issuer_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/issuer_presentation_ks
-    	aeid: BKjv5LLxWMCuUbFuSmKM89UauC1WpCl3mSjHJ_mo4SkE
+    	aeid: BPuNknoOpcDQUhb5YVyGm8UAl42FhQA383oswqNjFa_p
     
     Loading 3 OOBIs...
 
@@ -162,8 +169,8 @@ print("\n\nYou can continue ✅")
     Waiting for witness receipts...
 
 
-    Prefix  EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB
-    	Public key 1:  DHrA6vMbplOCablALks0ETTyw4kvDUpU_1Lm1JA4ck4h
+    Prefix  EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
+    	Public key 1:  DItmvcP7HhVymyncElJlPpgbwEHVdzv0IYoCMWHoc9bQ
     
 
 
@@ -173,14 +180,14 @@ print("\n\nYou can continue ✅")
     Sending TEL events to witnesses
 
 
-    Registry:  issuer_registry(EIyTeFQMOtf_aPG5KzNu_59ZH0oGp9WOnCRnzgwQspqK) 
-    	created for Identifier Prefix:  EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB
+    Registry:  issuer_registry(EAEqvHOJMPaQiiXB_SDvi9WEaRxBgMQXGXCVkDxnffK0) 
+    	created for Identifier Prefix:  EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
 
 
-    http://witness-demo:5642/oobi/EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB/witness resolved
+    http://witness-demo:5642/oobi/EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw/witness resolved
 
 
-    http://witness-demo:5642/oobi/EMWZ4G0EU2HMNgiprVnRTjMHos0f9_bl4Voc3aLRhVql/witness resolved
+    http://witness-demo:5642/oobi/ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb/witness resolved
 
 
     http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK resolved
@@ -195,24 +202,25 @@ print("\n\nYou can continue ✅")
     Sending TEL events to witnesses
 
 
-    EATkZvs2FIBeI6Y0cNerOdnLehkqmv1xh_t2SS-qZONi has been created.
+    EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI has been created.
 
 
-    Sending message EA4knr_6Y4YBdfQX6ZHvqsWblcnL5rcgQ9VpUcWwsvWp to EMWZ4G0EU2HMNgiprVnRTjMHos0f9_bl4Voc3aLRhVql
+    Sending message EGGLNn5u9-pDdSOZ3qusWE4uCKE7BM95wuotxwx9wt3X to ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb
 
 
     ... grant message sent
 
 
-    Sending admit message to EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB
+    Sending admit message to EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
 
 
     ... admit message sent
 
 
     
+    [1m[42m[90m  You can continue ✅  [0m
     
-    You can continue ✅
+    
 
 
 ## The IPEX Presentation Flow
@@ -228,24 +236,24 @@ First, confirm the Holder has the credential:
     --verbose
 ```
 
-    Current received credentials for holder_aid (EMWZ4G0EU2HMNgiprVnRTjMHos0f9_bl4Voc3aLRhVql):
+    Current received credentials for holder_aid (ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb):
     
-    Credential #1: EATkZvs2FIBeI6Y0cNerOdnLehkqmv1xh_t2SS-qZONi
+    Credential #1: EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB
-        Issued on 2025-05-29T20:07:39.509343+00:00
+        Issued by EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
+        Issued on 2025-05-30T22:29:08.601062+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EATkZvs2FIBeI6Y0cNerOdnLehkqmv1xh_t2SS-qZONi",
-    	  "i": "EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB",
-    	  "ri": "EIyTeFQMOtf_aPG5KzNu_59ZH0oGp9WOnCRnzgwQspqK",
+    	  "d": "EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI",
+    	  "i": "EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw",
+    	  "ri": "EAEqvHOJMPaQiiXB_SDvi9WEaRxBgMQXGXCVkDxnffK0",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "ELKkpP9KlJzpn-r06rEUDsRUMPfb6z_4RhkbxLhf6fM9",
-    	    "i": "EMWZ4G0EU2HMNgiprVnRTjMHos0f9_bl4Voc3aLRhVql",
-    	    "dt": "2025-05-29T20:07:39.509343+00:00",
+    	    "d": "EBDchGEtKuTUvjorNVbhg4egHDPASz-8sAL3aw3zALl8",
+    	    "i": "ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb",
+    	    "dt": "2025-05-30T22:29:08.601062+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -279,7 +287,7 @@ verifier_aid = "verifier_aid"
     KERI Keystore created at: /usr/local/var/keri/ks/verifier_ks
     KERI Database created at: /usr/local/var/keri/db/verifier_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/verifier_ks
-    	aeid: BF_M0RK6dk0eWNbpscPnV1y9cY0Qjt35yo4p6A-G6x9o
+    	aeid: BJ6I3rDvLLwkrEFRp4MkWlN6kBr0I_9gchYn4gjfSpjn
     
     Loading 3 OOBIs...
 
@@ -292,8 +300,8 @@ verifier_aid = "verifier_aid"
     Waiting for witness receipts...
 
 
-    Prefix  EAWFhD8SaXnH1gd-O7JTSCzz8EjLXytS7AL_ZHXmA-Z5
-    	Public key 1:  DIHJUNs3paFm168KOLm5ZvgZpqaMTXyTausSqsQVZYJc
+    Prefix  EH2I6XrdMk7_DCBo-SUO8xcQzDPQAeYhuBvFc6XG5f6S
+    	Public key 1:  DMAxBVh4rcxByan3BAMZVMBy8wfIchXAJdmTUDzPPRg9
     
 
 
@@ -318,10 +326,10 @@ verifier_oobi = exec(verifier_oobi_gen)
 
 ```
 
-    http://witness-demo:5642/oobi/EAWFhD8SaXnH1gd-O7JTSCzz8EjLXytS7AL_ZHXmA-Z5/witness resolved
+    http://witness-demo:5642/oobi/EH2I6XrdMk7_DCBo-SUO8xcQzDPQAeYhuBvFc6XG5f6S/witness resolved
 
 
-    http://witness-demo:5642/oobi/EMWZ4G0EU2HMNgiprVnRTjMHos0f9_bl4Voc3aLRhVql/witness resolved
+    http://witness-demo:5642/oobi/ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb/witness resolved
 
 
 ### Verifier Resolves Schema OOBI
@@ -361,7 +369,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending message EAKj4eYhGvd0IS9DbXJ3VBVIybMaOP5wbuTJxk6a18dI to EAWFhD8SaXnH1gd-O7JTSCzz8EjLXytS7AL_ZHXmA-Z5
+    Sending message EOebNJIW1vG32kNbY00SBPnZt88GcDyP02CFepwdAcjF to EH2I6XrdMk7_DCBo-SUO8xcQzDPQAeYhuBvFc6XG5f6S
 
 
     ... grant message sent
@@ -379,7 +387,7 @@ ipex_said=exec(get_ipex_said)
 print(ipex_said)
 ```
 
-    EAKj4eYhGvd0IS9DbXJ3VBVIybMaOP5wbuTJxk6a18dI
+    EOebNJIW1vG32kNbY00SBPnZt88GcDyP02CFepwdAcjF
 
 
 **Verifier displays credential (Optional)**
@@ -398,24 +406,24 @@ Before formally admitting the credential, the Verifier can inspect the received 
     
     Received IPEX Messages:
     
-    GRANT - SAID: EAKj4eYhGvd0IS9DbXJ3VBVIybMaOP5wbuTJxk6a18dI
-    Credential EATkZvs2FIBeI6Y0cNerOdnLehkqmv1xh_t2SS-qZONi:
+    GRANT - SAID: EOebNJIW1vG32kNbY00SBPnZt88GcDyP02CFepwdAcjF
+    Credential EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB
-        Issued on 2025-05-29T20:07:39.509343+00:00
+        Issued by EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
+        Issued on 2025-05-30T22:29:08.601062+00:00
         Already responded? No [91m✘[0m
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EATkZvs2FIBeI6Y0cNerOdnLehkqmv1xh_t2SS-qZONi",
-    	  "i": "EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB",
-    	  "ri": "EIyTeFQMOtf_aPG5KzNu_59ZH0oGp9WOnCRnzgwQspqK",
+    	  "d": "EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI",
+    	  "i": "EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw",
+    	  "ri": "EAEqvHOJMPaQiiXB_SDvi9WEaRxBgMQXGXCVkDxnffK0",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "ELKkpP9KlJzpn-r06rEUDsRUMPfb6z_4RhkbxLhf6fM9",
-    	    "i": "EMWZ4G0EU2HMNgiprVnRTjMHos0f9_bl4Voc3aLRhVql",
-    	    "dt": "2025-05-29T20:07:39.509343+00:00",
+    	    "d": "EBDchGEtKuTUvjorNVbhg4egHDPASz-8sAL3aw3zALl8",
+    	    "i": "ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb",
+    	    "dt": "2025-05-30T22:29:08.601062+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -445,7 +453,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending admit message to EMWZ4G0EU2HMNgiprVnRTjMHos0f9_bl4Voc3aLRhVql
+    Sending admit message to ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb
 
 
     ... admit message sent
@@ -467,25 +475,25 @@ Finally, the Verifier can check the status of the received IPEX message again. T
     
     Received IPEX Messages:
     
-    GRANT - SAID: EAKj4eYhGvd0IS9DbXJ3VBVIybMaOP5wbuTJxk6a18dI
-    Credential EATkZvs2FIBeI6Y0cNerOdnLehkqmv1xh_t2SS-qZONi:
+    GRANT - SAID: EOebNJIW1vG32kNbY00SBPnZt88GcDyP02CFepwdAcjF
+    Credential EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB
-        Issued on 2025-05-29T20:07:39.509343+00:00
+        Issued by EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
+        Issued on 2025-05-30T22:29:08.601062+00:00
         Already responded? Yes [92m✔[0m
-        Response: [92mAdmit[0m (EJprGoKXnzLFCW7SAGmjP8uxHOgXmPKi-Vh3shyymvmU)
+        Response: [92mAdmit[0m (EM1bVeam1rRLof18IBXer1cLjVAlofYuw6xd4NESLDWi)
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EATkZvs2FIBeI6Y0cNerOdnLehkqmv1xh_t2SS-qZONi",
-    	  "i": "EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB",
-    	  "ri": "EIyTeFQMOtf_aPG5KzNu_59ZH0oGp9WOnCRnzgwQspqK",
+    	  "d": "EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI",
+    	  "i": "EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw",
+    	  "ri": "EAEqvHOJMPaQiiXB_SDvi9WEaRxBgMQXGXCVkDxnffK0",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "ELKkpP9KlJzpn-r06rEUDsRUMPfb6z_4RhkbxLhf6fM9",
-    	    "i": "EMWZ4G0EU2HMNgiprVnRTjMHos0f9_bl4Voc3aLRhVql",
-    	    "dt": "2025-05-29T20:07:39.509343+00:00",
+    	    "d": "EBDchGEtKuTUvjorNVbhg4egHDPASz-8sAL3aw3zALl8",
+    	    "i": "ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb",
+    	    "dt": "2025-05-30T22:29:08.601062+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -529,13 +537,13 @@ Now, if the Issuer lists their issued credentials again, the status will reflect
     -i
 ```
 
-    Current issued credentials for issuer_aid (EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB):
+    Current issued credentials for issuer_aid (EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw):
     
-    Credential #1: EATkZvs2FIBeI6Y0cNerOdnLehkqmv1xh_t2SS-qZONi
+    Credential #1: EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI
         Type: EventPass
         Status: Revoked [91m✘[0m
-        Issued by EGAGFFh0iTH1NlFI1RPObQ0OnqXStU7_Hi4nEQvpxcsB
-        Issued on 2025-05-29T20:08:05.699489+00:00
+        Issued by EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
+        Issued on 2025-05-30T22:29:37.841849+00:00
 
 
 <div class="alert alert-primary">
@@ -560,18 +568,3 @@ This notebook demonstrated the ACDC presentation and revocation flows:
 </ol>
 This completes the basic lifecycle demonstration: issuance (previous notebook), presentation, and revocation, all handled securely using KERI identities and the IPEX protocol.
 </div>
-
-
-```python
-from scripts.utils import clear_keri
-clear_keri()
-```
-
-    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
-    ✅ Successfully removed: /usr/local/var/keri/
-
-
-
-```python
-
-```

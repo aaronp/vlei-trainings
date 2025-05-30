@@ -39,6 +39,10 @@ Next, you will complete a key rotation example. Start by setting up a keystore a
 
 
 ```python
+# Imports and Utility functions
+from scripts.utils import clear_keri
+clear_keri()
+
 keystore_name="rotation-keystore"
 keystore_passcode="xSLg286d4iWiRg2mzGYca"
 salt="0ABeuT2dErMrqFE5Dmrnc2Bq"
@@ -59,6 +63,10 @@ aid_alias_non_transferable = "aid-non-transferable"
     --nsith 1 \
     --toad 0
 ```
+
+    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
+    ✅ Successfully removed: /usr/local/var/keri/
+
 
     KERI Keystore created at: /usr/local/var/keri/ks/rotation-keystore
     KERI Database created at: /usr/local/var/keri/db/rotation-keystore
@@ -346,14 +354,3 @@ Key rotation is essential for security hygiene, cryptographic agility, and enabl
 </p>
 Performing a rotation (<code>kli rotate</code>) creates a rot event, increments the sequence number, activates the previously pre-rotated keys (revealing them in the k field), and commits to a new set of keys (digest in the n field), all while keeping the AID prefix unchanged. This chained process forms part of the Key Event Log (KEL).
 </div>
-
-
-```python
-# Imports and Utility functions
-from scripts.utils import clear_keri
-clear_keri()
-```
-
-    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
-    ✅ Successfully removed: /usr/local/var/keri/
-

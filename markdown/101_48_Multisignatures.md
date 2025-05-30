@@ -97,13 +97,12 @@ pr_continue()
 ```
 
     Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
-    ⚠️ Path not found: /usr/local/var/keri/. Nothing to remove.
+    ✅ Successfully removed: /usr/local/var/keri/
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Initializing keystores</span>
-</pre>
-
+    
+    [1m[4m[44m[90m  Initializing keystores  [0m
+    
 
 
     KERI Keystore created at: /usr/local/var/keri/ks/multisig1_keystore
@@ -111,69 +110,50 @@ pr_continue()
     KERI Credential Store created at: /usr/local/var/keri/reg/multisig1_keystore
     
     Loading 3 OOBIs...
+
+
     http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
+
+
     KERI Keystore created at: /usr/local/var/keri/ks/multisig2_keystore
     KERI Database created at: /usr/local/var/keri/db/multisig2_keystore
     KERI Credential Store created at: /usr/local/var/keri/reg/multisig2_keystore
     
     Loading 3 OOBIs...
+
+
     http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Incepting multisig parts</span>
-</pre>
-
-
-
-    Waiting for witness receipts...
-    Prefix  EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp
-    	Public key 1:  DH97nsnEh-miXmUCCBNOu0_hAw7-y58UiKlCUbbUYfzc
     
-    Waiting for witness receipts...
-    Prefix  EFVi3nAa7yIZyx5SLngEhqKRmjguGT_eGMPLeOW1k7O_
-    	Public key 1:  DBVKekw6wac74IqMw4MtDDGPh4OwBam1Hnp4bzYLSmDo
-    
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Incepting multisig parts</span>
-</pre>
-
-
-
-    Waiting for witness receipts...
-
-
-    Prefix  EFZh0IQg26cUMg7lI4MicB6uBurGwPVHqzVhYB_mKyim
-    	Public key 1:  DF2nnVqhYRMnt3uhCBdLM_rmoPXZCTdyvoCvospDY7Mp
+    [1m[4m[44m[90m  Incepting multisig parts  [0m
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  ELeMeGGMXf4buHA61qNxuAVBylnBi15IA61zN4Heoiai
-    	Public key 1:  DMLY14-xBXPVxbB2kYZcJQPkCO3A0DLCvfsTqYKetkPB
+    Prefix  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg
+    	Public key 1:  DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
     
 
 
+    Waiting for witness receipts...
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
 
-</pre>
+    Prefix  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT
+    	Public key 1:  DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+    
 
+
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ##  Creating the Multi-Signature Group AID
@@ -213,28 +193,21 @@ role = "mailbox"
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Adding mailbox role</span>
-</pre>
-
+    
+    [1m[4m[44m[90m  Adding mailbox role  [0m
+    
 
 
     End role authorization added for role mailbox
+
+
     End role authorization added for role mailbox
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ### Resolving OOBIs
@@ -268,50 +241,32 @@ pr_title("Resolving OOBIs")
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Generating OOBIs</span>
-</pre>
-
-
+    
+    [1m[4m[44m[90m  Generating OOBIs  [0m
+    
 
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig part </span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">1</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold"> OOBI: </span>
-<span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold; text-decoration: underline">http://witness-demo:5643/oobi/EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99</span>
-<span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold; text-decoration: underline">cGZESrz3zapM</span>
-</pre>
+    
+    [1m[94mMultisig part 1 OOBI: http://witness-demo:5643/oobi/EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM[0m
+    
+    
+    [1m[94mMultisig part 2 OOBI: http://witness-demo:5644/oobi/ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX[0m
+    
+    
+    [1m[4m[44m[90m  Resolving OOBIs  [0m
+    
 
 
+    http://witness-demo:5644/oobi/ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX resolved
 
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig part </span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">2</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold"> OOBI: </span>
-<span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold; text-decoration: underline">http://witness-demo:5644/oobi/EFVi3nAa7yIZyx5SLngEhqKRmjguGT_eGMPLeOW1k7O_/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja</span>
-<span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold; text-decoration: underline">2LigFYZN2YfX</span>
-</pre>
+    http://witness-demo:5643/oobi/EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM resolved
 
 
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Resolving OOBIs</span>
-</pre>
-
-
-
-    http://witness-demo:5644/oobi/EFVi3nAa7yIZyx5SLngEhqKRmjguGT_eGMPLeOW1k7O_/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX resolved
-    http://witness-demo:5643/oobi/EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM resolved
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ### Configuring the Multi-Signature Group
@@ -368,34 +323,24 @@ pr_message(f"Multisig config: {file_path}")
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Building multisig config file</span>
-</pre>
-
-
+    
+    [1m[4m[44m[90m  Building multisig config file  [0m
+    
 
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig part </span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">1</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold"> prefix: EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp</span>
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig part </span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">2</span><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold"> prefix: EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp</span>
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig config: ./config/multisig/multisig_config.json</span>
-</pre>
-
-
-
+    
+    [1m[94mMultisig part 1 prefix: EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg[0m
+    
+    
+    [1m[94mMultisig part 2 prefix: EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg[0m
+    
+    
+    [1m[94mMultisig config: ./config/multisig/multisig_config.json[0m
+    
     {
       "aids": [
-        "EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp",
-        "EFVi3nAa7yIZyx5SLngEhqKRmjguGT_eGMPLeOW1k7O_"
+        "EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg",
+        "ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT"
       ],
       "transferable": true,
       "wits": [
@@ -408,11 +353,10 @@ pr_continue()
       "nsith": "2"
     }
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ### Incepting the Multi-Signature Group AID
@@ -463,37 +407,33 @@ pr_message(f"Multisig Join")
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Incepting multisig AID</span>
-</pre>
-
-
-
+    
+    [1m[4m[44m[90m  Incepting multisig AID  [0m
+    
     Command 
     kli multisig incept --name multisig1_keystore     --alias multisig1_alias     --group multisig_group     --file ./config/multisig/multisig_config.json > ./logs/multisig_event.log
-     started with PID: 14203
+     started with PID: 17183
     Command 
     kli multisig join --name multisig2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 14204
+     started with PID: 17185
     Waiting for multisig inception to complete...
     
+
+
     Waiting for multisig inception to complete...
     
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig Event</span>
-</pre>
-
-
-
-    Group identifier inception initialized for EG3X1AxcORiGCbM5WyNgzoCWkWXy5N5f5-35Uuzmzw7-
+    
+    [1m[94mMultisig Event[0m
+    
+    Group identifier inception initialized for EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
     
     Alias: 	multisig_group
-    Identifier: EG3X1AxcORiGCbM5WyNgzoCWkWXy5N5f5-35Uuzmzw7-
+    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
     Seq No:	0
     Group Identifier
-        Local Indentifier:  EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp [92m✔ Fully Signed[0m
+        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -501,17 +441,14 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DH97nsnEh-miXmUCCBNOu0_hAw7-y58UiKlCUbbUYfzc
-    	2. DBVKekw6wac74IqMw4MtDDGPh4OwBam1Hnp4bzYLSmDo
+    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
+    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
     
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig Join</span>
-</pre>
-
-
-
+    
+    [1m[94mMultisig Join[0m
+    
     Waiting for group multisig events...
     
     Group Multisig Inception proposed:
@@ -519,8 +456,8 @@ pr_continue()
     +-------+-----------------+----------------------------------------------+
     | Local | Name            |                     AID                      |
     +-------+-----------------+----------------------------------------------+
-    |       | multisig1_alias | EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp |
-    |   *   | multisig2_alias | EFVi3nAa7yIZyx5SLngEhqKRmjguGT_eGMPLeOW1k7O_ |
+    |   *   | multisig2_alias | ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT |
+    |       | multisig1_alias | EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg |
     +-------+-----------------+----------------------------------------------+
     
     Configuration:
@@ -537,10 +474,10 @@ pr_continue()
     +---------------------+----------------------------------------------+
     
     Alias: 	multisig_group
-    Identifier: EG3X1AxcORiGCbM5WyNgzoCWkWXy5N5f5-35Uuzmzw7-
+    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
     Seq No:	0
     Group Identifier
-        Local Indentifier:  EFVi3nAa7yIZyx5SLngEhqKRmjguGT_eGMPLeOW1k7O_ [92m✔ Fully Signed[0m
+        Local Indentifier:  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -548,23 +485,15 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DH97nsnEh-miXmUCCBNOu0_hAw7-y58UiKlCUbbUYfzc
-    	2. DBVKekw6wac74IqMw4MtDDGPh4OwBam1Hnp4bzYLSmDo
+    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
+    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
     
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ### Verifying Multi-Signature AID Status
@@ -588,13 +517,58 @@ pr_title(f"Multisig AID status")
 !kli status --name multisig1_keystore --alias multisig_group --verbose
 ```
 
+    
+    [1m[4m[44m[90m  Multisig AID status  [0m
+    
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Multisig AID status</span>
-</pre>
 
-
-
-    Keystore must already exist, exiting
+    Alias: 	multisig_group
+    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Seq No:	0
+    Group Identifier
+        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+    
+    Witnesses:
+    Count:		3
+    Receipts:	3
+    Threshold:	2
+    
+    Public Keys:	
+    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
+    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+    
+    
+    Witnesses:	
+    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+    	2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
+    	3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
+    
+    {
+     "v": "KERI10JSON000215_",
+     "t": "icp",
+     "d": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "s": "0",
+     "kt": "2",
+     "k": [
+      "DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N",
+      "DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI"
+     ],
+     "nt": "2",
+     "n": [
+      "EOUHnSSGU5noEQpLBE3e9HmTfhereKkqdpilc6THtmpG",
+      "EHHQECQ_asW004Hy8_TKAqMzvfmcpBSoldCJY_j4HOh4"
+     ],
+     "bt": "2",
+     "b": [
+      "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
+      "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
+      "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
+     ],
+     "c": [],
+     "a": []
+    }
+    
 
 
 ## Interaction Event with Multi-Signature Group AID
@@ -639,52 +613,77 @@ pr_message(f"Multisig Join")
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Performing interaction event</span>
-</pre>
-
-
-
+    
+    [1m[4m[44m[90m  Performing interaction event  [0m
+    
     Command 
     kli multisig interact --name multisig1_keystore     --alias multisig_group     --data '{"d": "arbitrary data"}' > ./logs/multisig_event.log
-     started with PID: 14244
+     started with PID: 17196
     Command 
     kli multisig join --name multisig2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 14245
+     started with PID: 17198
     Waiting for multisig interaction to complete...
     
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig Event</span>
-</pre>
-
+    Waiting for multisig interaction to complete...
+    
 
 
-    Keystore must already exist, exiting
+    
+    [1m[94mMultisig Event[0m
+    
+    
+    Alias: 	multisig_group
+    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Seq No:	1
+    Group Identifier
+        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+    
+    Witnesses:
+    Count:		3
+    Receipts:	3
+    Threshold:	2
+    
+    Public Keys:	
+    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
+    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+    
 
 
+    
+    [1m[94mMultisig Join[0m
+    
+    Waiting for group multisig events...
+    Group Multisig Interaction for multisig_group (EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM) proposed:
+    Data:
+    [
+      {
+        "d": "arbitrary data"
+      }
+    ]
+    
+    Alias: 	multisig_group
+    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Seq No:	1
+    Group Identifier
+        Local Indentifier:  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT [92m✔ Fully Signed[0m
+    
+    Witnesses:
+    Count:		3
+    Receipts:	3
+    Threshold:	2
+    
+    Public Keys:	
+    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
+    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+    
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig Join</span>
-</pre>
 
-
-
-    Keystore must already exist, exiting
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ### Verifying Interaction Event
@@ -697,13 +696,72 @@ pr_title(f"Multisig AID status")
 !kli status --name multisig1_keystore --alias multisig_group --verbose
 ```
 
+    
+    [1m[4m[44m[90m  Multisig AID status  [0m
+    
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Multisig AID status</span>
-</pre>
 
-
-
-    Keystore must already exist, exiting
+    Alias: 	multisig_group
+    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Seq No:	1
+    Group Identifier
+        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+    
+    Witnesses:
+    Count:		3
+    Receipts:	3
+    Threshold:	2
+    
+    Public Keys:	
+    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
+    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+    
+    
+    Witnesses:	
+    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+    	2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
+    	3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
+    
+    {
+     "v": "KERI10JSON000215_",
+     "t": "icp",
+     "d": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "s": "0",
+     "kt": "2",
+     "k": [
+      "DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N",
+      "DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI"
+     ],
+     "nt": "2",
+     "n": [
+      "EOUHnSSGU5noEQpLBE3e9HmTfhereKkqdpilc6THtmpG",
+      "EHHQECQ_asW004Hy8_TKAqMzvfmcpBSoldCJY_j4HOh4"
+     ],
+     "bt": "2",
+     "b": [
+      "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
+      "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
+      "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
+     ],
+     "c": [],
+     "a": []
+    }
+    
+    {
+     "v": "KERI10JSON0000e1_",
+     "t": "ixn",
+     "d": "EIvFnTY_zAlreT6kmNS3KxVJYmI85H1QEpaqlsrmRSKf",
+     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "s": "1",
+     "p": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "a": [
+      {
+       "d": "arbitrary data"
+      }
+     ]
+    }
+    
 
 
 ## Rotation Event for Multi-Signature Group AID
@@ -734,49 +792,17 @@ pr_title(f"Rotating multisig-parts keys")
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Rotating multisig-parts keys</span>
-</pre>
-
-
-
-    Keystore must already exist, exiting
-    Keystore must already exist, exiting
-    Keystore must already exist, exiting
-    Keystore must already exist, exiting
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
-
-
-    Checking for updates...
-
-
     
-    
-    Identifier: EFZh0IQg26cUMg7lI4MicB6uBurGwPVHqzVhYB_mKyim
-    Seq No:	1
-    
-    Witnesses:
-    Count:		3
-    Receipts:	3
-    Threshold:	3
-    
-    Public Keys:	
-    	1. DHkwumFe8fIxGkqSmsx29MoQnBF0QtMLKvZuZ6FSKBZi
+    [1m[4m[44m[90m  Rotating multisig-parts keys  [0m
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  ELeMeGGMXf4buHA61qNxuAVBylnBi15IA61zN4Heoiai
+    Prefix  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg
     New Sequence No.  1
-    	Public key 1:  DLTuSMibYqmwVDC64Q_TgvRzuWcqHcEseFiBmiUg4w3x
+    	Public key 1:  DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
 
 
     Checking for updates...
@@ -784,7 +810,7 @@ pr_continue()
 
     
     
-    Identifier: ELeMeGGMXf4buHA61qNxuAVBylnBi15IA61zN4Heoiai
+    Identifier: EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg
     Seq No:	1
     
     Witnesses:
@@ -793,15 +819,40 @@ pr_continue()
     Threshold:	3
     
     Public Keys:	
-    	1. DLTuSMibYqmwVDC64Q_TgvRzuWcqHcEseFiBmiUg4w3x
+    	1. DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
     
 
 
+    Waiting for witness receipts...
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
 
-</pre>
+    Prefix  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT
+    New Sequence No.  1
+    	Public key 1:  DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
 
+
+    Checking for updates...
+
+
+    
+    
+    Identifier: ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT
+    Seq No:	1
+    
+    Witnesses:
+    Count:		3
+    Receipts:	3
+    Threshold:	3
+    
+    Public Keys:	
+    	1. DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
+    
+
+
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ### Rotating the Multi-Signature Group Keys
@@ -852,52 +903,95 @@ pr_message(f"Multisig Join")
 pr_continue()
 ```
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Rotating multisig group</span>
-</pre>
-
-
-
+    
+    [1m[4m[44m[90m  Rotating multisig group  [0m
+    
     Command 
-    kli multisig rotate --name multisig1_keystore     --alias multisig_group     --smids EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp     --smids EFVi3nAa7yIZyx5SLngEhqKRmjguGT_eGMPLeOW1k7O_     --rmids EBIzC9Z5pCUqmLSZ-BW5ouoa8wo-aRlkGJAuMp6aLemp     --rmids EFVi3nAa7yIZyx5SLngEhqKRmjguGT_eGMPLeOW1k7O_     --isith '["1/2", "1/2"]'     --nsith '["1/2", "1/2"]' > ./logs/multisig_event.log
-     started with PID: 14278
+    kli multisig rotate --name multisig1_keystore     --alias multisig_group     --smids EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg     --smids ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT     --rmids EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg     --rmids ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT     --isith '["1/2", "1/2"]'     --nsith '["1/2", "1/2"]' > ./logs/multisig_event.log
+     started with PID: 17229
     Command 
     kli multisig join --name multisig2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 14279
+     started with PID: 17230
     Waiting for multisig rotation to complete...
     
 
 
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig Event</span>
-</pre>
-
+    Waiting for multisig rotation to complete...
+    
 
 
-    Keystore must already exist, exiting
+    
+    [1m[94mMultisig Event[0m
+    
+    
+    Alias: 	multisig_group
+    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Seq No:	2
+    Group Identifier
+        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+    
+    Witnesses:
+    Count:		3
+    Receipts:	3
+    Threshold:	3
+    
+    Public Keys:	
+    	1. DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
+    	2. DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
+    
 
 
+    
+    [1m[94mMultisig Join[0m
+    
+    Waiting for group multisig events...
+    
+    Group Multisig Rotation proposed:
+    
+    Signing Members
+    +-------+-----------------+----------------------------------------------+-----------+
+    | Local | Name            |                     AID                      | Threshold |
+    +-------+-----------------+----------------------------------------------+-----------+
+    |       | multisig1_alias | EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg |    1/2    |
+    |   *   | multisig2_alias | ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT |    1/2    |
+    +-------+-----------------+----------------------------------------------+-----------+
+    
+    Rotation Members
+    +-------+-----------------+----------------------------------------------+-----------+
+    | Local | Name            |                     AID                      | Threshold |
+    +-------+-----------------+----------------------------------------------+-----------+
+    |       | multisig1_alias | EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg |    1/2    |
+    |   *   | multisig2_alias | ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT |    1/2    |
+    +-------+-----------------+----------------------------------------------+-----------+
+    
+    Configuration:
+    +-------------------+-------+
+    | Name              | Value |
+    +-------------------+-------+
+    | Witness Threshold |   3   |
+    +-------------------+-------+
+    
+    Alias: 	multisig_group
+    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Seq No:	2
+    Group Identifier
+        Local Indentifier:  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT [92m✔ Fully Signed[0m
+    
+    Witnesses:
+    Count:		3
+    Receipts:	3
+    Threshold:	3
+    
+    Public Keys:	
+    	1. DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
+    	2. DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
+    
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #5f5fff; text-decoration-color: #5f5fff; font-weight: bold">Multisig Join</span>
-</pre>
 
-
-
-    Keystore must already exist, exiting
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
-
-
-
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #008000; text-decoration-color: #008000">You can continue ✅</span>
-
-</pre>
-
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 ### Verifiying rotation event
@@ -922,13 +1016,101 @@ pr_title(f"Multisig AID status")
 !kli status --name multisig1_keystore --alias multisig_group --verbose
 ```
 
+    
+    [1m[4m[44m[90m  Multisig AID status  [0m
+    
 
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #0000ff; text-decoration-color: #0000ff; font-weight: bold">Multisig AID status</span>
-</pre>
 
-
-
-    Keystore must already exist, exiting
+    Alias: 	multisig_group
+    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Seq No:	2
+    Group Identifier
+        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+    
+    Witnesses:
+    Count:		3
+    Receipts:	3
+    Threshold:	3
+    
+    Public Keys:	
+    	1. DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
+    	2. DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
+    
+    
+    Witnesses:	
+    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+    	2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
+    	3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
+    
+    {
+     "v": "KERI10JSON000215_",
+     "t": "icp",
+     "d": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "s": "0",
+     "kt": "2",
+     "k": [
+      "DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N",
+      "DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI"
+     ],
+     "nt": "2",
+     "n": [
+      "EOUHnSSGU5noEQpLBE3e9HmTfhereKkqdpilc6THtmpG",
+      "EHHQECQ_asW004Hy8_TKAqMzvfmcpBSoldCJY_j4HOh4"
+     ],
+     "bt": "2",
+     "b": [
+      "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
+      "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
+      "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
+     ],
+     "c": [],
+     "a": []
+    }
+    
+    {
+     "v": "KERI10JSON0000e1_",
+     "t": "ixn",
+     "d": "EIvFnTY_zAlreT6kmNS3KxVJYmI85H1QEpaqlsrmRSKf",
+     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "s": "1",
+     "p": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "a": [
+      {
+       "d": "arbitrary data"
+      }
+     ]
+    }
+    
+    {
+     "v": "KERI10JSON0001d2_",
+     "t": "rot",
+     "d": "EMElcqLua9b7svahA1-mceJFwADpvM2t7LfcqT_kp2at",
+     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "s": "2",
+     "p": "EIvFnTY_zAlreT6kmNS3KxVJYmI85H1QEpaqlsrmRSKf",
+     "kt": [
+      "1/2",
+      "1/2"
+     ],
+     "k": [
+      "DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U",
+      "DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ"
+     ],
+     "nt": [
+      "1/2",
+      "1/2"
+     ],
+     "n": [
+      "EMT4qc3zG8kvQBzi7xdig7WFvYmdsT97iUpqLcgboMP9",
+      "EJzddvzR-Mk21aSbwLekAcc2CBKS1VzxkGBx-M1K3KT9"
+     ],
+     "bt": "3",
+     "br": [],
+     "ba": [],
+     "a": []
+    }
+    
 
 
 <div class="alert alert-prymary">
