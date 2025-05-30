@@ -1,1 +1,4 @@
 __pycache__/
+jupyter/notebooks/logs/delegate_incept.log
+jupyter/notebooks/logs/multisig_event.log
+jupyter/notebooks/logs/multisig_join.log
