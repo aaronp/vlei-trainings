@@ -48,6 +48,18 @@ To deploy the training environment, we use Docker to create a local instance of 
 1.  **Jupyter Lab:**
     Open your web browser and navigate to [http://localhost:8888](http://localhost:8888).
 
+## Quick Context for LLMs: `llm_context.md`
+
+Want to ask your favorite Large Language Model (LLM) questions about KERI, ACDC, or the vLEI ecosystem based on the content in this repository?
+
+To help you get the most accurate and contextually relevant responses, we've compiled all the training material into a single, convenient file: **[`llm_context.md`](llm_context.md)**.
+
+Simply upload `llm_context.md` as context to your LLM when you're asking questions about the topics covered here.
+
+While this consolidated file is excellent for quick LLM lookups or generating summaries, we strongly encourage you to read and follow the original training material within this repository. The hands-on notebooks offer a step-by-step learning experience that is crucial for a deep understanding.
+
+**⚠️ A Word of Caution:** Always critically evaluate responses from LLMs. While providing comprehensive context with `llm_context.md` can significantly improve accuracy, LLMs may still generate incorrect or misleading information.
+
 ## Report issues and Feedback
 We welcome your feedback to improve these training materials!
 
