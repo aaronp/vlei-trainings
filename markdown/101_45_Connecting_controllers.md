@@ -17,6 +17,10 @@ For the example, you need to use two different keystores called `keystore-a` and
 
 
 ```python
+# Imports and Utility functions
+from scripts.utils import clear_keri
+clear_keri()
+
 keystore_a_name="keystore_a"
 keystore_a_passcode="xSLg286d4iWiRg2mzGYca"
 salt_a="0ABeuT2dErMrqFE5Dmrnc2Bq"
@@ -26,6 +30,10 @@ salt_a="0ABeuT2dErMrqFE5Dmrnc2Bq"
     --config-file keystore_init_config.json
 
 ```
+
+    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
+    ✅ Successfully removed: /usr/local/var/keri/
+
 
     KERI Keystore created at: /usr/local/var/keri/ks/keystore_a
     KERI Database created at: /usr/local/var/keri/db/keystore_a
@@ -252,7 +260,7 @@ phrase_a = exec("kli challenge generate --out string")
 phrase_b = exec("kli challenge generate --out string")
 ```
 
-    vapor guitar foam unveil diary pudding maple panic glide print state educate
+    extra oyster august rain camera brother fatal rural license decade near this
 
 
 Now, simulate the OOB exchange: `aid_b` sends `phrase_b` to `aid_a`, and `aid_a` sends `phrase_a` to `aid_b`. Each party then uses `kli challenge respond` to sign the phrase they received and `kli challenge verify` to check the response from the other party.
@@ -269,7 +277,7 @@ print(phrase_a)
     --recipient {aid_a}
 ```
 
-    struggle amazing soon pave situate repeat garbage language judge frown original bus
+    material bomb upset laundry forward ability dignity push amount behave cost employ
 
 
 
@@ -285,7 +293,7 @@ print(phrase_a)
 
     .
     
-    Signer aid_b successfully responded to challenge words: '['struggle', 'amazing', 'soon', 'pave', 'situate', 'repeat', 'garbage', 'language', 'judge', 'frown', 'original', 'bus']'
+    Signer aid_b successfully responded to challenge words: '['material', 'bomb', 'upset', 'laundry', 'forward', 'ability', 'dignity', 'push', 'amount', 'behave', 'cost', 'employ']'
     
 
 
@@ -300,7 +308,7 @@ print(phrase_b)
     --recipient {aid_b}
 ```
 
-    chat hawk wrong roof melody regret tumble tobacco junior finger voice robust
+    casual orange tone chunk venue behave cruel foam lamp silk wrist source
 
 
 
@@ -316,7 +324,7 @@ print(phrase_b)
 
     .
     
-    Signer aid_a successfully responded to challenge words: '['chat', 'hawk', 'wrong', 'roof', 'melody', 'regret', 'tumble', 'tobacco', 'junior', 'finger', 'voice', 'robust']'
+    Signer aid_a successfully responded to challenge words: '['casual', 'orange', 'tone', 'chunk', 'venue', 'behave', 'cruel', 'foam', 'lamp', 'silk', 'wrist', 'source']'
     
 
 
@@ -326,14 +334,3 @@ Successful verification on both sides establishes mutual authenticated control, 
   <b>📝 SUMMARY</b><hr>
 After initial discovery (often via OOBIs), KERI controllers can enhance trust by verifying active control of private keys using a challenge-response protocol. This involves each controller generating a unique challenge phrase (kli challenge generate). One controller (aid_a) then responds to the other's challenge (phrase_b) by signing it (kli challenge respond), and the second controller (aid_b) verifies this response (kli challenge verify). This process is repeated reciprocally. Successful verification by both parties confirms they are interacting with the legitimate key holders for each AID.
 </div>
-
-
-```python
-# Imports and Utility functions
-from scripts.utils import clear_keri
-clear_keri()
-```
-
-    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
-    ✅ Successfully removed: /usr/local/var/keri/
-

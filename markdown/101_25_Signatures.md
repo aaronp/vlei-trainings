@@ -69,6 +69,7 @@ First, create a keystore and an identifier.
 ```python
 # Imports and Utility functions
 from scripts.utils import clear_keri
+clear_keri()
 
 keystore_name="signature-keystore"
 passcode="xSLg286d4iWiRg2mzGYca"
@@ -88,6 +89,10 @@ aid_alias = "aid-signature"
     --nsith 0 \
     --toad 0
 ```
+
+    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
+    ✅ Successfully removed: /usr/local/var/keri/
+
 
     KERI Keystore created at: /usr/local/var/keri/ks/signature-keystore
     KERI Database created at: /usr/local/var/keri/db/signature-keystore
@@ -159,17 +164,6 @@ What happens if the signature is altered even slightly? The next command has the
 
 
 As expected, the verification fails. Even a tiny change invalidates the signature, demonstrating the integrity protection it provides.
-
-
-```python
-# Imports and Utility functions
-from scripts.utils import clear_keri
-clear_keri()
-```
-
-    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
-    ✅ Successfully removed: /usr/local/var/keri/
-
 
 
 ```python

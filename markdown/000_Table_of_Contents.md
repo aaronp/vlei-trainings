@@ -1,7 +1,13 @@
 # Table of Contents
-## vLEI Training - 101
+## vLEI 101
 1. [Welcome to vLEI Training - 101](101_05_Welcome_to_vLEI_Training_-_101.md#Welcome-to-vLEI-Training---101)
     1. [Prerequisites](101_05_Welcome_to_vLEI_Training_-_101.md#Prerequisites)
+    1. [Understanding Your Learning Environment](101_05_Welcome_to_vLEI_Training_-_101.md#Understanding-Your-Learning-Environment)
+        1. [Notebook Philosophy Stand-Alone and Sequential](101_05_Welcome_to_vLEI_Training_-_101.md#Notebook-Philosophy-Stand-Alone-and-Sequential)
+        1. [Navigating Large Notebooks The Table of Contents](101_05_Welcome_to_vLEI_Training_-_101.md#Navigating-Large-Notebooks-The-Table-of-Contents)
+        1. [Interacting with Notebook Cells](101_05_Welcome_to_vLEI_Training_-_101.md#Interacting-with-Notebook-Cells)
+        1. [Managing the Notebook Kernel](101_05_Welcome_to_vLEI_Training_-_101.md#Managing-the-Notebook-Kernel)
+        1. [Clearing Output](101_05_Welcome_to_vLEI_Training_-_101.md#Clearing-Output)
     1. [Software Versions](101_05_Welcome_to_vLEI_Training_-_101.md#Software-Versions)
 1. [Foundations KERI, ACDC, and the vLEI Ecosystem](101_07_Introduction_to-KERI_ACDC_and_vLEI.md#Foundations-KERI-ACDC-and-the-vLEI-Ecosystem)
     1. [The KERI Protocol](101_07_Introduction_to-KERI_ACDC_and_vLEI.md#The-KERI-Protocol)
@@ -60,6 +66,30 @@
         1. [Resolving OOBI URLs](101_45_Connecting_controllers.md#Resolving-OOBI-URLs)
         1. [Listing contacts](101_45_Connecting_controllers.md#Listing-contacts)
     1. [Authenticating Control with Challenge-Response](101_45_Connecting_controllers.md#Authenticating-Control-with-Challenge-Response)
+1. [KLI Operations Creating and Managing Delegated AIDs](101_47_Delegated_AIDs.md#KLI-Operations-Creating-and-Managing-Delegated-AIDs)
+    1. [Introduction to Delegated AIDs](101_47_Delegated_AIDs.md#Introduction-to-Delegated-AIDs)
+    1. [Initial Setup](101_47_Delegated_AIDs.md#Initial-Setup)
+    1. [Creating Delegated Identifiers](101_47_Delegated_AIDs.md#Creating-Delegated-Identifiers)
+        1. [Step 1 Delegate Incepts Proxy](101_47_Delegated_AIDs.md#Step-1-Delegate-Incepts-Proxy)
+        1. [Step 2 Delegate request delegated AID Inception](101_47_Delegated_AIDs.md#Step-2-Delegate-request-delegated-AID-Inception)
+        1. [Step 3 Delegator confirms delegation](101_47_Delegated_AIDs.md#Step-3-Delegator-confirms-delegation)
+    1. [Rotating Delegated Identifiers](101_47_Delegated_AIDs.md#Rotating-Delegated-Identifiers)
+    1. [Understanding the Delegator's KEL](101_47_Delegated_AIDs.md#Understanding-the-Delegators-KEL)
+1. [KERI Core Multi-Signature Group Identifiers](101_48_Multisignatures.md#KERI-Core-Multi-Signature-Group-Identifiers)
+    1. [Introduction to Multi-Signatures](101_48_Multisignatures.md#Introduction-to-Multi-Signatures)
+    1. [Initial Setup of Participant AIDs](101_48_Multisignatures.md#Initial-Setup-of-Participant-AIDs)
+    1. [Creating the Multi-Signature Group AID](101_48_Multisignatures.md#Creating-the-Multi-Signature-Group-AID)
+        1. [Adding Mailbox Role](101_48_Multisignatures.md#Adding-Mailbox-Role)
+        1. [Resolving OOBIs](101_48_Multisignatures.md#Resolving-OOBIs)
+        1. [Configuring the Multi-Signature Group](101_48_Multisignatures.md#Configuring-the-Multi-Signature-Group)
+        1. [Incepting the Multi-Signature Group AID](101_48_Multisignatures.md#Incepting-the-Multi-Signature-Group-AID)
+        1. [Verifying Multi-Signature AID Status](101_48_Multisignatures.md#Verifying-Multi-Signature-AID-Status)
+    1. [Interaction Event with Multi-Signature Group AID](101_48_Multisignatures.md#Interaction-Event-with-Multi-Signature-Group-AID)
+        1. [Verifying Interaction Event](101_48_Multisignatures.md#Verifying-Interaction-Event)
+    1. [Rotation Event for Multi-Signature Group AID](101_48_Multisignatures.md#Rotation-Event-for-Multi-Signature-Group-AID)
+        1. [Rotating Individual Participant Keys](101_48_Multisignatures.md#Rotating-Individual-Participant-Keys)
+        1. [Rotating the Multi-Signature Group Keys](101_48_Multisignatures.md#Rotating-the-Multi-Signature-Group-Keys)
+        1. [Verifiying rotation event](101_48_Multisignatures.md#Verifiying-rotation-event)
 1. [Understanding ACDCs Authentic Chained Data Containers](101_50_ACDC.md#Understanding-ACDCs-Authentic-Chained-Data-Containers)
     1. [Defining ACDCs](101_50_ACDC.md#Defining-ACDCs)
     1. [SAIDs Self-Addressing Identifiers](101_50_ACDC.md#SAIDs-Self-Addressing-Identifiers)
@@ -106,7 +136,7 @@
         1. [Step 3 Verifier Admits and Validates Presentation](101_70_ACDC_Presentation_and_Revocation.md#Step-3-Verifier-Admits-and-Validates-Presentation)
     1. [Credential Revocation by Issuer](101_70_ACDC_Presentation_and_Revocation.md#Credential-Revocation-by-Issuer)
 
-## vLEI Training - 102
+## vLEI 102
 1. [Introducing Keria and Signify-ts Architecture and Concepts](102_05_Keria_Signify.md#Introducing-Keria-and-Signify-ts-Architecture-and-Concepts)
     1. [Client-Agent Architecture](102_05_Keria_Signify.md#Client-Agent-Architecture)
         1. [Keria Deployment and Configuration](102_05_Keria_Signify.md#Keria-Deployment-and-Configuration)
@@ -155,8 +185,7 @@
         1. [Step 5 Verifier Receives Offer](102_25_Keria_Signify_Credential_Presentation_and_Revocation.md#Step-5-Verifier-Receives-Offer)
         1. [Step 6 Verifier Agrees and Validates](102_25_Keria_Signify_Credential_Presentation_and_Revocation.md#Step-6-Verifier-Agrees-and-Validates)
     1. [Credential Revocation by Issuer](102_25_Keria_Signify_Credential_Presentation_and_Revocation.md#Credential-Revocation-by-Issuer)
-
-## vLEI Training - 103
+## vLEI 103
 1. [Advanced ACDC Features Edges, Edge Operators, and Rules](103_75_ACDC_Edges_and_Rules.md#Advanced-ACDC-Features-Edges-Edge-Operators-and-Rules)
     1. [Understanding Edges and Rules](103_75_ACDC_Edges_and_Rules.md#Understanding-Edges-and-Rules)
     1. [I2I Operator Issuer-To-Issuee](103_75_ACDC_Edges_and_Rules.md#I2I-Operator-Issuer-To-Issuee)
@@ -168,5 +197,3 @@
     1. [DI2I Operator Delegated-Issuer-To-Issuee](103_75_ACDC_Edges_and_Rules.md#DI2I-Operator-Delegated-Issuer-To-Issuee)
         1. [DI2I Scenario Example](103_75_ACDC_Edges_and_Rules.md#DI2I-Scenario-Example)
         1. [Use Cases for DI2I](103_75_ACDC_Edges_and_Rules.md#Use-Cases-for-DI2I)
-
-

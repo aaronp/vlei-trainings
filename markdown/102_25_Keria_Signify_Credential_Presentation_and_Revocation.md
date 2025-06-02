@@ -96,25 +96,25 @@ await resolveOOBI(verifierClient, schemaOOBI, schemaContactAlias);
 console.log("Client setup and OOBI resolutions complete.");
 ```
 
-    Using Passcode (bran): Dzr0-gp7IQm7BDsl9nIan
+    Using Passcode (bran): BBlay0WZE90_WvBXrv94-
 
 
     Client boot process initiated with Keria agent.
 
 
-      Client AID Prefix:  EDAb4rdlUPsyb6CcJiNGw07JeGhodEagyYypd-GhCueG
+      Client AID Prefix:  ENyVASu5x45SQIOUaYLmRGzIgpZZIlrB3Ogpf3yxYQnN
 
 
-      Agent AID Prefix:   EOEizcOxdLzyrKgNd0I7EbdYx2VG4enuwtZhBpTLrUw6
+      Agent AID Prefix:   EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT
 
 
     Initiating AID inception for alias: issuerAid
 
 
-    Successfully created AID with prefix: EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn
+    Successfully created AID with prefix: ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX
 
 
-    Assigning 'agent' role to Keria Agent EOEizcOxdLzyrKgNd0I7EbdYx2VG4enuwtZhBpTLrUw6 for AID alias issuerAid
+    Assigning 'agent' role to Keria Agent EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT for AID alias issuerAid
 
 
     Successfully assigned 'agent' role for AID alias issuerAid.
@@ -123,28 +123,28 @@ console.log("Client setup and OOBI resolutions complete.");
     Generating OOBI for AID alias issuerAid with role agent
 
 
-    Generated OOBI URL: http://keria:3902/oobi/EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn/agent/EOEizcOxdLzyrKgNd0I7EbdYx2VG4enuwtZhBpTLrUw6
+    Generated OOBI URL: http://keria:3902/oobi/ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX/agent/EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT
 
 
-    Using Passcode (bran): AAOrzTiJVfIP7EqV9LYmc
+    Using Passcode (bran): CTTJIoA3pv_F__m_jAcyX
 
 
     Client boot process initiated with Keria agent.
 
 
-      Client AID Prefix:  EDMqlH9EKd--Snlmoe0koyxNAt8jCBvZde2wF8B8xqxt
+      Client AID Prefix:  ENWBwkA9lLoMIxed6eIS-V_e1gO_CFCDkSwqXrhamMJq
 
 
-      Agent AID Prefix:   EAg8KV49aBQdyM4EwXGDFCMWkTURsfiaFu-z0YURfrcC
+      Agent AID Prefix:   EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E
 
 
     Initiating AID inception for alias: holderAid
 
 
-    Successfully created AID with prefix: EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc
+    Successfully created AID with prefix: EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1
 
 
-    Assigning 'agent' role to Keria Agent EAg8KV49aBQdyM4EwXGDFCMWkTURsfiaFu-z0YURfrcC for AID alias holderAid
+    Assigning 'agent' role to Keria Agent EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E for AID alias holderAid
 
 
     Successfully assigned 'agent' role for AID alias holderAid.
@@ -153,28 +153,28 @@ console.log("Client setup and OOBI resolutions complete.");
     Generating OOBI for AID alias holderAid with role agent
 
 
-    Generated OOBI URL: http://keria:3902/oobi/EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc/agent/EAg8KV49aBQdyM4EwXGDFCMWkTURsfiaFu-z0YURfrcC
+    Generated OOBI URL: http://keria:3902/oobi/EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1/agent/EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E
 
 
-    Using Passcode (bran): AiNsYdyEgviu4PvrVkLn5
+    Using Passcode (bran): AcXyho7JD81I7kdzrIx28
 
 
     Client boot process initiated with Keria agent.
 
 
-      Client AID Prefix:  EGCtAAiZVqBI6AkCuA3vzzuXzt5lOGSqkLm-mo9zIKdK
+      Client AID Prefix:  EKIvcyAwBRAUpimMRqa6PnI5GPohWCQxaYB4ky5dfH2-
 
 
-      Agent AID Prefix:   ELJn1LkUitnCrIfrkDGCaz3RvWfXVs00xaiBlY0E5O1X
+      Agent AID Prefix:   EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG
 
 
     Initiating AID inception for alias: verifierAid
 
 
-    Successfully created AID with prefix: EHK8_15tKXVhUiGAEQmQAkEN03RBPFbmV5-lEhQ4FFHX
+    Successfully created AID with prefix: EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6
 
 
-    Assigning 'agent' role to Keria Agent ELJn1LkUitnCrIfrkDGCaz3RvWfXVs00xaiBlY0E5O1X for AID alias verifierAid
+    Assigning 'agent' role to Keria Agent EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG for AID alias verifierAid
 
 
     Successfully assigned 'agent' role for AID alias verifierAid.
@@ -183,10 +183,10 @@ console.log("Client setup and OOBI resolutions complete.");
     Generating OOBI for AID alias verifierAid with role agent
 
 
-    Generated OOBI URL: http://keria:3902/oobi/EHK8_15tKXVhUiGAEQmQAkEN03RBPFbmV5-lEhQ4FFHX/agent/ELJn1LkUitnCrIfrkDGCaz3RvWfXVs00xaiBlY0E5O1X
+    Generated OOBI URL: http://keria:3902/oobi/EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6/agent/EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc/agent/EAg8KV49aBQdyM4EwXGDFCMWkTURsfiaFu-z0YURfrcC with alias holderContact
+    Resolving OOBI URL: http://keria:3902/oobi/EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1/agent/EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E with alias holderContact
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -195,7 +195,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Contact "holderContact" (ID: undefined) added/updated.
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn/agent/EOEizcOxdLzyrKgNd0I7EbdYx2VG4enuwtZhBpTLrUw6 with alias issuerContact
+    Resolving OOBI URL: http://keria:3902/oobi/ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX/agent/EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT with alias issuerContact
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -204,7 +204,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Contact "issuerContact" (ID: undefined) added/updated.
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc/agent/EAg8KV49aBQdyM4EwXGDFCMWkTURsfiaFu-z0YURfrcC with alias holderContact
+    Resolving OOBI URL: http://keria:3902/oobi/EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1/agent/EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E with alias holderContact
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -213,7 +213,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Contact "holderContact" (ID: undefined) added/updated.
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EHK8_15tKXVhUiGAEQmQAkEN03RBPFbmV5-lEhQ4FFHX/agent/ELJn1LkUitnCrIfrkDGCaz3RvWfXVs00xaiBlY0E5O1X with alias verifierContact
+    Resolving OOBI URL: http://keria:3902/oobi/EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6/agent/EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG with alias verifierContact
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -315,33 +315,33 @@ await markNotificationRead(issuerClient, admitNotification.i)
     Creating credential registry "issuerRegistry" for AID alias "issuerAid"...
 
 
-    Successfully created credential registry: EHDCWCiR2T3V4jsTF78Fqpw5dzpffP4zCr3w98gCUz19
+    Successfully created credential registry: EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf
 
 
-    Issuing credential from AID "issuerAid" to AID "EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc"...
+    Issuing credential from AID "issuerAid" to AID "EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"...
 
 
     {
-      name: [32m"credential.EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
+      name: [32m"credential.ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
       metadata: {
         ced: {
           v: [32m"ACDC10JSON0001c4_"[39m,
-          d: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
-          i: [32m"EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn"[39m,
-          ri: [32m"EHDCWCiR2T3V4jsTF78Fqpw5dzpffP4zCr3w98gCUz19"[39m,
+          d: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
+          i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
+          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
           s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
           a: {
-            d: [32m"EIUn5dynCaYVyFsQUB9rLB-qTM4B4QNkzaIo6xykJRsF"[39m,
-            i: [32m"EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc"[39m,
+            d: [32m"EK-RrRHBk5OFTOARAWOUKiMoaE-Ws5rbU83748qV5yCJ"[39m,
+            i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
             eventName: [32m"GLEIF Summit"[39m,
             accessLevel: [32m"staff"[39m,
             validDate: [32m"2026-10-01"[39m,
-            dt: [32m"2025-05-23T23:36:39.558000+00:00"[39m
+            dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
           }
         },
         depends: {
-          name: [32m"witness.EGCmbxXm69lc_1IxhpmYKP4O0P3ucZfpDs28ZTtdXFia"[39m,
-          metadata: { pre: [32m"EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn"[39m, sn: [33m2[39m },
+          name: [32m"witness.EDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m,
+          metadata: { pre: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m, sn: [33m2[39m },
           done: [33mfalse[39m,
           error: [1mnull[22m,
           response: [1mnull[22m
@@ -352,30 +352,30 @@ await markNotificationRead(issuerClient, admitNotification.i)
       response: {
         ced: {
           v: [32m"ACDC10JSON0001c4_"[39m,
-          d: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
-          i: [32m"EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn"[39m,
-          ri: [32m"EHDCWCiR2T3V4jsTF78Fqpw5dzpffP4zCr3w98gCUz19"[39m,
+          d: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
+          i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
+          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
           s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
           a: {
-            d: [32m"EIUn5dynCaYVyFsQUB9rLB-qTM4B4QNkzaIo6xykJRsF"[39m,
-            i: [32m"EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc"[39m,
+            d: [32m"EK-RrRHBk5OFTOARAWOUKiMoaE-Ws5rbU83748qV5yCJ"[39m,
+            i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
             eventName: [32m"GLEIF Summit"[39m,
             accessLevel: [32m"staff"[39m,
             validDate: [32m"2026-10-01"[39m,
-            dt: [32m"2025-05-23T23:36:39.558000+00:00"[39m
+            dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
           }
         }
       }
     }
 
 
-    Successfully issued credential with SAID: EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg
+    Successfully issued credential with SAID: ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V
 
 
-    AID "issuerAid" granting credential to AID "EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc" via IPEX...
+    AID "issuerAid" granting credential to AID "EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1" via IPEX...
 
 
-    Successfully submitted IPEX grant from "issuerAid" to "EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc".
+    Successfully submitted IPEX grant from "issuerAid" to "EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1".
 
 
     Waiting for notification with route "/exn/ipex/grant"...
@@ -387,25 +387,25 @@ await markNotificationRead(issuerClient, admitNotification.i)
     [Retry] Waiting 5000ms before next attempt...
 
 
-    AID "holderAid" admitting IPEX grant "EA-9yCb0O2jH1mt6u2Azw2YzEq6GKy5GCxpUD2xSPQxA" from AID "EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn"...
+    AID "holderAid" admitting IPEX grant "EJRboVbSg2SE81l_zeAazRYI5vvMwcjx3Wh96n3zMf39" from AID "ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"...
 
 
-    Successfully submitted IPEX admit for grant "EA-9yCb0O2jH1mt6u2Azw2YzEq6GKy5GCxpUD2xSPQxA".
+    Successfully submitted IPEX admit for grant "EJRboVbSg2SE81l_zeAazRYI5vvMwcjx3Wh96n3zMf39".
 
 
-    Marking notification "0ABOLiF_olhpsCHtNhSyptbQ" as read...
+    Marking notification "0ACpasWyXZ2fXJL2GN0PMSzx" as read...
 
 
-    Notification "0ABOLiF_olhpsCHtNhSyptbQ" marked as read.
+    Notification "0ACpasWyXZ2fXJL2GN0PMSzx" marked as read.
 
 
     Waiting for notification with route "/exn/ipex/admit"...
 
 
-    Marking notification "0AB_Qp2Ni5irGNAD61Lrayq0" as read...
+    Marking notification "0AAAmsfdu-iZ9fAO2F7gm7nc" as read...
 
 
-    Notification "0AB_Qp2Ni5irGNAD61Lrayq0" marked as read.
+    Notification "0AAAmsfdu-iZ9fAO2F7gm7nc" marked as read.
 
 
 ## Credential Presentation Workflow (IPEX)
@@ -511,12 +511,12 @@ console.log(await holderClient.notifications().list());
 
 
     {
-      i: [32m"0ABkOn1ccrfCcO5w9luw5_bH"[39m,
-      dt: [32m"2025-05-23T23:36:46.662188+00:00"[39m,
+      i: [32m"0ABuHbOWeToag68XdfESYrDA"[39m,
+      dt: [32m"2025-05-30T22:30:34.801879+00:00"[39m,
       r: [33mfalse[39m,
       a: {
         r: [32m"/exn/ipex/apply"[39m,
-        d: [32m"EHOEmCESJ72h3pZp7cAZh8MvTGh13J_P-1mMUKSyUmWU"[39m,
+        d: [32m"EA37R1JrmMmp87B7B_mnMMgFxJ_O03HoxTrwBx5jb9C0"[39m,
         m: [32m""[39m
       }
     }
@@ -529,15 +529,15 @@ console.log(await holderClient.notifications().list());
       exn: {
         v: [32m"KERI10JSON0001a0_"[39m,
         t: [32m"exn"[39m,
-        d: [32m"EHOEmCESJ72h3pZp7cAZh8MvTGh13J_P-1mMUKSyUmWU"[39m,
-        i: [32m"EHK8_15tKXVhUiGAEQmQAkEN03RBPFbmV5-lEhQ4FFHX"[39m,
-        rp: [32m"EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc"[39m,
+        d: [32m"EA37R1JrmMmp87B7B_mnMMgFxJ_O03HoxTrwBx5jb9C0"[39m,
+        i: [32m"EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6"[39m,
+        rp: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
         p: [32m""[39m,
-        dt: [32m"2025-05-23T23:36:46.332000+00:00"[39m,
+        dt: [32m"2025-05-30T22:30:34.445000+00:00"[39m,
         r: [32m"/ipex/apply"[39m,
         q: {},
         a: {
-          i: [32m"EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc"[39m,
+          i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
           m: [32m""[39m,
           s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
           a: { eventName: [32m"GLEIF Summit"[39m }
@@ -557,22 +557,22 @@ console.log(await holderClient.notifications().list());
       total: [33m2[39m,
       notes: [
         {
-          i: [32m"0ABOLiF_olhpsCHtNhSyptbQ"[39m,
-          dt: [32m"2025-05-23T23:36:40.725734+00:00"[39m,
+          i: [32m"0ACpasWyXZ2fXJL2GN0PMSzx"[39m,
+          dt: [32m"2025-05-30T22:30:28.835002+00:00"[39m,
           r: [33mtrue[39m,
           a: {
             r: [32m"/exn/ipex/grant"[39m,
-            d: [32m"EA-9yCb0O2jH1mt6u2Azw2YzEq6GKy5GCxpUD2xSPQxA"[39m,
+            d: [32m"EJRboVbSg2SE81l_zeAazRYI5vvMwcjx3Wh96n3zMf39"[39m,
             m: [32m""[39m
           }
         },
         {
-          i: [32m"0ABkOn1ccrfCcO5w9luw5_bH"[39m,
-          dt: [32m"2025-05-23T23:36:46.662188+00:00"[39m,
+          i: [32m"0ABuHbOWeToag68XdfESYrDA"[39m,
+          dt: [32m"2025-05-30T22:30:34.801879+00:00"[39m,
           r: [33mtrue[39m,
           a: {
             r: [32m"/exn/ipex/apply"[39m,
-            d: [32m"EHOEmCESJ72h3pZp7cAZh8MvTGh13J_P-1mMUKSyUmWU"[39m,
+            d: [32m"EA37R1JrmMmp87B7B_mnMMgFxJ_O03HoxTrwBx5jb9C0"[39m,
             m: [32m""[39m
           }
         }
@@ -623,31 +623,31 @@ console.log(matchingCredentials); // Should list the EventPass credential issued
       {
         sad: {
           v: [32m"ACDC10JSON0001c4_"[39m,
-          d: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
-          i: [32m"EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn"[39m,
-          ri: [32m"EHDCWCiR2T3V4jsTF78Fqpw5dzpffP4zCr3w98gCUz19"[39m,
+          d: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
+          i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
+          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
           s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
           a: {
-            d: [32m"EIUn5dynCaYVyFsQUB9rLB-qTM4B4QNkzaIo6xykJRsF"[39m,
-            i: [32m"EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc"[39m,
+            d: [32m"EK-RrRHBk5OFTOARAWOUKiMoaE-Ws5rbU83748qV5yCJ"[39m,
+            i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
             eventName: [32m"GLEIF Summit"[39m,
             accessLevel: [32m"staff"[39m,
             validDate: [32m"2026-10-01"[39m,
-            dt: [32m"2025-05-23T23:36:39.558000+00:00"[39m
+            dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
           }
         },
-        atc: [32m"-IABEEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg0AAAAAAAAAAAAAAAAAAAAAAAEEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
+        atc: [32m"-IABENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V0AAAAAAAAAAAAAAAAAAAAAAAENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
         iss: {
           v: [32m"KERI10JSON0000ed_"[39m,
           t: [32m"iss"[39m,
-          d: [32m"EB9Qq4Hi5HP39DLKzCZPKuHsvXW_oM4WiekQwqWzrYTS"[39m,
-          i: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
+          d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m,
+          i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
           s: [32m"0"[39m,
-          ri: [32m"EHDCWCiR2T3V4jsTF78Fqpw5dzpffP4zCr3w98gCUz19"[39m,
-          dt: [32m"2025-05-23T23:36:39.558000+00:00"[39m
+          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
+          dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
         },
-        issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEGCmbxXm69lc_1IxhpmYKP4O0P3ucZfpDs28ZTtdXFia"[39m,
-        pre: [32m"EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn"[39m,
+        issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m,
+        pre: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
         schema: {
           [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
           [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
@@ -671,37 +671,37 @@ console.log(matchingCredentials); // Should list the EventPass credential issued
         chains: [],
         status: {
           vn: [ [33m1[39m, [33m0[39m ],
-          i: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
+          i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
           s: [32m"0"[39m,
-          d: [32m"EB9Qq4Hi5HP39DLKzCZPKuHsvXW_oM4WiekQwqWzrYTS"[39m,
-          ri: [32m"EHDCWCiR2T3V4jsTF78Fqpw5dzpffP4zCr3w98gCUz19"[39m,
+          d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m,
+          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
           ra: {},
-          a: { s: [33m2[39m, d: [32m"EGCmbxXm69lc_1IxhpmYKP4O0P3ucZfpDs28ZTtdXFia"[39m },
-          dt: [32m"2025-05-23T23:36:39.558000+00:00"[39m,
+          a: { s: [33m2[39m, d: [32m"EDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m },
+          dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m,
           et: [32m"iss"[39m
         },
         anchor: {
-          pre: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
+          pre: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
           sn: [33m0[39m,
-          d: [32m"EB9Qq4Hi5HP39DLKzCZPKuHsvXW_oM4WiekQwqWzrYTS"[39m
+          d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m
         },
         anc: {
           v: [32m"KERI10JSON00013a_"[39m,
           t: [32m"ixn"[39m,
-          d: [32m"EGCmbxXm69lc_1IxhpmYKP4O0P3ucZfpDs28ZTtdXFia"[39m,
-          i: [32m"EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn"[39m,
+          d: [32m"EDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m,
+          i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
           s: [32m"2"[39m,
-          p: [32m"EFJ7gEUv3Lb6esn9qonFTbuNC8oFrjBDJ7R8wrZob64H"[39m,
+          p: [32m"EDZ0aXTdlj5qu-QX46tPXPFrJyF3Wo3GTQKnw6XvX2Ip"[39m,
           a: [
             {
-              i: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
+              i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
               s: [32m"0"[39m,
-              d: [32m"EB9Qq4Hi5HP39DLKzCZPKuHsvXW_oM4WiekQwqWzrYTS"[39m
+              d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m
             }
           ]
         },
         ancatc: [
-          [32m"-VBq-AABAABUEUrQFQK2I_Up-ZIg3eFWrIhQw7vzwQhRV3qrbp-oimrtiqQXXpd46jchJoy3tUelBmH7O6CTkl1mtWJBh3MC-BADAADJQIHMnljFOjpfY-1j_o-oegDxClZUwQbaoqaYx1x7y7VMh4KrfFeYPMp3mqsJId9j9x8T5U8Tr-mskU5XJ-8HABAJWzA1OV4i7Fku1Nv2De_STCnk5fNXU8qa31JolaZi7guodkWODUJIEbYv7Yx0E2DeRCmtONBCoDfGNRUOzMcPACBWT1kvsLGH3vqNvWVsgJda51wrJR1vDUxMrdpooQuqLUGJG7q7VSGrFRcVQedEW9kq9-T-bMmMqHvUJx8HrpsO-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-05-23T23c36c40d815100p00c00"[39m
+          [32m"-VBq-AABAABrFFLGDtSkiaoBnzOfOOJnReHWX1e9wBXGp_8eYfFpj13TX0EVYgauV3TV03yzjJfU7RnHCzFiY6baVF7w6uAC-BADAABCx_vYPLlk_smdjR-wvRKarYTKjNd5rCTwMRWALW3UXtgaeclLBdFQoidmNGpdsb9OPefr2rEWHPMSB3AQvpIPABBlkhIabG2_cvT5Z1tVVNjHVj1sSyAFdY2trQVZTd1AeqA41rmaHo8pmfOXfK8C649AlUMgqvYkmeeCNIPC2LQOACDAb_hhtCPGZUCGqFOlHT-ZMmDLzh0OCLXkObEhwfN8u3bLWU99lwsmO3ajIBSbdq7s1PBWZbIK25BgjDx3uscC-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-05-30T22c30c28d923580p00c00"[39m
         ]
       }
     ]
@@ -798,22 +798,16 @@ console.log("Verifier's notifications after marking offer as read:");
 console.log(await verifierClient.notifications().list());
 ```
 
-    [Retry] Offer notification not found for Verifier on attempt #1 of 5
-
-
-    [Retry] Waiting 5000ms before next attempt...
-
-
     Verifier received Offer Notification:
 
 
     {
-      i: [32m"0AArzFWIouZ6c7AMKzo-U3a0"[39m,
-      dt: [32m"2025-05-23T23:36:52.163188+00:00"[39m,
+      i: [32m"0ACf2mKy5wG1WIIHGBfgp0nX"[39m,
+      dt: [32m"2025-05-30T22:30:40.303419+00:00"[39m,
       r: [33mfalse[39m,
       a: {
         r: [32m"/exn/ipex/offer"[39m,
-        d: [32m"EA6FtB2kWgbkuED0GmLxYPmO0UmwwQOi-lEM0OYIIezK"[39m,
+        d: [32m"EF4iUVpspER4GXh2dIfkIXn77B3RI9XV8R4YLEX9_SVK"[39m,
         m: [32m""[39m
       }
     }
@@ -826,31 +820,31 @@ console.log(await verifierClient.notifications().list());
       exn: {
         v: [32m"KERI10JSON000376_"[39m,
         t: [32m"exn"[39m,
-        d: [32m"EA6FtB2kWgbkuED0GmLxYPmO0UmwwQOi-lEM0OYIIezK"[39m,
-        i: [32m"EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc"[39m,
-        rp: [32m"EHK8_15tKXVhUiGAEQmQAkEN03RBPFbmV5-lEhQ4FFHX"[39m,
-        p: [32m"EHOEmCESJ72h3pZp7cAZh8MvTGh13J_P-1mMUKSyUmWU"[39m,
-        dt: [32m"2025-05-23T23:36:51.793000+00:00"[39m,
+        d: [32m"EF4iUVpspER4GXh2dIfkIXn77B3RI9XV8R4YLEX9_SVK"[39m,
+        i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
+        rp: [32m"EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6"[39m,
+        p: [32m"EA37R1JrmMmp87B7B_mnMMgFxJ_O03HoxTrwBx5jb9C0"[39m,
+        dt: [32m"2025-05-30T22:30:39.933000+00:00"[39m,
         r: [32m"/ipex/offer"[39m,
         q: {},
-        a: { i: [32m"EHK8_15tKXVhUiGAEQmQAkEN03RBPFbmV5-lEhQ4FFHX"[39m, m: [32m""[39m },
+        a: { i: [32m"EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6"[39m, m: [32m""[39m },
         e: {
           acdc: {
             v: [32m"ACDC10JSON0001c4_"[39m,
-            d: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
-            i: [32m"EFbKVKlaUvDFW7dwfo7UF9ZnXA4e50LUajv5onQjf0Fn"[39m,
-            ri: [32m"EHDCWCiR2T3V4jsTF78Fqpw5dzpffP4zCr3w98gCUz19"[39m,
+            d: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
+            i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
+            ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
             s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
             a: {
-              d: [32m"EIUn5dynCaYVyFsQUB9rLB-qTM4B4QNkzaIo6xykJRsF"[39m,
-              i: [32m"EA4YKD3HrCgeWVhbtRNjoAvcXRJEWtuD7tERgpYnT-Mc"[39m,
+              d: [32m"EK-RrRHBk5OFTOARAWOUKiMoaE-Ws5rbU83748qV5yCJ"[39m,
+              i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
               eventName: [32m"GLEIF Summit"[39m,
               accessLevel: [32m"staff"[39m,
               validDate: [32m"2026-10-01"[39m,
-              dt: [32m"2025-05-23T23:36:39.558000+00:00"[39m
+              dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
             }
           },
-          d: [32m"EPa-67ivoZtC_N4GGKnsl8b7J8rviIzW5LMm2TZe11HJ"[39m
+          d: [32m"ECbDgYmvZKfgQogFGE8xgF5xtX_RddD_vAR-QFQkkEO-"[39m
         }
       },
       pathed: {}
@@ -866,12 +860,12 @@ console.log(await verifierClient.notifications().list());
       total: [33m1[39m,
       notes: [
         {
-          i: [32m"0AArzFWIouZ6c7AMKzo-U3a0"[39m,
-          dt: [32m"2025-05-23T23:36:52.163188+00:00"[39m,
+          i: [32m"0ACf2mKy5wG1WIIHGBfgp0nX"[39m,
+          dt: [32m"2025-05-30T22:30:40.303419+00:00"[39m,
           r: [33mtrue[39m,
           a: {
             r: [32m"/exn/ipex/offer"[39m,
-            d: [32m"EA6FtB2kWgbkuED0GmLxYPmO0UmwwQOi-lEM0OYIIezK"[39m,
+            d: [32m"EF4iUVpspER4GXh2dIfkIXn77B3RI9XV8R4YLEX9_SVK"[39m,
             m: [32m""[39m
           }
         }
@@ -954,26 +948,26 @@ console.log("Credential status after revocation:", statusAfter);
 
     Credential status before revocation: {
       vn: [ [33m1[39m, [33m0[39m ],
-      i: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
+      i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
       s: [32m"0"[39m,
-      d: [32m"EB9Qq4Hi5HP39DLKzCZPKuHsvXW_oM4WiekQwqWzrYTS"[39m,
-      ri: [32m"EHDCWCiR2T3V4jsTF78Fqpw5dzpffP4zCr3w98gCUz19"[39m,
+      d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m,
+      ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
       ra: {},
-      a: { s: [33m2[39m, d: [32m"EGCmbxXm69lc_1IxhpmYKP4O0P3ucZfpDs28ZTtdXFia"[39m },
-      dt: [32m"2025-05-23T23:36:39.558000+00:00"[39m,
+      a: { s: [33m2[39m, d: [32m"EDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m },
+      dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m,
       et: [32m"iss"[39m
     }
 
 
     Credential status after revocation: {
       vn: [ [33m1[39m, [33m0[39m ],
-      i: [32m"EEbttbnfLRu6WQJZmol73f4DkY81POf3TIeuIMt6ayNg"[39m,
+      i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
       s: [32m"1"[39m,
-      d: [32m"EApyDyykdwTfgzocYskOFxkAnxTJNWOs7jsOf5cRqNCA"[39m,
-      ri: [32m"EHDCWCiR2T3V4jsTF78Fqpw5dzpffP4zCr3w98gCUz19"[39m,
+      d: [32m"EETK8-AwjhP8fKjlVM_wDocbOQWySzg0oR9Nh7_S2JJ6"[39m,
+      ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
       ra: {},
-      a: { s: [33m3[39m, d: [32m"EDSwkl7bXI8aV5P2vQeca3a6dYpycaruGjXo0yNNgQDP"[39m },
-      dt: [32m"2025-05-23T23:36:57.669000+00:00"[39m,
+      a: { s: [33m3[39m, d: [32m"EO-7rNU7Zb0NdviTeeMg4eVxgbHdVi1fS0w6382rjhuw"[39m },
+      dt: [32m"2025-05-30T22:30:40.802000+00:00"[39m,
       et: [32m"rev"[39m
     }
 

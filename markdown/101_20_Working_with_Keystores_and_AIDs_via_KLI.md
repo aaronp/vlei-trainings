@@ -12,6 +12,24 @@ Before you can create identifiers or perform many other actions with KLI, you ne
 The command to do this is `kli init`. Here's an example:
 
 
+<div class="alert alert-info">
+  <b>💡 TIP</b><hr>
+    <li>If you run <code>clear_keri()</code>, the keystore directories are deleted.</li>  
+    <li>This function is provided as a utility to clean your data and re-run the notebooks.</li>
+    <li>It will be called at the beginning of each notebook.</li>
+</div>
+
+
+```python
+# Imports and Utility functions
+from scripts.utils import clear_keri
+clear_keri()
+```
+
+    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
+    ✅ Successfully removed: /usr/local/var/keri/
+
+
 
 ```python
 # Choose a name for your keystore
@@ -217,13 +235,6 @@ Now use `kli list` to list all the identifiers managed by the keystore
     my-first-aid (BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC)
 
 
-<div class="alert alert-info">
-  <b>💡 TIP</b><hr>
-    <li>If you run <code>clear_keri()</code>, the keystore directories are deleted.</li>  
-    <li>This function is provided as a utility to clean your data and re-run the notebooks.</li>
-    <li>It requires and input (y/n) for confirmation</li>
-</div>
-
 <div class="alert alert-primary">
   <b>📝 SUMMARY</b><hr>
 <p>The basics of managing KERI identifiers using the KLI:</p>
@@ -235,17 +246,6 @@ Now use `kli list` to list all the identifiers managed by the keystore
     <li><strong>Listing Identifiers:</strong> The <code>kli list</code> command displays all identifiers managed within a specific keystore</li>
 </ul>
 </div>
-
-
-```python
-# Imports and Utility functions
-from scripts.utils import clear_keri
-clear_keri()
-```
-
-    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
-    ✅ Successfully removed: /usr/local/var/keri/
-
 
 
 ```python
