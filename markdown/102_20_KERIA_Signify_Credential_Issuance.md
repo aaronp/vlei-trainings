@@ -7,7 +7,7 @@ Demonstrate the process of issuing an ACDC (Authentic Chained Data Container) fr
 
 <div class="alert alert-info">
 <b>ℹ️ NOTE</b><hr>
-This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>) to quickly establish the necessary preconditions for credential issuance. The detailed steps for client initialization, AID creation, end role assignment, and OOBI resolution were covered in the "Keria-Signify Connecting Controllers" notebook. Here, we provide a high-level recap of what these utility functions accomplish.
+This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>) to quickly establish the necessary preconditions for credential issuance. The detailed steps for client initialization, AID creation, end role assignment, and OOBI resolution were covered in the "KERIA-Signify Connecting Controllers" notebook. Here, we provide a high-level recap of what these utility functions accomplish.
 </div>
 
 ## Prerequisites: Client and AID Setup
@@ -15,9 +15,9 @@ This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>
 The setup process, streamlined by the utility functions, performs the following key actions:
 
 * **Signify Library Initialization**: Ensures the underlying cryptographic components of Signify-ts are ready.
-* **Client Initialization & Connection**: Three `SignifyClient` instances are created—one each for an Issuer, a Holder, and a Verifier. Each client is bootstrapped and connected to its Keria agent.
+* **Client Initialization & Connection**: Three `SignifyClient` instances are created—one each for an Issuer, a Holder, and a Verifier. Each client is bootstrapped and connected to its KERIA agent.
 * **AID Creation**: Each client (Issuer, Holder, Verifier) creates a primary AID using default arguments.
-* **End Role Assignment**: An `agent` end role is assigned to each client's Keria Agent AID. 
+* **End Role Assignment**: An `agent` end role is assigned to each client's KERIA Agent AID. 
 * **OOBI Generation and Resolution (Client-to-Client)**:
     * OOBIs are generated for the Issuer, Holder, and Verifier AIDs, specifically for the `'agent'` role.
     * Communication channels are established by resolving these OOBIs:
@@ -106,7 +106,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): D8VzjCkZJLU4U3jYvbJwS
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  EFKfKyQozYGbFls3BQp_2yos_5zrj-5q_MMBY6nw5Ao_
@@ -121,7 +121,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03
 
 
-    Assigning 'agent' role to Keria Agent EOTGTRM2MTSQgB_WXcvCPNsD8NPT5tBcjJc4PtSgxyIX for AID alias issuerAid
+    Assigning 'agent' role to KERIA Agent EOTGTRM2MTSQgB_WXcvCPNsD8NPT5tBcjJc4PtSgxyIX for AID alias issuerAid
 
 
     Successfully assigned 'agent' role for AID alias issuerAid.
@@ -136,7 +136,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): Cxfca-122qAkoMOGwbMCV
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  EOTuwSBof7LtRy9vsie1-UE8Wb5USW1pGp3YWnZizrM_
@@ -151,7 +151,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL
 
 
-    Assigning 'agent' role to Keria Agent EJcgXxS6OKQ2RVzRtPZ1KW5yHcSrSl8BfNfut1JiNNML for AID alias holderAid
+    Assigning 'agent' role to KERIA Agent EJcgXxS6OKQ2RVzRtPZ1KW5yHcSrSl8BfNfut1JiNNML for AID alias holderAid
 
 
     Successfully assigned 'agent' role for AID alias holderAid.
@@ -166,7 +166,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): BoDKZbJF_utSTiXBMZC-m
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  EL9MTtEU-u1H5fTMJF5mOB-F3WnKykh-nuALVdobGOOj
@@ -181,7 +181,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EBmR-76xFui4TzcwfUGi5TiDSnCFsZ4ROxP-H8Bv4zrc
 
 
-    Assigning 'agent' role to Keria Agent EGcP2yft7OOJ41te4pqk-ALVqut8FFfc21uBeh5eVq_p for AID alias verifierAid
+    Assigning 'agent' role to KERIA Agent EGcP2yft7OOJ41te4pqk-ALVqut8FFfc21uBeh5eVq_p for AID alias verifierAid
 
 
     Successfully assigned 'agent' role for AID alias verifierAid.
@@ -316,7 +316,7 @@ console.log(`Registry: Name='${issuerRegistry.name}', SAID (regk)='${issuerRegis
 
 ### Step 2: Retrieve Schema Definition
 
-The Issuer needs the definition of the schema against which they intend to issue a credential. Since the schema OOBI was resolved during the setup phase, the schema definition can now be retrieved from the Keria agent's cache using its SAID. You will reuse the `EventPass` schema (SAID: `EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK`) from previous KLI examples.
+The Issuer needs the definition of the schema against which they intend to issue a credential. Since the schema OOBI was resolved during the setup phase, the schema definition can now be retrieved from the KERIA agent's cache using its SAID. You will reuse the `EventPass` schema (SAID: `EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK`) from previous KLI examples.
 
 
 ```typescript
@@ -509,7 +509,7 @@ console.log(issuerCredential)
 The credential has been created but currently resides with the Issuer. To transfer it to the Holder, the Issuer initiates an IPEX (Issuance and Presentation Exchange) grant. This process uses KERI `exn` (exchange) messages. The grant message effectively offers the credential to the Holder. 
 
 The `issuerClient.ipex().grant()` method prepares the grant message, including the ACDC itself (`acdc`), the issuance event from the registry (`iss`), and the anchoring event from the Issuer's KEL (`anc`) along with its signatures (`ancAttachment`).
-Then, `issuerClient.ipex().submitGrant()` sends this packaged grant message to the Holder's Keria agent.
+Then, `issuerClient.ipex().submitGrant()` sends this packaged grant message to the Holder's KERIA agent.
 
 Use the code below to perform the ipex grant.
 
@@ -528,7 +528,7 @@ const [grant, gsigs, gend] = await issuerClient.ipex().grant({
 });
 
 // Issuer submits the prepared grant message to the Holder.
-// This sends an 'exn' message to the Holder's Keria agent.
+// This sends an 'exn' message to the Holder's KERIA agent.
 const submitGrantOperation = await issuerClient
     .ipex()
     .submitGrant(
@@ -555,7 +555,7 @@ The Holder can proactively check the status of a credential in the Issuer's regi
 
 ```typescript
 // The flow transitions from the Issuer to the Holder.
-// A delay and retry mechanism is added to allow time for Keria agents and witnesses
+// A delay and retry mechanism is added to allow time for KERIA agents and witnesses
 // to propagate the credential issuance information.
 
 let credentialState;
@@ -602,7 +602,7 @@ console.log(credentialState) // Displays the status (e.g., issued, revoked)
 
 ### Step 5: Holder Receives IPEX Grant Notification
 
-The Holder's Keria agent will receive the grant `exn` message sent by the Issuer. The Holder's client can list its notifications to find this incoming grant. The notification will contain the SAID of the `exn` message (`grantNotification.a.d`), which can then be used to retrieve the full details of the grant exchange from the Holder's client.
+The Holder's KERIA agent will receive the grant `exn` message sent by the Issuer. The Holder's client can list its notifications to find this incoming grant. The notification will contain the SAID of the `exn` message (`grantNotification.a.d`), which can then be used to retrieve the full details of the grant exchange from the Holder's client.
 
 
 

@@ -133,14 +133,14 @@
 
 ## vLEI Training - 102
 
-1. [Introducing Keria and Signify-ts: Architecture and Concepts](102_05_Keria_Signify.ipynb#Introducing-Keria-and-Signify-ts:-Architecture-and-Concepts)
+1. [Introducing KERIA and Signify-ts: Architecture and Concepts](102_05_Keria_Signify.ipynb#Introducing-KERIA-and-Signify-ts:-Architecture-and-Concepts)
     1. [Client-Agent Architecture](102_05_Keria_Signify.ipynb#Client-Agent-Architecture)
-        1. [Keria Deployment and Configuration](102_05_Keria_Signify.ipynb#Keria-Deployment-and-Configuration)
+        1. [KERIA Deployment and Configuration](102_05_Keria_Signify.ipynb#KERIA-Deployment-and-Configuration)
     1. [Agent Service Endpoints](102_05_Keria_Signify.ipynb#Agent-Service-Endpoints)
     1. [Understanding End Roles](102_05_Keria_Signify.ipynb#Understanding-End-Roles)
     1. [Client and Agent AIDs Explained](102_05_Keria_Signify.ipynb#Client-and-Agent-AIDs-Explained)
 1. [Signify-ts Basics: Client Setup and AID Management](102_10_Keria_Signify_Basic_Operations.ipynb#Signify-ts-Basics:-Client-Setup-and-AID-Management)
-    1. [Connecting to a Keria Agent](102_10_Keria_Signify_Basic_Operations.ipynb#Connecting-to-a-Keria-Agent)
+    1. [Connecting to a KERIA Agent](102_10_Keria_Signify_Basic_Operations.ipynb#Connecting-to-a-KERIA-Agent)
         1. [Initializing the Signify-ts Library](102_10_Keria_Signify_Basic_Operations.ipynb#Initializing-the-Signify-ts-Library)
         1. [Creating the Client Instance](102_10_Keria_Signify_Basic_Operations.ipynb#Creating-the-Client-Instance)
         1. [Bootstrapping and Connecting to the Agent](102_10_Keria_Signify_Basic_Operations.ipynb#Bootstrapping-and-Connecting-to-the-Agent)
@@ -5267,14 +5267,14 @@ This completes the basic lifecycle demonstration: issuance (previous notebook), 
 </div>
 
 <!-- Source: 102_05_Keria_Signify.md -->
-# Introducing Keria and Signify-ts: Architecture and Concepts
+# Introducing KERIA and Signify-ts: Architecture and Concepts
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
-  Introduces the foundational concepts of Keria and Signify-ts, focusing on:
+  Introduces the foundational concepts of KERIA and Signify-ts, focusing on:
     <ul>
-        <li>The Keria/Signify client-agent architecture.</li>
-        <li>Key Keria endpoint interfaces.</li>
+        <li>The KERIA/Signify client-agent architecture.</li>
+        <li>Key KERIA endpoint interfaces.</li>
         <li>The concept of End Roles.</li>
         <li>The relationship between Client AIDs and Agent AIDs.</li>
     </ul>
@@ -5282,33 +5282,33 @@ This completes the basic lifecycle demonstration: issuance (previous notebook), 
 
 ## Client-Agent Architecture
 
-KERI is a protocol for secure, self-certifying identifiers. **Keria** is an agent implementation of KERI, designed to run as a service (e.g., in the cloud or self-hosted) that manages AIDs on behalf of a controller. **Signify-ts** is a TypeScript library that acts as a client, enabling applications to interact with a Keria agent.
+KERI is a protocol for secure, self-certifying identifiers. **KERIA** is an agent implementation of KERI, designed to run as a service (e.g., in the cloud or self-hosted) that manages AIDs on behalf of a controller. **Signify-ts** is a TypeScript library that acts as a client, enabling applications to interact with a KERIA agent.
 
-The idea behind this client-agent architecture is to enable "signing at the edge". Your sensitive private keys, used for signing key events and other data, remain on the client-side (managed by Signify client library). The Keria agent, running remotely, handles tasks like:
+The idea behind this client-agent architecture is to enable "signing at the edge". Your sensitive private keys, used for signing key events and other data, remain on the client-side (managed by Signify client library). The KERIA agent, running remotely, handles tasks like:
 * Storing encrypted key material (salts, encrypted private keys)
 * Managing Key Event Logs (KELs)
 * Interacting with witnesses
 * Exchanging messages with other KERI agents
 
-The Keria agent itself never has access to your unencrypted private keys. All critical signing operations happen on the client, and the signed events are then sent to the Keria agent for processing and dissemination.
+The KERIA agent itself never has access to your unencrypted private keys. All critical signing operations happen on the client, and the signed events are then sent to the KERIA agent for processing and dissemination.
 
 This architecture separates key management and signing authority (client-side) from the operational aspects of maintaining an AID's KEL and its availability (agent-side).
 
-### Keria Deployment and Configuration
+### KERIA Deployment and Configuration
 
-In a typical deployment, Keria starts up and often loads its configuration, including a list of default witnesses, from a JSON configuration file (e.g., **[keria configuration file](config/keria/keria-docker.json)**). This allows the agent to be pre-configured with a set of trusted witnesses that any AIDs it manages can use.
+In a typical deployment, KERIA starts up and often loads its configuration, including a list of default witnesses, from a JSON configuration file (e.g., **[keria configuration file](config/keria/keria-docker.json)**). This allows the agent to be pre-configured with a set of trusted witnesses that any AIDs it manages can use.
 
 ## Agent Service Endpoints
 
-A Keria service instance exposes distinct HTTP endpoints to handle different types of interactions:
+A KERIA service instance exposes distinct HTTP endpoints to handle different types of interactions:
 
 1.  **Boot Interface** (`boot port`, e.g., 3903 by default):
-    * **Purpose**: Used for the initial setup and provisioning of a Keria agent worker for a Signify client. This is where the client and agent establish their initial secure relationship.
+    * **Purpose**: Used for the initial setup and provisioning of a KERIA agent worker for a Signify client. This is where the client and agent establish their initial secure relationship.
     * **Interaction**: The Signify client sends its client AID's inception event to this endpoint to request the creation of a delegated agent AID.
     * **Accessibility**: Often restricted to internal infrastructure or disabled if agents are pre-configured (static worker mode).
 
 2.  **Admin Interface** (`admin port`, e.g., 3901 by default):
-    * **Purpose**: This is the primary REST API for the Signify client to command and control its Keria agent.
+    * **Purpose**: This is the primary REST API for the Signify client to command and control its KERIA agent.
     * **Interaction**: Used for operations like creating new AIDs, rotating keys, issuing credentials, resolving OOBIs, etc. All requests to this interface must be authenticated (e.g., signed by the Client AID).
     * **Accessibility**: Typically exposed externally to allow the client to manage its AIDs.
 
@@ -5323,7 +5323,7 @@ This separation of interfaces enhances security and deployment flexibility.
 
 An **end role** in KERI is an authorization that one AID grants to another AID to act in a specific capacity on its behalf. Think of it as assigning a specific job to another identifier.
 
-For instance, when a Signify client connects to a Keria agent, the **Client AID** (controlled by the user/application) delegates authority to an **Agent AID** (managed by the Keria service). The Client AID essentially authorizes its Agent AID to perform certain KERI operations in its name, like anchoring its KEL with witnesses or responding to discovery requests.
+For instance, when a Signify client connects to a KERIA agent, the **Client AID** (controlled by the user/application) delegates authority to an **Agent AID** (managed by the KERIA service). The Client AID essentially authorizes its Agent AID to perform certain KERI operations in its name, like anchoring its KEL with witnesses or responding to discovery requests.
 
 Declaring an end role typically involves creating a KERI event, often an interaction event (`ixn`) or an establishment event (`icp` or `rot`) with specific configuration (`c` field) or an `end` role event, that specifies:
 * The AID granting the authorization (the delegator or authorizer).
@@ -5334,7 +5334,7 @@ This signed authorization is recorded in the KEL of the authorizing AID, making 
 
 ## Client and Agent AIDs Explained
 
-When you use Signify-ts to connect to a Keria agent, two primary AIDs are involved:
+When you use Signify-ts to connect to a KERIA agent, two primary AIDs are involved:
 
 1.  **Client AID**:
     * This is an AID that *you* (or your application) control directly via the Signify-ts client.
@@ -5343,19 +5343,19 @@ When you use Signify-ts to connect to a Keria agent, two primary AIDs are involv
     * It acts as the **delegator** to the Agent AID.
 
 2.  **Agent AID**:
-    * This AID is created and managed by the Keria service *on your behalf*.
+    * This AID is created and managed by the KERIA service *on your behalf*.
     * Its inception event specifies the Client AID as its delegator (`di` field in the inception event). This means the Agent AID's authority to act is derived from, and anchored to, your Client AID.
     * It's also typically a transferable AID.
-    * The Keria service uses this Agent AID to perform actions for your Client AID, such as interacting with witnesses or other agents, without needing direct access to your Client AID's private keys.
+    * The KERIA service uses this Agent AID to perform actions for your Client AID, such as interacting with witnesses or other agents, without needing direct access to your Client AID's private keys.
 
-The Signify client generates the Client AID and sends its inception event to the Keria agent's Boot Interface. The Keria service then creates the delegated Agent AID and returns its inception event to the client. Finally, the Signify client approves this delegation by sending an interaction event back to the Keria agent's Admin Interface.
+The Signify client generates the Client AID and sends its inception event to the KERIA agent's Boot Interface. The KERIA service then creates the delegated Agent AID and returns its inception event to the client. Finally, the Signify client approves this delegation by sending an interaction event back to the KERIA agent's Admin Interface.
 
-This delegation model is fundamental to Keria's security: your primary controlling keys (for the Client AID) remain "at the edge," while the Keria agent operates with a delegated authority (via the Agent AID) that is always traceable back to your Client AID.
+This delegation model is fundamental to KERIA's security: your primary controlling keys (for the Client AID) remain "at the edge," while the KERIA agent operates with a delegated authority (via the Agent AID) that is always traceable back to your Client AID.
 
 <div class="alert alert-primary">
   <b>📝 SUMMARY</b><hr>
   <p>
-    The Keria/Signify architecture enables "signing at the edge," where a Signify client (like Signify-ts) manages private keys and signing operations locally, while a remote Keria agent handles KEL management, witness interactions, and KERI protocol communications. Keria exposes three main HTTP endpoints:
+    The KERIA/Signify architecture enables "signing at the edge," where a Signify client (like Signify-ts) manages private keys and signing operations locally, while a remote KERIA agent handles KEL management, witness interactions, and KERI protocol communications. KERIA exposes three main HTTP endpoints:
     <ul>
         <li><b>Boot Interface:</b> For initial client-agent provisioning and creation of a delegated Agent AID.</li>
         <li><b>Admin Interface:</b> A REST API for the client to command and control its agent (e.g., create AIDs, rotate keys).</li>
@@ -5364,7 +5364,7 @@ This delegation model is fundamental to Keria's security: your primary controlli
     End roles in KERI define verifiable authorizations for one AID to act in a specific capacity for another (e.g., an Agent AID acting in the 'agent' role for a Client AID).
   </p>
   <p>
-    The connection process involves a <b>Client AID</b> (controlled by the user via Signify) delegating authority to an <b>Agent AID</b> (managed by Keria). 
+    The connection process involves a <b>Client AID</b> (controlled by the user via Signify) delegating authority to an <b>Agent AID</b> (managed by KERIA). 
   </p>
 </div>
 
@@ -5378,17 +5378,17 @@ This delegation model is fundamental to Keria's security: your primary controlli
     Familiarity with core KERI concepts (AIDs, KELs, digital signatures, witnesses, OOBIs) is assumed.
 </div>
 
-## Connecting to a Keria Agent
+## Connecting to a KERIA Agent
 
-Now that we understand the architecture, let's see how to use the `signify-ts` library to establish a connection with a Keria agent. This process involves three main steps:
+Now that we understand the architecture, let's see how to use the `signify-ts` library to establish a connection with a KERIA agent. This process involves three main steps:
 1.  Initializing the `signify-ts` library.
-2.  Creating a `SignifyClient` instance, which represents your application's connection to a specific Keria agent.
+2.  Creating a `SignifyClient` instance, which represents your application's connection to a specific KERIA agent.
 3.  Bootstrapping and connecting the client to the agent, which establishes the Client AID and the delegated Agent AID.
 
 
 
 <div class="alert alert-info">
-    <b>ℹ️ Note</b><hr>This section assumes that a Keria agent is running and its Boot and Admin interfaces are accessible at the specified URLs. In the context of these notebooks, Keria is pre-configured and running as part of the Docker deployment.
+    <b>ℹ️ Note</b><hr>This section assumes that a KERIA agent is running and its Boot and Admin interfaces are accessible at the specified URLs. In the context of these notebooks, KERIA is pre-configured and running as part of the Docker deployment.
 </div>
 
 
@@ -5410,17 +5410,17 @@ console.log("Signify-ts library initialized and ready.");
 
 
 ### Creating the Client Instance
-Once the library is initialized, you can create an instance of `SignifyClient`. This object will be your primary interface for all interactions with the Keria agent. It requires several parameters:
+Once the library is initialized, you can create an instance of `SignifyClient`. This object will be your primary interface for all interactions with the KERIA agent. It requires several parameters:
 
-- **url**: The URL of the Keria agent's Admin Interface. The client uses this for most command and control operations after the initial connection is established.
+- **url**: The URL of the KERIA agent's Admin Interface. The client uses this for most command and control operations after the initial connection is established.
 - **bran**: A 21-character, high-entropy string, often referred to as a "passcode." This bran serves as the root salt for deriving the Client AID's signing and rotation keys via a Hierarchical Deterministic (HD) key algorithm. It is critical to treat the bran as securely as a private key. Losing it means losing control of the Client AID.
 - **tier**: The security tier for the passcode hashing algorithm. Tier.low, Tier.med, and Tier.high represent different computational costs for deriving keys from the bran. Higher tiers are more resistant to brute-force attacks but require more processing power and time.
-- **bootUrl**: The URL of the Keria agent's Boot Interface. This is used for the initial setup and provisioning of the agent worker for this client.
+- **bootUrl**: The URL of the KERIA agent's Boot Interface. This is used for the initial setup and provisioning of the agent worker for this client.
 
 
 ```typescript
-const adminUrl = 'http://keria:3901'; // Keria agent's Admin Interface URL
-const bootUrl = 'http://keria:3903';  // Keria agent's Boot Interface URL
+const adminUrl = 'http://keria:3901'; // KERIA agent's Admin Interface URL
+const bootUrl = 'http://keria:3903';  // KERIA agent's Boot Interface URL
 
 // Generate a new random 21-character bran (passcode/salt)
 // In a real application, you would securely store and reuse this bran.
@@ -5446,30 +5446,30 @@ console.log('Using Passcode (bran):', bran);
 
 <div class="alert alert-info">
   <b>ℹ️ NOTE</b><hr>
-In a production environment, the <code>bran</code> must be securely generated and stored. For a given Client AID, you must consistently use the same bran to reconnect and derive the correct keys. Using <code>randomPasscode()</code> each time, as in this demo, will result in a new Client AID being created or an inability to connect to an existing one if the Keria agent already has a state associated with a different bran for its controller.
+In a production environment, the <code>bran</code> must be securely generated and stored. For a given Client AID, you must consistently use the same bran to reconnect and derive the correct keys. Using <code>randomPasscode()</code> each time, as in this demo, will result in a new Client AID being created or an inability to connect to an existing one if the KERIA agent already has a state associated with a different bran for its controller.
 </div>
 
 ### Bootstrapping and Connecting to the Agent
-With the `SignifyClient` instance created, the next step is to establish the initial connection and state with the Keria agent. This involves two methods:
+With the `SignifyClient` instance created, the next step is to establish the initial connection and state with the KERIA agent. This involves two methods:
 
-- **`client.boot()`**: Initiates the bootstrapping process with the Keria agent's Boot Interface:
+- **`client.boot()`**: Initiates the bootstrapping process with the KERIA agent's Boot Interface:
   - The client generates its Client AID using the provided bran.
-  - It sends the Client AID's inception event to the Keria agent's Boot Interface.
-  - The Keria agent, upon successful verification, creates a delegated Agent AID and returns its inception event to the client. This step essentially provisions the necessary resources and establishes the delegated relationship on the Keria agent for this specific client.
+  - It sends the Client AID's inception event to the KERIA agent's Boot Interface.
+  - The KERIA agent, upon successful verification, creates a delegated Agent AID and returns its inception event to the client. This step essentially provisions the necessary resources and establishes the delegated relationship on the KERIA agent for this specific client.
 
-- **`client.connect()`**: After `boot()` (or if the agent has been previously booted with the same bran), connect() establishes the active session with the Keria agent via its Admin Interface.
+- **`client.connect()`**: After `boot()` (or if the agent has been previously booted with the same bran), connect() establishes the active session with the KERIA agent via its Admin Interface.
 
 
 
 ```typescript
-// Bootstrap the connection with the Keria agent
+// Bootstrap the connection with the KERIA agent
 // This creates the Client AID and requests the Agent AID creation.
 await client.boot();
-console.log('Client boot process initiated with Keria agent.');
+console.log('Client boot process initiated with KERIA agent.');
 
 // Establish the active connection and retrieve state
 await client.connect();
-console.log('Client connected to Keria agent.');
+console.log('Client connected to KERIA agent.');
 
 // Retrieve and display the current state
 const state = await client.state();
@@ -5485,10 +5485,10 @@ console.log('Agent AID Delegator:', state.agent.di); // Should be the Client AID
 
 ```
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
-    Client connected to Keria agent.
+    Client connected to KERIA agent.
 
 
     
@@ -5524,12 +5524,12 @@ console.log('Agent AID Delegator:', state.agent.di); // Should be the Client AID
 - **Client AID Prefix:** The unique, self-certifying identifier for the client, tied to the bran.
 - **Client AID Keys:** The current public signing key(s) for the Client AID.
 - **Client AID Next Keys Digest:** The digest (hash) of the public key(s) pre-rotated for the next key rotation of the Client AID.
-- **Agent AID Prefix:** The unique identifier for the Keria agent worker associated with your client.
+- **Agent AID Prefix:** The unique identifier for the KERIA agent worker associated with your client.
 - **Agent AID Type:** dip indicates a "delegated inception" event, signifying that this Agent AID's authority is delegated by another AID.
 - **Agent AID Delegator:** This crucial field shows the prefix of the Client AID, confirming that the Agent AID is indeed delegated by your Client AID.
 
 ### Reconnecting to an Existing Agent
-If the Keria agent has already been booted for a specific `bran` (Client AID), you don't need to call `client.boot()` again when using the same bran. You directly use `client.connect()`. Signify-ts will detect the existing state and reconnect.
+If the KERIA agent has already been booted for a specific `bran` (Client AID), you don't need to call `client.boot()` again when using the same bran. You directly use `client.connect()`. Signify-ts will detect the existing state and reconnect.
 
 
 ```typescript
@@ -5544,7 +5544,7 @@ console.log('Second SignifyClient instance created with the same bran.');
 
 // Connect without booting, as the agent state for this bran should already exist
 await client2.connect();
-console.log('Second client connected to the existing Keria agent.');
+console.log('Second client connected to the existing KERIA agent.');
 
 const state2 = await client2.state();
 console.log('\nReconnection State Details:');
@@ -5557,7 +5557,7 @@ console.log('Agent AID Delegator:', state2.agent.di); // Should be the same Clie
     Second SignifyClient instance created with the same bran.
 
 
-    Second client connected to the existing Keria agent.
+    Second client connected to the existing KERIA agent.
 
 
     
@@ -5578,11 +5578,11 @@ console.log('Agent AID Delegator:', state2.agent.di); // Should be the same Clie
 
 <div class="alert alert-primary">
 <b>📝 SUMMARY</b><hr>
-To connect to a Keria agent using Signify-ts:
+To connect to a KERIA agent using Signify-ts:
 <ol>
 <li>Initialize the library with <code>await ready()</code>.</li>
 <li>Create a <code>SignifyClient</code> instance, providing the agent's Admin and Boot URLs, a unique 21-character <code>bran</code> (passcode/salt for key derivation), and a security <code>Tier</code>.</li>
-<li>For the first-time connection with a new <code>bran</code>, call <code>await client.boot()</code> to provision the Client AID and request the creation of a delegated Agent AID from Keria.</li>
+<li>For the first-time connection with a new <code>bran</code>, call <code>await client.boot()</code> to provision the Client AID and request the creation of a delegated Agent AID from KERIA.</li>
 <li>Call <code>await client.connect()</code> to establish the active session, retrieve the state (Client and Agent AIDs), and complete any delegation approvals. The Client AID delegates authority to the Agent AID, whose inception event (type <code>dip</code>) will list the Client AID as its delegator.</li>
 <li>For subsequent connections using the same <code>bran</code>, skip <code>client.boot()</code> and directly use <code>client.connect()</code>.</li>
 </ol>
@@ -5591,11 +5591,11 @@ The <code>bran</code> is critical for deriving the Client AID's keys and must be
 
 ## Adding an Autonomic Identifier (AID)
 
-Once your Signify client is connected to the Keria agent, you can instruct the agent to create and manage new Autonomic Identifiers (AIDs) on your behalf. These AIDs will be controlled by your Client AID (established during the `connect()` phase) through the delegation mechanism.
+Once your Signify client is connected to the KERIA agent, you can instruct the agent to create and manage new Autonomic Identifiers (AIDs) on your behalf. These AIDs will be controlled by your Client AID (established during the `connect()` phase) through the delegation mechanism.
 
 ### Initiating AID Inception
 
-Creating a new AID is an asynchronous operation. When you request the Keria agent to incept an AID, the agent starts the process, which might involve communicating with witnesses. The `signify-ts` library handles this by first giving you an "operation" object, which you can then use to poll for the completion of the inception process.
+Creating a new AID is an asynchronous operation. When you request the KERIA agent to incept an AID, the agent starts the process, which might involve communicating with witnesses. The `signify-ts` library handles this by first giving you an "operation" object, which you can then use to poll for the completion of the inception process.
 
 The `client.identifiers().create()` method is used to start the inception of a new AID.
 
@@ -5603,8 +5603,8 @@ The `client.identifiers().create()` method is used to start the inception of a n
 
 - **aidAlias (string):** This is a human-readable alias that you assign to the AID within your Signify client's local storage. It's used to refer to this AID in subsequent client operations. It's not part of the KERI protocol itself but a convenience for client-side management.
 - **inceptionArgs (object):** This object contains the configuration for the new AID:
-  - **toad (number):** The Threshold of Accountable Duplicity. This is the minimum number of witness receipts the controller (your Client AID via Keria) requires for this new AID's events to be considered accountable.
-  - **wits (array of strings):** A list of AID prefixes of the witnesses that this new AID should use. These witnesses must be discoverable by your Keria agent (e.g., pre-loaded during Keria's startup or resolved via OOBIs by the client/agent).
+  - **toad (number):** The Threshold of Accountable Duplicity. This is the minimum number of witness receipts the controller (your Client AID via KERIA) requires for this new AID's events to be considered accountable.
+  - **wits (array of strings):** A list of AID prefixes of the witnesses that this new AID should use. These witnesses must be discoverable by your KERIA agent (e.g., pre-loaded during KERIA's startup or resolved via OOBIs by the client/agent).
   - **Other parameters:** not shown for brevity but available, see **[CreateIdentifierArgs](https://weboftrust.github.io/signify-ts/interfaces/CreateIdentiferArgs.html)**
 
 
@@ -5623,7 +5623,7 @@ const identifierArgs = {
     // Other parameters can be specified. If not, defaults are used.
 };
 
-// Send the inception request to the Keria agent
+// Send the inception request to the KERIA agent
 const inceptionResult = await client.identifiers().create(aidAlias, identifierArgs);
 console.log(`AID inception initiated for alias: ${aidAlias}`);
 
@@ -5652,18 +5652,18 @@ console.log(inceptionOperation);
 **Outout explained**
 
 Calling `inceptionResult.op()` returns a promise that resolves to an operation object containing:
-- **name:** A unique name for this long-running operation (e.g., `witness.AID_PREFIX`). Keria uses this to track the task. The prefix in the name corresponds to the AID being created.
+- **name:** A unique name for this long-running operation (e.g., `witness.AID_PREFIX`). KERIA uses this to track the task. The prefix in the name corresponds to the AID being created.
 - **metadata:** Contains details like the prefix (pre) of the AID being incepted and the sequence number (`sn`, which is 0 for inception).
 - **done:** A boolean indicating if the operation has completed. Initially, it's `false`.
 - **error:** Will contain error details if the operation fails.
 - **response:** Will contain the result of the operation (the signed inception event) once `done` is `true`.
 
 ### Waiting for Operation Completion
-Since AID inception involves network communication (e.g., with witnesses to gather receipts), it doesn't complete instantly. You need to poll or wait for the operation to finish. The `client.operations().wait()` method handles this, periodically checking with the Keria agent until the operation's `done` flag becomes `true` or a timeout occurs.
+Since AID inception involves network communication (e.g., with witnesses to gather receipts), it doesn't complete instantly. You need to poll or wait for the operation to finish. The `client.operations().wait()` method handles this, periodically checking with the KERIA agent until the operation's `done` flag becomes `true` or a timeout occurs.
 
 
 ```typescript
-// Poll the Keria agent for the completion of the inception operation.
+// Poll the KERIA agent for the completion of the inception operation.
 // AbortSignal.timeout(30000) sets a 30-second timeout for waiting.
 console.log('Waiting for inception operation to complete...');
 const operationResponse = await client
@@ -5723,7 +5723,7 @@ console.log(`Witnesses specified: ${JSON.stringify(newAidInceptionEvent.b)}`);
 
 **Completed Operation Output Explained:**
 
-- `done`: Now true, indicating the inception is complete on the Keria agent's side.
+- `done`: Now true, indicating the inception is complete on the KERIA agent's side.
 - `response`: This field now contains the actual signed inception event (`icp`) for the newly created AID (`newAid`).
 - `i`: The prefix of the newly created AID.
 - `k`: The list of current public signing keys.
@@ -5731,10 +5731,10 @@ console.log(`Witnesses specified: ${JSON.stringify(newAidInceptionEvent.b)}`);
 - `b`: The list of witness AIDs that this AID is configured to use.
 - `bt`: The Threshold of Accountable Duplicity (TOAD) specified during creation (matches toad: 2 from our request).
 
-The Keria agent has successfully incepted the AID, and its KEL (starting with this inception event) is now managed by the agent and receipted by the specified witnesses.
+The KERIA agent has successfully incepted the AID, and its KEL (starting with this inception event) is now managed by the agent and receipted by the specified witnesses.
 
 ## Managing Agent Operations
-Signify-ts also provides methods to list and delete operations tracked by the Keria agent for your client.
+Signify-ts also provides methods to list and delete operations tracked by the KERIA agent for your client.
 
 ### Listing Operations
 
@@ -5802,15 +5802,15 @@ console.log(`\nDeleted operation: ${opNameToDelete}`);
 
 <div class="alert alert-primary">
 <b>📝 SUMMARY</b><hr>
-To create a new AID using Signify-ts and a Keria agent:
+To create a new AID using Signify-ts and a KERIA agent:
 <ol>
 <li>Use <code>client.identifiers().create(alias, config)</code>. Provide a client-side <code>alias</code> for the AID and a <code>config</code> object specifying parameters like <code>toad</code> (Threshold of Accountable Duplicity) and <code>wits</code> (list of witness AIDs).</li>
 <li>The <code>create()</code> method returns an object from which you can get a long-running <code>operation</code> object using <code>.op()</code>. This operation is initially marked as not <code>done</code>.</li>
-<li>Use <code>client.operations().wait(operationName)</code> to poll the Keria agent until the operation completes. The resolved object will have
+<li>Use <code>client.operations().wait(operationName)</code> to poll the KERIA agent until the operation completes. The resolved object will have
 <code>done: true</code> and its <code>response</code> field will contain the signed inception event (<code>icp</code>) of the newly created AID.</li>
 <li>Operations can be listed with <code>client.operations().list()</code> and deleted with <code>client.operations().delete(operationName)</code>.</li>
 </ol>
-This process highlights the asynchronous nature of Keria operations that involve agent-side processing and network interactions.
+This process highlights the asynchronous nature of KERIA operations that involve agent-side processing and network interactions.
 </div>
 
 
@@ -5823,20 +5823,20 @@ This process highlights the asynchronous nature of Keria operations that involve
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
-  Explain how to establish a secure, mutually authenticated connection between two Keria/Signify-ts controllers using Out-of-Band Introductions (OOBIs) and the challenge/response protocol to enhance trust.
+  Explain how to establish a secure, mutually authenticated connection between two KERIA/Signify-ts controllers using Out-of-Band Introductions (OOBIs) and the challenge/response protocol to enhance trust.
 </div>
 
 ## Controller and AID Setup
 
-This notebook focuses on connecting two independent controllers using the Keria/Signify architecture. This involves two `SignifyClient` instances, each managing its own AID, establishing contact, and then authenticating each other. Conceptually, these steps mirror the `kli` process for connecting controllers but are executed through the `signify-ts` library interacting with Keria agents.
+This notebook focuses on connecting two independent controllers using the KERIA/Signify architecture. This involves two `SignifyClient` instances, each managing its own AID, establishing contact, and then authenticating each other. Conceptually, these steps mirror the `kli` process for connecting controllers but are executed through the `signify-ts` library interacting with KERIA agents.
 
 You will begin by setting up two distinct `SignifyClient` instances, which we'll call `clientA` (representing a controller Alfred) and `clientB` (representing a controller Betty). Each client will:
 1.  Generate a unique `bran` (passcode).
 2.  Instantiate `SignifyClient`.
-3.  Boot and connect to its Keria agent, establishing its Client AID and the delegated Agent AID.
+3.  Boot and connect to its KERIA agent, establishing its Client AID and the delegated Agent AID.
 4.  Create a primary AID (let's call them `aidA` for Alfred and `aidB` for Betty) with a set of predefined witnesses.
 
-The specifics of client creation, booting, connecting, and basic AID inception using `signify-ts` were covered in the "Keria-Signify Basic Operations" notebook. You will apply those principles below:
+The specifics of client creation, booting, connecting, and basic AID inception using `signify-ts` were covered in the "KERIA-Signify Basic Operations" notebook. You will apply those principles below:
 
 
 
@@ -5904,23 +5904,23 @@ console.log(`Client A AID Pre: ${aidA.i}\nClient B AID Pre: ${aidB.i}`)
 
 
 <div class="alert alert-info">
-    <b>ℹ️ Note</b><hr> For this demonstration, both clients will connect to the same Keria instance (defined by <code>url</code> and <code>bootUrl</code>). In a real-world scenario, Alfred and Betty would likely each have their own Signify clients running on their respective devices and interacting with their own (or chosen) Keria agent instances. The Keria agent URLs might be different for each. However, the KERI protocol and Signify patterns for connection and authentication remain the same.
+    <b>ℹ️ Note</b><hr> For this demonstration, both clients will connect to the same KERIA instance (defined by <code>url</code> and <code>bootUrl</code>). In a real-world scenario, Alfred and Betty would likely each have their own Signify clients running on their respective devices and interacting with their own (or chosen) KERIA agent instances. The KERIA agent URLs might be different for each. However, the KERI protocol and Signify patterns for connection and authentication remain the same.
 </div>
 
 ## Assigning Agent End Roles
 
-As discussed in "Keria-Signify Basics", when a `SignifyClient` connects, it establishes a **Client AID** (which you directly control via the `bran`) and a delegated **Agent AID** (managed by the Keria service). For these Agent AIDs to act effectively on behalf of the AIDs we just created (`aidA` and `aidB`), we need to explicitly authorize them by assigning an `agent` end role.
+As discussed in "KERIA-Signify Basics", when a `SignifyClient` connects, it establishes a **Client AID** (which you directly control via the `bran`) and a delegated **Agent AID** (managed by the KERIA service). For these Agent AIDs to act effectively on behalf of the AIDs we just created (`aidA` and `aidB`), we need to explicitly authorize them by assigning an `agent` end role.
 
-The `agent` role, in this context, signifies that the Keria Agent AID associated with `clientA` is authorized to manage/interact on behalf of `aidA`, and similarly for `clientB` and `aidB`. This is a crucial step for enabling the Keria agent to perform tasks like responding to OOBI requests for these specific identifiers.
+The `agent` role, in this context, signifies that the KERIA Agent AID associated with `clientA` is authorized to manage/interact on behalf of `aidA`, and similarly for `clientB` and `aidB`. This is a crucial step for enabling the KERIA agent to perform tasks like responding to OOBI requests for these specific identifiers.
 
 Use the `client.identifiers().addEndRole()` method to add the role. This method requires:
 - The alias of the identifier granting the authorization (e.g., `aidAAlias`).
 - The role to be assigned (e.g., `'agent'`).
-- The prefix of the AID being authorized for that role. In this case, it's the prefix of the client's own Keria Agent AID, accessible via `client.agent!.pre`.
+- The prefix of the AID being authorized for that role. In this case, it's the prefix of the client's own KERIA Agent AID, accessible via `client.agent!.pre`.
 
 
 ```typescript
-// ----- Client A: Assign 'agent' role for aidA to its Keria Agent AID -----
+// ----- Client A: Assign 'agent' role for aidA to its KERIA Agent AID -----
 const agentRole = 'agent';
 
 // Authorize clientA's Agent AID to act as an agent for aidA
@@ -5939,9 +5939,9 @@ const { response: AAddRoleResponse } = await clientA
 
 await clientA.operations().delete(AAddRoleOperation.name);
 
-console.log(`Client A: Assigned '${agentRole}' role to Keria Agent ${clientA.agent!.pre} for AID ${aidA.i}`);
+console.log(`Client A: Assigned '${agentRole}' role to KERIA Agent ${clientA.agent!.pre} for AID ${aidA.i}`);
 
-// ----- Client B: Assign 'agent' role for aidB to its Keria Agent AID -----
+// ----- Client B: Assign 'agent' role for aidB to its KERIA Agent AID -----
 
 // Authorize clientB's Agent AID to act as an agent for aidB
 const BAddRoleResult = await clientB
@@ -5959,23 +5959,23 @@ const { response: BAddRoleResponse } = await clientB
 
 await clientB.operations().delete(BAddRoleOperation.name);
 
-console.log(`Client B: Assigned '${agentRole}' role to Keria Agent ${clientB.agent!.pre} for AID ${aidB.i}`);
+console.log(`Client B: Assigned '${agentRole}' role to KERIA Agent ${clientB.agent!.pre} for AID ${aidB.i}`);
 
 ```
 
-    Client A: Assigned 'agent' role to Keria Agent EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq for AID EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl
+    Client A: Assigned 'agent' role to KERIA Agent EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq for AID EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl
 
 
-    Client B: Assigned 'agent' role to Keria Agent EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv for AID ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q
+    Client B: Assigned 'agent' role to KERIA Agent EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv for AID ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q
 
 
 ## Discovery via OOBIs
 
-With the AIDs created and their respective Keria agents authorized, Alfred (`clientA`, `aidA`) and Betty (`clientB`, `aidB`) need a way to discover each other. This is where Out-of-Band Introductions (OOBIs) are used.
+With the AIDs created and their respective KERIA agents authorized, Alfred (`clientA`, `aidA`) and Betty (`clientB`, `aidB`) need a way to discover each other. This is where Out-of-Band Introductions (OOBIs) are used.
 
 ### Generating OOBI URLs
 
-Each client needs to generate an OOBI for its AID (`aidA` and `aidB`). This OOBI is associated with the `agent` role, meaning the OOBI URL (**IURL** for short) will point to an endpoint on their Keria agent that is authorized to serve information about the AID.
+Each client needs to generate an OOBI for its AID (`aidA` and `aidB`). This OOBI is associated with the `agent` role, meaning the OOBI URL (**IURL** for short) will point to an endpoint on their KERIA agent that is authorized to serve information about the AID.
 
 Proceed by generating the IURLs:
 - `clientA` generates an OOBI for `aidA` with the role `agent`.
@@ -6008,7 +6008,7 @@ console.log(`Client B (Betty) generated OOBI for aidB: ${oobiB_url}`);
 
 In a real scenario, Alfred would share `oobiA` with Betty, and Betty would share `oobiB` with Alfred through some non-KERI channel (e.g., email, QR code, messaging app). For this notebook, we'll just store them in variables.
 
-Now perform the OOBI resolution. This means `clientA`'s Keria agent uses the URL in `oobiB` to fetch `aidB`'s KEL from `clientB`'s Keria agent. `clientA` then cryptographically verifies this KEL. `clientB` resolves `oobiA` similarly.
+Now perform the OOBI resolution. This means `clientA`'s KERIA agent uses the URL in `oobiB` to fetch `aidB`'s KEL from `clientB`'s KERIA agent. `clientA` then cryptographically verifies this KEL. `clientB` resolves `oobiA` similarly.
 
 
 
@@ -6141,8 +6141,8 @@ The process, as described in the "Connecting Controllers" notebook for `kli`, is
 
 1.  **Generate Challenge**: Alfred (`clientA`) generates a set of unique challenge words.
 2.  **Send Challenge (Simulated OOB)**: Alfred communicates these words to Betty through an out-of-band channel (e.g., verbally, secure message). This step is crucial to prevent a Man-in-the-Middle (MITM) on the main KERI connection from intercepting or altering the challenge. For this notebook, we'll print the words.
-3.  **Respond to Challenge**: Betty (`clientB`), using `aidB`, signs the exact challenge words received from Alfred. The `respond()` method sends this signed response to Alfred's Keria agent.
-4.  **Verify Response**: Alfred (`clientA`) receives the signed response. His Keria agent verifies that the signature corresponds to `aidB`'s current authoritative keys (from the KEL he resolved earlier) and that the signed message matches the original challenge words. This is an asynchronous operation.
+3.  **Respond to Challenge**: Betty (`clientB`), using `aidB`, signs the exact challenge words received from Alfred. The `respond()` method sends this signed response to Alfred's KERIA agent.
+4.  **Verify Response**: Alfred (`clientA`) receives the signed response. His KERIA agent verifies that the signature corresponds to `aidB`'s current authoritative keys (from the KEL he resolved earlier) and that the signed message matches the original challenge words. This is an asynchronous operation.
 5.  **Mark as Responded/Authenticated**: If verification is successful, Alfred (`clientA`) marks the challenge for `aidB` as successfully responded to and authenticated. This updates the contact information for Betty in Alfred's client.
 
 This process is then repeated with Betty challenging Alfred.
@@ -6397,13 +6397,13 @@ If both challenge-response cycles complete successfully, Alfred and Betty have n
 
 <div class="alert alert-primary">
 <b>📝 SUMMARY</b><hr>
-This notebook demonstrated the process of connecting two Keria/Signify controllers, Alfred (<code>clientA</code>) and Betty (<code>clientB</code>):
+This notebook demonstrated the process of connecting two KERIA/Signify controllers, Alfred (<code>clientA</code>) and Betty (<code>clientB</code>):
 <ol>
-    <li><b>Initial Setup:</b> Each client was initialized, booted its Keria agent, connected, and created an Autonomic Identifier(<code>aidA</code> for Alfred, <code>aidB</code> for Betty).</li>
-    <li><b>End Role Assignment:</b> The Keria Agent AID for each client was authorized with an <code>agent</code> end role for its respective AID (<code>aidA</code> and <code>aidB</code>). This allows the Keria agent to manage these AIDs, such as serving their KELs via OOBIs. This was done using <code>client.identifiers().addEndRole()</code>.</li>
+    <li><b>Initial Setup:</b> Each client was initialized, booted its KERIA agent, connected, and created an Autonomic Identifier(<code>aidA</code> for Alfred, <code>aidB</code> for Betty).</li>
+    <li><b>End Role Assignment:</b> The KERIA Agent AID for each client was authorized with an <code>agent</code> end role for its respective AID (<code>aidA</code> and <code>aidB</code>). This allows the KERIA agent to manage these AIDs, such as serving their KELs via OOBIs. This was done using <code>client.identifiers().addEndRole()</code>.</li>
     <li><b>OOBI Generation & Resolution:</b>
         <ul>
-            <li>Each client generated an OOBI URL for its AID, specifically for the <code>'agent'</code> role, using <code>client.oobis().get(alias, 'agent')</code>. This OOBI points to their Keria agent's endpoint for that AID.</li>
+            <li>Each client generated an OOBI URL for its AID, specifically for the <code>'agent'</code> role, using <code>client.oobis().get(alias, 'agent')</code>. This OOBI points to their KERIA agent's endpoint for that AID.</li>
             <li>The OOBIs were (simulated) exchanged out-of-band.</li>
             <li>Each client then resolved the other's OOBI using <code>client.oobis().resolve()</code>. This retrieved and cryptographically verified the other's KEL, adding them to their local contact list.</li>
         </ul>
@@ -6441,7 +6441,7 @@ Demonstrate the process of issuing an ACDC (Authentic Chained Data Container) fr
 
 <div class="alert alert-info">
 <b>ℹ️ NOTE</b><hr>
-This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>) to quickly establish the necessary preconditions for credential issuance. The detailed steps for client initialization, AID creation, end role assignment, and OOBI resolution were covered in the "Keria-Signify Connecting Controllers" notebook. Here, we provide a high-level recap of what these utility functions accomplish.
+This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>) to quickly establish the necessary preconditions for credential issuance. The detailed steps for client initialization, AID creation, end role assignment, and OOBI resolution were covered in the "KERIA-Signify Connecting Controllers" notebook. Here, we provide a high-level recap of what these utility functions accomplish.
 </div>
 
 ## Prerequisites: Client and AID Setup
@@ -6449,9 +6449,9 @@ This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>
 The setup process, streamlined by the utility functions, performs the following key actions:
 
 * **Signify Library Initialization**: Ensures the underlying cryptographic components of Signify-ts are ready.
-* **Client Initialization & Connection**: Three `SignifyClient` instances are created—one each for an Issuer, a Holder, and a Verifier. Each client is bootstrapped and connected to its Keria agent.
+* **Client Initialization & Connection**: Three `SignifyClient` instances are created—one each for an Issuer, a Holder, and a Verifier. Each client is bootstrapped and connected to its KERIA agent.
 * **AID Creation**: Each client (Issuer, Holder, Verifier) creates a primary AID using default arguments.
-* **End Role Assignment**: An `agent` end role is assigned to each client's Keria Agent AID. 
+* **End Role Assignment**: An `agent` end role is assigned to each client's KERIA Agent AID. 
 * **OOBI Generation and Resolution (Client-to-Client)**:
     * OOBIs are generated for the Issuer, Holder, and Verifier AIDs, specifically for the `'agent'` role.
     * Communication channels are established by resolving these OOBIs:
@@ -6540,7 +6540,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): D8VzjCkZJLU4U3jYvbJwS
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  EFKfKyQozYGbFls3BQp_2yos_5zrj-5q_MMBY6nw5Ao_
@@ -6555,7 +6555,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03
 
 
-    Assigning 'agent' role to Keria Agent EOTGTRM2MTSQgB_WXcvCPNsD8NPT5tBcjJc4PtSgxyIX for AID alias issuerAid
+    Assigning 'agent' role to KERIA Agent EOTGTRM2MTSQgB_WXcvCPNsD8NPT5tBcjJc4PtSgxyIX for AID alias issuerAid
 
 
     Successfully assigned 'agent' role for AID alias issuerAid.
@@ -6570,7 +6570,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): Cxfca-122qAkoMOGwbMCV
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  EOTuwSBof7LtRy9vsie1-UE8Wb5USW1pGp3YWnZizrM_
@@ -6585,7 +6585,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL
 
 
-    Assigning 'agent' role to Keria Agent EJcgXxS6OKQ2RVzRtPZ1KW5yHcSrSl8BfNfut1JiNNML for AID alias holderAid
+    Assigning 'agent' role to KERIA Agent EJcgXxS6OKQ2RVzRtPZ1KW5yHcSrSl8BfNfut1JiNNML for AID alias holderAid
 
 
     Successfully assigned 'agent' role for AID alias holderAid.
@@ -6600,7 +6600,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): BoDKZbJF_utSTiXBMZC-m
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  EL9MTtEU-u1H5fTMJF5mOB-F3WnKykh-nuALVdobGOOj
@@ -6615,7 +6615,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EBmR-76xFui4TzcwfUGi5TiDSnCFsZ4ROxP-H8Bv4zrc
 
 
-    Assigning 'agent' role to Keria Agent EGcP2yft7OOJ41te4pqk-ALVqut8FFfc21uBeh5eVq_p for AID alias verifierAid
+    Assigning 'agent' role to KERIA Agent EGcP2yft7OOJ41te4pqk-ALVqut8FFfc21uBeh5eVq_p for AID alias verifierAid
 
 
     Successfully assigned 'agent' role for AID alias verifierAid.
@@ -6750,7 +6750,7 @@ console.log(`Registry: Name='${issuerRegistry.name}', SAID (regk)='${issuerRegis
 
 ### Step 2: Retrieve Schema Definition
 
-The Issuer needs the definition of the schema against which they intend to issue a credential. Since the schema OOBI was resolved during the setup phase, the schema definition can now be retrieved from the Keria agent's cache using its SAID. You will reuse the `EventPass` schema (SAID: `EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK`) from previous KLI examples.
+The Issuer needs the definition of the schema against which they intend to issue a credential. Since the schema OOBI was resolved during the setup phase, the schema definition can now be retrieved from the KERIA agent's cache using its SAID. You will reuse the `EventPass` schema (SAID: `EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK`) from previous KLI examples.
 
 
 ```typescript
@@ -6943,7 +6943,7 @@ console.log(issuerCredential)
 The credential has been created but currently resides with the Issuer. To transfer it to the Holder, the Issuer initiates an IPEX (Issuance and Presentation Exchange) grant. This process uses KERI `exn` (exchange) messages. The grant message effectively offers the credential to the Holder. 
 
 The `issuerClient.ipex().grant()` method prepares the grant message, including the ACDC itself (`acdc`), the issuance event from the registry (`iss`), and the anchoring event from the Issuer's KEL (`anc`) along with its signatures (`ancAttachment`).
-Then, `issuerClient.ipex().submitGrant()` sends this packaged grant message to the Holder's Keria agent.
+Then, `issuerClient.ipex().submitGrant()` sends this packaged grant message to the Holder's KERIA agent.
 
 Use the code below to perform the ipex grant.
 
@@ -6962,7 +6962,7 @@ const [grant, gsigs, gend] = await issuerClient.ipex().grant({
 });
 
 // Issuer submits the prepared grant message to the Holder.
-// This sends an 'exn' message to the Holder's Keria agent.
+// This sends an 'exn' message to the Holder's KERIA agent.
 const submitGrantOperation = await issuerClient
     .ipex()
     .submitGrant(
@@ -6989,7 +6989,7 @@ The Holder can proactively check the status of a credential in the Issuer's regi
 
 ```typescript
 // The flow transitions from the Issuer to the Holder.
-// A delay and retry mechanism is added to allow time for Keria agents and witnesses
+// A delay and retry mechanism is added to allow time for KERIA agents and witnesses
 // to propagate the credential issuance information.
 
 let credentialState;
@@ -7036,7 +7036,7 @@ console.log(credentialState) // Displays the status (e.g., issued, revoked)
 
 ### Step 5: Holder Receives IPEX Grant Notification
 
-The Holder's Keria agent will receive the grant `exn` message sent by the Issuer. The Holder's client can list its notifications to find this incoming grant. The notification will contain the SAID of the `exn` message (`grantNotification.a.d`), which can then be used to retrieve the full details of the grant exchange from the Holder's client.
+The Holder's KERIA agent will receive the grant `exn` message sent by the Issuer. The Holder's client can list its notifications to find this incoming grant. The notification will contain the SAID of the `exn` message (`grantNotification.a.d`), which can then be used to retrieve the full details of the grant exchange from the Holder's client.
 
 
 
@@ -7503,7 +7503,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): BBlay0WZE90_WvBXrv94-
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  ENyVASu5x45SQIOUaYLmRGzIgpZZIlrB3Ogpf3yxYQnN
@@ -7518,7 +7518,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX
 
 
-    Assigning 'agent' role to Keria Agent EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT for AID alias issuerAid
+    Assigning 'agent' role to KERIA Agent EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT for AID alias issuerAid
 
 
     Successfully assigned 'agent' role for AID alias issuerAid.
@@ -7533,7 +7533,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): CTTJIoA3pv_F__m_jAcyX
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  ENWBwkA9lLoMIxed6eIS-V_e1gO_CFCDkSwqXrhamMJq
@@ -7548,7 +7548,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1
 
 
-    Assigning 'agent' role to Keria Agent EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E for AID alias holderAid
+    Assigning 'agent' role to KERIA Agent EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E for AID alias holderAid
 
 
     Successfully assigned 'agent' role for AID alias holderAid.
@@ -7563,7 +7563,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): AcXyho7JD81I7kdzrIx28
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  EKIvcyAwBRAUpimMRqa6PnI5GPohWCQxaYB4ky5dfH2-
@@ -7578,7 +7578,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6
 
 
-    Assigning 'agent' role to Keria Agent EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG for AID alias verifierAid
+    Assigning 'agent' role to KERIA Agent EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG for AID alias verifierAid
 
 
     Successfully assigned 'agent' role for AID alias verifierAid.
