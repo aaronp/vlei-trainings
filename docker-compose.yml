@@ -1,10 +1,12 @@
+# Docker compose file for KERI JupyterLab environment
 
+# image tags
 x-vlei-image: &vlei-image
-  image: gleif/vlei:0.2.0
+  image: gleif/vlei:1.0.0
 x-witness-demo-image: &witness-demo-image
-  image: weboftrust/keri:1.2.6
+  image: gleif/keri:1.2.8-rc5
 x-keria-image: &keria-image
-  image: weboftrust/keria:0.2.0-rc2
+  image: gleif/keria:0.3.0
 x-healthcheck: &healthcheck
   interval: 15s
   timeout: 5s
@@ -49,7 +51,7 @@ services:
       - PYTHONIOENCODING=UTF-8 # Ensure consistent logging encoding
     volumes:
       - ./jupyter/notebooks/config/schemas:/usr/local/var/vLEI/101_schemas
-    command: [ 'vLEI-server', '-s', './101_schemas', '-c', './101_schemas', '-o', './101_schemas' ]
+    command: [ 'vLEI-server', '-s', './101_schemas', '-c', './101_schemas', '-o', './101_schemas', '--loglevel', 'INFO' ]
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://127.0.0.1:7723/oobi/EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao" ]
       <<: *healthcheck
