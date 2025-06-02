@@ -99,7 +99,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): BBlay0WZE90_WvBXrv94-
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  ENyVASu5x45SQIOUaYLmRGzIgpZZIlrB3Ogpf3yxYQnN
@@ -114,7 +114,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX
 
 
-    Assigning 'agent' role to Keria Agent EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT for AID alias issuerAid
+    Assigning 'agent' role to KERIA Agent EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT for AID alias issuerAid
 
 
     Successfully assigned 'agent' role for AID alias issuerAid.
@@ -129,7 +129,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): CTTJIoA3pv_F__m_jAcyX
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  ENWBwkA9lLoMIxed6eIS-V_e1gO_CFCDkSwqXrhamMJq
@@ -144,7 +144,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1
 
 
-    Assigning 'agent' role to Keria Agent EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E for AID alias holderAid
+    Assigning 'agent' role to KERIA Agent EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E for AID alias holderAid
 
 
     Successfully assigned 'agent' role for AID alias holderAid.
@@ -159,7 +159,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Using Passcode (bran): AcXyho7JD81I7kdzrIx28
 
 
-    Client boot process initiated with Keria agent.
+    Client boot process initiated with KERIA agent.
 
 
       Client AID Prefix:  EKIvcyAwBRAUpimMRqa6PnI5GPohWCQxaYB4ky5dfH2-
@@ -174,7 +174,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Successfully created AID with prefix: EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6
 
 
-    Assigning 'agent' role to Keria Agent EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG for AID alias verifierAid
+    Assigning 'agent' role to KERIA Agent EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG for AID alias verifierAid
 
 
     Successfully assigned 'agent' role for AID alias verifierAid.

@@ -10,7 +10,7 @@ import {
     Serder
 } from 'npm:signify-ts';
 
-// Default Keria connection parameters (adjust as needed for your environment)
+// Default KERIA connection parameters (adjust as needed for your environment)
 export const DEFAULT_ADMIN_URL = 'http://keria:3901'; 
 export const DEFAULT_BOOT_URL = 'http://keria:3903';  
 export const DEFAULT_TIMEOUT_MS = 30000; // 30 seconds for operations
@@ -41,7 +41,7 @@ export async function initializeSignify() {
 }
 
 /**
- * Creates a new SignifyClient instance, boots it, and connects to the Keria agent.
+ * Creates a new SignifyClient instance, boots it, and connects to the KERIA agent.
  *
  * @returns {Promise<{ client: SignifyClient; bran: string; clientState: State }>}
  * The initialized client, its bran, and state. 
@@ -59,7 +59,7 @@ export async function initializeAndConnectClient(
 
     try {
         await client.boot();
-        console.log('Client boot process initiated with Keria agent.');
+        console.log('Client boot process initiated with KERIA agent.');
 
         await client.connect();
         const clientState = await client.state();
@@ -113,7 +113,7 @@ export async function createNewAID(
 }
 
 /**
- * Assigns an end role for a given AID to the client's Keria Agent AID.
+ * Assigns an end role for a given AID to the client's KERIA Agent AID.
  *
  * @returns {Promise<{ operation: Operation<T> }>} The operation details.
  */
@@ -127,7 +127,7 @@ export async function addEndRoleForAID(
     }
     const agentAIDPrefix = client.agent.pre;
 
-    console.log(`Assigning '${role}' role to Keria Agent ${agentAIDPrefix} for AID alias ${aidAlias}`);
+    console.log(`Assigning '${role}' role to KERIA Agent ${agentAIDPrefix} for AID alias ${aidAlias}`);
     try {
         const addRoleResult = await client
             .identifiers()
@@ -165,7 +165,7 @@ export async function generateOOBI(
     try {
         const oobiResult = await client.oobis().get(aidAlias, role);
         if (!oobiResult?.oobis?.length) {
-            throw new Error('No OOBI URL returned from Keria agent.');
+            throw new Error('No OOBI URL returned from KERIA agent.');
         }
         const oobiUrl = oobiResult.oobis[0];
         console.log(`Generated OOBI URL: ${oobiUrl}`);

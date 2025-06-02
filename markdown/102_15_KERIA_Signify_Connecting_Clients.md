@@ -2,20 +2,20 @@
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
-  Explain how to establish a secure, mutually authenticated connection between two Keria/Signify-ts controllers using Out-of-Band Introductions (OOBIs) and the challenge/response protocol to enhance trust.
+  Explain how to establish a secure, mutually authenticated connection between two KERIA/Signify-ts controllers using Out-of-Band Introductions (OOBIs) and the challenge/response protocol to enhance trust.
 </div>
 
 ## Controller and AID Setup
 
-This notebook focuses on connecting two independent controllers using the Keria/Signify architecture. This involves two `SignifyClient` instances, each managing its own AID, establishing contact, and then authenticating each other. Conceptually, these steps mirror the `kli` process for connecting controllers but are executed through the `signify-ts` library interacting with Keria agents.
+This notebook focuses on connecting two independent controllers using the KERIA/Signify architecture. This involves two `SignifyClient` instances, each managing its own AID, establishing contact, and then authenticating each other. Conceptually, these steps mirror the `kli` process for connecting controllers but are executed through the `signify-ts` library interacting with KERIA agents.
 
 You will begin by setting up two distinct `SignifyClient` instances, which we'll call `clientA` (representing a controller Alfred) and `clientB` (representing a controller Betty). Each client will:
 1.  Generate a unique `bran` (passcode).
 2.  Instantiate `SignifyClient`.
-3.  Boot and connect to its Keria agent, establishing its Client AID and the delegated Agent AID.
+3.  Boot and connect to its KERIA agent, establishing its Client AID and the delegated Agent AID.
 4.  Create a primary AID (let's call them `aidA` for Alfred and `aidB` for Betty) with a set of predefined witnesses.
 
-The specifics of client creation, booting, connecting, and basic AID inception using `signify-ts` were covered in the "Keria-Signify Basic Operations" notebook. You will apply those principles below:
+The specifics of client creation, booting, connecting, and basic AID inception using `signify-ts` were covered in the "KERIA-Signify Basic Operations" notebook. You will apply those principles below:
 
 
 
@@ -83,23 +83,23 @@ console.log(`Client A AID Pre: ${aidA.i}\nClient B AID Pre: ${aidB.i}`)
 
 
 <div class="alert alert-info">
-    <b>ℹ️ Note</b><hr> For this demonstration, both clients will connect to the same Keria instance (defined by <code>url</code> and <code>bootUrl</code>). In a real-world scenario, Alfred and Betty would likely each have their own Signify clients running on their respective devices and interacting with their own (or chosen) Keria agent instances. The Keria agent URLs might be different for each. However, the KERI protocol and Signify patterns for connection and authentication remain the same.
+    <b>ℹ️ Note</b><hr> For this demonstration, both clients will connect to the same KERIA instance (defined by <code>url</code> and <code>bootUrl</code>). In a real-world scenario, Alfred and Betty would likely each have their own Signify clients running on their respective devices and interacting with their own (or chosen) KERIA agent instances. The KERIA agent URLs might be different for each. However, the KERI protocol and Signify patterns for connection and authentication remain the same.
 </div>
 
 ## Assigning Agent End Roles
 
-As discussed in "Keria-Signify Basics", when a `SignifyClient` connects, it establishes a **Client AID** (which you directly control via the `bran`) and a delegated **Agent AID** (managed by the Keria service). For these Agent AIDs to act effectively on behalf of the AIDs we just created (`aidA` and `aidB`), we need to explicitly authorize them by assigning an `agent` end role.
+As discussed in "KERIA-Signify Basics", when a `SignifyClient` connects, it establishes a **Client AID** (which you directly control via the `bran`) and a delegated **Agent AID** (managed by the KERIA service). For these Agent AIDs to act effectively on behalf of the AIDs we just created (`aidA` and `aidB`), we need to explicitly authorize them by assigning an `agent` end role.
 
-The `agent` role, in this context, signifies that the Keria Agent AID associated with `clientA` is authorized to manage/interact on behalf of `aidA`, and similarly for `clientB` and `aidB`. This is a crucial step for enabling the Keria agent to perform tasks like responding to OOBI requests for these specific identifiers.
+The `agent` role, in this context, signifies that the KERIA Agent AID associated with `clientA` is authorized to manage/interact on behalf of `aidA`, and similarly for `clientB` and `aidB`. This is a crucial step for enabling the KERIA agent to perform tasks like responding to OOBI requests for these specific identifiers.
 
 Use the `client.identifiers().addEndRole()` method to add the role. This method requires:
 - The alias of the identifier granting the authorization (e.g., `aidAAlias`).
 - The role to be assigned (e.g., `'agent'`).
-- The prefix of the AID being authorized for that role. In this case, it's the prefix of the client's own Keria Agent AID, accessible via `client.agent!.pre`.
+- The prefix of the AID being authorized for that role. In this case, it's the prefix of the client's own KERIA Agent AID, accessible via `client.agent!.pre`.
 
 
 ```typescript
-// ----- Client A: Assign 'agent' role for aidA to its Keria Agent AID -----
+// ----- Client A: Assign 'agent' role for aidA to its KERIA Agent AID -----
 const agentRole = 'agent';
 
 // Authorize clientA's Agent AID to act as an agent for aidA
@@ -118,9 +118,9 @@ const { response: AAddRoleResponse } = await clientA
 
 await clientA.operations().delete(AAddRoleOperation.name);
 
-console.log(`Client A: Assigned '${agentRole}' role to Keria Agent ${clientA.agent!.pre} for AID ${aidA.i}`);
+console.log(`Client A: Assigned '${agentRole}' role to KERIA Agent ${clientA.agent!.pre} for AID ${aidA.i}`);
 
-// ----- Client B: Assign 'agent' role for aidB to its Keria Agent AID -----
+// ----- Client B: Assign 'agent' role for aidB to its KERIA Agent AID -----
 
 // Authorize clientB's Agent AID to act as an agent for aidB
 const BAddRoleResult = await clientB
@@ -138,23 +138,23 @@ const { response: BAddRoleResponse } = await clientB
 
 await clientB.operations().delete(BAddRoleOperation.name);
 
-console.log(`Client B: Assigned '${agentRole}' role to Keria Agent ${clientB.agent!.pre} for AID ${aidB.i}`);
+console.log(`Client B: Assigned '${agentRole}' role to KERIA Agent ${clientB.agent!.pre} for AID ${aidB.i}`);
 
 ```
 
-    Client A: Assigned 'agent' role to Keria Agent EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq for AID EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl
+    Client A: Assigned 'agent' role to KERIA Agent EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq for AID EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl
 
 
-    Client B: Assigned 'agent' role to Keria Agent EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv for AID ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q
+    Client B: Assigned 'agent' role to KERIA Agent EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv for AID ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q
 
 
 ## Discovery via OOBIs
 
-With the AIDs created and their respective Keria agents authorized, Alfred (`clientA`, `aidA`) and Betty (`clientB`, `aidB`) need a way to discover each other. This is where Out-of-Band Introductions (OOBIs) are used.
+With the AIDs created and their respective KERIA agents authorized, Alfred (`clientA`, `aidA`) and Betty (`clientB`, `aidB`) need a way to discover each other. This is where Out-of-Band Introductions (OOBIs) are used.
 
 ### Generating OOBI URLs
 
-Each client needs to generate an OOBI for its AID (`aidA` and `aidB`). This OOBI is associated with the `agent` role, meaning the OOBI URL (**IURL** for short) will point to an endpoint on their Keria agent that is authorized to serve information about the AID.
+Each client needs to generate an OOBI for its AID (`aidA` and `aidB`). This OOBI is associated with the `agent` role, meaning the OOBI URL (**IURL** for short) will point to an endpoint on their KERIA agent that is authorized to serve information about the AID.
 
 Proceed by generating the IURLs:
 - `clientA` generates an OOBI for `aidA` with the role `agent`.
@@ -187,7 +187,7 @@ console.log(`Client B (Betty) generated OOBI for aidB: ${oobiB_url}`);
 
 In a real scenario, Alfred would share `oobiA` with Betty, and Betty would share `oobiB` with Alfred through some non-KERI channel (e.g., email, QR code, messaging app). For this notebook, we'll just store them in variables.
 
-Now perform the OOBI resolution. This means `clientA`'s Keria agent uses the URL in `oobiB` to fetch `aidB`'s KEL from `clientB`'s Keria agent. `clientA` then cryptographically verifies this KEL. `clientB` resolves `oobiA` similarly.
+Now perform the OOBI resolution. This means `clientA`'s KERIA agent uses the URL in `oobiB` to fetch `aidB`'s KEL from `clientB`'s KERIA agent. `clientA` then cryptographically verifies this KEL. `clientB` resolves `oobiA` similarly.
 
 
 
@@ -320,8 +320,8 @@ The process, as described in the "Connecting Controllers" notebook for `kli`, is
 
 1.  **Generate Challenge**: Alfred (`clientA`) generates a set of unique challenge words.
 2.  **Send Challenge (Simulated OOB)**: Alfred communicates these words to Betty through an out-of-band channel (e.g., verbally, secure message). This step is crucial to prevent a Man-in-the-Middle (MITM) on the main KERI connection from intercepting or altering the challenge. For this notebook, we'll print the words.
-3.  **Respond to Challenge**: Betty (`clientB`), using `aidB`, signs the exact challenge words received from Alfred. The `respond()` method sends this signed response to Alfred's Keria agent.
-4.  **Verify Response**: Alfred (`clientA`) receives the signed response. His Keria agent verifies that the signature corresponds to `aidB`'s current authoritative keys (from the KEL he resolved earlier) and that the signed message matches the original challenge words. This is an asynchronous operation.
+3.  **Respond to Challenge**: Betty (`clientB`), using `aidB`, signs the exact challenge words received from Alfred. The `respond()` method sends this signed response to Alfred's KERIA agent.
+4.  **Verify Response**: Alfred (`clientA`) receives the signed response. His KERIA agent verifies that the signature corresponds to `aidB`'s current authoritative keys (from the KEL he resolved earlier) and that the signed message matches the original challenge words. This is an asynchronous operation.
 5.  **Mark as Responded/Authenticated**: If verification is successful, Alfred (`clientA`) marks the challenge for `aidB` as successfully responded to and authenticated. This updates the contact information for Betty in Alfred's client.
 
 This process is then repeated with Betty challenging Alfred.
@@ -576,13 +576,13 @@ If both challenge-response cycles complete successfully, Alfred and Betty have n
 
 <div class="alert alert-primary">
 <b>📝 SUMMARY</b><hr>
-This notebook demonstrated the process of connecting two Keria/Signify controllers, Alfred (<code>clientA</code>) and Betty (<code>clientB</code>):
+This notebook demonstrated the process of connecting two KERIA/Signify controllers, Alfred (<code>clientA</code>) and Betty (<code>clientB</code>):
 <ol>
-    <li><b>Initial Setup:</b> Each client was initialized, booted its Keria agent, connected, and created an Autonomic Identifier(<code>aidA</code> for Alfred, <code>aidB</code> for Betty).</li>
-    <li><b>End Role Assignment:</b> The Keria Agent AID for each client was authorized with an <code>agent</code> end role for its respective AID (<code>aidA</code> and <code>aidB</code>). This allows the Keria agent to manage these AIDs, such as serving their KELs via OOBIs. This was done using <code>client.identifiers().addEndRole()</code>.</li>
+    <li><b>Initial Setup:</b> Each client was initialized, booted its KERIA agent, connected, and created an Autonomic Identifier(<code>aidA</code> for Alfred, <code>aidB</code> for Betty).</li>
+    <li><b>End Role Assignment:</b> The KERIA Agent AID for each client was authorized with an <code>agent</code> end role for its respective AID (<code>aidA</code> and <code>aidB</code>). This allows the KERIA agent to manage these AIDs, such as serving their KELs via OOBIs. This was done using <code>client.identifiers().addEndRole()</code>.</li>
     <li><b>OOBI Generation & Resolution:</b>
         <ul>
-            <li>Each client generated an OOBI URL for its AID, specifically for the <code>'agent'</code> role, using <code>client.oobis().get(alias, 'agent')</code>. This OOBI points to their Keria agent's endpoint for that AID.</li>
+            <li>Each client generated an OOBI URL for its AID, specifically for the <code>'agent'</code> role, using <code>client.oobis().get(alias, 'agent')</code>. This OOBI points to their KERIA agent's endpoint for that AID.</li>
             <li>The OOBIs were (simulated) exchanged out-of-band.</li>
             <li>Each client then resolved the other's OOBI using <code>client.oobis().resolve()</code>. This retrieved and cryptographically verified the other's KEL, adding them to their local contact list.</li>
         </ul>
