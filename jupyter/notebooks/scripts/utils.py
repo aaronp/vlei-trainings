@@ -1,5 +1,6 @@
 import subprocess
 import os
+import platform
 import shlex 
 
 class Ansi:
@@ -60,7 +61,22 @@ def pr_continue():
 
 def clear_keri(prompt_confirmation=False):
 
+    os_name = platform.system()
+
     path = "/usr/local/var/keri/"
+    match os_name:
+        case "Linux":
+            path = "/usr/local/var/keri/"
+        case "Darwin":  # macOS
+            user_path = os.path.expanduser("~")
+            path = os.path.join(user_path, ".keri")
+        case "Windows":
+            user_path = os.path.expanduser("~")
+            path = os.path.join(user_path, "keri")  # Adjust as needed for Windows
+        case _:
+            print(f"❌ Unsupported OS: {os_name}. Cannot clear keystore.")
+            return
+    # check 
     proceed_with_deletion = False
 
     if prompt_confirmation:
