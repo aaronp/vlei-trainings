@@ -50,8 +50,8 @@ services:
       - PYTHONUNBUFFERED=1 # Ensure output is logged in real-time
       - PYTHONIOENCODING=UTF-8 # Ensure consistent logging encoding
     volumes:
-      - ./jupyter/notebooks/config/schemas:/usr/local/var/vLEI/101_schemas
-    command: [ 'vLEI-server', '-s', './101_schemas', '-c', './101_schemas', '-o', './101_schemas', '--loglevel', 'INFO' ]
+      - ./jupyter/notebooks/config/schemas:/vLEI/schema
+    command: [ 'vLEI-server', '-s', '/vLEI/schema', '-c', '/vLEI/schema', '-o', '/vLEI/schema', '--loglevel', 'INFO' ]
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://127.0.0.1:7723/oobi/EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao" ]
       <<: *healthcheck
