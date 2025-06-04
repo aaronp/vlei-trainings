@@ -1,8 +1,14 @@
 <!-- Source: 000_Table_of_Contents.md -->
 # Table of Contents
-## vLEI Training - 101
+## vLEI 101
 1. [Welcome to vLEI Training - 101](101_05_Welcome_to_vLEI_Training_-_101.ipynb#Welcome-to-vLEI-Training---101)
     1. [Prerequisites](101_05_Welcome_to_vLEI_Training_-_101.ipynb#Prerequisites)
+    1. [Understanding Your Learning Environment](101_05_Welcome_to_vLEI_Training_-_101.ipynb#Understanding-Your-Learning-Environment)
+        1. [Notebook Philosophy: Stand-Alone and Sequential](101_05_Welcome_to_vLEI_Training_-_101.ipynb#Notebook-Philosophy:-Stand-Alone-and-Sequential)
+        1. [Navigating Large Notebooks: The Table of Contents](101_05_Welcome_to_vLEI_Training_-_101.ipynb#Navigating-Large-Notebooks:-The-Table-of-Contents)
+        1. [Interacting with Notebook Cells](101_05_Welcome_to_vLEI_Training_-_101.ipynb#Interacting-with-Notebook-Cells)
+        1. [Managing the Notebook Kernel](101_05_Welcome_to_vLEI_Training_-_101.ipynb#Managing-the-Notebook-Kernel)
+        1. [Clearing Output](101_05_Welcome_to_vLEI_Training_-_101.ipynb#Clearing-Output)
     1. [Software Versions](101_05_Welcome_to_vLEI_Training_-_101.ipynb#Software-Versions)
 1. [Foundations: KERI, ACDC, and the vLEI Ecosystem](101_07_Introduction_to-KERI_ACDC_and_vLEI.ipynb#Foundations:-KERI-ACDC-and-the-vLEI-Ecosystem)
     1. [The KERI Protocol](101_07_Introduction_to-KERI_ACDC_and_vLEI.ipynb#The-KERI-Protocol)
@@ -131,8 +137,7 @@
         1. [Step 3: Verifier Admits and Validates Presentation](101_70_ACDC_Presentation_and_Revocation.ipynb#Step-3:-Verifier-Admits-and-Validates-Presentation)
     1. [Credential Revocation by Issuer](101_70_ACDC_Presentation_and_Revocation.ipynb#Credential-Revocation-by-Issuer)
 
-## vLEI Training - 102
-
+## vLEI 102
 1. [Introducing KERIA and Signify-ts: Architecture and Concepts](102_05_Keria_Signify.ipynb#Introducing-KERIA-and-Signify-ts:-Architecture-and-Concepts)
     1. [Client-Agent Architecture](102_05_Keria_Signify.ipynb#Client-Agent-Architecture)
         1. [KERIA Deployment and Configuration](102_05_Keria_Signify.ipynb#KERIA-Deployment-and-Configuration)
@@ -161,16 +166,16 @@
     1. [Mutual Authentication with Challenge-Response](102_15_Keria_Signify_Connecting_Clients.ipynb#Mutual-Authentication-with-Challenge-Response)
         1. [Generating Challenge Phrases](102_15_Keria_Signify_Connecting_Clients.ipynb#Generating-Challenge-Phrases)
         1. [Performing the Challenge-Response Protocol](102_15_Keria_Signify_Connecting_Clients.ipynb#Performing-the-Challenge-Response-Protocol)
-1. [Signify-ts: ACDC Credential Issuance with IPEX](102_20_Keria_Signify_Credential_Issuance.ipynb#Signify-ts:-ACDC-Credential-Issuance-with-IPEX)
-    1. [Prerequisites: Client and AID Setup](102_20_Keria_Signify_Credential_Issuance.ipynb#Prerequisites:-Client-and-AID-Setup)
-    1. [Credential Issuance Workflow Steps](102_20_Keria_Signify_Credential_Issuance.ipynb#Credential-Issuance-Workflow-Steps)
-        1. [Step 1: Create Issuer's Credential Registry](102_20_Keria_Signify_Credential_Issuance.ipynb#Step-1:-Create-Issuers-Credential-Registry)
-        1. [Step 2: Retrieve Schema Definition](102_20_Keria_Signify_Credential_Issuance.ipynb#Step-2:-Retrieve-Schema-Definition)
-        1. [Step 3: Issue the ACDC](102_20_Keria_Signify_Credential_Issuance.ipynb#Step-3:-Issue-the-ACDC)
-        1. [Step 4: Issuer Grants Credential via IPEX](102_20_Keria_Signify_Credential_Issuance.ipynb#Step-4:-Issuer-Grants-Credential-via-IPEX)
-        1. [Step 5: Holder Receives IPEX Grant Notification](102_20_Keria_Signify_Credential_Issuance.ipynb#Step-5:-Holder-Receives-IPEX-Grant-Notification)
-        1. [Step 6: Holder Admits Credential](102_20_Keria_Signify_Credential_Issuance.ipynb#Step-6:-Holder-Admits-Credential)
-        1. [Step 8: Issuer Receives Admit Notification](102_20_Keria_Signify_Credential_Issuance.ipynb#Step-8:-Issuer-Receives-Admit-Notification)
+1. [Signify-ts: ACDC Credential Issuance with IPEX](102_20_KERIA_Signify_Credential_Issuance.ipynb#Signify-ts:-ACDC-Credential-Issuance-with-IPEX)
+    1. [Prerequisites: Client and AID Setup](102_20_KERIA_Signify_Credential_Issuance.ipynb#Prerequisites:-Client-and-AID-Setup)
+    1. [Credential Issuance Workflow Steps](102_20_KERIA_Signify_Credential_Issuance.ipynb#Credential-Issuance-Workflow-Steps)
+        1. [Step 1: Create Issuer's Credential Registry](102_20_KERIA_Signify_Credential_Issuance.ipynb#Step-1:-Create-Issuers-Credential-Registry)
+        1. [Step 2: Retrieve Schema Definition](102_20_KERIA_Signify_Credential_Issuance.ipynb#Step-2:-Retrieve-Schema-Definition)
+        1. [Step 3: Issue the ACDC](102_20_KERIA_Signify_Credential_Issuance.ipynb#Step-3:-Issue-the-ACDC)
+        1. [Step 4: Issuer Grants Credential via IPEX](102_20_KERIA_Signify_Credential_Issuance.ipynb#Step-4:-Issuer-Grants-Credential-via-IPEX)
+        1. [Step 5: Holder Receives IPEX Grant Notification](102_20_KERIA_Signify_Credential_Issuance.ipynb#Step-5:-Holder-Receives-IPEX-Grant-Notification)
+        1. [Step 6: Holder Admits Credential](102_20_KERIA_Signify_Credential_Issuance.ipynb#Step-6:-Holder-Admits-Credential)
+        1. [Step 8: Issuer Receives Admit Notification](102_20_KERIA_Signify_Credential_Issuance.ipynb#Step-8:-Issuer-Receives-Admit-Notification)
 1. [Signify-ts: ACDC Presentation and Revocation with IPEX](102_25_Keria_Signify_Credential_Presentation_and_Revocation.ipynb#Signify-ts:-ACDC-Presentation-and-Revocation-with-IPEX)
     1. [Prerequisites: Client and Credential Setup](102_25_Keria_Signify_Credential_Presentation_and_Revocation.ipynb#Prerequisites:-Client-and-Credential-Setup)
     1. [Credential Presentation Workflow (IPEX)](102_25_Keria_Signify_Credential_Presentation_and_Revocation.ipynb#Credential-Presentation-Workflow-IPEX)
@@ -181,8 +186,7 @@
         1. [Step 5: Verifier Receives Offer](102_25_Keria_Signify_Credential_Presentation_and_Revocation.ipynb#Step-5:-Verifier-Receives-Offer)
         1. [Step 6: Verifier Agrees and Validates](102_25_Keria_Signify_Credential_Presentation_and_Revocation.ipynb#Step-6:-Verifier-Agrees-and-Validates)
     1. [Credential Revocation by Issuer](102_25_Keria_Signify_Credential_Presentation_and_Revocation.ipynb#Credential-Revocation-by-Issuer)
-
-## vLEI Training - 103
+## vLEI 103
 1. [Advanced ACDC Features: Edges, Edge Operators, and Rules](103_75_ACDC_Edges_and_Rules.ipynb#Advanced-ACDC-Features:-Edges-Edge-Operators-and-Rules)
     1. [Understanding Edges and Rules](103_75_ACDC_Edges_and_Rules.ipynb#Understanding-Edges-and-Rules)
     1. [I2I Operator: Issuer-To-Issuee](103_75_ACDC_Edges_and_Rules.ipynb#I2I-Operator:-Issuer-To-Issuee)
@@ -195,12 +199,12 @@
         1. [DI2I Scenario Example](103_75_ACDC_Edges_and_Rules.ipynb#DI2I-Scenario-Example)
         1. [Use Cases for DI2I](103_75_ACDC_Edges_and_Rules.ipynb#Use-Cases-for-DI2I)
 
-
+[Next (Welcome) ->](101_05_Welcome_to_vLEI_Training_-_101.ipynb)
 
 <!-- Source: 101_05_Welcome_to_vLEI_Training_-_101.md -->
 # Welcome to vLEI Training - 101
 
-This collection of Notebooks is designed to guide you through the foundational concepts of the Key Event Receipt Infrastructure (KERI) and Authentic Chained Data Containers (ACDC) protocols, followed by the workings of the verifiable Legal Entity Identifier (vLEI) ecosystem. We aim to equip you with the knowledge needed to build applications leveraging this powerful identity technology.
+This collection of Notebooks is designed to guide you through the foundational concepts of the [Key Event Receipt Infrastructure](https://trustoverip.github.io/tswg-keri-specification/) (KERI) and [Authentic Chained Data Containers](https://trustoverip.github.io/tswg-acdc-specification/) (ACDC) protocols, followed by the workings of the [verifiable Legal Entity Identifier](https://www.gleif.org/en/organizational-identity/introducing-the-verifiable-lei-vlei/introducing-the-vlei-ecosystem-governance-framework) (vLEI) ecosystem. We aim to equip you with the knowledge needed to build applications leveraging this powerful identity technology.
 
 After completing this training, you will:
 - Understand the KERI protocol
@@ -229,13 +233,13 @@ The training aims to be accessible, but having background knowledge will certain
 
 This training series utilizes Jupyter Notebooks to provide an interactive and hands-on learning experience. Jupyter Notebooks allow for a mix of explanatory text, and live, executable code cells, creating a dynamic way to understand complex topics like KERI, ACDCs, and the vLEI ecosystem.
 
-### Notebook Philosophy: Stand-Alone and Sequential
+### Notebook Philosophy
 
 Each notebook in this series is designed to be largely **stand-alone for the concepts it introduces**, building upon the knowledge from previous notebooks. While conceptual links are strong, the code examples within a specific notebook are generally self-contained or rely on a clearly defined setup at the beginning of that notebook.
 
 Crucially, **cells within a single notebook are meant to be executed in sequence from top to bottom.** Variables, states, and environments created in earlier cells are often prerequisites for later cells to function correctly. Running cells out of order, or skipping cells, will likely lead to errors or unexpected behavior.
 
-### Navigating Large Notebooks: The Table of Contents
+### Navigating Large Notebooks
 
 For longer notebooks, navigating can be made easier using the **Table of Contents (ToC)** feature. In Jupyter Lab, you can find this in the left sidebar.
 * Look for an icon that resembles a list or a document outline. Clicking this will open a navigable ToC based on the Markdown headings (H1, H2, H3, etc.) in the notebook.
@@ -293,10 +297,10 @@ This can be useful for decluttering the view or before re-running a notebook fro
 
 This material was created and tested to work with:
 
-- **keri:1.2.6**
-- **keria:0.2.0-rc2**
-- **signify-ts:?**
-- **vlei:0.2.0**
+- **[weboftrust/keri:1.2.6](https://github.com/WebOfTrust/keripy/releases/tag/1.2.6)**
+- **[gleif/keria:0.3.0](https://github.com/GLEIF-IT/keria/releases/tag/0.3.0)**
+- **[weboftrust/signify-ts:0.3.0-rc1](https://www.npmjs.com/package/signify-ts)**
+- **[weboftrust/vlei:1.0.0](https://github.com/WebOfTrust/vLEI/releases/tag/1.0.0)**
 
 <div class="alert alert-info">
   <b>🧩 DID YOU KNOW?</b><hr>
@@ -309,10 +313,7 @@ KERI, ACDC, and the vLEI ecosystem offer a strong foundation for secure digital 
 
 
 
-
-```python
-
-```
+[<- Prev (TOC)](000_Table_of_Contents.ipynb) | [Next (Intro) ->](101_07_Introduction_to-KERI_ACDC_and_vLEI.ipynb)
 
 <!-- Source: 101_07_Introduction_to-KERI_ACDC_and_vLEI.md -->
 # Foundations: KERI, ACDC, and the vLEI Ecosystem
@@ -329,14 +330,15 @@ Consider this a starting point; we'll dive into the details, practical examples,
 
 ## The KERI Protocol
 
-**KERI** stands for **Key Event Receipt Infrastructure**. It's a decentralized key management infrastructure (DKMI) that aims to provide a secure and decentralized identity layer for the internet, focusing on establishing trust through cryptographic proof rather than relying solely on centralized authorities.
+**KERI** stands for **Key Event Receipt Infrastructure**, invented by [Dr. Samuel Smith](https://keri.one/131-2/). It's a decentralized key management infrastructure (DKMI) that aims to provide a secure and decentralized identity layer for the internet, focusing on establishing trust through cryptographic proof rather than relying solely on centralized authorities. It is a "never trust, always verify" security model with no share secrets, meaning no shared passwords, keys, or other types of cryptographic secrets. This means that KERI is a signed-everything model, meaning every communication between components is signed so that trust in each transmission can be verified by verifying its signature or by verifying the anchoring of data to a key event log (KEL).
 
 Core Ideas:
 
-* **Autonomic Identifiers (AIDs):** KERI's foundation is built on self-certifying identifiers called AIDs. These identifiers are generated from and cryptographically bound to key pairs controlled by an entity, eliminating the need for a central registration authority for the identifier itself.
-* **Key Event Logs (KELs):** Each AID has an associated KEL, which is a secure, append-only log of signed "key events" (like identifier creation, key rotation, etc.). This log provides a verifiable history, or provenance, of the control over the AID. Anyone can verify the current authoritative keys for an AID by processing its KEL.
-* **End-Verifiability:** KERI emphasizes that control and events can be verified by anyone, anywhere, using only the KEL, without trusting intermediaries.
-* **Witnesses:** For high availability and resilience, controllers can designate witnesses who receive, verify, and store key events, making the KEL accessible even when the controller is offline.
+* **Self Addressing Identifiers (SAIDs):** [Self addressing identifiers](https://trustoverip.github.io/tswg-keri-specification/#term:said) are a special type of content-addressable identifier where the identifier is based on and embedded within the data it refers to, making it self referential. The embedding happens after computing the digest in a two step digest and embedding process. See the [spec reference](https://trustoverip.github.io/tswg-said-specification/draft-ssmith-said.html).
+* **Autonomic Identifiers (AIDs):** KERI's foundation is built on [self-certifying identifiers](https://trustoverip.github.io/tswg-keri-specification/#self-certifying-identifier-scid) called AIDs. These identifiers are generated from and cryptographically bound to key pairs controlled by an entity, eliminating the need for a central registration authority for the identifier itself. An AID is a SAID derived from the first event (inception event) in a key event log (KEL).
+* **Key Event Logs (KELs):** Each AID has an associated KEL, which is a secure, append-only log of signed "key events" (like identifier creation, key rotation, etc.). This log provides a verifiable key history, or provenance, of the control over the AID. Anyone can verify the current authoritative keys for an AID by processing its KEL.
+* **End-Verifiability:** KERI emphasizes that identifier control and key events can be verified by anyone, anywhere, using only the KEL, without trusting intermediaries.
+* **Witnesses:** For high availability and resilience, the person controlling of keys for an AID (controller) can designate witnesses who receive, verify, and store key events. This both allows the controller to set security thresholds for event signing and also makes the KEL accessible when the controller is offline.
 * **And more:** KERI has many other advanced features, but we'll focus on the fundamentals in this introduction.
 
 ## The ACDC Protocol
@@ -350,7 +352,7 @@ Core Ideas:
 * **Schemas & SAIDs:** Each ACDC conforms to a specific Schema, which defines its structure and data types. Both the schema and the ACDC instance itself are identified using SAIDs (Self-Addressing Identifiers), making them tamper-evident.
 * **Chaining (Edges):** ACDCs can be cryptographically linked together using "edges," forming verifiable chains or graphs of evidence (e.g., an approval credential linking back to the request credential).
 * **Rules:** ACDCs can optionally include embedded machine-readable rules or legal prose (like Ricardian Contracts).
-* **IPEX (Issuance and Presentation Exchange):** to define uniform mechanisms for how ACDCs are issued between parties and how they are presented for verification in a securely attributable way.
+* **IPEX (Issuance and Presentation Exchange):** a [credential exchange protocol](https://trustoverip.github.io/tswg-acdc-specification/#issuance-and-presentation-exchange-ipex) defining a mechanism and workflow for how ACDCs are issued between parties and how they are presented for verification in a securely attributable way. This protocol also defines a workflow for [graduated disclosure](https://trustoverip.github.io/tswg-acdc-specification/#graduated-disclosure), a variant of selective disclosure that allows for progressive, selective unblinding of claims or attributes after an agreement has been negotiated between the discloser (holder) and the receiver (disclosee) of an ACDC.
 
 ## The GLEIF vLEI Ecosystem
 
@@ -358,16 +360,18 @@ The **verifiable Legal Entity Identifier (vLEI)** is a system pioneered by the G
 
 **Core Ideas:**
 
-* **Digital Counterpart to LEI:** The vLEI acts as a digitally trustworthy representation of an organization's LEI code, enabling automated verification.
+* **Digital Counterpart to LEI:** The vLEI acts as a digitally verifiable representation of an organization's LEI code, enabling automated, machine-readable verification.
 * **Built on KERI/ACDC:** The vLEI infrastructure is built using the KERI protocol and represents vLEI credentials as ACDCs. This leverages KERI's security and ACDC's verifiable credential format.
 * **Trust Chain / Ecosystem:** The vLEI system establishes a chain of trust:
-    * **GLEIF (Root of Trust):** GLEIF operates as the root of the ecosystem; its AID and KEL serve as the ultimate anchor for verifying the authority of QVIs.
-    * **Qualified vLEI Issuers (QVIs):** GLEIF uses its KERI identity to issue credentials (delegate authority) to a trusted network of QVIs.
-    * **Organizations:** QVIs are qualified to issue vLEI credentials (representing the organization's identity) to legal entities.
-    * **Organizational Roles:** An organization holding a vLEI can then issue specific **vLEI Role Credentials** to individuals representing the organization in official or functional capacities (e.g., CEO, authorized signatory, supplier). These role credentials cryptographically bind the person's identity in that role to the organization's vLEI.
+    * **GLEIF (Root of Trust):** GLEIF operates as the root of the ecosystem; its AID and KEL serve as the ultimate anchor for verifying the authority of QVIs. The root of trust uses **identifier delegation** to establish an authorization chain from the Root of Trust to the QVI through delegation chained KELs.
+    * **Qualified vLEI Issuers (QVIs):** GLEIF uses its KERI identity to issue QVI credentials to a trusted network of QVIs. This means that both identifier delegation and credential issuance are used to delegate authority from GLEIF to QVIs for the purpose of allowing QVIs to issue vLEI credentials.
+    * **Organizations:** QVIs are qualified to issue vLEI credentials, which represent the organization's identity, to legal entities.
+    * **Organizational Role:** An organization holding a vLEI can then issue specific **vLEI Role Credentials** to individuals representing the organization in official or functional capacities (e.g., CEO, authorized signatory, supplier). These role credentials cryptographically bind the person's identity in that role to the organization's vLEI.
+        * **Official Organizational Role (OOR) Credential:** A person representing a legal entity may be issued an OOR credential that indicates their official role in an organization. The rules for OOR credential issuance must follow the ISO 5009 Official Organization Role standard for official role names.
+        * **Engagement Context Role (ECR) Credential:** An ECR credential indicates a person performs a given role for a company-defined context. It is a more permissive credential type where the name of the role is legal-entity specific.
 * **QVI Workflow:** The workflow centrally involves the QVIs. GLEIF qualifies these issuers. A QVI interacts with an organization to verify its identity information (linked to its traditional LEI) and then uses its verifiable delegated authority from GLEIF to issue the organization its primary vLEI credential. This QVI issuance step is crucial for establishing the organization's verifiable digital identity within the ecosystem.
 
-The vLEI ecosystem uses KERI and ACDC to extend the existing LEI system into the digital realm, creating a globally verifiable system for organizational identity and the roles individuals hold within those organizations, all anchored back to GLEIF as the root of trust.
+The vLEI ecosystem uses KERI and ACDC to extend the existing LEI system into the digital realm, creating a globally verifiable system for organizational identity that incorporates the roles individuals hold within an organization organizations, all anchored back to GLEIF as the root of trust.
 
 <div class="alert alert-prymary">
   <b>📝 SUMMARY</b><hr>
@@ -378,6 +382,8 @@ KERI provides the secure identifier layer, ACDC provides the credential format o
 
 
 
+
+[<- Prev (Welcome)](101_05_Welcome_to_vLEI_Training_-_101.ipynb) | [Next (KERI Command Line Interface - KLI) ->](101_10_KERI_Command_Line_Interface.ipynb)
 
 <!-- Source: 101_10_KERI_Command_Line_Interface.md -->
 # Understanding the KERI Command Line Interface (KLI)
@@ -399,10 +405,11 @@ Since you are working within Jupyter notebooks, the KLI commands are written wit
 
 The KLI provides a wide range of functionalities. Key capabilities include:
 - **Identifier management**: Management and creation of keystores and identifiers
-- **Utility functions**: Functions to facilitate KERI-related operations
+- **Utility functions**: Functions to facilitate KERI-related operations for debugging and troubleshooting.
 - **Credential management**: Creation of credentials
 - **Comunication operations**: Establishing connections between AIDs
 - **IPEX actions**: To issue and present credentials
+- **Run witness**: Start a witness process in order to receipt key events
 - **Others**: The KLI provides commands for most of the features available in the KERI and ACDC protocol implementations.
 
 
@@ -425,10 +432,12 @@ This isn't a complete list of every command, but it covers some essential utilit
 !kli version
 ```
 
-    Library version: 1.2.6
+    Library version: 1.2.8
 
 
-**Generate a salt**: Create a new random salt (or seed). A salt is a random value used as an input when generating cryptographic key pairs to help ensure their uniqueness and security.
+**Generate a salt**: Create a new random salt (or seed) in the fully-qualified [CESR](https://trustoverip.github.io/tswg-cesr-specification/) format. A salt is a random value used as an input when generating cryptographic key pairs to help ensure their uniqueness and security.
+
+What it means to be fully qualified is that the bytes in the cryptographic salt are ordered according to the CESR protocol. This ordering will be explained in a later training when CESR is introduced and explained. For now just think of CESR as a custom file format for KERI and ACDC data.
 
 
 ```python
@@ -436,7 +445,7 @@ This isn't a complete list of every command, but it covers some essential utilit
 !kli salt
 ```
 
-    0ACKVwq9kPVbl421sH50Iwub
+    0ADPWf4yE8GQe6VJXKBvU57U
 
 
 **Generate a passcode**: The passcode is used to encrypt your keystore, providing an additional layer of protection.
@@ -447,17 +456,17 @@ This isn't a complete list of every command, but it covers some essential utilit
 !kli passcode generate
 ```
 
-    MuKgq7Ej6m8JbuWvTCb43
+    hL4AW1HdHuDczLYPJLAz7
 
 
-**Print a timestamp**
+**Print a timestamp**: Timestamps are typically used in operations involving multiple signers with what are called multi-signature (or "multisig") groups.
 
 
 ```python
 !kli time
 ```
 
-    2025-05-30T22:26:46.188402+00:00
+    2025-06-04T15:01:22.020361+00:00
 
 
 **Display help menu**
@@ -519,6 +528,10 @@ This isn't a complete list of every command, but it covers some essential utilit
         witness
 
 
+Additional commands will be introduced as they are used in upcoming trainings.
+
+[<- Prev (Intro)](101_07_Introduction_to-KERI_ACDC_and_vLEI.ipynb) | [Next (Controllers and Identifiers) ->](101_15_Controllers_and_Identifiers.ipynb)
+
 <!-- Source: 101_15_Controllers_and_Identifiers.md -->
 # KERI Core: Controllers, Identifiers, and Key Event Logs
 
@@ -533,70 +546,94 @@ Before we dive into creating identifiers and doing operations with the KLI, let'
 
 Identifiers are a generic term; they exist in many forms, but here we are concerned with digital identifiers. In a general sense, an identifier is a name, label, or sequence of characters used to uniquely identify something within a given context. Identifiers are useful to assign claims to something or to locate a resource. Common examples of identifiers are domain names, an email, an ID Number, and so on. 
 
-KERI identifiers are called **Autonomic Identifiers (AIDs)**. They have properties that give them additional capabilities compared to traditional digital identifiers. Here's what makes them different:
-- **Provide asymmetric key features:** Beyond being an identifier, AIDs provide signing and verification capabilities via public key
-- **Cryptographically Bound Control:** AIDs are linked to one or more cryptographic key pairs (public/private) from their moment of creation; this binding forms the basis of their security and allows the holder of the private key(s) to control the identifier and prove that control through digital signatures.
-- **Universally Unique:** Like standard UUIDs, AIDs are designed to be globally unique without needing a central issuing authority, thanks to their cryptographic foundation.  
-- **Self-Managed:** Unlike traditional identifiers (like usernames or domain names) that rely on central administrators or registries, an AID is managed directly by its owner(s) — known as the Controller — through cryptographic means (specifically, their private keys). 
-- **Self-Certifying:** An AID inherently proves its own authenticity. Its validity stems directly from its cryptographic link to its controlling keys, established at its creation, not from an external authority vouching for it.
-- **Control Over Time:** AIDs are designed for persistent control. The identifier's control history and current authoritative keys are maintained in a verifiable **key event log (KEL)**, allowing anyone to determine the current authoritative keys and verify the control history. This enables keys to be rotated (changed) securely over time without abandoning the identifier itself, even if old keys are compromised.
-- **Authenticates & Authorizes:** The cryptographic nature of an AID allows its Controller to prove their control (authenticate) directly and grant permissions (authorize actions or access related to the AID) without needing a third-party system.
-- **Multi-Signature Control (Multisig):** An AID doesn't have to be controlled by just one Controller. KERI supports configurations where multiple key pairs (held by one or multiple Controllers) are required to authorize actions. This can involve needing a specific number of signatures (e.g., 3 out of 5) or advanced weighted threshold multi-signature schemes.   
-- **Secure Key Rotation (Pre-rotation):** When control keys need to be changed (rotated), KERI uses a highly secure "pre-rotation" method. In a rotation event, a secure commitment is made to the next set of keys (hiding the actual public keys using a hash). This means the private keys for the next rotation remain unexposed and secure until they are actually needed, protecting the rotation process itself from being hijacked.   
-- **Delegation of Authority:** A Controller of one AID can securely grant specific, often limited or revokable, authority to another AID (a delegate).
+KERI identifiers are called **Autonomic Identifiers (AIDs)**. They have properties that give them additional capabilities compared to traditional digital identifiers. Their most important attribute is to maintain a stable identifier over time while their controlling keys may be rotated to keep the identifier secure.
 
-Don't worry if these features raise many questions right now. We will explain the 'how' behind them gradually in the sections to come.
+There are many different properties of AIDs:
+- **Universally Unique:** Like standard UUIDs, AIDs are designed to be globally unique without needing a central issuing authority, thanks to their cryptographic foundation.  
+- **Provide asymmetric cryptography features:** Beyond being an identifier, AIDs provide signing and verification capabilities due to being build on public and private key pairs.
+- **Cryptographically Bound Control:** AIDs are bound to a set of cryptographic key pairs at time of creation, called the **inception event**, and later key pairs from a **rotation event**; this binding forms the basis of their security and allows the holder of the private key(s) to control the identifier and prove that control through digital signatures and a key event log (KEL).
+- - **Control Over Time:** AIDs are designed for persistent control. The identifier's control history and current authoritative keys are maintained in a verifiable **key event log (KEL)**, allowing anyone to determine the current authoritative keys and verify the control history. This enables keys to be rotated (changed) securely over time without abandoning the identifier itself, even if old keys are compromised.
+- **Self-Managed:** Unlike traditional identifiers (like usernames or domain names) that rely on central administrators or registries, an AID is managed directly by its owner(s) — known as the Controller — through cryptographic means (specifically, their private keys). This makes AIDs maximally decentralized, durectly controlled by end-users. 
+- **Self-Certifying:** An AID inherently proves its own authenticity. Its validity stems directly from its cryptographic link to its controlling keys, established at its creation, not from an external authority vouching for it.
+- **Authenticates & Authorizes:** The cryptographic nature of an AID allows its Controller to directly prove their control (authenticate) and grant permissions (authorize actions or access related to the AID) without needing a third-party identity system.
+- **Multi-Signature Control (Multisig):** An AID does not have to be controlled by only one Controller. KERI supports configurations requiring multiple identifiers, using key pairs held by one or more Controllers, to cooperatively authorize actions. This can involve needing a specific number of signatures (e.g., 3 out of 5) or advanced weighted threshold multi-signature schemes.   
+- **Secure Key Rotation (Pre-rotation):** When keys controlling an AID need to be changed (rotated), KERI uses a highly secure [pre-rotation](https://trustoverip.github.io/tswg-keri-specification/#key-rotationpre-rotation) method. In each rotation event, a secure commitment is made to the next set of rotation keys that hides the actual next public keys by using a digest of each next key. This means the private keys for the next rotation remain unexposed and secure until they are actually needed, protecting the rotation process itself from attack.   
+- **Identifier Delegation:** A Controller of one AID can securely grant specific, often limited or revokable, authority as a delegator to another AID, the delegate. This is an important capability for scaling signing operations by using many delegated identifiers in parallel.
+
+Don't worry if these features raise many questions right now. We will explain the "how" behind them gradually in the sections to come.
 
 ## The Controller Role
 
 In KERI, the Controller is the entity that holds the private cryptographic key(s) associated with an Autonomic Identifier and is therefore responsible for managing it. This possession of the private key(s) is the source of its authority and control over the AID.  
 
-So, a Controller is an entity managing their identifiers. Some scenarios can be:
-- An individual managing their own digital identity
-- An organization managing its official identifier.
-- An autonomous piece of software or device managing its own identifier.
-- An autonomous piece of software acting on behalf of someone else.   
-- A group managing a shared identifier via multi-signature schemes.
+So, a Controller is an entity managing their identifiers and the key pairs for those identifiers. Some controller scenarios include:
+- Personal identity - An individual managing their own digital identity.
+- Organizational identity - An organization managing its official identifier.
+- Agentic identity - An autonomous piece of software or device managing its own identifier.
+- Delegated agentic identity - An autonomous piece of software acting on behalf of a person or organization.   
+- Multisignature identity - A group managing a shared identifier via multi-signature schemes. Participants could be people, organizations, or AI agents.
 
-There may be other scenarios that define the Controller; the relevant aspect is that it is an entity with access to the AID private keys and can use them.
+The most important aspect is an entity has direct access to the private keys the AID is derived from.
 
-While the Controller holds authority over the AID, it relies on software to operate and maintain it. In this training, you’ll be using the KLI as the Controller’s tool for interacting with and managing AIDs.
+While the Controller holds authority over the AID it relies on software to operate and maintain it. In this training, you will first be using the KLI as the Controller’s tool for interacting with and managing AIDs. Later trainings will include using the Signify and KERIA tooling to interact with AIDs.
 
-## Key Event Logs (KELs)
+## Key Event Logs (KELs) - Never Trust, Always Veify
 
-The Controller's authority isn't just a claim; it's proven using cryptography. Controllers possess the private keys associated with their AID. They use these keys to sign messages and authorize actions. Every significant action taken by a Controller regarding their AID – like creating it (inception), changing its keys (rotation), or other interactions – is recorded as a **Key Event**.
+The Controller's authority more than a trusted assertion, it is proven using cryptography through a verification process. Remember, KERI is a "never trust, always verify" protocol. No matter what statements a Controller makes they cannot be relied upon unless they can be cryptographically verified. KERI is a "signed everything" architecture with no shared secrets. This means no bearer tokens like JWT and OAuth have. Instead KERI uses cryptographic signature to create trust.
 
-These Key Events are stored sequentially in a **Key Event Log (KEL)**. Think of the KEL as the official history book for an AID. Here are some details about the KEL
+The basis of this trust comes from Controllers signing statements with their private key pairs. This means Controllers possess the private keys associated with their AID. They use these keys to sign messages and authorize actions. 
+
+The association between key pairs and an AID is initially formed by what is called the **inception event**, the first event in a **Key Event Log (KEL)**. Every significant action taken by a Controller regarding their AID, like creating the identifier (inception), changing its keys (rotation), or other interactions, is recorded as a **Key Event** in the KEL.
+
+These Key Events are stored sequentially in a **Key Event Log (KEL)**. Think of the KEL as the official history book for an AID. Like a blockchain, a KEL is a hash chained data structure.
+
+### Key Event Log diagram
+```mermaid
+graph RL
+    %% Define event nodes
+    ICP["Inception 🔑"]
+    ROT1["Rotation 1 🔑"]
+    ROT2["Rotation 2 🔑"]
+    IXN1["Interaction 1 ⚓"]
+
+    %% Define backward chaining
+    ROT1 -->  ICP
+    ROT2 --> ROT1
+    IXN1 --> ROT2
+
+    %% Optional node styling for UML appearance
+    classDef eventBox fill:#f5f5f5,stroke:#000,stroke-width:1px,rx:5px,ry:5px,font-size:14px;
+    class ICP,ROT1,ROT2,IXN1, eventBox;
+```
+
+Here are some details about the KEL
 
 * It starts with the AID's "birth certificate" – the **Inception Event**.
-* Every subsequent authorized change (like a key rotation) is added as a new entry, cryptographically linked to the previous one.
+* Every subsequent authorized change (like a key rotation) is added as a new entry, cryptographically linked to the previous one. Each new event is signed by the keys referred to in the last rotation event, or from the inception event if no rotations have occurred yet.
 * Anyone can potentially view the KEL to verify the AID's history and current state, but only the Controller(s) can add new, valid events to it.
 * There may be multiple copies of a KEL; they can be distributed across a network of witnesses, a concept we will dive deeper into later.
 
 ## Advanced Control Mechanisms
 
-Control in KERI can be quite nuanced. While the Controller ultimately holds authority, they can sometimes grant specific permissions to others:
+Control in KERI can be quite nuanced including single signature, multiple signature (multisig), and delegation in any given AID. While the Controller ultimately holds authority, they can sometimes grant specific permissions to others through delegation. Furthermore, the Controller responsibility may be shared across multiple controlling parties in a multisig AID.
 
 * **Signing vs. Rotation Authority**: A Controller might keep the power to change the AID's keys (rotation authority) but allow another entity (a "custodian") to perform more routine actions like signing messages (signing authority).
-* **Delegation**: A Controller can grant some level of authority to a completely separate Delegated Identifier. This allows for creating hierarchies and complex organizational structures.
+* **Delegation**: A Controller can grant some level of authority to a completely separate Delegated Identifier. This allows for creating scalable signing infrastructure with delegation hierarchies that can model complex organizational or authority structures.
 
-We'll explore these advanced concepts like delegation and multi-sig configurations in later sections.
+We'll explore these advanced concepts like delegation and multisig configurations in later sections.
 
 <div class="alert alert-prymary">
   <b>📝 SUMMARY</b><hr>
 <p>Fundamental KERI concepts:</p>
 <ul>
     <li><strong>Autonomic Identifiers (AIDs):</strong> These are KERI's unique, self-managing digital identifiers. Unlike traditional IDs, they are cryptographically bound to key pairs from creation, are self-certifying (requiring no central authority), and support features like secure key rotation (pre-rotation), multi-signature control, and delegation.</li>
-    <li><strong>Controller:</strong> The entity (person, organization, software) holding the private key(s) for an AID, giving it the authority to manage the identifier and authorize actions.</li>
-    <li><strong>Key Event Log (KEL):</strong> The secure, append-only, verifiable history for an AID. It records all significant actions (like creation and key rotations) signed by the Controller, allowing anyone to track the identifier's control provenance.</li>
+    <li><strong>Controller:</strong> The entity (person, organization, software), or entities in the case of multisig, holding the private key(s) for an AID, giving it the authority to manage the identifier and authorize actions.</li>
+    <li><strong>Key Event Log (KEL):</strong> The secure, append-only, hash chained data structure serving as a verifiable key history for an AID. It records all significant actions (like creation and key rotations) signed by the Controller, allowing anyone to track the identifier's control provenance. A KEL may also store interaction events for anchoring arbitrary data to a KEL, sort of like anchoring data to a blockchain. We will explore this deeply in a future lesson.</li>
 </ul>
 <p>In essence, Controllers use their private keys to manage AIDs, and all authoritative actions are recorded in the KEL.</p>
 </div>
 
-
-```python
-
-```
+[<- Prev (Controllers and Identifiers)](101_10_KERI_Command_Line_Interface.ipynb) | [Next (Working with Keystores and AIDs with the KLI) ->](101_20_Working_with_Keystores_and_AIDs_via_KLI.ipynb)
 
 <!-- Source: 101_20_Working_with_Keystores_and_AIDs_via_KLI.md -->
 # KLI Operations: Managing Keystores and Identifiers
@@ -628,7 +665,7 @@ clear_keri()
 ```
 
     Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
-    ✅ Successfully removed: /usr/local/var/keri/
+    ⚠️ Path not found: /usr/local/var/keri/. Nothing to remove.
 
 
 
@@ -648,7 +685,7 @@ keystore_salt="0ABeuT2dErMrqFE5Dmrnc2Bq"
     KERI Keystore created at: /usr/local/var/keri/ks/my-first-key-store
     KERI Database created at: /usr/local/var/keri/db/my-first-key-store
     KERI Credential Store created at: /usr/local/var/keri/reg/my-first-key-store
-    	aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
+      aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
 
 
 The command sets up the necessary file structures for your keystore, so once executed, it's ready for you to create and manage Identifiers within it.
@@ -691,7 +728,7 @@ aid_alias = "my-first-aid"
 ```
 
     Prefix  BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC
-    	Public key 1:  BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC
+      Public key 1:  BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC
     
 
 
@@ -741,7 +778,7 @@ You can check the status of the identifier you just created using `kli status` a
     Threshold:	0
     
     Public Keys:	
-    	1. BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC
+      1. BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC
     
 
 
@@ -766,7 +803,7 @@ You can use `kli status` with the `--verbose` parameter to show the key event lo
     Threshold:	0
     
     Public Keys:	
-    	1. BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC
+      1. BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC
     
     
     Witnesses:	
@@ -820,7 +857,7 @@ You can also list all the identifiers managed within this keystore. To illustrat
 ```
 
     Prefix  BBuVNJvbJD2WNduQ0JUGRVGb6uKYrF5bO5T4gdGt_ezO
-    	Public key 1:  BBuVNJvbJD2WNduQ0JUGRVGb6uKYrF5bO5T4gdGt_ezO
+      Public key 1:  BBuVNJvbJD2WNduQ0JUGRVGb6uKYrF5bO5T4gdGt_ezO
     
 
 
@@ -953,11 +990,11 @@ aid_alias = "aid-signature"
     KERI Keystore created at: /usr/local/var/keri/ks/signature-keystore
     KERI Database created at: /usr/local/var/keri/db/signature-keystore
     KERI Credential Store created at: /usr/local/var/keri/reg/signature-keystore
-    	aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
+      aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
 
 
     Prefix  BCtRkWLNdWNRvB8L5gYMaLkanJQWi8wGbmmAtEw9XSWw
-    	Public key 1:  BCtRkWLNdWNRvB8L5gYMaLkanJQWi8wGbmmAtEw9XSWw
+      Public key 1:  BCtRkWLNdWNRvB8L5gYMaLkanJQWi8wGbmmAtEw9XSWw
     
 
 
@@ -1100,11 +1137,11 @@ aid_alias_non_transferable = "aid-non-transferable"
     KERI Keystore created at: /usr/local/var/keri/ks/rotation-keystore
     KERI Database created at: /usr/local/var/keri/db/rotation-keystore
     KERI Credential Store created at: /usr/local/var/keri/reg/rotation-keystore
-    	aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
+      aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
 
 
     Prefix  BEG5uWt6xB94bIkdGUCjYcBf_ryDgPa7t1GUtVc7lerw
-    	Public key 1:  BEG5uWt6xB94bIkdGUCjYcBf_ryDgPa7t1GUtVc7lerw
+      Public key 1:  BEG5uWt6xB94bIkdGUCjYcBf_ryDgPa7t1GUtVc7lerw
     
 
 
@@ -1156,7 +1193,7 @@ The difference lies in the parameters set during the AID's inception event. Let'
     Threshold:	0
     
     Public Keys:	
-    	1. BEG5uWt6xB94bIkdGUCjYcBf_ryDgPa7t1GUtVc7lerw
+      1. BEG5uWt6xB94bIkdGUCjYcBf_ryDgPa7t1GUtVc7lerw
     
     
     Witnesses:	
@@ -1215,7 +1252,7 @@ aid_alias_transferable = "aid-transferable"
 ```
 
     Prefix  EAv3ajpSbn807a-HSPuDZm0PFzr6jn58m306dibjrxwM
-    	Public key 1:  DOdymqdtGJzeoRRSL9C8Suni6ebPaSqQfuEUM_JFkPQx
+      Public key 1:  DOdymqdtGJzeoRRSL9C8Suni6ebPaSqQfuEUM_JFkPQx
     
 
 
@@ -1239,7 +1276,7 @@ Now, check its status and inception event:
     Threshold:	0
     
     Public Keys:	
-    	1. DOdymqdtGJzeoRRSL9C8Suni6ebPaSqQfuEUM_JFkPQx
+      1. DOdymqdtGJzeoRRSL9C8Suni6ebPaSqQfuEUM_JFkPQx
     
     
     Witnesses:	
@@ -1284,7 +1321,7 @@ With the commitment to the next keys in place, we can now successfully rotate th
 
     Prefix  EAv3ajpSbn807a-HSPuDZm0PFzr6jn58m306dibjrxwM
     New Sequence No.  1
-    	Public key 1:  DOkM4enfZoc7w8oVdkXzRaVoCdz8f9aAm2u4kA5CHNcQ
+      Public key 1:  DOkM4enfZoc7w8oVdkXzRaVoCdz8f9aAm2u4kA5CHNcQ
 
 
 ### Examining the Rotation (rot) Event
@@ -1309,7 +1346,7 @@ The kli rotate command performed the key rotation by creating and signing a new 
     Threshold:	0
     
     Public Keys:	
-    	1. DOkM4enfZoc7w8oVdkXzRaVoCdz8f9aAm2u4kA5CHNcQ
+      1. DOkM4enfZoc7w8oVdkXzRaVoCdz8f9aAm2u4kA5CHNcQ
     
     
     Witnesses:	
@@ -1495,7 +1532,7 @@ To verify the witness network is working, let's query the KEL of one of them usi
 !curl -s http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
 ```
 
-    {"v":"KERI10JSON0000fd_","t":"icp","d":"EIkO4CUmYXukX4auGU9yaFoQaIicfVZkazQ0A3IO5biT","i":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","s":"0","kt":"1","k":["BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"],"nt":"0","n":[],"bt":"0","b":[],"c":[],"a":[]}-VAn-AABAAAMlb78gUo1_gPDwxbXyERk2sW8B0mtiNuACutAygnY78PHYUjbPj1fSY1jyid8fl4-TXgLXPnDmeoUs1UO-H0A-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-05-30T15c45c45d961043p00c00{"v":"KERI10JSON0000fd_","t":"rpy","d":"EHkrUtl8Nt7nZjJ8mApuG80us9E_td3oa4V-oW2clB2K","dt":"2024-12-31T14:06:30.123456+00:00","r":"/loc/scheme","a":{"eid":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","scheme":"http","url":"http://witness-demo:5642/"}}-VAi-CABBBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha0BDkVOk5p25Rhim3LkhYXmDNNiUcZkgCp_BWvEB45q6f_pKJBYYlpUABpci5DMzBNXlz4RvK8ImKVc_cH-0D8Q8D{"v":"KERI10JSON0000fb_","t":"rpy","d":"EDSjg0HilC3L4I_eI53C3_6lW9I6pPbR4SWGgoOmDhMb","dt":"2024-12-31T14:06:30.123456+00:00","r":"/loc/scheme","a":{"eid":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","scheme":"tcp","url":"tcp://witness-demo:5632/"}}-VAi-CABBBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha0BDLG3-HNp-kclaNamqIRI46rNcAhpIEQBDON2HO28r9zO-6S53_w7AA_Q4Weg4eAjvTGiXiNExhO86elrIEd74F{"v":"KERI10JSON000116_","t":"rpy","d":"EBBDzl8D5gFgFkVXaB-XNQlCem-4y5JywPcueWAMRfCp","dt":"2024-12-31T14:06:30.123456+00:00","r":"/end/role/add","a":{"cid":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","role":"controller","eid":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"}}-VAi-CABBBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha0BDt7alD1tA9x_9vVMKxY1Ne113qJ-xDdCyThnAh6_c13Rsrb9WW5HlKyQxyW5DVXWJjQ65yzME5kCLBiJWYBKEL
+    {"v":"KERI10JSON0000fd_","t":"icp","d":"EIkO4CUmYXukX4auGU9yaFoQaIicfVZkazQ0A3IO5biT","i":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","s":"0","kt":"1","k":["BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"],"nt":"0","n":[],"bt":"0","b":[],"c":[],"a":[]}-VAn-AABAAAMlb78gUo1_gPDwxbXyERk2sW8B0mtiNuACutAygnY78PHYUjbPj1fSY1jyid8fl4-TXgLXPnDmeoUs1UO-H0A-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-06-04T14c28c36d486205p00c00{"v":"KERI10JSON0000fd_","t":"rpy","d":"EHkrUtl8Nt7nZjJ8mApuG80us9E_td3oa4V-oW2clB2K","dt":"2024-12-31T14:06:30.123456+00:00","r":"/loc/scheme","a":{"eid":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","scheme":"http","url":"http://witness-demo:5642/"}}-VAi-CABBBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha0BDkVOk5p25Rhim3LkhYXmDNNiUcZkgCp_BWvEB45q6f_pKJBYYlpUABpci5DMzBNXlz4RvK8ImKVc_cH-0D8Q8D{"v":"KERI10JSON0000fb_","t":"rpy","d":"EDSjg0HilC3L4I_eI53C3_6lW9I6pPbR4SWGgoOmDhMb","dt":"2024-12-31T14:06:30.123456+00:00","r":"/loc/scheme","a":{"eid":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","scheme":"tcp","url":"tcp://witness-demo:5632/"}}-VAi-CABBBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha0BDLG3-HNp-kclaNamqIRI46rNcAhpIEQBDON2HO28r9zO-6S53_w7AA_Q4Weg4eAjvTGiXiNExhO86elrIEd74F{"v":"KERI10JSON000116_","t":"rpy","d":"EBBDzl8D5gFgFkVXaB-XNQlCem-4y5JywPcueWAMRfCp","dt":"2024-12-31T14:06:30.123456+00:00","r":"/end/role/add","a":{"cid":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","role":"controller","eid":"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"}}-VAi-CABBBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha0BDt7alD1tA9x_9vVMKxY1Ne113qJ-xDdCyThnAh6_c13Rsrb9WW5HlKyQxyW5DVXWJjQ65yzME5kCLBiJWYBKEL
 
 The command should have returned a KEL; you should be able to recognize part of it. It starts with `{"v": "KERI10JSON0000fd_", "t": "icp"...`. If so, the witness network is up and running. 
 
@@ -1530,7 +1567,7 @@ salt="0ABeuT2dErMrqFE5Dmrnc2Bq"
     KERI Keystore created at: /usr/local/var/keri/ks/tests-keystore
     KERI Database created at: /usr/local/var/keri/db/tests-keystore
     KERI Credential Store created at: /usr/local/var/keri/reg/tests-keystore
-    	aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
+      aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
     
     Loading 3 OOBIs...
 
@@ -1605,7 +1642,7 @@ aid_alias_transferable = "aid-transferable"
 
 
     Prefix  EJq-DYl9EQVlY1lShETUWLQuDEcVdRkWXfkkGBNDugjZ
-    	Public key 1:  DOdymqdtGJzeoRRSL9C8Suni6ebPaSqQfuEUM_JFkPQx
+      Public key 1:  DOdymqdtGJzeoRRSL9C8Suni6ebPaSqQfuEUM_JFkPQx
     
 
 
@@ -1626,12 +1663,12 @@ Check the status of the AID using `kli status`
     Threshold:	1
     
     Public Keys:	
-    	1. DOdymqdtGJzeoRRSL9C8Suni6ebPaSqQfuEUM_JFkPQx
+      1. DOdymqdtGJzeoRRSL9C8Suni6ebPaSqQfuEUM_JFkPQx
     
     
     Witnesses:	
-    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
-    	2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
+      1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+      2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
     
     {
      "v": "KERI10JSON000188_",
@@ -1709,7 +1746,7 @@ salt_a="0ABeuT2dErMrqFE5Dmrnc2Bq"
     KERI Keystore created at: /usr/local/var/keri/ks/keystore_a
     KERI Database created at: /usr/local/var/keri/db/keystore_a
     KERI Credential Store created at: /usr/local/var/keri/reg/keystore_a
-    	aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
+      aeid: BD-1udeJaXFzKbSUFb6nhmndaLlMj-pdlNvNoN562h3z
     
     Loading 3 OOBIs...
 
@@ -1735,7 +1772,7 @@ salt_b="0ADzG7sbUyw-MYIoUyQe5wxB"
     KERI Keystore created at: /usr/local/var/keri/ks/keystore_b
     KERI Database created at: /usr/local/var/keri/db/keystore_b
     KERI Credential Store created at: /usr/local/var/keri/reg/keystore_b
-    	aeid: BPJYwdaLcdcbB6pTpRal-IhbV_Vb8bD6vq_qiMFojHNG
+      aeid: BPJYwdaLcdcbB6pTpRal-IhbV_Vb8bD6vq_qiMFojHNG
     
     Loading 3 OOBIs...
 
@@ -1763,7 +1800,7 @@ aid_a = "aid_a"
 
 
     Prefix  EML-Hx1ivj6CSkPTM80xCqFmabG9l9ZrVxPe9omW2cWl
-    	Public key 1:  DDiMxDbmRMjC0mDSkzlwEbYveGozxRXXIsFUo3ixQaU4
+      Public key 1:  DDiMxDbmRMjC0mDSkzlwEbYveGozxRXXIsFUo3ixQaU4
     
 
 
@@ -1781,7 +1818,7 @@ aid_b = "aid_b"
 
 
     Prefix  EAJR7SlFds3hQpH8kj8HySFRdhW6DcC7m9KdELNJIUma
-    	Public key 1:  DHEa1ktRvZUjdRitkgJ5u3tNjitiw9Ba0cgz-fMhTS4c
+      Public key 1:  DHEa1ktRvZUjdRitkgJ5u3tNjitiw9Ba0cgz-fMhTS4c
     
 
 
@@ -1931,7 +1968,7 @@ phrase_a = exec("kli challenge generate --out string")
 phrase_b = exec("kli challenge generate --out string")
 ```
 
-    extra oyster august rain camera brother fatal rural license decade near this
+    place wild rabbit avoid angle robust special memory bitter audit cream peace
 
 
 Now, simulate the OOB exchange: `aid_b` sends `phrase_b` to `aid_a`, and `aid_a` sends `phrase_a` to `aid_b`. Each party then uses `kli challenge respond` to sign the phrase they received and `kli challenge verify` to check the response from the other party.
@@ -1948,7 +1985,7 @@ print(phrase_a)
     --recipient {aid_a}
 ```
 
-    material bomb upset laundry forward ability dignity push amount behave cost employ
+    protect alpha sentence corn clump area size inflict height rack lucky flight
 
 
 
@@ -1964,7 +2001,7 @@ print(phrase_a)
 
     .
     
-    Signer aid_b successfully responded to challenge words: '['material', 'bomb', 'upset', 'laundry', 'forward', 'ability', 'dignity', 'push', 'amount', 'behave', 'cost', 'employ']'
+    Signer aid_b successfully responded to challenge words: '['protect', 'alpha', 'sentence', 'corn', 'clump', 'area', 'size', 'inflict', 'height', 'rack', 'lucky', 'flight']'
     
 
 
@@ -1979,7 +2016,7 @@ print(phrase_b)
     --recipient {aid_b}
 ```
 
-    casual orange tone chunk venue behave cruel foam lamp silk wrist source
+    ridge indicate panda side inside quick coyote roast choose wisdom door crystal
 
 
 
@@ -1995,7 +2032,7 @@ print(phrase_b)
 
     .
     
-    Signer aid_a successfully responded to challenge words: '['casual', 'orange', 'tone', 'chunk', 'venue', 'behave', 'cruel', 'foam', 'lamp', 'silk', 'wrist', 'source']'
+    Signer aid_a successfully responded to challenge words: '['ridge', 'indicate', 'panda', 'side', 'inside', 'quick', 'coyote', 'roast', 'choose', 'wisdom', 'door', 'crystal']'
     
 
 
@@ -2138,8 +2175,8 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS
-    	Public key 1:  DAHdXK8xFMWZdKEW_lynR6g2dyyXMUir4hwZpr0Gjho_
+    Prefix  EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql
+      Public key 1:  DBdyvsfLABDPYn1HXRnL66zHXLAStInBywj5g7igyJTe
     
 
 
@@ -2148,13 +2185,13 @@ pr_continue()
     
 
 
-    Delegator OOBI: http://witness-demo:5642/oobi/EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS/witness
+    Delegator OOBI: http://witness-demo:5642/oobi/EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql/witness
     
     [1m[4m[44m[90m  Resolving OOBIs  [0m
     
 
 
-    http://witness-demo:5642/oobi/EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS/witness resolved
+    http://witness-demo:5642/oobi/EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql/witness resolved
 
 
     
@@ -2199,8 +2236,8 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EGRrKqc5MYLJnW6Z4q61jMrpW3dyz5GKfDuVANMY25gk
-    	Public key 1:  DD2BuIvQ8twvPCd3POqYTdAdtcbxaAIqC752e4IPG6Q8
+    Prefix  EGcYNX5GV2Kr4ZLNEJYmyu8SP9tqAsODYc8TFRBgHyfX
+      Public key 1:  DNe0YO6vybFcsvZa4FII2s9RcPgAXUgSHplRASV9tvK6
     
 
 
@@ -2257,11 +2294,11 @@ pr_continue()
 
 
     
-    [1m[94mDelegator prefix: EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS[0m
+    [1m[94mDelegator prefix: EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql[0m
     
     Command 
-    kli incept --name delegate_keystore     --alias delegate_alias     --icount 1     --isith 1     --ncount 1     --nsith 1     --wits BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha     --toad 1     --transferable     --delpre EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS     --proxy delegate_proxy_alias > ./logs/delegate_incept.log
-     started with PID: 17092
+    kli incept --name delegate_keystore     --alias delegate_alias     --icount 1     --isith 1     --ncount 1     --nsith 1     --wits BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha     --toad 1     --transferable     --delpre EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql     --proxy delegate_proxy_alias > ./logs/delegate_incept.log
+     started with PID: 1715
     
     [1m[42m[90m  You can continue ✅  [0m
     
@@ -2295,7 +2332,7 @@ pr_continue()
 
 
     
-    [1m[94m['Delegagtor Prefix  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS', 'Delegate ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce inception Anchored at Seq. No.  1', 'Delegate ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce inception event committed.'][0m
+    [1m[94m['Delegagtor Prefix  EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql', 'Delegate EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY inception Anchored at Seq. No.  1', 'Delegate EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY inception event committed.'][0m
     
     
     [1m[42m[90m  You can continue ✅  [0m
@@ -2317,10 +2354,10 @@ pr_title(f"Delegated AID status")
 
 
     Alias: 	delegate_alias
-    Identifier: ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce
+    Identifier: EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY
     Seq No:	0
     Delegated Identifier
-        Delegator:  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS [92m✔ Anchored[0m
+        Delegator:  EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql [92m✔ Anchored[0m
     
     
     Witnesses:
@@ -2329,25 +2366,25 @@ pr_title(f"Delegated AID status")
     Threshold:	1
     
     Public Keys:	
-    	1. DOS76wt7y1yoBiQZVC33zMy7JzEApdj_skNTNdDjdIGf
+      1. DEKUQA0-79W99LNe61p1DTTKWQeiAvEtfC0ARHo65di8
     
     
     Witnesses:	
-    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+      1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
     
     {
      "v": "KERI10JSON00018d_",
      "t": "dip",
-     "d": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
-     "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
+     "d": "EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY",
+     "i": "EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY",
      "s": "0",
      "kt": "1",
      "k": [
-      "DOS76wt7y1yoBiQZVC33zMy7JzEApdj_skNTNdDjdIGf"
+      "DEKUQA0-79W99LNe61p1DTTKWQeiAvEtfC0ARHo65di8"
      ],
      "nt": "1",
      "n": [
-      "EIW0R6ISrCSVcDX2la_xByvAnaM6HtxkGGakP3rSysvb"
+      "EGa-ShLUtSkZoBNH_W_L6v_xMcFkxGWzluDUa1boc7Vo"
      ],
      "bt": "1",
      "b": [
@@ -2355,7 +2392,7 @@ pr_title(f"Delegated AID status")
      ],
      "c": [],
      "a": [],
-     "di": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS"
+     "di": "EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql"
     }
     
 
@@ -2406,14 +2443,14 @@ pr_continue()
     
     Command 
     kli rotate --name delegate_keystore     --alias delegate_alias     --proxy delegate_proxy_alias
-     started with PID: 17101
+     started with PID: 1724
 
 
     
     [1m[94mRotation[0m
     
     
-    [1m[94m['Delegagtor Prefix  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS', 'Delegate ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce rotation Anchored at Seq. No.  2', 'Delegate ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce rotation event committed.'][0m
+    [1m[94m['Delegagtor Prefix  EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql', 'Delegate EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY rotation Anchored at Seq. No.  2', 'Delegate EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY rotation event committed.'][0m
     
     
     [1m[42m[90m  You can continue ✅  [0m
@@ -2435,10 +2472,10 @@ pr_title(f"Delegated AID status")
 
 
     Alias: 	delegate_alias
-    Identifier: ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce
+    Identifier: EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY
     Seq No:	1
     Delegated Identifier
-        Delegator:  EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS [92m✔ Anchored[0m
+        Delegator:  EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql [92m✔ Anchored[0m
     
     
     Witnesses:
@@ -2447,25 +2484,25 @@ pr_title(f"Delegated AID status")
     Threshold:	1
     
     Public Keys:	
-    	1. DFFiw3TgJ9rsy4Nr0e8hOKg6fmQWdrHrK5_N5oAOzaOx
+      1. DLTfrN6iP5MtmZVuBSqaPCAdK9b2bEBE_xkhzsk7YIgZ
     
     
     Witnesses:	
-    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+      1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
     
     {
      "v": "KERI10JSON00018d_",
      "t": "dip",
-     "d": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
-     "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
+     "d": "EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY",
+     "i": "EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY",
      "s": "0",
      "kt": "1",
      "k": [
-      "DOS76wt7y1yoBiQZVC33zMy7JzEApdj_skNTNdDjdIGf"
+      "DEKUQA0-79W99LNe61p1DTTKWQeiAvEtfC0ARHo65di8"
      ],
      "nt": "1",
      "n": [
-      "EIW0R6ISrCSVcDX2la_xByvAnaM6HtxkGGakP3rSysvb"
+      "EGa-ShLUtSkZoBNH_W_L6v_xMcFkxGWzluDUa1boc7Vo"
      ],
      "bt": "1",
      "b": [
@@ -2473,23 +2510,23 @@ pr_title(f"Delegated AID status")
      ],
      "c": [],
      "a": [],
-     "di": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS"
+     "di": "EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql"
     }
     
     {
      "v": "KERI10JSON000160_",
      "t": "drt",
-     "d": "EPGvOlVX9B35JSaIjXiq2MgdaFAKVjYRS6VUkPYyKCRJ",
-     "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
+     "d": "ED57vFs4WZl855xAyad_-QVvyeFRSw54kOYJ08iN7i3k",
+     "i": "EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY",
      "s": "1",
-     "p": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
+     "p": "EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY",
      "kt": "1",
      "k": [
-      "DFFiw3TgJ9rsy4Nr0e8hOKg6fmQWdrHrK5_N5oAOzaOx"
+      "DLTfrN6iP5MtmZVuBSqaPCAdK9b2bEBE_xkhzsk7YIgZ"
      ],
      "nt": "1",
      "n": [
-      "ELMlJDnqRE3VUA8_5kYQeT26lTM052Mom7TPeThnRdZn"
+      "ECxUwHP7xaV3UQmzNog09BUbtjWqiFeV4QB5fXNvmnfY"
      ],
      "bt": "1",
      "br": [],
@@ -2520,7 +2557,7 @@ pr_title(f"Delegator AID status")
 
 
     Alias: 	delegator_alias
-    Identifier: EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS
+    Identifier: EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql
     Seq No:	2
     
     Witnesses:
@@ -2529,27 +2566,27 @@ pr_title(f"Delegator AID status")
     Threshold:	3
     
     Public Keys:	
-    	1. DK893JfjZJKRrVeV_5Rp1j7S1zd746lg2vOyvxXPy__r
+      1. DOAyqAKM-InSDQ-0K32TkS1bsWlCExdGFEnrtavdOcNL
     
     
     Witnesses:	
-    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
-    	2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
-    	3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
+      1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+      2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
+      3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
     
     {
      "v": "KERI10JSON0001b7_",
      "t": "icp",
-     "d": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
-     "i": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
+     "d": "EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql",
+     "i": "EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql",
      "s": "0",
      "kt": "1",
      "k": [
-      "DAHdXK8xFMWZdKEW_lynR6g2dyyXMUir4hwZpr0Gjho_"
+      "DBdyvsfLABDPYn1HXRnL66zHXLAStInBywj5g7igyJTe"
      ],
      "nt": "1",
      "n": [
-      "EPLRq0SznqxZxNOlgoFkX2gOjZT9tRhVyv49SLGB5ddY"
+      "ELIxGfihcj5rhKHJCkjvy_Sl7bQ6eNOBajc8Feu3w6SW"
      ],
      "bt": "2",
      "b": [
@@ -2564,26 +2601,26 @@ pr_title(f"Delegator AID status")
     {
      "v": "KERI10JSON0001cf_",
      "t": "rot",
-     "d": "EB95J4WOTqa1j5cjne3o_zoZ9_gQapHDCVhjgU3lqF7w",
-     "i": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
+     "d": "EF0M4VE_sTNm76RxcJq7lvvREs_AdrPtZqt8lJH6ztv7",
+     "i": "EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql",
      "s": "1",
-     "p": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
+     "p": "EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql",
      "kt": "1",
      "k": [
-      "DGeHiAmo7du8TB5SThYhxWdP-0GxWtcDSNOlU_I-bxJk"
+      "DMr2U18_KpS-KQ82M4NPqqjR-SCg1V_pLVTtBuKTJvcn"
      ],
      "nt": "1",
      "n": [
-      "EJPeDQBXATIi2YH_iElN3yFxhrPMRM8wMozBgLN2VRso"
+      "EFE6dIEH0NlQhYiWhXKrZF1clwU1h56zUGhwtyFm5SQV"
      ],
      "bt": "3",
      "br": [],
      "ba": [],
      "a": [
       {
-       "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
+       "i": "EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY",
        "s": "0",
-       "d": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce"
+       "d": "EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY"
       }
      ]
     }
@@ -2591,26 +2628,26 @@ pr_title(f"Delegator AID status")
     {
      "v": "KERI10JSON0001cf_",
      "t": "rot",
-     "d": "ELdrRNS3A95tTmAy1cTeMzVMQWZQgHitDRPqf_sOtpEm",
-     "i": "EMsMcRQdLjUfgJIK1v78gTd9C9gXtFCDI0VqYBIMBPIS",
+     "d": "EPT2KJZN9CL92Sehs-iu9HfiSp8unuaWWtKO_1gI1PQP",
+     "i": "EPBGfVZJ6LfuqxhAr1_7jLP1ckIRC5lhap-ItHzDivql",
      "s": "2",
-     "p": "EB95J4WOTqa1j5cjne3o_zoZ9_gQapHDCVhjgU3lqF7w",
+     "p": "EF0M4VE_sTNm76RxcJq7lvvREs_AdrPtZqt8lJH6ztv7",
      "kt": "1",
      "k": [
-      "DK893JfjZJKRrVeV_5Rp1j7S1zd746lg2vOyvxXPy__r"
+      "DOAyqAKM-InSDQ-0K32TkS1bsWlCExdGFEnrtavdOcNL"
      ],
      "nt": "1",
      "n": [
-      "EHOMY5uZRRzIrUFJqZKu9XK9-1gLwyAdDeowEvHbCDv4"
+      "EMB8XrhXMR-WsK8XNPOqbSzuLegqGF51OnaqYTV3x8NR"
      ],
      "bt": "3",
      "br": [],
      "ba": [],
      "a": [
       {
-       "i": "ECprYUvng9UgSrkKW-5Nysq2gw-suZC4h-Xi0w3boKce",
+       "i": "EKUdtxrk07LrveCNRB0HqE_OD_y8Q6Bpm6hvIZui03cY",
        "s": "1",
-       "d": "EPGvOlVX9B35JSaIjXiq2MgdaFAKVjYRS6VUkPYyKCRJ"
+       "d": "ED57vFs4WZl855xAyad_-QVvyeFRSw54kOYJ08iN7i3k"
       }
      ]
     }
@@ -2795,16 +2832,16 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg
-    	Public key 1:  DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
+    Prefix  EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c
+      Public key 1:  DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT
-    	Public key 1:  DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+    Prefix  EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP
+      Public key 1:  DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_
     
 
 
@@ -2905,20 +2942,20 @@ pr_continue()
 
 
     
-    [1m[94mMultisig part 1 OOBI: http://witness-demo:5643/oobi/EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM[0m
+    [1m[94mMultisig part 1 OOBI: http://witness-demo:5643/oobi/EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM[0m
     
     
-    [1m[94mMultisig part 2 OOBI: http://witness-demo:5644/oobi/ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX[0m
+    [1m[94mMultisig part 2 OOBI: http://witness-demo:5644/oobi/EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX[0m
     
     
     [1m[4m[44m[90m  Resolving OOBIs  [0m
     
 
 
-    http://witness-demo:5644/oobi/ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX resolved
+    http://witness-demo:5644/oobi/EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX resolved
 
 
-    http://witness-demo:5643/oobi/EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM resolved
+    http://witness-demo:5643/oobi/EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM resolved
 
 
     
@@ -2987,18 +3024,18 @@ pr_continue()
 
 
     
-    [1m[94mMultisig part 1 prefix: EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg[0m
+    [1m[94mMultisig part 1 prefix: EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c[0m
     
     
-    [1m[94mMultisig part 2 prefix: EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg[0m
+    [1m[94mMultisig part 2 prefix: EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c[0m
     
     
     [1m[94mMultisig config: ./config/multisig/multisig_config.json[0m
     
     {
       "aids": [
-        "EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg",
-        "ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT"
+        "EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c",
+        "EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP"
       ],
       "transferable": true,
       "wits": [
@@ -3070,10 +3107,10 @@ pr_continue()
     
     Command 
     kli multisig incept --name multisig1_keystore     --alias multisig1_alias     --group multisig_group     --file ./config/multisig/multisig_config.json > ./logs/multisig_event.log
-     started with PID: 17183
+     started with PID: 1808
     Command 
     kli multisig join --name multisig2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 17185
+     started with PID: 1809
     Waiting for multisig inception to complete...
     
 
@@ -3085,13 +3122,13 @@ pr_continue()
     
     [1m[94mMultisig Event[0m
     
-    Group identifier inception initialized for EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Group identifier inception initialized for EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     
     Alias: 	multisig_group
-    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Identifier: EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     Seq No:	0
     Group Identifier
-        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+        Local Indentifier:  EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -3099,8 +3136,8 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
-    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+      1. DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN
+      2. DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_
     
 
 
@@ -3114,8 +3151,8 @@ pr_continue()
     +-------+-----------------+----------------------------------------------+
     | Local | Name            |                     AID                      |
     +-------+-----------------+----------------------------------------------+
-    |   *   | multisig2_alias | ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT |
-    |       | multisig1_alias | EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg |
+    |       | multisig1_alias | EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c |
+    |   *   | multisig2_alias | EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP |
     +-------+-----------------+----------------------------------------------+
     
     Configuration:
@@ -3132,10 +3169,10 @@ pr_continue()
     +---------------------+----------------------------------------------+
     
     Alias: 	multisig_group
-    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Identifier: EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     Seq No:	0
     Group Identifier
-        Local Indentifier:  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT [92m✔ Fully Signed[0m
+        Local Indentifier:  EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -3143,8 +3180,8 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
-    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+      1. DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN
+      2. DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_
     
 
 
@@ -3181,10 +3218,10 @@ pr_title(f"Multisig AID status")
 
 
     Alias: 	multisig_group
-    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Identifier: EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     Seq No:	0
     Group Identifier
-        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+        Local Indentifier:  EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -3192,30 +3229,30 @@ pr_title(f"Multisig AID status")
     Threshold:	2
     
     Public Keys:	
-    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
-    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+      1. DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN
+      2. DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_
     
     
     Witnesses:	
-    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
-    	2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
-    	3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
+      1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+      2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
+      3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
     
     {
      "v": "KERI10JSON000215_",
      "t": "icp",
-     "d": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
-     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "d": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
+     "i": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
      "s": "0",
      "kt": "2",
      "k": [
-      "DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N",
-      "DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI"
+      "DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN",
+      "DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_"
      ],
      "nt": "2",
      "n": [
-      "EOUHnSSGU5noEQpLBE3e9HmTfhereKkqdpilc6THtmpG",
-      "EHHQECQ_asW004Hy8_TKAqMzvfmcpBSoldCJY_j4HOh4"
+      "EDKR0N8g5f86AVCrv2srMClZGRsUDVZSaNNSRHJq485j",
+      "EMPpccC-fJs4AGcJEGZ33EeacSAncVHe0EUe8FO4I-pC"
      ],
      "bt": "2",
      "b": [
@@ -3276,10 +3313,10 @@ pr_continue()
     
     Command 
     kli multisig interact --name multisig1_keystore     --alias multisig_group     --data '{"d": "arbitrary data"}' > ./logs/multisig_event.log
-     started with PID: 17196
+     started with PID: 1822
     Command 
     kli multisig join --name multisig2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 17198
+     started with PID: 1823
     Waiting for multisig interaction to complete...
     
 
@@ -3293,10 +3330,10 @@ pr_continue()
     
     
     Alias: 	multisig_group
-    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Identifier: EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     Seq No:	1
     Group Identifier
-        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+        Local Indentifier:  EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -3304,8 +3341,8 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
-    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+      1. DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN
+      2. DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_
     
 
 
@@ -3313,7 +3350,7 @@ pr_continue()
     [1m[94mMultisig Join[0m
     
     Waiting for group multisig events...
-    Group Multisig Interaction for multisig_group (EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM) proposed:
+    Group Multisig Interaction for multisig_group (EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH) proposed:
     Data:
     [
       {
@@ -3322,10 +3359,10 @@ pr_continue()
     ]
     
     Alias: 	multisig_group
-    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Identifier: EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     Seq No:	1
     Group Identifier
-        Local Indentifier:  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT [92m✔ Fully Signed[0m
+        Local Indentifier:  EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -3333,8 +3370,8 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
-    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+      1. DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN
+      2. DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_
     
 
 
@@ -3360,10 +3397,10 @@ pr_title(f"Multisig AID status")
 
 
     Alias: 	multisig_group
-    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Identifier: EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     Seq No:	1
     Group Identifier
-        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+        Local Indentifier:  EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -3371,30 +3408,30 @@ pr_title(f"Multisig AID status")
     Threshold:	2
     
     Public Keys:	
-    	1. DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N
-    	2. DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI
+      1. DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN
+      2. DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_
     
     
     Witnesses:	
-    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
-    	2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
-    	3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
+      1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+      2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
+      3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
     
     {
      "v": "KERI10JSON000215_",
      "t": "icp",
-     "d": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
-     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "d": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
+     "i": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
      "s": "0",
      "kt": "2",
      "k": [
-      "DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N",
-      "DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI"
+      "DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN",
+      "DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_"
      ],
      "nt": "2",
      "n": [
-      "EOUHnSSGU5noEQpLBE3e9HmTfhereKkqdpilc6THtmpG",
-      "EHHQECQ_asW004Hy8_TKAqMzvfmcpBSoldCJY_j4HOh4"
+      "EDKR0N8g5f86AVCrv2srMClZGRsUDVZSaNNSRHJq485j",
+      "EMPpccC-fJs4AGcJEGZ33EeacSAncVHe0EUe8FO4I-pC"
      ],
      "bt": "2",
      "b": [
@@ -3409,10 +3446,10 @@ pr_title(f"Multisig AID status")
     {
      "v": "KERI10JSON0000e1_",
      "t": "ixn",
-     "d": "EIvFnTY_zAlreT6kmNS3KxVJYmI85H1QEpaqlsrmRSKf",
-     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "d": "EIEApX1H7R8iW10RTYyvbTR4tR0NIFyM4Z3nK-Xfzem0",
+     "i": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
      "s": "1",
-     "p": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "p": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
      "a": [
       {
        "d": "arbitrary data"
@@ -3458,9 +3495,9 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg
+    Prefix  EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c
     New Sequence No.  1
-    	Public key 1:  DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
+      Public key 1:  DGIC1Fak-SGtG7LWdIzrmqYoM8rmfus4SptlDJIlyNTa
 
 
     Checking for updates...
@@ -3468,7 +3505,7 @@ pr_continue()
 
     
     
-    Identifier: EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg
+    Identifier: EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c
     Seq No:	1
     
     Witnesses:
@@ -3477,16 +3514,16 @@ pr_continue()
     Threshold:	3
     
     Public Keys:	
-    	1. DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
+      1. DGIC1Fak-SGtG7LWdIzrmqYoM8rmfus4SptlDJIlyNTa
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT
+    Prefix  EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP
     New Sequence No.  1
-    	Public key 1:  DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
+      Public key 1:  DB4JiY-QDBD39TzRXdByCftPniWaYGCy46IeoDdlRWr7
 
 
     Checking for updates...
@@ -3494,7 +3531,7 @@ pr_continue()
 
     
     
-    Identifier: ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT
+    Identifier: EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP
     Seq No:	1
     
     Witnesses:
@@ -3503,7 +3540,7 @@ pr_continue()
     Threshold:	3
     
     Public Keys:	
-    	1. DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
+      1. DB4JiY-QDBD39TzRXdByCftPniWaYGCy46IeoDdlRWr7
     
 
 
@@ -3565,11 +3602,11 @@ pr_continue()
     [1m[4m[44m[90m  Rotating multisig group  [0m
     
     Command 
-    kli multisig rotate --name multisig1_keystore     --alias multisig_group     --smids EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg     --smids ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT     --rmids EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg     --rmids ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT     --isith '["1/2", "1/2"]'     --nsith '["1/2", "1/2"]' > ./logs/multisig_event.log
-     started with PID: 17229
+    kli multisig rotate --name multisig1_keystore     --alias multisig_group     --smids EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c     --smids EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP     --rmids EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c     --rmids EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP     --isith '["1/2", "1/2"]'     --nsith '["1/2", "1/2"]' > ./logs/multisig_event.log
+     started with PID: 1856
     Command 
     kli multisig join --name multisig2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 17230
+     started with PID: 1857
     Waiting for multisig rotation to complete...
     
 
@@ -3583,10 +3620,10 @@ pr_continue()
     
     
     Alias: 	multisig_group
-    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Identifier: EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     Seq No:	2
     Group Identifier
-        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+        Local Indentifier:  EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -3594,8 +3631,8 @@ pr_continue()
     Threshold:	3
     
     Public Keys:	
-    	1. DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
-    	2. DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
+      1. DGIC1Fak-SGtG7LWdIzrmqYoM8rmfus4SptlDJIlyNTa
+      2. DB4JiY-QDBD39TzRXdByCftPniWaYGCy46IeoDdlRWr7
     
 
 
@@ -3610,16 +3647,16 @@ pr_continue()
     +-------+-----------------+----------------------------------------------+-----------+
     | Local | Name            |                     AID                      | Threshold |
     +-------+-----------------+----------------------------------------------+-----------+
-    |       | multisig1_alias | EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg |    1/2    |
-    |   *   | multisig2_alias | ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT |    1/2    |
+    |       | multisig1_alias | EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c |    1/2    |
+    |   *   | multisig2_alias | EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP |    1/2    |
     +-------+-----------------+----------------------------------------------+-----------+
     
     Rotation Members
     +-------+-----------------+----------------------------------------------+-----------+
     | Local | Name            |                     AID                      | Threshold |
     +-------+-----------------+----------------------------------------------+-----------+
-    |       | multisig1_alias | EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg |    1/2    |
-    |   *   | multisig2_alias | ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT |    1/2    |
+    |       | multisig1_alias | EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c |    1/2    |
+    |   *   | multisig2_alias | EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP |    1/2    |
     +-------+-----------------+----------------------------------------------+-----------+
     
     Configuration:
@@ -3630,10 +3667,10 @@ pr_continue()
     +-------------------+-------+
     
     Alias: 	multisig_group
-    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Identifier: EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     Seq No:	2
     Group Identifier
-        Local Indentifier:  ENuGXvFrBc5E_rZH5wIlYC2GPcsB7MYKx6VKOG6GYOxT [92m✔ Fully Signed[0m
+        Local Indentifier:  EDRpBUlvCLaZ3xK11118vM2BfQ5E-qjllg5pFXFO0NPP [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -3641,8 +3678,8 @@ pr_continue()
     Threshold:	3
     
     Public Keys:	
-    	1. DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
-    	2. DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
+      1. DGIC1Fak-SGtG7LWdIzrmqYoM8rmfus4SptlDJIlyNTa
+      2. DB4JiY-QDBD39TzRXdByCftPniWaYGCy46IeoDdlRWr7
     
 
 
@@ -3680,10 +3717,10 @@ pr_title(f"Multisig AID status")
 
 
     Alias: 	multisig_group
-    Identifier: EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM
+    Identifier: EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH
     Seq No:	2
     Group Identifier
-        Local Indentifier:  EGs6z9GpXFMBPqwr86Y2QYw4bwhgKYAKS4-WcDkC0ZDg [92m✔ Fully Signed[0m
+        Local Indentifier:  EFSe_lmMvLh-E1MXjYEw2goaUwpZovkjCFErGZFdpy8c [92m✔ Fully Signed[0m
     
     Witnesses:
     Count:		3
@@ -3691,30 +3728,30 @@ pr_title(f"Multisig AID status")
     Threshold:	3
     
     Public Keys:	
-    	1. DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U
-    	2. DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ
+      1. DGIC1Fak-SGtG7LWdIzrmqYoM8rmfus4SptlDJIlyNTa
+      2. DB4JiY-QDBD39TzRXdByCftPniWaYGCy46IeoDdlRWr7
     
     
     Witnesses:	
-    	1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
-    	2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
-    	3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
+      1. BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha
+      2. BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
+      3. BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
     
     {
      "v": "KERI10JSON000215_",
      "t": "icp",
-     "d": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
-     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "d": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
+     "i": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
      "s": "0",
      "kt": "2",
      "k": [
-      "DJ9ZtzOSc0qRB99kgXwUYz0oP1V8nJd8bvqTeWIJze1N",
-      "DOv0pdPS5onwOLdWQ8OAPXxQq0Go7hNpufw1-v3t_oFI"
+      "DJamj7mBMiXa6LX3Mh0rMkcpXtlKohUl0eCKLUqyuhTN",
+      "DKsB9FQ5xCY02l8tfLz_7OljHbc8VyvkukwbCjBwvq4_"
      ],
      "nt": "2",
      "n": [
-      "EOUHnSSGU5noEQpLBE3e9HmTfhereKkqdpilc6THtmpG",
-      "EHHQECQ_asW004Hy8_TKAqMzvfmcpBSoldCJY_j4HOh4"
+      "EDKR0N8g5f86AVCrv2srMClZGRsUDVZSaNNSRHJq485j",
+      "EMPpccC-fJs4AGcJEGZ33EeacSAncVHe0EUe8FO4I-pC"
      ],
      "bt": "2",
      "b": [
@@ -3729,10 +3766,10 @@ pr_title(f"Multisig AID status")
     {
      "v": "KERI10JSON0000e1_",
      "t": "ixn",
-     "d": "EIvFnTY_zAlreT6kmNS3KxVJYmI85H1QEpaqlsrmRSKf",
-     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "d": "EIEApX1H7R8iW10RTYyvbTR4tR0NIFyM4Z3nK-Xfzem0",
+     "i": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
      "s": "1",
-     "p": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "p": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
      "a": [
       {
        "d": "arbitrary data"
@@ -3743,25 +3780,25 @@ pr_title(f"Multisig AID status")
     {
      "v": "KERI10JSON0001d2_",
      "t": "rot",
-     "d": "EMElcqLua9b7svahA1-mceJFwADpvM2t7LfcqT_kp2at",
-     "i": "EObkkmRkEGnnCa0tZ8sbz9UTM-s5ZHO_qLt3zEQgt7XM",
+     "d": "EHmOg-rZFq8bON03ydSGGEeImqTcrayuV2KBqK6FtIpn",
+     "i": "EBm6I-m6wRvaIhxXd72jADCDJQOybMFFdPxHS0QFNHaH",
      "s": "2",
-     "p": "EIvFnTY_zAlreT6kmNS3KxVJYmI85H1QEpaqlsrmRSKf",
+     "p": "EIEApX1H7R8iW10RTYyvbTR4tR0NIFyM4Z3nK-Xfzem0",
      "kt": [
       "1/2",
       "1/2"
      ],
      "k": [
-      "DPCtzw9WsuR853hKiQz5Ep8DEKH7oVhUfdCQb0YqqX5U",
-      "DDCwu9uD8IuAWOLEJAyqdn7X3xKAaDzFLBvk_vwJz4kQ"
+      "DGIC1Fak-SGtG7LWdIzrmqYoM8rmfus4SptlDJIlyNTa",
+      "DB4JiY-QDBD39TzRXdByCftPniWaYGCy46IeoDdlRWr7"
      ],
      "nt": [
       "1/2",
       "1/2"
      ],
      "n": [
-      "EMT4qc3zG8kvQBzi7xdig7WFvYmdsT97iUpqLcgboMP9",
-      "EJzddvzR-Mk21aSbwLekAcc2CBKS1VzxkGBx-M1K3KT9"
+      "EM6gJGrWi4Y_gCG01fFvio2zN_z6uUCipy0xIqbLRqw1",
+      "EDtuGqxCVZ91iR0-nM0J1Dk6Z8cshBkj-5S3jlKydUoY"
      ],
      "bt": "3",
      "br": [],
@@ -4137,7 +4174,7 @@ holder_aid = "holder_aid"
     KERI Keystore created at: /usr/local/var/keri/ks/holder_ks
     KERI Database created at: /usr/local/var/keri/db/holder_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/holder_ks
-    	aeid: BB2_xl-WTEt10ozTsZgKiWQyAhFDkkv4xgR3PaXKlhjX
+      aeid: BAL-KC971KSegfhUenj9j9szQqiC0zcByLTA5H6doDVu
     
     Loading 3 OOBIs...
 
@@ -4150,8 +4187,8 @@ holder_aid = "holder_aid"
     Waiting for witness receipts...
 
 
-    Prefix  EER1WBgpxjbgbk2-MXhEE8wPNMAU1Tquc9qsgZgS8nlC
-    	Public key 1:  DOtffm6WrtPebmqbh4UST2pkpPiD8vJzc2Nbcs0HJ2ko
+    Prefix  EGFWtZLEd34VcrTeB-H8cj1pO5NN2Df8Hd4voS1hAlbm
+      Public key 1:  DE8iSHeGK9wT33nqnrc0raFovOTCUzN9tL31vQfaqW6I
     
 
 
@@ -4182,7 +4219,7 @@ issuer_aid = "issuer_aid"
     KERI Keystore created at: /usr/local/var/keri/ks/issuer_ks
     KERI Database created at: /usr/local/var/keri/db/issuer_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/issuer_ks
-    	aeid: BO6SJRvzq9Va_7INypO-KD1VgeNPFaEU5tPXRveK6cRZ
+      aeid: BN7BNasUYsXWMi03L714naWt0AXdsv0rWNK4vFDQKZFc
     
     Loading 3 OOBIs...
 
@@ -4195,8 +4232,8 @@ issuer_aid = "issuer_aid"
     Waiting for witness receipts...
 
 
-    Prefix  EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u
-    	Public key 1:  DAJM3XT8asq5iruo7iyLOTVokSenCxgGmJ_R4P9qt83z
+    Prefix  EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ
+      Public key 1:  DK6tDonaHYTnawp4z7nTilL4_LSrNu522MJ8ghnr_MWa
     
 
 
@@ -4221,10 +4258,10 @@ issuer_oobi = exec(issuer_oobi_gen)
     --oobi {holder_oobi}
 ```
 
-    http://witness-demo:5642/oobi/EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u/witness resolved
+    http://witness-demo:5642/oobi/EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ/witness resolved
 
 
-    http://witness-demo:5642/oobi/EER1WBgpxjbgbk2-MXhEE8wPNMAU1Tquc9qsgZgS8nlC/witness resolved
+    http://witness-demo:5642/oobi/EGFWtZLEd34VcrTeB-H8cj1pO5NN2Df8Hd4voS1hAlbm/witness resolved
 
 
 ### Creating the Issuer's Credential Registry
@@ -4249,8 +4286,8 @@ issuer_registry_name="issuer_registry"
     Sending TEL events to witnesses
 
 
-    Registry:  issuer_registry(EB3L-aXTqyGcosI0FF-G3oY81vJ8yH27WDGf3AGy89vD) 
-    	created for Identifier Prefix:  EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u
+    Registry:  issuer_registry(EMtK7g4vnlSWBOtamxDycKesN1GlvBfOgq_9qoqnTkqu) 
+      created for Identifier Prefix:  EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ
 
 
 To query the status of a registry, use the command `kli vc registry status`. This shows the registry's SAID, its current sequence number (how many events have occurred in its TEL), and the controlling AID.
@@ -4262,9 +4299,9 @@ To query the status of a registry, use the command `kli vc registry status`. Thi
     --registry-name {issuer_registry_name} 
 ```
 
-    Registry:  EB3L-aXTqyGcosI0FF-G3oY81vJ8yH27WDGf3AGy89vD
+    Registry:  EMtK7g4vnlSWBOtamxDycKesN1GlvBfOgq_9qoqnTkqu
     Seq No.  0
-        Controlling Identifier:  EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u
+        Controlling Identifier:  EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ
     
     Backers: Not supported
     Events:	Interaction Allowed
@@ -4414,7 +4451,7 @@ time = exec("kli time")
     Sending TEL events to witnesses
 
 
-    EGrgz5obwuqs7eDZxiGuNWIKT9Nc2RuCX5tTXpw5koWh has been created.
+    ELd3cfOo_XCmgEL5MJfWqseQ159BAGDAPucF_FDiQawo has been created.
 
 
 ### Viewing the Issued Credential
@@ -4429,29 +4466,29 @@ The kli vc list command allows the Issuer to see the credentials they have issue
     --verbose
 ```
 
-    Current issued credentials for issuer_aid (EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u):
+    Current issued credentials for issuer_aid (EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ):
     
-    Credential #1: EGrgz5obwuqs7eDZxiGuNWIKT9Nc2RuCX5tTXpw5koWh
+    Credential #1: ELd3cfOo_XCmgEL5MJfWqseQ159BAGDAPucF_FDiQawo
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u
-        Issued on 2025-05-30T22:28:37.911749+00:00
+        Issued by EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ
+        Issued on 2025-06-04T15:03:16.842175+00:00
         Full Credential:
-    	{
-    	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EGrgz5obwuqs7eDZxiGuNWIKT9Nc2RuCX5tTXpw5koWh",
-    	  "i": "EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u",
-    	  "ri": "EB3L-aXTqyGcosI0FF-G3oY81vJ8yH27WDGf3AGy89vD",
-    	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
-    	  "a": {
-    	    "d": "EGt-ziMbMUTAfywSQJXIvftRFYBm6acPuTsBSP2clfLJ",
-    	    "i": "EER1WBgpxjbgbk2-MXhEE8wPNMAU1Tquc9qsgZgS8nlC",
-    	    "dt": "2025-05-30T22:28:37.911749+00:00",
-    	    "eventName": "GLEIF Summit",
-    	    "accessLevel": "staff",
-    	    "validDate": "2026-10-01"
-    	  }
-    	}
+      {
+        "v": "ACDC10JSON0001c4_",
+        "d": "ELd3cfOo_XCmgEL5MJfWqseQ159BAGDAPucF_FDiQawo",
+        "i": "EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ",
+        "ri": "EMtK7g4vnlSWBOtamxDycKesN1GlvBfOgq_9qoqnTkqu",
+        "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
+        "a": {
+          "d": "EJn2CCWM7ZwZKC1R58Sfna1BbsK8_ET-0ZGcNWsc39pH",
+          "i": "EGFWtZLEd34VcrTeB-H8cj1pO5NN2Df8Hd4voS1hAlbm",
+          "dt": "2025-06-04T15:03:16.842175+00:00",
+          "eventName": "GLEIF Summit",
+          "accessLevel": "staff",
+          "validDate": "2026-10-01"
+        }
+      }
 
 
 Notice the structure of the credential JSON:   
@@ -4478,7 +4515,7 @@ credential_said=exec(get_credential_said)
 print(credential_said)
 ```
 
-    EGrgz5obwuqs7eDZxiGuNWIKT9Nc2RuCX5tTXpw5koWh
+    ELd3cfOo_XCmgEL5MJfWqseQ159BAGDAPucF_FDiQawo
 
 
 ## Transferring the Credential via IPEX
@@ -4511,7 +4548,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending message EIOYoUwcaXuRJxCdO5JBIBWEP7_zz-ilwmRdKY_Nd0vK to EER1WBgpxjbgbk2-MXhEE8wPNMAU1Tquc9qsgZgS8nlC
+    Sending message EEcql8Xt6iO8QlTgezO0HpsCEUCDpP5w2UHAgV9tHYM3 to EGFWtZLEd34VcrTeB-H8cj1pO5NN2Df8Hd4voS1hAlbm
 
 
     ... grant message sent
@@ -4532,12 +4569,12 @@ This step isn't strictly required for the workflow but allows the Issuer to view
     
     Sent IPEX Messages:
     
-    GRANT - SAID: EIOYoUwcaXuRJxCdO5JBIBWEP7_zz-ilwmRdKY_Nd0vK
-    Credential EGrgz5obwuqs7eDZxiGuNWIKT9Nc2RuCX5tTXpw5koWh:
+    GRANT - SAID: EEcql8Xt6iO8QlTgezO0HpsCEUCDpP5w2UHAgV9tHYM3
+    Credential ELd3cfOo_XCmgEL5MJfWqseQ159BAGDAPucF_FDiQawo:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u
-        Issued on 2025-05-30T22:28:37.911749+00:00
+        Issued by EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ
+        Issued on 2025-06-04T15:03:16.842175+00:00
         Already responded? No [91m✘[0m
     
 
@@ -4555,7 +4592,7 @@ print(ipex_said)
 
 ```
 
-    EIOYoUwcaXuRJxCdO5JBIBWEP7_zz-ilwmRdKY_Nd0vK
+    EEcql8Xt6iO8QlTgezO0HpsCEUCDpP5w2UHAgV9tHYM3
 
 
 **Holder Views Received Messages (Optional)**
@@ -4572,12 +4609,12 @@ Similar to the Issuer checking sent messages, the Holder can use `kli ipex list`
     
     Received IPEX Messages:
     
-    GRANT - SAID: EIOYoUwcaXuRJxCdO5JBIBWEP7_zz-ilwmRdKY_Nd0vK
-    Credential EGrgz5obwuqs7eDZxiGuNWIKT9Nc2RuCX5tTXpw5koWh:
+    GRANT - SAID: EEcql8Xt6iO8QlTgezO0HpsCEUCDpP5w2UHAgV9tHYM3
+    Credential ELd3cfOo_XCmgEL5MJfWqseQ159BAGDAPucF_FDiQawo:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u
-        Issued on 2025-05-30T22:28:37.911749+00:00
+        Issued by EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ
+        Issued on 2025-06-04T15:03:16.842175+00:00
         Already responded? No [91m✘[0m
     
 
@@ -4604,7 +4641,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending admit message to EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u
+    Sending admit message to EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ
 
 
     ... admit message sent
@@ -4625,9 +4662,9 @@ The Holder can optionally check their sent IPEX messages to confirm the `ADMIT` 
     
     Sent IPEX Messages:
     
-    ADMIT - SAID: EKTZik_4EaIGdTnM4R6Itz35I_dBv5_YIjUSBRvACkJU
-    Admitted message SAID: EIOYoUwcaXuRJxCdO5JBIBWEP7_zz-ilwmRdKY_Nd0vK
-    Credential EGrgz5obwuqs7eDZxiGuNWIKT9Nc2RuCX5tTXpw5koWh:
+    ADMIT - SAID: ENJd_fU7WIYMpDf5eAWJfVbvIDUtQCLGATL7N0lhNEm_
+    Admitted message SAID: EEcql8Xt6iO8QlTgezO0HpsCEUCDpP5w2UHAgV9tHYM3
+    Credential ELd3cfOo_XCmgEL5MJfWqseQ159BAGDAPucF_FDiQawo:
         Type: EventPass
         Status: Accepted [92m✔[0m
     
@@ -4644,29 +4681,31 @@ The issuance process is complete! The Holder now possesses the verifiable creden
     --verbose
 ```
 
-    Current received credentials for holder_aid (EER1WBgpxjbgbk2-MXhEE8wPNMAU1Tquc9qsgZgS8nlC):
+    Current received credentials for holder_aid (EGFWtZLEd34VcrTeB-H8cj1pO5NN2Df8Hd4voS1hAlbm):
     
-    Credential #1: EGrgz5obwuqs7eDZxiGuNWIKT9Nc2RuCX5tTXpw5koWh
+
+
+    Credential #1: ELd3cfOo_XCmgEL5MJfWqseQ159BAGDAPucF_FDiQawo
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u
-        Issued on 2025-05-30T22:28:37.911749+00:00
+        Issued by EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ
+        Issued on 2025-06-04T15:03:16.842175+00:00
         Full Credential:
-    	{
-    	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EGrgz5obwuqs7eDZxiGuNWIKT9Nc2RuCX5tTXpw5koWh",
-    	  "i": "EGMC6FaJ-8UtTgmDNzIwwZmf2HkZzntLvfv58VzuHz2u",
-    	  "ri": "EB3L-aXTqyGcosI0FF-G3oY81vJ8yH27WDGf3AGy89vD",
-    	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
-    	  "a": {
-    	    "d": "EGt-ziMbMUTAfywSQJXIvftRFYBm6acPuTsBSP2clfLJ",
-    	    "i": "EER1WBgpxjbgbk2-MXhEE8wPNMAU1Tquc9qsgZgS8nlC",
-    	    "dt": "2025-05-30T22:28:37.911749+00:00",
-    	    "eventName": "GLEIF Summit",
-    	    "accessLevel": "staff",
-    	    "validDate": "2026-10-01"
-    	  }
-    	}
+      {
+        "v": "ACDC10JSON0001c4_",
+        "d": "ELd3cfOo_XCmgEL5MJfWqseQ159BAGDAPucF_FDiQawo",
+        "i": "EEIQ8qCtswSd-w4_d8DhjxjGJPBX2MUfr8wEJ2g00TtJ",
+        "ri": "EMtK7g4vnlSWBOtamxDycKesN1GlvBfOgq_9qoqnTkqu",
+        "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
+        "a": {
+          "d": "EJn2CCWM7ZwZKC1R58Sfna1BbsK8_ET-0ZGcNWsc39pH",
+          "i": "EGFWtZLEd34VcrTeB-H8cj1pO5NN2Df8Hd4voS1hAlbm",
+          "dt": "2025-06-04T15:03:16.842175+00:00",
+          "eventName": "GLEIF Summit",
+          "accessLevel": "staff",
+          "validDate": "2026-10-01"
+        }
+      }
 
 
 <div class="alert alert-primary">
@@ -4832,7 +4871,7 @@ pr_continue()
     KERI Keystore created at: /usr/local/var/keri/ks/holder_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/holder_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/holder_presentation_ks
-    	aeid: BDB0RaCfC01zC5ofjJoU6VsWvLkdDj35t7FAFI3Ykx5s
+      aeid: BFrQUhb_Q3fF769wYEoom0xAI5rMcynIchip24ERPG2r
     
     Loading 3 OOBIs...
 
@@ -4845,15 +4884,15 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb
-    	Public key 1:  DOF_LhXLyHpXZIO_DF26rE3LfwFvE7dMLejReTFhQ2Rs
+    Prefix  EACgLu5i0hrj-80IJAeT94o1Y1kwapxveSfYl0DCofEc
+      Public key 1:  DMt75jxTltoUKn-y8ksNUE9BCDKTpFf2Qe8EZAND3bBs
     
 
 
     KERI Keystore created at: /usr/local/var/keri/ks/issuer_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/issuer_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/issuer_presentation_ks
-    	aeid: BPuNknoOpcDQUhb5YVyGm8UAl42FhQA383oswqNjFa_p
+      aeid: BDLvnpI2rgoPJM4OCpYtvcyu9PbzQnpULgZwOW0iKE6W
     
     Loading 3 OOBIs...
 
@@ -4866,8 +4905,8 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
-    	Public key 1:  DItmvcP7HhVymyncElJlPpgbwEHVdzv0IYoCMWHoc9bQ
+    Prefix  EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd
+      Public key 1:  DNRvbxGnX8VVGMYW1ixAiIMbNgYffEGPLZpQVuZdfdvQ
     
 
 
@@ -4877,14 +4916,14 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    Registry:  issuer_registry(EAEqvHOJMPaQiiXB_SDvi9WEaRxBgMQXGXCVkDxnffK0) 
-    	created for Identifier Prefix:  EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
+    Registry:  issuer_registry(EIJCqyK-W9LZKaIv6xMJNmE-_mvtM3-RnMm4POsGtayO) 
+      created for Identifier Prefix:  EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd
 
 
-    http://witness-demo:5642/oobi/EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw/witness resolved
+    http://witness-demo:5642/oobi/EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd/witness resolved
 
 
-    http://witness-demo:5642/oobi/ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb/witness resolved
+    http://witness-demo:5642/oobi/EACgLu5i0hrj-80IJAeT94o1Y1kwapxveSfYl0DCofEc/witness resolved
 
 
     http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK resolved
@@ -4899,16 +4938,16 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI has been created.
+    EM6q2emrEmhTLKp4GCkCLjJvG3SRYgZL65Uwd-lRq0aR has been created.
 
 
-    Sending message EGGLNn5u9-pDdSOZ3qusWE4uCKE7BM95wuotxwx9wt3X to ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb
+    Sending message EHUcBjMrznuSW-zXz2EpNjpa7r6PnJg87PoQLH9J2FXx to EACgLu5i0hrj-80IJAeT94o1Y1kwapxveSfYl0DCofEc
 
 
     ... grant message sent
 
 
-    Sending admit message to EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
+    Sending admit message to EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd
 
 
     ... admit message sent
@@ -4933,29 +4972,29 @@ First, confirm the Holder has the credential:
     --verbose
 ```
 
-    Current received credentials for holder_aid (ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb):
+    Current received credentials for holder_aid (EACgLu5i0hrj-80IJAeT94o1Y1kwapxveSfYl0DCofEc):
     
-    Credential #1: EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI
+    Credential #1: EM6q2emrEmhTLKp4GCkCLjJvG3SRYgZL65Uwd-lRq0aR
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
-        Issued on 2025-05-30T22:29:08.601062+00:00
+        Issued by EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd
+        Issued on 2025-06-04T15:03:45.318753+00:00
         Full Credential:
-    	{
-    	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI",
-    	  "i": "EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw",
-    	  "ri": "EAEqvHOJMPaQiiXB_SDvi9WEaRxBgMQXGXCVkDxnffK0",
-    	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
-    	  "a": {
-    	    "d": "EBDchGEtKuTUvjorNVbhg4egHDPASz-8sAL3aw3zALl8",
-    	    "i": "ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb",
-    	    "dt": "2025-05-30T22:29:08.601062+00:00",
-    	    "eventName": "GLEIF Summit",
-    	    "accessLevel": "staff",
-    	    "validDate": "2026-10-01"
-    	  }
-    	}
+      {
+        "v": "ACDC10JSON0001c4_",
+        "d": "EM6q2emrEmhTLKp4GCkCLjJvG3SRYgZL65Uwd-lRq0aR",
+        "i": "EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd",
+        "ri": "EIJCqyK-W9LZKaIv6xMJNmE-_mvtM3-RnMm4POsGtayO",
+        "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
+        "a": {
+          "d": "EFFLM-bc6W9slQVyRib_oxBjeoa9-x5C4cKB005E-Uit",
+          "i": "EACgLu5i0hrj-80IJAeT94o1Y1kwapxveSfYl0DCofEc",
+          "dt": "2025-06-04T15:03:45.318753+00:00",
+          "eventName": "GLEIF Summit",
+          "accessLevel": "staff",
+          "validDate": "2026-10-01"
+        }
+      }
 
 
 ### Verifier AID Setup
@@ -4984,7 +5023,7 @@ verifier_aid = "verifier_aid"
     KERI Keystore created at: /usr/local/var/keri/ks/verifier_ks
     KERI Database created at: /usr/local/var/keri/db/verifier_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/verifier_ks
-    	aeid: BJ6I3rDvLLwkrEFRp4MkWlN6kBr0I_9gchYn4gjfSpjn
+      aeid: BN41M6w-AkCOGo39hwUh4l6reChpVtcprWM97qvXPAqZ
     
     Loading 3 OOBIs...
 
@@ -4997,8 +5036,8 @@ verifier_aid = "verifier_aid"
     Waiting for witness receipts...
 
 
-    Prefix  EH2I6XrdMk7_DCBo-SUO8xcQzDPQAeYhuBvFc6XG5f6S
-    	Public key 1:  DMAxBVh4rcxByan3BAMZVMBy8wfIchXAJdmTUDzPPRg9
+    Prefix  EMmc7O2UkOI6KC2vcBo-eFwvwHkwveyIW-Rw4Nk_jxan
+      Public key 1:  DPHFCZa-reSplNen33oY8-2Sn1T1c7e44VSQzH4CDP6j
     
 
 
@@ -5023,10 +5062,10 @@ verifier_oobi = exec(verifier_oobi_gen)
 
 ```
 
-    http://witness-demo:5642/oobi/EH2I6XrdMk7_DCBo-SUO8xcQzDPQAeYhuBvFc6XG5f6S/witness resolved
+    http://witness-demo:5642/oobi/EMmc7O2UkOI6KC2vcBo-eFwvwHkwveyIW-Rw4Nk_jxan/witness resolved
 
 
-    http://witness-demo:5642/oobi/ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb/witness resolved
+    http://witness-demo:5642/oobi/EACgLu5i0hrj-80IJAeT94o1Y1kwapxveSfYl0DCofEc/witness resolved
 
 
 ### Verifier Resolves Schema OOBI
@@ -5066,7 +5105,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending message EOebNJIW1vG32kNbY00SBPnZt88GcDyP02CFepwdAcjF to EH2I6XrdMk7_DCBo-SUO8xcQzDPQAeYhuBvFc6XG5f6S
+    Sending message EK8Uqww85qp1X5yfuePYZXrL_RrAn9kCVNTtUp6x3G9H to EMmc7O2UkOI6KC2vcBo-eFwvwHkwveyIW-Rw4Nk_jxan
 
 
     ... grant message sent
@@ -5084,7 +5123,7 @@ ipex_said=exec(get_ipex_said)
 print(ipex_said)
 ```
 
-    EOebNJIW1vG32kNbY00SBPnZt88GcDyP02CFepwdAcjF
+    EK8Uqww85qp1X5yfuePYZXrL_RrAn9kCVNTtUp6x3G9H
 
 
 **Verifier displays credential (Optional)**
@@ -5103,29 +5142,29 @@ Before formally admitting the credential, the Verifier can inspect the received 
     
     Received IPEX Messages:
     
-    GRANT - SAID: EOebNJIW1vG32kNbY00SBPnZt88GcDyP02CFepwdAcjF
-    Credential EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI:
+    GRANT - SAID: EK8Uqww85qp1X5yfuePYZXrL_RrAn9kCVNTtUp6x3G9H
+    Credential EM6q2emrEmhTLKp4GCkCLjJvG3SRYgZL65Uwd-lRq0aR:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
-        Issued on 2025-05-30T22:29:08.601062+00:00
+        Issued by EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd
+        Issued on 2025-06-04T15:03:45.318753+00:00
         Already responded? No [91m✘[0m
         Full Credential:
-    	{
-    	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI",
-    	  "i": "EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw",
-    	  "ri": "EAEqvHOJMPaQiiXB_SDvi9WEaRxBgMQXGXCVkDxnffK0",
-    	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
-    	  "a": {
-    	    "d": "EBDchGEtKuTUvjorNVbhg4egHDPASz-8sAL3aw3zALl8",
-    	    "i": "ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb",
-    	    "dt": "2025-05-30T22:29:08.601062+00:00",
-    	    "eventName": "GLEIF Summit",
-    	    "accessLevel": "staff",
-    	    "validDate": "2026-10-01"
-    	  }
-    	}
+      {
+        "v": "ACDC10JSON0001c4_",
+        "d": "EM6q2emrEmhTLKp4GCkCLjJvG3SRYgZL65Uwd-lRq0aR",
+        "i": "EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd",
+        "ri": "EIJCqyK-W9LZKaIv6xMJNmE-_mvtM3-RnMm4POsGtayO",
+        "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
+        "a": {
+          "d": "EFFLM-bc6W9slQVyRib_oxBjeoa9-x5C4cKB005E-Uit",
+          "i": "EACgLu5i0hrj-80IJAeT94o1Y1kwapxveSfYl0DCofEc",
+          "dt": "2025-06-04T15:03:45.318753+00:00",
+          "eventName": "GLEIF Summit",
+          "accessLevel": "staff",
+          "validDate": "2026-10-01"
+        }
+      }
     
 
 
@@ -5150,7 +5189,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending admit message to ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb
+    Sending admit message to EACgLu5i0hrj-80IJAeT94o1Y1kwapxveSfYl0DCofEc
 
 
     ... admit message sent
@@ -5172,30 +5211,30 @@ Finally, the Verifier can check the status of the received IPEX message again. T
     
     Received IPEX Messages:
     
-    GRANT - SAID: EOebNJIW1vG32kNbY00SBPnZt88GcDyP02CFepwdAcjF
-    Credential EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI:
+    GRANT - SAID: EK8Uqww85qp1X5yfuePYZXrL_RrAn9kCVNTtUp6x3G9H
+    Credential EM6q2emrEmhTLKp4GCkCLjJvG3SRYgZL65Uwd-lRq0aR:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
-        Issued on 2025-05-30T22:29:08.601062+00:00
+        Issued by EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd
+        Issued on 2025-06-04T15:03:45.318753+00:00
         Already responded? Yes [92m✔[0m
-        Response: [92mAdmit[0m (EM1bVeam1rRLof18IBXer1cLjVAlofYuw6xd4NESLDWi)
+        Response: [92mAdmit[0m (EHamHmk1meFFVG0YH5LTsyhFz4QWKZxpbLpourIL25wv)
         Full Credential:
-    	{
-    	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI",
-    	  "i": "EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw",
-    	  "ri": "EAEqvHOJMPaQiiXB_SDvi9WEaRxBgMQXGXCVkDxnffK0",
-    	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
-    	  "a": {
-    	    "d": "EBDchGEtKuTUvjorNVbhg4egHDPASz-8sAL3aw3zALl8",
-    	    "i": "ENZjGNzlGAml1u7VBZlKV8mojMlcdifH6NmSr-fuGpyb",
-    	    "dt": "2025-05-30T22:29:08.601062+00:00",
-    	    "eventName": "GLEIF Summit",
-    	    "accessLevel": "staff",
-    	    "validDate": "2026-10-01"
-    	  }
-    	}
+      {
+        "v": "ACDC10JSON0001c4_",
+        "d": "EM6q2emrEmhTLKp4GCkCLjJvG3SRYgZL65Uwd-lRq0aR",
+        "i": "EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd",
+        "ri": "EIJCqyK-W9LZKaIv6xMJNmE-_mvtM3-RnMm4POsGtayO",
+        "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
+        "a": {
+          "d": "EFFLM-bc6W9slQVyRib_oxBjeoa9-x5C4cKB005E-Uit",
+          "i": "EACgLu5i0hrj-80IJAeT94o1Y1kwapxveSfYl0DCofEc",
+          "dt": "2025-06-04T15:03:45.318753+00:00",
+          "eventName": "GLEIF Summit",
+          "accessLevel": "staff",
+          "validDate": "2026-10-01"
+        }
+      }
     
 
 
@@ -5234,13 +5273,13 @@ Now, if the Issuer lists their issued credentials again, the status will reflect
     -i
 ```
 
-    Current issued credentials for issuer_aid (EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw):
+    Current issued credentials for issuer_aid (EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd):
     
-    Credential #1: EBOsDXAW4gfw5STV4KbYAIxcyN2XiWMDLmD27YFNA1VI
+    Credential #1: EM6q2emrEmhTLKp4GCkCLjJvG3SRYgZL65Uwd-lRq0aR
         Type: EventPass
         Status: Revoked [91m✘[0m
-        Issued by EHnLhHuqkRorqx2UQtWxNyAL6WMsUiF78SpazXK98hFw
-        Issued on 2025-05-30T22:29:37.841849+00:00
+        Issued by EFf6lKON0stKX83sHZfqclTVdiQ8vKTXUGBrMyFQa8Yd
+        Issued on 2025-06-04T15:04:11.864435+00:00
 
 
 <div class="alert alert-primary">
@@ -5266,3147 +5305,7 @@ This notebook demonstrated the ACDC presentation and revocation flows:
 This completes the basic lifecycle demonstration: issuance (previous notebook), presentation, and revocation, all handled securely using KERI identities and the IPEX protocol.
 </div>
 
-<!-- Source: 102_05_Keria_Signify.md -->
-# Introducing KERIA and Signify-ts: Architecture and Concepts
-
-<div class="alert alert-primary">
-  <b>🎯 OBJECTIVE</b><hr>
-  Introduces the foundational concepts of KERIA and Signify-ts, focusing on:
-    <ul>
-        <li>The KERIA/Signify client-agent architecture.</li>
-        <li>Key KERIA endpoint interfaces.</li>
-        <li>The concept of End Roles.</li>
-        <li>The relationship between Client AIDs and Agent AIDs.</li>
-    </ul>
-</div>
-
-## Client-Agent Architecture
-
-KERI is a protocol for secure, self-certifying identifiers. **KERIA** is an agent implementation of KERI, designed to run as a service (e.g., in the cloud or self-hosted) that manages AIDs on behalf of a controller. **Signify-ts** is a TypeScript library that acts as a client, enabling applications to interact with a KERIA agent.
-
-The idea behind this client-agent architecture is to enable "signing at the edge". Your sensitive private keys, used for signing key events and other data, remain on the client-side (managed by Signify client library). The KERIA agent, running remotely, handles tasks like:
-* Storing encrypted key material (salts, encrypted private keys)
-* Managing Key Event Logs (KELs)
-* Interacting with witnesses
-* Exchanging messages with other KERI agents
-
-The KERIA agent itself never has access to your unencrypted private keys. All critical signing operations happen on the client, and the signed events are then sent to the KERIA agent for processing and dissemination.
-
-This architecture separates key management and signing authority (client-side) from the operational aspects of maintaining an AID's KEL and its availability (agent-side).
-
-### KERIA Deployment and Configuration
-
-In a typical deployment, KERIA starts up and often loads its configuration, including a list of default witnesses, from a JSON configuration file (e.g., **[keria configuration file](config/keria/keria-docker.json)**). This allows the agent to be pre-configured with a set of trusted witnesses that any AIDs it manages can use.
-
-## Agent Service Endpoints
-
-A KERIA service instance exposes distinct HTTP endpoints to handle different types of interactions:
-
-1.  **Boot Interface** (`boot port`, e.g., 3903 by default):
-    * **Purpose**: Used for the initial setup and provisioning of a KERIA agent worker for a Signify client. This is where the client and agent establish their initial secure relationship.
-    * **Interaction**: The Signify client sends its client AID's inception event to this endpoint to request the creation of a delegated agent AID.
-    * **Accessibility**: Often restricted to internal infrastructure or disabled if agents are pre-configured (static worker mode).
-
-2.  **Admin Interface** (`admin port`, e.g., 3901 by default):
-    * **Purpose**: This is the primary REST API for the Signify client to command and control its KERIA agent.
-    * **Interaction**: Used for operations like creating new AIDs, rotating keys, issuing credentials, resolving OOBIs, etc. All requests to this interface must be authenticated (e.g., signed by the Client AID).
-    * **Accessibility**: Typically exposed externally to allow the client to manage its AIDs.
-
-3.  **KERI Protocol Interface** (`http port`, e.g., 3902 by default):
-    * **Purpose**: Handles standard KERI protocol messages (e.g., KELs, receipts, challenges) exchanged with other KERI agents and witnesses in the wider KERI network.
-    * **Interaction**: Facilitates multi-sig coordination, credential revocation, KEL exchange, etc., using CESR (Composable Event Streaming Representation) over HTTP.
-    * **Accessibility**: Exposed externally to enable interaction with the global KERI ecosystem.
-
-This separation of interfaces enhances security and deployment flexibility.
-
-## Understanding End Roles
-
-An **end role** in KERI is an authorization that one AID grants to another AID to act in a specific capacity on its behalf. Think of it as assigning a specific job to another identifier.
-
-For instance, when a Signify client connects to a KERIA agent, the **Client AID** (controlled by the user/application) delegates authority to an **Agent AID** (managed by the KERIA service). The Client AID essentially authorizes its Agent AID to perform certain KERI operations in its name, like anchoring its KEL with witnesses or responding to discovery requests.
-
-Declaring an end role typically involves creating a KERI event, often an interaction event (`ixn`) or an establishment event (`icp` or `rot`) with specific configuration (`c` field) or an `end` role event, that specifies:
-* The AID granting the authorization (the delegator or authorizer).
-* The AID receiving the authorization (the delegate or authorized party).
-* The specific role being granted (e.g., `agent`, `witness`, `watcher`).
-
-This signed authorization is recorded in the KEL of the authorizing AID, making the role assignment verifiable by anyone who can access and validate that KEL.
-
-## Client and Agent AIDs Explained
-
-When you use Signify-ts to connect to a KERIA agent, two primary AIDs are involved:
-
-1.  **Client AID**:
-    * This is an AID that *you* (or your application) control directly via the Signify-ts client.
-    * You hold its private keys.
-    * It's typically a transferable AID, allowing for key rotation.
-    * It acts as the **delegator** to the Agent AID.
-
-2.  **Agent AID**:
-    * This AID is created and managed by the KERIA service *on your behalf*.
-    * Its inception event specifies the Client AID as its delegator (`di` field in the inception event). This means the Agent AID's authority to act is derived from, and anchored to, your Client AID.
-    * It's also typically a transferable AID.
-    * The KERIA service uses this Agent AID to perform actions for your Client AID, such as interacting with witnesses or other agents, without needing direct access to your Client AID's private keys.
-
-The Signify client generates the Client AID and sends its inception event to the KERIA agent's Boot Interface. The KERIA service then creates the delegated Agent AID and returns its inception event to the client. Finally, the Signify client approves this delegation by sending an interaction event back to the KERIA agent's Admin Interface.
-
-This delegation model is fundamental to KERIA's security: your primary controlling keys (for the Client AID) remain "at the edge," while the KERIA agent operates with a delegated authority (via the Agent AID) that is always traceable back to your Client AID.
-
-<div class="alert alert-primary">
-  <b>📝 SUMMARY</b><hr>
-  <p>
-    The KERIA/Signify architecture enables "signing at the edge," where a Signify client (like Signify-ts) manages private keys and signing operations locally, while a remote KERIA agent handles KEL management, witness interactions, and KERI protocol communications. KERIA exposes three main HTTP endpoints:
-    <ul>
-        <li><b>Boot Interface:</b> For initial client-agent provisioning and creation of a delegated Agent AID.</li>
-        <li><b>Admin Interface:</b> A REST API for the client to command and control its agent (e.g., create AIDs, rotate keys).</li>
-        <li><b>KERI Protocol Interface:</b> For standard KERI message exchange with other agents and witnesses.</li>
-    </ul>
-    End roles in KERI define verifiable authorizations for one AID to act in a specific capacity for another (e.g., an Agent AID acting in the 'agent' role for a Client AID).
-  </p>
-  <p>
-    The connection process involves a <b>Client AID</b> (controlled by the user via Signify) delegating authority to an <b>Agent AID</b> (managed by KERIA). 
-  </p>
-</div>
-
-<!-- Source: 102_10_Keria_Signify_Basic_Operations.md -->
-# Signify-ts Basics: Client Setup and AID Management
-
-<div class="alert alert-primary">
-  <b>🎯 OBJECTIVE</b><hr>
-  Introduce basic operations using Signify-ts: creating a client, initializing (booting) an agent, connecting to an agent, and creating an Autonomic Identifier (AID).</li>
-    </ul>
-    Familiarity with core KERI concepts (AIDs, KELs, digital signatures, witnesses, OOBIs) is assumed.
-</div>
-
-## Connecting to a KERIA Agent
-
-Now that we understand the architecture, let's see how to use the `signify-ts` library to establish a connection with a KERIA agent. This process involves three main steps:
-1.  Initializing the `signify-ts` library.
-2.  Creating a `SignifyClient` instance, which represents your application's connection to a specific KERIA agent.
-3.  Bootstrapping and connecting the client to the agent, which establishes the Client AID and the delegated Agent AID.
-
-
-
-<div class="alert alert-info">
-    <b>ℹ️ Note</b><hr>This section assumes that a KERIA agent is running and its Boot and Admin interfaces are accessible at the specified URLs. In the context of these notebooks, KERIA is pre-configured and running as part of the Docker deployment.
-</div>
-
-
-### Initializing the Signify-ts Library
-
-The `signify-ts` library contains components for cryptographic operations using libsodium. Before any of its functionalities can be used, these components must be initialized. This is achieved by calling and the `ready()` function.
-
-
-
-```typescript
-import { randomPasscode, ready, SignifyClient, Tier } from 'npm:signify-ts';
-
-await ready();
-
-console.log("Signify-ts library initialized and ready.");
-```
-
-    Signify-ts library initialized and ready.
-
-
-### Creating the Client Instance
-Once the library is initialized, you can create an instance of `SignifyClient`. This object will be your primary interface for all interactions with the KERIA agent. It requires several parameters:
-
-- **url**: The URL of the KERIA agent's Admin Interface. The client uses this for most command and control operations after the initial connection is established.
-- **bran**: A 21-character, high-entropy string, often referred to as a "passcode." This bran serves as the root salt for deriving the Client AID's signing and rotation keys via a Hierarchical Deterministic (HD) key algorithm. It is critical to treat the bran as securely as a private key. Losing it means losing control of the Client AID.
-- **tier**: The security tier for the passcode hashing algorithm. Tier.low, Tier.med, and Tier.high represent different computational costs for deriving keys from the bran. Higher tiers are more resistant to brute-force attacks but require more processing power and time.
-- **bootUrl**: The URL of the KERIA agent's Boot Interface. This is used for the initial setup and provisioning of the agent worker for this client.
-
-
-```typescript
-const adminUrl = 'http://keria:3901'; // KERIA agent's Admin Interface URL
-const bootUrl = 'http://keria:3903';  // KERIA agent's Boot Interface URL
-
-// Generate a new random 21-character bran (passcode/salt)
-// In a real application, you would securely store and reuse this bran.
-const bran = randomPasscode();
-
-// Create the SignifyClient instance
-const client = new SignifyClient(
-    adminUrl,
-    bran,
-    Tier.low, // Using Tier.low for faster execution
-    bootUrl
-);
-
-console.log('SignifyClient instance created.');
-console.log('Using Passcode (bran):', bran);
-```
-
-    SignifyClient instance created.
-
-
-    Using Passcode (bran): Ce9I2GaXFrJGLcOvPl8zy
-
-
-<div class="alert alert-info">
-  <b>ℹ️ NOTE</b><hr>
-In a production environment, the <code>bran</code> must be securely generated and stored. For a given Client AID, you must consistently use the same bran to reconnect and derive the correct keys. Using <code>randomPasscode()</code> each time, as in this demo, will result in a new Client AID being created or an inability to connect to an existing one if the KERIA agent already has a state associated with a different bran for its controller.
-</div>
-
-### Bootstrapping and Connecting to the Agent
-With the `SignifyClient` instance created, the next step is to establish the initial connection and state with the KERIA agent. This involves two methods:
-
-- **`client.boot()`**: Initiates the bootstrapping process with the KERIA agent's Boot Interface:
-  - The client generates its Client AID using the provided bran.
-  - It sends the Client AID's inception event to the KERIA agent's Boot Interface.
-  - The KERIA agent, upon successful verification, creates a delegated Agent AID and returns its inception event to the client. This step essentially provisions the necessary resources and establishes the delegated relationship on the KERIA agent for this specific client.
-
-- **`client.connect()`**: After `boot()` (or if the agent has been previously booted with the same bran), connect() establishes the active session with the KERIA agent via its Admin Interface.
-
-
-
-```typescript
-// Bootstrap the connection with the KERIA agent
-// This creates the Client AID and requests the Agent AID creation.
-await client.boot();
-console.log('Client boot process initiated with KERIA agent.');
-
-// Establish the active connection and retrieve state
-await client.connect();
-console.log('Client connected to KERIA agent.');
-
-// Retrieve and display the current state
-const state = await client.state();
-console.log('\nConnection State Details:');
-console.log('-------------------------');
-console.log('Client AID Prefix: ', state.controller.state.i);
-console.log('Client AID Keys:   ', state.controller.state.k);
-console.log('Client AID Next Keys Digest: ', state.controller.state.n);
-console.log('')
-console.log('Agent AID Prefix:   ', state.agent.i);
-console.log('Agent AID Type:     ', state.agent.et); // Should be 'dip' for delegated inception
-console.log('Agent AID Delegator:', state.agent.di); // Should be the Client AID's prefix
-
-```
-
-    Client boot process initiated with KERIA agent.
-
-
-    Client connected to KERIA agent.
-
-
-    
-    Connection State Details:
-
-
-    -------------------------
-
-
-    Client AID Prefix:  ELt0ARREZ1Z84hbZGULVSDbmxqbHBfDIrpb-ARp2FqM4
-
-
-    Client AID Keys:    [ [32m"DD9Iig6iGSgsHS-Ych8rLOG089v5pt1xXJa-e9h0Gaa3"[39m ]
-
-
-    Client AID Next Keys Digest:  [ [32m"ECNYELO1rX8fWjFgUMPKsDN56y-o_3K4CkXBdNjzTK2j"[39m ]
-
-
-    
-
-
-    Agent AID Prefix:    EGGiGqfDaDYw5uN86eImhubioQNoSXr3qnF-9A_10rV5
-
-
-    Agent AID Type:      dip
-
-
-    Agent AID Delegator: ELt0ARREZ1Z84hbZGULVSDbmxqbHBfDIrpb-ARp2FqM4
-
-
-**Output Explanation:**
-
-- **Client AID Prefix:** The unique, self-certifying identifier for the client, tied to the bran.
-- **Client AID Keys:** The current public signing key(s) for the Client AID.
-- **Client AID Next Keys Digest:** The digest (hash) of the public key(s) pre-rotated for the next key rotation of the Client AID.
-- **Agent AID Prefix:** The unique identifier for the KERIA agent worker associated with your client.
-- **Agent AID Type:** dip indicates a "delegated inception" event, signifying that this Agent AID's authority is delegated by another AID.
-- **Agent AID Delegator:** This crucial field shows the prefix of the Client AID, confirming that the Agent AID is indeed delegated by your Client AID.
-
-### Reconnecting to an Existing Agent
-If the KERIA agent has already been booted for a specific `bran` (Client AID), you don't need to call `client.boot()` again when using the same bran. You directly use `client.connect()`. Signify-ts will detect the existing state and reconnect.
-
-
-```typescript
-// Create a new client instance with the SAME bran
-const client2 = new SignifyClient(
-    adminUrl,
-    bran, // Using the same bran as the first client
-    Tier.low,
-    bootUrl
-);
-console.log('Second SignifyClient instance created with the same bran.');
-
-// Connect without booting, as the agent state for this bran should already exist
-await client2.connect();
-console.log('Second client connected to the existing KERIA agent.');
-
-const state2 = await client2.state();
-console.log('\nReconnection State Details:');
-console.log('---------------------------');
-console.log('Client AID Prefix:  ', state2.controller.state.i); // Should be the same Client AID
-console.log('Agent AID Prefix:   ', state2.agent.i);  // Should be the same Agent AID
-console.log('Agent AID Delegator:', state2.agent.di); // Should be the same Client AID
-```
-
-    Second SignifyClient instance created with the same bran.
-
-
-    Second client connected to the existing KERIA agent.
-
-
-    
-    Reconnection State Details:
-
-
-    ---------------------------
-
-
-    Client AID Prefix:   ELt0ARREZ1Z84hbZGULVSDbmxqbHBfDIrpb-ARp2FqM4
-
-
-    Agent AID Prefix:    EGGiGqfDaDYw5uN86eImhubioQNoSXr3qnF-9A_10rV5
-
-
-    Agent AID Delegator: ELt0ARREZ1Z84hbZGULVSDbmxqbHBfDIrpb-ARp2FqM4
-
-
-<div class="alert alert-primary">
-<b>📝 SUMMARY</b><hr>
-To connect to a KERIA agent using Signify-ts:
-<ol>
-<li>Initialize the library with <code>await ready()</code>.</li>
-<li>Create a <code>SignifyClient</code> instance, providing the agent's Admin and Boot URLs, a unique 21-character <code>bran</code> (passcode/salt for key derivation), and a security <code>Tier</code>.</li>
-<li>For the first-time connection with a new <code>bran</code>, call <code>await client.boot()</code> to provision the Client AID and request the creation of a delegated Agent AID from KERIA.</li>
-<li>Call <code>await client.connect()</code> to establish the active session, retrieve the state (Client and Agent AIDs), and complete any delegation approvals. The Client AID delegates authority to the Agent AID, whose inception event (type <code>dip</code>) will list the Client AID as its delegator.</li>
-<li>For subsequent connections using the same <code>bran</code>, skip <code>client.boot()</code> and directly use <code>client.connect()</code>.</li>
-</ol>
-The <code>bran</code> is critical for deriving the Client AID's keys and must be kept secure and reused consistently for the same identity.
-</div>
-
-## Adding an Autonomic Identifier (AID)
-
-Once your Signify client is connected to the KERIA agent, you can instruct the agent to create and manage new Autonomic Identifiers (AIDs) on your behalf. These AIDs will be controlled by your Client AID (established during the `connect()` phase) through the delegation mechanism.
-
-### Initiating AID Inception
-
-Creating a new AID is an asynchronous operation. When you request the KERIA agent to incept an AID, the agent starts the process, which might involve communicating with witnesses. The `signify-ts` library handles this by first giving you an "operation" object, which you can then use to poll for the completion of the inception process.
-
-The `client.identifiers().create()` method is used to start the inception of a new AID.
-
-**Parameters Explained:**
-
-- **aidAlias (string):** This is a human-readable alias that you assign to the AID within your Signify client's local storage. It's used to refer to this AID in subsequent client operations. It's not part of the KERI protocol itself but a convenience for client-side management.
-- **inceptionArgs (object):** This object contains the configuration for the new AID:
-  - **toad (number):** The Threshold of Accountable Duplicity. This is the minimum number of witness receipts the controller (your Client AID via KERIA) requires for this new AID's events to be considered accountable.
-  - **wits (array of strings):** A list of AID prefixes of the witnesses that this new AID should use. These witnesses must be discoverable by your KERIA agent (e.g., pre-loaded during KERIA's startup or resolved via OOBIs by the client/agent).
-  - **Other parameters:** not shown for brevity but available, see **[CreateIdentifierArgs](https://weboftrust.github.io/signify-ts/interfaces/CreateIdentiferArgs.html)**
-
-
-```typescript
-// Define an alias for the new AID for easy reference within the client
-const aidAlias = 'newAid';
-
-// Inception request parameters
-const identifierArgs = {
-    toad: 2, // Threshold of Accountable Duplicity: minimum number of witness receipts required
-    wits: [   // List of witness AID prefixes to use for this AID
-        'BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha',
-        'BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM',
-        'BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX'
-    ]
-    // Other parameters can be specified. If not, defaults are used.
-};
-
-// Send the inception request to the KERIA agent
-const inceptionResult = await client.identifiers().create(aidAlias, identifierArgs);
-console.log(`AID inception initiated for alias: ${aidAlias}`);
-
-// The result contains information about the long-running operation
-const inceptionOperation = await inceptionResult.op();
-console.log('Inception Operation Details:');
-console.log(inceptionOperation);
-
-```
-
-    AID inception initiated for alias: newAid
-
-
-    Inception Operation Details:
-
-
-    {
-      name: [32m"witness.EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y"[39m,
-      metadata: { pre: [32m"EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y"[39m, sn: [33m0[39m },
-      done: [33mfalse[39m,
-      error: [1mnull[22m,
-      response: [1mnull[22m
-    }
-
-
-**Outout explained**
-
-Calling `inceptionResult.op()` returns a promise that resolves to an operation object containing:
-- **name:** A unique name for this long-running operation (e.g., `witness.AID_PREFIX`). KERIA uses this to track the task. The prefix in the name corresponds to the AID being created.
-- **metadata:** Contains details like the prefix (pre) of the AID being incepted and the sequence number (`sn`, which is 0 for inception).
-- **done:** A boolean indicating if the operation has completed. Initially, it's `false`.
-- **error:** Will contain error details if the operation fails.
-- **response:** Will contain the result of the operation (the signed inception event) once `done` is `true`.
-
-### Waiting for Operation Completion
-Since AID inception involves network communication (e.g., with witnesses to gather receipts), it doesn't complete instantly. You need to poll or wait for the operation to finish. The `client.operations().wait()` method handles this, periodically checking with the KERIA agent until the operation's `done` flag becomes `true` or a timeout occurs.
-
-
-```typescript
-// Poll the KERIA agent for the completion of the inception operation.
-// AbortSignal.timeout(30000) sets a 30-second timeout for waiting.
-console.log('Waiting for inception operation to complete...');
-const operationResponse = await client
-    .operations()
-    .wait(inceptionOperation, AbortSignal.timeout(30000)); // Pass the operation name
-
-console.log('\nInception Operation Completed:');
-console.log(operationResponse);
-
-// The actual inception event is in the 'response' field of the completed operation
-const newAidInceptionEvent = operationResponse.response;
-console.log(`\nSuccessfully created AID with prefix: ${newAidInceptionEvent.i}`);
-console.log(`Witnesses specified: ${JSON.stringify(newAidInceptionEvent.b)}`);
-
-```
-
-    Waiting for inception operation to complete...
-
-
-    
-    Inception Operation Completed:
-
-
-    {
-      name: [32m"witness.EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y"[39m,
-      metadata: { pre: [32m"EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y"[39m, sn: [33m0[39m },
-      done: [33mtrue[39m,
-      error: [1mnull[22m,
-      response: {
-        v: [32m"KERI10JSON0001b7_"[39m,
-        t: [32m"icp"[39m,
-        d: [32m"EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y"[39m,
-        i: [32m"EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y"[39m,
-        s: [32m"0"[39m,
-        kt: [32m"1"[39m,
-        k: [ [32m"DJYh961uze2DQs1xLlsGprNGqINgYdE9guRqpT5llTLQ"[39m ],
-        nt: [32m"1"[39m,
-        n: [ [32m"EFgUmc8WoT3lO6ZwWlAHzKdE7NHR_PnhvxalMC-IE0lj"[39m ],
-        bt: [32m"2"[39m,
-        b: [
-          [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m,
-          [32m"BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM"[39m,
-          [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m
-        ],
-        c: [],
-        a: []
-      }
-    }
-
-
-    
-    Successfully created AID with prefix: EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y
-
-
-    Witnesses specified: ["BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM","BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"]
-
-
-**Completed Operation Output Explained:**
-
-- `done`: Now true, indicating the inception is complete on the KERIA agent's side.
-- `response`: This field now contains the actual signed inception event (`icp`) for the newly created AID (`newAid`).
-- `i`: The prefix of the newly created AID.
-- `k`: The list of current public signing keys.
-- `n`: The list of digests of the next (pre-rotated) public keys.
-- `b`: The list of witness AIDs that this AID is configured to use.
-- `bt`: The Threshold of Accountable Duplicity (TOAD) specified during creation (matches toad: 2 from our request).
-
-The KERIA agent has successfully incepted the AID, and its KEL (starting with this inception event) is now managed by the agent and receipted by the specified witnesses.
-
-## Managing Agent Operations
-Signify-ts also provides methods to list and delete operations tracked by the KERIA agent for your client.
-
-### Listing Operations
-
-
-```typescript
-// List all current long-running operations for this client
-const operationsList = await client.operations().list();
-console.log('\nCurrent Operations List:');
-console.log(JSON.stringify(operationsList, null, 2));
-```
-
-    
-    Current Operations List:
-
-
-    [
-      {
-        "name": "witness.EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y",
-        "metadata": {
-          "pre": "EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y",
-          "sn": 0
-        },
-        "done": true,
-        "error": null,
-        "response": {
-          "v": "KERI10JSON0001b7_",
-          "t": "icp",
-          "d": "EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y",
-          "i": "EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y",
-          "s": "0",
-          "kt": "1",
-          "k": [
-            "DJYh961uze2DQs1xLlsGprNGqINgYdE9guRqpT5llTLQ"
-          ],
-          "nt": "1",
-          "n": [
-            "EFgUmc8WoT3lO6ZwWlAHzKdE7NHR_PnhvxalMC-IE0lj"
-          ],
-          "bt": "2",
-          "b": [
-            "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
-            "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
-            "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
-          ],
-          "c": [],
-          "a": []
-        }
-      }
-    ]
-
-
-### Deleting Operations
-
-
-```typescript
-// Delete the completed inception operation (optional cleanup)
-const opNameToDelete = operationsList[0].name;
-await client.operations().delete(opNameToDelete);
-console.log(`\nDeleted operation: ${opNameToDelete}`);
-```
-
-    
-    Deleted operation: witness.EHyf8OpsIYmb5FC70ZqF_s8713YLxVZ2dinCh_bTuI9Y
-
-
-<div class="alert alert-primary">
-<b>📝 SUMMARY</b><hr>
-To create a new AID using Signify-ts and a KERIA agent:
-<ol>
-<li>Use <code>client.identifiers().create(alias, config)</code>. Provide a client-side <code>alias</code> for the AID and a <code>config</code> object specifying parameters like <code>toad</code> (Threshold of Accountable Duplicity) and <code>wits</code> (list of witness AIDs).</li>
-<li>The <code>create()</code> method returns an object from which you can get a long-running <code>operation</code> object using <code>.op()</code>. This operation is initially marked as not <code>done</code>.</li>
-<li>Use <code>client.operations().wait(operationName)</code> to poll the KERIA agent until the operation completes. The resolved object will have
-<code>done: true</code> and its <code>response</code> field will contain the signed inception event (<code>icp</code>) of the newly created AID.</li>
-<li>Operations can be listed with <code>client.operations().list()</code> and deleted with <code>client.operations().delete(operationName)</code>.</li>
-</ol>
-This process highlights the asynchronous nature of KERIA operations that involve agent-side processing and network interactions.
-</div>
-
-
-```typescript
-
-```
-
-<!-- Source: 102_15_Keria_Signify_Connecting_Clients.md -->
-# Signify-ts: Securely Connecting Controllers
-
-<div class="alert alert-primary">
-  <b>🎯 OBJECTIVE</b><hr>
-  Explain how to establish a secure, mutually authenticated connection between two KERIA/Signify-ts controllers using Out-of-Band Introductions (OOBIs) and the challenge/response protocol to enhance trust.
-</div>
-
-## Controller and AID Setup
-
-This notebook focuses on connecting two independent controllers using the KERIA/Signify architecture. This involves two `SignifyClient` instances, each managing its own AID, establishing contact, and then authenticating each other. Conceptually, these steps mirror the `kli` process for connecting controllers but are executed through the `signify-ts` library interacting with KERIA agents.
-
-You will begin by setting up two distinct `SignifyClient` instances, which we'll call `clientA` (representing a controller Alfred) and `clientB` (representing a controller Betty). Each client will:
-1.  Generate a unique `bran` (passcode).
-2.  Instantiate `SignifyClient`.
-3.  Boot and connect to its KERIA agent, establishing its Client AID and the delegated Agent AID.
-4.  Create a primary AID (let's call them `aidA` for Alfred and `aidB` for Betty) with a set of predefined witnesses.
-
-The specifics of client creation, booting, connecting, and basic AID inception using `signify-ts` were covered in the "KERIA-Signify Basic Operations" notebook. You will apply those principles below:
-
-
-
-```typescript
-import { randomPasscode, ready, SignifyClient, Tier } from 'npm:signify-ts';
-
-const url = 'http://keria:3901';
-const bootUrl = 'http://keria:3903';
-
-// Inception request parameters
-const identifierArgs = {
-    toad: 3,
-    wits: [  
-        'BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha',
-        'BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM',
-        'BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX'
-    ]
-};
-
-await ready();
-
-// ----- Client A (Alfred) -----
-
-const aidAAlias = 'aidA'
-const branA = randomPasscode();
-const clientA = new SignifyClient(url, branA, Tier.low, bootUrl);
-
-await clientA.boot();
-await clientA.connect();
-
-const AInceptionResult = await clientA.identifiers().create(aidAAlias, identifierArgs);
-
-const AInceptionOperation = await AInceptionResult.op();
-
-const { response: aidA }  = await clientA
-    .operations()
-    .wait(AInceptionOperation, AbortSignal.timeout(30000));
-
-await clientA.operations().delete(AInceptionOperation.name);
-
-// ----- Client B (Betty) -----
-
-const aidBAlias = 'aidB'
-const branB = randomPasscode();
-const clientB = new SignifyClient(url, branB, Tier.low, bootUrl);
-
-await clientB.boot();
-await clientB.connect();
-
-const BInceptionResult = await clientB.identifiers().create(aidBAlias, identifierArgs);
-
-const BInceptionOperation = await BInceptionResult.op();
-
-const { response: aidB }  = await clientB
-    .operations()
-    .wait(BInceptionOperation, AbortSignal.timeout(30000));
-
-await clientB.operations().delete(BInceptionOperation.name);
-
-console.log(`Client A AID Pre: ${aidA.i}\nClient B AID Pre: ${aidB.i}`)
-```
-
-    Client A AID Pre: EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl
-    Client B AID Pre: ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q
-
-
-<div class="alert alert-info">
-    <b>ℹ️ Note</b><hr> For this demonstration, both clients will connect to the same KERIA instance (defined by <code>url</code> and <code>bootUrl</code>). In a real-world scenario, Alfred and Betty would likely each have their own Signify clients running on their respective devices and interacting with their own (or chosen) KERIA agent instances. The KERIA agent URLs might be different for each. However, the KERI protocol and Signify patterns for connection and authentication remain the same.
-</div>
-
-## Assigning Agent End Roles
-
-As discussed in "KERIA-Signify Basics", when a `SignifyClient` connects, it establishes a **Client AID** (which you directly control via the `bran`) and a delegated **Agent AID** (managed by the KERIA service). For these Agent AIDs to act effectively on behalf of the AIDs we just created (`aidA` and `aidB`), we need to explicitly authorize them by assigning an `agent` end role.
-
-The `agent` role, in this context, signifies that the KERIA Agent AID associated with `clientA` is authorized to manage/interact on behalf of `aidA`, and similarly for `clientB` and `aidB`. This is a crucial step for enabling the KERIA agent to perform tasks like responding to OOBI requests for these specific identifiers.
-
-Use the `client.identifiers().addEndRole()` method to add the role. This method requires:
-- The alias of the identifier granting the authorization (e.g., `aidAAlias`).
-- The role to be assigned (e.g., `'agent'`).
-- The prefix of the AID being authorized for that role. In this case, it's the prefix of the client's own KERIA Agent AID, accessible via `client.agent!.pre`.
-
-
-```typescript
-// ----- Client A: Assign 'agent' role for aidA to its KERIA Agent AID -----
-const agentRole = 'agent';
-
-// Authorize clientA's Agent AID to act as an agent for aidA
-const AAddRoleResult = await clientA
-    .identifiers()
-    .addEndRole(aidAAlias, 
-                agentRole, 
-                clientA!.agent!.pre // clientA.agent.pre is the Agent AID prefix
-               ); 
-
-const AAddRoleOperation = await AAddRoleResult.op();
-
-const { response: AAddRoleResponse } = await clientA
-    .operations()
-    .wait(AAddRoleOperation, AbortSignal.timeout(30000));
-
-await clientA.operations().delete(AAddRoleOperation.name);
-
-console.log(`Client A: Assigned '${agentRole}' role to KERIA Agent ${clientA.agent!.pre} for AID ${aidA.i}`);
-
-// ----- Client B: Assign 'agent' role for aidB to its KERIA Agent AID -----
-
-// Authorize clientB's Agent AID to act as an agent for aidB
-const BAddRoleResult = await clientB
-    .identifiers()
-    .addEndRole(aidBAlias, 
-                agentRole, 
-                clientB!.agent!.pre // clientB.agent.pre is the Agent AID prefix
-               ); 
-
-const BAddRoleOperation = await BAddRoleResult.op();
-
-const { response: BAddRoleResponse } = await clientB
-    .operations()
-    .wait(BAddRoleOperation, AbortSignal.timeout(30000));
-
-await clientB.operations().delete(BAddRoleOperation.name);
-
-console.log(`Client B: Assigned '${agentRole}' role to KERIA Agent ${clientB.agent!.pre} for AID ${aidB.i}`);
-
-```
-
-    Client A: Assigned 'agent' role to KERIA Agent EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq for AID EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl
-
-
-    Client B: Assigned 'agent' role to KERIA Agent EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv for AID ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q
-
-
-## Discovery via OOBIs
-
-With the AIDs created and their respective KERIA agents authorized, Alfred (`clientA`, `aidA`) and Betty (`clientB`, `aidB`) need a way to discover each other. This is where Out-of-Band Introductions (OOBIs) are used.
-
-### Generating OOBI URLs
-
-Each client needs to generate an OOBI for its AID (`aidA` and `aidB`). This OOBI is associated with the `agent` role, meaning the OOBI URL (**IURL** for short) will point to an endpoint on their KERIA agent that is authorized to serve information about the AID.
-
-Proceed by generating the IURLs:
-- `clientA` generates an OOBI for `aidA` with the role `agent`.
-- `clientB` generates an OOBI for `aidB` with the role `agent`.
-
-
-
-```typescript
-// ----- Generate OOBIs -----
-
-// Client A generates OOBI for aidA (role 'agent')
-const oobiA_Result = await clientA.oobis().get(aidAAlias, agentRole);
-const oobiA_url = oobiA_Result.oobis[0]; // Assuming at least one OOBI is returned
-console.log(`Client A (Alfred) generated OOBI for aidA: ${oobiA_url}`);
-
-// Client B generates OOBI for aidB (role 'agent')
-const oobiB_Result = await clientB.oobis().get(aidBAlias, agentRole);
-const oobiB_url = oobiB_Result.oobis[0]; // Assuming at least one OOBI is returned
-console.log(`Client B (Betty) generated OOBI for aidB: ${oobiB_url}`);
-
-```
-
-    Client A (Alfred) generated OOBI for aidA: http://keria:3902/oobi/EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl/agent/EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq
-
-
-    Client B (Betty) generated OOBI for aidB: http://keria:3902/oobi/ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q/agent/EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv
-
-
-### Resolving OOBI URLs
-
-In a real scenario, Alfred would share `oobiA` with Betty, and Betty would share `oobiB` with Alfred through some non-KERI channel (e.g., email, QR code, messaging app). For this notebook, we'll just store them in variables.
-
-Now perform the OOBI resolution. This means `clientA`'s KERIA agent uses the URL in `oobiB` to fetch `aidB`'s KEL from `clientB`'s KERIA agent. `clientA` then cryptographically verifies this KEL. `clientB` resolves `oobiA` similarly.
-
-
-
-
-```typescript
-// Client A resolves Client B's OOBI
-const contactBAlias = 'Betty_Contact_for_Alfred'; // Alias for clientA to refer to aidB
-console.log(`\nClient A (Alfred) attempting to resolve Betty's OOBI...`);
-const AResolveOperation = await clientA.oobis().resolve(oobiB_url, contactBAlias);
-const AResolveResponse = await clientA
-    .operations()
-    .wait(AResolveOperation, AbortSignal.timeout(30000));
-await clientA.operations().delete(AResolveOperation.name);
-console.log(`Client A resolved Betty's OOBI. Response:`, AResolveResponse.response ? "OK" : "Failed or no response data");
-
-// Client B resolves Client A's OOBI
-const contactAAlias = 'Alfred_Contact_for_Betty'; // Alias for clientB to refer to aidA
-console.log(`\nClient B (Betty) attempting to resolve Alfred's OOBI...`);
-const BResolveOperation = await clientB.oobis().resolve(oobiA_url, contactAAlias);
-const BResolveResponse = await clientB
-    .operations()
-    .wait(BResolveOperation, AbortSignal.timeout(30000));
-await clientB.operations().delete(BResolveOperation.name);
-console.log(`Client B resolved Alfred's OOBI. Response:`, BResolveResponse.response ? "OK" : "Failed or no response data");
-
-```
-
-    
-    Client A (Alfred) attempting to resolve Betty's OOBI...
-
-
-    Client A resolved Betty's OOBI. Response: OK
-
-
-    
-    Client B (Betty) attempting to resolve Alfred's OOBI...
-
-
-    Client B resolved Alfred's OOBI. Response: OK
-
-
-### Verifying Resolved Contacts
-
-Upon successful resolution, each client will have added the other's AID to their local contact list. Use `clientA.contacts().list()` to display the contacts:
-
-
-```typescript
-console.log(`\nVerifying contacts...`);
-const AContacts = await clientA.contacts().list(undefined, 'alias', contactBAlias);
-console.log(AContacts);
-
-const BContacts = await clientB.contacts().list(undefined, 'alias', contactAAlias);
-console.log(BContacts);
-
-```
-
-    
-    Verifying contacts...
-
-
-    [
-      {
-        alias: [32m"Betty_Contact_for_Alfred"[39m,
-        oobi: [32m"http://keria:3902/oobi/ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q/agent/EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv"[39m,
-        id: [32m"ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q"[39m,
-        ends: {
-          agent: {
-            [32m"EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv"[39m: { http: [32m"http://keria:3902/"[39m }
-          },
-          witness: {
-            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
-              http: [32m"http://witness-demo:5642/"[39m,
-              tcp: [32m"tcp://witness-demo:5632/"[39m
-            },
-            BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
-              http: [32m"http://witness-demo:5643/"[39m,
-              tcp: [32m"tcp://witness-demo:5633/"[39m
-            },
-            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
-              http: [32m"http://witness-demo:5644/"[39m,
-              tcp: [32m"tcp://witness-demo:5634/"[39m
-            }
-          }
-        },
-        challenges: [],
-        wellKnowns: []
-      }
-    ]
-
-
-    [
-      {
-        alias: [32m"Alfred_Contact_for_Betty"[39m,
-        oobi: [32m"http://keria:3902/oobi/EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl/agent/EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq"[39m,
-        id: [32m"EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl"[39m,
-        ends: {
-          agent: {
-            [32m"EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq"[39m: { http: [32m"http://keria:3902/"[39m }
-          },
-          witness: {
-            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
-              http: [32m"http://witness-demo:5642/"[39m,
-              tcp: [32m"tcp://witness-demo:5632/"[39m
-            },
-            BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
-              http: [32m"http://witness-demo:5643/"[39m,
-              tcp: [32m"tcp://witness-demo:5633/"[39m
-            },
-            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
-              http: [32m"http://witness-demo:5644/"[39m,
-              tcp: [32m"tcp://witness-demo:5634/"[39m
-            }
-          }
-        },
-        challenges: [],
-        wellKnowns: []
-      }
-    ]
-
-
-## Mutual Authentication with Challenge-Response
-
-Successfully resolving an OOBI means you've retrieved and cryptographically verified the KEL of the target AID. This establishes the authenticity and integrity of the AID's key history.
-
-However, it does not, by itself, prove that the entity you are currently communicating with over the network (the one that provided the OOBI or is responding via the OOBI's endpoint) is the legitimate controller of that AID's private keys.
-
-This is why the **Challenge-Response** protocol is critical for establishing authenticated control.
-
-The process, as described in the "Connecting Controllers" notebook for `kli`, is as follows for each pair (e.g., Alfred challenging Betty):
-
-1.  **Generate Challenge**: Alfred (`clientA`) generates a set of unique challenge words.
-2.  **Send Challenge (Simulated OOB)**: Alfred communicates these words to Betty through an out-of-band channel (e.g., verbally, secure message). This step is crucial to prevent a Man-in-the-Middle (MITM) on the main KERI connection from intercepting or altering the challenge. For this notebook, we'll print the words.
-3.  **Respond to Challenge**: Betty (`clientB`), using `aidB`, signs the exact challenge words received from Alfred. The `respond()` method sends this signed response to Alfred's KERIA agent.
-4.  **Verify Response**: Alfred (`clientA`) receives the signed response. His KERIA agent verifies that the signature corresponds to `aidB`'s current authoritative keys (from the KEL he resolved earlier) and that the signed message matches the original challenge words. This is an asynchronous operation.
-5.  **Mark as Responded/Authenticated**: If verification is successful, Alfred (`clientA`) marks the challenge for `aidB` as successfully responded to and authenticated. This updates the contact information for Betty in Alfred's client.
-
-This process is then repeated with Betty challenging Alfred.
-
-### Generating Challenge Phrases
-
-Generate a set of random words for each client. `signify-ts` uses `client.challenges().generate()` for this. The strength of the challenge can be specified by the bit length (e.g., 128 or 256 bits, which translates to a certain number of words).
-
-
-```typescript
-// ----- Generate Challenge Words -----
-
-// Client A (Alfred) generates challenge words for Betty
-const challengeWordsA = await clientA.challenges().generate(128); // 128-bit strength
-console.log("Client A's challenge words for Betty:", challengeWordsA.words);
-
-// Client B (Betty) generates challenge words for Alfred
-const challengeWordsB = await clientB.challenges().generate(128); // 128-bit strength
-console.log("Client B's challenge words for Alfred:", challengeWordsB.words);
-```
-
-    Client A's challenge words for Betty: [
-      [32m"detail"[39m,   [32m"electric"[39m,
-      [32m"pair"[39m,     [32m"economy"[39m,
-      [32m"picnic"[39m,   [32m"approve"[39m,
-      [32m"photo"[39m,    [32m"index"[39m,
-      [32m"dinosaur"[39m, [32m"disagree"[39m,
-      [32m"north"[39m,    [32m"bring"[39m
-    ]
-
-
-    Client B's challenge words for Alfred: [
-      [32m"nominee"[39m, [32m"mesh"[39m,
-      [32m"noodle"[39m,  [32m"decide"[39m,
-      [32m"brave"[39m,   [32m"siege"[39m,
-      [32m"law"[39m,     [32m"mesh"[39m,
-      [32m"nephew"[39m,  [32m"thing"[39m,
-      [32m"betray"[39m,  [32m"ancient"[39m
-    ]
-
-
-### Performing the Challenge-Response Protocol
-
-Perform the following sequence of steps to simulate the challenge/respond protocol.
-
-Assume Alfred has securely (out-of-band) communicated `challengeWordsA.words` to Betty.
-- Betty will now use `clientB.challenges().respond()` to sign these words with `aidB` and send the response to `aidA`.
-- Alfred will then use `clientA.challenges().verify()` to verify Betty's response. This verification is an operation that needs to be polled.
-- Finally, Alfred uses `clientA.challenges().responded()` to mark the contact as authenticated.
-
-
-
-```typescript
-// ----- Betty (Client B) responds to Alfred's (Client A) challenge -----
-console.log(`\nBetty (aidB: ${aidB.i}) responding to Alfred's (aidA: ${aidA.i}) challenge...`);
-
-// Betty uses aidBAlias to sign, targeting aidA.i with challengeWordsA.words
-await clientB.challenges().respond(aidBAlias, aidA.i, challengeWordsA.words);
-console.log("Betty's response sent.");
-
-// ----- Alfred (Client A) verifies Betty's (Client B) response -----
-console.log(`\nAlfred (aidA) verifying Betty's (aidB) response...`);
-
-// Alfred verifies the response allegedly from aidB.i using challengeWordsA.words
-const AVerifyBOperation = await clientA.challenges().verify(aidB.i, challengeWordsA.words);
-
-const { response: AVerifyBResponseDetails } = await clientA
-    .operations()
-    .wait(AVerifyBOperation, AbortSignal.timeout(30000));
-
-await clientA.operations().delete(AVerifyBOperation.name);
-
-const exnSaidB = AVerifyBResponseDetails.exn.d;
-console.log("Alfred: Betty's response verified. SAID of exn:", exnSaidB);
-
-// Alfred marks the challenge for Betty (aidB.i) as successfully responded
-await clientA.challenges().responded(aidB.i, exnSaidB);
-console.log("Alfred: Marked Betty's contact as authenticated.");
-
-
-// Check Alfred's contact list for Betty's authenticated status
-const AContactsAfterAuth = await clientA.contacts().list(undefined, 'alias', contactBAlias);
-
-console.log(AContactsAfterAuth)
-```
-
-    
-    Betty (aidB: ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q) responding to Alfred's (aidA: EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl) challenge...
-
-
-    Betty's response sent.
-
-
-    
-    Alfred (aidA) verifying Betty's (aidB) response...
-
-
-    Alfred: Betty's response verified. SAID of exn: EPs3O2UrdjwttqWaiyE_RXVh_AxDHwYxOdljvlfXUURV
-
-
-    Alfred: Marked Betty's contact as authenticated.
-
-
-    [
-      {
-        alias: [32m"Betty_Contact_for_Alfred"[39m,
-        oobi: [32m"http://keria:3902/oobi/ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q/agent/EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv"[39m,
-        id: [32m"ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q"[39m,
-        ends: {
-          agent: {
-            [32m"EKiHYbDJv1JynOorIKoCJaHs3uxcGhuCSW_zpCKqI-uv"[39m: { http: [32m"http://keria:3902/"[39m }
-          },
-          witness: {
-            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
-              http: [32m"http://witness-demo:5642/"[39m,
-              tcp: [32m"tcp://witness-demo:5632/"[39m
-            },
-            BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
-              http: [32m"http://witness-demo:5643/"[39m,
-              tcp: [32m"tcp://witness-demo:5633/"[39m
-            },
-            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
-              http: [32m"http://witness-demo:5644/"[39m,
-              tcp: [32m"tcp://witness-demo:5634/"[39m
-            }
-          }
-        },
-        challenges: [
-          {
-            dt: [32m"2025-05-30T22:29:56.791000+00:00"[39m,
-            words: [
-              [32m"detail"[39m,   [32m"electric"[39m,
-              [32m"pair"[39m,     [32m"economy"[39m,
-              [32m"picnic"[39m,   [32m"approve"[39m,
-              [32m"photo"[39m,    [32m"index"[39m,
-              [32m"dinosaur"[39m, [32m"disagree"[39m,
-              [32m"north"[39m,    [32m"bring"[39m
-            ],
-            said: [32m"EPs3O2UrdjwttqWaiyE_RXVh_AxDHwYxOdljvlfXUURV"[39m,
-            authenticated: [33mtrue[39m
-          }
-        ],
-        wellKnowns: []
-      }
-    ]
-
-
-Now, the roles reverse. Assume Betty (Client B) has securely (out-of-band) communicated `challengeWordsB.words` to Alfred (Client A).
-Alfred will use `clientA.challenges().respond()` to sign these words with `aidA` and send the response to `aidB`.
-Betty will then use `clientB.challenges().verify()` to verify Alfred's response and `clientB.challenges().responded()` to mark the contact.
-
-
-```typescript
-// ----- Alfred (Client A) responds to Betty's (Client B) challenge -----
-console.log(`\nAlfred (aidA: ${aidA.i}) responding to Betty's (aidB: ${aidB.i}) challenge...`);
-
-// Alfred uses aidAAlias to sign, targeting aidB.i with challengeWordsB.words
-await clientA.challenges().respond(aidAAlias, aidB.i, challengeWordsB.words);
-console.log("Alfred's response sent.");
-
-// ----- Betty (Client B) verifies Alfred's (Client A) response -----
-console.log(`\nBetty (aidB) verifying Alfred's (aidA) response...`);
-
-// Betty verifies the response allegedly from aidA.i using challengeWordsB.words
-const BVerifyAOperation = await clientB.challenges().verify(aidA.i, challengeWordsB.words);
-
-const { response: BVerifyAResponseDetails } = await clientB
-    .operations()
-    .wait(BVerifyAOperation, AbortSignal.timeout(30000));
-
-await clientB.operations().delete(BVerifyAOperation.name);
-
-
-const exnSaidA = BVerifyAResponseDetails.exn.d;
-console.log("Betty: Alfred's response verified. SAID of exn:", exnSaidA);
-
-// Betty marks the challenge for Alfred (aidA.i) as successfully responded
-await clientB.challenges().responded(aidA.i, exnSaidA);
-
-console.log("Betty: Marked Alfred's contact as authenticated.");
-
-
-// Check Betty's contact list for Alfred's authenticated status
-const BContactsAfterAuth = await clientB.contacts().list(undefined, 'alias', contactAAlias);
-
-console.log(BContactsAfterAuth);
-```
-
-    
-    Alfred (aidA: EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl) responding to Betty's (aidB: ENytNgGxlCqqCR9SWOJHVgw2L9tjnuZpOUgDgRvn87-q) challenge...
-
-
-    Alfred's response sent.
-
-
-    
-    Betty (aidB) verifying Alfred's (aidA) response...
-
-
-    Betty: Alfred's response verified. SAID of exn: EBPw4p70smbNbxN3KGd0TwHx6KVWfSPM-D8wtfOq3HpJ
-
-
-    Betty: Marked Alfred's contact as authenticated.
-
-
-    [
-      {
-        alias: [32m"Alfred_Contact_for_Betty"[39m,
-        oobi: [32m"http://keria:3902/oobi/EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl/agent/EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq"[39m,
-        id: [32m"EOj8WL3Q3Y-1KwVuDUf1IIZRwtEw0xsKnXNf2JSjCBhl"[39m,
-        ends: {
-          agent: {
-            [32m"EKE_3OAx9qpNn8LF06xkkxL-61ZWLuYLUSHlKuA2TvRq"[39m: { http: [32m"http://keria:3902/"[39m }
-          },
-          witness: {
-            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
-              http: [32m"http://witness-demo:5642/"[39m,
-              tcp: [32m"tcp://witness-demo:5632/"[39m
-            },
-            BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
-              http: [32m"http://witness-demo:5643/"[39m,
-              tcp: [32m"tcp://witness-demo:5633/"[39m
-            },
-            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
-              http: [32m"http://witness-demo:5644/"[39m,
-              tcp: [32m"tcp://witness-demo:5634/"[39m
-            }
-          }
-        },
-        challenges: [
-          {
-            dt: [32m"2025-05-30T22:29:57.290000+00:00"[39m,
-            words: [
-              [32m"nominee"[39m, [32m"mesh"[39m,
-              [32m"noodle"[39m,  [32m"decide"[39m,
-              [32m"brave"[39m,   [32m"siege"[39m,
-              [32m"law"[39m,     [32m"mesh"[39m,
-              [32m"nephew"[39m,  [32m"thing"[39m,
-              [32m"betray"[39m,  [32m"ancient"[39m
-            ],
-            said: [32m"EBPw4p70smbNbxN3KGd0TwHx6KVWfSPM-D8wtfOq3HpJ"[39m,
-            authenticated: [33mtrue[39m
-          }
-        ],
-        wellKnowns: []
-      }
-    ]
-
-
-If both challenge-response cycles complete successfully, Alfred and Betty have now established a mutually authenticated connection. This provides a strong foundation of trust for subsequent interactions, such as exchanging verifiable credentials.
-
-
-<div class="alert alert-primary">
-<b>📝 SUMMARY</b><hr>
-This notebook demonstrated the process of connecting two KERIA/Signify controllers, Alfred (<code>clientA</code>) and Betty (<code>clientB</code>):
-<ol>
-    <li><b>Initial Setup:</b> Each client was initialized, booted its KERIA agent, connected, and created an Autonomic Identifier(<code>aidA</code> for Alfred, <code>aidB</code> for Betty).</li>
-    <li><b>End Role Assignment:</b> The KERIA Agent AID for each client was authorized with an <code>agent</code> end role for its respective AID (<code>aidA</code> and <code>aidB</code>). This allows the KERIA agent to manage these AIDs, such as serving their KELs via OOBIs. This was done using <code>client.identifiers().addEndRole()</code>.</li>
-    <li><b>OOBI Generation & Resolution:</b>
-        <ul>
-            <li>Each client generated an OOBI URL for its AID, specifically for the <code>'agent'</code> role, using <code>client.oobis().get(alias, 'agent')</code>. This OOBI points to their KERIA agent's endpoint for that AID.</li>
-            <li>The OOBIs were (simulated) exchanged out-of-band.</li>
-            <li>Each client then resolved the other's OOBI using <code>client.oobis().resolve()</code>. This retrieved and cryptographically verified the other's KEL, adding them to their local contact list.</li>
-        </ul>
-    </li>
-    <li><b>Challenge-Response Protocol for Mutual Authentication:</b>
-        <ul>
-            <li>Each client generated unique challenge words using <code>client.challenges().generate()</code>.</li>
-            <li>These words were (conceptually) exchanged out-of-band.</li>
-            <li><b>Cycle 1 (Betty responds to Alfred):</b>
-                <ul>
-                    <li>Betty signed Alfred's challenge words with <code>aidB</code> using <code>clientB.challenges().respond()</code>.</li>
-                    <li>Alfred verified Betty's signed response against <code>aidB</code>'s known keys using <code>clientA.challenges().verify()</code>.</li>
-                    <li>Upon successful verification, Alfred marked Betty's contact as authenticated using <code>clientA.challenges().responded()</code>.</li>
-                </ul>
-            </li>
-            <li><b>Cycle 2 (Alfred responds to Betty):</b> The same process was repeated with Alfred responding to Betty's challenge.</li>
-        </ul>
-    </li>
-</ol>
-Successful completion of both OOBI resolution and the mutual challenge-response protocol establishes a high degree of trust. Both controllers have verified each other's identity (KEL) and cryptographically confirmed that the other party has active control of their private keys. The <code>challengesAuthenticated</code> flag in their contact lists for each other should now be true.
-</div>
-
-
-```typescript
-
-```
-
-<!-- Source: 102_20_Keria_Signify_Credential_Issuance.md -->
-# Signify-ts: ACDC Credential Issuance with IPEX
-
-<div class="alert alert-primary">
-<b>🎯 OBJECTIVE</b><hr>
-Demonstrate the process of issuing an ACDC (Authentic Chained Data Container) from an Issuer to a Holder using the Issuance and Presentation Exchange (IPEX) protocol with the Signify-ts library.
-</div>
-
-<div class="alert alert-info">
-<b>ℹ️ NOTE</b><hr>
-This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>) to quickly establish the necessary preconditions for credential issuance. The detailed steps for client initialization, AID creation, end role assignment, and OOBI resolution were covered in the "KERIA-Signify Connecting Controllers" notebook. Here, we provide a high-level recap of what these utility functions accomplish.
-</div>
-
-## Prerequisites: Client and AID Setup
-
-The setup process, streamlined by the utility functions, performs the following key actions:
-
-* **Signify Library Initialization**: Ensures the underlying cryptographic components of Signify-ts are ready.
-* **Client Initialization & Connection**: Three `SignifyClient` instances are created—one each for an Issuer, a Holder, and a Verifier. Each client is bootstrapped and connected to its KERIA agent.
-* **AID Creation**: Each client (Issuer, Holder, Verifier) creates a primary AID using default arguments.
-* **End Role Assignment**: An `agent` end role is assigned to each client's KERIA Agent AID. 
-* **OOBI Generation and Resolution (Client-to-Client)**:
-    * OOBIs are generated for the Issuer, Holder, and Verifier AIDs, specifically for the `'agent'` role.
-    * Communication channels are established by resolving these OOBIs:
-        * Issuer's client resolves the Holder's OOBI.
-        * Holder's client resolves the Issuer's OOBI.
-        * Verifier's client resolves the Holder's OOBI.
-        * Holder's client resolves the Verifier's OOBI.
-* **Schema OOBI Resolution**: The Issuer, Holder, and Verifier clients all resolve the OOBI for the "EventPass" schema (SAID: `EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK`). This schema is hosted on the schema server (vLEI-Server in this context). Resolving the schema OOBI ensures all parties have the correct and verifiable schema definition necessary to understand and validate the credential.
-
-The code block below executes this setup.
-
-
-```typescript
-import { randomPasscode, Serder} from 'npm:signify-ts';
-import { initializeSignify, 
-         initializeAndConnectClient,
-         createNewAID,
-         addEndRoleForAID,
-         generateOOBI,
-         resolveOOBI,
-         createTimestamp,
-         DEFAULT_IDENTIFIER_ARGS,
-         DEFAULT_TIMEOUT_MS,
-         DEFAULT_DELAY_MS,
-         DEFAULT_RETRIES,
-         ROLE_AGENT,
-         IPEX_GRANT_ROUTE,
-         IPEX_ADMIT_ROUTE,
-         IPEX_APPLY_ROUTE,
-         IPEX_OFFER_ROUTE,
-         SCHEMA_SERVER_HOST
-       } from './scripts_ts/utils.ts';
-
-// Clients setup
-// Initialize Issuer, Holder and Verifier CLients, Create AIDs for each one, assign 'agent' role to the AIDs
-// generate and resolve OOBIs 
-
-// Issuer Client
-const issuerBran = randomPasscode()
-const issuerAidAlias = 'issuerAid'
-const { client: issuerClient } = await initializeAndConnectClient(issuerBran)
-const { aid: issuerAid} = await createNewAID(issuerClient, issuerAidAlias, DEFAULT_IDENTIFIER_ARGS);
-await addEndRoleForAID(issuerClient, issuerAidAlias, ROLE_AGENT);
-const issuerOOBI = await generateOOBI(issuerClient, issuerAidAlias, ROLE_AGENT);
-
-// Holder Client
-const holderBran = randomPasscode()
-const holderAidAlias = 'holderAid'
-const { client: holderClient } = await initializeAndConnectClient(holderBran)
-const { aid: holderAid} = await createNewAID(holderClient, holderAidAlias, DEFAULT_IDENTIFIER_ARGS);
-await addEndRoleForAID(holderClient, holderAidAlias, ROLE_AGENT);
-const holderOOBI = await generateOOBI(holderClient, holderAidAlias, ROLE_AGENT);
-
-// Verifier Client
-const verifierBran = randomPasscode()
-const verifierAidAlias = 'verifierAid'
-const { client: verifierClient } = await initializeAndConnectClient(verifierBran)
-const { aid: verifierAid} = await createNewAID(verifierClient, verifierAidAlias, DEFAULT_IDENTIFIER_ARGS);
-await addEndRoleForAID(verifierClient, verifierAidAlias, ROLE_AGENT);
-const verifierOOBI = await generateOOBI(verifierClient, verifierAidAlias, ROLE_AGENT);
-
-// Clients OOBI Resolution
-// Resolve OOBIs to establish connections Issuer-Holder, Holder-Verifier
-const issuerContactAlias = 'issuerContact';
-const holderContactAlias = 'holderContact';
-const verifierContactAlias = 'verifierContact';
-
-await resolveOOBI(issuerClient, holderOOBI, holderContactAlias);
-await resolveOOBI(holderClient, issuerOOBI, issuerContactAlias);
-await resolveOOBI(verifierClient, holderOOBI, holderContactAlias);
-await resolveOOBI(holderClient, verifierOOBI, verifierContactAlias);
-
-// Schemas OOBI Resolution
-// Resolve the Schemas from the Schema Server (VLEI-Server)
-const schemaContactAlias = 'schemaContact';
-const schemaSaid = 'EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK';
-const schemaOOBI = `http://vlei-server:7723/oobi/${schemaSaid}`;
-
-await resolveOOBI(issuerClient, schemaOOBI, schemaContactAlias);
-await resolveOOBI(holderClient, schemaOOBI, schemaContactAlias);
-await resolveOOBI(verifierClient, schemaOOBI, schemaContactAlias);
-
-console.log("Client setup and OOBI resolutions complete.");
-```
-
-    Using Passcode (bran): D8VzjCkZJLU4U3jYvbJwS
-
-
-    Client boot process initiated with KERIA agent.
-
-
-      Client AID Prefix:  EFKfKyQozYGbFls3BQp_2yos_5zrj-5q_MMBY6nw5Ao_
-
-
-      Agent AID Prefix:   EOTGTRM2MTSQgB_WXcvCPNsD8NPT5tBcjJc4PtSgxyIX
-
-
-    Initiating AID inception for alias: issuerAid
-
-
-    Successfully created AID with prefix: EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03
-
-
-    Assigning 'agent' role to KERIA Agent EOTGTRM2MTSQgB_WXcvCPNsD8NPT5tBcjJc4PtSgxyIX for AID alias issuerAid
-
-
-    Successfully assigned 'agent' role for AID alias issuerAid.
-
-
-    Generating OOBI for AID alias issuerAid with role agent
-
-
-    Generated OOBI URL: http://keria:3902/oobi/EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03/agent/EOTGTRM2MTSQgB_WXcvCPNsD8NPT5tBcjJc4PtSgxyIX
-
-
-    Using Passcode (bran): Cxfca-122qAkoMOGwbMCV
-
-
-    Client boot process initiated with KERIA agent.
-
-
-      Client AID Prefix:  EOTuwSBof7LtRy9vsie1-UE8Wb5USW1pGp3YWnZizrM_
-
-
-      Agent AID Prefix:   EJcgXxS6OKQ2RVzRtPZ1KW5yHcSrSl8BfNfut1JiNNML
-
-
-    Initiating AID inception for alias: holderAid
-
-
-    Successfully created AID with prefix: EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL
-
-
-    Assigning 'agent' role to KERIA Agent EJcgXxS6OKQ2RVzRtPZ1KW5yHcSrSl8BfNfut1JiNNML for AID alias holderAid
-
-
-    Successfully assigned 'agent' role for AID alias holderAid.
-
-
-    Generating OOBI for AID alias holderAid with role agent
-
-
-    Generated OOBI URL: http://keria:3902/oobi/EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL/agent/EJcgXxS6OKQ2RVzRtPZ1KW5yHcSrSl8BfNfut1JiNNML
-
-
-    Using Passcode (bran): BoDKZbJF_utSTiXBMZC-m
-
-
-    Client boot process initiated with KERIA agent.
-
-
-      Client AID Prefix:  EL9MTtEU-u1H5fTMJF5mOB-F3WnKykh-nuALVdobGOOj
-
-
-      Agent AID Prefix:   EGcP2yft7OOJ41te4pqk-ALVqut8FFfc21uBeh5eVq_p
-
-
-    Initiating AID inception for alias: verifierAid
-
-
-    Successfully created AID with prefix: EBmR-76xFui4TzcwfUGi5TiDSnCFsZ4ROxP-H8Bv4zrc
-
-
-    Assigning 'agent' role to KERIA Agent EGcP2yft7OOJ41te4pqk-ALVqut8FFfc21uBeh5eVq_p for AID alias verifierAid
-
-
-    Successfully assigned 'agent' role for AID alias verifierAid.
-
-
-    Generating OOBI for AID alias verifierAid with role agent
-
-
-    Generated OOBI URL: http://keria:3902/oobi/EBmR-76xFui4TzcwfUGi5TiDSnCFsZ4ROxP-H8Bv4zrc/agent/EGcP2yft7OOJ41te4pqk-ALVqut8FFfc21uBeh5eVq_p
-
-
-    Resolving OOBI URL: http://keria:3902/oobi/EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL/agent/EJcgXxS6OKQ2RVzRtPZ1KW5yHcSrSl8BfNfut1JiNNML with alias holderContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "holderContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://keria:3902/oobi/EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03/agent/EOTGTRM2MTSQgB_WXcvCPNsD8NPT5tBcjJc4PtSgxyIX with alias issuerContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "issuerContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://keria:3902/oobi/EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL/agent/EJcgXxS6OKQ2RVzRtPZ1KW5yHcSrSl8BfNfut1JiNNML with alias holderContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "holderContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://keria:3902/oobi/EBmR-76xFui4TzcwfUGi5TiDSnCFsZ4ROxP-H8Bv4zrc/agent/EGcP2yft7OOJ41te4pqk-ALVqut8FFfc21uBeh5eVq_p with alias verifierContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "verifierContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "schemaContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "schemaContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "schemaContact" (ID: undefined) added/updated.
-
-
-    Client setup and OOBI resolutions complete.
-
-
-## Credential Issuance Workflow Steps
-
-With the clients set up and connected, you can proceed with the credential issuance workflow. This involves the Issuer creating a credential and transferring it to the Holder using the IPEX protocol. Below are the code snippets you need to follow to do the issuance.
-
-### Step 1: Create Issuer's Credential Registry
-
-Before an Issuer can issue credentials, it needs a Credential Registry. In KERI, a Credential Registry is implemented using a **Transaction Event Log (TEL)**. This TEL is a secure, hash-linked log, managed by the Issuer's AID, specifically for tracking the lifecycle of credentials it issues—such as their issuance and revocation status. The registry itself is identified by a SAID derived from its inception event (`vcp` event type for registry inception). The TEL's history is anchored to the Issuer's Key Event Log, ensuring that all changes to the registry's state are cryptographically secured by the Issuer's controlling keys. This anchoring is achieved by including a digest of the TEL event in a KEL event.
-
-Use the code below to let the Issuer client create this registry. A human-readable name (`issuerRegistryName`) is used to reference it within the client.
-
-
-```typescript
-//Create Issuer credential Registry
-const issuerRegistryName = 'issuerRegistry' // Human readable identifier for the Registry
-
-// Initiate registry creation
-const createRegistryResult = await issuerClient
-    .registries()
-    .create({ name: issuerAidAlias, registryName: issuerRegistryName });
-
-// Get the operation details
-const createRegistryOperation = await createRegistryResult.op();
-
-// Wait for the operation to complete
-const createRegistryResponse = await issuerClient
-    .operations()
-    .wait(createRegistryOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
-
-// Clean up the operation from the agent's list
-await issuerClient.operations().delete(createRegistryOperation.name);
-
-console.log(`Registry '${issuerRegistryName}' created for Issuer AID ${issuerAid.i}.`);
-console.log("Registry creation response:", JSON.stringify(createRegistryResponse.response, null, 2));
-
-// Listing Registries to confirm creation and retrieve its SAID (regk)
-const issuerRegistries = await issuerClient.registries().list(issuerAidAlias);
-const issuerRegistry = issuerRegistries[0]
-console.log(`Registry: Name='${issuerRegistry.name}', SAID (regk)='${issuerRegistry.regk}'`);
-```
-
-    Registry 'issuerRegistry' created for Issuer AID EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03.
-
-
-    Registry creation response: {
-      "anchor": {
-        "i": "EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD",
-        "s": "0",
-        "d": "EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"
-      }
-    }
-
-
-    Registry: Name='issuerRegistry', SAID (regk)='EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD'
-
-
-### Step 2: Retrieve Schema Definition
-
-The Issuer needs the definition of the schema against which they intend to issue a credential. Since the schema OOBI was resolved during the setup phase, the schema definition can now be retrieved from the KERIA agent's cache using its SAID. You will reuse the `EventPass` schema (SAID: `EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK`) from previous KLI examples.
-
-
-```typescript
-// Retrieve Schemas
-const issuerSchema = await issuerClient.schemas().get(schemaSaid);
-console.log(issuerSchema)
-```
-
-    {
-      [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-      [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
-      title: [32m"EventPass"[39m,
-      description: [32m"Event Pass Schema"[39m,
-      type: [32m"object"[39m,
-      credentialType: [32m"EventPassCred"[39m,
-      version: [32m"1.0.0"[39m,
-      properties: {
-        v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
-        d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
-        u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
-        i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
-        ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
-        s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
-        a: {
-          oneOf: [
-            { description: [32m"Attributes block SAID"[39m, type: [32m"string"[39m },
-            {
-              [32m"$id"[39m: [32m"ELppbffpWEM-uufl6qpVTcN6LoZS2A69UN4Ddrtr_JqE"[39m,
-              description: [32m"Attributes block"[39m,
-              type: [32m"object"[39m,
-              properties: [36m[Object][39m,
-              additionalProperties: [33mfalse[39m,
-              required: [36m[Array][39m
-            }
-          ]
-        }
-      },
-      additionalProperties: [33mfalse[39m,
-      required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
-    }
-
-
-### Step 3: Issue the ACDC
-
-Now the Issuer creates the actual ACDC. This involves:
-
-1. Defining the `credentialClaims` – the specific attribute values for this instance of the `EventPass` credential.
-2. Calling `issuerClient.credentials().issue()`. This method takes the Issuer's AID alias and an object specifying:
-    - `ri`: The SAID of the Credential Registry (`issuerRegistry.regk`) where this credential's issuance will be recorded.
-    - `s`: The SAID of the schema (`schemaSaid`) this credential adheres to.
-    - `a`: An attributes block containing:
-      - `i`: The AID of the Issuee (the Holder, holderAid.i).
-      - The actual `credentialClaims`.
-
-This `issue` command creates the ACDC locally within the Issuer's client and records an issuance event (e.g., `iss`) in the specified registry's TEL. The SAID of the newly created credential is then extracted from the response.
-
-Use the code below to perform these actions.
-
-
-```typescript
-// Issue Credential
-
-const credentialClaims = {
-    "eventName":"GLEIF Summit",
-    "accessLevel":"staff",
-    "validDate":"2026-10-01"
-}
-
-const issueResult = await issuerClient
-    .credentials()
-    .issue(
-        issuerAidAlias,
-        {
-            ri: issuerRegistry.regk, //Registry Identifier (not the alias)
-            s: schemaSaid,           // Schema identifier
-            a: {                     // Attributes block
-                i: holderAid.i,      // Isuue or credential subject 
-                ...credentialClaims  // The actual claims data                 
-            }
-        });
-
-// Issuance is an asynchronous operation.
-const issueOperation = await issueResult.op; //In this case is .op instead of .op() (Inconsistency in the sdk)
-
-// Wait for the issuance operation to complete.
-const issueResponse = await issuerClient
-    .operations()
-    .wait(issueOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
-
-// Clean up the operation.
-await issuerClient.operations().delete(issueOperation.name);
-
-// Extract the SAID of the newly created credential from the response.
-// This SAID uniquely identifies this specific ACDC instance.
-const credentialSaid = issueResponse.response.ced.d
-
-// Display the issued credential from the Issuer's perspective.
-const issuerCredential = await issuerClient.credentials().get(credentialSaid);
-console.log(issuerCredential)
-```
-
-    {
-      sad: {
-        v: [32m"ACDC10JSON0001c4_"[39m,
-        d: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-        i: [32m"EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03"[39m,
-        ri: [32m"EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"[39m,
-        s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-        a: {
-          d: [32m"ELYh7aQiEkVNVH7mfjku9O8OZl7AzhPCXxyur0X2ltO6"[39m,
-          i: [32m"EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL"[39m,
-          eventName: [32m"GLEIF Summit"[39m,
-          accessLevel: [32m"staff"[39m,
-          validDate: [32m"2026-10-01"[39m,
-          dt: [32m"2025-05-30T22:30:09.073000+00:00"[39m
-        }
-      },
-      atc: [32m"-IABEK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack0AAAAAAAAAAAAAAAAAAAAAAAEK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-      iss: {
-        v: [32m"KERI10JSON0000ed_"[39m,
-        t: [32m"iss"[39m,
-        d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m,
-        i: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-        s: [32m"0"[39m,
-        ri: [32m"EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"[39m,
-        dt: [32m"2025-05-30T22:30:09.073000+00:00"[39m
-      },
-      issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEEPmvcaNMLp2pJVlBSx59vyQ5SXDHU4m2Ybrr7FSbkY4"[39m,
-      pre: [32m"EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03"[39m,
-      schema: {
-        [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-        [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
-        title: [32m"EventPass"[39m,
-        description: [32m"Event Pass Schema"[39m,
-        type: [32m"object"[39m,
-        credentialType: [32m"EventPassCred"[39m,
-        version: [32m"1.0.0"[39m,
-        properties: {
-          v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
-          d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
-          u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
-          i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
-          ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
-          s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
-          a: { oneOf: [ [36m[Object][39m, [36m[Object][39m ] }
-        },
-        additionalProperties: [33mfalse[39m,
-        required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
-      },
-      chains: [],
-      status: {
-        vn: [ [33m1[39m, [33m0[39m ],
-        i: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-        s: [32m"0"[39m,
-        d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m,
-        ri: [32m"EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"[39m,
-        ra: {},
-        a: { s: [33m2[39m, d: [32m"EEPmvcaNMLp2pJVlBSx59vyQ5SXDHU4m2Ybrr7FSbkY4"[39m },
-        dt: [32m"2025-05-30T22:30:09.073000+00:00"[39m,
-        et: [32m"iss"[39m
-      },
-      anchor: {
-        pre: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-        sn: [33m0[39m,
-        d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m
-      },
-      anc: {
-        v: [32m"KERI10JSON00013a_"[39m,
-        t: [32m"ixn"[39m,
-        d: [32m"EEPmvcaNMLp2pJVlBSx59vyQ5SXDHU4m2Ybrr7FSbkY4"[39m,
-        i: [32m"EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03"[39m,
-        s: [32m"2"[39m,
-        p: [32m"EJArJOs8g_8LcY5C38LNQi8ix6Hur_eRvpxOfDc3WjmV"[39m,
-        a: [
-          {
-            i: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-            s: [32m"0"[39m,
-            d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m
-          }
-        ]
-      },
-      ancatc: [
-        [32m"-VBq-AABAACLNqxFLy3y_zzBWAwC0rfKkXs87iVX0dq0aeKOebtpbT_FjHdeBPKMGVHuwbjjhqi0chi2UMmUYVxy_oQzhHYO-BADAACx5YKXI5URS_fo_cdhBf4_bJwWtC964Ji8E8Dqn2BQ3LssFqibKy2lM1vnRWVBbCBbM9DEMGE5rhF0c6Ie76QJABAHveLCsa4LHsgudLl2VXhg2aKIINKWibPUYY1qbZOm11z5XI_JERhEYN7NjOD800-CngRuZtbThZR2mUWCO_MBACD8quWOkpO3jCIi9RU0_z8syQR9rvlgE_0PHWGdpu8O3IPBVgFj8m_1sHeSmNfB4hRaXvDPhKRaIqRZ8C1PueoP-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-05-30T22c30c09d173885p00c00"[39m
-      ]
-    }
-
-
-### Step 4: Issuer Grants Credential via IPEX
-
-The credential has been created but currently resides with the Issuer. To transfer it to the Holder, the Issuer initiates an IPEX (Issuance and Presentation Exchange) grant. This process uses KERI `exn` (exchange) messages. The grant message effectively offers the credential to the Holder. 
-
-The `issuerClient.ipex().grant()` method prepares the grant message, including the ACDC itself (`acdc`), the issuance event from the registry (`iss`), and the anchoring event from the Issuer's KEL (`anc`) along with its signatures (`ancAttachment`).
-Then, `issuerClient.ipex().submitGrant()` sends this packaged grant message to the Holder's KERIA agent.
-
-Use the code below to perform the ipex grant.
-
-
-```typescript
-// Ipex Grant
-
-const [grant, gsigs, gend] = await issuerClient.ipex().grant({
-    senderName: issuerAidAlias,
-    acdc: new Serder(issuerCredential.sad), // The ACDC (Verifiable Credential) itself
-    iss: new Serder(issuerCredential.iss),  // The issuance event from the credential registry (TEL event)
-    anc: new Serder(issuerCredential.anc),  // The KEL event anchoring the TEL issuance event
-    ancAttachment: issuerCredential.ancatc, // Signatures for the KEL anchoring event
-    recipient: holderAid.i,                 // AID of the Holder
-    datetime: createTimestamp(),            // Timestamp for the grant message
-});
-
-// Issuer submits the prepared grant message to the Holder.
-// This sends an 'exn' message to the Holder's KERIA agent.
-const submitGrantOperation = await issuerClient
-    .ipex()
-    .submitGrant(
-        issuerAidAlias,  // Issuer's AID alias
-        grant,           // The grant message payload
-        gsigs,           // Signatures for the grant message
-        gend,            // Endorsements for the grant message
-        [holderAid.i]    // List of recipient AIDs
-    );
-
-// Wait for the submission operation to complete.
-const submitGrantResponse = await issuerClient
-    .operations()
-    .wait(submitGrantOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
-
-// Clean up the operation.
-await issuerClient.operations().delete(submitGrantOperation.name);
-```
-
-**Holder Checks Credential Status (Optional)**
-
-The Holder can proactively check the status of a credential in the Issuer's registry if they know the registry's SAID (`issuerRegistry.regk`) and the credential's SAID (`issuerCredential.sad.d`). This query demonstrates how a party can verify the status directly from the TEL.
-
-
-```typescript
-// The flow transitions from the Issuer to the Holder.
-// A delay and retry mechanism is added to allow time for KERIA agents and witnesses
-// to propagate the credential issuance information.
-
-let credentialState;
-
-// Retry loop to fetch credential state from the Holder's perspective.
-for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
-    try{
-        // Holder's client queries the state of the credential in the Issuer's registry.
-        credentialState = await holderClient.credentials().state(issuerRegistry.regk, issuerCredential.sad.d)
-        break;
-    }
-    catch (error){    
-         console.log(`[Retry] failed to get credential state on attempt #${attempt} of ${DEFAULT_RETRIES}`);
-         if (attempt === DEFAULT_RETRIES) {
-             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for getting credential state.`);
-             throw error; 
-         }
-         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
-         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
-    }
-}
-
-console.log(credentialState) // Displays the status (e.g., issued, revoked)
-```
-
-    [Retry] failed to get credential state on attempt #1 of 5
-
-
-    [Retry] Waiting 5000ms before next attempt...
-
-
-    {
-      vn: [ [33m1[39m, [33m0[39m ],
-      i: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-      s: [32m"0"[39m,
-      d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m,
-      ri: [32m"EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"[39m,
-      ra: {},
-      a: { s: [33m2[39m, d: [32m"EEPmvcaNMLp2pJVlBSx59vyQ5SXDHU4m2Ybrr7FSbkY4"[39m },
-      dt: [32m"2025-05-30T22:30:09.073000+00:00"[39m,
-      et: [32m"iss"[39m
-    }
-
-
-### Step 5: Holder Receives IPEX Grant Notification
-
-The Holder's KERIA agent will receive the grant `exn` message sent by the Issuer. The Holder's client can list its notifications to find this incoming grant. The notification will contain the SAID of the `exn` message (`grantNotification.a.d`), which can then be used to retrieve the full details of the grant exchange from the Holder's client.
-
-
-
-
-```typescript
-// Holder waits for Grant notification
-
-let notifications;
-
-// Retry loop to fetch notifications.
-for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
-    try{
-        // List notifications, filtering for unread IPEX_GRANT_ROUTE messages.
-        let allNotifications = await holderClient.notifications().list( );
-        notifications = allNotifications.notes.filter(
-            (n) => n.a.r === IPEX_GRANT_ROUTE && n.r === false // n.r is 'read' status
-        )        
-        if(notifications.length === 0){ 
-            throw new Error("Grant notification not found"); // Throw error to trigger retry
-        }
-        break;     
-    }
-    catch (error){    
-         console.log(`[Retry] Grant notification not found on attempt #${attempt} of ${DEFAULT_RETRIES}`);
-         if (attempt === DEFAULT_RETRIES) {
-             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for grant notification.`);
-             throw error; 
-         }
-         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
-         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
-    }
-}
-
-const grantNotification = notifications[0]  // Assuming only one grant notification for simplicity
-
-console.log(grantNotification) // Displays the notification details
-
-// Retrieve the full IPEX grant exchange details using the SAID from the notification.
-// The 'exn' field in the exchange will contain the actual credential data.
-const grantExchange = await holderClient.exchanges().get(grantNotification.a.d);
-
-console.log(grantExchange) // Displays the content of the grant message
-```
-
-    {
-      i: [32m"0AB09Ypc0wBlTZOLPjMbn4vV"[39m,
-      dt: [32m"2025-05-30T22:30:10.427960+00:00"[39m,
-      r: [33mfalse[39m,
-      a: {
-        r: [32m"/exn/ipex/grant"[39m,
-        d: [32m"EKZVzf_m6q0OxQCJ7fLncsiLcSS3pO8Mn3GfHcekiIu0"[39m,
-        m: [32m""[39m
-      }
-    }
-
-
-    {
-      exn: {
-        v: [32m"KERI10JSON00057f_"[39m,
-        t: [32m"exn"[39m,
-        d: [32m"EKZVzf_m6q0OxQCJ7fLncsiLcSS3pO8Mn3GfHcekiIu0"[39m,
-        i: [32m"EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03"[39m,
-        rp: [32m"EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL"[39m,
-        p: [32m""[39m,
-        dt: [32m"2025-05-30T22:30:10.075000+00:00"[39m,
-        r: [32m"/ipex/grant"[39m,
-        q: {},
-        a: { i: [32m"EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL"[39m, m: [32m""[39m },
-        e: {
-          acdc: {
-            v: [32m"ACDC10JSON0001c4_"[39m,
-            d: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-            i: [32m"EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03"[39m,
-            ri: [32m"EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"[39m,
-            s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-            a: {
-              d: [32m"ELYh7aQiEkVNVH7mfjku9O8OZl7AzhPCXxyur0X2ltO6"[39m,
-              i: [32m"EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL"[39m,
-              eventName: [32m"GLEIF Summit"[39m,
-              accessLevel: [32m"staff"[39m,
-              validDate: [32m"2026-10-01"[39m,
-              dt: [32m"2025-05-30T22:30:09.073000+00:00"[39m
-            }
-          },
-          iss: {
-            v: [32m"KERI10JSON0000ed_"[39m,
-            t: [32m"iss"[39m,
-            d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m,
-            i: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-            s: [32m"0"[39m,
-            ri: [32m"EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"[39m,
-            dt: [32m"2025-05-30T22:30:09.073000+00:00"[39m
-          },
-          anc: {
-            v: [32m"KERI10JSON00013a_"[39m,
-            t: [32m"ixn"[39m,
-            d: [32m"EEPmvcaNMLp2pJVlBSx59vyQ5SXDHU4m2Ybrr7FSbkY4"[39m,
-            i: [32m"EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03"[39m,
-            s: [32m"2"[39m,
-            p: [32m"EJArJOs8g_8LcY5C38LNQi8ix6Hur_eRvpxOfDc3WjmV"[39m,
-            a: [ [36m[Object][39m ]
-          },
-          d: [32m"ELOVc871Iguz50q9gfUh1Or955Ns4wYdi8jMI2iMYNF4"[39m
-        }
-      },
-      pathed: {
-        acdc: [32m"-IABEK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack0AAAAAAAAAAAAAAAAAAAAAAAEAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m,
-        iss: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAAAEEPmvcaNMLp2pJVlBSx59vyQ5SXDHU4m2Ybrr7FSbkY4"[39m,
-        anc: [32m"-VBq-AABAACLNqxFLy3y_zzBWAwC0rfKkXs87iVX0dq0aeKOebtpbT_FjHdeBPKMGVHuwbjjhqi0chi2UMmUYVxy_oQzhHYO-BADAACx5YKXI5URS_fo_cdhBf4_bJwWtC964Ji8E8Dqn2BQ3LssFqibKy2lM1vnRWVBbCBbM9DEMGE5rhF0c6Ie76QJABAHveLCsa4LHsgudLl2VXhg2aKIINKWibPUYY1qbZOm11z5XI_JERhEYN7NjOD800-CngRuZtbThZR2mUWCO_MBACD8quWOkpO3jCIi9RU0_z8syQR9rvlgE_0PHWGdpu8O3IPBVgFj8m_1sHeSmNfB4hRaXvDPhKRaIqRZ8C1PueoP-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-05-30T22c30c09d173885p00c00"[39m
-      }
-    }
-
-
-### Step 6: Holder Admits Credential
-
-Upon receiving and reviewing the grant, the Holder decides to accept (`admit`) the credential. This involves:
-- Preparing an `admit` `exn` message using `holderClient.ipex().admit()`.
-- Submitting this `admit` message back to the Issuer using `holderClient.ipex().submitAdmit()`.
-- Marking the original grant notification as read.
-- The Holder's client then processes the admitted credential, verifying its signatures, schema, and status against the Issuer's KEL and TEL, and stores it locally.
-
-
-```typescript
-// Holder admits (accepts) the IPEX grant.
-
-// Prepare the IPEX admit message.
-const [admit, sigs, aend] = await holderClient.ipex().admit({
-    senderName: holderAidAlias,       // Alias of the Holder's AID
-    message: '',                      // Optional message to include in the admit
-    grantSaid: grantNotification.a.d!,// SAID of the grant 'exn' message being admitted
-    recipient: issuerAid.i,           // AID of the Issuer
-    datetime: createTimestamp(),      // Timestamp for the admit message
-});
-
-// Holder submits the prepared admit message to the Issuer.
-const admitOperation = await holderClient
-    .ipex()
-    .submitAdmit(holderAidAlias, admit, sigs, aend, [issuerAid.i]);
-
-// Wait for the submission operation to complete.
-const admitResponse = await holderClient
-    .operations()
-    .wait(admitOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
-
-// Clean up the operation.
-await holderClient.operations().delete(admitOperation.name);
-
-// Holder marks the grant notification as read.
-await holderClient.notifications().mark(grantNotification.i);
-console.log("Holder's notifications after marking grant as read:");
-console.log(await holderClient.notifications().list());
-
-// Holder can now get the credential from their local store.
-// This implies the client has processed, verified, and stored it upon admission.
-const holderReceivedCredential = await holderClient.credentials().get(issuerCredential.sad.d);
-console.log("Credential as stored by Holder:");
-console.log(holderReceivedCredential);
-
-```
-
-    Holder's notifications after marking grant as read:
-
-
-    {
-      start: [33m0[39m,
-      end: [33m0[39m,
-      total: [33m1[39m,
-      notes: [
-        {
-          i: [32m"0AB09Ypc0wBlTZOLPjMbn4vV"[39m,
-          dt: [32m"2025-05-30T22:30:10.427960+00:00"[39m,
-          r: [33mtrue[39m,
-          a: {
-            r: [32m"/exn/ipex/grant"[39m,
-            d: [32m"EKZVzf_m6q0OxQCJ7fLncsiLcSS3pO8Mn3GfHcekiIu0"[39m,
-            m: [32m""[39m
-          }
-        }
-      ]
-    }
-
-
-    Credential as stored by Holder:
-
-
-    {
-      sad: {
-        v: [32m"ACDC10JSON0001c4_"[39m,
-        d: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-        i: [32m"EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03"[39m,
-        ri: [32m"EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"[39m,
-        s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-        a: {
-          d: [32m"ELYh7aQiEkVNVH7mfjku9O8OZl7AzhPCXxyur0X2ltO6"[39m,
-          i: [32m"EDdN4TQ-jU908p5yh2oFIBXT6z86dhnJOdHQOJBmU6tL"[39m,
-          eventName: [32m"GLEIF Summit"[39m,
-          accessLevel: [32m"staff"[39m,
-          validDate: [32m"2026-10-01"[39m,
-          dt: [32m"2025-05-30T22:30:09.073000+00:00"[39m
-        }
-      },
-      atc: [32m"-IABEK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack0AAAAAAAAAAAAAAAAAAAAAAAEK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-      iss: {
-        v: [32m"KERI10JSON0000ed_"[39m,
-        t: [32m"iss"[39m,
-        d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m,
-        i: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-        s: [32m"0"[39m,
-        ri: [32m"EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"[39m,
-        dt: [32m"2025-05-30T22:30:09.073000+00:00"[39m
-      },
-      issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEEPmvcaNMLp2pJVlBSx59vyQ5SXDHU4m2Ybrr7FSbkY4"[39m,
-      pre: [32m"EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03"[39m,
-      schema: {
-        [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-        [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
-        title: [32m"EventPass"[39m,
-        description: [32m"Event Pass Schema"[39m,
-        type: [32m"object"[39m,
-        credentialType: [32m"EventPassCred"[39m,
-        version: [32m"1.0.0"[39m,
-        properties: {
-          v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
-          d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
-          u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
-          i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
-          ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
-          s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
-          a: { oneOf: [ [36m[Object][39m, [36m[Object][39m ] }
-        },
-        additionalProperties: [33mfalse[39m,
-        required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
-      },
-      chains: [],
-      status: {
-        vn: [ [33m1[39m, [33m0[39m ],
-        i: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-        s: [32m"0"[39m,
-        d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m,
-        ri: [32m"EPgvV9XW9GJoNerY4M8wGYdwmHaKv5eyh-6iIDt5YBTD"[39m,
-        ra: {},
-        a: { s: [33m2[39m, d: [32m"EEPmvcaNMLp2pJVlBSx59vyQ5SXDHU4m2Ybrr7FSbkY4"[39m },
-        dt: [32m"2025-05-30T22:30:09.073000+00:00"[39m,
-        et: [32m"iss"[39m
-      },
-      anchor: {
-        pre: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-        sn: [33m0[39m,
-        d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m
-      },
-      anc: {
-        v: [32m"KERI10JSON00013a_"[39m,
-        t: [32m"ixn"[39m,
-        d: [32m"EEPmvcaNMLp2pJVlBSx59vyQ5SXDHU4m2Ybrr7FSbkY4"[39m,
-        i: [32m"EHlukyZ8UqOkqoZlwzX5K0rOX0oP-xiv50yFU-XGId03"[39m,
-        s: [32m"2"[39m,
-        p: [32m"EJArJOs8g_8LcY5C38LNQi8ix6Hur_eRvpxOfDc3WjmV"[39m,
-        a: [
-          {
-            i: [32m"EK4nhpBdFXy6ACsV9mIlCaCOFmATMX1qBRd2IsJYqack"[39m,
-            s: [32m"0"[39m,
-            d: [32m"EAbD9IMA7DOqpG--b7qFOxe8zVg0kkPLEgmmDSK23ZxH"[39m
-          }
-        ]
-      },
-      ancatc: [
-        [32m"-VBq-AABAACLNqxFLy3y_zzBWAwC0rfKkXs87iVX0dq0aeKOebtpbT_FjHdeBPKMGVHuwbjjhqi0chi2UMmUYVxy_oQzhHYO-BADAACx5YKXI5URS_fo_cdhBf4_bJwWtC964Ji8E8Dqn2BQ3LssFqibKy2lM1vnRWVBbCBbM9DEMGE5rhF0c6Ie76QJABAHveLCsa4LHsgudLl2VXhg2aKIINKWibPUYY1qbZOm11z5XI_JERhEYN7NjOD800-CngRuZtbThZR2mUWCO_MBACD8quWOkpO3jCIi9RU0_z8syQR9rvlgE_0PHWGdpu8O3IPBVgFj8m_1sHeSmNfB4hRaXvDPhKRaIqRZ8C1PueoP-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-05-30T22c30c10d517398p00c00"[39m
-      ]
-    }
-
-
-### Step 8: Issuer Receives Admit Notification
-
-The Issuer, in turn, will receive a notification that the Holder has admitted the credential. The Issuer's client lists its notifications, finds the `admit` message, and marks it as read. This completes the issuance loop.
-
-
-```typescript
-// Issuer retrieves the Admit notification from the Holder.
-
-let issuerAdmitNotifications;
-
-// Retry loop for the Issuer to receive the admit notification.
-for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
-    try{
-        // List notifications, filtering for unread IPEX_ADMIT_ROUTE messages.
-        let allNotifications = await issuerClient.notifications().list();
-        issuerAdmitNotifications = allNotifications.notes.filter(
-            (n) => n.a.r === IPEX_ADMIT_ROUTE && n.r === false
-        )        
-        if(issuerAdmitNotifications.length === 0){ 
-            throw new Error("Admit notification not found"); // Throw error to trigger retry
-        }
-        break; // Exit loop if notification found
-    }
-    catch (error){    
-         console.log(`[Retry] Admit notification not found for Issuer on attempt #${attempt} of ${DEFAULT_RETRIES}`);
-         if (attempt === DEFAULT_RETRIES) {
-             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for Issuer's admit notification.`);
-             throw error; 
-         }
-         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
-         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
-    }
-}
-
-const admitNotificationForIssuer = issuerAdmitNotifications[0] // Assuming one notification
-
-// Issuer marks the admit notification as read.
-await issuerClient.notifications().mark(admitNotificationForIssuer.i);
-console.log("Issuer's notifications after marking admit as read:");
-console.log(await issuerClient.notifications().list());
-```
-
-    Issuer's notifications after marking admit as read:
-
-
-    {
-      start: [33m0[39m,
-      end: [33m0[39m,
-      total: [33m1[39m,
-      notes: [
-        {
-          i: [32m"0AC4rhlXG77Eka1gHDfQffwO"[39m,
-          dt: [32m"2025-05-30T22:30:16.028729+00:00"[39m,
-          r: [33mtrue[39m,
-          a: {
-            r: [32m"/exn/ipex/admit"[39m,
-            d: [32m"EOi0jaDXvsTp1tRVtk35k_SqCk8y7RkILGHvR8kR3xj9"[39m,
-            m: [32m""[39m
-          }
-        }
-      ]
-    }
-
-
-**Cleanup (Optional)**
-
-Once the IPEX flow for issuance is complete and notifications have been processed, both parties can optionally delete these notifications from their local client stores.
-
-
-```typescript
-// Issuer Remove Admit Notification from their list
-await issuerClient.notifications().delete(admitNotificationForIssuer.i);
-console.log("Issuer's notifications after deleting admit notification:");
-console.log(await issuerClient.notifications().list());
-
-// Holder Remove Grant Notification from their list
-await holderClient.notifications().delete(grantNotification.i);
-console.log("Holder's notifications after deleting grant notification:");
-console.log(await holderClient.notifications().list());
-```
-
-    Issuer's notifications after deleting admit notification:
-
-
-    { start: [33m0[39m, end: [33m0[39m, total: [33m0[39m, notes: [] }
-
-
-    Holder's notifications after deleting grant notification:
-
-
-    { start: [33m0[39m, end: [33m0[39m, total: [33m0[39m, notes: [] }
-
-
-<!-- Source: 102_25_Keria_Signify_Credential_Presentation_and_Revocation.md -->
-# Signify-ts: ACDC Presentation and Revocation with IPEX
-
-<div class="alert alert-primary">
-<b>🎯 OBJECTIVE</b><hr>
-Demonstrate the process of presenting an ACDC (Authentic Chained Data Container) from a Holder to a Verifier using the IPEX protocol with the Signify-ts library and the process of credential revocation.
-</div>
-
-<div class="alert alert-info">
-<b>ℹ️ NOTE</b><hr>
-This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>) to quickly establish the necessary preconditions for credential presentation. 
-</div>
-
-## Prerequisites: Client and Credential Setup 
-
-The client setup process from the previous notebook is reused here.
-
-
-```typescript
-import { randomPasscode, Serder} from 'npm:signify-ts';
-import { initializeSignify, 
-         initializeAndConnectClient,
-         createNewAID,
-         addEndRoleForAID,
-         generateOOBI,
-         resolveOOBI,
-         createTimestamp,
-         createCredentialRegistry,
-         getSchema,
-         issueCredential,
-         ipexGrantCredential,
-         getCredentialState,
-         waitForAndGetNotification,
-         ipexAdmitGrant,
-         markNotificationRead,
-         DEFAULT_IDENTIFIER_ARGS,
-         DEFAULT_TIMEOUT_MS,
-         DEFAULT_DELAY_MS,
-         DEFAULT_RETRIES,
-         ROLE_AGENT,
-         IPEX_GRANT_ROUTE,
-         IPEX_ADMIT_ROUTE,
-         IPEX_APPLY_ROUTE,
-         IPEX_OFFER_ROUTE,
-         SCHEMA_SERVER_HOST
-       } from './scripts_ts/utils.ts';
-
-// Clients setup
-// Initialize Issuer, Holder and Verifier CLients, Create AIDs for each one, assign 'agent' role to the AIDs
-// generate and resolve OOBIs 
-
-// Issuer Client
-const issuerBran = randomPasscode()
-const issuerAidAlias = 'issuerAid'
-const { client: issuerClient } = await initializeAndConnectClient(issuerBran)
-const { aid: issuerAid} = await createNewAID(issuerClient, issuerAidAlias, DEFAULT_IDENTIFIER_ARGS);
-await addEndRoleForAID(issuerClient, issuerAidAlias, ROLE_AGENT);
-const issuerOOBI = await generateOOBI(issuerClient, issuerAidAlias, ROLE_AGENT);
-
-// Holder Client
-const holderBran = randomPasscode()
-const holderAidAlias = 'holderAid'
-const { client: holderClient } = await initializeAndConnectClient(holderBran)
-const { aid: holderAid} = await createNewAID(holderClient, holderAidAlias, DEFAULT_IDENTIFIER_ARGS);
-await addEndRoleForAID(holderClient, holderAidAlias, ROLE_AGENT);
-const holderOOBI = await generateOOBI(holderClient, holderAidAlias, ROLE_AGENT);
-
-// Verifier Client
-const verifierBran = randomPasscode()
-const verifierAidAlias = 'verifierAid'
-const { client: verifierClient } = await initializeAndConnectClient(verifierBran)
-const { aid: verifierAid} = await createNewAID(verifierClient, verifierAidAlias, DEFAULT_IDENTIFIER_ARGS);
-await addEndRoleForAID(verifierClient, verifierAidAlias, ROLE_AGENT);
-const verifierOOBI = await generateOOBI(verifierClient, verifierAidAlias, ROLE_AGENT);
-
-// Clients OOBI Resolution
-// Resolve OOBIs to establish connections Issuer-Holder, Holder-Verifier
-const issuerContactAlias = 'issuerContact';
-const holderContactAlias = 'holderContact';
-const verifierContactAlias = 'verifierContact';
-
-await resolveOOBI(issuerClient, holderOOBI, holderContactAlias);
-await resolveOOBI(holderClient, issuerOOBI, issuerContactAlias);
-await resolveOOBI(verifierClient, holderOOBI, holderContactAlias);
-await resolveOOBI(holderClient, verifierOOBI, verifierContactAlias);
-
-// Schemas OOBI Resolution
-// Resolve the Schemas from the Schema Server (VLEI-Server)
-const schemaContactAlias = 'schemaContact';
-const schemaSaid = 'EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK';
-const schemaOOBI = `http://vlei-server:7723/oobi/${schemaSaid}`;
-
-await resolveOOBI(issuerClient, schemaOOBI, schemaContactAlias);
-await resolveOOBI(holderClient, schemaOOBI, schemaContactAlias);
-await resolveOOBI(verifierClient, schemaOOBI, schemaContactAlias);
-
-console.log("Client setup and OOBI resolutions complete.");
-```
-
-    Using Passcode (bran): BBlay0WZE90_WvBXrv94-
-
-
-    Client boot process initiated with KERIA agent.
-
-
-      Client AID Prefix:  ENyVASu5x45SQIOUaYLmRGzIgpZZIlrB3Ogpf3yxYQnN
-
-
-      Agent AID Prefix:   EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT
-
-
-    Initiating AID inception for alias: issuerAid
-
-
-    Successfully created AID with prefix: ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX
-
-
-    Assigning 'agent' role to KERIA Agent EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT for AID alias issuerAid
-
-
-    Successfully assigned 'agent' role for AID alias issuerAid.
-
-
-    Generating OOBI for AID alias issuerAid with role agent
-
-
-    Generated OOBI URL: http://keria:3902/oobi/ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX/agent/EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT
-
-
-    Using Passcode (bran): CTTJIoA3pv_F__m_jAcyX
-
-
-    Client boot process initiated with KERIA agent.
-
-
-      Client AID Prefix:  ENWBwkA9lLoMIxed6eIS-V_e1gO_CFCDkSwqXrhamMJq
-
-
-      Agent AID Prefix:   EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E
-
-
-    Initiating AID inception for alias: holderAid
-
-
-    Successfully created AID with prefix: EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1
-
-
-    Assigning 'agent' role to KERIA Agent EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E for AID alias holderAid
-
-
-    Successfully assigned 'agent' role for AID alias holderAid.
-
-
-    Generating OOBI for AID alias holderAid with role agent
-
-
-    Generated OOBI URL: http://keria:3902/oobi/EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1/agent/EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E
-
-
-    Using Passcode (bran): AcXyho7JD81I7kdzrIx28
-
-
-    Client boot process initiated with KERIA agent.
-
-
-      Client AID Prefix:  EKIvcyAwBRAUpimMRqa6PnI5GPohWCQxaYB4ky5dfH2-
-
-
-      Agent AID Prefix:   EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG
-
-
-    Initiating AID inception for alias: verifierAid
-
-
-    Successfully created AID with prefix: EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6
-
-
-    Assigning 'agent' role to KERIA Agent EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG for AID alias verifierAid
-
-
-    Successfully assigned 'agent' role for AID alias verifierAid.
-
-
-    Generating OOBI for AID alias verifierAid with role agent
-
-
-    Generated OOBI URL: http://keria:3902/oobi/EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6/agent/EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG
-
-
-    Resolving OOBI URL: http://keria:3902/oobi/EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1/agent/EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E with alias holderContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "holderContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://keria:3902/oobi/ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX/agent/EIHT7d2T8XOMZEqhQOG4R4e-BTl3b3aNCtkXPuqJbWmT with alias issuerContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "issuerContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://keria:3902/oobi/EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1/agent/EBUzU-W5eobwytZ07vLGDL62W5OrEaQ58PDN17JyfV3E with alias holderContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "holderContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://keria:3902/oobi/EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6/agent/EKxQw1LA69A6vfUc3uW-RWAhDE42Vk8cwe_iBzeqTKtG with alias verifierContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "verifierContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "schemaContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "schemaContact" (ID: undefined) added/updated.
-
-
-    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
-
-
-    Successfully resolved OOBI URL. Response: OK
-
-
-    Contact "schemaContact" (ID: undefined) added/updated.
-
-
-    Client setup and OOBI resolutions complete.
-
-
-As you will be conducting a credential presentation in this notebook, let's generate one for use in the presentation workflow. 
-
-
-```typescript
-// Create Issuer Credential Registry
-const issuerRegistryName = 'issuerRegistry'
-const { registrySaid: registrySaid } = await createCredentialRegistry(issuerClient, issuerAidAlias, issuerRegistryName)
-
-// Define credential Claims
-const credentialClaims = {
-    "eventName":"GLEIF Summit",
-    "accessLevel":"staff",
-    "validDate":"2026-10-01"
-}
-
-// Issuer - Issue Credential
-const { credentialSaid: credentialSaid} = await issueCredential(
-    issuerClient, 
-    issuerAidAlias, 
-    registrySaid, 
-    schemaSaid,
-    holderAid.i,
-    credentialClaims
-)
-
-// Issuer - get credential (with all its data)
-const credential = await issuerClient.credentials().get(credentialSaid);
-
-// Issuer - Ipex grant
-const grantResponse = await ipexGrantCredential(
-    issuerClient,
-    issuerAidAlias, 
-    holderAid.i,
-    credential,
-    ipexAdmitGrant
-)
-
-// Holder - Wait for grant notification
-const grantNotifications = await waitForAndGetNotification(holderClient, IPEX_GRANT_ROUTE)
-const grantNotification = grantNotifications[0]
-
-// Holder - Admit Grant
-const admitResponse = await ipexAdmitGrant(
-    holderClient,
-    holderAidAlias,
-    issuerAid.i,
-    grantNotification.a.d
-)
-
-// Holder - Mark notification
-await markNotificationRead(holderClient, grantNotification.i)
-
-// Issuer - Wait for admit notification
-const admitNotifications = await waitForAndGetNotification(issuerClient, IPEX_ADMIT_ROUTE)
-const admitNotification = admitNotifications[0]
-
-// Issuer - Mark notification
-await markNotificationRead(issuerClient, admitNotification.i)
-```
-
-    Creating credential registry "issuerRegistry" for AID alias "issuerAid"...
-
-
-    Successfully created credential registry: EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf
-
-
-    Issuing credential from AID "issuerAid" to AID "EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"...
-
-
-    {
-      name: [32m"credential.ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-      metadata: {
-        ced: {
-          v: [32m"ACDC10JSON0001c4_"[39m,
-          d: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-          i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
-          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
-          s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-          a: {
-            d: [32m"EK-RrRHBk5OFTOARAWOUKiMoaE-Ws5rbU83748qV5yCJ"[39m,
-            i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
-            eventName: [32m"GLEIF Summit"[39m,
-            accessLevel: [32m"staff"[39m,
-            validDate: [32m"2026-10-01"[39m,
-            dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
-          }
-        },
-        depends: {
-          name: [32m"witness.EDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m,
-          metadata: { pre: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m, sn: [33m2[39m },
-          done: [33mfalse[39m,
-          error: [1mnull[22m,
-          response: [1mnull[22m
-        }
-      },
-      done: [33mtrue[39m,
-      error: [1mnull[22m,
-      response: {
-        ced: {
-          v: [32m"ACDC10JSON0001c4_"[39m,
-          d: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-          i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
-          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
-          s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-          a: {
-            d: [32m"EK-RrRHBk5OFTOARAWOUKiMoaE-Ws5rbU83748qV5yCJ"[39m,
-            i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
-            eventName: [32m"GLEIF Summit"[39m,
-            accessLevel: [32m"staff"[39m,
-            validDate: [32m"2026-10-01"[39m,
-            dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
-          }
-        }
-      }
-    }
-
-
-    Successfully issued credential with SAID: ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V
-
-
-    AID "issuerAid" granting credential to AID "EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1" via IPEX...
-
-
-    Successfully submitted IPEX grant from "issuerAid" to "EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1".
-
-
-    Waiting for notification with route "/exn/ipex/grant"...
-
-
-    [Retry] Grant notification not found on attempt #1 of 5
-
-
-    [Retry] Waiting 5000ms before next attempt...
-
-
-    AID "holderAid" admitting IPEX grant "EJRboVbSg2SE81l_zeAazRYI5vvMwcjx3Wh96n3zMf39" from AID "ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"...
-
-
-    Successfully submitted IPEX admit for grant "EJRboVbSg2SE81l_zeAazRYI5vvMwcjx3Wh96n3zMf39".
-
-
-    Marking notification "0ACpasWyXZ2fXJL2GN0PMSzx" as read...
-
-
-    Notification "0ACpasWyXZ2fXJL2GN0PMSzx" marked as read.
-
-
-    Waiting for notification with route "/exn/ipex/admit"...
-
-
-    Marking notification "0AAAmsfdu-iZ9fAO2F7gm7nc" as read...
-
-
-    Notification "0AAAmsfdu-iZ9fAO2F7gm7nc" marked as read.
-
-
-## Credential Presentation Workflow (IPEX)
-
-Now that the Holder possesses the credential, they can present it to a Verifier. This workflow also uses IPEX, but typically starts with the Verifier requesting a presentation.
-
-Below are presented the code snipets you need to follow to do the presentation.
-
-### Step 1: Verifier Requests Presentation (Apply)
-
-The Verifier initiates the presentation process by sending an IPEX apply message. This `apply` message is an `exn` message specifying the criteria for the credential they are requesting. This includes the `schemaSaid` and can include specific attributes the credential must have.
-
-
-```typescript
-// Verifier Ipex Apply (Presentation request)
-
-// Prepare the IPEX apply message.
-const [apply, sigsApply, _endApply] = await verifierClient.ipex().apply({ //_endApply is not used
-    senderName: verifierAidAlias,     // Alias of the Verifier's AID
-    schemaSaid: schemaSaid,           // SAID of the schema for the requested credential
-    attributes: { eventName:'GLEIF Summit' }, // Specific attributes the credential should have
-    recipient: holderAid.i,           // AID of the Holder being asked for the presentation
-    datetime: createTimestamp(),      // Timestamp for the apply message
-});
-
-// Verifier submits the prepared apply message to the Holder.
-const applyOperation = await verifierClient
-    .ipex()
-    .submitApply(verifierAidAlias, apply, sigsApply, [holderAid.i]);
-
-// Wait for the submission operation to complete.
-const applyResponse = await verifierClient
-    .operations()
-    .wait(applyOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
-
-// Clean up the operation.
-await verifierClient.operations().delete(applyOperation.name);
-```
-
-### Step 2: Holder Receives Apply Request
-
-Holder Apply Notification and Exchange
-The Holder receives a notification for the Verifier's `apply` request. They retrieve the details of this request from the exchange message. After processing, the Holder marks the notification as read.
-
-
-```typescript
-// Holder receives the IPEX apply notification from the Verifier.
-
-let holderApplyNotifications;
-
-// Retry loop for the Holder to receive the apply notification.
-for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
-    try{
-        // List notifications, filtering for unread IPEX_APPLY_ROUTE messages.
-        let allNotifications = await holderClient.notifications().list()
-        holderApplyNotifications = allNotifications.notes.filter(
-            (n) => n.a.r === IPEX_APPLY_ROUTE && n.r === false
-        )        
-        if(holderApplyNotifications.length === 0){ 
-            throw new Error("Apply notification not found"); // Throw error to trigger retry
-        }
-        break; // Exit loop if notification found
-    }
-    catch (error){    
-         console.log(`[Retry] Apply notification not found for Holder on attempt #${attempt} of ${DEFAULT_RETRIES}`);
-         if (attempt === DEFAULT_RETRIES) {
-             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for Holder's apply notification.`);
-             throw error; 
-         }
-         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
-         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
-    }
-}
-
-const applyNotificationForHolder = holderApplyNotifications[0] // Assuming one notification
-
-console.log("Holder received Apply Notification:");
-console.log(applyNotificationForHolder);
-
-// Retrieve the full IPEX apply exchange details.
-const applyExchange = await holderClient.exchanges().get(applyNotificationForHolder.a.d);
-console.log("Details of Apply Exchange received by Holder:");
-console.log(applyExchange);
-
-// Extract the SAID of the apply 'exn' message for use in the offer.
-const applyExchangeSaid = applyExchange.exn.d;
-
-// Holder marks the apply notification as read.
-await holderClient.notifications().mark(applyNotificationForHolder.i);
-console.log("Holder's notifications after marking apply as read:");
-console.log(await holderClient.notifications().list());
-
-
-```
-
-    [Retry] Apply notification not found for Holder on attempt #1 of 5
-
-
-    [Retry] Waiting 5000ms before next attempt...
-
-
-    Holder received Apply Notification:
-
-
-    {
-      i: [32m"0ABuHbOWeToag68XdfESYrDA"[39m,
-      dt: [32m"2025-05-30T22:30:34.801879+00:00"[39m,
-      r: [33mfalse[39m,
-      a: {
-        r: [32m"/exn/ipex/apply"[39m,
-        d: [32m"EA37R1JrmMmp87B7B_mnMMgFxJ_O03HoxTrwBx5jb9C0"[39m,
-        m: [32m""[39m
-      }
-    }
-
-
-    Details of Apply Exchange received by Holder:
-
-
-    {
-      exn: {
-        v: [32m"KERI10JSON0001a0_"[39m,
-        t: [32m"exn"[39m,
-        d: [32m"EA37R1JrmMmp87B7B_mnMMgFxJ_O03HoxTrwBx5jb9C0"[39m,
-        i: [32m"EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6"[39m,
-        rp: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
-        p: [32m""[39m,
-        dt: [32m"2025-05-30T22:30:34.445000+00:00"[39m,
-        r: [32m"/ipex/apply"[39m,
-        q: {},
-        a: {
-          i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
-          m: [32m""[39m,
-          s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-          a: { eventName: [32m"GLEIF Summit"[39m }
-        },
-        e: {}
-      },
-      pathed: {}
-    }
-
-
-    Holder's notifications after marking apply as read:
-
-
-    {
-      start: [33m0[39m,
-      end: [33m1[39m,
-      total: [33m2[39m,
-      notes: [
-        {
-          i: [32m"0ACpasWyXZ2fXJL2GN0PMSzx"[39m,
-          dt: [32m"2025-05-30T22:30:28.835002+00:00"[39m,
-          r: [33mtrue[39m,
-          a: {
-            r: [32m"/exn/ipex/grant"[39m,
-            d: [32m"EJRboVbSg2SE81l_zeAazRYI5vvMwcjx3Wh96n3zMf39"[39m,
-            m: [32m""[39m
-          }
-        },
-        {
-          i: [32m"0ABuHbOWeToag68XdfESYrDA"[39m,
-          dt: [32m"2025-05-30T22:30:34.801879+00:00"[39m,
-          r: [33mtrue[39m,
-          a: {
-            r: [32m"/exn/ipex/apply"[39m,
-            d: [32m"EA37R1JrmMmp87B7B_mnMMgFxJ_O03HoxTrwBx5jb9C0"[39m,
-            m: [32m""[39m
-          }
-        }
-      ]
-    }
-
-
-### Step 3: Holder Finds Matching Credential
-
-The Holder now needs to find a credential in their possession that satisfies the Verifier's `apply` request (matches the schema SAID and any specified attributes). The code below constructs a filter based on the `applyExchange` data and uses it to search the Holder's credentials.
-
-
-```typescript
-// The apply operation from the Verifier asks for a specific credential 
-// (matching schema and attribute values).
-// This code snippet creates a credential filter based on the criteria
-// from the applyExchange message received by the Holder.
-
-let filter: { [x: string]: any } = { '-s': applyExchange.exn.a.s }; // Filter by schema SAID
-// Add attribute filters from the apply request
-for (const key in applyExchange.exn.a.a) { // 'a.a' contains the requested attributes
-    filter[`-a-${key}`] = applyExchange.exn.a.a[key];
-}
-
-console.log("Constructed filter for matching credentials:");
-console.log(filter);
-
-// Holder lists credentials matching the filter.
-const matchingCredentials = await holderClient.credentials().list({ filter });
-
-console.log("Matching credentials found by Holder:");
-console.log(matchingCredentials); // Should list the EventPass credential issued earlier
-```
-
-    Constructed filter for matching credentials:
-
-
-    {
-      [32m"-s"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-      [32m"-a-eventName"[39m: [32m"GLEIF Summit"[39m
-    }
-
-
-    Matching credentials found by Holder:
-
-
-    [
-      {
-        sad: {
-          v: [32m"ACDC10JSON0001c4_"[39m,
-          d: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-          i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
-          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
-          s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-          a: {
-            d: [32m"EK-RrRHBk5OFTOARAWOUKiMoaE-Ws5rbU83748qV5yCJ"[39m,
-            i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
-            eventName: [32m"GLEIF Summit"[39m,
-            accessLevel: [32m"staff"[39m,
-            validDate: [32m"2026-10-01"[39m,
-            dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
-          }
-        },
-        atc: [32m"-IABENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V0AAAAAAAAAAAAAAAAAAAAAAAENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-        iss: {
-          v: [32m"KERI10JSON0000ed_"[39m,
-          t: [32m"iss"[39m,
-          d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m,
-          i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-          s: [32m"0"[39m,
-          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
-          dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
-        },
-        issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m,
-        pre: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
-        schema: {
-          [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-          [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
-          title: [32m"EventPass"[39m,
-          description: [32m"Event Pass Schema"[39m,
-          type: [32m"object"[39m,
-          credentialType: [32m"EventPassCred"[39m,
-          version: [32m"1.0.0"[39m,
-          properties: {
-            v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
-            d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
-            u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
-            i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
-            ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
-            s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
-            a: { oneOf: [36m[Array][39m }
-          },
-          additionalProperties: [33mfalse[39m,
-          required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
-        },
-        chains: [],
-        status: {
-          vn: [ [33m1[39m, [33m0[39m ],
-          i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-          s: [32m"0"[39m,
-          d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m,
-          ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
-          ra: {},
-          a: { s: [33m2[39m, d: [32m"EDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m },
-          dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m,
-          et: [32m"iss"[39m
-        },
-        anchor: {
-          pre: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-          sn: [33m0[39m,
-          d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m
-        },
-        anc: {
-          v: [32m"KERI10JSON00013a_"[39m,
-          t: [32m"ixn"[39m,
-          d: [32m"EDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m,
-          i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
-          s: [32m"2"[39m,
-          p: [32m"EDZ0aXTdlj5qu-QX46tPXPFrJyF3Wo3GTQKnw6XvX2Ip"[39m,
-          a: [
-            {
-              i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-              s: [32m"0"[39m,
-              d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m
-            }
-          ]
-        },
-        ancatc: [
-          [32m"-VBq-AABAABrFFLGDtSkiaoBnzOfOOJnReHWX1e9wBXGp_8eYfFpj13TX0EVYgauV3TV03yzjJfU7RnHCzFiY6baVF7w6uAC-BADAABCx_vYPLlk_smdjR-wvRKarYTKjNd5rCTwMRWALW3UXtgaeclLBdFQoidmNGpdsb9OPefr2rEWHPMSB3AQvpIPABBlkhIabG2_cvT5Z1tVVNjHVj1sSyAFdY2trQVZTd1AeqA41rmaHo8pmfOXfK8C649AlUMgqvYkmeeCNIPC2LQOACDAb_hhtCPGZUCGqFOlHT-ZMmDLzh0OCLXkObEhwfN8u3bLWU99lwsmO3ajIBSbdq7s1PBWZbIK25BgjDx3uscC-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-05-30T22c30c28d923580p00c00"[39m
-        ]
-      }
-    ]
-
-
-### Step 4: Holder Offers Credential
-
-Assuming a matching credential is found, the Holder prepares an IPEX offer message. This `offer` includes the ACDC they are presenting. This is sent back to the Verifier.
-
-
-```typescript
-// Holder prepares and submits an IPEX offer message with the matching credential.
-
-// Prepare the IPEX offer message.
-const [offer, sigsOffer, endOffer] = await holderClient.ipex().offer({
-    senderName: holderAidAlias,                   // Alias of the Holder's AID
-    recipient: verifierAid.i,                     // AID of the Verifier
-    acdc: new Serder(matchingCredentials[0].sad), // The ACDC being offered (first matching credential)
-    applySaid: applyExchangeSaid,                 // SAID of the Verifier's apply 'exn' message this offer is responding to
-    datetime: createTimestamp(),                  // Timestamp for the offer message
-});
-
-// Holder submits the prepared offer message to the Verifier.
-const offerOperation = await holderClient
-    .ipex()
-    .submitOffer(holderAidAlias, offer, sigsOffer, endOffer, [
-        verifierAid.i, // Recipient AID
-    ]);
-
-// Wait for the submission operation to complete.
-const offerResponse = await holderClient
-    .operations()
-    .wait(offerOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
-
-// Clean up the operation.
-await holderClient.operations().delete(offerOperation.name);
-console.log("Holder submitted IPEX Offer to Verifier.");
-
-
-```
-
-    Holder submitted IPEX Offer to Verifier.
-
-
-### Step 5: Verifier Receives Offer
-
-The Verifier receives a notification for the Holder's `offer`. The Verifier retrieves the exchange details and marks the notification.
-
-
-```typescript
-// Verifier receives the IPEX offer notification from the Holder.
-
-let verifierOfferNotifications;
-
-// Retry loop for the Verifier to receive the offer notification.
-for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
-    try{
-        // List notifications, filtering for unread IPEX_OFFER_ROUTE messages.
-        verifierOfferNotifications = await verifierClient.notifications().list(
-            (n) => n.a.r === IPEX_OFFER_ROUTE && n.r === false
-        );
-        if(verifierOfferNotifications.notes.length === 0){ 
-            throw new Error("Offer notification not found"); // Throw error to trigger retry
-        }
-        break; // Exit loop if notification found
-    }
-    catch (error){    
-         console.log(`[Retry] Offer notification not found for Verifier on attempt #${attempt} of ${DEFAULT_RETRIES}`);
-         if (attempt === DEFAULT_RETRIES) {
-             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for Verifier's offer notification.`);
-             throw error; 
-         }
-         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
-         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
-    }
-}
-
-const offerNotificationForVerifier = verifierOfferNotifications.notes[0]; // Assuming one notification
-
-console.log("Verifier received Offer Notification:");
-console.log(offerNotificationForVerifier);
-
-// Retrieve the full IPEX offer exchange details.
-const offerExchange = await verifierClient.exchanges().get(offerNotificationForVerifier.a.d);
-console.log("Details of Offer Exchange received by Verifier:");
-console.log(offerExchange); // This will contain the ACDC presented by the Holder
-
-// Extract the SAID of the offer 'exn' message for use in the agree.
-let offerExchangeSaid = offerExchange.exn.d;
-
-// Verifier marks the offer notification as read.
-await verifierClient.notifications().mark(offerNotificationForVerifier.i);
-console.log("Verifier's notifications after marking offer as read:");
-console.log(await verifierClient.notifications().list());
-```
-
-    Verifier received Offer Notification:
-
-
-    {
-      i: [32m"0ACf2mKy5wG1WIIHGBfgp0nX"[39m,
-      dt: [32m"2025-05-30T22:30:40.303419+00:00"[39m,
-      r: [33mfalse[39m,
-      a: {
-        r: [32m"/exn/ipex/offer"[39m,
-        d: [32m"EF4iUVpspER4GXh2dIfkIXn77B3RI9XV8R4YLEX9_SVK"[39m,
-        m: [32m""[39m
-      }
-    }
-
-
-    Details of Offer Exchange received by Verifier:
-
-
-    {
-      exn: {
-        v: [32m"KERI10JSON000376_"[39m,
-        t: [32m"exn"[39m,
-        d: [32m"EF4iUVpspER4GXh2dIfkIXn77B3RI9XV8R4YLEX9_SVK"[39m,
-        i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
-        rp: [32m"EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6"[39m,
-        p: [32m"EA37R1JrmMmp87B7B_mnMMgFxJ_O03HoxTrwBx5jb9C0"[39m,
-        dt: [32m"2025-05-30T22:30:39.933000+00:00"[39m,
-        r: [32m"/ipex/offer"[39m,
-        q: {},
-        a: { i: [32m"EO4jq_VUNW5hTH7tiXRnySakhhthTl5vWZmK3vffFNb6"[39m, m: [32m""[39m },
-        e: {
-          acdc: {
-            v: [32m"ACDC10JSON0001c4_"[39m,
-            d: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-            i: [32m"ENTh30fxeaOyithus3ZUMTIRqaJ4lX4iowIl-m9uZ0lX"[39m,
-            ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
-            s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-            a: {
-              d: [32m"EK-RrRHBk5OFTOARAWOUKiMoaE-Ws5rbU83748qV5yCJ"[39m,
-              i: [32m"EHhtjBPLlWy-LxsNjJRcJWR1qDNm7P35cw_xGsamo8g1"[39m,
-              eventName: [32m"GLEIF Summit"[39m,
-              accessLevel: [32m"staff"[39m,
-              validDate: [32m"2026-10-01"[39m,
-              dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m
-            }
-          },
-          d: [32m"ECbDgYmvZKfgQogFGE8xgF5xtX_RddD_vAR-QFQkkEO-"[39m
-        }
-      },
-      pathed: {}
-    }
-
-
-    Verifier's notifications after marking offer as read:
-
-
-    {
-      start: [33m0[39m,
-      end: [33m0[39m,
-      total: [33m1[39m,
-      notes: [
-        {
-          i: [32m"0ACf2mKy5wG1WIIHGBfgp0nX"[39m,
-          dt: [32m"2025-05-30T22:30:40.303419+00:00"[39m,
-          r: [33mtrue[39m,
-          a: {
-            r: [32m"/exn/ipex/offer"[39m,
-            d: [32m"EF4iUVpspER4GXh2dIfkIXn77B3RI9XV8R4YLEX9_SVK"[39m,
-            m: [32m""[39m
-          }
-        }
-      ]
-    }
-
-
-### Step 6: Verifier Agrees and Validates
-
-Finally, the Verifier, after validating the offered credential (which signify-ts does implicitly upon processing the offer and preparing the agree), sends an IPEX agree message back to the Holder. This confirms successful receipt and validation of the presentation.
-
-
-```typescript
-// Verifier prepares and submits an IPEX agree message.
-
-// Prepare the IPEX agree message.
-const [agree, sigsAgree, _endAgree] = await verifierClient.ipex().agree({
-    senderName: verifierAidAlias, // Alias of the Verifier's AID
-    recipient: holderAid.i,       // AID of the Holder
-    offerSaid: offerExchangeSaid, // SAID of the Holder's offer 'exn' message this agree is responding to
-    datetime: createTimestamp(),  // Timestamp for the agree message
-});
-
-// Verifier submits the prepared agree message to the Holder.
-const agreeOperation = await verifierClient
-    .ipex()
-    .submitAgree(verifierAidAlias, agree, sigsAgree, [holderAid.i]);
-
-// Wait for the submission operation to complete.
-const agreeResponse = await verifierClient
-    .operations()
-    .wait(agreeOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
-
-// Clean up the operation.
-await verifierClient.operations().delete(agreeOperation.name);
-console.log("Verifier submitted IPEX Agree to Holder, completing the presentation exchange.");
-
-// At this point, the Verifier has successfully received and validated the credential.
-// The Verifier's client would have stored the presented credential details if needed.
-```
-
-    Verifier submitted IPEX Agree to Holder, completing the presentation exchange.
-
-
-## Credential Revocation by Issuer
-
-Circumstances may require a credential to be invalidated before its intended expiry, or if it has no expiry. This process is known as revocation. Only the original Issuer of a credential can revoke it. Revocation involves the Issuer recording a revocation event in the specific credential's Transaction Event Log (TEL), which is part of the Issuer's Credential Registry. This event is, like all TEL events, anchored to the Issuer's KEL.
-
-The Issuer uses the `issuerClient.credentials().revoke()` method, specifying the alias of their issuing AID and the SAID of the credential to be revoked. This action creates a new event in the TEL associated with the credential, marking its status as revoked.
-
-First, check the credential status before revocation. The status object contains details about the latest event in the credential's TEL. The et field indicates the event type (e.g., iss for issuance).
-
-
-```typescript
-
-// Log the credential's status from the Issuer's perspective before revocation.
-// The 'status' field shows the latest event in the credential's Transaction Event Log (TEL).
-// 'et: "iss"' indicates it's currently in an issued state.
-const statusBefore = (await issuerClient.credentials().get(credentialSaid)).status;
-console.log("Credential status before revocation:", statusBefore);
-
-// Issuer revokes the credential.
-// This creates a revocation event in the credential's TEL within the Issuer's registry.
-const revokeResult = await issuerClient.credentials().revoke(issuerAidAlias, credentialSaid); // Changed from revokeOperation to revokeResult to get .op
-const revokeOperation = revokeResult.op; // Get the operation from the result
-
-// Wait for the revocation operation to complete.
-const revokeResponse = await issuerClient
-    .operations()
-    .wait(revokeOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS)); // Used revokeOperation directly
-
-// Log the credential status after revocation.
-// Note the 'et: "rev"' indicating it's now revoked, and the sequence number 's' has incremented.
-const statusAfter = (await issuerClient.credentials().get(credentialSaid)).status;
-console.log("Credential status after revocation:", statusAfter);
-
-
-
-```
-
-    Credential status before revocation: {
-      vn: [ [33m1[39m, [33m0[39m ],
-      i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-      s: [32m"0"[39m,
-      d: [32m"EKjlRSgDEgVRM_avs2gOFa_heuqhoIWaqHcW5WPxjlPT"[39m,
-      ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
-      ra: {},
-      a: { s: [33m2[39m, d: [32m"EDS8kkDxjKQLJoNSNlRYiN0CfmRfkKw66-Chr-3k7w30"[39m },
-      dt: [32m"2025-05-30T22:30:27.482000+00:00"[39m,
-      et: [32m"iss"[39m
-    }
-
-
-    Credential status after revocation: {
-      vn: [ [33m1[39m, [33m0[39m ],
-      i: [32m"ENn8FhzHG80K9qPY81AgpAIeIBAxn5oClGngWhaNKJ5V"[39m,
-      s: [32m"1"[39m,
-      d: [32m"EETK8-AwjhP8fKjlVM_wDocbOQWySzg0oR9Nh7_S2JJ6"[39m,
-      ri: [32m"EGxX0UsqRkvlqH2i3EHZt4dNkL7RRLWoV1vqH_E9F1yf"[39m,
-      ra: {},
-      a: { s: [33m3[39m, d: [32m"EO-7rNU7Zb0NdviTeeMg4eVxgbHdVi1fS0w6382rjhuw"[39m },
-      dt: [32m"2025-05-30T22:30:40.802000+00:00"[39m,
-      et: [32m"rev"[39m
-    }
-
-
-The output shows the change in the credential's status object:
-
-- Before revocation, `et` (event type) was `iss`.
-- After revocation, `et` is `rev`.
-- The sequence number `s` of the TEL event also increments, reflecting the new event.
-- The digest d of the event changes, as it's a new event.
-
-This demonstrates that the Issuer has successfully updated the credential's status in their registry. Anyone (like a Verifier) who subsequently checks this registry for the credential's status will see that it has been revoked.
-
-Once a Holder becomes aware that a credential they possess has been revoked (e.g., by checking its status in the Issuer's registry or being informed through other means), they should no longer rely on it. It's good practice for the Holder to delete the revoked credential from their local store to prevent accidental presentation.
-
-The `holderClient.credentials().delete()` method removes the credential from the Holder's local client storage.
-
-
-```typescript
-// Holder deletes the (now revoked) credential from their local store.
-await holderClient.credentials().delete(credentialSaid);
-
-// Verify the credential is no longer in the Holder's list.
-console.log("Holder's credential list after deleting the revoked credential:");
-console.log(await holderClient.credentials().list()); // Should be an empty array or not contain the revoked credential
-
-```
-
-    Holder's credential list after deleting the revoked credential:
-
-
-    []
-
-
-<!-- Source: 103_75_ACDC_Edges_and_Rules.md -->
+<!-- Source: 101_75_ACDC_Edges_and_Rules.md -->
 # Advanced ACDC Features: Edges, Edge Operators, and Rules
 
 <div class="alert alert-primary">
@@ -8521,4 +5420,3296 @@ ACDC Edges (<code>e</code> section) link ACDCs, with Edge Operators defining rel
 <li><b>DI2I (Delegated-Issuer-To-Issuee):</b> Use when the current ACDC's issuer is either the subject of the linked ACDC or a formally recognized delegate of that subject. Allows for flexible, multi-step delegation. Example: A QC Supervisor (delegate of Plant GM) issues a "Batch Approved" ACDC pointing to the GM's "Plant Authority" ACDC.</li>
 </ul>    
 </div>
+
+<!-- Source: 101_80_ACDC_Chained_Credentials_I2I.md -->
+# ACDC Issuance with KLI: Issuer-To-Issuee
+
+<div class="alert alert-primary">
+  <b>🎯 OBJECTIVE</b><hr>
+
+</div>
+
+<div class="alert alert-primary">
+  <b>📝 SUMMARY</b><hr>
+  
+</div>
+
+<!-- Source: 101_85_ACDC_Chained_Credentials_NI2I.md -->
+# ACDC Issuance with KLI: Not-Issuer-To-Issuee
+
+<div class="alert alert-primary">
+  <b>🎯 OBJECTIVE</b><hr>
+
+</div>
+
+<div class="alert alert-primary">
+  <b>📝 SUMMARY</b><hr>
+</div>
+
+<!-- Source: 102_05_KERIA_Signify.md -->
+# Introducing KERIA and Signify-ts: Architecture and Concepts
+
+<div class="alert alert-primary">
+  <b>🎯 OBJECTIVE</b><hr>
+  Introduces the foundational concepts of KERIA and Signify-ts, focusing on:
+    <ul>
+        <li>The KERIA/Signify client-agent architecture.</li>
+        <li>Key KERIA endpoint interfaces.</li>
+        <li>The concept of End Roles.</li>
+        <li>The relationship between Client AIDs and Agent AIDs.</li>
+    </ul>
+</div>
+
+## Client-Agent Architecture
+
+KERI is a protocol for secure, self-certifying identifiers. **KERIA** is an agent implementation of KERI, designed to run as a service (e.g., in the cloud or self-hosted) that manages AIDs on behalf of a controller. **Signify-ts** is a TypeScript library that acts as a client, enabling applications to interact with a KERIA agent.
+
+The idea behind this client-agent architecture is to enable "signing at the edge". Your sensitive private keys, used for signing key events and other data, remain on the client-side (managed by Signify client library). The KERIA agent, running remotely, handles tasks like:
+* Storing encrypted key material (salts, encrypted private keys)
+* Managing Key Event Logs (KELs)
+* Interacting with witnesses
+* Exchanging messages with other KERI agents
+
+The KERIA agent itself never has access to your unencrypted private keys. All critical signing operations happen on the client, and the signed events are then sent to the KERIA agent for processing and dissemination.
+
+This architecture separates key management and signing authority (client-side) from the operational aspects of maintaining an AID's KEL and its availability (agent-side).
+
+### KERIA Deployment and Configuration
+
+In a typical deployment, KERIA starts up and often loads its configuration, including a list of default witnesses, from a JSON configuration file (e.g., **[keria configuration file](config/keria/keria-docker.json)**). This allows the agent to be pre-configured with a set of trusted witnesses that any AIDs it manages can use.
+
+## Agent Service Endpoints
+
+A KERIA service instance exposes distinct HTTP endpoints to handle different types of interactions:
+
+1.  **Boot Interface** (`boot port`, e.g., 3903 by default):
+    * **Purpose**: Used for the initial setup and provisioning of a KERIA agent worker for a Signify client. This is where the client and agent establish their initial secure relationship.
+    * **Interaction**: The Signify client sends its client AID's inception event to this endpoint to request the creation of a delegated agent AID.
+    * **Accessibility**: Often restricted to internal infrastructure or disabled if agents are pre-configured (static worker mode).
+
+2.  **Admin Interface** (`admin port`, e.g., 3901 by default):
+    * **Purpose**: This is the primary REST API for the Signify client to command and control its KERIA agent.
+    * **Interaction**: Used for operations like creating new AIDs, rotating keys, issuing credentials, resolving OOBIs, etc. All requests to this interface must be authenticated (e.g., signed by the Client AID).
+    * **Accessibility**: Typically exposed externally to allow the client to manage its AIDs.
+
+3.  **KERI Protocol Interface** (`http port`, e.g., 3902 by default):
+    * **Purpose**: Handles standard KERI protocol messages (e.g., KELs, receipts, challenges) exchanged with other KERI agents and witnesses in the wider KERI network.
+    * **Interaction**: Facilitates multi-sig coordination, credential revocation, KEL exchange, etc., using CESR (Composable Event Streaming Representation) over HTTP.
+    * **Accessibility**: Exposed externally to enable interaction with the global KERI ecosystem.
+
+This separation of interfaces enhances security and deployment flexibility.
+
+## Understanding End Roles
+
+An **end role** in KERI is an authorization that one AID grants to another AID to act in a specific capacity on its behalf. Think of it as assigning a specific job to another identifier.
+
+For instance, when a Signify client connects to a KERIA agent, the **Client AID** (controlled by the user/application) delegates authority to an **Agent AID** (managed by the KERIA service). The Client AID essentially authorizes its Agent AID to perform certain KERI operations in its name, like anchoring its KEL with witnesses or responding to discovery requests.
+
+Declaring an end role typically involves creating a KERI event, often an interaction event (`ixn`) or an establishment event (`icp` or `rot`) with specific configuration (`c` field) or an `end` role event, that specifies:
+* The AID granting the authorization (the delegator or authorizer).
+* The AID receiving the authorization (the delegate or authorized party).
+* The specific role being granted (e.g., `agent`, `witness`, `watcher`).
+
+This signed authorization is recorded in the KEL of the authorizing AID, making the role assignment verifiable by anyone who can access and validate that KEL.
+
+## Client and Agent AIDs Explained
+
+When you use Signify-ts to connect to a KERIA agent, two primary AIDs are involved:
+
+1.  **Client AID**:
+    * This is an AID that *you* (or your application) control directly via the Signify-ts client.
+    * You hold its private keys.
+    * It's typically a transferable AID, allowing for key rotation.
+    * It acts as the **delegator** to the Agent AID.
+
+2.  **Agent AID**:
+    * This AID is created and managed by the KERIA service *on your behalf*.
+    * Its inception event specifies the Client AID as its delegator (`di` field in the inception event). This means the Agent AID's authority to act is derived from, and anchored to, your Client AID.
+    * It's also typically a transferable AID.
+    * The KERIA service uses this Agent AID to perform actions for your Client AID, such as interacting with witnesses or other agents, without needing direct access to your Client AID's private keys.
+
+The Signify client generates the Client AID and sends its inception event to the KERIA agent's Boot Interface. The KERIA service then creates the delegated Agent AID and returns its inception event to the client. Finally, the Signify client approves this delegation by sending an interaction event back to the KERIA agent's Admin Interface.
+
+This delegation model is fundamental to KERIA's security: your primary controlling keys (for the Client AID) remain "at the edge," while the KERIA agent operates with a delegated authority (via the Agent AID) that is always traceable back to your Client AID.
+
+<div class="alert alert-primary">
+  <b>📝 SUMMARY</b><hr>
+  <p>
+    The KERIA/Signify architecture enables "signing at the edge," where a Signify client (like Signify-ts) manages private keys and signing operations locally, while a remote KERIA agent handles KEL management, witness interactions, and KERI protocol communications. KERIA exposes three main HTTP endpoints:
+    <ul>
+        <li><b>Boot Interface:</b> For initial client-agent provisioning and creation of a delegated Agent AID.</li>
+        <li><b>Admin Interface:</b> A REST API for the client to command and control its agent (e.g., create AIDs, rotate keys).</li>
+        <li><b>KERI Protocol Interface:</b> For standard KERI message exchange with other agents and witnesses.</li>
+    </ul>
+    End roles in KERI define verifiable authorizations for one AID to act in a specific capacity for another (e.g., an Agent AID acting in the 'agent' role for a Client AID).
+  </p>
+  <p>
+    The connection process involves a <b>Client AID</b> (controlled by the user via Signify) delegating authority to an <b>Agent AID</b> (managed by KERIA).
+  </p>
+</div>
+
+<!-- Source: 102_10_KERIA_Signify_Basic_Operations.md -->
+# Signify-ts Basics: Client Setup and AID Management
+
+<div class="alert alert-primary">
+  <b>🎯 OBJECTIVE</b><hr>
+  Introduce basic operations using Signify-ts: creating a client, initializing (booting) an agent, connecting to an agent, and creating an Autonomic Identifier (AID).</li>
+    </ul>
+    Familiarity with core KERI concepts (AIDs, KELs, digital signatures, witnesses, OOBIs) is assumed.
+</div>
+
+## Connecting to a KERIA Agent
+
+Now that we understand the architecture, let's see how to use the `signify-ts` library to establish a connection with a KERIA agent. This process involves three main steps:
+1.  Initializing the `signify-ts` library.
+2.  Creating a `SignifyClient` instance, which represents your application's connection to a specific KERIA agent.
+3.  Bootstrapping and connecting the client to the agent, which establishes the Client AID and the delegated Agent AID.
+
+
+
+<div class="alert alert-info">
+    <b>ℹ️ Note</b><hr>This section assumes that a KERIA agent is running and its Boot and Admin interfaces are accessible at the specified URLs. In the context of these notebooks, KERIA is pre-configured and running as part of the Docker deployment.
+</div>
+
+
+### Initializing the Signify-ts Library
+
+The `signify-ts` library contains components for cryptographic operations using libsodium. Before any of its functionalities can be used, these components must be initialized. This is achieved by calling and the `ready()` function.
+
+
+
+```typescript
+import { randomPasscode, ready, SignifyClient, Tier } from 'npm:signify-ts';
+
+await ready();
+
+console.log("Signify-ts library initialized and ready.");
+```
+
+    Signify-ts library initialized and ready.
+
+
+### Creating the Client Instance
+Once the library is initialized, you can create an instance of `SignifyClient`. This object will be your primary interface for all interactions with the KERIA agent. It requires several parameters:
+
+- **url**: The URL of the KERIA agent's Admin Interface. The client uses this for most command and control operations after the initial connection is established.
+- **bran**: A 21-character, high-entropy string, often referred to as a "passcode." This bran serves as the root salt for deriving the Client AID's signing and rotation keys via a Hierarchical Deterministic (HD) key algorithm. It is critical to treat the bran as securely as a private key. Losing it means losing control of the Client AID.
+- **tier**: The security tier for the passcode hashing algorithm. Tier.low, Tier.med, and Tier.high represent different computational costs for deriving keys from the bran. Higher tiers are more resistant to brute-force attacks but require more processing power and time.
+- **bootUrl**: The URL of the KERIA agent's Boot Interface. This is used for the initial setup and provisioning of the agent worker for this client.
+
+
+```typescript
+const adminUrl = 'http://keria:3901'; // KERIA agent's Admin Interface URL
+const bootUrl = 'http://keria:3903';  // KERIA agent's Boot Interface URL
+
+// Generate a new random 21-character bran (passcode/salt)
+// In a real application, you would securely store and reuse this bran.
+const bran = randomPasscode();
+
+// Create the SignifyClient instance
+const client = new SignifyClient(
+    adminUrl,
+    bran,
+    Tier.low, // Using Tier.low for faster execution
+    bootUrl
+);
+
+console.log('SignifyClient instance created.');
+console.log('Using Passcode (bran):', bran);
+```
+
+    SignifyClient instance created.
+
+
+    Using Passcode (bran): C1WD4N5K5qoovdB_Mp6p9
+
+
+<div class="alert alert-info">
+  <b>ℹ️ NOTE</b><hr>
+In a production environment, the <code>bran</code> must be securely generated and stored. For a given Client AID, you must consistently use the same bran to reconnect and derive the correct keys. Using <code>randomPasscode()</code> each time, as in this demo, will result in a new Client AID being created or an inability to connect to an existing one if the KERIA agent already has a state associated with a different bran for its controller.
+</div>
+
+### Bootstrapping and Connecting to the Agent
+With the `SignifyClient` instance created, the next step is to establish the initial connection and state with the KERIA agent. This involves two methods:
+
+- **`client.boot()`**: Initiates the bootstrapping process with the KERIA agent's Boot Interface:
+  - The client generates its Client AID using the provided bran.
+  - It sends the Client AID's inception event to the KERIA agent's Boot Interface.
+  - The KERIA agent, upon successful verification, creates a delegated Agent AID and returns its inception event to the client. This step essentially provisions the necessary resources and establishes the delegated relationship on the KERIA agent for this specific client.
+
+- **`client.connect()`**: After `boot()` (or if the agent has been previously booted with the same bran), connect() establishes the active session with the KERIA agent via its Admin Interface.
+
+
+
+```typescript
+// Bootstrap the connection with the KERIA agent
+// This creates the Client AID and requests the Agent AID creation.
+await client.boot();
+console.log('Client boot process initiated with KERIA agent.');
+
+// Establish the active connection and retrieve state
+await client.connect();
+console.log('Client connected to KERIA agent.');
+
+// Retrieve and display the current state
+const state = await client.state();
+console.log('\nConnection State Details:');
+console.log('-------------------------');
+console.log('Client AID Prefix: ', state.controller.state.i);
+console.log('Client AID Keys:   ', state.controller.state.k);
+console.log('Client AID Next Keys Digest: ', state.controller.state.n);
+console.log('')
+console.log('Agent AID Prefix:   ', state.agent.i);
+console.log('Agent AID Type:     ', state.agent.et); // Should be 'dip' for delegated inception
+console.log('Agent AID Delegator:', state.agent.di); // Should be the Client AID's prefix
+
+```
+
+    Client boot process initiated with KERIA agent.
+
+
+    Client connected to KERIA agent.
+
+
+    
+    Connection State Details:
+
+
+    -------------------------
+
+
+    Client AID Prefix:  EGy50CruzvlE_E4tdzQl22ycLSTAZQR8PqygPT9yYfzf
+
+
+    Client AID Keys:    [ [32m"DIOOCc4UlRPN9Wry5a0POEMyjxouJFcDBHnJCIk5CyTk"[39m ]
+
+
+    Client AID Next Keys Digest:  [ [32m"EAuuqjV6pvECpRJdHCU5NkSaNSYLZuaOcckoGN3fbd30"[39m ]
+
+
+    
+
+
+    Agent AID Prefix:    EBDgKlsReAaSA3Kr5MHb3B7u30l8hHhvl6j-Njr4vCdJ
+
+
+    Agent AID Type:      dip
+
+
+    Agent AID Delegator: EGy50CruzvlE_E4tdzQl22ycLSTAZQR8PqygPT9yYfzf
+
+
+**Output Explanation:**
+
+- **Client AID Prefix:** The unique, self-certifying identifier for the client, tied to the bran.
+- **Client AID Keys:** The current public signing key(s) for the Client AID.
+- **Client AID Next Keys Digest:** The digest (hash) of the public key(s) pre-rotated for the next key rotation of the Client AID.
+- **Agent AID Prefix:** The unique identifier for the KERIA agent worker associated with your client.
+- **Agent AID Type:** dip indicates a "delegated inception" event, signifying that this Agent AID's authority is delegated by another AID.
+- **Agent AID Delegator:** This crucial field shows the prefix of the Client AID, confirming that the Agent AID is indeed delegated by your Client AID.
+
+### Reconnecting to an Existing Agent
+If the KERIA agent has already been booted for a specific `bran` (Client AID), you don't need to call `client.boot()` again when using the same bran. You directly use `client.connect()`. Signify-ts will detect the existing state and reconnect.
+
+
+```typescript
+// Create a new client instance with the SAME bran
+const client2 = new SignifyClient(
+    adminUrl,
+    bran, // Using the same bran as the first client
+    Tier.low,
+    bootUrl
+);
+console.log('Second SignifyClient instance created with the same bran.');
+
+// Connect without booting, as the agent state for this bran should already exist
+await client2.connect();
+console.log('Second client connected to the existing KERIA agent.');
+
+const state2 = await client2.state();
+console.log('\nReconnection State Details:');
+console.log('---------------------------');
+console.log('Client AID Prefix:  ', state2.controller.state.i); // Should be the same Client AID
+console.log('Agent AID Prefix:   ', state2.agent.i);  // Should be the same Agent AID
+console.log('Agent AID Delegator:', state2.agent.di); // Should be the same Client AID
+```
+
+    Second SignifyClient instance created with the same bran.
+
+
+    Second client connected to the existing KERIA agent.
+
+
+    
+    Reconnection State Details:
+
+
+    ---------------------------
+
+
+    Client AID Prefix:   EGy50CruzvlE_E4tdzQl22ycLSTAZQR8PqygPT9yYfzf
+
+
+    Agent AID Prefix:    EBDgKlsReAaSA3Kr5MHb3B7u30l8hHhvl6j-Njr4vCdJ
+
+
+    Agent AID Delegator: EGy50CruzvlE_E4tdzQl22ycLSTAZQR8PqygPT9yYfzf
+
+
+<div class="alert alert-primary">
+<b>📝 SUMMARY</b><hr>
+To connect to a KERIA agent using Signify-ts:
+<ol>
+<li>Initialize the library with <code>await ready()</code>.</li>
+<li>Create a <code>SignifyClient</code> instance, providing the agent's Admin and Boot URLs, a unique 21-character <code>bran</code> (passcode/salt for key derivation), and a security <code>Tier</code>.</li>
+<li>For the first-time connection with a new <code>bran</code>, call <code>await client.boot()</code> to provision the Client AID and request the creation of a delegated Agent AID from KERIA.</li>
+<li>Call <code>await client.connect()</code> to establish the active session, retrieve the state (Client and Agent AIDs), and complete any delegation approvals. The Client AID delegates authority to the Agent AID, whose inception event (type <code>dip</code>) will list the Client AID as its delegator.</li>
+<li>For subsequent connections using the same <code>bran</code>, skip <code>client.boot()</code> and directly use <code>client.connect()</code>.</li>
+</ol>
+The <code>bran</code> is critical for deriving the Client AID's keys and must be kept secure and reused consistently for the same identity.
+</div>
+
+## Adding an Autonomic Identifier (AID)
+
+Once your Signify client is connected to the KERIA agent, you can instruct the agent to create and manage new Autonomic Identifiers (AIDs) on your behalf. These AIDs will be controlled by your Client AID (established during the `connect()` phase) through the delegation mechanism.
+
+### Initiating AID Inception
+
+Creating a new AID is an asynchronous operation. When you request the KERIA agent to incept an AID, the agent starts the process, which might involve communicating with witnesses. The `signify-ts` library handles this by first giving you an "operation" object, which you can then use to poll for the completion of the inception process.
+
+The `client.identifiers().create()` method is used to start the inception of a new AID.
+
+**Parameters Explained:**
+
+- **aidAlias (string):** This is a human-readable alias that you assign to the AID within your Signify client's local storage. It's used to refer to this AID in subsequent client operations. It's not part of the KERI protocol itself but a convenience for client-side management.
+- **inceptionArgs (object):** This object contains the configuration for the new AID:
+  - **toad (number):** The Threshold of Accountable Duplicity. This is the minimum number of witness receipts the controller (your Client AID via KERIA) requires for this new AID's events to be considered accountable.
+  - **wits (array of strings):** A list of AID prefixes of the witnesses that this new AID should use. These witnesses must be discoverable by your KERIA agent (e.g., pre-loaded during KERIA's startup or resolved via OOBIs by the client/agent).
+  - **Other parameters:** not shown for brevity but available, see **[CreateIdentifierArgs](https://weboftrust.github.io/signify-ts/interfaces/CreateIdentiferArgs.html)**
+
+
+```typescript
+// Define an alias for the new AID for easy reference within the client
+const aidAlias = 'newAid';
+
+// Inception request parameters
+const identifierArgs = {
+    toad: 2, // Threshold of Accountable Duplicity: minimum number of witness receipts required
+    wits: [   // List of witness AID prefixes to use for this AID
+        'BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha',
+        'BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM',
+        'BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX'
+    ]
+    // Other parameters can be specified. If not, defaults are used.
+};
+
+// Send the inception request to the KERIA agent
+const inceptionResult = await client.identifiers().create(aidAlias, identifierArgs);
+console.log(`AID inception initiated for alias: ${aidAlias}`);
+
+// The result contains information about the long-running operation
+const inceptionOperation = await inceptionResult.op();
+console.log('Inception Operation Details:');
+console.log(inceptionOperation);
+
+```
+
+    AID inception initiated for alias: newAid
+
+
+    Inception Operation Details:
+
+
+    {
+      name: [32m"witness.EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c"[39m,
+      metadata: { pre: [32m"EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c"[39m, sn: [33m0[39m },
+      done: [33mfalse[39m,
+      error: [1mnull[22m,
+      response: [1mnull[22m
+    }
+
+
+**Outout explained**
+
+Calling `inceptionResult.op()` returns a promise that resolves to an operation object containing:
+- **name:** A unique name for this long-running operation (e.g., `witness.AID_PREFIX`). KERIA uses this to track the task. The prefix in the name corresponds to the AID being created.
+- **metadata:** Contains details like the prefix (pre) of the AID being incepted and the sequence number (`sn`, which is 0 for inception).
+- **done:** A boolean indicating if the operation has completed. Initially, it's `false`.
+- **error:** Will contain error details if the operation fails.
+- **response:** Will contain the result of the operation (the signed inception event) once `done` is `true`.
+
+### Waiting for Operation Completion
+Since AID inception involves network communication (e.g., with witnesses to gather receipts), it doesn't complete instantly. You need to poll or wait for the operation to finish. The `client.operations().wait()` method handles this, periodically checking with the KERIA agent until the operation's `done` flag becomes `true` or a timeout occurs.
+
+
+```typescript
+// Poll the KERIA agent for the completion of the inception operation.
+// AbortSignal.timeout(30000) sets a 30-second timeout for waiting.
+console.log('Waiting for inception operation to complete...');
+const operationResponse = await client
+    .operations()
+    .wait(inceptionOperation, AbortSignal.timeout(30000)); // Pass the operation name
+
+console.log('\nInception Operation Completed:');
+console.log(operationResponse);
+
+// The actual inception event is in the 'response' field of the completed operation
+const newAidInceptionEvent = operationResponse.response;
+console.log(`\nSuccessfully created AID with prefix: ${newAidInceptionEvent.i}`);
+console.log(`Witnesses specified: ${JSON.stringify(newAidInceptionEvent.b)}`);
+
+```
+
+    Waiting for inception operation to complete...
+
+
+    
+    Inception Operation Completed:
+
+
+    {
+      name: [32m"witness.EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c"[39m,
+      metadata: { pre: [32m"EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c"[39m, sn: [33m0[39m },
+      done: [33mtrue[39m,
+      error: [1mnull[22m,
+      response: {
+        v: [32m"KERI10JSON0001b7_"[39m,
+        t: [32m"icp"[39m,
+        d: [32m"EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c"[39m,
+        i: [32m"EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c"[39m,
+        s: [32m"0"[39m,
+        kt: [32m"1"[39m,
+        k: [ [32m"DFg0XKcOYNByPQxeLJJLkQbcp6PCrw9Ok0_KjvVuExLD"[39m ],
+        nt: [32m"1"[39m,
+        n: [ [32m"EEYOcoApbjh470lF3oW9d1rd-T2t6Rf7FcaN8svFIptE"[39m ],
+        bt: [32m"2"[39m,
+        b: [
+          [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m,
+          [32m"BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM"[39m,
+          [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m
+        ],
+        c: [],
+        a: []
+      }
+    }
+
+
+    
+    Successfully created AID with prefix: EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c
+
+
+    Witnesses specified: ["BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM","BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"]
+
+
+**Completed Operation Output Explained:**
+
+- `done`: Now true, indicating the inception is complete on the KERIA agent's side.
+- `response`: This field now contains the actual signed inception event (`icp`) for the newly created AID (`newAid`).
+- `i`: The prefix of the newly created AID.
+- `k`: The list of current public signing keys.
+- `n`: The list of digests of the next (pre-rotated) public keys.
+- `b`: The list of witness AIDs that this AID is configured to use.
+- `bt`: The Threshold of Accountable Duplicity (TOAD) specified during creation (matches toad: 2 from our request).
+
+The KERIA agent has successfully incepted the AID, and its KEL (starting with this inception event) is now managed by the agent and receipted by the specified witnesses.
+
+## Managing Agent Operations
+Signify-ts also provides methods to list and delete operations tracked by the KERIA agent for your client.
+
+### Listing Operations
+
+
+```typescript
+// List all current long-running operations for this client
+const operationsList = await client.operations().list();
+console.log('\nCurrent Operations List:');
+console.log(JSON.stringify(operationsList, null, 2));
+```
+
+    
+    Current Operations List:
+
+
+    [
+      {
+        "name": "witness.EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c",
+        "metadata": {
+          "pre": "EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c",
+          "sn": 0
+        },
+        "done": true,
+        "error": null,
+        "response": {
+          "v": "KERI10JSON0001b7_",
+          "t": "icp",
+          "d": "EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c",
+          "i": "EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c",
+          "s": "0",
+          "kt": "1",
+          "k": [
+            "DFg0XKcOYNByPQxeLJJLkQbcp6PCrw9Ok0_KjvVuExLD"
+          ],
+          "nt": "1",
+          "n": [
+            "EEYOcoApbjh470lF3oW9d1rd-T2t6Rf7FcaN8svFIptE"
+          ],
+          "bt": "2",
+          "b": [
+            "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
+            "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
+            "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
+          ],
+          "c": [],
+          "a": []
+        }
+      }
+    ]
+
+
+### Deleting Operations
+
+
+```typescript
+// Delete the completed inception operation (optional cleanup)
+const opNameToDelete = operationsList[0].name;
+await client.operations().delete(opNameToDelete);
+console.log(`\nDeleted operation: ${opNameToDelete}`);
+```
+
+    
+    Deleted operation: witness.EKFj1FVb9deU-fAm94I-tx0qomV2kezIBDra6Blg_e1c
+
+
+<div class="alert alert-primary">
+<b>📝 SUMMARY</b><hr>
+To create a new AID using Signify-ts and a KERIA agent:
+<ol>
+<li>Use <code>client.identifiers().create(alias, config)</code>. Provide a client-side <code>alias</code> for the AID and a <code>config</code> object specifying parameters like <code>toad</code> (Threshold of Accountable Duplicity) and <code>wits</code> (list of witness AIDs).</li>
+<li>The <code>create()</code> method returns an object from which you can get a long-running <code>operation</code> object using <code>.op()</code>. This operation is initially marked as not <code>done</code>.</li>
+<li>Use <code>client.operations().wait(operationName)</code> to poll the KERIA agent until the operation completes. The resolved object will have
+<code>done: true</code> and its <code>response</code> field will contain the signed inception event (<code>icp</code>) of the newly created AID.</li>
+<li>Operations can be listed with <code>client.operations().list()</code> and deleted with <code>client.operations().delete(operationName)</code>.</li>
+</ol>
+This process highlights the asynchronous nature of KERIA operations that involve agent-side processing and network interactions.
+</div>
+
+
+```typescript
+
+```
+
+<!-- Source: 102_15_KERIA_Signify_Connecting_Clients.md -->
+# Signify-ts: Securely Connecting Controllers
+
+<div class="alert alert-primary">
+  <b>🎯 OBJECTIVE</b><hr>
+  Explain how to establish a secure, mutually authenticated connection between two KERIA/Signify-ts controllers using Out-of-Band Introductions (OOBIs) and the challenge/response protocol to enhance trust.
+</div>
+
+## Controller and AID Setup
+
+This notebook focuses on connecting two independent controllers using the KERIA/Signify architecture. This involves two `SignifyClient` instances, each managing its own AID, establishing contact, and then authenticating each other. Conceptually, these steps mirror the `kli` process for connecting controllers but are executed through the `signify-ts` library interacting with KERIA agents.
+
+You will begin by setting up two distinct `SignifyClient` instances, which we'll call `clientA` (representing a controller Alfred) and `clientB` (representing a controller Betty). Each client will:
+1.  Generate a unique `bran` (passcode).
+2.  Instantiate `SignifyClient`.
+3.  Boot and connect to its KERIA agent, establishing its Client AID and the delegated Agent AID.
+4.  Create a primary AID (let's call them `aidA` for Alfred and `aidB` for Betty) with a set of predefined witnesses.
+
+The specifics of client creation, booting, connecting, and basic AID inception using `signify-ts` were covered in the "KERIA-Signify Basic Operations" notebook. You will apply those principles below:
+
+
+
+```typescript
+import { randomPasscode, ready, SignifyClient, Tier } from 'npm:signify-ts';
+
+const url = 'http://keria:3901';
+const bootUrl = 'http://keria:3903';
+
+// Inception request parameters
+const identifierArgs = {
+    toad: 3,
+    wits: [  
+        'BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha',
+        'BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM',
+        'BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX'
+    ]
+};
+
+await ready();
+
+// ----- Client A (Alfred) -----
+
+const aidAAlias = 'aidA'
+const branA = randomPasscode();
+const clientA = new SignifyClient(url, branA, Tier.low, bootUrl);
+
+await clientA.boot();
+await clientA.connect();
+
+const AInceptionResult = await clientA.identifiers().create(aidAAlias, identifierArgs);
+
+const AInceptionOperation = await AInceptionResult.op();
+
+const { response: aidA }  = await clientA
+    .operations()
+    .wait(AInceptionOperation, AbortSignal.timeout(30000));
+
+await clientA.operations().delete(AInceptionOperation.name);
+
+// ----- Client B (Betty) -----
+
+const aidBAlias = 'aidB'
+const branB = randomPasscode();
+const clientB = new SignifyClient(url, branB, Tier.low, bootUrl);
+
+await clientB.boot();
+await clientB.connect();
+
+const BInceptionResult = await clientB.identifiers().create(aidBAlias, identifierArgs);
+
+const BInceptionOperation = await BInceptionResult.op();
+
+const { response: aidB }  = await clientB
+    .operations()
+    .wait(BInceptionOperation, AbortSignal.timeout(30000));
+
+await clientB.operations().delete(BInceptionOperation.name);
+
+console.log(`Client A AID Pre: ${aidA.i}\nClient B AID Pre: ${aidB.i}`)
+```
+
+    Client A AID Pre: EF3amv_TdT60MIZDjsNKjtDGzqljq9-1TkpzipRRFWAP
+    Client B AID Pre: EHtWV0lIqejGwtanN_ArPXdjn_DxDFDF9exx5DAEIMCf
+
+
+<div class="alert alert-info">
+    <b>ℹ️ Note</b><hr> For this demonstration, both clients will connect to the same KERIA instance (defined by <code>url</code> and <code>bootUrl</code>). In a real-world scenario, Alfred and Betty would likely each have their own Signify clients running on their respective devices and interacting with their own (or chosen) KERIA agent instances. The KERIA agent URLs might be different for each. However, the KERI protocol and Signify patterns for connection and authentication remain the same.
+</div>
+
+## Assigning Agent End Roles
+
+As discussed in "KERIA-Signify Basics", when a `SignifyClient` connects, it establishes a **Client AID** (which you directly control via the `bran`) and a delegated **Agent AID** (managed by the KERIA service). For these Agent AIDs to act effectively on behalf of the AIDs we just created (`aidA` and `aidB`), we need to explicitly authorize them by assigning an `agent` end role.
+
+The `agent` role, in this context, signifies that the KERIA Agent AID associated with `clientA` is authorized to manage/interact on behalf of `aidA`, and similarly for `clientB` and `aidB`. This is a crucial step for enabling the KERIA agent to perform tasks like responding to OOBI requests for these specific identifiers.
+
+Use the `client.identifiers().addEndRole()` method to add the role. This method requires:
+- The alias of the identifier granting the authorization (e.g., `aidAAlias`).
+- The role to be assigned (e.g., `'agent'`).
+- The prefix of the AID being authorized for that role. In this case, it's the prefix of the client's own KERIA Agent AID, accessible via `client.agent!.pre`.
+
+
+```typescript
+// ----- Client A: Assign 'agent' role for aidA to its KERIA Agent AID -----
+const agentRole = 'agent';
+
+// Authorize clientA's Agent AID to act as an agent for aidA
+const AAddRoleResult = await clientA
+    .identifiers()
+    .addEndRole(aidAAlias, 
+                agentRole, 
+                clientA!.agent!.pre // clientA.agent.pre is the Agent AID prefix
+               ); 
+
+const AAddRoleOperation = await AAddRoleResult.op();
+
+const { response: AAddRoleResponse } = await clientA
+    .operations()
+    .wait(AAddRoleOperation, AbortSignal.timeout(30000));
+
+await clientA.operations().delete(AAddRoleOperation.name);
+
+console.log(`Client A: Assigned '${agentRole}' role to KERIA Agent ${clientA.agent!.pre} for AID ${aidA.i}`);
+
+// ----- Client B: Assign 'agent' role for aidB to its KERIA Agent AID -----
+
+// Authorize clientB's Agent AID to act as an agent for aidB
+const BAddRoleResult = await clientB
+    .identifiers()
+    .addEndRole(aidBAlias, 
+                agentRole, 
+                clientB!.agent!.pre // clientB.agent.pre is the Agent AID prefix
+               ); 
+
+const BAddRoleOperation = await BAddRoleResult.op();
+
+const { response: BAddRoleResponse } = await clientB
+    .operations()
+    .wait(BAddRoleOperation, AbortSignal.timeout(30000));
+
+await clientB.operations().delete(BAddRoleOperation.name);
+
+console.log(`Client B: Assigned '${agentRole}' role to KERIA Agent ${clientB.agent!.pre} for AID ${aidB.i}`);
+
+```
+
+    Client A: Assigned 'agent' role to KERIA Agent EPCGywnfSg2wYIpe9MJMeEm06vrDdiwreZpSR_WzhuDi for AID EF3amv_TdT60MIZDjsNKjtDGzqljq9-1TkpzipRRFWAP
+
+
+    Client B: Assigned 'agent' role to KERIA Agent EB0PfSwfCwxW0jh8Sm3_5rKHk0L5uJYO1qbjV3kH63v4 for AID EHtWV0lIqejGwtanN_ArPXdjn_DxDFDF9exx5DAEIMCf
+
+
+## Discovery via OOBIs
+
+With the AIDs created and their respective KERIA agents authorized, Alfred (`clientA`, `aidA`) and Betty (`clientB`, `aidB`) need a way to discover each other. This is where Out-of-Band Introductions (OOBIs) are used.
+
+### Generating OOBI URLs
+
+Each client needs to generate an OOBI for its AID (`aidA` and `aidB`). This OOBI is associated with the `agent` role, meaning the OOBI URL (**IURL** for short) will point to an endpoint on their KERIA agent that is authorized to serve information about the AID.
+
+Proceed by generating the IURLs:
+- `clientA` generates an OOBI for `aidA` with the role `agent`.
+- `clientB` generates an OOBI for `aidB` with the role `agent`.
+
+
+
+```typescript
+// ----- Generate OOBIs -----
+
+// Client A generates OOBI for aidA (role 'agent')
+const oobiA_Result = await clientA.oobis().get(aidAAlias, agentRole);
+const oobiA_url = oobiA_Result.oobis[0]; // Assuming at least one OOBI is returned
+console.log(`Client A (Alfred) generated OOBI for aidA: ${oobiA_url}`);
+
+// Client B generates OOBI for aidB (role 'agent')
+const oobiB_Result = await clientB.oobis().get(aidBAlias, agentRole);
+const oobiB_url = oobiB_Result.oobis[0]; // Assuming at least one OOBI is returned
+console.log(`Client B (Betty) generated OOBI for aidB: ${oobiB_url}`);
+
+```
+
+    Client A (Alfred) generated OOBI for aidA: http://keria:3902/oobi/EF3amv_TdT60MIZDjsNKjtDGzqljq9-1TkpzipRRFWAP/agent/EPCGywnfSg2wYIpe9MJMeEm06vrDdiwreZpSR_WzhuDi
+
+
+    Client B (Betty) generated OOBI for aidB: http://keria:3902/oobi/EHtWV0lIqejGwtanN_ArPXdjn_DxDFDF9exx5DAEIMCf/agent/EB0PfSwfCwxW0jh8Sm3_5rKHk0L5uJYO1qbjV3kH63v4
+
+
+### Resolving OOBI URLs
+
+In a real scenario, Alfred would share `oobiA` with Betty, and Betty would share `oobiB` with Alfred through some non-KERI channel (e.g., email, QR code, messaging app). For this notebook, we'll just store them in variables.
+
+Now perform the OOBI resolution. This means `clientA`'s KERIA agent uses the URL in `oobiB` to fetch `aidB`'s KEL from `clientB`'s KERIA agent. `clientA` then cryptographically verifies this KEL. `clientB` resolves `oobiA` similarly.
+
+
+
+
+```typescript
+// Client A resolves Client B's OOBI
+const contactBAlias = 'Betty_Contact_for_Alfred'; // Alias for clientA to refer to aidB
+console.log(`\nClient A (Alfred) attempting to resolve Betty's OOBI...`);
+const AResolveOperation = await clientA.oobis().resolve(oobiB_url, contactBAlias);
+const AResolveResponse = await clientA
+    .operations()
+    .wait(AResolveOperation, AbortSignal.timeout(30000));
+await clientA.operations().delete(AResolveOperation.name);
+console.log(`Client A resolved Betty's OOBI. Response:`, AResolveResponse.response ? "OK" : "Failed or no response data");
+
+// Client B resolves Client A's OOBI
+const contactAAlias = 'Alfred_Contact_for_Betty'; // Alias for clientB to refer to aidA
+console.log(`\nClient B (Betty) attempting to resolve Alfred's OOBI...`);
+const BResolveOperation = await clientB.oobis().resolve(oobiA_url, contactAAlias);
+const BResolveResponse = await clientB
+    .operations()
+    .wait(BResolveOperation, AbortSignal.timeout(30000));
+await clientB.operations().delete(BResolveOperation.name);
+console.log(`Client B resolved Alfred's OOBI. Response:`, BResolveResponse.response ? "OK" : "Failed or no response data");
+
+```
+
+    
+    Client A (Alfred) attempting to resolve Betty's OOBI...
+
+
+    Client A resolved Betty's OOBI. Response: OK
+
+
+    
+    Client B (Betty) attempting to resolve Alfred's OOBI...
+
+
+    Client B resolved Alfred's OOBI. Response: OK
+
+
+### Verifying Resolved Contacts
+
+Upon successful resolution, each client will have added the other's AID to their local contact list. Use `clientA.contacts().list()` to display the contacts:
+
+
+```typescript
+console.log(`\nVerifying contacts...`);
+const AContacts = await clientA.contacts().list(undefined, 'alias', contactBAlias);
+console.log(AContacts);
+
+const BContacts = await clientB.contacts().list(undefined, 'alias', contactAAlias);
+console.log(BContacts);
+
+```
+
+    
+    Verifying contacts...
+
+
+    [
+      {
+        alias: [32m"Betty_Contact_for_Alfred"[39m,
+        oobi: [32m"http://keria:3902/oobi/EHtWV0lIqejGwtanN_ArPXdjn_DxDFDF9exx5DAEIMCf/agent/EB0PfSwfCwxW0jh8Sm3_5rKHk0L5uJYO1qbjV3kH63v4"[39m,
+        id: [32m"EHtWV0lIqejGwtanN_ArPXdjn_DxDFDF9exx5DAEIMCf"[39m,
+        ends: {
+          agent: {
+            EB0PfSwfCwxW0jh8Sm3_5rKHk0L5uJYO1qbjV3kH63v4: { http: [32m"http://keria:3902/"[39m }
+          },
+          witness: {
+            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
+              http: [32m"http://witness-demo:5642/"[39m,
+              tcp: [32m"tcp://witness-demo:5632/"[39m
+            },
+            BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
+              http: [32m"http://witness-demo:5643/"[39m,
+              tcp: [32m"tcp://witness-demo:5633/"[39m
+            },
+            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
+              http: [32m"http://witness-demo:5644/"[39m,
+              tcp: [32m"tcp://witness-demo:5634/"[39m
+            }
+          }
+        },
+        challenges: [],
+        wellKnowns: []
+      }
+    ]
+
+
+    [
+      {
+        alias: [32m"Alfred_Contact_for_Betty"[39m,
+        oobi: [32m"http://keria:3902/oobi/EF3amv_TdT60MIZDjsNKjtDGzqljq9-1TkpzipRRFWAP/agent/EPCGywnfSg2wYIpe9MJMeEm06vrDdiwreZpSR_WzhuDi"[39m,
+        id: [32m"EF3amv_TdT60MIZDjsNKjtDGzqljq9-1TkpzipRRFWAP"[39m,
+        ends: {
+          agent: {
+            EPCGywnfSg2wYIpe9MJMeEm06vrDdiwreZpSR_WzhuDi: { http: [32m"http://keria:3902/"[39m }
+          },
+          witness: {
+            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
+              http: [32m"http://witness-demo:5642/"[39m,
+              tcp: [32m"tcp://witness-demo:5632/"[39m
+            },
+            BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
+              http: [32m"http://witness-demo:5643/"[39m,
+              tcp: [32m"tcp://witness-demo:5633/"[39m
+            },
+            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
+              http: [32m"http://witness-demo:5644/"[39m,
+              tcp: [32m"tcp://witness-demo:5634/"[39m
+            }
+          }
+        },
+        challenges: [],
+        wellKnowns: []
+      }
+    ]
+
+
+## Mutual Authentication with Challenge-Response
+
+Successfully resolving an OOBI means you've retrieved and cryptographically verified the KEL of the target AID. This establishes the authenticity and integrity of the AID's key history.
+
+However, it does not, by itself, prove that the entity you are currently communicating with over the network (the one that provided the OOBI or is responding via the OOBI's endpoint) is the legitimate controller of that AID's private keys.
+
+This is why the **Challenge-Response** protocol is critical for establishing authenticated control.
+
+The process, as described in the "Connecting Controllers" notebook for `kli`, is as follows for each pair (e.g., Alfred challenging Betty):
+
+1.  **Generate Challenge**: Alfred (`clientA`) generates a set of unique challenge words.
+2.  **Send Challenge (Simulated OOB)**: Alfred communicates these words to Betty through an out-of-band channel (e.g., verbally, secure message). This step is crucial to prevent a Man-in-the-Middle (MITM) on the main KERI connection from intercepting or altering the challenge. For this notebook, we'll print the words.
+3.  **Respond to Challenge**: Betty (`clientB`), using `aidB`, signs the exact challenge words received from Alfred. The `respond()` method sends this signed response to Alfred's KERIA agent.
+4.  **Verify Response**: Alfred (`clientA`) receives the signed response. His KERIA agent verifies that the signature corresponds to `aidB`'s current authoritative keys (from the KEL he resolved earlier) and that the signed message matches the original challenge words. This is an asynchronous operation.
+5.  **Mark as Responded/Authenticated**: If verification is successful, Alfred (`clientA`) marks the challenge for `aidB` as successfully responded to and authenticated. This updates the contact information for Betty in Alfred's client.
+
+This process is then repeated with Betty challenging Alfred.
+
+### Generating Challenge Phrases
+
+Generate a set of random words for each client. `signify-ts` uses `client.challenges().generate()` for this. The strength of the challenge can be specified by the bit length (e.g., 128 or 256 bits, which translates to a certain number of words).
+
+
+```typescript
+// ----- Generate Challenge Words -----
+
+// Client A (Alfred) generates challenge words for Betty
+const challengeWordsA = await clientA.challenges().generate(128); // 128-bit strength
+console.log("Client A's challenge words for Betty:", challengeWordsA.words);
+
+// Client B (Betty) generates challenge words for Alfred
+const challengeWordsB = await clientB.challenges().generate(128); // 128-bit strength
+console.log("Client B's challenge words for Alfred:", challengeWordsB.words);
+```
+
+    Client A's challenge words for Betty: [
+      [32m"hood"[39m,     [32m"gown"[39m,
+      [32m"scatter"[39m,  [32m"cable"[39m,
+      [32m"level"[39m,    [32m"false"[39m,
+      [32m"sentence"[39m, [32m"enroll"[39m,
+      [32m"snap"[39m,     [32m"fly"[39m,
+      [32m"budget"[39m,   [32m"bring"[39m
+    ]
+
+
+    Client B's challenge words for Alfred: [
+      [32m"inherit"[39m,  [32m"okay"[39m,
+      [32m"elbow"[39m,    [32m"episode"[39m,
+      [32m"canal"[39m,    [32m"wrestle"[39m,
+      [32m"ribbon"[39m,   [32m"fortune"[39m,
+      [32m"favorite"[39m, [32m"correct"[39m,
+      [32m"relief"[39m,   [32m"photo"[39m
+    ]
+
+
+### Performing the Challenge-Response Protocol
+
+Perform the following sequence of steps to simulate the challenge/respond protocol.
+
+Assume Alfred has securely (out-of-band) communicated `challengeWordsA.words` to Betty.
+- Betty will now use `clientB.challenges().respond()` to sign these words with `aidB` and send the response to `aidA`.
+- Alfred will then use `clientA.challenges().verify()` to verify Betty's response. This verification is an operation that needs to be polled.
+- Finally, Alfred uses `clientA.challenges().responded()` to mark the contact as authenticated.
+
+
+
+```typescript
+// ----- Betty (Client B) responds to Alfred's (Client A) challenge -----
+console.log(`\nBetty (aidB: ${aidB.i}) responding to Alfred's (aidA: ${aidA.i}) challenge...`);
+
+// Betty uses aidBAlias to sign, targeting aidA.i with challengeWordsA.words
+await clientB.challenges().respond(aidBAlias, aidA.i, challengeWordsA.words);
+console.log("Betty's response sent.");
+
+// ----- Alfred (Client A) verifies Betty's (Client B) response -----
+console.log(`\nAlfred (aidA) verifying Betty's (aidB) response...`);
+
+// Alfred verifies the response allegedly from aidB.i using challengeWordsA.words
+const AVerifyBOperation = await clientA.challenges().verify(aidB.i, challengeWordsA.words);
+
+const { response: AVerifyBResponseDetails } = await clientA
+    .operations()
+    .wait(AVerifyBOperation, AbortSignal.timeout(30000));
+
+await clientA.operations().delete(AVerifyBOperation.name);
+
+const exnSaidB = AVerifyBResponseDetails.exn.d;
+console.log("Alfred: Betty's response verified. SAID of exn:", exnSaidB);
+
+// Alfred marks the challenge for Betty (aidB.i) as successfully responded
+await clientA.challenges().responded(aidB.i, exnSaidB);
+console.log("Alfred: Marked Betty's contact as authenticated.");
+
+
+// Check Alfred's contact list for Betty's authenticated status
+const AContactsAfterAuth = await clientA.contacts().list(undefined, 'alias', contactBAlias);
+
+console.log(AContactsAfterAuth)
+```
+
+    
+    Betty (aidB: EHtWV0lIqejGwtanN_ArPXdjn_DxDFDF9exx5DAEIMCf) responding to Alfred's (aidA: EF3amv_TdT60MIZDjsNKjtDGzqljq9-1TkpzipRRFWAP) challenge...
+
+
+    Betty's response sent.
+
+
+    
+    Alfred (aidA) verifying Betty's (aidB) response...
+
+
+    Alfred: Betty's response verified. SAID of exn: EKlk7aI3pzn1vUokeYT7kYaOMxMZtVRs64F-wxGJ2X3L
+
+
+    Alfred: Marked Betty's contact as authenticated.
+
+
+    [
+      {
+        alias: [32m"Betty_Contact_for_Alfred"[39m,
+        oobi: [32m"http://keria:3902/oobi/EHtWV0lIqejGwtanN_ArPXdjn_DxDFDF9exx5DAEIMCf/agent/EB0PfSwfCwxW0jh8Sm3_5rKHk0L5uJYO1qbjV3kH63v4"[39m,
+        id: [32m"EHtWV0lIqejGwtanN_ArPXdjn_DxDFDF9exx5DAEIMCf"[39m,
+        ends: {
+          agent: {
+            EB0PfSwfCwxW0jh8Sm3_5rKHk0L5uJYO1qbjV3kH63v4: { http: [32m"http://keria:3902/"[39m }
+          },
+          witness: {
+            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
+              http: [32m"http://witness-demo:5642/"[39m,
+              tcp: [32m"tcp://witness-demo:5632/"[39m
+            },
+            BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
+              http: [32m"http://witness-demo:5643/"[39m,
+              tcp: [32m"tcp://witness-demo:5633/"[39m
+            },
+            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
+              http: [32m"http://witness-demo:5644/"[39m,
+              tcp: [32m"tcp://witness-demo:5634/"[39m
+            }
+          }
+        },
+        challenges: [
+          {
+            dt: [32m"2025-06-04T15:04:33.451000+00:00"[39m,
+            words: [
+              [32m"hood"[39m,     [32m"gown"[39m,
+              [32m"scatter"[39m,  [32m"cable"[39m,
+              [32m"level"[39m,    [32m"false"[39m,
+              [32m"sentence"[39m, [32m"enroll"[39m,
+              [32m"snap"[39m,     [32m"fly"[39m,
+              [32m"budget"[39m,   [32m"bring"[39m
+            ],
+            said: [32m"EKlk7aI3pzn1vUokeYT7kYaOMxMZtVRs64F-wxGJ2X3L"[39m,
+            authenticated: [33mtrue[39m
+          }
+        ],
+        wellKnowns: []
+      }
+    ]
+
+
+Now, the roles reverse. Assume Betty (Client B) has securely (out-of-band) communicated `challengeWordsB.words` to Alfred (Client A).
+Alfred will use `clientA.challenges().respond()` to sign these words with `aidA` and send the response to `aidB`.
+Betty will then use `clientB.challenges().verify()` to verify Alfred's response and `clientB.challenges().responded()` to mark the contact.
+
+
+```typescript
+// ----- Alfred (Client A) responds to Betty's (Client B) challenge -----
+console.log(`\nAlfred (aidA: ${aidA.i}) responding to Betty's (aidB: ${aidB.i}) challenge...`);
+
+// Alfred uses aidAAlias to sign, targeting aidB.i with challengeWordsB.words
+await clientA.challenges().respond(aidAAlias, aidB.i, challengeWordsB.words);
+console.log("Alfred's response sent.");
+
+// ----- Betty (Client B) verifies Alfred's (Client A) response -----
+console.log(`\nBetty (aidB) verifying Alfred's (aidA) response...`);
+
+// Betty verifies the response allegedly from aidA.i using challengeWordsB.words
+const BVerifyAOperation = await clientB.challenges().verify(aidA.i, challengeWordsB.words);
+
+const { response: BVerifyAResponseDetails } = await clientB
+    .operations()
+    .wait(BVerifyAOperation, AbortSignal.timeout(30000));
+
+await clientB.operations().delete(BVerifyAOperation.name);
+
+
+const exnSaidA = BVerifyAResponseDetails.exn.d;
+console.log("Betty: Alfred's response verified. SAID of exn:", exnSaidA);
+
+// Betty marks the challenge for Alfred (aidA.i) as successfully responded
+await clientB.challenges().responded(aidA.i, exnSaidA);
+
+console.log("Betty: Marked Alfred's contact as authenticated.");
+
+
+// Check Betty's contact list for Alfred's authenticated status
+const BContactsAfterAuth = await clientB.contacts().list(undefined, 'alias', contactAAlias);
+
+console.log(BContactsAfterAuth);
+```
+
+    
+    Alfred (aidA: EF3amv_TdT60MIZDjsNKjtDGzqljq9-1TkpzipRRFWAP) responding to Betty's (aidB: EHtWV0lIqejGwtanN_ArPXdjn_DxDFDF9exx5DAEIMCf) challenge...
+
+
+    Alfred's response sent.
+
+
+    
+    Betty (aidB) verifying Alfred's (aidA) response...
+
+
+    Betty: Alfred's response verified. SAID of exn: EGG2ygr-T5YAfa73R3wOAsTPMsR9tAkRZj1__6Jy18Ca
+
+
+    Betty: Marked Alfred's contact as authenticated.
+
+
+    [
+      {
+        alias: [32m"Alfred_Contact_for_Betty"[39m,
+        oobi: [32m"http://keria:3902/oobi/EF3amv_TdT60MIZDjsNKjtDGzqljq9-1TkpzipRRFWAP/agent/EPCGywnfSg2wYIpe9MJMeEm06vrDdiwreZpSR_WzhuDi"[39m,
+        id: [32m"EF3amv_TdT60MIZDjsNKjtDGzqljq9-1TkpzipRRFWAP"[39m,
+        ends: {
+          agent: {
+            EPCGywnfSg2wYIpe9MJMeEm06vrDdiwreZpSR_WzhuDi: { http: [32m"http://keria:3902/"[39m }
+          },
+          witness: {
+            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
+              http: [32m"http://witness-demo:5642/"[39m,
+              tcp: [32m"tcp://witness-demo:5632/"[39m
+            },
+            BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
+              http: [32m"http://witness-demo:5643/"[39m,
+              tcp: [32m"tcp://witness-demo:5633/"[39m
+            },
+            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
+              http: [32m"http://witness-demo:5644/"[39m,
+              tcp: [32m"tcp://witness-demo:5634/"[39m
+            }
+          }
+        },
+        challenges: [
+          {
+            dt: [32m"2025-06-04T15:04:33.948000+00:00"[39m,
+            words: [
+              [32m"inherit"[39m,  [32m"okay"[39m,
+              [32m"elbow"[39m,    [32m"episode"[39m,
+              [32m"canal"[39m,    [32m"wrestle"[39m,
+              [32m"ribbon"[39m,   [32m"fortune"[39m,
+              [32m"favorite"[39m, [32m"correct"[39m,
+              [32m"relief"[39m,   [32m"photo"[39m
+            ],
+            said: [32m"EGG2ygr-T5YAfa73R3wOAsTPMsR9tAkRZj1__6Jy18Ca"[39m,
+            authenticated: [33mtrue[39m
+          }
+        ],
+        wellKnowns: []
+      }
+    ]
+
+
+If both challenge-response cycles complete successfully, Alfred and Betty have now established a mutually authenticated connection. This provides a strong foundation of trust for subsequent interactions, such as exchanging verifiable credentials.
+
+
+<div class="alert alert-primary">
+<b>📝 SUMMARY</b><hr>
+This notebook demonstrated the process of connecting two KERIA/Signify controllers, Alfred (<code>clientA</code>) and Betty (<code>clientB</code>):
+<ol>
+    <li><b>Initial Setup:</b> Each client was initialized, booted its KERIA agent, connected, and created an Autonomic Identifier(<code>aidA</code> for Alfred, <code>aidB</code> for Betty).</li>
+    <li><b>End Role Assignment:</b> The KERIA Agent AID for each client was authorized with an <code>agent</code> end role for its respective AID (<code>aidA</code> and <code>aidB</code>). This allows the KERIA agent to manage these AIDs, such as serving their KELs via OOBIs. This was done using <code>client.identifiers().addEndRole()</code>.</li>
+    <li><b>OOBI Generation & Resolution:</b>
+        <ul>
+            <li>Each client generated an OOBI URL for its AID, specifically for the <code>'agent'</code> role, using <code>client.oobis().get(alias, 'agent')</code>. This OOBI points to their KERIA agent's endpoint for that AID.</li>
+            <li>The OOBIs were (simulated) exchanged out-of-band.</li>
+            <li>Each client then resolved the other's OOBI using <code>client.oobis().resolve()</code>. This retrieved and cryptographically verified the other's KEL, adding them to their local contact list.</li>
+        </ul>
+    </li>
+    <li><b>Challenge-Response Protocol for Mutual Authentication:</b>
+        <ul>
+            <li>Each client generated unique challenge words using <code>client.challenges().generate()</code>.</li>
+            <li>These words were (conceptually) exchanged out-of-band.</li>
+            <li><b>Cycle 1 (Betty responds to Alfred):</b>
+                <ul>
+                    <li>Betty signed Alfred's challenge words with <code>aidB</code> using <code>clientB.challenges().respond()</code>.</li>
+                    <li>Alfred verified Betty's signed response against <code>aidB</code>'s known keys using <code>clientA.challenges().verify()</code>.</li>
+                    <li>Upon successful verification, Alfred marked Betty's contact as authenticated using <code>clientA.challenges().responded()</code>.</li>
+                </ul>
+            </li>
+            <li><b>Cycle 2 (Alfred responds to Betty):</b> The same process was repeated with Alfred responding to Betty's challenge.</li>
+        </ul>
+    </li>
+</ol>
+Successful completion of both OOBI resolution and the mutual challenge-response protocol establishes a high degree of trust. Both controllers have verified each other's identity (KEL) and cryptographically confirmed that the other party has active control of their private keys. The <code>challengesAuthenticated</code> flag in their contact lists for each other should now be true.
+</div>
+
+
+```typescript
+
+```
+
+<!-- Source: 102_20_KERIA_Signify_Credential_Issuance.md -->
+# Signify-ts: ACDC Credential Issuance with IPEX
+
+<div class="alert alert-primary">
+<b>🎯 OBJECTIVE</b><hr>
+Demonstrate the process of issuing an ACDC (Authentic Chained Data Container) from an Issuer to a Holder using the Issuance and Presentation Exchange (IPEX) protocol with the Signify-ts library.
+</div>
+
+<div class="alert alert-info">
+<b>ℹ️ NOTE</b><hr>
+This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>) to quickly establish the necessary preconditions for credential issuance. The detailed steps for client initialization, AID creation, end role assignment, and OOBI resolution were covered in the "KERIA-Signify Connecting Controllers" notebook. Here, we provide a high-level recap of what these utility functions accomplish.
+</div>
+
+## Prerequisites: Client and AID Setup
+
+The setup process, streamlined by the utility functions, performs the following key actions:
+
+* **Signify Library Initialization**: Ensures the underlying cryptographic components of Signify-ts are ready.
+* **Client Initialization & Connection**: Three `SignifyClient` instances are created—one each for an Issuer, a Holder, and a Verifier. Each client is bootstrapped and connected to its KERIA agent.
+* **AID Creation**: Each client (Issuer, Holder, Verifier) creates a primary AID using default arguments.
+* **End Role Assignment**: An `agent` end role is assigned to each client's KERIA Agent AID.
+* **OOBI Generation and Resolution (Client-to-Client)**:
+    * OOBIs are generated for the Issuer, Holder, and Verifier AIDs, specifically for the `'agent'` role.
+    * Communication channels are established by resolving these OOBIs:
+        * Issuer's client resolves the Holder's OOBI.
+        * Holder's client resolves the Issuer's OOBI.
+        * Verifier's client resolves the Holder's OOBI.
+        * Holder's client resolves the Verifier's OOBI.
+* **Schema OOBI Resolution**: The Issuer, Holder, and Verifier clients all resolve the OOBI for the "EventPass" schema (SAID: `EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK`). This schema is hosted on the schema server (vLEI-Server in this context). Resolving the schema OOBI ensures all parties have the correct and verifiable schema definition necessary to understand and validate the credential.
+
+The code block below executes this setup.
+
+
+```typescript
+import { randomPasscode, Serder} from 'npm:signify-ts';
+import { initializeSignify, 
+         initializeAndConnectClient,
+         createNewAID,
+         addEndRoleForAID,
+         generateOOBI,
+         resolveOOBI,
+         createTimestamp,
+         DEFAULT_IDENTIFIER_ARGS,
+         DEFAULT_TIMEOUT_MS,
+         DEFAULT_DELAY_MS,
+         DEFAULT_RETRIES,
+         ROLE_AGENT,
+         IPEX_GRANT_ROUTE,
+         IPEX_ADMIT_ROUTE,
+         IPEX_APPLY_ROUTE,
+         IPEX_OFFER_ROUTE,
+         SCHEMA_SERVER_HOST
+       } from './scripts_ts/utils.ts';
+
+// Clients setup
+// Initialize Issuer, Holder and Verifier CLients, Create AIDs for each one, assign 'agent' role to the AIDs
+// generate and resolve OOBIs 
+
+// Issuer Client
+const issuerBran = randomPasscode()
+const issuerAidAlias = 'issuerAid'
+const { client: issuerClient } = await initializeAndConnectClient(issuerBran)
+const { aid: issuerAid} = await createNewAID(issuerClient, issuerAidAlias, DEFAULT_IDENTIFIER_ARGS);
+await addEndRoleForAID(issuerClient, issuerAidAlias, ROLE_AGENT);
+const issuerOOBI = await generateOOBI(issuerClient, issuerAidAlias, ROLE_AGENT);
+
+// Holder Client
+const holderBran = randomPasscode()
+const holderAidAlias = 'holderAid'
+const { client: holderClient } = await initializeAndConnectClient(holderBran)
+const { aid: holderAid} = await createNewAID(holderClient, holderAidAlias, DEFAULT_IDENTIFIER_ARGS);
+await addEndRoleForAID(holderClient, holderAidAlias, ROLE_AGENT);
+const holderOOBI = await generateOOBI(holderClient, holderAidAlias, ROLE_AGENT);
+
+// Verifier Client
+const verifierBran = randomPasscode()
+const verifierAidAlias = 'verifierAid'
+const { client: verifierClient } = await initializeAndConnectClient(verifierBran)
+const { aid: verifierAid} = await createNewAID(verifierClient, verifierAidAlias, DEFAULT_IDENTIFIER_ARGS);
+await addEndRoleForAID(verifierClient, verifierAidAlias, ROLE_AGENT);
+const verifierOOBI = await generateOOBI(verifierClient, verifierAidAlias, ROLE_AGENT);
+
+// Clients OOBI Resolution
+// Resolve OOBIs to establish connections Issuer-Holder, Holder-Verifier
+const issuerContactAlias = 'issuerContact';
+const holderContactAlias = 'holderContact';
+const verifierContactAlias = 'verifierContact';
+
+await resolveOOBI(issuerClient, holderOOBI, holderContactAlias);
+await resolveOOBI(holderClient, issuerOOBI, issuerContactAlias);
+await resolveOOBI(verifierClient, holderOOBI, holderContactAlias);
+await resolveOOBI(holderClient, verifierOOBI, verifierContactAlias);
+
+// Schemas OOBI Resolution
+// Resolve the Schemas from the Schema Server (VLEI-Server)
+const schemaContactAlias = 'schemaContact';
+const schemaSaid = 'EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK';
+const schemaOOBI = `http://vlei-server:7723/oobi/${schemaSaid}`;
+
+await resolveOOBI(issuerClient, schemaOOBI, schemaContactAlias);
+await resolveOOBI(holderClient, schemaOOBI, schemaContactAlias);
+await resolveOOBI(verifierClient, schemaOOBI, schemaContactAlias);
+
+console.log("Client setup and OOBI resolutions complete.");
+```
+
+    Using Passcode (bran): B3DY034H9XuzFT-Ptv4b1
+
+
+    Client boot process initiated with KERIA agent.
+
+
+      Client AID Prefix:  EGa8jF_kAcwenOhS5ZZkG-IMVdfsj4d534NHjf0pV0oJ
+
+
+      Agent AID Prefix:   EH3zywrsDY7rTTfu3GLhkO1qoEOKRXlVnSDSQyyt26tr
+
+
+    Initiating AID inception for alias: issuerAid
+
+
+    Successfully created AID with prefix: ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij
+
+
+    Assigning 'agent' role to KERIA Agent EH3zywrsDY7rTTfu3GLhkO1qoEOKRXlVnSDSQyyt26tr for AID alias issuerAid
+
+
+    Successfully assigned 'agent' role for AID alias issuerAid.
+
+
+    Generating OOBI for AID alias issuerAid with role agent
+
+
+    Generated OOBI URL: http://keria:3902/oobi/ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij/agent/EH3zywrsDY7rTTfu3GLhkO1qoEOKRXlVnSDSQyyt26tr
+
+
+    Using Passcode (bran): AkNzx1mKWHbfeEUrCuSLB
+
+
+    Client boot process initiated with KERIA agent.
+
+
+      Client AID Prefix:  EM2zmilQcexjBGkZ7L5Q36wjGGQ349sP8ha6Ir06ReYg
+
+
+      Agent AID Prefix:   EFBboib9VLJnpogPdt46kowsAPECn_RU6xlI-OkgJYdW
+
+
+    Initiating AID inception for alias: holderAid
+
+
+    Successfully created AID with prefix: EAtu8ymzJ_oDcexdqTJjYcq-Crh7ofWjTfwec9OdFk6k
+
+
+    Assigning 'agent' role to KERIA Agent EFBboib9VLJnpogPdt46kowsAPECn_RU6xlI-OkgJYdW for AID alias holderAid
+
+
+    Successfully assigned 'agent' role for AID alias holderAid.
+
+
+    Generating OOBI for AID alias holderAid with role agent
+
+
+    Generated OOBI URL: http://keria:3902/oobi/EAtu8ymzJ_oDcexdqTJjYcq-Crh7ofWjTfwec9OdFk6k/agent/EFBboib9VLJnpogPdt46kowsAPECn_RU6xlI-OkgJYdW
+
+
+    Using Passcode (bran): Brj2-63aeIamrXA5cYa8C
+
+
+    Client boot process initiated with KERIA agent.
+
+
+      Client AID Prefix:  EMSdy38QjsLFdNN-pLogMXBiCneroknsvsr1bArfEa4a
+
+
+      Agent AID Prefix:   EMCiB96yeLF1D1b_-UT5VhdnayUjc8sCSrkk09q9yUUF
+
+
+    Initiating AID inception for alias: verifierAid
+
+
+    Successfully created AID with prefix: EL0en3tVUTPBx2AYPwsF4xYsGNqeVVnrKxubMGfBWkRj
+
+
+    Assigning 'agent' role to KERIA Agent EMCiB96yeLF1D1b_-UT5VhdnayUjc8sCSrkk09q9yUUF for AID alias verifierAid
+
+
+    Successfully assigned 'agent' role for AID alias verifierAid.
+
+
+    Generating OOBI for AID alias verifierAid with role agent
+
+
+    Generated OOBI URL: http://keria:3902/oobi/EL0en3tVUTPBx2AYPwsF4xYsGNqeVVnrKxubMGfBWkRj/agent/EMCiB96yeLF1D1b_-UT5VhdnayUjc8sCSrkk09q9yUUF
+
+
+    Resolving OOBI URL: http://keria:3902/oobi/EAtu8ymzJ_oDcexdqTJjYcq-Crh7ofWjTfwec9OdFk6k/agent/EFBboib9VLJnpogPdt46kowsAPECn_RU6xlI-OkgJYdW with alias holderContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "holderContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://keria:3902/oobi/ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij/agent/EH3zywrsDY7rTTfu3GLhkO1qoEOKRXlVnSDSQyyt26tr with alias issuerContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "issuerContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://keria:3902/oobi/EAtu8ymzJ_oDcexdqTJjYcq-Crh7ofWjTfwec9OdFk6k/agent/EFBboib9VLJnpogPdt46kowsAPECn_RU6xlI-OkgJYdW with alias holderContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "holderContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://keria:3902/oobi/EL0en3tVUTPBx2AYPwsF4xYsGNqeVVnrKxubMGfBWkRj/agent/EMCiB96yeLF1D1b_-UT5VhdnayUjc8sCSrkk09q9yUUF with alias verifierContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "verifierContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "schemaContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "schemaContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "schemaContact" (ID: undefined) added/updated.
+
+
+    Client setup and OOBI resolutions complete.
+
+
+## Credential Issuance Workflow Steps
+
+With the clients set up and connected, you can proceed with the credential issuance workflow. This involves the Issuer creating a credential and transferring it to the Holder using the IPEX protocol. Below are the code snippets you need to follow to do the issuance.
+
+### Step 1: Create Issuer's Credential Registry
+
+Before an Issuer can issue credentials, it needs a Credential Registry. In KERI, a Credential Registry is implemented using a **Transaction Event Log (TEL)**. This TEL is a secure, hash-linked log, managed by the Issuer's AID, specifically for tracking the lifecycle of credentials it issues—such as their issuance and revocation status. The registry itself is identified by a SAID derived from its inception event (`vcp` event type for registry inception). The TEL's history is anchored to the Issuer's Key Event Log, ensuring that all changes to the registry's state are cryptographically secured by the Issuer's controlling keys. This anchoring is achieved by including a digest of the TEL event in a KEL event.
+
+Use the code below to let the Issuer client create this registry. A human-readable name (`issuerRegistryName`) is used to reference it within the client.
+
+
+```typescript
+//Create Issuer credential Registry
+const issuerRegistryName = 'issuerRegistry' // Human readable identifier for the Registry
+
+// Initiate registry creation
+const createRegistryResult = await issuerClient
+    .registries()
+    .create({ name: issuerAidAlias, registryName: issuerRegistryName });
+
+// Get the operation details
+const createRegistryOperation = await createRegistryResult.op();
+
+// Wait for the operation to complete
+const createRegistryResponse = await issuerClient
+    .operations()
+    .wait(createRegistryOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+// Clean up the operation from the agent's list
+await issuerClient.operations().delete(createRegistryOperation.name);
+
+console.log(`Registry '${issuerRegistryName}' created for Issuer AID ${issuerAid.i}.`);
+console.log("Registry creation response:", JSON.stringify(createRegistryResponse.response, null, 2));
+
+// Listing Registries to confirm creation and retrieve its SAID (regk)
+const issuerRegistries = await issuerClient.registries().list(issuerAidAlias);
+const issuerRegistry = issuerRegistries[0]
+console.log(`Registry: Name='${issuerRegistry.name}', SAID (regk)='${issuerRegistry.regk}'`);
+```
+
+    Registry 'issuerRegistry' created for Issuer AID ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij.
+
+
+    Registry creation response: {
+      "anchor": {
+        "i": "EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M",
+        "s": "0",
+        "d": "EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"
+      }
+    }
+
+
+    Registry: Name='issuerRegistry', SAID (regk)='EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M'
+
+
+### Step 2: Retrieve Schema Definition
+
+The Issuer needs the definition of the schema against which they intend to issue a credential. Since the schema OOBI was resolved during the setup phase, the schema definition can now be retrieved from the KERIA agent's cache using its SAID. You will reuse the `EventPass` schema (SAID: `EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK`) from previous KLI examples.
+
+
+```typescript
+// Retrieve Schemas
+const issuerSchema = await issuerClient.schemas().get(schemaSaid);
+console.log(issuerSchema)
+```
+
+    {
+      [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+      [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
+      title: [32m"EventPass"[39m,
+      description: [32m"Event Pass Schema"[39m,
+      type: [32m"object"[39m,
+      credentialType: [32m"EventPassCred"[39m,
+      version: [32m"1.0.0"[39m,
+      properties: {
+        v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
+        d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
+        u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
+        i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
+        ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
+        s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
+        a: {
+          oneOf: [
+            { description: [32m"Attributes block SAID"[39m, type: [32m"string"[39m },
+            {
+              [32m"$id"[39m: [32m"ELppbffpWEM-uufl6qpVTcN6LoZS2A69UN4Ddrtr_JqE"[39m,
+              description: [32m"Attributes block"[39m,
+              type: [32m"object"[39m,
+              properties: [36m[Object][39m,
+              additionalProperties: [33mfalse[39m,
+              required: [36m[Array][39m
+            }
+          ]
+        }
+      },
+      additionalProperties: [33mfalse[39m,
+      required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
+    }
+
+
+### Step 3: Issue the ACDC
+
+Now the Issuer creates the actual ACDC. This involves:
+
+1. Defining the `credentialClaims` – the specific attribute values for this instance of the `EventPass` credential.
+2. Calling `issuerClient.credentials().issue()`. This method takes the Issuer's AID alias and an object specifying:
+    - `ri`: The SAID of the Credential Registry (`issuerRegistry.regk`) where this credential's issuance will be recorded.
+    - `s`: The SAID of the schema (`schemaSaid`) this credential adheres to.
+    - `a`: An attributes block containing:
+      - `i`: The AID of the Issuee (the Holder, holderAid.i).
+      - The actual `credentialClaims`.
+
+This `issue` command creates the ACDC locally within the Issuer's client and records an issuance event (e.g., `iss`) in the specified registry's TEL. The SAID of the newly created credential is then extracted from the response.
+
+Use the code below to perform these actions.
+
+
+```typescript
+// Issue Credential
+
+const credentialClaims = {
+    "eventName":"GLEIF Summit",
+    "accessLevel":"staff",
+    "validDate":"2026-10-01"
+}
+
+const issueResult = await issuerClient
+    .credentials()
+    .issue(
+        issuerAidAlias,
+        {
+            ri: issuerRegistry.regk, //Registry Identifier (not the alias)
+            s: schemaSaid,           // Schema identifier
+            a: {                     // Attributes block
+                i: holderAid.i,      // Isuue or credential subject 
+                ...credentialClaims  // The actual claims data                 
+            }
+        });
+
+// Issuance is an asynchronous operation.
+const issueOperation = await issueResult.op; //In this case is .op instead of .op() (Inconsistency in the sdk)
+
+// Wait for the issuance operation to complete.
+const issueResponse = await issuerClient
+    .operations()
+    .wait(issueOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+// Clean up the operation.
+await issuerClient.operations().delete(issueOperation.name);
+
+// Extract the SAID of the newly created credential from the response.
+// This SAID uniquely identifies this specific ACDC instance.
+const credentialSaid = issueResponse.response.ced.d
+
+// Display the issued credential from the Issuer's perspective.
+const issuerCredential = await issuerClient.credentials().get(credentialSaid);
+console.log(issuerCredential)
+```
+
+    {
+      sad: {
+        v: [32m"ACDC10JSON0001c4_"[39m,
+        d: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+        i: [32m"ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij"[39m,
+        ri: [32m"EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"[39m,
+        s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+        a: {
+          d: [32m"EHOflATLiJkQuoq3Cqy9BLjH5WF8rtcN1jWAaj4xYfh4"[39m,
+          i: [32m"EAtu8ymzJ_oDcexdqTJjYcq-Crh7ofWjTfwec9OdFk6k"[39m,
+          eventName: [32m"GLEIF Summit"[39m,
+          accessLevel: [32m"staff"[39m,
+          validDate: [32m"2026-10-01"[39m,
+          dt: [32m"2025-06-04T15:04:46.493000+00:00"[39m
+        }
+      },
+      atc: [32m"-IABEPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I0AAAAAAAAAAAAAAAAAAAAAAAEPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+      iss: {
+        v: [32m"KERI10JSON0000ed_"[39m,
+        t: [32m"iss"[39m,
+        d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m,
+        i: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+        s: [32m"0"[39m,
+        ri: [32m"EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"[39m,
+        dt: [32m"2025-06-04T15:04:46.493000+00:00"[39m
+      },
+      issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEC7WN6ibPwkVlsFk7poKqoyRHRF9X_fwyC0dKCUiyarj"[39m,
+      pre: [32m"ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij"[39m,
+      schema: {
+        [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+        [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
+        title: [32m"EventPass"[39m,
+        description: [32m"Event Pass Schema"[39m,
+        type: [32m"object"[39m,
+        credentialType: [32m"EventPassCred"[39m,
+        version: [32m"1.0.0"[39m,
+        properties: {
+          v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
+          d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
+          u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
+          i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
+          ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
+          s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
+          a: { oneOf: [ [36m[Object][39m, [36m[Object][39m ] }
+        },
+        additionalProperties: [33mfalse[39m,
+        required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
+      },
+      chains: [],
+      status: {
+        vn: [ [33m1[39m, [33m0[39m ],
+        i: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+        s: [32m"0"[39m,
+        d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m,
+        ri: [32m"EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"[39m,
+        ra: {},
+        a: { s: [33m2[39m, d: [32m"EC7WN6ibPwkVlsFk7poKqoyRHRF9X_fwyC0dKCUiyarj"[39m },
+        dt: [32m"2025-06-04T15:04:46.493000+00:00"[39m,
+        et: [32m"iss"[39m
+      },
+      anchor: {
+        pre: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+        sn: [33m0[39m,
+        d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m
+      },
+      anc: {
+        v: [32m"KERI10JSON00013a_"[39m,
+        t: [32m"ixn"[39m,
+        d: [32m"EC7WN6ibPwkVlsFk7poKqoyRHRF9X_fwyC0dKCUiyarj"[39m,
+        i: [32m"ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij"[39m,
+        s: [32m"2"[39m,
+        p: [32m"EPBXiith2VTRHo7eNpVfsgeJDi2vG1MUJd9c9x7cb25v"[39m,
+        a: [
+          {
+            i: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+            s: [32m"0"[39m,
+            d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m
+          }
+        ]
+      },
+      ancatc: [
+        [32m"-VBq-AABAAB3pcqDdNtfLxtRqwQQXs-F1HufOB6oHRnfHky_WWjUazpG32crtROcZ2lOUUbRiAOV9TAkDPIpxtvh-5x0oOUG-BADAABO7mFEmlZDQV6Hh6Ur1DgB9ja612Da4TrJBxUlOqeNCJdkqoFDbM3tVkMhSKL_rFw7A3yAT333PWV6NazrIPYGABCoMVuKFdOnXYgmOFfl4_jp9Cb-omprJiZzFNRm96oF5MWLlGSI1mbg01j9ezbt7ywo6CA7JeA3yn9rmUmEzwsFACBvst5rfp4fUrMJkCLVTxEN-rtja9tN4iSesA-5iRV_zMprC8Enzd4H134nFLtYoShzcPsCwNLO3Bx7_6T3d3MF-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-06-04T15c04c46d579147p00c00"[39m
+      ]
+    }
+
+
+### Step 4: Issuer Grants Credential via IPEX
+
+The credential has been created but currently resides with the Issuer. To transfer it to the Holder, the Issuer initiates an IPEX (Issuance and Presentation Exchange) grant. This process uses KERI `exn` (exchange) messages. The grant message effectively offers the credential to the Holder. 
+
+The `issuerClient.ipex().grant()` method prepares the grant message, including the ACDC itself (`acdc`), the issuance event from the registry (`iss`), and the anchoring event from the Issuer's KEL (`anc`) along with its signatures (`ancAttachment`).
+Then, `issuerClient.ipex().submitGrant()` sends this packaged grant message to the Holder's KERIA agent.
+
+Use the code below to perform the ipex grant.
+
+
+```typescript
+// Ipex Grant
+
+const [grant, gsigs, gend] = await issuerClient.ipex().grant({
+    senderName: issuerAidAlias,
+    acdc: new Serder(issuerCredential.sad), // The ACDC (Verifiable Credential) itself
+    iss: new Serder(issuerCredential.iss),  // The issuance event from the credential registry (TEL event)
+    anc: new Serder(issuerCredential.anc),  // The KEL event anchoring the TEL issuance event
+    ancAttachment: issuerCredential.ancatc, // Signatures for the KEL anchoring event
+    recipient: holderAid.i,                 // AID of the Holder
+    datetime: createTimestamp(),            // Timestamp for the grant message
+});
+
+// Issuer submits the prepared grant message to the Holder.
+// This sends an 'exn' message to the Holder's KERIA agent.
+const submitGrantOperation = await issuerClient
+    .ipex()
+    .submitGrant(
+        issuerAidAlias,  // Issuer's AID alias
+        grant,           // The grant message payload
+        gsigs,           // Signatures for the grant message
+        gend,            // Endorsements for the grant message
+        [holderAid.i]    // List of recipient AIDs
+    );
+
+// Wait for the submission operation to complete.
+const submitGrantResponse = await issuerClient
+    .operations()
+    .wait(submitGrantOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+// Clean up the operation.
+await issuerClient.operations().delete(submitGrantOperation.name);
+```
+
+**Holder Checks Credential Status (Optional)**
+
+The Holder can proactively check the status of a credential in the Issuer's registry if they know the registry's SAID (`issuerRegistry.regk`) and the credential's SAID (`issuerCredential.sad.d`). This query demonstrates how a party can verify the status directly from the TEL.
+
+
+```typescript
+// The flow transitions from the Issuer to the Holder.
+// A delay and retry mechanism is added to allow time for KERIA agents and witnesses
+// to propagate the credential issuance information.
+
+let credentialState;
+
+// Retry loop to fetch credential state from the Holder's perspective.
+for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
+    try{
+        // Holder's client queries the state of the credential in the Issuer's registry.
+        credentialState = await holderClient.credentials().state(issuerRegistry.regk, issuerCredential.sad.d)
+        break;
+    }
+    catch (error){    
+         console.log(`[Retry] failed to get credential state on attempt #${attempt} of ${DEFAULT_RETRIES}`);
+         if (attempt === DEFAULT_RETRIES) {
+             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for getting credential state.`);
+             throw error; 
+         }
+         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
+         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
+    }
+}
+
+console.log(credentialState) // Displays the status (e.g., issued, revoked)
+```
+
+    [Retry] failed to get credential state on attempt #1 of 5
+
+
+    [Retry] Waiting 5000ms before next attempt...
+
+
+    {
+      vn: [ [33m1[39m, [33m0[39m ],
+      i: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+      s: [32m"0"[39m,
+      d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m,
+      ri: [32m"EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"[39m,
+      ra: {},
+      a: { s: [33m2[39m, d: [32m"EC7WN6ibPwkVlsFk7poKqoyRHRF9X_fwyC0dKCUiyarj"[39m },
+      dt: [32m"2025-06-04T15:04:46.493000+00:00"[39m,
+      et: [32m"iss"[39m
+    }
+
+
+### Step 5: Holder Receives IPEX Grant Notification
+
+The Holder's KERIA agent will receive the grant `exn` message sent by the Issuer. The Holder's client can list its notifications to find this incoming grant. The notification will contain the SAID of the `exn` message (`grantNotification.a.d`), which can then be used to retrieve the full details of the grant exchange from the Holder's client.
+
+
+
+
+```typescript
+// Holder waits for Grant notification
+
+let notifications;
+
+// Retry loop to fetch notifications.
+for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
+    try{
+        // List notifications, filtering for unread IPEX_GRANT_ROUTE messages.
+        let allNotifications = await holderClient.notifications().list( );
+        notifications = allNotifications.notes.filter(
+            (n) => n.a.r === IPEX_GRANT_ROUTE && n.r === false // n.r is 'read' status
+        )        
+        if(notifications.length === 0){ 
+            throw new Error("Grant notification not found"); // Throw error to trigger retry
+        }
+        break;     
+    }
+    catch (error){    
+         console.log(`[Retry] Grant notification not found on attempt #${attempt} of ${DEFAULT_RETRIES}`);
+         if (attempt === DEFAULT_RETRIES) {
+             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for grant notification.`);
+             throw error; 
+         }
+         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
+         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
+    }
+}
+
+const grantNotification = notifications[0]  // Assuming only one grant notification for simplicity
+
+console.log(grantNotification) // Displays the notification details
+
+// Retrieve the full IPEX grant exchange details using the SAID from the notification.
+// The 'exn' field in the exchange will contain the actual credential data.
+const grantExchange = await holderClient.exchanges().get(grantNotification.a.d);
+
+console.log(grantExchange) // Displays the content of the grant message
+```
+
+    {
+      i: [32m"0ACpFi2wWXVI5mv-fI13hdts"[39m,
+      dt: [32m"2025-06-04T15:04:47.739121+00:00"[39m,
+      r: [33mfalse[39m,
+      a: {
+        r: [32m"/exn/ipex/grant"[39m,
+        d: [32m"EJu1IhOMLN0C0gEWzB8-SE9I9XZ47M9qA5hKD3ckMNO3"[39m,
+        m: [32m""[39m
+      }
+    }
+
+
+    {
+      exn: {
+        v: [32m"KERI10JSON00057f_"[39m,
+        t: [32m"exn"[39m,
+        d: [32m"EJu1IhOMLN0C0gEWzB8-SE9I9XZ47M9qA5hKD3ckMNO3"[39m,
+        i: [32m"ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij"[39m,
+        rp: [32m"EAtu8ymzJ_oDcexdqTJjYcq-Crh7ofWjTfwec9OdFk6k"[39m,
+        p: [32m""[39m,
+        dt: [32m"2025-06-04T15:04:47.370000+00:00"[39m,
+        r: [32m"/ipex/grant"[39m,
+        q: {},
+        a: { i: [32m"EAtu8ymzJ_oDcexdqTJjYcq-Crh7ofWjTfwec9OdFk6k"[39m, m: [32m""[39m },
+        e: {
+          acdc: {
+            v: [32m"ACDC10JSON0001c4_"[39m,
+            d: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+            i: [32m"ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij"[39m,
+            ri: [32m"EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"[39m,
+            s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+            a: {
+              d: [32m"EHOflATLiJkQuoq3Cqy9BLjH5WF8rtcN1jWAaj4xYfh4"[39m,
+              i: [32m"EAtu8ymzJ_oDcexdqTJjYcq-Crh7ofWjTfwec9OdFk6k"[39m,
+              eventName: [32m"GLEIF Summit"[39m,
+              accessLevel: [32m"staff"[39m,
+              validDate: [32m"2026-10-01"[39m,
+              dt: [32m"2025-06-04T15:04:46.493000+00:00"[39m
+            }
+          },
+          iss: {
+            v: [32m"KERI10JSON0000ed_"[39m,
+            t: [32m"iss"[39m,
+            d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m,
+            i: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+            s: [32m"0"[39m,
+            ri: [32m"EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"[39m,
+            dt: [32m"2025-06-04T15:04:46.493000+00:00"[39m
+          },
+          anc: {
+            v: [32m"KERI10JSON00013a_"[39m,
+            t: [32m"ixn"[39m,
+            d: [32m"EC7WN6ibPwkVlsFk7poKqoyRHRF9X_fwyC0dKCUiyarj"[39m,
+            i: [32m"ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij"[39m,
+            s: [32m"2"[39m,
+            p: [32m"EPBXiith2VTRHo7eNpVfsgeJDi2vG1MUJd9c9x7cb25v"[39m,
+            a: [ [36m[Object][39m ]
+          },
+          d: [32m"EKCB1GWu-PA0b37I_5daRbTlOrOABL7O4eNNR1sW4qIM"[39m
+        }
+      },
+      pathed: {
+        acdc: [32m"-IABEPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I0AAAAAAAAAAAAAAAAAAAAAAAEHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m,
+        iss: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAAAEC7WN6ibPwkVlsFk7poKqoyRHRF9X_fwyC0dKCUiyarj"[39m,
+        anc: [32m"-VBq-AABAAB3pcqDdNtfLxtRqwQQXs-F1HufOB6oHRnfHky_WWjUazpG32crtROcZ2lOUUbRiAOV9TAkDPIpxtvh-5x0oOUG-BADAABO7mFEmlZDQV6Hh6Ur1DgB9ja612Da4TrJBxUlOqeNCJdkqoFDbM3tVkMhSKL_rFw7A3yAT333PWV6NazrIPYGABCoMVuKFdOnXYgmOFfl4_jp9Cb-omprJiZzFNRm96oF5MWLlGSI1mbg01j9ezbt7ywo6CA7JeA3yn9rmUmEzwsFACBvst5rfp4fUrMJkCLVTxEN-rtja9tN4iSesA-5iRV_zMprC8Enzd4H134nFLtYoShzcPsCwNLO3Bx7_6T3d3MF-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-06-04T15c04c46d579147p00c00"[39m
+      }
+    }
+
+
+### Step 6: Holder Admits Credential
+
+Upon receiving and reviewing the grant, the Holder decides to accept (`admit`) the credential. This involves:
+- Preparing an `admit` `exn` message using `holderClient.ipex().admit()`.
+- Submitting this `admit` message back to the Issuer using `holderClient.ipex().submitAdmit()`.
+- Marking the original grant notification as read.
+- The Holder's client then processes the admitted credential, verifying its signatures, schema, and status against the Issuer's KEL and TEL, and stores it locally.
+
+
+```typescript
+// Holder admits (accepts) the IPEX grant.
+
+// Prepare the IPEX admit message.
+const [admit, sigs, aend] = await holderClient.ipex().admit({
+    senderName: holderAidAlias,       // Alias of the Holder's AID
+    message: '',                      // Optional message to include in the admit
+    grantSaid: grantNotification.a.d!,// SAID of the grant 'exn' message being admitted
+    recipient: issuerAid.i,           // AID of the Issuer
+    datetime: createTimestamp(),      // Timestamp for the admit message
+});
+
+// Holder submits the prepared admit message to the Issuer.
+const admitOperation = await holderClient
+    .ipex()
+    .submitAdmit(holderAidAlias, admit, sigs, aend, [issuerAid.i]);
+
+// Wait for the submission operation to complete.
+const admitResponse = await holderClient
+    .operations()
+    .wait(admitOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+// Clean up the operation.
+await holderClient.operations().delete(admitOperation.name);
+
+// Holder marks the grant notification as read.
+await holderClient.notifications().mark(grantNotification.i);
+console.log("Holder's notifications after marking grant as read:");
+console.log(await holderClient.notifications().list());
+
+// Holder can now get the credential from their local store.
+// This implies the client has processed, verified, and stored it upon admission.
+const holderReceivedCredential = await holderClient.credentials().get(issuerCredential.sad.d);
+console.log("Credential as stored by Holder:");
+console.log(holderReceivedCredential);
+
+```
+
+    Holder's notifications after marking grant as read:
+
+
+    {
+      start: [33m0[39m,
+      end: [33m0[39m,
+      total: [33m1[39m,
+      notes: [
+        {
+          i: [32m"0ACpFi2wWXVI5mv-fI13hdts"[39m,
+          dt: [32m"2025-06-04T15:04:47.739121+00:00"[39m,
+          r: [33mtrue[39m,
+          a: {
+            r: [32m"/exn/ipex/grant"[39m,
+            d: [32m"EJu1IhOMLN0C0gEWzB8-SE9I9XZ47M9qA5hKD3ckMNO3"[39m,
+            m: [32m""[39m
+          }
+        }
+      ]
+    }
+
+
+    Credential as stored by Holder:
+
+
+    {
+      sad: {
+        v: [32m"ACDC10JSON0001c4_"[39m,
+        d: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+        i: [32m"ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij"[39m,
+        ri: [32m"EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"[39m,
+        s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+        a: {
+          d: [32m"EHOflATLiJkQuoq3Cqy9BLjH5WF8rtcN1jWAaj4xYfh4"[39m,
+          i: [32m"EAtu8ymzJ_oDcexdqTJjYcq-Crh7ofWjTfwec9OdFk6k"[39m,
+          eventName: [32m"GLEIF Summit"[39m,
+          accessLevel: [32m"staff"[39m,
+          validDate: [32m"2026-10-01"[39m,
+          dt: [32m"2025-06-04T15:04:46.493000+00:00"[39m
+        }
+      },
+      atc: [32m"-IABEPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I0AAAAAAAAAAAAAAAAAAAAAAAEPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+      iss: {
+        v: [32m"KERI10JSON0000ed_"[39m,
+        t: [32m"iss"[39m,
+        d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m,
+        i: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+        s: [32m"0"[39m,
+        ri: [32m"EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"[39m,
+        dt: [32m"2025-06-04T15:04:46.493000+00:00"[39m
+      },
+      issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEC7WN6ibPwkVlsFk7poKqoyRHRF9X_fwyC0dKCUiyarj"[39m,
+      pre: [32m"ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij"[39m,
+      schema: {
+        [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+        [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
+        title: [32m"EventPass"[39m,
+        description: [32m"Event Pass Schema"[39m,
+        type: [32m"object"[39m,
+        credentialType: [32m"EventPassCred"[39m,
+        version: [32m"1.0.0"[39m,
+        properties: {
+          v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
+          d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
+          u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
+          i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
+          ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
+          s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
+          a: { oneOf: [ [36m[Object][39m, [36m[Object][39m ] }
+        },
+        additionalProperties: [33mfalse[39m,
+        required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
+      },
+      chains: [],
+      status: {
+        vn: [ [33m1[39m, [33m0[39m ],
+        i: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+        s: [32m"0"[39m,
+        d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m,
+        ri: [32m"EMaXNezCJ4L32YVtNSn3A0TGzGwl059pWNfNDeNP3g8M"[39m,
+        ra: {},
+        a: { s: [33m2[39m, d: [32m"EC7WN6ibPwkVlsFk7poKqoyRHRF9X_fwyC0dKCUiyarj"[39m },
+        dt: [32m"2025-06-04T15:04:46.493000+00:00"[39m,
+        et: [32m"iss"[39m
+      },
+      anchor: {
+        pre: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+        sn: [33m0[39m,
+        d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m
+      },
+      anc: {
+        v: [32m"KERI10JSON00013a_"[39m,
+        t: [32m"ixn"[39m,
+        d: [32m"EC7WN6ibPwkVlsFk7poKqoyRHRF9X_fwyC0dKCUiyarj"[39m,
+        i: [32m"ENotjFflUyGuOjygEcvPKbFPxM7kh1vN9ci_6eFyH9ij"[39m,
+        s: [32m"2"[39m,
+        p: [32m"EPBXiith2VTRHo7eNpVfsgeJDi2vG1MUJd9c9x7cb25v"[39m,
+        a: [
+          {
+            i: [32m"EPn6wt7a_vKatnnsPVtMuoVwED3KOos2_cLr_w-30I6I"[39m,
+            s: [32m"0"[39m,
+            d: [32m"EHTPnwtg_PDXi6ybEsUgxt3s9fcGGAb2BFSVNqY7XvsJ"[39m
+          }
+        ]
+      },
+      ancatc: [
+        [32m"-VBq-AABAAB3pcqDdNtfLxtRqwQQXs-F1HufOB6oHRnfHky_WWjUazpG32crtROcZ2lOUUbRiAOV9TAkDPIpxtvh-5x0oOUG-BADAABO7mFEmlZDQV6Hh6Ur1DgB9ja612Da4TrJBxUlOqeNCJdkqoFDbM3tVkMhSKL_rFw7A3yAT333PWV6NazrIPYGABCoMVuKFdOnXYgmOFfl4_jp9Cb-omprJiZzFNRm96oF5MWLlGSI1mbg01j9ezbt7ywo6CA7JeA3yn9rmUmEzwsFACBvst5rfp4fUrMJkCLVTxEN-rtja9tN4iSesA-5iRV_zMprC8Enzd4H134nFLtYoShzcPsCwNLO3Bx7_6T3d3MF-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-06-04T15c04c47d890793p00c00"[39m
+      ]
+    }
+
+
+### Step 8: Issuer Receives Admit Notification
+
+The Issuer, in turn, will receive a notification that the Holder has admitted the credential. The Issuer's client lists its notifications, finds the `admit` message, and marks it as read. This completes the issuance loop.
+
+
+```typescript
+// Issuer retrieves the Admit notification from the Holder.
+
+let issuerAdmitNotifications;
+
+// Retry loop for the Issuer to receive the admit notification.
+for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
+    try{
+        // List notifications, filtering for unread IPEX_ADMIT_ROUTE messages.
+        let allNotifications = await issuerClient.notifications().list();
+        issuerAdmitNotifications = allNotifications.notes.filter(
+            (n) => n.a.r === IPEX_ADMIT_ROUTE && n.r === false
+        )        
+        if(issuerAdmitNotifications.length === 0){ 
+            throw new Error("Admit notification not found"); // Throw error to trigger retry
+        }
+        break; // Exit loop if notification found
+    }
+    catch (error){    
+         console.log(`[Retry] Admit notification not found for Issuer on attempt #${attempt} of ${DEFAULT_RETRIES}`);
+         if (attempt === DEFAULT_RETRIES) {
+             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for Issuer's admit notification.`);
+             throw error; 
+         }
+         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
+         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
+    }
+}
+
+const admitNotificationForIssuer = issuerAdmitNotifications[0] // Assuming one notification
+
+// Issuer marks the admit notification as read.
+await issuerClient.notifications().mark(admitNotificationForIssuer.i);
+console.log("Issuer's notifications after marking admit as read:");
+console.log(await issuerClient.notifications().list());
+```
+
+    Issuer's notifications after marking admit as read:
+
+
+    {
+      start: [33m0[39m,
+      end: [33m0[39m,
+      total: [33m1[39m,
+      notes: [
+        {
+          i: [32m"0ADUC4NseE7OCjgsEAaOmgNG"[39m,
+          dt: [32m"2025-06-04T15:04:53.337931+00:00"[39m,
+          r: [33mtrue[39m,
+          a: {
+            r: [32m"/exn/ipex/admit"[39m,
+            d: [32m"EFmGmAvy0mnaGqm8lWgg7cg7D1RL-2-kdyLTjUZ8mzAu"[39m,
+            m: [32m""[39m
+          }
+        }
+      ]
+    }
+
+
+**Cleanup (Optional)**
+
+Once the IPEX flow for issuance is complete and notifications have been processed, both parties can optionally delete these notifications from their local client stores.
+
+
+```typescript
+// Issuer Remove Admit Notification from their list
+await issuerClient.notifications().delete(admitNotificationForIssuer.i);
+console.log("Issuer's notifications after deleting admit notification:");
+console.log(await issuerClient.notifications().list());
+
+// Holder Remove Grant Notification from their list
+await holderClient.notifications().delete(grantNotification.i);
+console.log("Holder's notifications after deleting grant notification:");
+console.log(await holderClient.notifications().list());
+```
+
+    Issuer's notifications after deleting admit notification:
+
+
+    { start: [33m0[39m, end: [33m0[39m, total: [33m0[39m, notes: [] }
+
+
+    Holder's notifications after deleting grant notification:
+
+
+    { start: [33m0[39m, end: [33m0[39m, total: [33m0[39m, notes: [] }
+
+
+<!-- Source: 102_25_KERIA_Signify_Credential_Presentation_and_Revocation.md -->
+# Signify-ts: ACDC Presentation and Revocation with IPEX
+
+<div class="alert alert-primary">
+<b>🎯 OBJECTIVE</b><hr>
+Demonstrate the process of presenting an ACDC (Authentic Chained Data Container) from a Holder to a Verifier using the IPEX protocol with the Signify-ts library and the process of credential revocation.
+</div>
+
+<div class="alert alert-info">
+<b>ℹ️ NOTE</b><hr>
+This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>) to quickly establish the necessary preconditions for credential presentation. 
+</div>
+
+## Prerequisites: Client and Credential Setup 
+
+The client setup process from the previous notebook is reused here.
+
+
+```typescript
+import { randomPasscode, Serder} from 'npm:signify-ts';
+import { initializeSignify, 
+         initializeAndConnectClient,
+         createNewAID,
+         addEndRoleForAID,
+         generateOOBI,
+         resolveOOBI,
+         createTimestamp,
+         createCredentialRegistry,
+         getSchema,
+         issueCredential,
+         ipexGrantCredential,
+         getCredentialState,
+         waitForAndGetNotification,
+         ipexAdmitGrant,
+         markNotificationRead,
+         DEFAULT_IDENTIFIER_ARGS,
+         DEFAULT_TIMEOUT_MS,
+         DEFAULT_DELAY_MS,
+         DEFAULT_RETRIES,
+         ROLE_AGENT,
+         IPEX_GRANT_ROUTE,
+         IPEX_ADMIT_ROUTE,
+         IPEX_APPLY_ROUTE,
+         IPEX_OFFER_ROUTE,
+         SCHEMA_SERVER_HOST
+       } from './scripts_ts/utils.ts';
+
+// Clients setup
+// Initialize Issuer, Holder and Verifier CLients, Create AIDs for each one, assign 'agent' role to the AIDs
+// generate and resolve OOBIs 
+
+// Issuer Client
+const issuerBran = randomPasscode()
+const issuerAidAlias = 'issuerAid'
+const { client: issuerClient } = await initializeAndConnectClient(issuerBran)
+const { aid: issuerAid} = await createNewAID(issuerClient, issuerAidAlias, DEFAULT_IDENTIFIER_ARGS);
+await addEndRoleForAID(issuerClient, issuerAidAlias, ROLE_AGENT);
+const issuerOOBI = await generateOOBI(issuerClient, issuerAidAlias, ROLE_AGENT);
+
+// Holder Client
+const holderBran = randomPasscode()
+const holderAidAlias = 'holderAid'
+const { client: holderClient } = await initializeAndConnectClient(holderBran)
+const { aid: holderAid} = await createNewAID(holderClient, holderAidAlias, DEFAULT_IDENTIFIER_ARGS);
+await addEndRoleForAID(holderClient, holderAidAlias, ROLE_AGENT);
+const holderOOBI = await generateOOBI(holderClient, holderAidAlias, ROLE_AGENT);
+
+// Verifier Client
+const verifierBran = randomPasscode()
+const verifierAidAlias = 'verifierAid'
+const { client: verifierClient } = await initializeAndConnectClient(verifierBran)
+const { aid: verifierAid} = await createNewAID(verifierClient, verifierAidAlias, DEFAULT_IDENTIFIER_ARGS);
+await addEndRoleForAID(verifierClient, verifierAidAlias, ROLE_AGENT);
+const verifierOOBI = await generateOOBI(verifierClient, verifierAidAlias, ROLE_AGENT);
+
+// Clients OOBI Resolution
+// Resolve OOBIs to establish connections Issuer-Holder, Holder-Verifier
+const issuerContactAlias = 'issuerContact';
+const holderContactAlias = 'holderContact';
+const verifierContactAlias = 'verifierContact';
+
+await resolveOOBI(issuerClient, holderOOBI, holderContactAlias);
+await resolveOOBI(holderClient, issuerOOBI, issuerContactAlias);
+await resolveOOBI(verifierClient, holderOOBI, holderContactAlias);
+await resolveOOBI(holderClient, verifierOOBI, verifierContactAlias);
+
+// Schemas OOBI Resolution
+// Resolve the Schemas from the Schema Server (VLEI-Server)
+const schemaContactAlias = 'schemaContact';
+const schemaSaid = 'EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK';
+const schemaOOBI = `http://vlei-server:7723/oobi/${schemaSaid}`;
+
+await resolveOOBI(issuerClient, schemaOOBI, schemaContactAlias);
+await resolveOOBI(holderClient, schemaOOBI, schemaContactAlias);
+await resolveOOBI(verifierClient, schemaOOBI, schemaContactAlias);
+
+console.log("Client setup and OOBI resolutions complete.");
+```
+
+    Using Passcode (bran): B5_FKkln-ro53KIrL2Kfd
+
+
+    Client boot process initiated with KERIA agent.
+
+
+      Client AID Prefix:  EHPERuJTkvyBun51nSbKyeWPZiuQbVjehhTn9D6svRio
+
+
+      Agent AID Prefix:   EIykQoYv3Pl20c2HfJkt-wIpNL6DUri3DiDwHkphTOp0
+
+
+    Initiating AID inception for alias: issuerAid
+
+
+    Successfully created AID with prefix: EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL
+
+
+    Assigning 'agent' role to KERIA Agent EIykQoYv3Pl20c2HfJkt-wIpNL6DUri3DiDwHkphTOp0 for AID alias issuerAid
+
+
+    Successfully assigned 'agent' role for AID alias issuerAid.
+
+
+    Generating OOBI for AID alias issuerAid with role agent
+
+
+    Generated OOBI URL: http://keria:3902/oobi/EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL/agent/EIykQoYv3Pl20c2HfJkt-wIpNL6DUri3DiDwHkphTOp0
+
+
+    Using Passcode (bran): DJeK9Hzuwf_BySFdz7oR7
+
+
+    Client boot process initiated with KERIA agent.
+
+
+      Client AID Prefix:  EGIUlipGZTlHend3ME67yXI6IS-PT6fJtmZ49BK0VeLV
+
+
+      Agent AID Prefix:   EDt0H6ufqnaZVUGGzRuWrP64_2j4Nt0GVv0jHeWbG3hq
+
+
+    Initiating AID inception for alias: holderAid
+
+
+    Successfully created AID with prefix: EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L
+
+
+    Assigning 'agent' role to KERIA Agent EDt0H6ufqnaZVUGGzRuWrP64_2j4Nt0GVv0jHeWbG3hq for AID alias holderAid
+
+
+    Successfully assigned 'agent' role for AID alias holderAid.
+
+
+    Generating OOBI for AID alias holderAid with role agent
+
+
+    Generated OOBI URL: http://keria:3902/oobi/EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L/agent/EDt0H6ufqnaZVUGGzRuWrP64_2j4Nt0GVv0jHeWbG3hq
+
+
+    Using Passcode (bran): CRD-tjcSzAx4bfG7lkOvq
+
+
+    Client boot process initiated with KERIA agent.
+
+
+      Client AID Prefix:  ED__3u60CN8UtkE06cAJHyy3O_5g1dSOS_EDdrpkN9KY
+
+
+      Agent AID Prefix:   EAXrqweFbs9dwQxBQOhi2eJLJc6Ju7nulyVHsTR22kfy
+
+
+    Initiating AID inception for alias: verifierAid
+
+
+    Successfully created AID with prefix: ENuSi5ewqasHRtVQhpKsLcjY97JTaQVj-bV4uKg0R1mH
+
+
+    Assigning 'agent' role to KERIA Agent EAXrqweFbs9dwQxBQOhi2eJLJc6Ju7nulyVHsTR22kfy for AID alias verifierAid
+
+
+    Successfully assigned 'agent' role for AID alias verifierAid.
+
+
+    Generating OOBI for AID alias verifierAid with role agent
+
+
+    Generated OOBI URL: http://keria:3902/oobi/ENuSi5ewqasHRtVQhpKsLcjY97JTaQVj-bV4uKg0R1mH/agent/EAXrqweFbs9dwQxBQOhi2eJLJc6Ju7nulyVHsTR22kfy
+
+
+    Resolving OOBI URL: http://keria:3902/oobi/EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L/agent/EDt0H6ufqnaZVUGGzRuWrP64_2j4Nt0GVv0jHeWbG3hq with alias holderContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "holderContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://keria:3902/oobi/EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL/agent/EIykQoYv3Pl20c2HfJkt-wIpNL6DUri3DiDwHkphTOp0 with alias issuerContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "issuerContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://keria:3902/oobi/EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L/agent/EDt0H6ufqnaZVUGGzRuWrP64_2j4Nt0GVv0jHeWbG3hq with alias holderContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "holderContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://keria:3902/oobi/ENuSi5ewqasHRtVQhpKsLcjY97JTaQVj-bV4uKg0R1mH/agent/EAXrqweFbs9dwQxBQOhi2eJLJc6Ju7nulyVHsTR22kfy with alias verifierContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "verifierContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "schemaContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "schemaContact" (ID: undefined) added/updated.
+
+
+    Resolving OOBI URL: http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK with alias schemaContact
+
+
+    Successfully resolved OOBI URL. Response: OK
+
+
+    Contact "schemaContact" (ID: undefined) added/updated.
+
+
+    Client setup and OOBI resolutions complete.
+
+
+As you will be conducting a credential presentation in this notebook, let's generate one for use in the presentation workflow. 
+
+
+```typescript
+// Create Issuer Credential Registry
+const issuerRegistryName = 'issuerRegistry'
+const { registrySaid: registrySaid } = await createCredentialRegistry(issuerClient, issuerAidAlias, issuerRegistryName)
+
+// Define credential Claims
+const credentialClaims = {
+    "eventName":"GLEIF Summit",
+    "accessLevel":"staff",
+    "validDate":"2026-10-01"
+}
+
+// Issuer - Issue Credential
+const { credentialSaid: credentialSaid} = await issueCredential(
+    issuerClient, 
+    issuerAidAlias, 
+    registrySaid, 
+    schemaSaid,
+    holderAid.i,
+    credentialClaims
+)
+
+// Issuer - get credential (with all its data)
+const credential = await issuerClient.credentials().get(credentialSaid);
+
+// Issuer - Ipex grant
+const grantResponse = await ipexGrantCredential(
+    issuerClient,
+    issuerAidAlias, 
+    holderAid.i,
+    credential,
+    ipexAdmitGrant
+)
+
+// Holder - Wait for grant notification
+const grantNotifications = await waitForAndGetNotification(holderClient, IPEX_GRANT_ROUTE)
+const grantNotification = grantNotifications[0]
+
+// Holder - Admit Grant
+const admitResponse = await ipexAdmitGrant(
+    holderClient,
+    holderAidAlias,
+    issuerAid.i,
+    grantNotification.a.d
+)
+
+// Holder - Mark notification
+await markNotificationRead(holderClient, grantNotification.i)
+
+// Issuer - Wait for admit notification
+const admitNotifications = await waitForAndGetNotification(issuerClient, IPEX_ADMIT_ROUTE)
+const admitNotification = admitNotifications[0]
+
+// Issuer - Mark notification
+await markNotificationRead(issuerClient, admitNotification.i)
+```
+
+    Creating credential registry "issuerRegistry" for AID alias "issuerAid"...
+
+
+    Successfully created credential registry: EH7KRA3UjKK5cDcAo4m5Et8h2fx2BKxjUrHjgq_1g2an
+
+
+    Issuing credential from AID "issuerAid" to AID "EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L"...
+
+
+    {
+      name: [32m"credential.EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+      metadata: {
+        ced: {
+          v: [32m"ACDC10JSON0001c4_"[39m,
+          d: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+          i: [32m"EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL"[39m,
+          ri: [32m"EH7KRA3UjKK5cDcAo4m5Et8h2fx2BKxjUrHjgq_1g2an"[39m,
+          s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+          a: {
+            d: [32m"EPtFml2gguf3I7S-CfI7DS0BN5zOS2QlxuljFwP2_-ma"[39m,
+            i: [32m"EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L"[39m,
+            eventName: [32m"GLEIF Summit"[39m,
+            accessLevel: [32m"staff"[39m,
+            validDate: [32m"2026-10-01"[39m,
+            dt: [32m"2025-06-04T15:05:04.920000+00:00"[39m
+          }
+        },
+        depends: {
+          name: [32m"witness.EMKUE-5IeQuEKfqUJ_fe9M-CRJhLnAXpt05YjEjez9h6"[39m,
+          metadata: { pre: [32m"EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL"[39m, sn: [33m2[39m },
+          done: [33mfalse[39m,
+          error: [1mnull[22m,
+          response: [1mnull[22m
+        }
+      },
+      done: [33mtrue[39m,
+      error: [1mnull[22m,
+      response: {
+        ced: {
+          v: [32m"ACDC10JSON0001c4_"[39m,
+          d: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+          i: [32m"EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL"[39m,
+          ri: [32m"EH7KRA3UjKK5cDcAo4m5Et8h2fx2BKxjUrHjgq_1g2an"[39m,
+          s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+          a: {
+            d: [32m"EPtFml2gguf3I7S-CfI7DS0BN5zOS2QlxuljFwP2_-ma"[39m,
+            i: [32m"EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L"[39m,
+            eventName: [32m"GLEIF Summit"[39m,
+            accessLevel: [32m"staff"[39m,
+            validDate: [32m"2026-10-01"[39m,
+            dt: [32m"2025-06-04T15:05:04.920000+00:00"[39m
+          }
+        }
+      }
+    }
+
+
+    Successfully issued credential with SAID: EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8
+
+
+    AID "issuerAid" granting credential to AID "EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L" via IPEX...
+
+
+    Successfully submitted IPEX grant from "issuerAid" to "EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L".
+
+
+    Waiting for notification with route "/exn/ipex/grant"...
+
+
+    [Retry] Grant notification not found on attempt #1 of 5
+
+
+    [Retry] Waiting 5000ms before next attempt...
+
+
+    AID "holderAid" admitting IPEX grant "EKPhjj0KWhkb8RchDFPK5dldc6-P9aJWBXsret6-HhQN" from AID "EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL"...
+
+
+    Successfully submitted IPEX admit for grant "EKPhjj0KWhkb8RchDFPK5dldc6-P9aJWBXsret6-HhQN".
+
+
+    Marking notification "0ADhZXWOStbuV544vB0s2VgY" as read...
+
+
+    Notification "0ADhZXWOStbuV544vB0s2VgY" marked as read.
+
+
+    Waiting for notification with route "/exn/ipex/admit"...
+
+
+    Marking notification "0ACaLBkDztZERMyznwgOSUwr" as read...
+
+
+    Notification "0ACaLBkDztZERMyznwgOSUwr" marked as read.
+
+
+## Credential Presentation Workflow (IPEX)
+
+Now that the Holder possesses the credential, they can present it to a Verifier. This workflow also uses IPEX, but typically starts with the Verifier requesting a presentation.
+
+Below are presented the code snipets you need to follow to do the presentation.
+
+### Step 1: Verifier Requests Presentation (Apply)
+
+The Verifier initiates the presentation process by sending an IPEX apply message. This `apply` message is an `exn` message specifying the criteria for the credential they are requesting. This includes the `schemaSaid` and can include specific attributes the credential must have.
+
+
+```typescript
+// Verifier Ipex Apply (Presentation request)
+
+// Prepare the IPEX apply message.
+const [apply, sigsApply, _endApply] = await verifierClient.ipex().apply({ //_endApply is not used
+    senderName: verifierAidAlias,     // Alias of the Verifier's AID
+    schemaSaid: schemaSaid,           // SAID of the schema for the requested credential
+    attributes: { eventName:'GLEIF Summit' }, // Specific attributes the credential should have
+    recipient: holderAid.i,           // AID of the Holder being asked for the presentation
+    datetime: createTimestamp(),      // Timestamp for the apply message
+});
+
+// Verifier submits the prepared apply message to the Holder.
+const applyOperation = await verifierClient
+    .ipex()
+    .submitApply(verifierAidAlias, apply, sigsApply, [holderAid.i]);
+
+// Wait for the submission operation to complete.
+const applyResponse = await verifierClient
+    .operations()
+    .wait(applyOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+// Clean up the operation.
+await verifierClient.operations().delete(applyOperation.name);
+```
+
+### Step 2: Holder Receives Apply Request
+
+Holder Apply Notification and Exchange
+The Holder receives a notification for the Verifier's `apply` request. They retrieve the details of this request from the exchange message. After processing, the Holder marks the notification as read.
+
+
+```typescript
+// Holder receives the IPEX apply notification from the Verifier.
+
+let holderApplyNotifications;
+
+// Retry loop for the Holder to receive the apply notification.
+for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
+    try{
+        // List notifications, filtering for unread IPEX_APPLY_ROUTE messages.
+        let allNotifications = await holderClient.notifications().list()
+        holderApplyNotifications = allNotifications.notes.filter(
+            (n) => n.a.r === IPEX_APPLY_ROUTE && n.r === false
+        )        
+        if(holderApplyNotifications.length === 0){ 
+            throw new Error("Apply notification not found"); // Throw error to trigger retry
+        }
+        break; // Exit loop if notification found
+    }
+    catch (error){    
+         console.log(`[Retry] Apply notification not found for Holder on attempt #${attempt} of ${DEFAULT_RETRIES}`);
+         if (attempt === DEFAULT_RETRIES) {
+             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for Holder's apply notification.`);
+             throw error; 
+         }
+         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
+         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
+    }
+}
+
+const applyNotificationForHolder = holderApplyNotifications[0] // Assuming one notification
+
+console.log("Holder received Apply Notification:");
+console.log(applyNotificationForHolder);
+
+// Retrieve the full IPEX apply exchange details.
+const applyExchange = await holderClient.exchanges().get(applyNotificationForHolder.a.d);
+console.log("Details of Apply Exchange received by Holder:");
+console.log(applyExchange);
+
+// Extract the SAID of the apply 'exn' message for use in the offer.
+const applyExchangeSaid = applyExchange.exn.d;
+
+// Holder marks the apply notification as read.
+await holderClient.notifications().mark(applyNotificationForHolder.i);
+console.log("Holder's notifications after marking apply as read:");
+console.log(await holderClient.notifications().list());
+
+
+```
+
+    [Retry] Apply notification not found for Holder on attempt #1 of 5
+
+
+    [Retry] Waiting 5000ms before next attempt...
+
+
+    Holder received Apply Notification:
+
+
+    {
+      i: [32m"0ACoV0qEAfPbJMbAnEmj9xlV"[39m,
+      dt: [32m"2025-06-04T15:05:12.207529+00:00"[39m,
+      r: [33mfalse[39m,
+      a: {
+        r: [32m"/exn/ipex/apply"[39m,
+        d: [32m"EFNhZ0uO7MTPukdj4I8lji8uvFYX8_6e2j-_38wTWyap"[39m,
+        m: [32m""[39m
+      }
+    }
+
+
+    Details of Apply Exchange received by Holder:
+
+
+    {
+      exn: {
+        v: [32m"KERI10JSON0001a0_"[39m,
+        t: [32m"exn"[39m,
+        d: [32m"EFNhZ0uO7MTPukdj4I8lji8uvFYX8_6e2j-_38wTWyap"[39m,
+        i: [32m"ENuSi5ewqasHRtVQhpKsLcjY97JTaQVj-bV4uKg0R1mH"[39m,
+        rp: [32m"EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L"[39m,
+        p: [32m""[39m,
+        dt: [32m"2025-06-04T15:05:11.868000+00:00"[39m,
+        r: [32m"/ipex/apply"[39m,
+        q: {},
+        a: {
+          i: [32m"EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L"[39m,
+          m: [32m""[39m,
+          s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+          a: { eventName: [32m"GLEIF Summit"[39m }
+        },
+        e: {}
+      },
+      pathed: {}
+    }
+
+
+    Holder's notifications after marking apply as read:
+
+
+    {
+      start: [33m0[39m,
+      end: [33m1[39m,
+      total: [33m2[39m,
+      notes: [
+        {
+          i: [32m"0ADhZXWOStbuV544vB0s2VgY"[39m,
+          dt: [32m"2025-06-04T15:05:06.239313+00:00"[39m,
+          r: [33mtrue[39m,
+          a: {
+            r: [32m"/exn/ipex/grant"[39m,
+            d: [32m"EKPhjj0KWhkb8RchDFPK5dldc6-P9aJWBXsret6-HhQN"[39m,
+            m: [32m""[39m
+          }
+        },
+        {
+          i: [32m"0ACoV0qEAfPbJMbAnEmj9xlV"[39m,
+          dt: [32m"2025-06-04T15:05:12.207529+00:00"[39m,
+          r: [33mtrue[39m,
+          a: {
+            r: [32m"/exn/ipex/apply"[39m,
+            d: [32m"EFNhZ0uO7MTPukdj4I8lji8uvFYX8_6e2j-_38wTWyap"[39m,
+            m: [32m""[39m
+          }
+        }
+      ]
+    }
+
+
+### Step 3: Holder Finds Matching Credential
+
+The Holder now needs to find a credential in their possession that satisfies the Verifier's `apply` request (matches the schema SAID and any specified attributes). The code below constructs a filter based on the `applyExchange` data and uses it to search the Holder's credentials.
+
+
+```typescript
+// The apply operation from the Verifier asks for a specific credential 
+// (matching schema and attribute values).
+// This code snippet creates a credential filter based on the criteria
+// from the applyExchange message received by the Holder.
+
+let filter: { [x: string]: any } = { '-s': applyExchange.exn.a.s }; // Filter by schema SAID
+// Add attribute filters from the apply request
+for (const key in applyExchange.exn.a.a) { // 'a.a' contains the requested attributes
+    filter[`-a-${key}`] = applyExchange.exn.a.a[key];
+}
+
+console.log("Constructed filter for matching credentials:");
+console.log(filter);
+
+// Holder lists credentials matching the filter.
+const matchingCredentials = await holderClient.credentials().list({ filter });
+
+console.log("Matching credentials found by Holder:");
+console.log(matchingCredentials); // Should list the EventPass credential issued earlier
+```
+
+    Constructed filter for matching credentials:
+
+
+    {
+      [32m"-s"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+      [32m"-a-eventName"[39m: [32m"GLEIF Summit"[39m
+    }
+
+
+    Matching credentials found by Holder:
+
+
+    [
+      {
+        sad: {
+          v: [32m"ACDC10JSON0001c4_"[39m,
+          d: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+          i: [32m"EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL"[39m,
+          ri: [32m"EH7KRA3UjKK5cDcAo4m5Et8h2fx2BKxjUrHjgq_1g2an"[39m,
+          s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+          a: {
+            d: [32m"EPtFml2gguf3I7S-CfI7DS0BN5zOS2QlxuljFwP2_-ma"[39m,
+            i: [32m"EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L"[39m,
+            eventName: [32m"GLEIF Summit"[39m,
+            accessLevel: [32m"staff"[39m,
+            validDate: [32m"2026-10-01"[39m,
+            dt: [32m"2025-06-04T15:05:04.920000+00:00"[39m
+          }
+        },
+        atc: [32m"-IABEKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ80AAAAAAAAAAAAAAAAAAAAAAAEKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+        iss: {
+          v: [32m"KERI10JSON0000ed_"[39m,
+          t: [32m"iss"[39m,
+          d: [32m"EPxR_l9BvCje1sPB2WLvv4HsqvMT_zIGT4pgNhbkJNt3"[39m,
+          i: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+          s: [32m"0"[39m,
+          ri: [32m"EH7KRA3UjKK5cDcAo4m5Et8h2fx2BKxjUrHjgq_1g2an"[39m,
+          dt: [32m"2025-06-04T15:05:04.920000+00:00"[39m
+        },
+        issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEMKUE-5IeQuEKfqUJ_fe9M-CRJhLnAXpt05YjEjez9h6"[39m,
+        pre: [32m"EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL"[39m,
+        schema: {
+          [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+          [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
+          title: [32m"EventPass"[39m,
+          description: [32m"Event Pass Schema"[39m,
+          type: [32m"object"[39m,
+          credentialType: [32m"EventPassCred"[39m,
+          version: [32m"1.0.0"[39m,
+          properties: {
+            v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
+            d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
+            u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
+            i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
+            ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
+            s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
+            a: { oneOf: [36m[Array][39m }
+          },
+          additionalProperties: [33mfalse[39m,
+          required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
+        },
+        chains: [],
+        status: {
+          vn: [ [33m1[39m, [33m0[39m ],
+          i: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+          s: [32m"0"[39m,
+          d: [32m"EPxR_l9BvCje1sPB2WLvv4HsqvMT_zIGT4pgNhbkJNt3"[39m,
+          ri: [32m"EH7KRA3UjKK5cDcAo4m5Et8h2fx2BKxjUrHjgq_1g2an"[39m,
+          ra: {},
+          a: { s: [33m2[39m, d: [32m"EMKUE-5IeQuEKfqUJ_fe9M-CRJhLnAXpt05YjEjez9h6"[39m },
+          dt: [32m"2025-06-04T15:05:04.920000+00:00"[39m,
+          et: [32m"iss"[39m
+        },
+        anchor: {
+          pre: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+          sn: [33m0[39m,
+          d: [32m"EPxR_l9BvCje1sPB2WLvv4HsqvMT_zIGT4pgNhbkJNt3"[39m
+        },
+        anc: {
+          v: [32m"KERI10JSON00013a_"[39m,
+          t: [32m"ixn"[39m,
+          d: [32m"EMKUE-5IeQuEKfqUJ_fe9M-CRJhLnAXpt05YjEjez9h6"[39m,
+          i: [32m"EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL"[39m,
+          s: [32m"2"[39m,
+          p: [32m"ELJu2sjvvIpDa19QGiXp8i3vw6PzqYPhy5miaX_Z3fGV"[39m,
+          a: [
+            {
+              i: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+              s: [32m"0"[39m,
+              d: [32m"EPxR_l9BvCje1sPB2WLvv4HsqvMT_zIGT4pgNhbkJNt3"[39m
+            }
+          ]
+        },
+        ancatc: [
+          [32m"-VBq-AABAAB_pj2UCMcnN4OrqCfEvKMBsQcSMQu89RgrNg9Tlq56BXQ1Xf7au7n2GaBnFqiX8loobcKzTv0kI-HYCHJNMsEM-BADAACBd1MfEddIa0Htr0MeHOX5z9ABdBlAszvvCDzDxrU1lwXfXU5WwT3DqcguujVp-Y4PFrnQUhb1CP_2ib_2evsIABAjPUQSWIB5J3DzahmgW9DBYoY_N1dwNhS3_YB9tv7CYpOLTqQdRQPEtP23JVWEBnp_79ytcqPnNSlG7HPhPJ4NACCCQgSJzIVvr4sOxA0ZQqjKPTeGtVSzEnitpWlz_sicQ0gkL2lngLindJgeD6KZKdRMd_WjCxC2Gj1-NeGXe6UA-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-06-04T15c05c06d391297p00c00"[39m
+        ]
+      }
+    ]
+
+
+### Step 4: Holder Offers Credential
+
+Assuming a matching credential is found, the Holder prepares an IPEX offer message. This `offer` includes the ACDC they are presenting. This is sent back to the Verifier.
+
+
+```typescript
+// Holder prepares and submits an IPEX offer message with the matching credential.
+
+// Prepare the IPEX offer message.
+const [offer, sigsOffer, endOffer] = await holderClient.ipex().offer({
+    senderName: holderAidAlias,                   // Alias of the Holder's AID
+    recipient: verifierAid.i,                     // AID of the Verifier
+    acdc: new Serder(matchingCredentials[0].sad), // The ACDC being offered (first matching credential)
+    applySaid: applyExchangeSaid,                 // SAID of the Verifier's apply 'exn' message this offer is responding to
+    datetime: createTimestamp(),                  // Timestamp for the offer message
+});
+
+// Holder submits the prepared offer message to the Verifier.
+const offerOperation = await holderClient
+    .ipex()
+    .submitOffer(holderAidAlias, offer, sigsOffer, endOffer, [
+        verifierAid.i, // Recipient AID
+    ]);
+
+// Wait for the submission operation to complete.
+const offerResponse = await holderClient
+    .operations()
+    .wait(offerOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+// Clean up the operation.
+await holderClient.operations().delete(offerOperation.name);
+console.log("Holder submitted IPEX Offer to Verifier.");
+
+
+```
+
+    Holder submitted IPEX Offer to Verifier.
+
+
+### Step 5: Verifier Receives Offer
+
+The Verifier receives a notification for the Holder's `offer`. The Verifier retrieves the exchange details and marks the notification.
+
+
+```typescript
+// Verifier receives the IPEX offer notification from the Holder.
+
+let verifierOfferNotifications;
+
+// Retry loop for the Verifier to receive the offer notification.
+for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
+    try{
+        // List notifications, filtering for unread IPEX_OFFER_ROUTE messages.
+        verifierOfferNotifications = await verifierClient.notifications().list(
+            (n) => n.a.r === IPEX_OFFER_ROUTE && n.r === false
+        );
+        if(verifierOfferNotifications.notes.length === 0){ 
+            throw new Error("Offer notification not found"); // Throw error to trigger retry
+        }
+        break; // Exit loop if notification found
+    }
+    catch (error){    
+         console.log(`[Retry] Offer notification not found for Verifier on attempt #${attempt} of ${DEFAULT_RETRIES}`);
+         if (attempt === DEFAULT_RETRIES) {
+             console.error(`[Retry] Max retries (${DEFAULT_RETRIES}) reached for Verifier's offer notification.`);
+             throw error; 
+         }
+         console.log(`[Retry] Waiting ${DEFAULT_DELAY_MS}ms before next attempt...`);
+         await new Promise(resolve => setTimeout(resolve, DEFAULT_DELAY_MS));
+    }
+}
+
+const offerNotificationForVerifier = verifierOfferNotifications.notes[0]; // Assuming one notification
+
+console.log("Verifier received Offer Notification:");
+console.log(offerNotificationForVerifier);
+
+// Retrieve the full IPEX offer exchange details.
+const offerExchange = await verifierClient.exchanges().get(offerNotificationForVerifier.a.d);
+console.log("Details of Offer Exchange received by Verifier:");
+console.log(offerExchange); // This will contain the ACDC presented by the Holder
+
+// Extract the SAID of the offer 'exn' message for use in the agree.
+let offerExchangeSaid = offerExchange.exn.d;
+
+// Verifier marks the offer notification as read.
+await verifierClient.notifications().mark(offerNotificationForVerifier.i);
+console.log("Verifier's notifications after marking offer as read:");
+console.log(await verifierClient.notifications().list());
+```
+
+    [Retry] Offer notification not found for Verifier on attempt #1 of 5
+
+
+    [Retry] Waiting 5000ms before next attempt...
+
+
+    Verifier received Offer Notification:
+
+
+    {
+      i: [32m"0ACjPjYuqsetz8GWynmeDQux"[39m,
+      dt: [32m"2025-06-04T15:05:17.707984+00:00"[39m,
+      r: [33mfalse[39m,
+      a: {
+        r: [32m"/exn/ipex/offer"[39m,
+        d: [32m"EOJSD3QuOAIzkd9Udq7XOd8QbXS_qPFDpx1-iuVCDTQx"[39m,
+        m: [32m""[39m
+      }
+    }
+
+
+    Details of Offer Exchange received by Verifier:
+
+
+    {
+      exn: {
+        v: [32m"KERI10JSON000376_"[39m,
+        t: [32m"exn"[39m,
+        d: [32m"EOJSD3QuOAIzkd9Udq7XOd8QbXS_qPFDpx1-iuVCDTQx"[39m,
+        i: [32m"EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L"[39m,
+        rp: [32m"ENuSi5ewqasHRtVQhpKsLcjY97JTaQVj-bV4uKg0R1mH"[39m,
+        p: [32m"EFNhZ0uO7MTPukdj4I8lji8uvFYX8_6e2j-_38wTWyap"[39m,
+        dt: [32m"2025-06-04T15:05:17.339000+00:00"[39m,
+        r: [32m"/ipex/offer"[39m,
+        q: {},
+        a: { i: [32m"ENuSi5ewqasHRtVQhpKsLcjY97JTaQVj-bV4uKg0R1mH"[39m, m: [32m""[39m },
+        e: {
+          acdc: {
+            v: [32m"ACDC10JSON0001c4_"[39m,
+            d: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+            i: [32m"EEmtrwjYNtN9MJuciijVkTxabYJYML9ibDFTPY7NCTNL"[39m,
+            ri: [32m"EH7KRA3UjKK5cDcAo4m5Et8h2fx2BKxjUrHjgq_1g2an"[39m,
+            s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+            a: {
+              d: [32m"EPtFml2gguf3I7S-CfI7DS0BN5zOS2QlxuljFwP2_-ma"[39m,
+              i: [32m"EGH3ZGpgULNAJ2ITDIOeMOuHLVKSyqXo2kgSEgoFlQ4L"[39m,
+              eventName: [32m"GLEIF Summit"[39m,
+              accessLevel: [32m"staff"[39m,
+              validDate: [32m"2026-10-01"[39m,
+              dt: [32m"2025-06-04T15:05:04.920000+00:00"[39m
+            }
+          },
+          d: [32m"EHujwRN9bxVz7lhQUSZhRSaJ6x-ZMhSLkkjLIqM4R34e"[39m
+        }
+      },
+      pathed: {}
+    }
+
+
+    Verifier's notifications after marking offer as read:
+
+
+    {
+      start: [33m0[39m,
+      end: [33m0[39m,
+      total: [33m1[39m,
+      notes: [
+        {
+          i: [32m"0ACjPjYuqsetz8GWynmeDQux"[39m,
+          dt: [32m"2025-06-04T15:05:17.707984+00:00"[39m,
+          r: [33mtrue[39m,
+          a: {
+            r: [32m"/exn/ipex/offer"[39m,
+            d: [32m"EOJSD3QuOAIzkd9Udq7XOd8QbXS_qPFDpx1-iuVCDTQx"[39m,
+            m: [32m""[39m
+          }
+        }
+      ]
+    }
+
+
+### Step 6: Verifier Agrees and Validates
+
+Finally, the Verifier, after validating the offered credential (which signify-ts does implicitly upon processing the offer and preparing the agree), sends an IPEX agree message back to the Holder. This confirms successful receipt and validation of the presentation.
+
+
+```typescript
+// Verifier prepares and submits an IPEX agree message.
+
+// Prepare the IPEX agree message.
+const [agree, sigsAgree, _endAgree] = await verifierClient.ipex().agree({
+    senderName: verifierAidAlias, // Alias of the Verifier's AID
+    recipient: holderAid.i,       // AID of the Holder
+    offerSaid: offerExchangeSaid, // SAID of the Holder's offer 'exn' message this agree is responding to
+    datetime: createTimestamp(),  // Timestamp for the agree message
+});
+
+// Verifier submits the prepared agree message to the Holder.
+const agreeOperation = await verifierClient
+    .ipex()
+    .submitAgree(verifierAidAlias, agree, sigsAgree, [holderAid.i]);
+
+// Wait for the submission operation to complete.
+const agreeResponse = await verifierClient
+    .operations()
+    .wait(agreeOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+
+// Clean up the operation.
+await verifierClient.operations().delete(agreeOperation.name);
+console.log("Verifier submitted IPEX Agree to Holder, completing the presentation exchange.");
+
+// At this point, the Verifier has successfully received and validated the credential.
+// The Verifier's client would have stored the presented credential details if needed.
+```
+
+    Verifier submitted IPEX Agree to Holder, completing the presentation exchange.
+
+
+## Credential Revocation by Issuer
+
+Circumstances may require a credential to be invalidated before its intended expiry, or if it has no expiry. This process is known as revocation. Only the original Issuer of a credential can revoke it. Revocation involves the Issuer recording a revocation event in the specific credential's Transaction Event Log (TEL), which is part of the Issuer's Credential Registry. This event is, like all TEL events, anchored to the Issuer's KEL.
+
+The Issuer uses the `issuerClient.credentials().revoke()` method, specifying the alias of their issuing AID and the SAID of the credential to be revoked. This action creates a new event in the TEL associated with the credential, marking its status as revoked.
+
+First, check the credential status before revocation. The status object contains details about the latest event in the credential's TEL. The et field indicates the event type (e.g., iss for issuance).
+
+
+```typescript
+
+// Log the credential's status from the Issuer's perspective before revocation.
+// The 'status' field shows the latest event in the credential's Transaction Event Log (TEL).
+// 'et: "iss"' indicates it's currently in an issued state.
+const statusBefore = (await issuerClient.credentials().get(credentialSaid)).status;
+console.log("Credential status before revocation:", statusBefore);
+
+// Issuer revokes the credential.
+// This creates a revocation event in the credential's TEL within the Issuer's registry.
+const revokeResult = await issuerClient.credentials().revoke(issuerAidAlias, credentialSaid); // Changed from revokeOperation to revokeResult to get .op
+const revokeOperation = revokeResult.op; // Get the operation from the result
+
+// Wait for the revocation operation to complete.
+const revokeResponse = await issuerClient
+    .operations()
+    .wait(revokeOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS)); // Used revokeOperation directly
+
+// Log the credential status after revocation.
+// Note the 'et: "rev"' indicating it's now revoked, and the sequence number 's' has incremented.
+const statusAfter = (await issuerClient.credentials().get(credentialSaid)).status;
+console.log("Credential status after revocation:", statusAfter);
+
+
+
+```
+
+    Credential status before revocation: {
+      vn: [ [33m1[39m, [33m0[39m ],
+      i: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+      s: [32m"0"[39m,
+      d: [32m"EPxR_l9BvCje1sPB2WLvv4HsqvMT_zIGT4pgNhbkJNt3"[39m,
+      ri: [32m"EH7KRA3UjKK5cDcAo4m5Et8h2fx2BKxjUrHjgq_1g2an"[39m,
+      ra: {},
+      a: { s: [33m2[39m, d: [32m"EMKUE-5IeQuEKfqUJ_fe9M-CRJhLnAXpt05YjEjez9h6"[39m },
+      dt: [32m"2025-06-04T15:05:04.920000+00:00"[39m,
+      et: [32m"iss"[39m
+    }
+
+
+    Credential status after revocation: {
+      vn: [ [33m1[39m, [33m0[39m ],
+      i: [32m"EKoHHvHWszegDgxEBPjpmPJFX7MJ-wmK4mWUnihClrJ8"[39m,
+      s: [32m"1"[39m,
+      d: [32m"EF9rzk9YcyVOWGctRrEvGWwOakXsn1XaKXAD-tD592dm"[39m,
+      ri: [32m"EH7KRA3UjKK5cDcAo4m5Et8h2fx2BKxjUrHjgq_1g2an"[39m,
+      ra: {},
+      a: { s: [33m3[39m, d: [32m"EMP5NQi2VZolFxlRUGbqi71goRMzQUv_1socFXq2tyVN"[39m },
+      dt: [32m"2025-06-04T15:05:23.214000+00:00"[39m,
+      et: [32m"rev"[39m
+    }
+
+
+The output shows the change in the credential's status object:
+
+- Before revocation, `et` (event type) was `iss`.
+- After revocation, `et` is `rev`.
+- The sequence number `s` of the TEL event also increments, reflecting the new event.
+- The digest d of the event changes, as it's a new event.
+
+This demonstrates that the Issuer has successfully updated the credential's status in their registry. Anyone (like a Verifier) who subsequently checks this registry for the credential's status will see that it has been revoked.
+
+Once a Holder becomes aware that a credential they possess has been revoked (e.g., by checking its status in the Issuer's registry or being informed through other means), they should no longer rely on it. It's good practice for the Holder to delete the revoked credential from their local store to prevent accidental presentation.
+
+The `holderClient.credentials().delete()` method removes the credential from the Holder's local client storage.
+
+
+```typescript
+// Holder deletes the (now revoked) credential from their local store.
+await holderClient.credentials().delete(credentialSaid);
+
+// Verify the credential is no longer in the Holder's list.
+console.log("Holder's credential list after deleting the revoked credential:");
+console.log(await holderClient.credentials().list()); // Should be an empty array or not contain the revoked credential
+
+```
+
+    Holder's credential list after deleting the revoked credential:
+
+
+    []
+
+
+<!-- Source: 103_05_vLEI_Ecosystem.md -->
+# The GLEIF verifiable LEI (vLEI) Ecosystem
+
+<div class="alert alert-primary">
+<b>🎯 OBJECTIVE</b><hr>
+To provide a theoretical understanding of the verifiable Legal Entity Identifier (vLEI) ecosystem. Including its architecture, the role of GLEIF as the Root of Trust, the underlying KERI and ACDC principles that enable its security and verifiability, and governance aspects.
+</div>
+
+## Introduction to the vLEI
+The verifiable Legal Entity Identifier (vLEI) system, led by the Global Legal Entity Identifier Foundation (GLEIF), represents a significant advancement in digital organizational identity.  It extends the traditional, widely adopted Legal Entity Identifier (LEI) into the digital realm, enabling secure, certain, and verifiable organizational identity in online interactions.  The core purpose of the vLEI is to address critical challenges in the digital world, such as identity impersonation, fraud, and the overall need for trustworthy authentication of organizations.
+
+The vLEI leverages the robust security and verifiability features of the Key Event Receipt Infrastructure (KERI) and Authentic Chained Data Containers (ACDCs).  KERI provides the foundation for self-certifying, decentralized identifiers (AIDs), while ACDCs serve as the format for verifiable credentials, representing the vLEI itself and associated attestations.  This combination allows for automated cryptographic verification of an organization's identity, reducing risks and costs associated with traditional identity validation methods. 
+
+The vLEI ecosystem is designed for a wide range of digital business activities, including, but not limited to:
+- Approving business transactions and contracts 
+- Securely onboarding customers 
+- Facilitating trusted interactions within import/export and supply chain networks 
+- Streamlining regulatory filings and reports 
+
+## The GLEIF vLEI Ecosystem Architecture
+
+The vLEI ecosystem is structured as a hierarchical chain of trust, with GLEIF positioned at its apex. This architecture ensures that all vLEIs and the authorities of entities issuing them can be cryptographically verified back to a common, trusted root.
+
+### GLEIF as the Root of Trust
+
+GLEIF serves as the ultimate Root of Trust in the vLEI ecosystem. This role is anchored by the **GLEIF Root AID**, a KERI-based identifier meticulously established and managed by GLEIF. The generation and administration of the GLEIF Root AID, along with its delegated AIDs, are governed by stringent policies emphasizing the highest duty of care, the use of self-certifying autonomic identifiers, and a strong cryptographic foundation.
+
+From the GLEIF Root AID, GLEIF establishes delegated AIDs for its operational purposes, such as:
+
+- **GLEIF Internal Delegated AID (GIDA)**: Used by GLEIF to participate in the vLEI ecosystem, for instance, as a vLEI Holder.
+- **GLEIF External Delegated AID (GEDA)**: Used by GLEIF to manage its relationship with and authorize **Qualified vLEI Issuers (QVIs)**.
+The genesis of these core GLEIF AIDs involves a rigorous, multi-party ceremony with multiple **GLEIF Authorized Representatives (GARs)**, employing Out-of-Band Interaction (OOBI) sessions and challenge-response mechanisms to ensure authenticity and security.
+
+### The Chain of Trust
+
+The vLEI ecosystem operates on a clear cryptographic chain of trust, detailing how authority and credentials flow from GLEIF down to individual representatives of legal entities.
+
+1. **GLEIF to Qualified vLEI Issuers (QVIs):**
+The chain begins with GLEIF enabling **Qualified vLEI Issuers (QVIs)**. QVIs are organizations formally accredited by GLEIF to issue vLEI credentials to Legal Entities. They act as crucial intermediaries, extending GLEIF's trust into the broader ecosystem. GLEIF, through its GEDA, establishes a QVI's authority and operational capability by providing two key components:
+    - A **QVI Delegated AID**: This is a KERI AID for the QVI, cryptographically delegated from GLEIF's own authority. The QVI uses this delegated AID for its operations within the vLEI ecosystem.
+    - The **QVI vLEI Credential**: GLEIF issues this specific ACDC to the QVI. It serves as the QVI's formal, verifiable authorization from GLEIF, attesting to its status and its right to issue vLEI credentials to other legal entities.
+1. **QVI to Legal Entity:**
+Entitled by its delegated AID and its **Qualified vLEI Issuer vLEI Credential** from GLEIF, the QVI then issues a **Legal Entity vLEI Credential** to an organization (a Legal Entity). This ACDC represents the verified digital identity of the Legal Entity. To maintain the integrity of the trust chain, the Legal Entity vLEI Credential issued by the QVI includes a cryptographic link back to the "Qualified vLEI Issuer vLEI Credential" held by the issuing QVI. The Legal Entity itself, through its Legal Entity Authorized Representatives (LARs), creates and manages its own AID to which this credential is issued.
+1. **Legal Entity and QVI in Issuance of Role Credentials:**
+Once a Legal Entity holds its own valid Legal Entity vLEI Credential (and by extension, controls its own KERI AID), credentials can be issued to individuals representing the organization in various official or functional capacities. The issuance mechanism for these role credentials varies:
+    - **Legal Entity Official Organizational Role (OOR) vLEI Credentials**: These are for individuals in formally recognized official roles within the Legal Entity (e.g., CEO, Director). OOR vLEI Credentials are issued by a QVI, contracted by the Legal Entity for this purpose.
+    - **Legal Entity Engagement Context Role (ECR) vLEI Credentials**: These are for individuals representing the Legal Entity in other specific engagements or functional contexts. ECR vLEI Credentials can be issued either by a QVI (contracted by the Legal Entity) or directly by the Legal Entity itself. In all cases, these role credentials cryptographically link the individual, acting in their specified role, back to the Legal Entity's vLEI, thereby extending the verifiable chain of authority and context.
+
+This layered delegation and credential issuance process ensures that the authority for each credential can be cryptographically verified up the chain, ultimately anchoring in GLEIF as the Root of Trust for the entire vLEI ecosystem.
+
+## Core Technical Principles
+The vLEI ecosystem is built upon several core KERI principles and governance requirements to ensure its security, interoperability, and trustworthiness.
+
+### Self-Certifying Identifiers (AIDs)
+All identifiers within the vLEI ecosystem are KERI Autonomic Identifiers (AIDs).  AIDs are self-certifying, meaning their authenticity can be verified directly using cryptography alone, without reliance on a central registry for the identifier itself.  They are cryptographically bound to key pairs controlled by the entity.  Both transferable AIDs (whose control can be rotated to new keys) and non-transferable AIDs (e.g., for witnesses) are used. 
+
+### Key Management and Security
+KERI's advanced key management features are integral to the vLEI ecosystem's security:
+- **Pre-rotation:** KERI's pre-rotation mechanism is employed, where the commitment to the next set of keys is made in the current key establishment event.  This enhances security by ensuring that new keys are not exposed until they are actively used for rotation. 
+- **Multi-signature (Multi-sig):** Multi-sig control is extensively used, especially for critical AIDs like the GLEIF Root AID and QVI AIDs.  This requires signatures from multiple authorized parties to approve an event, significantly increasing resilience against compromise.
+- **Cooperative Delegation:** KERI's cooperative delegation model is used for delegating AIDs (e.g., GLEIF delegating to QVIs).  This requires cryptographic commitment from both the delegator and the delegate, enhancing security as an attacker would need to compromise keys from both entities. 
+
+### Use of KERI Infrastructure
+The vLEI ecosystem relies on standard KERI infrastructure components:
+- **Witnesses:** These are entities designated by an AID controller to receive, verify, sign (receipt), and store key events.  They ensure the availability and consistency of Key Event Logs (KELs).  GLEIF maintains its own Witness pool for its AIDs, and QVIs also utilize witnesses.  
+- **Watchers:** Entities that keep copies of KELs (or Key Event Receipt Logs - KERLs) to independently verify the state of AIDs.  Validators may use Watcher networks to protect the integrity of their verification process. 
+
+### ACDC and Schema Requirements
+vLEIs are implemented as Authentic Chained Data Containers (ACDCs). 
+
+- **Structure:** ACDCs have a defined structure including an envelope (metadata) and payload (attributes, and optionally, edges and rules). 
+- **SAIDs:** Both ACDCs and their schemas are identified by Self-Addressing Identifiers (SAIDs), which are cryptographic digests of their content, ensuring tamper-evidence and integrity. 
+- **Schemas:** All vLEI credentials adhere to official JSON Schemas published by GLEIF.  These schemas are also SAIDified and versioned.  The schema registry provides the SAIDs and URLs for these official schemas. 
+- **Serialization:** JSON serialization is mandatory for vLEI credentials. 
+- **Proof Format:** Signatures use the Ed25519 CESR Proof Format. 
+
+### Importance of OOBI and Challenge-Response
+- **Out-of-Band Introductions (OOBIs):** Used for discovery, allowing controllers to find each other's KELs and schema definitions.  For instance, GARs use OOBI protocols during the GLEIF AID genesis , and clients use OOBIs to resolve schema locations. 
+- **Challenge-Response:** This protocol is crucial for mutual authentication between controllers after initial discovery via OOBI.  It ensures that the entity on the other side genuinely possesses the private keys for the AID they claim to control.  This involves exchanging unique challenge messages and verifying signed responses.
+
+## The Legal Entity vLEI Credential
+The primary credential issued to an organization within the vLEI ecosystem is the Legal Entity vLEI Credential.  Its purpose is to provide a simple, safe, and secure way to identify the Legal Entity holding it to any verifier. 
+
+### Issuance Process
+The issuance of a Legal Entity vLEI Credential by a QVI to a Legal Entity is a governed process: 
+
+1. **Identity Verification of Legal Entity Representatives:** The QVI must perform thorough Identity Assurance and Identity Authentication of the Legal Entity's representatives:
+    - **Designated Authorized Representatives (DARs):** These individuals are authorized by the Legal Entity to, among other things, designate LARs.  Their identity and authority must be verified by the QVI. 
+    - **Legal Entity Authorized Representatives (LARs):** These individuals are designated by DARs and are authorized to request and manage vLEI credentials on behalf of the Legal Entity.  Their identities must also be assured and authenticated.  This often involves real-time OOBI sessions with the QAR (QVI Authorized Representative), sharing of AIDs, and a challenge-response process. 
+
+1. **Multi-Signature by LARs:** For enhanced security, if a Legal Entity has multiple LARs, the Legal Entity vLEI Credential typically requires multi-signatures from a threshold of LARs to accept and manage it.  The LARs form a multi-sig group to control the Legal Entity's AID. 
+
+1. **QVI Issuance Workflow:** The QVI itself follows a dual-control process, often involving two QARs for issuing and signing the Legal Entity vLEI Credential. 
+
+1. **Reporting:** QVIs must report issuance events to GLEIF via a vLEI Reporting API.  GLEIF then updates the Legal Entity's LEI page to reflect the issued vLEI credential. 
+
+The Legal Entity vLEI Credential schema specifies required fields, including the "LEI" of the Legal Entity.  It also uses the ACDC "sources" section to chain back to the QVI's authorizing credential, maintaining the verifiable chain of trust.
+
+## Revocation in the vLEI Ecosystem
+Revocation is a critical aspect of any credentialing system.  In the vLEI ecosystem, credentials can be revoked if they are compromised, if the underlying LEI lapses, or if an individual no longer holds an authorized role. 
+
+- **Mechanism:** Revocation is performed by the original issuer of the credential.  It involves recording a revocation event in the credential's Transaction Event Log (TEL) within the issuer's credential registry.  This TEL event is anchored to the issuer's KEL.
+
+- **Legal Entity vLEI Credential Revocation:** A QAR revokes a Legal Entity vLEI Credential upon a fully signed request from the Legal Entity's LAR(s) or due to involuntary reasons (e.g., lapsed LEI).  The QAR reports this revocation to GLEIF. 
+
+- **Role Credential Revocation:** For OOR or ECR credentials, the Legal Entity typically notifies the QVI (if QVI-issued) or handles it internally (if LE-issued) to revoke the credential when a person's role changes or employment ends. 
+
+The vLEI framework ensures that revocation status is verifiable, allowing relying parties to confirm the ongoing validity of a presented credential.
+
+<div class="alert alert-prymary">
+<b>📝 SUMMARY</b><hr>
+The GLEIF vLEI ecosystem provides a robust framework for digital organizational identity, leveraging KERI for secure, decentralized identifiers (AIDs) and ACDCs for verifiable credentials. GLEIF acts as the Root of Trust, delegating authority to Qualified vLEI Issuers (QVIs) who, in turn, issue vLEI credentials to Legal Entities.  These Legal Entities can then issue role-specific vLEI credentials to individuals. 
+<br><br>
+Key principles include self-certifying AIDs, advanced key management (pre-rotation, multi-sig), cooperative delegation, and the use of KERI infrastructure like Witnesses and Watchers.  vLEIs and their schemas are SAID-ified for tamper-evidence and integrity.  The issuance and presentation of vLEIs utilize the IPEX protocol, with OOBI and challenge-response mechanisms ensuring secure discovery and authentication.  Rigorous identity verification processes are mandated for issuing credentials, particularly the Legal Entity vLEI Credential, involving DARs and LARs.  The system also includes defined processes for credential revocation. 
+</div>
+
+
+```python
+
+```
 
