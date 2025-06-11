@@ -2,6 +2,6 @@ __pycache__/
 jupyter/notebooks/logs/delegate_incept.log
 jupyter/notebooks/logs/multisig_event.log
 jupyter/notebooks/logs/multisig_join.log
-jupyter/notebooks/config/multisig/multisig_config.json
+jupyter/notebooks/config/multisig/multisig_inception_config.json
 .idea
 jupyter/notebooks/config/credential_data/access_cred_edge.json
