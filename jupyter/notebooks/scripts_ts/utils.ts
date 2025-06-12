@@ -184,7 +184,7 @@ export async function generateOOBI(
 export async function resolveOOBI(
     client: SignifyClient,
     oobiUrl: string,
-    contactAlias: string
+    contactAlias?: string
 ): Promise<{ operation: Operation<T>; contacts?: Contact[] }> { 
     console.log(`Resolving OOBI URL: ${oobiUrl} with alias ${contactAlias}`);
     try {
@@ -201,7 +201,7 @@ export async function resolveOOBI(
         const contact = await client.contacts().list(undefined, 'alias', contactAlias);
 
         if (contact) {
-            console.log(`Contact "${contactAlias}" (ID: ${contact.id}) added/updated.`);
+            console.log(`Contact "${contactAlias}" added/updated.`);
         } else {
             console.warn(`Contact "${contactAlias}" not found after OOBI resolution.`);
         }
