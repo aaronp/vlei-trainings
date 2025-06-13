@@ -82,7 +82,7 @@ export const IPEX_GRANT_ROUTE = '/exn/ipex/grant'
 export const IPEX_ADMIT_ROUTE = '/exn/ipex/admit'
 export const IPEX_APPLY_ROUTE = '/exn/ipex/apply'
 export const IPEX_OFFER_ROUTE = '/exn/ipex/offer'
-export const SCHEMA_SERVER_HOST = 'http://vlei-server:7723/';
+export const SCHEMA_SERVER_HOST = 'http://vlei-server:7723';
 
 export const DEFAULT_IDENTIFIER_ARGS = {
     toad: 3,
