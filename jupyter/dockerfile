@@ -38,6 +38,8 @@ RUN pip install --no-cache-dir \
 
 COPY ./custom.css /root/.jupyter/custom/custom.css    
 
+COPY ./overrides.json /usr/local/share/jupyter/lab/settings/overrides.json   
+
 # Install the Deno Jupyter kernel
 RUN deno jupyter --install && \
     deno jupyter --unstable

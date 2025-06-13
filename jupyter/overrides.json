@@ -1,0 +1,102 @@
+{
+  "@jupyterlab/notebook-extension:tracker": {
+    "enableKernelInitNotification": true,
+    "codeCellConfig": {
+      "autoClosingBrackets": true,
+      "codeFolding": true,
+      "highlightActiveLine": true,
+      "lineWrap": false
+    },
+    "defaultCell": "code",
+    "autoStartDefaultKernel": false,
+    "showInputPlaceholder": true,
+    "inputHistoryScope": "global",
+    "kernelShutdown": false,
+    "markdownCellConfig": {
+      "autoClosingBrackets": true,
+      "codeFolding": true,
+      "highlightActiveLine": true
+    },
+    "autoRenderMarkdownCells": false,
+    "rawCellConfig": {
+      "autoClosingBrackets": true,
+      "codeFolding": true,
+      "highlightActiveLine": true
+    },
+    "scrollPastEnd": true,
+    "recordTiming": false,
+    "maxNumberOutputs": 50,
+    "scrollHeadingToTop": true,
+    "showEditorForReadOnlyMarkdown": false,
+    "kernelStatus": {
+      "showOnStatusBar": false,
+      "showProgress": true
+    },
+    "documentWideUndoRedo": false,
+    "showHiddenCellsButton": true,
+    "renderingLayout": "default",
+    "sideBySideLeftMarginOverride": "10px",
+    "sideBySideRightMarginOverride": "10px",
+    "sideBySideOutputRatio": 1,
+    "windowingMode": "full",
+    "accessKernelHistory": false,
+    "overscanCount": 3
+  },
+  "@jupyterlab/console-extension:tracker": {
+    "clearCellsOnExecute": false,
+    "clearCodeContentOnExecute": true,
+    "hideCodeInput": false,
+    "interactionMode": "notebook",
+    "showAllKernelActivity": false,
+    "promptCellConfig": {
+      "codeFolding": false,
+      "lineNumbers": false
+    },
+    "promptCellPosition": "bottom",
+    "showBanner": true,
+    "toolbar": [
+      {
+        "name": "run",
+        "command": "console:run-forced",
+        "rank": 0
+      },
+      {
+        "name": "restart",
+        "command": "console:restart-kernel",
+        "rank": 10
+      },
+      {
+        "name": "clear",
+        "command": "console:clear",
+        "rank": 20
+      },
+      {
+        "name": "spacer",
+        "type": "spacer",
+        "rank": 100
+      },
+      {
+        "name": "kernelName",
+        "rank": 1000
+      },
+      {
+        "name": "kernelStatus",
+        "rank": 1010
+      },
+      {
+        "name": "promptPosition",
+        "rank": 1020
+      }
+    ]
+  },
+  "@jupyterlab/completer-extension:manager": {
+    "availableProviders": {
+      "CompletionProvider:context": 500,
+      "CompletionProvider:kernel": 550
+    },
+    "providerTimeout": 1000,
+    "showDocumentationPanel": true,
+    "autoCompletion": true,
+    "suppressIfInlineCompleterActive": true
+  }
+}
