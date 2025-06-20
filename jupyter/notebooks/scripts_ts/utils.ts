@@ -66,9 +66,39 @@ export function prMessage(message: string): void {
   console.log(`\n${Ansi.BOLD}${Ansi.BRIGHT_BLUE}${message}${Ansi.RESET}\n`);
 }
 
+export function prAlert(message: string): void {
+  console.log(`\n${Ansi.BOLD}${Ansi.BG_YELLOW}${Ansi.BRIGHT_BLUE}${message}${Ansi.RESET}\n`);
+}
+
 export function prContinue(): void {
   const message = "  You can continue ✅  ";
   console.log(`\n${Ansi.BOLD}${Ansi.BG_GREEN}${Ansi.BRIGHT_BLACK}${message}${Ansi.RESET}\n\n`);
+}
+
+// Helper function for sleeping
+export function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Function to check the health of a container
+export async function isServiceHealthy(healthCheckUrl: string): Promise<boolean> {
+  
+  console.log(`Checking health at: ${healthCheckUrl}`);
+
+  try {
+    const response = await fetch(healthCheckUrl);
+    
+    if (response.ok) {
+        console.log(`Received status: ${response.status}. Service is healthy.`);
+        return true;
+    } else {
+        console.warn(`Received a non-ok status: ${response.status}. Service is running but may be unhealthy.`);
+        return false;
+    }
+  } catch (error) {
+    console.error(`Failed to connect to service. It may be down. Error:`, error.message);
+    return false;
+  }
 }
 
 // Default KERIA connection parameters (adjust as needed for your environment)
