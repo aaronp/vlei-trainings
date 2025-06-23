@@ -15,7 +15,7 @@ docker compose down
 
 # Build images (if Dockerfiles changed) and start services in detached mode
 echo "Building images and starting containers..."
-docker compose up --build -d
+docker compose up --build -d --scale direct-sally=0
 
 echo "Deployment complete!"
 echo "Access JupyterLab at: http://localhost:8888"
