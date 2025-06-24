@@ -2,7 +2,7 @@
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
-    Explain the purpose and benefits of using Self-Addressing Identifiers (SAIDs) for ACDC schemas and demonstrate the practical process of calculating and embedding these SAIDs into a schema file ("SAIDifying").
+    Explain the purpose and benefits of using Self-Addressing Identifiers (SAIDs) for ACDC schemas and demonstrate the practical, recursive process of calculating and embedding these SAIDs into an ACDC schema file ("SAIDifying").
 </div>
 
 ## Role of Schema SAIDs
@@ -73,5 +73,10 @@ In the next notebook, we'll use our SAIDified schema to set up a Credential Regi
 
 <div class="alert alert-primary">
   <b>📝 SUMMARY</b><hr>
-    KERI uses Self-Addressing Identifiers (SAIDs) as unique, verifiable identifiers for ACDC schemas, embedded in the <code>id</code> field. A schema's SAID is a cryptographic hash of its content, guaranteeing integrity (tamper-evidence) and immutability (specific to that version). This process, called "SAIDifying," involves calculating and embedding SAIDs recursively from inner blocks outwards. Practically, tools or scripts (like the example <code>process_schema_file</code> or <code>kli saidify</code>) are used to populate the initially empty $id fields in the schema JSON. Once SAIDified, the schema must be accessible (e.g., hosted on a server) so others can retrieve and verify it using its SAID.
+    KERI uses Self-Addressing Identifiers (SAIDs) as unique, verifiable identifiers for ACDC schemas, embedded in the <code>&#36;id</code> field. A schema's SAID is a cryptographic digest of its content, guaranteeing integrity (tamper-evidence) and immutability (specific to that version). This process, called "SAIDifying," involves calculating and embedding SAIDs recursively from inner blocks outwards. Practically, tools or scripts (like the example <code>process_schema_file</code> or <code>kli saidify</code>) are used to populate the initially empty <code>&#36;id</code> fields in the schema JSON. Once SAIDified, the schema must be accessible (e.g., hosted on a server) so others can retrieve and verify it using its SAID.
 </div>
+
+
+```python
+
+```

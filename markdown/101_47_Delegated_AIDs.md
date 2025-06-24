@@ -2,7 +2,9 @@
 
 <div class="alert alert-primary">
 <b>🎯 OBJECTIVE</b><hr>
-Understand the concept of delegated AIDs, where one Autonomic Identifier (AID), the delegator, grants specific authority to another AID, the delegate. This notebook demonstrates how to create and manage delegated AIDs using the KERI Command Line Interface (KLI), covering:
+Understand the concept of delegated AIDs, where one Autonomic Identifier (AID), the delegator, grants specific authority to another AID, the delegate. This is an illustration of [cooperative delegation](https://trustoverip.github.io/tswg-keri-specification/#cooperative-delegation), meaning both parties work together to form a strongly cryptographically bound delegation relationship between the delegator and the delegate.
+    
+This notebook demonstrates how to create and manage delegated AIDs using the KERI Command Line Interface (KLI), covering:
 <ul>
 <li>The two-step cooperative process of delegated inception.</li>
 <li>Performing delegated key rotation.</li>
@@ -10,21 +12,72 @@ Understand the concept of delegated AIDs, where one Autonomic Identifier (AID), 
 
 ## Introduction to Delegated AIDs
 
-In KERI, delegation is a powerful mechanism that allows one AID (the delegator) to authorize another AID (the delegate) to perform certain actions. This is achieved through a cooperative cryptographic process where both parties participate in establishing the relationship. 
+In KERI, delegation is a powerful mechanism that allows one AID (the delegator) to authorize another AID (the delegate) to perform certain actions such as signing. This is achieved through a cooperative cryptographic process where both parties participate in establishing the relationship. 
 
-Key aspects of KERI delegation include:
+The primary purpose of delegation in KERI is to allow **scaling of signing authority** by setting up **delegation hierarchies**.
 
-- Cooperative Establishment: The creation (inception) and subsequent management (e.g., rotation) of a delegated AID requires actions from both the delegate (initiating the request) and the delegator (confirming and anchoring the event). 
-- Cryptographic Binding: The delegated AID's prefix is a self-addressing identifier (SAID) derived from its own delegated inception event.  This inception event, in turn, includes the delegator's AID, creating a cryptographic link.
-- Anchoring: The delegator anchors the delegation by including a "delegated event seal" in one of its own key events.  This seal contains the delegate's AID, the sequence number of the delegated event, and a digest of that delegated event. 
-- Delegated Authority: The delegator typically retains ultimate establishment control authority, while the delegate might be authorized for specific non-establishment events or further, limited delegations. 
-- Hierarchical Structures: Delegation can be applied recursively, enabling the creation of complex hierarchical key management structures. 
+The delegation process is as follows:
+
+#### Delegation Process Diagram
+
+![image.png](101_47_Delegated_AIDs_files/8abf7d25-5405-4b88-b9ab-0033ce884834.png)
+
+#### Process Steps
+
+The process steps illustrated in the Delegation Process Diagram above are:
+1. Create the Delegator AID. You did this earlier in the training.
+2. Create the Proxy AID.
+3. Create the Delegate AID and specify the Proxy AID as the communication proxy using the `--proxy` flag to `kli incept`. This process waits for completion until the Delegator AID approves the delegation. It can time out and would need to be restarted.
+4. The Proxy AID signs the delegation request from the Delegate AID.
+5. The Proxy AID sends the delegation request to the Delegator AID.
+6. The Delegator AID receives the signed delegation request, along with the Proxy AID's KEL, verifies the signature on the delegation request, and then chooses to approve or deny the delegation.
+    - In the case of an approval the Delegator AID creates an anchor (seal) and adds that anchor to it's KEL using an interaction event which signifies the Delegator's approval of the delegation. The delegator then sends its KEL containing this anchor, and witness receipts for the interaction event, to the Delegate.
+7. The Delegate AID completes delegation by receiving from the Delegator AID a current copy of the delegator's KEL which now includes the anchoring delegation approval seal from the delegator combined with any witness receipts for the delegator's interaction event including this seal.
+
+#### Result of Delegation
+
+Once the delegation process shown above is complete you will end up with a simple delegation chain that looks like the following
+
+```mermaid
+graph BT
+    %% Define event nodes
+    DELEGATOR["Delegator 🔑"]
+    DELEGATE["Delegate 🔑"]
+
+    %% Define backward chaining
+    DELEGATE -- delegated from -->  DELEGATOR
+
+    %% UML appearance
+    classDef eventBox fill:#f5f5f5,stroke:#000,stroke-width:1px,rx:5px,ry:5px,font-size:14px;
+    class DELEGATOR,DELEGATE, eventBox;
+```
+
+#### Aspects of KERI Delegation
+
+The strong cryptographic binding between delegator and delegate allow the delegator to fractionalize, or split up, their signing authority into multiple smaller units that allow for the straightforward scaling of signing authority. Placing an object called an "anchor" in the delegator's key event log is used to signify delegation approval. This delegation anchor is also known as a "seal." 
+
+Major aspects of KERI delegation include:
+
+- Cooperative Establishment: The creation (inception) and subsequent management (e.g., rotation) of a delegated AID requires coordinated, cooperative actions from both the delegate (initiating the request) and the delegator (confirming and anchoring the event). 
+- Cryptographic Binding: The delegated AID's prefix is a self-addressing identifier (SAID) derived from its own delegated inception event.  This inception event, in turn, includes the delegator's AID, creating a strong cryptographic link between the delegator and the delegate.
+- Anchoring: The delegator anchors the delegation to it's KEL by including a "delegated event seal" in one of its own key events.  This seal contains the delegate's AID, the sequence number of the delegated event, and a digest of that delegated event.
+    - An anchor of this form is used for both delegated inception when an identifier is set up and also for delegated rotations when keys of the delegate are changed. The delegator must approve of a delegated rotation in order for a delegated identifier to rotate keys. The anchor in the KEL of the delegator functions as that approval.
+- Delegated Authority: The delegator typically retains ultimate establishment control authority, while the delegate might be authorized for specific non-establishment events such as signing (interaction events) or further, limited delegations. 
+- Hierarchical Structures: Delegation can be applied recursively, enabling the creation of complex hierarchical key management structures.
+
+#### Hierarchical Delegation Diagram
+
+![image.png](101_47_Delegated_AIDs_files/1492ddae-7901-43e5-840c-51ef06c2ebef.png)
 
 This notebook will walk through the KLI commands to perform delegated inception and delegated rotation, illustrating how these concepts are put into practice.
 
+
+
 ## Initial Setup
 
-First, we'll set up the necessary keystores and a primary AID for the delegator. We will also initialize a keystore for the delegate. For simplicity in this notebook, passcodes for keystores are omitted using the `--nopasscode` flag.
+### Step 1: Create Keystores and Delegator AID
+
+First, we'll set up the necessary keystores and a primary AID for the delegator. We will also initialize a keystore for the delegate. For brevity and simplicity in this notebook, passcodes for keystores are omitted using the `--nopasscode` flag. In a production deployment you would generally want to use the `--passcode <your_passcode>` argument to secure a keystore.
 
 The `keystore_init_config.json` file is used to pre-configure the keystores with witness information.
 
@@ -129,8 +182,8 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx
-    	Public key 1:  DFTyYU1vqmdrGyT5Uel1EOQS00GeYry9IcHSSPn4a4gN
+    Prefix  ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z
+    	Public key 1:  DFHkIxK5YojN8OPWWE40lQuNKitMg_nllHvSDG3LS9PJ
     
 
 
@@ -139,13 +192,13 @@ pr_continue()
     
 
 
-    Delegator OOBI: http://witness-demo:5642/oobi/EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx/witness
+    Delegator OOBI: http://witness-demo:5642/oobi/ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z/witness
     
     [1m[4m[44m[90m  Resolving OOBIs  [0m
     
 
 
-    http://witness-demo:5642/oobi/EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx/witness resolved
+    http://witness-demo:5642/oobi/ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z/witness resolved
 
 
     
@@ -155,10 +208,16 @@ pr_continue()
 
 
 ## Creating Delegated Identifiers
+
 Delegation is a multi-step process involving both the entity wishing to become a delegate and the entity granting the delegation (the delegator).
 
-### Step 1: Delegate Incepts Proxy
-The delegate first needs an AID that can initiate the delegation request. This "proxy" AID is a regular AID within the delegate's keystore. It will be used to manage the unpublished keys of the new delegated AID until the delegator confirms the delegation.
+The above delegation process diagram is repeated for convenience.
+
+![image.png](101_47_Delegated_AIDs_files/6da4065c-a5cf-4d45-893b-4dca0b51073e.png)
+
+### Step 2: Delegate Incepts Proxy
+
+The delegate needs an AID that can initiate the delegation request. This "proxy" AID is a regular AID within the delegate's keystore. It will be used to facilitate communication between the in-process delegate and the delegator until the delegator confirms the delegation and the process is complete.
 
 
 ```python
@@ -190,8 +249,8 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EHllMkXRGZDES9_hlM8bUSCbK_e2siwdnWqiz34muTe-
-    	Public key 1:  DJQyFrf_vWrsVze9T9lSqMCZzE8biAicRk9x-rkLYxAt
+    Prefix  ECR8KL6btVdIQRAst3YhCon_gTJRdRZQOUTXznjKlQgv
+    	Public key 1:  DA_0Ea1PKy-MRRUNqEJcdtJTlvvbUH4FDea2rXKOt1WC
     
 
 
@@ -201,13 +260,22 @@ pr_continue()
     
 
 
-### Step 2: Delegate request delegated AID Inception
+### Steps 3, 4, and 5: Delegate requests delegated AID Inception, Proxy signs and forwards  request
 
-Now, the delegate uses its proxy AID to request the inception of a new, delegated AID.
+During the setup process the delegate uses a proxy AID to send a signed delegation request to the delegator. 
 
+#### A Proxy is Required for Secure Communications
+
+The use of the proxy as shown in steps 3-5 below is necessary because the delegated identifier is not fully set up and thus cannot be used to sign anything until the delegator approves the delegation. This means the delegate cannot sign its own delegation request. So, to request the inception of a new, delegated AID a separate non-delegated AID is used as a one-time, temporary communication proxy. This proxy signs the delegation request so that it can be verifiable by the delegator.
+
+![image.png](101_47_Delegated_AIDs_files/cb546982-d3f2-4633-89c5-b5953c049e08.png)
+
+#### kli incept for the delegate 
+
+When using `kli incept` during delegation the following arguments are needed:
 - `--name` and `--alias`: Define the keystore and the alias for the new delegated AID being created.
 - `--delpre`: Specifies the prefix of the AID that will be delegating authority.
-- `--proxy`: Specifies the alias of the AID within the `delegate_keystore` that is making the request and will temporarily manage the keys for `delegate_alias`.
+- `--proxy`: Specifies the alias of the AID within the `delegate_keystore` that is making the request and will serve as the communication proxy between the delegator and the delegate (`delegate_alias`).
 
 The `kli incept --delpre` command will initiate the process and then wait for the delegator to confirm. We run this in the background (`exec_bg`) because it will pause.
 
@@ -248,19 +316,20 @@ pr_continue()
 
 
     
-    [1m[94mDelegator prefix: EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx[0m
+    [1m[94mDelegator prefix: ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z[0m
     
     Command 
-    kli incept --name delegate_keystore     --alias delegate_alias     --icount 1     --isith 1     --ncount 1     --nsith 1     --wits BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha     --toad 1     --transferable     --delpre EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx     --proxy delegate_proxy_alias > ./logs/delegate_incept.log
-     started with PID: 22799
+    kli incept --name delegate_keystore     --alias delegate_alias     --icount 1     --isith 1     --ncount 1     --nsith 1     --wits BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha     --toad 1     --transferable     --delpre ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z     --proxy delegate_proxy_alias > ./logs/delegate_incept.log
+     started with PID: 1408
     
     [1m[42m[90m  You can continue ✅  [0m
     
     
 
 
-### Step 3: Delegator confirms delegation 
-The delegator now needs to confirm the delegation request. The `kli delegate confirm` command checks for pending delegation requests for the specified delegator AID and, if `--auto` is used, automatically approves them. This action creates an event in the delegator's KEL that anchors the delegate's inception event. 
+### Step 6: Delegator confirms delegation 
+
+The delegator now needs to confirm the delegation request. The `kli delegate confirm` command checks for pending delegation requests for the specified delegator AID and, if `--auto` is used, automatically approves them. This action creates an interaction event in the delegator's KEL that anchors the delegate's inception event as a "seal" which functions as a proof of delegation approval.
 
 
 ```python
@@ -270,6 +339,7 @@ pr_title("Confirming delegation")
 command = f"""
 kli delegate confirm --name {delegator_keystore} \
     --alias {delegator_alias} \
+    --interact \
     --auto
 """
 
@@ -286,7 +356,7 @@ pr_continue()
 
 
     
-    [1m[94m['Delegagtor Prefix  EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx', 'Delegate EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za inception Anchored at Seq. No.  1', 'Delegate EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za inception event committed.'][0m
+    [1m[94m['Delegagtor Prefix  ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z', 'Delegate EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx inception Anchored at Seq. No.  1', 'Delegate EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx inception event committed.'][0m
     
     
     [1m[42m[90m  You can continue ✅  [0m
@@ -308,10 +378,10 @@ pr_title(f"Delegated AID status")
 
 
     Alias: 	delegate_alias
-    Identifier: EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za
+    Identifier: EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx
     Seq No:	0
     Delegated Identifier
-        Delegator:  EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx [92m✔ Anchored[0m
+        Delegator:  ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z [92m✔ Anchored[0m
     
     
     Witnesses:
@@ -320,7 +390,7 @@ pr_title(f"Delegated AID status")
     Threshold:	1
     
     Public Keys:	
-    	1. DN1pu3YctjX2U_1JrgMT2mn9siX4QsVAeZTJ97OHFONO
+    	1. DCpVaUQyVCZQtaD9hamZMqEnSHjbKAAXDFW--5oqihug
     
     
     Witnesses:	
@@ -329,16 +399,16 @@ pr_title(f"Delegated AID status")
     {
      "v": "KERI10JSON00018d_",
      "t": "dip",
-     "d": "EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za",
-     "i": "EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za",
+     "d": "EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx",
+     "i": "EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx",
      "s": "0",
      "kt": "1",
      "k": [
-      "DN1pu3YctjX2U_1JrgMT2mn9siX4QsVAeZTJ97OHFONO"
+      "DCpVaUQyVCZQtaD9hamZMqEnSHjbKAAXDFW--5oqihug"
      ],
      "nt": "1",
      "n": [
-      "EOds8n0ZB1vs0uxE8L9iafeXJh6CW3lEIJjFM3L75h80"
+      "EPN3C0ZmTNuCyEgIgbQg4TrquiJXf3vp-qqfivwgVSVg"
      ],
      "bt": "1",
      "b": [
@@ -346,7 +416,7 @@ pr_title(f"Delegated AID status")
      ],
      "c": [],
      "a": [],
-     "di": "EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx"
+     "di": "ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z"
     }
     
 
@@ -365,7 +435,12 @@ The prefix of a delegated AID is a SAID of its own `dip` event, which includes t
 
 Rotating the keys of a delegated AID also follows a cooperative, two-step process, similar to its inception. The delegate initiates the rotation, and the delegator must confirm it.
 
-The delegate uses `kli rotate` with the`--proxy` parameter. This command is run in the background as it waits for the delegator's confirmation. The delegator confirms the delegated rotation with `kli delegate confirm`. This action creates a new anchoring event in the delegator's KEL for the delegate's rotation.
+#### Delegated Rotation Steps:
+
+1. Delegate performs a rotation with `kli rotate`.
+2. Delegator approves the rotation with `kli delegate confirm`.
+
+The delegate uses `kli rotate` with the`--proxy` parameter. This command is run in the background as it waits for the delegator's confirmation. The delegator confirms the delegated rotation with `kli delegate confirm`. This action creates a new anchoring event in the delegator's KEL for the delegate's rotation. The use of the `--interact` flag to `kli delegate confirm` instructs the delegator to anchor the approving seal in an interaction event.
 
 
 ```python
@@ -381,6 +456,7 @@ exec_bg(command)
 command = f"""
 kli delegate confirm --name {delegator_keystore} \
     --alias {delegator_alias} \
+    --interact \
     --auto
 """
 output = exec(command, True)
@@ -397,14 +473,14 @@ pr_continue()
     
     Command 
     kli rotate --name delegate_keystore     --alias delegate_alias     --proxy delegate_proxy_alias
-     started with PID: 22808
+     started with PID: 1417
 
 
     
     [1m[94mRotation[0m
     
     
-    [1m[94m['Delegagtor Prefix  EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx', 'Delegate EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za rotation Anchored at Seq. No.  2', 'Delegate EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za rotation event committed.'][0m
+    [1m[94m['Delegagtor Prefix  ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z', 'Delegate EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx rotation Anchored at Seq. No.  2', 'Delegate EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx rotation event committed.'][0m
     
     
     [1m[42m[90m  You can continue ✅  [0m
@@ -426,10 +502,10 @@ pr_title(f"Delegated AID status")
 
 
     Alias: 	delegate_alias
-    Identifier: EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za
+    Identifier: EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx
     Seq No:	1
     Delegated Identifier
-        Delegator:  EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx [92m✔ Anchored[0m
+        Delegator:  ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z [92m✔ Anchored[0m
     
     
     Witnesses:
@@ -438,7 +514,7 @@ pr_title(f"Delegated AID status")
     Threshold:	1
     
     Public Keys:	
-    	1. DOpE3UfC_FgLD87d0QANte1Sj6KFq381ryDrIuqUcOrJ
+    	1. DOvX8F_mudSvZ8OlNWDf0UmflrtNqKpIueoNarYDzHCr
     
     
     Witnesses:	
@@ -447,16 +523,16 @@ pr_title(f"Delegated AID status")
     {
      "v": "KERI10JSON00018d_",
      "t": "dip",
-     "d": "EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za",
-     "i": "EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za",
+     "d": "EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx",
+     "i": "EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx",
      "s": "0",
      "kt": "1",
      "k": [
-      "DN1pu3YctjX2U_1JrgMT2mn9siX4QsVAeZTJ97OHFONO"
+      "DCpVaUQyVCZQtaD9hamZMqEnSHjbKAAXDFW--5oqihug"
      ],
      "nt": "1",
      "n": [
-      "EOds8n0ZB1vs0uxE8L9iafeXJh6CW3lEIJjFM3L75h80"
+      "EPN3C0ZmTNuCyEgIgbQg4TrquiJXf3vp-qqfivwgVSVg"
      ],
      "bt": "1",
      "b": [
@@ -464,23 +540,23 @@ pr_title(f"Delegated AID status")
      ],
      "c": [],
      "a": [],
-     "di": "EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx"
+     "di": "ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z"
     }
     
     {
      "v": "KERI10JSON000160_",
      "t": "drt",
-     "d": "EEkHfhlL5L0jbH6UhoxQ46Dk5dhobvsj7r3bMEB3fOmV",
-     "i": "EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za",
+     "d": "EGvE0Xh2Xly27Y_K5_G8b4dVqTYrMZVvwhpE9thEnDXh",
+     "i": "EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx",
      "s": "1",
-     "p": "EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za",
+     "p": "EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx",
      "kt": "1",
      "k": [
-      "DOpE3UfC_FgLD87d0QANte1Sj6KFq381ryDrIuqUcOrJ"
+      "DOvX8F_mudSvZ8OlNWDf0UmflrtNqKpIueoNarYDzHCr"
      ],
      "nt": "1",
      "n": [
-      "EAxJUtnlVKLB0PFMgoOU15yxVHE53IJnBpXwYZsTKNIF"
+      "EDy6QVJnVt4750t8wRkGmulml0-PjykSbT6Ulomc6kQw"
      ],
      "bt": "1",
      "br": [],
@@ -511,16 +587,16 @@ pr_title(f"Delegator AID status")
 
 
     Alias: 	delegator_alias
-    Identifier: EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx
+    Identifier: ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z
     Seq No:	2
     
     Witnesses:
     Count:		3
     Receipts:	3
-    Threshold:	3
+    Threshold:	2
     
     Public Keys:	
-    	1. DFGFMsJEZMnTJM47rO4-CBiVK2wG129wND0rE1a_PNaB
+    	1. DFHkIxK5YojN8OPWWE40lQuNKitMg_nllHvSDG3LS9PJ
     
     
     Witnesses:	
@@ -531,16 +607,16 @@ pr_title(f"Delegator AID status")
     {
      "v": "KERI10JSON0001b7_",
      "t": "icp",
-     "d": "EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx",
-     "i": "EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx",
+     "d": "ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z",
+     "i": "ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z",
      "s": "0",
      "kt": "1",
      "k": [
-      "DFTyYU1vqmdrGyT5Uel1EOQS00GeYry9IcHSSPn4a4gN"
+      "DFHkIxK5YojN8OPWWE40lQuNKitMg_nllHvSDG3LS9PJ"
      ],
      "nt": "1",
      "n": [
-      "EG3L1SrswzHHEKprAVBYUMs4OKaNvzdbHBQY5R_w4wts"
+      "EHPNS3Akmq_r3bYzDRuFJas2uDR6ofMh6KAs6pLfZbvV"
      ],
      "bt": "2",
      "b": [
@@ -553,55 +629,33 @@ pr_title(f"Delegator AID status")
     }
     
     {
-     "v": "KERI10JSON0001cf_",
-     "t": "rot",
-     "d": "EBE9RA2lP8WNy6nhiKlvfeyfQxjhrQCdMS-GGFcXIJv-",
-     "i": "EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx",
+     "v": "KERI10JSON00013a_",
+     "t": "ixn",
+     "d": "EJ0ybwWZuyuMtOdKMstEKTfK-z_8Bdd1c-BzyfTHbKef",
+     "i": "ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z",
      "s": "1",
-     "p": "EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx",
-     "kt": "1",
-     "k": [
-      "DOAvqZcaDAHDUyy1UL4EyWidF4dqcMIEJ-BCu29wMQHp"
-     ],
-     "nt": "1",
-     "n": [
-      "EB0KAOAATb2VYJE5AfKwrMtUb6tw2FxtR8_qUEfYkUBG"
-     ],
-     "bt": "3",
-     "br": [],
-     "ba": [],
+     "p": "ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z",
      "a": [
       {
-       "i": "EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za",
+       "i": "EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx",
        "s": "0",
-       "d": "EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za"
+       "d": "EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx"
       }
      ]
     }
     
     {
-     "v": "KERI10JSON0001cf_",
-     "t": "rot",
-     "d": "ENlp0pAWQsXkhFOaNyqZIGtNVHhY3FlXi0IYhFoiTe1u",
-     "i": "EPlFyx-dFx0DQeCOd73HDSMLHDosGSKezvytH4znf1Kx",
+     "v": "KERI10JSON00013a_",
+     "t": "ixn",
+     "d": "EBxqt68hVdxI2WW8N0jWCWTpn6USDcuyVugO560Id-j7",
+     "i": "ECawnieFvsT6r8UKQo1dSX3moF8EEQWBBBt7et4Aqe9z",
      "s": "2",
-     "p": "EBE9RA2lP8WNy6nhiKlvfeyfQxjhrQCdMS-GGFcXIJv-",
-     "kt": "1",
-     "k": [
-      "DFGFMsJEZMnTJM47rO4-CBiVK2wG129wND0rE1a_PNaB"
-     ],
-     "nt": "1",
-     "n": [
-      "EKN9kPL4W4Y7P3rKlivrVZQ-lr1PdW6tio0wNMhtM_8N"
-     ],
-     "bt": "3",
-     "br": [],
-     "ba": [],
+     "p": "EJ0ybwWZuyuMtOdKMstEKTfK-z_8Bdd1c-BzyfTHbKef",
      "a": [
       {
-       "i": "EJxPMmmXRoyGuBRjTedHExReyRnDnyreVguggxwPa4Za",
+       "i": "EOUKkRzLaJx5Zf1a44UeL5fKR2wHAUMM4g5X-dcCCLyx",
        "s": "1",
-       "d": "EEkHfhlL5L0jbH6UhoxQ46Dk5dhobvsj7r3bMEB3fOmV"
+       "d": "EGvE0Xh2Xly27Y_K5_G8b4dVqTYrMZVvwhpE9thEnDXh"
       }
      ]
     }
@@ -610,24 +664,24 @@ pr_title(f"Delegator AID status")
 
 Key observations from the delegator's KEL:
 
-- Sequence Number `s: "1"` (Rotation Event):
+- Sequence Number `s: "1"` (Interaction Event):
     - This event was created when the delegator confirmed the delegated inception.
     - The `a` (anchors/payload) array contains a delegated event seal: 
       - `"i"`: The prefix of the delegate AID.
       - `"s": "0"`: The sequence number of the delegate's event being anchored (the `dip` event at sequence 0).
       - `"d"`: The SAID (digest) of the delegate's `dip` event.
-- Sequence Number `s: "2"` (Rotation Event):
+- Sequence Number `s: "2"` (Interaction Event):
   - This event was created when the delegator confirmed the delegated rotation.
   - The `a` array contains another delegated event seal:
       - `"i"`: The prefix of the delegate AID.
       - `"s": "1"`: The sequence number of the delegate's event being anchored (the drt event at sequence 1).
       - `"d"`: The SAID (digest) of the delegate's drt event.
 
-These seals in the delegator's KEL are the cryptographic proof that the delegator authorized the delegate's inception and rotation events.  Conversely, the delegated AID's `dip` event also contains a di field pointing to the delegator, and its establishment events (like `dip` and `drt`) implicitly include a delegating event location seal that refers back to the specific event in the delegator's KEL that authorized them (though not explicitly shown in the simplified `kli status` output for the delegate, this is part of the full event structure).  This creates the verifiable, cooperative link between the two AIDs.
+These seals embedded within interaction events, specifically the "a" attributes section of the interaction events, in the delegator's KEL are the cryptographic proof that the delegator authorized the delegate's inception and rotation events.  Conversely, the delegated AID's `dip` event also contains a di field pointing to the delegator, and its establishment events (like `dip` and `drt`) implicitly include a delegating event location seal that refers back to the specific event in the delegator's KEL that authorized them (though not explicitly shown in the simplified `kli status` output for the delegate, this is part of the full event structure).  This creates the verifiable, cooperative link between the two AIDs.
 
 <div class="alert alert-info">
 <b>ℹ️ NOTE</b><hr>
-The security of KERI's cooperative delegation model is robust. To illicitly create or rotate a delegated AID, an attacker would generally need to compromise keys from both the delegator and the delegate (specifically, the delegate's pre-rotated keys and the delegator's current signing keys for the anchoring event).  Furthermore, the delegator has mechanisms to recover or revoke a compromised delegation. 
+The security of KERI's cooperative delegation model is robust. To illicitly create or rotate a delegated AID, an attacker would generally need to compromise keys from both the delegator and the delegate (specifically, the delegate's pre-rotated keys and the delegator's current signing keys for the anchoring event).  Furthermore, the delegator has mechanisms to recover a compromised delegation using something called "superseding delegated recovery rotation," covered in depth in a separate training.
 </div>
 
 <div class="alert alert-primary">

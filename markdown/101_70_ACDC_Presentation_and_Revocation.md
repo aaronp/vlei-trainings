@@ -2,12 +2,20 @@
 
 <div class="alert alert-primary">
 <b>🎯 OBJECTIVE</b><hr>
-Demonstrate how a Holder presents a previously issued ACDC or Verifiable Credential (VC) to a Verifier using the Issuance and Presentation Exchange (IPEX) protocol. And also covers the process of credential revocation by the Issuer.
+Demonstrate how a Holder presents a previously issued ACDC or Verifiable Credential (VC) to a Verifier using the Issuance and Presentation Exchange (IPEX) protocol.<br/>
+<br/>
+Understand how IPEX allows credential holders (issuees) to sign that they agree with the terms of a credential.<br/>
+<br/>
+Conduct a credential revocation and present a revoked credential as an issuer so the holder may learn that a credential they hold has been revoked. Learn that observer infrastructure may be used for pull-style monitoring of credential revocation state.
 </div>
 
 ## Credential Presentation Overview
 
-In the previous notebook, you saw how an Issuer creates and sends an ACDC to a Holder. Now, we'll focus on the next step in the typical verifiable credential lifecycle: presentation. The Holder, possessing the credential, needs to present it to another party (the Verifier) to prove certain claims or gain access to something. You will again use the IPEX protocol for this exchange, but this time initiated by the Holder. Finally, you will see how the original Issuer can revoke the credential.
+In the previous notebook, you saw how an Issuer creates and sends an ACDC to a Holder. Now, we'll focus on the next steps in the typical verifiable credential lifecycle: presentation and admittance.
+
+After creating the credential the Issuer must present it to the Holder. In IPEX this presentation is called an IPEX Grant message. After receiving the IPEX Grant message the Holder can then accept the credential by performing an IPEX Admit message. In the prior training this Grant and Admit process were explained.
+
+In this training, following the reception of a credential, the Holder will present it to another party (the Verifier) to prove certain claims or gain access to something. You will again use the IPEX protocol for this exchange, but this time initiated by the Holder. Finally, you will see how the original Issuer can revoke the credential.
 
 ### Recap: Issuing the Prerequisite Credential
 
@@ -50,7 +58,7 @@ issuer_aid = "issuer_aid"
     --config-dir ./config \
     --config-file keystore_init_config.json
 
-!kli incept --name {issuer_keystore_name} --passcode {issuer_keystore_passcode} --alias {issuer_aid}  \
+!kli incept --name {issuer_keystore_name} --passcode {issuer_keystore_passcode} --alias {issuer_aid}\
     --file ./config/aid_inception_config.json
 
 # Issuer registry inception
@@ -63,28 +71,30 @@ issuer_registry_name="issuer_registry"
 
 # Issuer and Holder oobi
 
-holder_oobi_gen = f"kli oobi generate --name {holder_keystore_name} --alias {holder_aid} --passcode {holder_keystore_passcode} --role witness"
+holder_oobi_gen = f"kli oobi generate --name {holder_keystore_name} --alias {holder_aid}\
+  --passcode {holder_keystore_passcode} --role witness"
 holder_oobi = exec(holder_oobi_gen)
 
-issuer_oobi_gen = f"kli oobi generate --name {issuer_keystore_name} --alias {issuer_aid} --passcode {issuer_keystore_passcode} --role witness"
+issuer_oobi_gen = f"kli oobi generate --name {issuer_keystore_name} --alias {issuer_aid}\
+  --passcode {issuer_keystore_passcode} --role witness"
 issuer_oobi = exec(issuer_oobi_gen)
 
-!kli oobi resolve --name {holder_keystore_name} --passcode {holder_keystore_passcode} --oobi-alias {issuer_aid} \
-    --oobi {issuer_oobi}
+!kli oobi resolve --name {holder_keystore_name} --passcode {holder_keystore_passcode}\
+  --oobi-alias {issuer_aid} --oobi {issuer_oobi}
 
-!kli oobi resolve --name {issuer_keystore_name} --passcode {issuer_keystore_passcode} --oobi-alias {holder_aid}\
-    --oobi {holder_oobi}
+!kli oobi resolve --name {issuer_keystore_name} --passcode {issuer_keystore_passcode}\
+  --oobi-alias {holder_aid} --oobi {holder_oobi}
 
 # Issuer and Holder resolve schema oobis
 schema_oobi_alias = "schema_oobi"
 schema_said = get_schema_said("config/schemas/event_pass_schema.json")
 schema_oobi = f"http://vlei-server:7723/oobi/{schema_said}"
 
-!kli oobi resolve --name {holder_keystore_name} --passcode {holder_keystore_passcode} --oobi-alias {schema_oobi_alias} \
-    --oobi {schema_oobi}
+!kli oobi resolve --name {holder_keystore_name} --passcode {holder_keystore_passcode}\
+    --oobi-alias {schema_oobi_alias} --oobi {schema_oobi}
 
-!kli oobi resolve --name {issuer_keystore_name} --passcode {issuer_keystore_passcode} --oobi-alias {schema_oobi_alias}\
-    --oobi {schema_oobi}
+!kli oobi resolve --name {issuer_keystore_name} --passcode {issuer_keystore_passcode}\
+    --oobi-alias {schema_oobi_alias} --oobi {schema_oobi}
 
 # Issuer create VC
 time = exec("kli time")
@@ -98,7 +108,9 @@ time = exec("kli time")
     --time {time}
 
 # Get credential said
-get_credential_said = f"kli vc list --name {issuer_keystore_name} --passcode {issuer_keystore_passcode} --alias {issuer_aid} --issued --said --schema {schema_said}"
+get_credential_said = f"kli vc list --name {issuer_keystore_name}\
+  --passcode {issuer_keystore_passcode} --alias {issuer_aid}\
+  --issued --said --schema {schema_said}"
 credential_said=exec(get_credential_said)
 
 #Issuer grant credential
@@ -113,7 +125,8 @@ time = exec("kli time")
 
 # Holder poll and admit credential
 
-get_ipex_said=f"kli ipex list --name {holder_keystore_name} --passcode {holder_keystore_passcode} --alias {holder_aid} --poll --said"
+get_ipex_said=f"kli ipex list --name {holder_keystore_name} --passcode {holder_keystore_passcode}\
+  --alias {holder_aid} --poll --said"
 ipex_said=exec(get_ipex_said)
 
 time = exec("kli time")
@@ -135,7 +148,7 @@ pr_continue()
     KERI Keystore created at: /usr/local/var/keri/ks/holder_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/holder_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/holder_presentation_ks
-    	aeid: BHQHgkOvgReP8UnWK6ALrbIs6XB-7erlXU1HrUOf9p3I
+    	aeid: BOKhLAo9ksJR4Z2srSd9MuLxF16UerT7HUvtSdWQQQXR
     
     Loading 3 OOBIs...
 
@@ -148,15 +161,15 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EKTsH9f4rhij7VT6dmiUOJzPL7KGJeIbTOnnSzAsrEFU
-    	Public key 1:  DFKc79G0e4ku9qjNf2419HrnmBQ-pf1Z-602oAjhvQJR
+    Prefix  EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE
+    	Public key 1:  DOkK-tZVU8Vq2sBi4cP7gwGv2yYnt2tufLZq89dz7rno
     
 
 
     KERI Keystore created at: /usr/local/var/keri/ks/issuer_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/issuer_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/issuer_presentation_ks
-    	aeid: BNWqcUUCns-8s_jXmzg_MPMzq0SFuTHfiY8OJlhTeEa2
+    	aeid: BLXbP-nEZiu-cvhT-2LqOo5jGb8IwWapebUXFjbBfE3d
     
     Loading 3 OOBIs...
 
@@ -169,8 +182,8 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO
-    	Public key 1:  DKHZJRB83VPD9SEkpCO56JCoaFg7g4UvvygoH76D4YXW
+    Prefix  EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+    	Public key 1:  DNtlNSyrh5UXB5MYglyrLS9nKw1-0O120NbJL0KIKg27
     
 
 
@@ -180,14 +193,14 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    Registry:  issuer_registry(ENileSLbbV2XRl5-yDhaAYbKNCbzUh0wTafSJ9ZBVmhD) 
-    	created for Identifier Prefix:  EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO
+    Registry:  issuer_registry(ECbnWXZp_09-HCjP6rBoLyhsrPyFsKiH2cCvSnmtEFc4) 
+    	created for Identifier Prefix:  EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
 
 
-    http://witness-demo:5642/oobi/EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO/witness resolved
+    http://witness-demo:5642/oobi/EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO/witness resolved
 
 
-    http://witness-demo:5642/oobi/EKTsH9f4rhij7VT6dmiUOJzPL7KGJeIbTOnnSzAsrEFU/witness resolved
+    http://witness-demo:5642/oobi/EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE/witness resolved
 
 
     http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK resolved
@@ -202,16 +215,16 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    EHMbH_hoEzN3RXkHhx7SPA5y7y6-Y8MuXLgLLqUkU3UL has been created.
+    EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc has been created.
 
 
-    Sending message EBRQJP2VemYRMIV3fHHpV154A0v7p_GIyu43w52Dpacf to EKTsH9f4rhij7VT6dmiUOJzPL7KGJeIbTOnnSzAsrEFU
+    Sending message EHYsLwilWvh1CwnG3RQk9_NJn4Nf6o92BQ5QCJUrtYua to EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE
 
 
     ... grant message sent
 
 
-    Sending admit message to EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO
+    Sending admit message to EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
 
 
     ... admit message sent
@@ -236,24 +249,24 @@ First, confirm the Holder has the credential:
     --verbose
 ```
 
-    Current received credentials for holder_aid (EKTsH9f4rhij7VT6dmiUOJzPL7KGJeIbTOnnSzAsrEFU):
+    Current received credentials for holder_aid (EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE):
     
-    Credential #1: EHMbH_hoEzN3RXkHhx7SPA5y7y6-Y8MuXLgLLqUkU3UL
+    Credential #1: EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO
-        Issued on 2025-06-05T22:21:57.656852+00:00
+        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+        Issued on 2025-06-24T18:40:41.740030+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EHMbH_hoEzN3RXkHhx7SPA5y7y6-Y8MuXLgLLqUkU3UL",
-    	  "i": "EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO",
-    	  "ri": "ENileSLbbV2XRl5-yDhaAYbKNCbzUh0wTafSJ9ZBVmhD",
+    	  "d": "EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc",
+    	  "i": "EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO",
+    	  "ri": "ECbnWXZp_09-HCjP6rBoLyhsrPyFsKiH2cCvSnmtEFc4",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "EIarjpmZWm9ko98rBbrGQ_ISxEzcP8nMZWD7ZhBnBoze",
-    	    "i": "EKTsH9f4rhij7VT6dmiUOJzPL7KGJeIbTOnnSzAsrEFU",
-    	    "dt": "2025-06-05T22:21:57.656852+00:00",
+    	    "d": "ED2LcOHWzqQfl02d-AiflVWfhshx-LU4TmmUuy5i_Ekb",
+    	    "i": "EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE",
+    	    "dt": "2025-06-24T18:40:41.740030+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -287,7 +300,7 @@ verifier_aid = "verifier_aid"
     KERI Keystore created at: /usr/local/var/keri/ks/verifier_ks
     KERI Database created at: /usr/local/var/keri/db/verifier_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/verifier_ks
-    	aeid: BBdwEg_yiSSYCkulDzvWVC7Yt8pxyo0-1QXO1wK9y3XO
+    	aeid: BHgOwu5rL2OSwHajkwPxeSA8X_5EPNcKBYJzfR6jxwu-
     
     Loading 3 OOBIs...
 
@@ -300,8 +313,8 @@ verifier_aid = "verifier_aid"
     Waiting for witness receipts...
 
 
-    Prefix  EJLZ-W2MArXetfQ0oBuzhcl8Depk37LbUV4UuRNraSaU
-    	Public key 1:  DOQIffAkPjF9r6Ka99SfGUuVe2b8NDJ3avjNg3WJ88DT
+    Prefix  EPeyjCgQ314pKpsWv6G97jeZLn_s7ECyQgoyLZgObAg-
+    	Public key 1:  DI4hh6fDke0Z84b_jkKFhTB3xY9813ez1tliEHGxxUYH
     
 
 
@@ -311,25 +324,25 @@ Similar to the Issuer/Holder exchange, the Holder and Verifier must exchange and
 
 
 ```python
-holder_oobi_gen = f"kli oobi generate --name {holder_keystore_name} --alias {holder_aid} --passcode {holder_keystore_passcode} --role witness"
+holder_oobi_gen = f"kli oobi generate --name {holder_keystore_name} --alias {holder_aid}\
+    --passcode {holder_keystore_passcode} --role witness"
 holder_oobi = exec(holder_oobi_gen)
 
-verifier_oobi_gen = f"kli oobi generate --name {verifier_keystore_name} --alias {verifier_aid} --passcode {verifier_keystore_passcode} --role witness"
+verifier_oobi_gen = f"kli oobi generate --name {verifier_keystore_name} --alias {verifier_aid}\
+    --passcode {verifier_keystore_passcode} --role witness"
 verifier_oobi = exec(verifier_oobi_gen)
 
-!kli oobi resolve --name {holder_keystore_name} --passcode {holder_keystore_passcode} --oobi-alias {verifier_aid} \
-    --oobi {verifier_oobi}
+!kli oobi resolve --name {holder_keystore_name} --passcode {holder_keystore_passcode}\
+    --oobi-alias {verifier_aid} --oobi {verifier_oobi}
 
-!kli oobi resolve --name {verifier_keystore_name} --passcode {verifier_keystore_passcode} --oobi-alias {holder_aid}\
-    --oobi {holder_oobi}
-
-
+!kli oobi resolve --name {verifier_keystore_name} --passcode {verifier_keystore_passcode}\
+    --oobi-alias {holder_aid} --oobi {holder_oobi}
 ```
 
-    http://witness-demo:5642/oobi/EJLZ-W2MArXetfQ0oBuzhcl8Depk37LbUV4UuRNraSaU/witness resolved
+    http://witness-demo:5642/oobi/EPeyjCgQ314pKpsWv6G97jeZLn_s7ECyQgoyLZgObAg-/witness resolved
 
 
-    http://witness-demo:5642/oobi/EKTsH9f4rhij7VT6dmiUOJzPL7KGJeIbTOnnSzAsrEFU/witness resolved
+    http://witness-demo:5642/oobi/EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE/witness resolved
 
 
 ### Verifier Resolves Schema OOBI
@@ -338,8 +351,8 @@ The Verifier also needs to resolve the OOBI for the ACDC's schema (`event_pass_s
 
 
 ```python
-!kli oobi resolve --name {verifier_keystore_name} --passcode {verifier_keystore_passcode} --oobi-alias {schema_oobi_alias}\
-    --oobi {schema_oobi}
+!kli oobi resolve --name {verifier_keystore_name} --passcode {verifier_keystore_passcode}\
+    --oobi-alias {schema_oobi_alias} --oobi {schema_oobi}
 ```
 
     http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK resolved
@@ -347,14 +360,23 @@ The Verifier also needs to resolve the OOBI for the ACDC's schema (`event_pass_s
 
 ### Step 1: Holder Presents Credential (Grant)
 
-Now, the Holder initiates the IPEX exchange to present the credential to the Verifier. The Holder acts as the "Discloser" in this context. The command used is `kli ipex grant`, just like in issuance, but the roles are reversed in intent.
+Now, the Holder initiates the IPEX exchange to present the credential to the Verifier. The Holder acts as the "Discloser" in this context. The command used is `kli ipex grant`, just like in issuance, but the IPEX roles are reversed so the Holder is the discloser and the Verifier is the disclosee.
 
 - `--name`, `--passcode`, `--alias`: Identify the Holder's keystore and AID.
 - `--said`: The SAID of the credential being presented.
 - `--recipient`: The AID of the Verifier who should receive the presentation.
 - `--time`: A timestamp for the grant message.
 
-This sends an IPEX grant message, effectively offering the credential presentation to the Verifier.
+This sends an IPEX Grant message, effectively offering the credential presentation to the Verifier.
+
+<div class="alert alert-info">
+<b>ℹ️ NOTE: on <code>--time</code></b><hr> 
+Including the time <code>--time</code> argument is only necessary when performing multisignature operations. It is shown below for illustrative purposes only. 
+    
+This argument is necessary for multisignature operations because each participating controller must produce the exact same event, in this case an IPEX Grant message, as all the other members of a multisig group. Since a timestamp is one of the attributes in an IPEX Grant message then in order to produce the exact same event, and thereby the same event digest, the same value for a timestamp must be used by each controller when constructing the event. At the command line this is provided with the `--time` argument to the `kli ipex grant` command.
+
+You will notice the output value of the `kli time` command is used in various places in these Jupyter notebooks. The necessity of the `--time` command is the same for each context; it is only applicable to multi-signature operations.
+</div>
 
 
 ```python
@@ -369,25 +391,41 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending message EG1Bmw-Rvih_y-pr5H_6PrqInThLwWTZJsmbZFF7Uzuk to EJLZ-W2MArXetfQ0oBuzhcl8Depk37LbUV4UuRNraSaU
+    Sending message EGAiDLoNe0VdxQqqaKtrw4EBv3CDv26kBtfpqggUL_r2 to EPeyjCgQ314pKpsWv6G97jeZLn_s7ECyQgoyLZgObAg-
 
 
     ... grant message sent
 
 
+Receiving the Grant message triggers the Verifier's KERI controller to perform several checks automatically:
+
+- Schema Validation: Checks whether the credential structure and data types match the resolved schema.
+- Issuer Authentication: Verifies the credential signature against the Issuer's KEL (previously retrieved via OOBI) and, importantly, checks the credential's status (e.g., not revoked) against the Issuer's registry (TEL).
+
+If all checks pass, the Verifier may admit the ACDC, store the validated credential information, and send an IPEX Admit message back to the Holder.
+
 ### Step 2: Verifier Receives Presentation
 
-The Verifier needs to check its KERI mailbox for the incoming grant message containing the credential presentation.Use `kli ipex list --poll` and extract the SAID of the message.
+The Verifier needs to check its KERI mailbox(es) for the incoming grant message containing the credential presentation.
+
+Use `kli ipex list --poll` to check the mailbox(es) and extract the SAID of the IPEX Grant message.
 
 
 ```python
-get_ipex_said=f"kli ipex list --name {verifier_keystore_name} --passcode {verifier_keystore_passcode} --alias {verifier_aid} --poll --said"
+get_ipex_said=f"kli ipex list --name {verifier_keystore_name} --passcode {verifier_keystore_passcode}\
+    --alias {verifier_aid} --poll --said"
 ipex_said=exec(get_ipex_said)
 
 print(ipex_said)
+
+pr_continue()
 ```
 
-    EG1Bmw-Rvih_y-pr5H_6PrqInThLwWTZJsmbZFF7Uzuk
+    EGAiDLoNe0VdxQqqaKtrw4EBv3CDv26kBtfpqggUL_r2
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
 
 
 **Verifier displays credential (Optional)**
@@ -406,24 +444,24 @@ Before formally admitting the credential, the Verifier can inspect the received 
     
     Received IPEX Messages:
     
-    GRANT - SAID: EG1Bmw-Rvih_y-pr5H_6PrqInThLwWTZJsmbZFF7Uzuk
-    Credential EHMbH_hoEzN3RXkHhx7SPA5y7y6-Y8MuXLgLLqUkU3UL:
+    GRANT - SAID: EGAiDLoNe0VdxQqqaKtrw4EBv3CDv26kBtfpqggUL_r2
+    Credential EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO
-        Issued on 2025-06-05T22:21:57.656852+00:00
+        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+        Issued on 2025-06-24T18:40:41.740030+00:00
         Already responded? No [91m✘[0m
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EHMbH_hoEzN3RXkHhx7SPA5y7y6-Y8MuXLgLLqUkU3UL",
-    	  "i": "EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO",
-    	  "ri": "ENileSLbbV2XRl5-yDhaAYbKNCbzUh0wTafSJ9ZBVmhD",
+    	  "d": "EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc",
+    	  "i": "EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO",
+    	  "ri": "ECbnWXZp_09-HCjP6rBoLyhsrPyFsKiH2cCvSnmtEFc4",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "EIarjpmZWm9ko98rBbrGQ_ISxEzcP8nMZWD7ZhBnBoze",
-    	    "i": "EKTsH9f4rhij7VT6dmiUOJzPL7KGJeIbTOnnSzAsrEFU",
-    	    "dt": "2025-06-05T22:21:57.656852+00:00",
+    	    "d": "ED2LcOHWzqQfl02d-AiflVWfhshx-LU4TmmUuy5i_Ekb",
+    	    "i": "EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE",
+    	    "dt": "2025-06-24T18:40:41.740030+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -432,14 +470,14 @@ Before formally admitting the credential, the Verifier can inspect the received 
     
 
 
-### Step 3: Verifier Admits and Validates Presentation
+The status of the credential is shown by `Already responded? No ✘` meaning that an IPEX Admit from the Verifier to the Holder has not yet been sent.
 
-The Verifier uses the `kli ipex admit` command to accept the presentation. This triggers the Verifier's KERI controller to perform several checks automatically:
+### Step 3: Verifier Admits and Validates Presentation (Agreeing to Terms)
 
-- Schema Validation: Checks whether the credential structure and data types match the resolved schema.
-- Issuer Authentication: Verifies the credential signature against the Issuer's KEL (previously retrieved via OOBI) and, importantly, checks the credential's status (e.g., not revoked) against the Issuer's registry (TEL).
+An admit is not strictly necessary between the verifier and the holder, though sending an admit is one way the Verifier signals to the holder that the verifier agrees to the terms of the credential presentation. The terms in the credential are specified in the rules section.
 
-If all checks pass, the Verifier sends an admit message back to the Holder and stores the validated credential information.
+The Verifier uses the `kli ipex admit` command to accept the presentation.
+
 
 
 ```python
@@ -453,7 +491,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending admit message to EKTsH9f4rhij7VT6dmiUOJzPL7KGJeIbTOnnSzAsrEFU
+    Sending admit message to EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE
 
 
     ... admit message sent
@@ -475,25 +513,25 @@ Finally, the Verifier can check the status of the received IPEX message again. T
     
     Received IPEX Messages:
     
-    GRANT - SAID: EG1Bmw-Rvih_y-pr5H_6PrqInThLwWTZJsmbZFF7Uzuk
-    Credential EHMbH_hoEzN3RXkHhx7SPA5y7y6-Y8MuXLgLLqUkU3UL:
+    GRANT - SAID: EGAiDLoNe0VdxQqqaKtrw4EBv3CDv26kBtfpqggUL_r2
+    Credential EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc:
         Type: EventPass
         Status: Issued [92m✔[0m
-        Issued by EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO
-        Issued on 2025-06-05T22:21:57.656852+00:00
+        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+        Issued on 2025-06-24T18:40:41.740030+00:00
         Already responded? Yes [92m✔[0m
-        Response: [92mAdmit[0m (EMcJw7qIEc2YVySRfN6z_SemI21KCvThiiFbN0T0XAFE)
+        Response: [92mAdmit[0m (EHJ4IF8xLyVjqAn1ZbJWLQtK370VsJpKSYQLCxPqd9L9)
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EHMbH_hoEzN3RXkHhx7SPA5y7y6-Y8MuXLgLLqUkU3UL",
-    	  "i": "EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO",
-    	  "ri": "ENileSLbbV2XRl5-yDhaAYbKNCbzUh0wTafSJ9ZBVmhD",
+    	  "d": "EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc",
+    	  "i": "EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO",
+    	  "ri": "ECbnWXZp_09-HCjP6rBoLyhsrPyFsKiH2cCvSnmtEFc4",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "EIarjpmZWm9ko98rBbrGQ_ISxEzcP8nMZWD7ZhBnBoze",
-    	    "i": "EKTsH9f4rhij7VT6dmiUOJzPL7KGJeIbTOnnSzAsrEFU",
-    	    "dt": "2025-06-05T22:21:57.656852+00:00",
+    	    "d": "ED2LcOHWzqQfl02d-AiflVWfhshx-LU4TmmUuy5i_Ekb",
+    	    "i": "EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE",
+    	    "dt": "2025-06-24T18:40:41.740030+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -534,37 +572,157 @@ Now, if the Issuer lists their issued credentials again, the status will reflect
 ```python
 !kli vc list --name {issuer_keystore_name} --passcode {issuer_keystore_passcode} \
     --alias {issuer_aid} \
-    -i
+    --issued
 ```
 
-    Current issued credentials for issuer_aid (EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO):
+    Current issued credentials for issuer_aid (EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO):
     
-    Credential #1: EHMbH_hoEzN3RXkHhx7SPA5y7y6-Y8MuXLgLLqUkU3UL
+    Credential #1: EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc
         Type: EventPass
         Status: Revoked [91m✘[0m
-        Issued by EGS90tmpUs2itV1eevY7v5twNQIDB-66hSwX3GKjlruO
-        Issued on 2025-06-05T22:22:28.440209+00:00
+        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+        Issued on 2025-06-24T18:41:09.527463+00:00
 
+
+### Sharing the revoked credential status with the Holder.
+Revoking a credential is an important event that should be shared with verifiers. One way to share a revocation with a verifier is to share the revocation of a credential with the Holder. After the Holder receives that revoked credential status then it can re-present the revoked credential to a verifier so that the verifier may know the credential is revoked.
+
+To accomplish this sharing of revocation state the issuer may perform another IPEX Grant of the credential following revocation. Then the Holder must again perform an IPEX Admit in order to learn of this revocation state.
+
+<div class="alert alert-info">
+<b>ℹ️ NOTE: Observers for Learning of Revocation State</b><hr> 
+Use of an Observer node to learn of an ACDC credential state is another way for a verifier to learn of the revocation state of a credential. While standalone observers are under development, a witness of a controller may be used to query for credential state using the following request format:
+<br/><br/>
+<b>`HTTP GET`</b> to a witness host on the `/query` endpoint with URL parameters like so:
+
+- `/query?typ=tel&amp;reg=EHrbPfpRLU9wpFXTzGY-LIo2FjMiljjEnt238eWHb7yZ&amp;vcid=EO5y0jMXS5XKTYBKjCUPmNKPr1FWcWhtKwB2Go2ozvr0`
+
+A full query to a witness would look like so:
+- `https://wit1.testnet.gleif.org:5641/query?typ=tel&reg=EHrbPfpRLU9wpFXTzGY-LIo2FjMiljjEnt238eWHb7yZ&vcid=EO5y0jMXS5XKTYBKjCUPmNKPr1FWcWhtKwB2Go2ozvr0`
+</div>
+
+### Presenting a revoked credential
+
+Now the holder can present the revoked credential to the verifier and the verifier can understand that the credential is revoke.
+
+#### Step 1: Issuer Sends revocation status with IPEX
+
+An issuer may directly inform a holder using another IPEX Grant about the revocation status of any credential issued from itself. 
+
+<div class="alert alert-info">
+<b>ℹ️ NOTE: Observers for querying credential status</b><hr> 
+Waiting for an issuer to send credential revocation status is not the only way a holder can learn about whether or not a credential has been revoked. 
+    
+<b>Observers</b> are another way a verifier or a holder can learn of the credential status, issued or revoked, from an issuer. Currently, as of June 16, 2025, observers are in an early phase in their development and are deployed as a feature on an issuer's witness. Eventually observers will be standalone components.
+</div>
+
+
+```python
+# Issuer grants the now revoked credential
+time = exec("kli time")
+
+!kli ipex grant \
+    --name {issuer_keystore_name} --passcode {issuer_keystore_passcode} \
+    --alias {issuer_aid} \
+    --said {credential_said} \
+    --recipient {holder_aid} \
+    --time {time}
+```
+
+    Sending message EN4bAI-uv4hIRQI2tZEeQJSHEeQ_DbTYqqIGUlFQtemU to EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE
+
+
+    ... grant message sent
+
+
+#### Step 2: Holder Admits IPEX Grant of revoked credential
+
+Now the holder admits the IPEX Grant from the issuer of the recently revoked credential.
+
+
+
+```python
+# Holder polls and admits the revoked credential
+# The pipe to "tail -n 1" makes sure to get the last IPEX Grant which will be the grant sharing the re
+get_ipex_said=f"kli ipex list --name {holder_keystore_name} --passcode {holder_keystore_passcode}\
+  --alias {holder_aid} --poll --said | tail -n 1 | tr -d '' "
+ipex_said=exec(get_ipex_said)
+
+print(f"Found grant {ipex_said} for revocation")
+
+time = exec("kli time")
+
+!kli ipex admit \
+    --name {holder_keystore_name} \
+    --passcode {holder_keystore_passcode} \
+    --alias {holder_aid} \
+    --said {ipex_said} \
+    --time {time}
+
+pr_continue()
+```
+
+    Found grant EN4bAI-uv4hIRQI2tZEeQJSHEeQ_DbTYqqIGUlFQtemU for revocation
+
+
+    Sending admit message to EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+
+
+    ... admit message sent
+
+
+    
+    [1m[42m[90m  You can continue ✅  [0m
+    
+    
+
+
+The holder now sees the credential status as "Revoked" in their credential list shown by `kli vc list.`
+
+
+```python
+!kli vc list --name {holder_keystore_name} --passcode {holder_keystore_passcode} \
+    --alias {holder_aid}
+```
+
+    Current received credentials for holder_aid (EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE):
+    
+    Credential #1: EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc
+        Type: EventPass
+        Status: Revoked [91m✘[0m
+        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+        Issued on 2025-06-24T18:41:09.527463+00:00
+
+
+Now that this credential is revoked it can similarly be presented to the verifier from either the issuer or the holder so that the verifier can learn of the revocation state of the credential. This would be a push-style workflow.
+
+Arguably a pull-style approach is better for verifiers where they query the issuer, or some other infrastructure, to learn of the revocation state of credentials, similar to checking certificate revocation lists ([CRLs](https://en.wikipedia.org/wiki/Certificate_revocation_list)) in the x509 TLS certificate model. Using **observer** infrastructure is the best way to accomplish pull-style querying for credential state. 
+
+As of the writing of this training the only functional observer implementation is combined with witnesses as describe above in the note to the [Sharing the revoked credential status with the Holder](#Sharing-the-revoked-credential-status-with-the-Holder.) section.
 
 <div class="alert alert-primary">
 <b>📝 SUMMARY</b><hr>
 This notebook demonstrated the ACDC presentation and revocation flows:
 <ol>
-<li><b>Prerequisites:</b> We started with a Holder possessing an issued credential from an Issuer (established via the recap section).</li>
-<li><b>Verifier Setup:</b> A Verifier established its KERI identity (AID).</li>
-<li><b>Connectivity:</b> The Holder and Verifier exchanged and resolved OOBIs. The Verifier also resolved the credential's schema OOBI to enable validation.</li>
-<li><b>Presentation (IPEX):</b>
+    <li><b>Prerequisites:</b> We started with a Holder possessing an issued credential from an Issuer (established via the recap section).</li>
+    <li><b>Verifier Setup:</b> A Verifier established its KERI identity (AID).</li>
+    <li><b>Connectivity:</b> The Holder and Verifier exchanged and resolved OOBIs. The Verifier also resolved the credential's schema OOBI to enable validation.</li>
+    <li><b>Presentation (IPEX):</b>
 <ul>
-<li>Holder initiated the presentation using kli ipex grant, sending the credential to the Verifier.</li>
-<li>Verifier polled its mailbox (kli ipex list --poll) to receive the presentation.</li>
-<li>Verifier accepted and validated the presentation using kli ipex admit. Validation included schema checks, issuer authentication (KEL), and registry status checks (TEL).</li>
+    <li>Holder initiated the presentation using kli ipex grant, sending the credential to the Verifier.</li>
+    <li>Verifier polled its mailbox (kli ipex list --poll) to receive the presentation.</li>
+    <li>Verifier accepted and validated the presentation using kli ipex admit. Validation included schema checks, issuer authentication (KEL), and registry status checks (TEL).</li>
 </ul>
 </li>
 <li><b>Revocation:</b>
 <ul>
-<li>The original Issuer revoked the credential using kli vc revoke, updating the status in the credential registry's TEL.</li>
+    <li>The original Issuer revoked the credential using kli vc revoke, updating the status in the credential registry's TEL.</li>
+    <li>The Issuer then presented via IPEX Grant the revoked credential to the Holder.</li>    
+    <li>The Holder then received the revoked credential via IPEX Admit.</li>
 </ul>
 </li>
 </ol>
+Observers were mentioned as pull-style infrastructure for verifiers, or anyone else, to learn of credential revocation state.
+<br/><br/>
 This completes the basic lifecycle demonstration: issuance (previous notebook), presentation, and revocation, all handled securely using KERI identities and the IPEX protocol.
 </div>

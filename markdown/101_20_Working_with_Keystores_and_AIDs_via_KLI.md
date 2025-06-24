@@ -185,8 +185,6 @@ You can use `kli status` with the `--verbose` parameter to show the key event lo
     
     
     Witnesses:	
-
-
     
     {
      "v": "KERI10JSON0000fd_",

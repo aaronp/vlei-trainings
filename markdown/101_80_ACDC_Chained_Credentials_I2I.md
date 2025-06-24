@@ -192,24 +192,24 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EGlbqwf3Ga4BvF6VXKlf40PHPKDE9O9Sh2DLYLrq_G8H
-    	Public key 1:  DMAGtf7bbvSjdrfQ2FFbCCKtB6wR7s--B-w7l-RMtMaG
+    Prefix  EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz
+    	Public key 1:  DKHRs7Wd209Elgel2ViMwz_m3SnzrkepQpkBRCy_WsRx
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly
-    	Public key 1:  DEjaa5ldc04HQNiiWuh2uj2Q5c1EHIq9zMkGocHvoYOG
+    Prefix  EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
+    	Public key 1:  DOc81L67bvzNIxqZRU4XUhpXn41NbWrLdq5xs9WyA90_
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  EGdluYSncX2IGrXQltbI20VZzX-4ZHim-otOImaP1Sk_
-    	Public key 1:  DGEpYCWM5l-WrmgtdCc_cghizJpHSCCO7rmGsYq-_EA4
+    Prefix  EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay
+    	Public key 1:  DApz759MW-c8v5D5AyZnDxBd1067vsDmhODzDnTHz62W
     
 
 
@@ -224,8 +224,8 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    Registry:  acme_mgr_registry(EPCdfo7GCMux8P8lrHAjbz-mtNzOj5I9IRX2CIj44K0W) 
-    	created for Identifier Prefix:  EGlbqwf3Ga4BvF6VXKlf40PHPKDE9O9Sh2DLYLrq_G8H
+    Registry:  acme_mgr_registry(EEBjKMzLet2AGcTiEgPO1NHUDltu8ot45WQQ5pso2CzL) 
+    	created for Identifier Prefix:  EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz
 
 
     Waiting for TEL event witness receipts
@@ -234,34 +234,34 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    Registry:  employee_access_registry(ECoFStsBpu1oDnXxFsZEcQgTb9o851V7gy7-VEeTMr5_) 
-    	created for Identifier Prefix:  EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly
+    Registry:  employee_access_registry(EIxYAxNJaKLMrJ8YLqcekteR8cxCjDd8IrQm2EQ6mhZW) 
+    	created for Identifier Prefix:  EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
 
 
     
-    [1m[94mACME AID: EGlbqwf3Ga4BvF6VXKlf40PHPKDE9O9Sh2DLYLrq_G8H[0m
+    [1m[94mACME AID: EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz[0m
     
     
-    [1m[94mEmployee AID: EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly[0m
+    [1m[94mEmployee AID: EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU[0m
     
     
-    [1m[94mSub-contractor AID: EGdluYSncX2IGrXQltbI20VZzX-4ZHim-otOImaP1Sk_[0m
+    [1m[94mSub-contractor AID: EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay[0m
     
     
     [1m[4m[44m[90m  Generating and resolving OOBIs  [0m
     
 
 
-    http://witness-demo:5642/oobi/EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly/witness resolved
+    http://witness-demo:5642/oobi/EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU/witness resolved
 
 
-    http://witness-demo:5642/oobi/EGlbqwf3Ga4BvF6VXKlf40PHPKDE9O9Sh2DLYLrq_G8H/witness resolved
+    http://witness-demo:5642/oobi/EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz/witness resolved
 
 
-    http://witness-demo:5642/oobi/EGdluYSncX2IGrXQltbI20VZzX-4ZHim-otOImaP1Sk_/witness resolved
+    http://witness-demo:5642/oobi/EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay/witness resolved
 
 
-    http://witness-demo:5642/oobi/EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly/witness resolved
+    http://witness-demo:5642/oobi/EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU/witness resolved
 
 
     
@@ -312,6 +312,8 @@ pr_continue()
     
     [1m[94mRetieving Schema from Server:[0m
     
+
+
     [1;39m{
       [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw"[0m[1;39m,
       [0m[34;1m"$schema"[0m[1;39m: [0m[0;32m"http://json-schema.org/draft-07/schema#"[0m[1;39m,
@@ -437,6 +439,8 @@ pr_continue()
     
     [1m[94mRetieving Schema from Server:[0m
     
+
+
     [1;39m{
       [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EF2zX3g5YDyHMSjgsK4OayZMFmLRMxcAJfW363JhBOfD"[0m[1;39m,
       [0m[34;1m"$schema"[0m[1;39m: [0m[0;32m"http://json-schema.org/draft-07/schema#"[0m[1;39m,
@@ -770,11 +774,11 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    EEfT-xtk8IdQZsadomUzunO1U7zCUD0FTO1eEKfNTd4r has been created.
+    EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg has been created.
 
 
     
-    [1m[94mRole Credential SAID: EEfT-xtk8IdQZsadomUzunO1U7zCUD0FTO1eEKfNTd4r[0m
+    [1m[94mRole Credential SAID: EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg[0m
     
     
     [1m[42m[90m  You can continue ✅  [0m
@@ -820,7 +824,7 @@ pr_continue()
     
 
 
-    Sending message EE1wNop_RImEpqJWcSbK_-CllXXC3QR1aq_OnP4925Th to EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly
+    Sending message EABDwmwue-EoZ5N1G1oCd0rOGqvNO0-iYZTjcJ4Jcwm9 to EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
 
 
     ... grant message sent
@@ -831,7 +835,7 @@ pr_continue()
     
 
 
-    Sending admit message to EGlbqwf3Ga4BvF6VXKlf40PHPKDE9O9Sh2DLYLrq_G8H
+    Sending admit message to EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz
 
 
     ... admit message sent
@@ -843,24 +847,24 @@ pr_continue()
     
 
 
-    Current received credentials for employee (EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly):
+    Current received credentials for employee (EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU):
     
-    Credential #1: EEfT-xtk8IdQZsadomUzunO1U7zCUD0FTO1eEKfNTd4r
+    Credential #1: EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg
         Type: RoleCredential
         Status: Issued [92m✔[0m
-        Issued by EGlbqwf3Ga4BvF6VXKlf40PHPKDE9O9Sh2DLYLrq_G8H
-        Issued on 2025-06-05T22:23:08.052322+00:00
+        Issued by EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz
+        Issued on 2025-06-24T18:41:54.790050+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c2_",
-    	  "d": "EEfT-xtk8IdQZsadomUzunO1U7zCUD0FTO1eEKfNTd4r",
-    	  "i": "EGlbqwf3Ga4BvF6VXKlf40PHPKDE9O9Sh2DLYLrq_G8H",
-    	  "ri": "EPCdfo7GCMux8P8lrHAjbz-mtNzOj5I9IRX2CIj44K0W",
+    	  "d": "EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg",
+    	  "i": "EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz",
+    	  "ri": "EEBjKMzLet2AGcTiEgPO1NHUDltu8ot45WQQ5pso2CzL",
     	  "s": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw",
     	  "a": {
-    	    "d": "EPomGK9qOAiFFBCi8SZK7981gVA2zrBF_h3L0dFhP3lL",
-    	    "i": "EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly",
-    	    "dt": "2025-06-05T22:23:08.052322+00:00",
+    	    "d": "EEQsaJquy8ZMwTHejV4HWeDBU78ZCEqwbRyLCAbRpxPN",
+    	    "i": "EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU",
+    	    "dt": "2025-06-24T18:41:54.790050+00:00",
     	    "roleTitle": "Engineering Manager",
     	    "department": "Technology Innovations"
     	  }
@@ -903,6 +907,8 @@ with open(access_cred_data_file_path, 'w') as f:
     
     [1m[94mAcces Credential Attributes[0m
     
+
+
     [1;39m{
       [0m[34;1m"buildingId"[0m[1;39m: [0m[0;32m"HQ-EastWing"[0m[1;39m,
       [0m[34;1m"accessLevel"[0m[1;39m: [0m[0;32m"Level 2 - Common Areas & Labs"[0m[1;39m
@@ -947,9 +953,9 @@ with open(access_cred_edge_file_path, 'w') as f:
 
 
     [1;39m{
-      [0m[34;1m"d"[0m[1;39m: [0m[0;32m"EDRQ1Kp1Bf2byY8r0ZU8AvSon-WdrO9-vOG7_3eIH0Or"[0m[1;39m,
+      [0m[34;1m"d"[0m[1;39m: [0m[0;32m"EP1JQRj0CwhBHkmsQPjOi6yPbxcVRCb1GZ4qD7cwRyvY"[0m[1;39m,
       [0m[34;1m"manager_endorsement"[0m[1;39m: [0m[1;39m{
-        [0m[34;1m"n"[0m[1;39m: [0m[0;32m"EEfT-xtk8IdQZsadomUzunO1U7zCUD0FTO1eEKfNTd4r"[0m[1;39m,
+        [0m[34;1m"n"[0m[1;39m: [0m[0;32m"EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg"[0m[1;39m,
         [0m[34;1m"s"[0m[1;39m: [0m[0;32m"ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw"[0m[1;39m,
         [0m[34;1m"o"[0m[1;39m: [0m[0;32m"I2I"[0m[1;39m
       [1;39m}[0m[1;39m
@@ -1025,11 +1031,11 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    EKUsRCZXkEXFy3mXESZAsJ8WOoP6eiOYgJU8GlCnBEV9 has been created.
+    ECcUJHcF9sCBhPJjhlH-u-hxgXVM0Kc85c9BnLzayvJY has been created.
 
 
     
-    [1m[94mAccess Credential SAID: EKUsRCZXkEXFy3mXESZAsJ8WOoP6eiOYgJU8GlCnBEV9[0m
+    [1m[94mAccess Credential SAID: ECcUJHcF9sCBhPJjhlH-u-hxgXVM0Kc85c9BnLzayvJY[0m
     
     
     [1m[42m[90m  You can continue ✅  [0m
@@ -1073,7 +1079,7 @@ pr_continue()
     
 
 
-    Sending message EOQnVV8GLD6isYgqHjaA9ohuSUCDujgMgaPlvCxHIJb3 to EGdluYSncX2IGrXQltbI20VZzX-4ZHim-otOImaP1Sk_
+    Sending message EHUD6v5UtQFA-MQCCzbXhmX5QDBDQBokIbGJJWPnwqMX to EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay
 
 
     ... grant message sent
@@ -1084,7 +1090,7 @@ pr_continue()
     
 
 
-    Sending admit message to EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly
+    Sending admit message to EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
 
 
     ... admit message sent
@@ -1096,31 +1102,31 @@ pr_continue()
     
 
 
-    Current received credentials for subcontractor (EGdluYSncX2IGrXQltbI20VZzX-4ZHim-otOImaP1Sk_):
+    Current received credentials for subcontractor (EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay):
     
-    Credential #1: EKUsRCZXkEXFy3mXESZAsJ8WOoP6eiOYgJU8GlCnBEV9
+    Credential #1: ECcUJHcF9sCBhPJjhlH-u-hxgXVM0Kc85c9BnLzayvJY
         Type: AccessCredential
         Status: Issued [92m✔[0m
-        Issued by EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly
-        Issued on 2025-06-05T22:23:24.095891+00:00
+        Issued by EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
+        Issued on 2025-06-24T18:42:08.670946+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON000320_",
-    	  "d": "EKUsRCZXkEXFy3mXESZAsJ8WOoP6eiOYgJU8GlCnBEV9",
-    	  "i": "EKZJBOcl723F-JnNz8uZNlqhANgto4_0UxLWMSoFO9ly",
-    	  "ri": "ECoFStsBpu1oDnXxFsZEcQgTb9o851V7gy7-VEeTMr5_",
+    	  "d": "ECcUJHcF9sCBhPJjhlH-u-hxgXVM0Kc85c9BnLzayvJY",
+    	  "i": "EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU",
+    	  "ri": "EIxYAxNJaKLMrJ8YLqcekteR8cxCjDd8IrQm2EQ6mhZW",
     	  "s": "EF2zX3g5YDyHMSjgsK4OayZMFmLRMxcAJfW363JhBOfD",
     	  "a": {
-    	    "d": "EFlWyQZhutX7a8p8xC-0QEmvWzSj7vOEpqgU1ePjVK5v",
-    	    "i": "EGdluYSncX2IGrXQltbI20VZzX-4ZHim-otOImaP1Sk_",
-    	    "dt": "2025-06-05T22:23:24.095891+00:00",
+    	    "d": "EJHX6r7ajKfhgCv917Ev5OeXbd1pB1MtG6GzyoNbgboC",
+    	    "i": "EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay",
+    	    "dt": "2025-06-24T18:42:08.670946+00:00",
     	    "buildingId": "HQ-EastWing",
     	    "accessLevel": "Level 2 - Common Areas & Labs"
     	  },
     	  "e": {
-    	    "d": "EDRQ1Kp1Bf2byY8r0ZU8AvSon-WdrO9-vOG7_3eIH0Or",
+    	    "d": "EP1JQRj0CwhBHkmsQPjOi6yPbxcVRCb1GZ4qD7cwRyvY",
     	    "manager_endorsement": {
-    	      "n": "EEfT-xtk8IdQZsadomUzunO1U7zCUD0FTO1eEKfNTd4r",
+    	      "n": "EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg",
     	      "s": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw",
     	      "o": "I2I"
     	    }
@@ -1137,8 +1143,6 @@ pr_continue()
     
     [1m[42m[90m  You can continue ✅  [0m
     
-
-
     
 
 

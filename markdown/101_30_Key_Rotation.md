@@ -2,16 +2,16 @@
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
-    Understandd the importance of key rotation, learn about the pre-rotation mechanism, and see how to execute and verify a rotation using KLI commands.
+    Understand the importance of key rotation, learn about the pre-rotation mechanism, and see how to execute and verify a rotation using KLI commands.
 </div>
 
 ## Importance of Key Rotation
 
-Securing AIDs involves more than just signing data; robust long-term management relies on key rotation. This fundamental practice involves changing the cryptographic keys associated with an identifier over time.
+Key rotation in a scalable identity system while the identifier remains stable is the hard problem from cryptography and distributed systems that KERI solves. The need to rotate keys guided the entire design of KERI and deeply impacted the vLEI system architecture. This is because securing identity and data involves more than just signing data; robust long-term security for an identity and any data it signs relies on key rotation. The ability to rotate keys is a fundamental security practice that involves changing over time the cryptographic keys associated with an identifier.
 
-Rotating keys isn't just about changing them arbitrarily; it's a crucial practice for several reasons:
+Rotating keys is not just about changing them arbitrarily; it's a crucial practice for several reasons:
 
-- **Security Hygiene & Limiting Exposure:** Keys used frequently are more exposed to potential compromise (e.g., residing in memory). Regularly rotating to new keys limits the time window an attacker has if they manage to steal a current key
+- **Security Hygiene and Limiting Exposure:** Keys used frequently are more exposed to potential compromise (e.g., residing in memory). Regularly rotating to new keys limits the time window an attacker has if they manage to steal a current key
 - **Cryptographic Agility:** Cryptographic algorithms evolve. Vulnerabilities are found in older ones, and stronger new ones emerge (like post-quantum algorithms). Key rotation allows an identifier to smoothly transition to updated cryptography without changing the identifier itself
 - **Recovery and Delegation:** You might need to recover control of an identifier if the current keys are lost or compromised, or delegate authority to another entity. Both scenarios typically involve establishing new keys, which is achieved through rotation events
 
@@ -22,7 +22,7 @@ Before diving into key rotation, it's helpful to explain Establishment Events. N
 - **Inception Event (icp):** The very first event that creates the AID and establishes its initial controlling keys
 - **Rotation Event (rot):** An event that changes the controlling keys from the set established by the previous Establishment Event to a new set
 
-These Establishment Events form the backbone of an AID's security history, allowing anyone to verify who had control at what time. Other event types exist (like interaction events), but they rely on the authority defined by the latest Establishment Event.
+These Establishment Events form the backbone of an AID's security history, allowing anyone to verify which keys had control at what time. Other event types exist (like interaction events), but they rely on the authority defined by the latest Establishment Event. Interaction events rely on the signing authority of the keys referenced in the latest establishment event. 
 
 ## The Pre-Rotation Mechanism
 
@@ -97,16 +97,17 @@ The error message says we tried to rotate a nontransferable prefix. What does th
 Not all KERI identifiers are designed to have their keys rotated. By default, `kli incept` creates a non-transferable identifier. Here is the difference:
 
 **Non-Transferable AID:**
-- Key rotation is not possible. Think of it as a fixed identifier.
+- Key rotation is not possible. Think of it as a fixed set of keys for an identifier.
 - Its control is permanently bound to the initial set of keys established at inception.
-- The prefix is derived from these initial keys, and since key rotation is not possible, control is permanently tied to this initial key set.
-- The public key is directly derivable from the AID prefix itself.
+- The prefix is derived from these initial keys.
+- As a special case, when only a single key pair was used to create a non-transferable AID the public key is directly derivable from the AID prefix itself.
+  - This is useful for use cases where you want to avoid sending KELs of non-transferable AIDs and instead infer the one-event KEL and associated public key from the AID.
 
 **Transferable AID:**
 - Key rotation is possible. 
 - Its control can be transferred (rotated) to new sets of keys over time.
 - It uses the pre-rotation mechanism, committing to the next set of keys in each rotation event.
-- The prefix is derived from the initial keys, although authoritative keys will change after rotation, the prefix will remain the same. This allows the identity to persist even as underlying keys change.
+- The prefix is derived from the initial keys. Although authoritative keys will change upon each rotation the prefix will remain the same. This allows the identifier to remain stable even as its underlying controlling keys change.
 
 How does KERI know the difference?
 
@@ -354,3 +355,5 @@ Key rotation is essential for security hygiene, cryptographic agility, and enabl
 </p>
 Performing a rotation (<code>kli rotate</code>) creates a rot event, increments the sequence number, activates the previously pre-rotated keys (revealing them in the k field), and commits to a new set of keys (digest in the n field), all while keeping the AID prefix unchanged. This chained process forms part of the Key Event Log (KEL).
 </div>
+
+[<- Prev (Signatures)](101_25_Signatures.ipynb) | [Next (Modes, OOBIs, and Witnesses) ->](101_35_Modes_oobis_and_witnesses.ipynb)
