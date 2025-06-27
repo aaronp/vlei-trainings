@@ -168,4 +168,15 @@ Try to verify again.
 
 As expected, the verification fails. Even a tiny change invalidates the signature, demonstrating the integrity protection it provides.
 
+<div class="alert alert-prymary">
+<b>📝 SUMMARY</b><hr>
+<ul>
+<li><strong>Digital Signature Process:</strong> Data is signed by first creating a condensed representation (a digest) using a hash function, and then encrypting that digest with a private key. The resulting encrypted digest is the digital signature.</li>
+<li><strong>Verification:</strong> To verify, a recipient uses the signer's public key to decrypt the signature, revealing the original digest. They then independently compute the digest of the received data. If the two digests match, the signature is valid.</li>
+<li><strong>Core Guarantees:</strong> A valid digital signature confirms <strong>authenticity</strong> (the message came from the key owner), <strong>integrity</strong> (the message wasn't altered), and <strong>non-repudiability</strong> (the signer cannot deny their action).</li>
+<li><strong>KERI's Key Management:</strong> In KERI, the crucial step for a verifier is finding the correct public key that was authoritative at the time of signing. This is accomplished by consulting the identifier's <strong>Key Event Log (KEL)</strong>, which provides the secure, verifiable history of key changes.</li>
+<li><strong>Practical Demonstration:</strong> The <code>kli sign</code> command generates a signature, while <code>kli verify</code> checks it. Even a minor alteration to the signature or the original data will cause the verification to fail, demonstrating the cryptographic security of the process.</li>
+</ul>
+</div>
+
 [<- Prev (Working with Keystores and AIDs via KLI)](101_20_Working_with_Keystores_and_AIDs_via_KLI.ipynb) | [Next (Rotation) ->](101_30_Key_Rotation.ipynb)

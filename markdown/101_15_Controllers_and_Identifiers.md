@@ -42,7 +42,7 @@ The most important aspect is an entity has direct access to the private keys the
 
 While the Controller holds authority over the AID it relies on software to operate and maintain it. In this training, you will first be using the KLI as the Controller’s tool for interacting with and managing AIDs. Later trainings will include using the Signify and KERIA tooling to interact with AIDs.
 
-## Key Event Logs (KELs) - Never Trust, Always Veify
+## Key Event Logs (KELs) - Never Trust, Always Verify
 
 The Controller's authority more than a trusted assertion, it is proven using cryptography through a verification process. Remember, KERI is a "never trust, always verify" protocol. No matter what statements a Controller makes they cannot be relied upon unless they can be cryptographically verified. KERI is a "signed everything" architecture with no shared secrets. This means no bearer tokens like JWT and OAuth have. Instead KERI uses cryptographic signature to create trust.
 
@@ -86,6 +86,23 @@ Control in KERI can be quite nuanced including single signature, multiple signat
 * **Delegation**: A Controller can grant some level of authority to a completely separate Delegated Identifier. This allows for creating scalable signing infrastructure with delegation hierarchies that can model complex organizational or authority structures.
 
 We'll explore these advanced concepts like delegation and multisig configurations in later sections.
+
+# Types of Autonomic Identifiers
+
+## Transferable AID
+
+A transferable AID may rotate keys and thus may have inception, rotation, and interaction events in its key event log. Most controllers that are not witnesses will use transferable AIDs. Any AID that issues credentials will be a transferable AID.
+
+- Example transferable AID: `EIkO4CUmYXukX4auGU9yaFoQaIicfVZkazQ0A3IO5biT`
+  - Notice the 'E' at the start.
+
+## Non-transferable AID
+
+A non-transferable AID cannot rotate keys and only ever has one event, the inception event, in its key event log. Use cases for non-transferable AIDs include witnesses, IoT devices, ephemeral identifiers, or anywhere that signing capabilities are needed where rotation capabilities are not.
+
+You can visually see the difference between a non-transferable AID and a transferable AID because a non-transferable AID starts with the "B" character as shown here:
+- `BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha`
+  - Notice the 'B' at the start.
 
 <div class="alert alert-prymary">
   <b>📝 SUMMARY</b><hr>
