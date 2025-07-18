@@ -52,9 +52,9 @@ To deploy the training environment, we use Docker to create a local instance of 
 
 Want to ask your favorite Large Language Model (LLM) questions about KERI, ACDC, or the vLEI ecosystem based on the content in this repository?
 
-To help you get the most accurate and contextually relevant responses, we've compiled all the training material into a single, convenient file: **[`llm_context.md`](llm_context.md)**.
+To help you get the most accurate and contextually relevant responses, we've compiled all the training material into a single, convenient file: **[`markdown/llm_context.md`](markdown/llm_context.md)**.
 
-Simply upload `llm_context.md` as context to your LLM when you're asking questions about the topics covered here.
+Simply upload `markdown/llm_context.md` as context to your LLM when you're asking questions about the topics covered here.
 
 While this consolidated file is excellent for quick LLM lookups or generating summaries, we strongly encourage you to read and follow the original training material within this repository. The hands-on notebooks offer a step-by-step learning experience that is crucial for a deep understanding.
 
@@ -74,5 +74,5 @@ How to report an issue or provide feedback:
 We appreciate your help in making these training materials as accurate and effective as possible!
 
 ### Authors
-- Esteban Garcia (GLEIF)
+- GLEIF vLEI Development Team
 
