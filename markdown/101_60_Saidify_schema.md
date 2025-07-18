@@ -44,8 +44,8 @@ print("\ncalculated saids ($id):")
     Successfully wrote processed data to ./config/schemas/sample_schema.json
     
     calculated saids ($id):
-    [0;32m"EJgBEKtba5ewUgG3k268YadY2eGBRrsVF6fF6tLyoRni"[0m
-    [0;32m"ED614TseulOlXWhFNsOcKIKt9Na0gCByugqyKVsva-gl"[0m
+    "EJgBEKtba5ewUgG3k268YadY2eGBRrsVF6fF6tLyoRni"
+    "ED614TseulOlXWhFNsOcKIKt9Na0gCByugqyKVsva-gl"
 
 
 After running this command, if you inspect output **[sample_credential_schema.json](config/schemas/sample_schema.json)**, you will see that the previously empty `"id": ""` fields (both the top-level one and the one inside the a block) have been populated with SAID strings (long Base64-like identifiers).

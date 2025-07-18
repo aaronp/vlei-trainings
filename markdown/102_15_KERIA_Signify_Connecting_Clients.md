@@ -1,13 +1,13 @@
-# Signify-ts: Securely Connecting Controllers
+# SignifyTS: Securely Connecting Controllers
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
-  Explain how to establish a secure, mutually authenticated connection between two KERIA/Signify-ts controllers using Out-of-Band Introductions (OOBIs) and the challenge/response protocol to enhance trust.
+  Explain how to establish a secure, mutually authenticated connection between two KERIA/SignifyTS controllers using Out-of-Band Introductions (OOBIs) and the challenge/response protocol to enhance trust.
 </div>
 
 ## Controller and AID Setup
 
-This notebook focuses on connecting two independent controllers using the KERIA/Signify architecture. This involves two `SignifyClient` instances, each managing its own AID, establishing contact, and then authenticating each other. Conceptually, these steps mirror the `kli` process for connecting controllers but are executed through the `signify-ts` library interacting with KERIA agents.
+This notebook focuses on connecting two independent controllers using the KERIA/Signify architecture. This involves two `SignifyClient` instances, each managing its own AID, establishing contact (node discovery), and then mutually authenticating each to the other using the challenge signing and verification process. Conceptually, these steps mirror the `kli` process for connecting and verifying controllers yet are executed through the `signify-ts` library interacting with KERIA agents.
 
 You will begin by setting up two distinct `SignifyClient` instances, which we'll call `clientA` (representing a controller Alfred) and `clientB` (representing a controller Betty). Each client will:
 1.  Generate a unique `bran` (passcode).
@@ -26,7 +26,7 @@ const url = 'http://keria:3901';
 const bootUrl = 'http://keria:3903';
 
 // Inception request parameters
-const identifierArgs = {
+const inceptionArgs = {
     toad: 3,
     wits: [  
         'BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha',
@@ -36,6 +36,7 @@ const identifierArgs = {
 };
 
 await ready();
+console.log("Signify library is ready.")
 
 // ----- Client A (Alfred) -----
 
@@ -45,16 +46,17 @@ const clientA = new SignifyClient(url, branA, Tier.low, bootUrl);
 
 await clientA.boot();
 await clientA.connect();
+console.log("Agent delegated and ready")
 
-const AInceptionResult = await clientA.identifiers().create(aidAAlias, identifierArgs);
+const aInceptionResult = await clientA.identifiers().create(aidAAlias, inceptionArgs);
 
-const AInceptionOperation = await AInceptionResult.op();
+const aInceptionOperation = await aInceptionResult.op();
 
 const { response: aidA }  = await clientA
     .operations()
-    .wait(AInceptionOperation, AbortSignal.timeout(30000));
+    .wait(aInceptionOperation, AbortSignal.timeout(30000));
 
-await clientA.operations().delete(AInceptionOperation.name);
+await clientA.operations().delete(aInceptionOperation.name);
 
 // ----- Client B (Betty) -----
 
@@ -65,32 +67,36 @@ const clientB = new SignifyClient(url, branB, Tier.low, bootUrl);
 await clientB.boot();
 await clientB.connect();
 
-const BInceptionResult = await clientB.identifiers().create(aidBAlias, identifierArgs);
+const bInceptionResult = await clientB.identifiers().create(aidBAlias, inceptionArgs);
 
-const BInceptionOperation = await BInceptionResult.op();
+const bInceptionOperation = await bInceptionResult.op();
 
 const { response: aidB }  = await clientB
     .operations()
-    .wait(BInceptionOperation, AbortSignal.timeout(30000));
+    .wait(bInceptionOperation, AbortSignal.timeout(30000));
 
-await clientB.operations().delete(BInceptionOperation.name);
+await clientB.operations().delete(bInceptionOperation.name);
 
 console.log(`Client A AID Pre: ${aidA.i}\nClient B AID Pre: ${aidB.i}`)
 ```
 
-    Client A AID Pre: EOpFAI7gf2qd6jV0yZaLa1PqZ1JEbeKaADazwABXBVx0
-    Client B AID Pre: EHYEEN95CTaT_jIVReXY4nLeSBeb2cIvsxECUTy-794a
+    Signify library is ready.
+    Agent delegated and ready
+    Client A AID Pre: EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA
+    Client B AID Pre: EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ
 
 
 <div class="alert alert-info">
     <b>ℹ️ Note</b><hr> For this demonstration, both clients will connect to the same KERIA instance (defined by <code>url</code> and <code>bootUrl</code>). In a real-world scenario, Alfred and Betty would likely each have their own Signify clients running on their respective devices and interacting with their own (or chosen) KERIA agent instances. The KERIA agent URLs might be different for each. However, the KERI protocol and Signify patterns for connection and authentication remain the same.
 </div>
 
+## 
+
 ## Assigning Agent End Roles
 
-As discussed in "KERIA-Signify Basics", when a `SignifyClient` connects, it establishes a **Client AID** (which you directly control via the `bran`) and a delegated **Agent AID** (managed by the KERIA service). For these Agent AIDs to act effectively on behalf of the AIDs we just created (`aidA` and `aidB`), we need to explicitly authorize them by assigning an `agent` end role.
+As discussed in "KERIA-Signify Basics", when a `SignifyClient` connects, it establishes a **Client AID** (which you directly control via the `bran`) and a delegated **Agent AID** (managed by the KERIA agent). For these Agent AIDs to act effectively on behalf of the AIDs we just created (`aidA` and `aidB`), we need to explicitly authorize the Agent AID to act in the `agent` role by assigning an `agent` end role to.
 
-The `agent` role, in this context, signifies that the KERIA Agent AID associated with `clientA` is authorized to manage/interact on behalf of `aidA`, and similarly for `clientB` and `aidB`. This is a crucial step for enabling the KERIA agent to perform tasks like responding to OOBI requests for these specific identifiers.
+The `agent` role, in this context, signifies that the KERIA Agent AID associated with `clientA` is authorized to manage/interact on behalf of `aidA`, and similarly for `clientB` and `aidB`. This is a crucial step for enabling the KERIA agent to perform tasks like sending messages through the agent mailbox and responding to OOBI requests for these specific identifiers.
 
 Use the `client.identifiers().addEndRole()` method to add the role. This method requires:
 - The alias of the identifier granting the authorization (e.g., `aidAAlias`).
@@ -103,49 +109,47 @@ Use the `client.identifiers().addEndRole()` method to add the role. This method 
 const agentRole = 'agent';
 
 // Authorize clientA's Agent AID to act as an agent for aidA
-const AAddRoleResult = await clientA
+const aAddRoleResult = await clientA
     .identifiers()
     .addEndRole(aidAAlias, 
                 agentRole, 
                 clientA!.agent!.pre // clientA.agent.pre is the Agent AID prefix
                ); 
 
-const AAddRoleOperation = await AAddRoleResult.op();
+const aAddRoleOperation = await aAddRoleResult.op();
 
-const { response: AAddRoleResponse } = await clientA
+const { response: aAddRoleResponse } = await clientA
     .operations()
-    .wait(AAddRoleOperation, AbortSignal.timeout(30000));
+    .wait(aAddRoleOperation, AbortSignal.timeout(30000));
 
-await clientA.operations().delete(AAddRoleOperation.name);
+await clientA.operations().delete(aAddRoleOperation.name);
 
 console.log(`Client A: Assigned '${agentRole}' role to KERIA Agent ${clientA.agent!.pre} for AID ${aidA.i}`);
 
 // ----- Client B: Assign 'agent' role for aidB to its KERIA Agent AID -----
 
 // Authorize clientB's Agent AID to act as an agent for aidB
-const BAddRoleResult = await clientB
+const bAddRoleResult = await clientB
     .identifiers()
     .addEndRole(aidBAlias, 
                 agentRole, 
                 clientB!.agent!.pre // clientB.agent.pre is the Agent AID prefix
                ); 
 
-const BAddRoleOperation = await BAddRoleResult.op();
+const bAddRoleOperation = await bAddRoleResult.op();
 
-const { response: BAddRoleResponse } = await clientB
+const { response: bAddRoleResponse } = await clientB
     .operations()
-    .wait(BAddRoleOperation, AbortSignal.timeout(30000));
+    .wait(bAddRoleOperation, AbortSignal.timeout(30000));
 
-await clientB.operations().delete(BAddRoleOperation.name);
+await clientB.operations().delete(bAddRoleOperation.name);
 
 console.log(`Client B: Assigned '${agentRole}' role to KERIA Agent ${clientB.agent!.pre} for AID ${aidB.i}`);
 
 ```
 
-    Client A: Assigned 'agent' role to KERIA Agent EExX_neoSheMZAlsLyePL4EFstB0qVkAwb8aV_i1QMCW for AID EOpFAI7gf2qd6jV0yZaLa1PqZ1JEbeKaADazwABXBVx0
-
-
-    Client B: Assigned 'agent' role to KERIA Agent EImHfGBXGoKmY213riggWsMyJhYPjaifHIVxcB88EWfx for AID EHYEEN95CTaT_jIVReXY4nLeSBeb2cIvsxECUTy-794a
+    Client A: Assigned 'agent' role to KERIA Agent EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU for AID EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA
+    Client B: Assigned 'agent' role to KERIA Agent EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU for AID EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ
 
 
 ## Discovery via OOBIs
@@ -177,10 +181,8 @@ console.log(`Client B (Betty) generated OOBI for aidB: ${oobiB_url}`);
 
 ```
 
-    Client A (Alfred) generated OOBI for aidA: http://keria:3902/oobi/EOpFAI7gf2qd6jV0yZaLa1PqZ1JEbeKaADazwABXBVx0/agent/EExX_neoSheMZAlsLyePL4EFstB0qVkAwb8aV_i1QMCW
-
-
-    Client B (Betty) generated OOBI for aidB: http://keria:3902/oobi/EHYEEN95CTaT_jIVReXY4nLeSBeb2cIvsxECUTy-794a/agent/EImHfGBXGoKmY213riggWsMyJhYPjaifHIVxcB88EWfx
+    Client A (Alfred) generated OOBI for aidA: http://keria:3902/oobi/EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA/agent/EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU
+    Client B (Betty) generated OOBI for aidB: http://keria:3902/oobi/EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ/agent/EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU
 
 
 ### Resolving OOBI URLs
@@ -217,15 +219,9 @@ console.log(`Client B resolved Alfred's OOBI. Response:`, BResolveResponse.respo
 
     
     Client A (Alfred) attempting to resolve Betty's OOBI...
-
-
     Client A resolved Betty's OOBI. Response: OK
-
-
     
     Client B (Betty) attempting to resolve Alfred's OOBI...
-
-
     Client B resolved Alfred's OOBI. Response: OK
 
 
@@ -246,29 +242,27 @@ console.log(BContacts);
 
     
     Verifying contacts...
-
-
     [
       {
-        alias: [32m"Betty_Contact_for_Alfred"[39m,
-        oobi: [32m"http://keria:3902/oobi/EHYEEN95CTaT_jIVReXY4nLeSBeb2cIvsxECUTy-794a/agent/EImHfGBXGoKmY213riggWsMyJhYPjaifHIVxcB88EWfx"[39m,
-        id: [32m"EHYEEN95CTaT_jIVReXY4nLeSBeb2cIvsxECUTy-794a"[39m,
+        alias: "Betty_Contact_for_Alfred",
+        oobi: "http://keria:3902/oobi/EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ/agent/EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU",
+        id: "EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ",
         ends: {
           agent: {
-            EImHfGBXGoKmY213riggWsMyJhYPjaifHIVxcB88EWfx: { http: [32m"http://keria:3902/"[39m }
+            "EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU": { http: "http://keria:3902/" }
           },
           witness: {
-            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
-              http: [32m"http://witness-demo:5642/"[39m,
-              tcp: [32m"tcp://witness-demo:5632/"[39m
+            "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha": {
+              http: "http://witness-demo:5642/",
+              tcp: "tcp://witness-demo:5632/"
             },
             BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
-              http: [32m"http://witness-demo:5643/"[39m,
-              tcp: [32m"tcp://witness-demo:5633/"[39m
+              http: "http://witness-demo:5643/",
+              tcp: "tcp://witness-demo:5633/"
             },
-            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
-              http: [32m"http://witness-demo:5644/"[39m,
-              tcp: [32m"tcp://witness-demo:5634/"[39m
+            "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX": {
+              http: "http://witness-demo:5644/",
+              tcp: "tcp://witness-demo:5634/"
             }
           }
         },
@@ -276,29 +270,27 @@ console.log(BContacts);
         wellKnowns: []
       }
     ]
-
-
     [
       {
-        alias: [32m"Alfred_Contact_for_Betty"[39m,
-        oobi: [32m"http://keria:3902/oobi/EOpFAI7gf2qd6jV0yZaLa1PqZ1JEbeKaADazwABXBVx0/agent/EExX_neoSheMZAlsLyePL4EFstB0qVkAwb8aV_i1QMCW"[39m,
-        id: [32m"EOpFAI7gf2qd6jV0yZaLa1PqZ1JEbeKaADazwABXBVx0"[39m,
+        alias: "Alfred_Contact_for_Betty",
+        oobi: "http://keria:3902/oobi/EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA/agent/EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU",
+        id: "EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA",
         ends: {
           agent: {
-            EExX_neoSheMZAlsLyePL4EFstB0qVkAwb8aV_i1QMCW: { http: [32m"http://keria:3902/"[39m }
+            EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU: { http: "http://keria:3902/" }
           },
           witness: {
-            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
-              http: [32m"http://witness-demo:5642/"[39m,
-              tcp: [32m"tcp://witness-demo:5632/"[39m
+            "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha": {
+              http: "http://witness-demo:5642/",
+              tcp: "tcp://witness-demo:5632/"
             },
             BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
-              http: [32m"http://witness-demo:5643/"[39m,
-              tcp: [32m"tcp://witness-demo:5633/"[39m
+              http: "http://witness-demo:5643/",
+              tcp: "tcp://witness-demo:5633/"
             },
-            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
-              http: [32m"http://witness-demo:5644/"[39m,
-              tcp: [32m"tcp://witness-demo:5634/"[39m
+            "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX": {
+              http: "http://witness-demo:5644/",
+              tcp: "tcp://witness-demo:5634/"
             }
           }
         },
@@ -312,9 +304,9 @@ console.log(BContacts);
 
 Successfully resolving an OOBI means you've retrieved and cryptographically verified the KEL of the target AID. This establishes the authenticity and integrity of the AID's key history.
 
-However, it does not, by itself, prove that the entity you are currently communicating with over the network (the one that provided the OOBI or is responding via the OOBI's endpoint) is the legitimate controller of that AID's private keys.
+However, it does not, by itself, prove conclusively that the entity you are currently communicating with over the network (the one that provided the OOBI or is responding via the OOBI's endpoint) is the legitimate controller of that AID's private keys. A liveness test is needed to prove that the controllers of each AID are actually in control of each respective AID.
 
-This is why the **Challenge-Response** protocol is critical for establishing authenticated control.
+This is why the **Challenge-Response** protocol is critical for establishing authenticated control. It serves as that liveness test.
 
 The process, as described in the "Connecting Controllers" notebook for `kli`, is as follows for each pair (e.g., Alfred challenging Betty):
 
@@ -344,22 +336,20 @@ console.log("Client B's challenge words for Alfred:", challengeWordsB.words);
 ```
 
     Client A's challenge words for Betty: [
-      [32m"include"[39m, [32m"forest"[39m,
-      [32m"goat"[39m,    [32m"clock"[39m,
-      [32m"patch"[39m,   [32m"sorry"[39m,
-      [32m"bullet"[39m,  [32m"void"[39m,
-      [32m"logic"[39m,   [32m"toss"[39m,
-      [32m"method"[39m,  [32m"follow"[39m
+      "gaze",     "clever",
+      "install",  "jump",
+      "captain",  "piano",
+      "dignity",  "whale",
+      "elephant", "endorse",
+      "copper",   "trumpet"
     ]
-
-
     Client B's challenge words for Alfred: [
-      [32m"junior"[39m,  [32m"finish"[39m,
-      [32m"twelve"[39m,  [32m"write"[39m,
-      [32m"reflect"[39m, [32m"resource"[39m,
-      [32m"cage"[39m,    [32m"earth"[39m,
-      [32m"penalty"[39m, [32m"garment"[39m,
-      [32m"pipe"[39m,    [32m"sorry"[39m
+      "six",      "foil",
+      "pill",     "art",
+      "cinnamon", "indoor",
+      "warrior",  "slim",
+      "awful",    "rather",
+      "knife",    "advance"
     ]
 
 
@@ -409,59 +399,49 @@ console.log(AContactsAfterAuth)
 ```
 
     
-    Betty (aidB: EHYEEN95CTaT_jIVReXY4nLeSBeb2cIvsxECUTy-794a) responding to Alfred's (aidA: EOpFAI7gf2qd6jV0yZaLa1PqZ1JEbeKaADazwABXBVx0) challenge...
-
-
+    Betty (aidB: EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ) responding to Alfred's (aidA: EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA) challenge...
     Betty's response sent.
-
-
     
     Alfred (aidA) verifying Betty's (aidB) response...
-
-
-    Alfred: Betty's response verified. SAID of exn: EAaIpCDDfZiIblIWmLcr4tRnM2t_vuOvZVsUNLAT9gGM
-
-
+    Alfred: Betty's response verified. SAID of exn: EN5L5ZYljzorITTNpqk4Trsmsrs-3yadrVSrm2f7nGVM
     Alfred: Marked Betty's contact as authenticated.
-
-
     [
       {
-        alias: [32m"Betty_Contact_for_Alfred"[39m,
-        oobi: [32m"http://keria:3902/oobi/EHYEEN95CTaT_jIVReXY4nLeSBeb2cIvsxECUTy-794a/agent/EImHfGBXGoKmY213riggWsMyJhYPjaifHIVxcB88EWfx"[39m,
-        id: [32m"EHYEEN95CTaT_jIVReXY4nLeSBeb2cIvsxECUTy-794a"[39m,
+        alias: "Betty_Contact_for_Alfred",
+        oobi: "http://keria:3902/oobi/EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ/agent/EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU",
+        id: "EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ",
         ends: {
           agent: {
-            EImHfGBXGoKmY213riggWsMyJhYPjaifHIVxcB88EWfx: { http: [32m"http://keria:3902/"[39m }
+            "EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU": { http: "http://keria:3902/" }
           },
           witness: {
-            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
-              http: [32m"http://witness-demo:5642/"[39m,
-              tcp: [32m"tcp://witness-demo:5632/"[39m
+            "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha": {
+              http: "http://witness-demo:5642/",
+              tcp: "tcp://witness-demo:5632/"
             },
             BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
-              http: [32m"http://witness-demo:5643/"[39m,
-              tcp: [32m"tcp://witness-demo:5633/"[39m
+              http: "http://witness-demo:5643/",
+              tcp: "tcp://witness-demo:5633/"
             },
-            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
-              http: [32m"http://witness-demo:5644/"[39m,
-              tcp: [32m"tcp://witness-demo:5634/"[39m
+            "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX": {
+              http: "http://witness-demo:5644/",
+              tcp: "tcp://witness-demo:5634/"
             }
           }
         },
         challenges: [
           {
-            dt: [32m"2025-06-24T18:42:37.806000+00:00"[39m,
+            dt: "2025-07-18T00:27:43.369000+00:00",
             words: [
-              [32m"include"[39m, [32m"forest"[39m,
-              [32m"goat"[39m,    [32m"clock"[39m,
-              [32m"patch"[39m,   [32m"sorry"[39m,
-              [32m"bullet"[39m,  [32m"void"[39m,
-              [32m"logic"[39m,   [32m"toss"[39m,
-              [32m"method"[39m,  [32m"follow"[39m
+              "gaze",     "clever",
+              "install",  "jump",
+              "captain",  "piano",
+              "dignity",  "whale",
+              "elephant", "endorse",
+              "copper",   "trumpet"
             ],
-            said: [32m"EAaIpCDDfZiIblIWmLcr4tRnM2t_vuOvZVsUNLAT9gGM"[39m,
-            authenticated: [33mtrue[39m
+            said: "EN5L5ZYljzorITTNpqk4Trsmsrs-3yadrVSrm2f7nGVM",
+            authenticated: true
           }
         ],
         wellKnowns: []
@@ -511,59 +491,49 @@ console.log(BContactsAfterAuth);
 ```
 
     
-    Alfred (aidA: EOpFAI7gf2qd6jV0yZaLa1PqZ1JEbeKaADazwABXBVx0) responding to Betty's (aidB: EHYEEN95CTaT_jIVReXY4nLeSBeb2cIvsxECUTy-794a) challenge...
-
-
+    Alfred (aidA: EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA) responding to Betty's (aidB: EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ) challenge...
     Alfred's response sent.
-
-
     
     Betty (aidB) verifying Alfred's (aidA) response...
-
-
-    Betty: Alfred's response verified. SAID of exn: EOhKVgColLrKj4qxzTRsh6FAMesSrGOwEEzLAJx46AlW
-
-
+    Betty: Alfred's response verified. SAID of exn: EEw1jfkIz0L1af2bsiLGC9f1WDOpxzit7glRWG4_dWfB
     Betty: Marked Alfred's contact as authenticated.
-
-
     [
       {
-        alias: [32m"Alfred_Contact_for_Betty"[39m,
-        oobi: [32m"http://keria:3902/oobi/EOpFAI7gf2qd6jV0yZaLa1PqZ1JEbeKaADazwABXBVx0/agent/EExX_neoSheMZAlsLyePL4EFstB0qVkAwb8aV_i1QMCW"[39m,
-        id: [32m"EOpFAI7gf2qd6jV0yZaLa1PqZ1JEbeKaADazwABXBVx0"[39m,
+        alias: "Alfred_Contact_for_Betty",
+        oobi: "http://keria:3902/oobi/EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA/agent/EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU",
+        id: "EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA",
         ends: {
           agent: {
-            EExX_neoSheMZAlsLyePL4EFstB0qVkAwb8aV_i1QMCW: { http: [32m"http://keria:3902/"[39m }
+            EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU: { http: "http://keria:3902/" }
           },
           witness: {
-            [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m: {
-              http: [32m"http://witness-demo:5642/"[39m,
-              tcp: [32m"tcp://witness-demo:5632/"[39m
+            "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha": {
+              http: "http://witness-demo:5642/",
+              tcp: "tcp://witness-demo:5632/"
             },
             BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM: {
-              http: [32m"http://witness-demo:5643/"[39m,
-              tcp: [32m"tcp://witness-demo:5633/"[39m
+              http: "http://witness-demo:5643/",
+              tcp: "tcp://witness-demo:5633/"
             },
-            [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m: {
-              http: [32m"http://witness-demo:5644/"[39m,
-              tcp: [32m"tcp://witness-demo:5634/"[39m
+            "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX": {
+              http: "http://witness-demo:5644/",
+              tcp: "tcp://witness-demo:5634/"
             }
           }
         },
         challenges: [
           {
-            dt: [32m"2025-06-24T18:42:38.305000+00:00"[39m,
+            dt: "2025-07-18T00:27:43.832000+00:00",
             words: [
-              [32m"junior"[39m,  [32m"finish"[39m,
-              [32m"twelve"[39m,  [32m"write"[39m,
-              [32m"reflect"[39m, [32m"resource"[39m,
-              [32m"cage"[39m,    [32m"earth"[39m,
-              [32m"penalty"[39m, [32m"garment"[39m,
-              [32m"pipe"[39m,    [32m"sorry"[39m
+              "six",      "foil",
+              "pill",     "art",
+              "cinnamon", "indoor",
+              "warrior",  "slim",
+              "awful",    "rather",
+              "knife",    "advance"
             ],
-            said: [32m"EOhKVgColLrKj4qxzTRsh6FAMesSrGOwEEzLAJx46AlW"[39m,
-            authenticated: [33mtrue[39m
+            said: "EEw1jfkIz0L1af2bsiLGC9f1WDOpxzit7glRWG4_dWfB",
+            authenticated: true
           }
         ],
         wellKnowns: []
@@ -604,8 +574,3 @@ This notebook demonstrated the process of connecting two KERIA/Signify controlle
 </ol>
 Successful completion of both OOBI resolution and the mutual challenge-response protocol establishes a high degree of trust. Both controllers have verified each other's identity (KEL) and cryptographically confirmed that the other party has active control of their private keys. The <code>challengesAuthenticated</code> flag in their contact lists for each other should now be true.
 </div>
-
-
-```typescript
-
-```

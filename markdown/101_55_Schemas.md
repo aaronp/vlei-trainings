@@ -75,7 +75,7 @@ As a demonstration the below schema is titled "Sample Schema" which is a label o
         "d" : {...},
         "u" : {...},
         "i" : {...},
-        "rd": {...},
+        "ri": {...},
         "s" : {...},
         "a" : {...}
     },

@@ -21,7 +21,7 @@ A multi-signature group AID is essentially an identifier whose controlling autho
 
 The result of this training will be the creation of a multisig group identifier illustrated in the middle of the diagram below.
 
-![image.png](453bb096-35eb-4de3-baa0-7b51b6eae48f.png)
+![image.png](101_48_Multisignature_Identifiers_files/453bb096-35eb-4de3-baa0-7b51b6eae48f.png)
 
 ## Initial Setup of Participant AIDs
 
@@ -46,7 +46,7 @@ clear_keri()
 
 # Party 1 Keystore
 party1_keystore = "party1_keystore"
-party1_salt= "0AAW49QDCAuz0I-R1yCY8wa7" # Use hardcoded salt so that the AID stays the same. Swap with `exec("kli salt")` for a dynamic salt.
+party1_salt= "0AAW49QDCAuz0I-R1yCY8wa6" # Use hardcoded salt so that the AID stays the same. Swap with `exec("kli salt")` for a dynamic salt.
 party1_alias = "party1_alias"
 
 pr_title("Initializing keystores")
@@ -105,7 +105,7 @@ pr_continue()
     Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
     ✅ Successfully removed: /usr/local/var/keri/
     
-    [1m[4m[44m[90m  Initializing keystores  [0m
+      Initializing keystores  
     
     KERI Keystore created at: /usr/local/var/keri/ks/party1_keystore
     KERI Database created at: /usr/local/var/keri/db/party1_keystore
@@ -124,18 +124,18 @@ pr_continue()
     http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
     http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
     
-    [1m[4m[44m[90m  Incepting multisig parts  [0m
+      Incepting multisig parts  
     
     Waiting for witness receipts...
-    Prefix  EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf
-    	Public key 1:  DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh
+    Prefix  ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY
+    	Public key 1:  DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU
     
     Waiting for witness receipts...
     Prefix  EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB
     	Public key 1:  DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -152,7 +152,7 @@ With the individual participant AIDs in place, now proceed to create the multisi
 
 To allow the cooperative inception process, each participant AID needs to authorize one of its witnesses to act as a `mailbox`. This allows other participants to send messages (like the group inception proposal) to them indirectly via this witness.
 
-![image.png](5dee8dbd-8aa0-4f8f-ac64-ea676e4f182a.png)
+![image.png](101_48_Multisignature_Identifiers_files/5dee8dbd-8aa0-4f8f-ac64-ea676e4f182a.png)
 
 The `kli ends add` command is used to authorize an end role.
 `--eid`: Specifies the prefix of the witness AID being authorized for the new role.
@@ -180,12 +180,12 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Adding mailbox role  [0m
+      Adding mailbox role  
     
     End role authorization added for role mailbox
     End role authorization added for role mailbox
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -222,21 +222,21 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Generating OOBIs  [0m
+      Generating OOBIs  
     
     
-    [1m[94mParty 1 OOBI: http://witness-demo:5643/oobi/EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM[0m
+    Party 1 OOBI: http://witness-demo:5643/oobi/ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM
     
     
-    [1m[94mParty 2 OOBI: http://witness-demo:5644/oobi/EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX[0m
+    Party 2 OOBI: http://witness-demo:5644/oobi/EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX
     
     
-    [1m[4m[44m[90m  Resolving OOBIs  [0m
+      Resolving OOBIs  
     
     http://witness-demo:5644/oobi/EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB/mailbox/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX resolved
-    http://witness-demo:5643/oobi/EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM resolved
+    http://witness-demo:5643/oobi/ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY/mailbox/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM resolved
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -298,20 +298,20 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Building multisig config file  [0m
+      Building multisig config file  
     
     
-    [1m[94mParty 1 prefix: EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf[0m
+    Party 1 prefix: ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY
     
     
-    [1m[94mParty 2 prefix: EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf[0m
+    Party 2 prefix: ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY
     
     
-    [1m[94mMultisig config: ./config/multisig/multisig_inception_config.json[0m
+    Multisig config: ./config/multisig/multisig_inception_config.json
     
     {
       "aids": [
-        "EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf",
+        "ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY",
         "EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB"
       ],
       "transferable": true,
@@ -324,7 +324,7 @@ pr_continue()
       "isith": "2",
       "nsith": "2"
     }
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -378,28 +378,28 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Incepting multisig AID  [0m
+      Incepting multisig AID  
     
     Command 
     kli multisig incept --name party1_keystore     --alias party1_alias     --group multisig_group     --file ./config/multisig/multisig_inception_config.json > ./logs/multisig_event.log
-     started with PID: 3587
+     started with PID: 2092
     Command 
     kli multisig join --name party2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 3589
+     started with PID: 2094
     Waiting for multisig inception to complete...
     
     Waiting for multisig inception to complete...
     
     
-    [1m[94mMultisig Event[0m
+    Multisig Event
     
-    Group identifier inception initialized for EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Group identifier inception initialized for EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     
     Alias: 	multisig_group
-    Identifier: EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Identifier: EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     Seq No:	0
     Group Identifier
-        Local Indentifier:  EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf [92m✔ Fully Signed[0m
+        Local Indentifier:  ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY ✔ Fully Signed
     
     Witnesses:
     Count:		3
@@ -407,11 +407,11 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh
+    	1. DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU
     	2. DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6
     
     
-    [1m[94mMultisig Join[0m
+    Multisig Join
     
     Waiting for group multisig events...
     
@@ -420,8 +420,8 @@ pr_continue()
     +-------+--------------+----------------------------------------------+
     | Local | Name         |                     AID                      |
     +-------+--------------+----------------------------------------------+
+    |       | party1_alias | ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY |
     |   *   | party2_alias | EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB |
-    |       | party1_alias | EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf |
     +-------+--------------+----------------------------------------------+
     
     Configuration:
@@ -438,10 +438,10 @@ pr_continue()
     +---------------------+----------------------------------------------+
     
     Alias: 	multisig_group
-    Identifier: EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Identifier: EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     Seq No:	0
     Group Identifier
-        Local Indentifier:  EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB [92m✔ Fully Signed[0m
+        Local Indentifier:  EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB ✔ Fully Signed
     
     Witnesses:
     Count:		3
@@ -449,11 +449,11 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh
+    	1. DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU
     	2. DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -462,7 +462,7 @@ pr_continue()
 
 The diagram below represents the multi-signature identifier created. Each single signature identifier contributed both a signing key and a rotation key, shown with the arrows from the single sig keystores (party1_keystore, party2_keystore) to the virtual multisig group identifier in the middle of the diagram.
 
-![image.png](a4a49bf5-780a-4cc7-b61b-32f36bc5deb3.png)
+![image.png](101_48_Multisignature_Identifiers_files/a4a49bf5-780a-4cc7-b61b-32f36bc5deb3.png)
 
 ### Verifying Multi-Signature AID Status
 
@@ -486,13 +486,13 @@ pr_title(f"Multisig AID status")
 ```
 
     
-    [1m[4m[44m[90m  Multisig AID status  [0m
+      Multisig AID status  
     
     Alias: 	multisig_group
-    Identifier: EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Identifier: EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     Seq No:	0
     Group Identifier
-        Local Indentifier:  EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf [92m✔ Fully Signed[0m
+        Local Indentifier:  ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY ✔ Fully Signed
     
     Witnesses:
     Count:		3
@@ -500,7 +500,7 @@ pr_title(f"Multisig AID status")
     Threshold:	2
     
     Public Keys:	
-    	1. DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh
+    	1. DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU
     	2. DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6
     
     
@@ -512,17 +512,17 @@ pr_title(f"Multisig AID status")
     {
      "v": "KERI10JSON000215_",
      "t": "icp",
-     "d": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
-     "i": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
+     "d": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
+     "i": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
      "s": "0",
      "kt": "2",
      "k": [
-      "DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh",
+      "DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU",
       "DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6"
      ],
      "nt": "2",
      "n": [
-      "ECfumJUeC-bsXFdmE--kTbPuSk6rkpBD0iP5wsNk277K",
+      "EDsRlPLnlcvZZVv-T1GoEZE5x0_QtRpSoSiAOurMmLz9",
       "EG-jLWaS8gE9wuPCArQk_81XZkr-x3WWHuFNYt_LpZXE"
      ],
      "bt": "2",
@@ -580,27 +580,57 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Performing interaction event  [0m
+      Performing interaction event  
     
     Command 
     kli multisig interact --name party1_keystore     --alias multisig_group     --data '{"d": "arbitrary data"}' > ./logs/multisig_event.log
-     started with PID: 3608
+     started with PID: 2113
     Command 
     kli multisig join --name party2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 3609
+     started with PID: 2114
     Waiting for multisig interaction to complete...
     
     Waiting for multisig interaction to complete...
     
+    Waiting for multisig interaction to complete...
     
-    [1m[94mMultisig Event[0m
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    Waiting for multisig interaction to complete...
+    
+    
+    Multisig Event
     
     
     Alias: 	multisig_group
-    Identifier: EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Identifier: EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     Seq No:	1
     Group Identifier
-        Local Indentifier:  EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf [92m✔ Fully Signed[0m
+        Local Indentifier:  ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY ✔ Fully Signed
     
     Witnesses:
     Count:		3
@@ -608,14 +638,14 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh
+    	1. DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU
     	2. DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6
     
     
-    [1m[94mMultisig Join[0m
+    Multisig Join
     
     Waiting for group multisig events...
-    Group Multisig Interaction for multisig_group (EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg) proposed:
+    Group Multisig Interaction for multisig_group (EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-) proposed:
     Data:
     [
       {
@@ -624,10 +654,10 @@ pr_continue()
     ]
     
     Alias: 	multisig_group
-    Identifier: EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Identifier: EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     Seq No:	1
     Group Identifier
-        Local Indentifier:  EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB [92m✔ Fully Signed[0m
+        Local Indentifier:  EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB ✔ Fully Signed
     
     Witnesses:
     Count:		3
@@ -635,11 +665,11 @@ pr_continue()
     Threshold:	2
     
     Public Keys:	
-    	1. DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh
+    	1. DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU
     	2. DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -655,13 +685,13 @@ pr_title(f"Multisig AID status")
 ```
 
     
-    [1m[4m[44m[90m  Multisig AID status  [0m
+      Multisig AID status  
     
     Alias: 	multisig_group
-    Identifier: EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Identifier: EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     Seq No:	1
     Group Identifier
-        Local Indentifier:  EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf [92m✔ Fully Signed[0m
+        Local Indentifier:  ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY ✔ Fully Signed
     
     Witnesses:
     Count:		3
@@ -669,7 +699,7 @@ pr_title(f"Multisig AID status")
     Threshold:	2
     
     Public Keys:	
-    	1. DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh
+    	1. DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU
     	2. DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6
     
     
@@ -681,17 +711,17 @@ pr_title(f"Multisig AID status")
     {
      "v": "KERI10JSON000215_",
      "t": "icp",
-     "d": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
-     "i": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
+     "d": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
+     "i": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
      "s": "0",
      "kt": "2",
      "k": [
-      "DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh",
+      "DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU",
       "DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6"
      ],
      "nt": "2",
      "n": [
-      "ECfumJUeC-bsXFdmE--kTbPuSk6rkpBD0iP5wsNk277K",
+      "EDsRlPLnlcvZZVv-T1GoEZE5x0_QtRpSoSiAOurMmLz9",
       "EG-jLWaS8gE9wuPCArQk_81XZkr-x3WWHuFNYt_LpZXE"
      ],
      "bt": "2",
@@ -707,10 +737,10 @@ pr_title(f"Multisig AID status")
     {
      "v": "KERI10JSON0000e1_",
      "t": "ixn",
-     "d": "EJ4NY2WV4QclhuV4cWlJsM-AvfGhA5h2ue_99S4XgD5f",
-     "i": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
+     "d": "ECFIsW1NE0jI3kd576KmSMSDqf4E_Z74Si1G9I6OdMrZ",
+     "i": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
      "s": "1",
-     "p": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
+     "p": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
      "a": [
       {
        "d": "arbitrary data"
@@ -754,16 +784,16 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Rotating multisig participant single signature keys  [0m
+      Rotating multisig participant single signature keys  
     
     Waiting for witness receipts...
-    Prefix  EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf
+    Prefix  ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY
     New Sequence No.  1
-    	Public key 1:  DIjIXuO4s_ewlBNSUM8sBu1uqKkhRkHsGtCyoLGEjGkE
+    	Public key 1:  DED9rD7Mpbtjtej7Ueyc_R6894f1hQ-YhcZtdAI0WIIn
     Checking for updates...
     
     
-    Identifier: EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf
+    Identifier: ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY
     Seq No:	1
     
     Witnesses:
@@ -772,7 +802,7 @@ pr_continue()
     Threshold:	3
     
     Public Keys:	
-    	1. DIjIXuO4s_ewlBNSUM8sBu1uqKkhRkHsGtCyoLGEjGkE
+    	1. DED9rD7Mpbtjtej7Ueyc_R6894f1hQ-YhcZtdAI0WIIn
     
     Waiting for witness receipts...
     Prefix  EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB
@@ -793,7 +823,7 @@ pr_continue()
     	1. DAz9zLvu7sXHI-YJVlNlS67B0A1SJJvG-MwlAsT2OOhF
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -849,27 +879,27 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Rotating multisig group  [0m
+      Rotating multisig group  
     
     Command 
-    kli multisig rotate --name party1_keystore     --alias multisig_group     --smids EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf     --smids EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB     --rmids EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf     --rmids EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB     --isith '["1/2", "1/2"]'     --nsith '["1/2", "1/2"]' > ./logs/multisig_event.log
-     started with PID: 3643
+    kli multisig rotate --name party1_keystore     --alias multisig_group     --smids ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY     --smids EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB     --rmids ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY     --rmids EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB     --isith '["1/2", "1/2"]'     --nsith '["1/2", "1/2"]' > ./logs/multisig_event.log
+     started with PID: 2159
     Command 
     kli multisig join --name party2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 3644
+     started with PID: 2160
     Waiting for multisig rotation to complete...
     
     Waiting for multisig rotation to complete...
     
     
-    [1m[94mMultisig Event[0m
+    Multisig Event
     
     
     Alias: 	multisig_group
-    Identifier: EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Identifier: EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     Seq No:	2
     Group Identifier
-        Local Indentifier:  EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf [92m✔ Fully Signed[0m
+        Local Indentifier:  ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY ✔ Fully Signed
     
     Witnesses:
     Count:		3
@@ -877,11 +907,11 @@ pr_continue()
     Threshold:	3
     
     Public Keys:	
-    	1. DIjIXuO4s_ewlBNSUM8sBu1uqKkhRkHsGtCyoLGEjGkE
+    	1. DED9rD7Mpbtjtej7Ueyc_R6894f1hQ-YhcZtdAI0WIIn
     	2. DAz9zLvu7sXHI-YJVlNlS67B0A1SJJvG-MwlAsT2OOhF
     
     
-    [1m[94mMultisig Join[0m
+    Multisig Join
     
     Waiting for group multisig events...
     
@@ -891,7 +921,7 @@ pr_continue()
     +-------+--------------+----------------------------------------------+-----------+
     | Local | Name         |                     AID                      | Threshold |
     +-------+--------------+----------------------------------------------+-----------+
-    |       | party1_alias | EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf |    1/2    |
+    |       | party1_alias | ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY |    1/2    |
     |   *   | party2_alias | EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB |    1/2    |
     +-------+--------------+----------------------------------------------+-----------+
     
@@ -899,7 +929,7 @@ pr_continue()
     +-------+--------------+----------------------------------------------+-----------+
     | Local | Name         |                     AID                      | Threshold |
     +-------+--------------+----------------------------------------------+-----------+
-    |       | party1_alias | EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf |    1/2    |
+    |       | party1_alias | ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY |    1/2    |
     |   *   | party2_alias | EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB |    1/2    |
     +-------+--------------+----------------------------------------------+-----------+
     
@@ -911,10 +941,10 @@ pr_continue()
     +-------------------+-------+
     
     Alias: 	multisig_group
-    Identifier: EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Identifier: EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     Seq No:	2
     Group Identifier
-        Local Indentifier:  EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB [92m✔ Fully Signed[0m
+        Local Indentifier:  EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB ✔ Fully Signed
     
     Witnesses:
     Count:		3
@@ -922,11 +952,11 @@ pr_continue()
     Threshold:	3
     
     Public Keys:	
-    	1. DIjIXuO4s_ewlBNSUM8sBu1uqKkhRkHsGtCyoLGEjGkE
+    	1. DED9rD7Mpbtjtej7Ueyc_R6894f1hQ-YhcZtdAI0WIIn
     	2. DAz9zLvu7sXHI-YJVlNlS67B0A1SJJvG-MwlAsT2OOhF
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -954,13 +984,13 @@ pr_title(f"Multisig AID status")
 ```
 
     
-    [1m[4m[44m[90m  Multisig AID status  [0m
+      Multisig AID status  
     
     Alias: 	multisig_group
-    Identifier: EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg
+    Identifier: EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-
     Seq No:	2
     Group Identifier
-        Local Indentifier:  EHYlHPfwSP6rh3eNIqxfSNvzxhORlXOiHB2tIpfp64Nf [92m✔ Fully Signed[0m
+        Local Indentifier:  ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY ✔ Fully Signed
     
     Witnesses:
     Count:		3
@@ -968,7 +998,7 @@ pr_title(f"Multisig AID status")
     Threshold:	3
     
     Public Keys:	
-    	1. DIjIXuO4s_ewlBNSUM8sBu1uqKkhRkHsGtCyoLGEjGkE
+    	1. DED9rD7Mpbtjtej7Ueyc_R6894f1hQ-YhcZtdAI0WIIn
     	2. DAz9zLvu7sXHI-YJVlNlS67B0A1SJJvG-MwlAsT2OOhF
     
     
@@ -980,17 +1010,17 @@ pr_title(f"Multisig AID status")
     {
      "v": "KERI10JSON000215_",
      "t": "icp",
-     "d": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
-     "i": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
+     "d": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
+     "i": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
      "s": "0",
      "kt": "2",
      "k": [
-      "DFvZfmk9Z4QKrYs1b1lDUJXY0MHJ52NF72PQBa42x1yh",
+      "DOKTEjSCgBNZLr62VaTUbQh1dpP7n6KUaIfZhak-aaXU",
       "DDyva00Vg_tIbK9V15XiIodr0tS3JDLqQvQC23DTp-h6"
      ],
      "nt": "2",
      "n": [
-      "ECfumJUeC-bsXFdmE--kTbPuSk6rkpBD0iP5wsNk277K",
+      "EDsRlPLnlcvZZVv-T1GoEZE5x0_QtRpSoSiAOurMmLz9",
       "EG-jLWaS8gE9wuPCArQk_81XZkr-x3WWHuFNYt_LpZXE"
      ],
      "bt": "2",
@@ -1006,10 +1036,10 @@ pr_title(f"Multisig AID status")
     {
      "v": "KERI10JSON0000e1_",
      "t": "ixn",
-     "d": "EJ4NY2WV4QclhuV4cWlJsM-AvfGhA5h2ue_99S4XgD5f",
-     "i": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
+     "d": "ECFIsW1NE0jI3kd576KmSMSDqf4E_Z74Si1G9I6OdMrZ",
+     "i": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
      "s": "1",
-     "p": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
+     "p": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
      "a": [
       {
        "d": "arbitrary data"
@@ -1020,16 +1050,16 @@ pr_title(f"Multisig AID status")
     {
      "v": "KERI10JSON0001d2_",
      "t": "rot",
-     "d": "EFmA8cLZKx70KsCF7Xb5kd5D8YntooEMKXidewCcoJKF",
-     "i": "EMy7T2j7ny-QPjsC7y5vm3yNdbFSSXAWiFKE--V0N3Jg",
+     "d": "EO2DzHkdFWFIkkwlmowdxKBDteybwf020WVgnofejPn6",
+     "i": "EEyK9sCty5qBjnAmc_-2fcsW-68sHfMgpH6bzc2vO0h-",
      "s": "2",
-     "p": "EJ4NY2WV4QclhuV4cWlJsM-AvfGhA5h2ue_99S4XgD5f",
+     "p": "ECFIsW1NE0jI3kd576KmSMSDqf4E_Z74Si1G9I6OdMrZ",
      "kt": [
       "1/2",
       "1/2"
      ],
      "k": [
-      "DIjIXuO4s_ewlBNSUM8sBu1uqKkhRkHsGtCyoLGEjGkE",
+      "DED9rD7Mpbtjtej7Ueyc_R6894f1hQ-YhcZtdAI0WIIn",
       "DAz9zLvu7sXHI-YJVlNlS67B0A1SJJvG-MwlAsT2OOhF"
      ],
      "nt": [
@@ -1037,7 +1067,7 @@ pr_title(f"Multisig AID status")
       "1/2"
      ],
      "n": [
-      "EEr1Qqu0XXasOgBrmT619E3nENJg2sSBmZUm-3oKJvad",
+      "EL3IL5wyj5koej_0Fcq1ZtVEDJR7ju5RDAUcIE2SZmrn",
       "EBzqFJ1sxQx9f-H9XgnhXhhN-9dN2SFaiY2NINiknoVl"
      ],
      "bt": "3",

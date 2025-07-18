@@ -1,8 +1,8 @@
-# Signify-ts: ACDC Credential Issuance with IPEX
+# Signify TS: ACDC Credential Issuance with IPEX
 
 <div class="alert alert-primary">
 <b>🎯 OBJECTIVE</b><hr>
-Demonstrate the process of issuing an ACDC (Authentic Chained Data Container) from an Issuer to a Holder using the Issuance and Presentation Exchange (IPEX) protocol with the Signify-ts library.
+Demonstrate the process of issuing an ACDC (Authentic Chained Data Container) from an Issuer to a Holder using the Issuance and Presentation Exchange (IPEX) protocol with the Signify TS library.
 </div>
 
 <div class="alert alert-info">
@@ -14,7 +14,7 @@ This section utilizes utility functions (from <code>./scripts_ts/utils.ts</code>
 
 The setup process, streamlined by the utility functions, performs the following key actions:
 
-* **Signify Library Initialization**: Ensures the underlying cryptographic components of Signify-ts are ready.
+* **Signify Library Initialization**: Ensures the underlying cryptographic components (libsodium) of Signify TS are ready.
 * **Client Initialization & Connection**: Three `SignifyClient` instances are created—one each for an Issuer, a Holder, and a Verifier. Each client is bootstrapped and connected to its KERIA agent.
 * **AID Creation**: Each client (Issuer, Holder, Verifier) creates a primary AID using default arguments.
 * **End Role Assignment**: An `agent` end role is assigned to each client's KERIA Agent AID.
@@ -103,25 +103,25 @@ await resolveOOBI(verifierClient, schemaOOBI, schemaContactAlias);
 console.log("Client setup and OOBI resolutions complete.");
 ```
 
-    Using Passcode (bran): AZdO5mRMSXPxzYQo0XEkJ
+    Using Passcode (bran): AKZY1fNBwmlOKq3flQKKF
 
 
     Client boot process initiated with KERIA agent.
 
 
-      Client AID Prefix:  EOj2Rv5Sgi-U-LUYy0vboC_wznnaLTFGl0msWr6MA_D2
+      Client AID Prefix:  EBeTToCL9Bu5T4cG3trMBPGtQefG6P2ubR8ItatYAaMz
 
 
-      Agent AID Prefix:   EIIQ2rIE8ijfb-TEUP8Dr5DHUbj282reljPm_bAAj6ai
+      Agent AID Prefix:   ENQeKR27rBqEQichHWRN6f-cFIVUOPYVFx8Kcsx1GuOc
 
 
     Initiating AID inception for alias: issuerAid
 
 
-    Successfully created AID with prefix: EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N
+    Successfully created AID with prefix: EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY
 
 
-    Assigning 'agent' role to KERIA Agent EIIQ2rIE8ijfb-TEUP8Dr5DHUbj282reljPm_bAAj6ai for AID alias issuerAid
+    Assigning 'agent' role to KERIA Agent ENQeKR27rBqEQichHWRN6f-cFIVUOPYVFx8Kcsx1GuOc for AID alias issuerAid
 
 
     Successfully assigned 'agent' role for AID alias issuerAid.
@@ -130,28 +130,28 @@ console.log("Client setup and OOBI resolutions complete.");
     Generating OOBI for AID alias issuerAid with role agent
 
 
-    Generated OOBI URL: http://keria:3902/oobi/EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N/agent/EIIQ2rIE8ijfb-TEUP8Dr5DHUbj282reljPm_bAAj6ai
+    Generated OOBI URL: http://keria:3902/oobi/EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY/agent/ENQeKR27rBqEQichHWRN6f-cFIVUOPYVFx8Kcsx1GuOc
 
 
-    Using Passcode (bran): BUIx859xI5JP8FLHYJ7pn
+    Using Passcode (bran): DFBHt1TdQF62vcmrYhME1
 
 
     Client boot process initiated with KERIA agent.
 
 
-      Client AID Prefix:  ELLHp8oDho4GMsQI_nbzsugIh7--xVhDewcIahBqQqp0
+      Client AID Prefix:  EPOlStDvCocLPQK3k69c3X8wr6isLGj6YVm5iV6YkEBb
 
 
-      Agent AID Prefix:   EAGd6oaHMjK64MWTs1kS8EKqpWCw1L3FjXhhWM8ZLHn5
+      Agent AID Prefix:   EOMGu_PusfnTv1Q7W2uLcPI35s0aHIzuSaF6KX09fzpx
 
 
     Initiating AID inception for alias: holderAid
 
 
-    Successfully created AID with prefix: EB_wwpGO9OuoZCrDxrVJOGLFQZ-SagZvF-slhpSHLWZ1
+    Successfully created AID with prefix: EKbgh2bOcETApqRbnUd5A_MTQC6ahiNgSRkuLNpR5X0-
 
 
-    Assigning 'agent' role to KERIA Agent EAGd6oaHMjK64MWTs1kS8EKqpWCw1L3FjXhhWM8ZLHn5 for AID alias holderAid
+    Assigning 'agent' role to KERIA Agent EOMGu_PusfnTv1Q7W2uLcPI35s0aHIzuSaF6KX09fzpx for AID alias holderAid
 
 
     Successfully assigned 'agent' role for AID alias holderAid.
@@ -160,28 +160,28 @@ console.log("Client setup and OOBI resolutions complete.");
     Generating OOBI for AID alias holderAid with role agent
 
 
-    Generated OOBI URL: http://keria:3902/oobi/EB_wwpGO9OuoZCrDxrVJOGLFQZ-SagZvF-slhpSHLWZ1/agent/EAGd6oaHMjK64MWTs1kS8EKqpWCw1L3FjXhhWM8ZLHn5
+    Generated OOBI URL: http://keria:3902/oobi/EKbgh2bOcETApqRbnUd5A_MTQC6ahiNgSRkuLNpR5X0-/agent/EOMGu_PusfnTv1Q7W2uLcPI35s0aHIzuSaF6KX09fzpx
 
 
-    Using Passcode (bran): Arxali7CV-mVLowXW66Pk
+    Using Passcode (bran): Aq0kul5oYDcDmixxgjR7A
 
 
     Client boot process initiated with KERIA agent.
 
 
-      Client AID Prefix:  EATegunMC2VTQg5qktZGZuOkbN8Shx6h7jqh3Pm2KSDs
+      Client AID Prefix:  ECzzvkokAPW27PRqD-NXKbKVSpv38VJrM6Vy5BhqIFNo
 
 
-      Agent AID Prefix:   EMM_yS3sE0B05GtbelGknVmRB036jwA5NE0Jxiy5ZHgZ
+      Agent AID Prefix:   ELllLsBHd8qhMvY10pniW3awVn3rilMEKv6kNnEpQg6I
 
 
     Initiating AID inception for alias: verifierAid
 
 
-    Successfully created AID with prefix: EIM_H1_qORjdrZHnStIPfAk0UuoEYSh5HkhN6zacpQon
+    Successfully created AID with prefix: EANP3JMLUsU5ngCxl4p4vtywC2K8Bd8ab2Fg60ikKEU-
 
 
-    Assigning 'agent' role to KERIA Agent EMM_yS3sE0B05GtbelGknVmRB036jwA5NE0Jxiy5ZHgZ for AID alias verifierAid
+    Assigning 'agent' role to KERIA Agent ELllLsBHd8qhMvY10pniW3awVn3rilMEKv6kNnEpQg6I for AID alias verifierAid
 
 
     Successfully assigned 'agent' role for AID alias verifierAid.
@@ -190,10 +190,10 @@ console.log("Client setup and OOBI resolutions complete.");
     Generating OOBI for AID alias verifierAid with role agent
 
 
-    Generated OOBI URL: http://keria:3902/oobi/EIM_H1_qORjdrZHnStIPfAk0UuoEYSh5HkhN6zacpQon/agent/EMM_yS3sE0B05GtbelGknVmRB036jwA5NE0Jxiy5ZHgZ
+    Generated OOBI URL: http://keria:3902/oobi/EANP3JMLUsU5ngCxl4p4vtywC2K8Bd8ab2Fg60ikKEU-/agent/ELllLsBHd8qhMvY10pniW3awVn3rilMEKv6kNnEpQg6I
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EB_wwpGO9OuoZCrDxrVJOGLFQZ-SagZvF-slhpSHLWZ1/agent/EAGd6oaHMjK64MWTs1kS8EKqpWCw1L3FjXhhWM8ZLHn5 with alias holderContact
+    Resolving OOBI URL: http://keria:3902/oobi/EKbgh2bOcETApqRbnUd5A_MTQC6ahiNgSRkuLNpR5X0-/agent/EOMGu_PusfnTv1Q7W2uLcPI35s0aHIzuSaF6KX09fzpx with alias holderContact
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -202,7 +202,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Contact "holderContact" added/updated.
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N/agent/EIIQ2rIE8ijfb-TEUP8Dr5DHUbj282reljPm_bAAj6ai with alias issuerContact
+    Resolving OOBI URL: http://keria:3902/oobi/EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY/agent/ENQeKR27rBqEQichHWRN6f-cFIVUOPYVFx8Kcsx1GuOc with alias issuerContact
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -211,7 +211,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Contact "issuerContact" added/updated.
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EB_wwpGO9OuoZCrDxrVJOGLFQZ-SagZvF-slhpSHLWZ1/agent/EAGd6oaHMjK64MWTs1kS8EKqpWCw1L3FjXhhWM8ZLHn5 with alias holderContact
+    Resolving OOBI URL: http://keria:3902/oobi/EKbgh2bOcETApqRbnUd5A_MTQC6ahiNgSRkuLNpR5X0-/agent/EOMGu_PusfnTv1Q7W2uLcPI35s0aHIzuSaF6KX09fzpx with alias holderContact
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -220,7 +220,7 @@ console.log("Client setup and OOBI resolutions complete.");
     Contact "holderContact" added/updated.
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EIM_H1_qORjdrZHnStIPfAk0UuoEYSh5HkhN6zacpQon/agent/EMM_yS3sE0B05GtbelGknVmRB036jwA5NE0Jxiy5ZHgZ with alias verifierContact
+    Resolving OOBI URL: http://keria:3902/oobi/EANP3JMLUsU5ngCxl4p4vtywC2K8Bd8ab2Fg60ikKEU-/agent/ELllLsBHd8qhMvY10pniW3awVn3rilMEKv6kNnEpQg6I with alias verifierContact
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -265,9 +265,16 @@ With the clients set up and connected, you can proceed with the credential issua
 
 ### Step 1: Create Issuer's Credential Registry
 
-Before an Issuer can issue credentials, it needs a Credential Registry. In KERI, a Credential Registry is implemented using a **Transaction Event Log (TEL)**. This TEL is a secure, hash-linked log, managed by the Issuer's AID, specifically for tracking the lifecycle of credentials it issues—such as their issuance and revocation status. The registry itself is identified by a SAID derived from its inception event (`vcp` event type for registry inception). The TEL's history is anchored to the Issuer's Key Event Log, ensuring that all changes to the registry's state are cryptographically secured by the Issuer's controlling keys. This anchoring is achieved by including a digest of the TEL event in a KEL event.
+Before an Issuer can issue credentials, it needs a Credential Registry. In KERI, a Credential Registry is implemented using a **Transaction Event Log (TEL)**. This TEL is a secure, hash-linked log, managed by the Issuer's AID, specifically for being the registry referenced by each ACDC event, both issuance and revocation. The registry itself is identified by a SAID derived from its inception event (`vcp` event type for registry inception). The TEL's history is anchored to the Issuer's Key Event Log, ensuring that all changes to the registry's state are cryptographically secured by the Issuer's controlling keys. This anchoring is achieved by including a digest of the TEL event within an anchor that is included in the data property of a KEL event.
 
 Use the code below to let the Issuer client create this registry. A human-readable name (`issuerRegistryName`) is used to reference it within the client.
+
+<div class="alert alert-info">
+    <b>ℹ️ NOTE: Production Registry Naming Suggestion</b>
+    <hr/>
+    <p>In production code you can name the registry whatever you want. It is not something that needs to be shown to the user and can be wholly managed behind the scenes. The important architectural consideration is that an issuer has a registry. Whether you decide to name the registry a user facing name or just a system name is up to you.</p>
+    <p>The suggestion is to keep the name a system-level thing that is not user facing unless absolutely necessary and valuable to the end user. The less things the end user has to worry about, the better. Generally speaking, the name of an ACDC registry is a developer or architect level concern, not a user concern, unless you are exposing multiple registries to the end user and need human-friendly names to distinguish them.</p>
+</div>
 
 
 ```typescript
@@ -299,19 +306,19 @@ const issuerRegistry = issuerRegistries[0]
 console.log(`Registry: Name='${issuerRegistry.name}', SAID (regk)='${issuerRegistry.regk}'`);
 ```
 
-    Registry 'issuerRegistry' created for Issuer AID EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N.
+    Registry 'issuerRegistry' created for Issuer AID EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY.
 
 
     Registry creation response: {
       "anchor": {
-        "i": "EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S",
+        "i": "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
         "s": "0",
-        "d": "EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"
+        "d": "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH"
       }
     }
 
 
-    Registry: Name='issuerRegistry', SAID (regk)='EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S'
+    Registry: Name='issuerRegistry', SAID (regk)='EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH'
 
 
 ### Step 2: Retrieve Schema Definition
@@ -326,36 +333,36 @@ console.log(issuerSchema)
 ```
 
     {
-      [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-      [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
-      title: [32m"EventPass"[39m,
-      description: [32m"Event Pass Schema"[39m,
-      type: [32m"object"[39m,
-      credentialType: [32m"EventPassCred"[39m,
-      version: [32m"1.0.0"[39m,
+      "$id": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      title: "EventPass",
+      description: "Event Pass Schema",
+      type: "object",
+      credentialType: "EventPassCred",
+      version: "1.0.0",
       properties: {
-        v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
-        d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
-        u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
-        i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
-        ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
-        s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
+        v: { description: "Credential Version String", type: "string" },
+        d: { description: "Credential SAID", type: "string" },
+        u: { description: "One time use nonce", type: "string" },
+        i: { description: "Issuer AID", type: "string" },
+        ri: { description: "Registry SAID", type: "string" },
+        s: { description: "Schema SAID", type: "string" },
         a: {
           oneOf: [
-            { description: [32m"Attributes block SAID"[39m, type: [32m"string"[39m },
+            { description: "Attributes block SAID", type: "string" },
             {
-              [32m"$id"[39m: [32m"ELppbffpWEM-uufl6qpVTcN6LoZS2A69UN4Ddrtr_JqE"[39m,
-              description: [32m"Attributes block"[39m,
-              type: [32m"object"[39m,
-              properties: [36m[Object][39m,
-              additionalProperties: [33mfalse[39m,
-              required: [36m[Array][39m
+              "$id": "ELppbffpWEM-uufl6qpVTcN6LoZS2A69UN4Ddrtr_JqE",
+              description: "Attributes block",
+              type: "object",
+              properties: [Object],
+              additionalProperties: false,
+              required: [Array]
             }
           ]
         }
       },
-      additionalProperties: [33mfalse[39m,
-      required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
+      additionalProperties: false,
+      required: [ "v", "d", "i", "ri", "s", "a" ]
     }
 
 
@@ -366,12 +373,15 @@ Now the Issuer creates the actual ACDC. This involves:
 1. Defining the `credentialClaims` – the specific attribute values for this instance of the `EventPass` credential.
 2. Calling `issuerClient.credentials().issue()`. This method takes the Issuer's AID alias and an object specifying:
     - `ri`: The SAID of the Credential Registry (`issuerRegistry.regk`) where this credential's issuance will be recorded.
+      - This field [will change](https://trustoverip.github.io/tswg-acdc-specification/#top-level-fields) from `ri` to `rd` in the upcoming 2.0 version of KERI and the 1.0 version of the ACDC Spec.
+        - `ri`: meant "registry identifier"
+        - `rd`: means "registry digest"
     - `s`: The SAID of the schema (`schemaSaid`) this credential adheres to.
     - `a`: An attributes block containing:
       - `i`: The AID of the Issuee (the Holder, holderAid.i).
       - The actual `credentialClaims`.
 
-This `issue` command creates the ACDC locally within the Issuer's client and records an issuance event (e.g., `iss`) in the specified registry's TEL. The SAID of the newly created credential is then extracted from the response.
+This `issue` command creates the ACDC locally within the Issuer's client and records an issuance event (e.g., `iss`) in the specified registry's TEL by sending the issued ACDC to the connected KERIA agent. The SAID of the newly created credential is then extracted from the response from KERIA..
 
 Use the code below to perform these actions.
 
@@ -397,6 +407,7 @@ const issueResult = await issuerClient
                 ...credentialClaims  // The actual claims data                 
             }
         });
+console.log("Issuing credential...")
 
 // Issuance is an asynchronous operation.
 const issueOperation = await issueResult.op; //In this case is .op instead of .op() (Inconsistency in the sdk)
@@ -405,6 +416,7 @@ const issueOperation = await issueResult.op; //In this case is .op instead of .o
 const issueResponse = await issuerClient
     .operations()
     .wait(issueOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+console.log("Finished issuing credential.");
 
 // Clean up the operation.
 await issuerClient.operations().delete(issueOperation.name);
@@ -418,88 +430,94 @@ const issuerCredential = await issuerClient.credentials().get(credentialSaid);
 console.log(issuerCredential)
 ```
 
+    Issuing credential...
+
+
+    Finished issuing credential.
+
+
     {
       sad: {
-        v: [32m"ACDC10JSON0001c4_"[39m,
-        d: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-        i: [32m"EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N"[39m,
-        ri: [32m"EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"[39m,
-        s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+        v: "ACDC10JSON0001c4_",
+        d: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+        i: "EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY",
+        ri: "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
+        s: "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
         a: {
-          d: [32m"ECi-WhMm0hhMdT-h0lJ1M6Btz3qye6vPzxAE0-9INhY4"[39m,
-          i: [32m"EB_wwpGO9OuoZCrDxrVJOGLFQZ-SagZvF-slhpSHLWZ1"[39m,
-          eventName: [32m"GLEIF Summit"[39m,
-          accessLevel: [32m"staff"[39m,
-          validDate: [32m"2026-10-01"[39m,
-          dt: [32m"2025-06-24T18:42:58.678000+00:00"[39m
+          d: "EIpTPqAX3CjYsFJn13OSRLgTojc5N5ecpp_dRzeIQ094",
+          i: "EKbgh2bOcETApqRbnUd5A_MTQC6ahiNgSRkuLNpR5X0-",
+          eventName: "GLEIF Summit",
+          accessLevel: "staff",
+          validDate: "2026-10-01",
+          dt: "2025-07-18T00:20:21.979000+00:00"
         }
       },
-      atc: [32m"-IABEPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm0AAAAAAAAAAAAAAAAAAAAAAAEPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
+      atc: "-IABELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j10AAAAAAAAAAAAAAAAAAAAAAAELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
       iss: {
-        v: [32m"KERI10JSON0000ed_"[39m,
-        t: [32m"iss"[39m,
-        d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m,
-        i: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-        s: [32m"0"[39m,
-        ri: [32m"EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"[39m,
-        dt: [32m"2025-06-24T18:42:58.678000+00:00"[39m
+        v: "KERI10JSON0000ed_",
+        t: "iss",
+        d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM",
+        i: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+        s: "0",
+        ri: "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
+        dt: "2025-07-18T00:20:21.979000+00:00"
       },
-      issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEJidOg2X6z44Uf73OIcDrH-qdEORcjheHavRwE7yXKsG"[39m,
-      pre: [32m"EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N"[39m,
+      issatc: "-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEOZa4v9bZNNSorDp8c-BBYTTmEYsYSwgv7RcIvFD3fAA",
+      pre: "EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY",
       schema: {
-        [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-        [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
-        title: [32m"EventPass"[39m,
-        description: [32m"Event Pass Schema"[39m,
-        type: [32m"object"[39m,
-        credentialType: [32m"EventPassCred"[39m,
-        version: [32m"1.0.0"[39m,
+        "$id": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        title: "EventPass",
+        description: "Event Pass Schema",
+        type: "object",
+        credentialType: "EventPassCred",
+        version: "1.0.0",
         properties: {
-          v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
-          d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
-          u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
-          i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
-          ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
-          s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
-          a: { oneOf: [ [36m[Object][39m, [36m[Object][39m ] }
+          v: { description: "Credential Version String", type: "string" },
+          d: { description: "Credential SAID", type: "string" },
+          u: { description: "One time use nonce", type: "string" },
+          i: { description: "Issuer AID", type: "string" },
+          ri: { description: "Registry SAID", type: "string" },
+          s: { description: "Schema SAID", type: "string" },
+          a: { oneOf: [ [Object], [Object] ] }
         },
-        additionalProperties: [33mfalse[39m,
-        required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
+        additionalProperties: false,
+        required: [ "v", "d", "i", "ri", "s", "a" ]
       },
       chains: [],
       status: {
-        vn: [ [33m1[39m, [33m0[39m ],
-        i: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-        s: [32m"0"[39m,
-        d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m,
-        ri: [32m"EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"[39m,
+        vn: [ 1, 0 ],
+        i: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+        s: "0",
+        d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM",
+        ri: "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
         ra: {},
-        a: { s: [33m2[39m, d: [32m"EJidOg2X6z44Uf73OIcDrH-qdEORcjheHavRwE7yXKsG"[39m },
-        dt: [32m"2025-06-24T18:42:58.678000+00:00"[39m,
-        et: [32m"iss"[39m
+        a: { s: 2, d: "EOZa4v9bZNNSorDp8c-BBYTTmEYsYSwgv7RcIvFD3fAA" },
+        dt: "2025-07-18T00:20:21.979000+00:00",
+        et: "iss"
       },
       anchor: {
-        pre: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-        sn: [33m0[39m,
-        d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m
+        pre: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+        sn: 0,
+        d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM"
       },
       anc: {
-        v: [32m"KERI10JSON00013a_"[39m,
-        t: [32m"ixn"[39m,
-        d: [32m"EJidOg2X6z44Uf73OIcDrH-qdEORcjheHavRwE7yXKsG"[39m,
-        i: [32m"EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N"[39m,
-        s: [32m"2"[39m,
-        p: [32m"EPj3NJzcTExwIif6o5HNBE3RRs6-fnkybJ9F4oWdNo38"[39m,
+        v: "KERI10JSON00013a_",
+        t: "ixn",
+        d: "EOZa4v9bZNNSorDp8c-BBYTTmEYsYSwgv7RcIvFD3fAA",
+        i: "EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY",
+        s: "2",
+        p: "EII-kMX52ep_cekP2CELNAQ99X7sChcoo67oZdOpHmdj",
         a: [
           {
-            i: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-            s: [32m"0"[39m,
-            d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m
+            i: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+            s: "0",
+            d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM"
           }
         ]
       },
       ancatc: [
-        [32m"-VBq-AABAAA7fDpTJp92i5jmcZFlPvCJ4sLRW_sbxxhotveFJ1LCG-Nk2c5sDzYomKJ1EKLPRGzFQwalle7-L4YDOPki5HIF-BADAAABhAd9wHgSt-D-GR7WqeT0LDq0BkZkflFQpz93lTOxgaZCJmwzbF6YNf1NRZDY38l8AlwzpyOQtqiaCFuRYz8PABDEWXxCfXUpQPxSzcqsXeEXP8gcTgHavgcWqzr1Q8NwOwTgx2Mu6ouNyzQxFBvK3Zw-8j6wbuTCWb2J5m_DsGcGACCJTcaUTGoEkreOBE78864gsy9LfK1ZAO9Ge66JtaKLzLEfgbdr4dG1XEGo6SW7muSF9rrE67v4TuSZshwQfP0N-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-06-24T18c42c58d776367p00c00"[39m
+        "-VBq-AABAAA_XsnPbTyvPYzGr0mNCY3759ZBSQcS0y2A02XPMr7PuRFm0h4HJfoh5WkY6mopBUtm_4xfG4_hkpR6nXS4-DIF-BADAADmd8Q1mtGQdFVhTGr5XKYGdY-dhORcwOd1Af2Yu0sNc-cD8UU_8Hkib-eF-JBNV5DORjFYw1J5HzFaJWeeqYAMABBtAfjzr8spBZdst0j0khZi7L42LzWSZK0kHbOCNZMHvtfrrQj3sPk85el1LDn43VWCXyUfBrDnSwgZqr51d0IIACAbSx-B3qKgWFOPAgexz2yNwr8Ma7bEejs3UCZSmGnMtHBvz4Urkdhvk7PYDwd8ksU1PJz5cbnP3S8elKoyUwsH-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-07-18T00c20c22d083667p00c00"
       ]
     }
 
@@ -511,7 +529,7 @@ The credential has been created but currently resides with the Issuer. To transf
 The `issuerClient.ipex().grant()` method prepares the grant message, including the ACDC itself (`acdc`), the issuance event from the registry (`iss`), and the anchoring event from the Issuer's KEL (`anc`) along with its signatures (`ancAttachment`).
 Then, `issuerClient.ipex().submitGrant()` sends this packaged grant message to the Holder's KERIA agent.
 
-Use the code below to perform the ipex grant.
+Use the code below to perform the IPEX grant.
 
 
 ```typescript
@@ -538,19 +556,31 @@ const submitGrantOperation = await issuerClient
         gend,            // Endorsements for the grant message
         [holderAid.i]    // List of recipient AIDs
     );
+console.log("Sending IPEX Grant as issuer")
 
 // Wait for the submission operation to complete.
 const submitGrantResponse = await issuerClient
     .operations()
     .wait(submitGrantOperation, AbortSignal.timeout(DEFAULT_TIMEOUT_MS));
+console.log("IPEX Grant sent")
 
 // Clean up the operation.
 await issuerClient.operations().delete(submitGrantOperation.name);
 ```
 
+    Sending IPEX Grant as issuer
+
+
+    IPEX Grant sent
+
+
+#### Credential Status Checking
+
 **Holder Checks Credential Status (Optional)**
 
-The Holder can proactively check the status of a credential in the Issuer's registry if they know the registry's SAID (`issuerRegistry.regk`) and the credential's SAID (`issuerCredential.sad.d`). This query demonstrates how a party can verify the status directly from the TEL.
+The Holder can proactively check the status of a credential in the Issuer's registry if they know the registry's SAID (`issuerRegistry.regk`) and the credential's SAID (`issuerCredential.sad.d`). This query demonstrates how a party can verify the status of an ACDC directly from its TEL.
+
+The retry loop below shows one way to cause the holder to wait for the issued credential to arrive.
 
 
 ```typescript
@@ -565,6 +595,7 @@ for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
     try{
         // Holder's client queries the state of the credential in the Issuer's registry.
         credentialState = await holderClient.credentials().state(issuerRegistry.regk, issuerCredential.sad.d)
+        console.log("Received the credential.")
         break;
     }
     catch (error){    
@@ -587,22 +618,29 @@ console.log(credentialState) // Displays the status (e.g., issued, revoked)
     [Retry] Waiting 5000ms before next attempt...
 
 
+    Received the credential.
+
+
     {
-      vn: [ [33m1[39m, [33m0[39m ],
-      i: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-      s: [32m"0"[39m,
-      d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m,
-      ri: [32m"EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"[39m,
+      vn: [ 1, 0 ],
+      i: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+      s: "0",
+      d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM",
+      ri: "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
       ra: {},
-      a: { s: [33m2[39m, d: [32m"EJidOg2X6z44Uf73OIcDrH-qdEORcjheHavRwE7yXKsG"[39m },
-      dt: [32m"2025-06-24T18:42:58.678000+00:00"[39m,
-      et: [32m"iss"[39m
+      a: { s: 2, d: "EOZa4v9bZNNSorDp8c-BBYTTmEYsYSwgv7RcIvFD3fAA" },
+      dt: "2025-07-18T00:20:21.979000+00:00",
+      et: "iss"
     }
 
 
+#### Notifications API for IPEX messages
+
+Sending an IPEX Grant also causes a notification object to be sent from the issuer (discloser) to the holder (disclosee). The Notifications API is an internal module used to signal transmission of an ACDC. Polling the list of received notifications is the way a holder knows when they have received a credential presentation through an IPEX grant.
+
 ### Step 5: Holder Receives IPEX Grant Notification
 
-The Holder's KERIA agent will receive the grant `exn` message sent by the Issuer. The Holder's client can list its notifications to find this incoming grant. The notification will contain the SAID of the `exn` message (`grantNotification.a.d`), which can then be used to retrieve the full details of the grant exchange from the Holder's client.
+The Holder's KERIA agent will receive the grant `exn` message sent by the Issuer and a notification object referencing the grant message. The Holder's client can list its notifications to find this incoming grant. The notification will contain the SAID of the `exn` message (`grantNotification.a.d`), which can then be used to retrieve the full details of the grant exchange from the Holder's client.
 
 
 
@@ -623,6 +661,7 @@ for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
         if(notifications.length === 0){ 
             throw new Error("Grant notification not found"); // Throw error to trigger retry
         }
+        console.log("Found an unread notification for an IPEX Grant");
         break;     
     }
     catch (error){    
@@ -638,80 +677,87 @@ for (let attempt = 1; attempt <= DEFAULT_RETRIES ; attempt++) {
 
 const grantNotification = notifications[0]  // Assuming only one grant notification for simplicity
 
-console.log(grantNotification) // Displays the notification details
+console.log("The notification", grantNotification) // Displays the notification details
 
 // Retrieve the full IPEX grant exchange details using the SAID from the notification.
 // The 'exn' field in the exchange will contain the actual credential data.
 const grantExchange = await holderClient.exchanges().get(grantNotification.a.d);
 
+console.log("The grant referenced by the notification")
 console.log(grantExchange) // Displays the content of the grant message
 ```
 
-    {
-      i: [32m"0ADAFhVMUUOgm6J7MqSW46oA"[39m,
-      dt: [32m"2025-06-24T18:42:59.841645+00:00"[39m,
-      r: [33mfalse[39m,
+    Found an unread notification for an IPEX Grant
+
+
+    The notification {
+      i: "0AByDAn4HYgPHtuJrvCig30Q",
+      dt: "2025-07-18T00:20:24.773780+00:00",
+      r: false,
       a: {
-        r: [32m"/exn/ipex/grant"[39m,
-        d: [32m"EMmdeS-9MpU59CmHe4yLw1Z5a3u_4D5a3Vd-xUVXuxcI"[39m,
-        m: [32m""[39m
+        r: "/exn/ipex/grant",
+        d: "EJ0Kd6gWZnQlCnK-3GnQQMbwank0vAvpmN4ss_XlhhdK",
+        m: ""
       }
     }
 
 
+    The grant referenced by the notification
+
+
     {
       exn: {
-        v: [32m"KERI10JSON00057f_"[39m,
-        t: [32m"exn"[39m,
-        d: [32m"EMmdeS-9MpU59CmHe4yLw1Z5a3u_4D5a3Vd-xUVXuxcI"[39m,
-        i: [32m"EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N"[39m,
-        rp: [32m"EB_wwpGO9OuoZCrDxrVJOGLFQZ-SagZvF-slhpSHLWZ1"[39m,
-        p: [32m""[39m,
-        dt: [32m"2025-06-24T18:42:59.473000+00:00"[39m,
-        r: [32m"/ipex/grant"[39m,
+        v: "KERI10JSON00057f_",
+        t: "exn",
+        d: "EJ0Kd6gWZnQlCnK-3GnQQMbwank0vAvpmN4ss_XlhhdK",
+        i: "EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY",
+        rp: "EKbgh2bOcETApqRbnUd5A_MTQC6ahiNgSRkuLNpR5X0-",
+        p: "",
+        dt: "2025-07-18T00:20:24.405000+00:00",
+        r: "/ipex/grant",
         q: {},
-        a: { i: [32m"EB_wwpGO9OuoZCrDxrVJOGLFQZ-SagZvF-slhpSHLWZ1"[39m, m: [32m""[39m },
+        a: { i: "EKbgh2bOcETApqRbnUd5A_MTQC6ahiNgSRkuLNpR5X0-", m: "" },
         e: {
           acdc: {
-            v: [32m"ACDC10JSON0001c4_"[39m,
-            d: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-            i: [32m"EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N"[39m,
-            ri: [32m"EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"[39m,
-            s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+            v: "ACDC10JSON0001c4_",
+            d: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+            i: "EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY",
+            ri: "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
+            s: "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
             a: {
-              d: [32m"ECi-WhMm0hhMdT-h0lJ1M6Btz3qye6vPzxAE0-9INhY4"[39m,
-              i: [32m"EB_wwpGO9OuoZCrDxrVJOGLFQZ-SagZvF-slhpSHLWZ1"[39m,
-              eventName: [32m"GLEIF Summit"[39m,
-              accessLevel: [32m"staff"[39m,
-              validDate: [32m"2026-10-01"[39m,
-              dt: [32m"2025-06-24T18:42:58.678000+00:00"[39m
+              d: "EIpTPqAX3CjYsFJn13OSRLgTojc5N5ecpp_dRzeIQ094",
+              i: "EKbgh2bOcETApqRbnUd5A_MTQC6ahiNgSRkuLNpR5X0-",
+              eventName: "GLEIF Summit",
+              accessLevel: "staff",
+              validDate: "2026-10-01",
+              dt: "2025-07-18T00:20:21.979000+00:00"
             }
           },
           iss: {
-            v: [32m"KERI10JSON0000ed_"[39m,
-            t: [32m"iss"[39m,
-            d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m,
-            i: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-            s: [32m"0"[39m,
-            ri: [32m"EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"[39m,
-            dt: [32m"2025-06-24T18:42:58.678000+00:00"[39m
+            v: "KERI10JSON0000ed_",
+            t: "iss",
+            d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM",
+            i: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+            s: "0",
+            ri: "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
+            dt: "2025-07-18T00:20:21.979000+00:00"
           },
           anc: {
-            v: [32m"KERI10JSON00013a_"[39m,
-            t: [32m"ixn"[39m,
-            d: [32m"EJidOg2X6z44Uf73OIcDrH-qdEORcjheHavRwE7yXKsG"[39m,
-            i: [32m"EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N"[39m,
-            s: [32m"2"[39m,
-            p: [32m"EPj3NJzcTExwIif6o5HNBE3RRs6-fnkybJ9F4oWdNo38"[39m,
-            a: [ [36m[Object][39m ]
+            v: "KERI10JSON00013a_",
+            t: "ixn",
+            d: "EOZa4v9bZNNSorDp8c-BBYTTmEYsYSwgv7RcIvFD3fAA",
+            i: "EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY",
+            s: "2",
+            p: "EII-kMX52ep_cekP2CELNAQ99X7sChcoo67oZdOpHmdj",
+            a: [ [Object] ]
           },
-          d: [32m"EH5YnOHy901He48NWwMe6_FCWF85sLXgg_ucTHAXyAKA"[39m
+          d: "EAaFqBzUELUVCGLFoubm-PoJrEPS8YjnrxhFXY8IzM-U"
         }
       },
       pathed: {
-        acdc: [32m"-IABEPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm0AAAAAAAAAAAAAAAAAAAAAAAEIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m,
-        iss: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAAAEJidOg2X6z44Uf73OIcDrH-qdEORcjheHavRwE7yXKsG"[39m,
-        anc: [32m"-VBq-AABAAA7fDpTJp92i5jmcZFlPvCJ4sLRW_sbxxhotveFJ1LCG-Nk2c5sDzYomKJ1EKLPRGzFQwalle7-L4YDOPki5HIF-BADAAABhAd9wHgSt-D-GR7WqeT0LDq0BkZkflFQpz93lTOxgaZCJmwzbF6YNf1NRZDY38l8AlwzpyOQtqiaCFuRYz8PABDEWXxCfXUpQPxSzcqsXeEXP8gcTgHavgcWqzr1Q8NwOwTgx2Mu6ouNyzQxFBvK3Zw-8j6wbuTCWb2J5m_DsGcGACCJTcaUTGoEkreOBE78864gsy9LfK1ZAO9Ge66JtaKLzLEfgbdr4dG1XEGo6SW7muSF9rrE67v4TuSZshwQfP0N-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-06-24T18c42c58d776367p00c00"[39m
+        acdc: "-IABELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j10AAAAAAAAAAAAAAAAAAAAAAAEHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM",
+        iss: "-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAAAEOZa4v9bZNNSorDp8c-BBYTTmEYsYSwgv7RcIvFD3fAA",
+        anc: "-VBq-AABAAA_XsnPbTyvPYzGr0mNCY3759ZBSQcS0y2A02XPMr7PuRFm0h4HJfoh5WkY6mopBUtm_4xfG4_hkpR6nXS4-DIF-BADAADmd8Q1mtGQdFVhTGr5XKYGdY-dhORcwOd1Af2Yu0sNc-cD8UU_8Hkib-eF-JBNV5DORjFYw1J5HzFaJWeeqYAMABBtAfjzr8spBZdst0j0khZi7L42LzWSZK0kHbOCNZMHvtfrrQj3sPk85el1LDn43VWCXyUfBrDnSwgZqr51d0IIACAbSx-B3qKgWFOPAgexz2yNwr8Ma7bEejs3UCZSmGnMtHBvz4Urkdhvk7PYDwd8ksU1PJz5cbnP3S8elKoyUwsH-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-07-18T00c20c22d083667p00c00"
       }
     }
 
@@ -767,18 +813,18 @@ console.log(holderReceivedCredential);
 
 
     {
-      start: [33m0[39m,
-      end: [33m0[39m,
-      total: [33m1[39m,
+      start: 0,
+      end: 0,
+      total: 1,
       notes: [
         {
-          i: [32m"0ADAFhVMUUOgm6J7MqSW46oA"[39m,
-          dt: [32m"2025-06-24T18:42:59.841645+00:00"[39m,
-          r: [33mtrue[39m,
+          i: "0AByDAn4HYgPHtuJrvCig30Q",
+          dt: "2025-07-18T00:20:24.773780+00:00",
+          r: true,
           a: {
-            r: [32m"/exn/ipex/grant"[39m,
-            d: [32m"EMmdeS-9MpU59CmHe4yLw1Z5a3u_4D5a3Vd-xUVXuxcI"[39m,
-            m: [32m""[39m
+            r: "/exn/ipex/grant",
+            d: "EJ0Kd6gWZnQlCnK-3GnQQMbwank0vAvpmN4ss_XlhhdK",
+            m: ""
           }
         }
       ]
@@ -790,91 +836,91 @@ console.log(holderReceivedCredential);
 
     {
       sad: {
-        v: [32m"ACDC10JSON0001c4_"[39m,
-        d: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-        i: [32m"EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N"[39m,
-        ri: [32m"EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"[39m,
-        s: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
+        v: "ACDC10JSON0001c4_",
+        d: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+        i: "EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY",
+        ri: "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
+        s: "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
         a: {
-          d: [32m"ECi-WhMm0hhMdT-h0lJ1M6Btz3qye6vPzxAE0-9INhY4"[39m,
-          i: [32m"EB_wwpGO9OuoZCrDxrVJOGLFQZ-SagZvF-slhpSHLWZ1"[39m,
-          eventName: [32m"GLEIF Summit"[39m,
-          accessLevel: [32m"staff"[39m,
-          validDate: [32m"2026-10-01"[39m,
-          dt: [32m"2025-06-24T18:42:58.678000+00:00"[39m
+          d: "EIpTPqAX3CjYsFJn13OSRLgTojc5N5ecpp_dRzeIQ094",
+          i: "EKbgh2bOcETApqRbnUd5A_MTQC6ahiNgSRkuLNpR5X0-",
+          eventName: "GLEIF Summit",
+          accessLevel: "staff",
+          validDate: "2026-10-01",
+          dt: "2025-07-18T00:20:21.979000+00:00"
         }
       },
-      atc: [32m"-IABEPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm0AAAAAAAAAAAAAAAAAAAAAAAEPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
+      atc: "-IABELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j10AAAAAAAAAAAAAAAAAAAAAAAELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
       iss: {
-        v: [32m"KERI10JSON0000ed_"[39m,
-        t: [32m"iss"[39m,
-        d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m,
-        i: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-        s: [32m"0"[39m,
-        ri: [32m"EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"[39m,
-        dt: [32m"2025-06-24T18:42:58.678000+00:00"[39m
+        v: "KERI10JSON0000ed_",
+        t: "iss",
+        d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM",
+        i: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+        s: "0",
+        ri: "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
+        dt: "2025-07-18T00:20:21.979000+00:00"
       },
-      issatc: [32m"-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEJidOg2X6z44Uf73OIcDrH-qdEORcjheHavRwE7yXKsG"[39m,
-      pre: [32m"EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N"[39m,
+      issatc: "-VAS-GAB0AAAAAAAAAAAAAAAAAAAAAACEOZa4v9bZNNSorDp8c-BBYTTmEYsYSwgv7RcIvFD3fAA",
+      pre: "EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY",
       schema: {
-        [32m"$id"[39m: [32m"EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK"[39m,
-        [32m"$schema"[39m: [32m"http://json-schema.org/draft-07/schema#"[39m,
-        title: [32m"EventPass"[39m,
-        description: [32m"Event Pass Schema"[39m,
-        type: [32m"object"[39m,
-        credentialType: [32m"EventPassCred"[39m,
-        version: [32m"1.0.0"[39m,
+        "$id": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        title: "EventPass",
+        description: "Event Pass Schema",
+        type: "object",
+        credentialType: "EventPassCred",
+        version: "1.0.0",
         properties: {
-          v: { description: [32m"Credential Version String"[39m, type: [32m"string"[39m },
-          d: { description: [32m"Credential SAID"[39m, type: [32m"string"[39m },
-          u: { description: [32m"One time use nonce"[39m, type: [32m"string"[39m },
-          i: { description: [32m"Issuer AID"[39m, type: [32m"string"[39m },
-          ri: { description: [32m"Registry SAID"[39m, type: [32m"string"[39m },
-          s: { description: [32m"Schema SAID"[39m, type: [32m"string"[39m },
-          a: { oneOf: [ [36m[Object][39m, [36m[Object][39m ] }
+          v: { description: "Credential Version String", type: "string" },
+          d: { description: "Credential SAID", type: "string" },
+          u: { description: "One time use nonce", type: "string" },
+          i: { description: "Issuer AID", type: "string" },
+          ri: { description: "Registry SAID", type: "string" },
+          s: { description: "Schema SAID", type: "string" },
+          a: { oneOf: [ [Object], [Object] ] }
         },
-        additionalProperties: [33mfalse[39m,
-        required: [ [32m"v"[39m, [32m"d"[39m, [32m"i"[39m, [32m"ri"[39m, [32m"s"[39m, [32m"a"[39m ]
+        additionalProperties: false,
+        required: [ "v", "d", "i", "ri", "s", "a" ]
       },
       chains: [],
       status: {
-        vn: [ [33m1[39m, [33m0[39m ],
-        i: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-        s: [32m"0"[39m,
-        d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m,
-        ri: [32m"EIifzVPDjABcuwizPvcbGnjZIOPkKnNw9cenX2jFba5S"[39m,
+        vn: [ 1, 0 ],
+        i: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+        s: "0",
+        d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM",
+        ri: "EA4LjjIE2SfG5ZLvWNMomRoBL25sOzeYXTYlyFckLiEH",
         ra: {},
-        a: { s: [33m2[39m, d: [32m"EJidOg2X6z44Uf73OIcDrH-qdEORcjheHavRwE7yXKsG"[39m },
-        dt: [32m"2025-06-24T18:42:58.678000+00:00"[39m,
-        et: [32m"iss"[39m
+        a: { s: 2, d: "EOZa4v9bZNNSorDp8c-BBYTTmEYsYSwgv7RcIvFD3fAA" },
+        dt: "2025-07-18T00:20:21.979000+00:00",
+        et: "iss"
       },
       anchor: {
-        pre: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-        sn: [33m0[39m,
-        d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m
+        pre: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+        sn: 0,
+        d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM"
       },
       anc: {
-        v: [32m"KERI10JSON00013a_"[39m,
-        t: [32m"ixn"[39m,
-        d: [32m"EJidOg2X6z44Uf73OIcDrH-qdEORcjheHavRwE7yXKsG"[39m,
-        i: [32m"EJ-zXn1XNto0WUWQWo88zvbwt-ZSvTb9NVzIRbCatC0N"[39m,
-        s: [32m"2"[39m,
-        p: [32m"EPj3NJzcTExwIif6o5HNBE3RRs6-fnkybJ9F4oWdNo38"[39m,
+        v: "KERI10JSON00013a_",
+        t: "ixn",
+        d: "EOZa4v9bZNNSorDp8c-BBYTTmEYsYSwgv7RcIvFD3fAA",
+        i: "EInqPd7K84Dfo4DzwPeITao_CX3DAuvP4e9EcTZ8ryYY",
+        s: "2",
+        p: "EII-kMX52ep_cekP2CELNAQ99X7sChcoo67oZdOpHmdj",
         a: [
           {
-            i: [32m"EPK6k6pUEItMAFgcDlEai541dqolAXCJxNQKApepY1qm"[39m,
-            s: [32m"0"[39m,
-            d: [32m"EIfss0aFa1pBGTN8iQJK1vkhhf-54_FCytWqUXyIS--t"[39m
+            i: "ELnSh4dIcGKK3CfB_NsuaLOOat4GR0KFNLfwQssKv0j1",
+            s: "0",
+            d: "EHi5JRGXifVZUsdGv9sXOCLkfRNrmte5NuJhGa7kJVzM"
           }
         ]
       },
       ancatc: [
-        [32m"-VBq-AABAAA7fDpTJp92i5jmcZFlPvCJ4sLRW_sbxxhotveFJ1LCG-Nk2c5sDzYomKJ1EKLPRGzFQwalle7-L4YDOPki5HIF-BADAAABhAd9wHgSt-D-GR7WqeT0LDq0BkZkflFQpz93lTOxgaZCJmwzbF6YNf1NRZDY38l8AlwzpyOQtqiaCFuRYz8PABDEWXxCfXUpQPxSzcqsXeEXP8gcTgHavgcWqzr1Q8NwOwTgx2Mu6ouNyzQxFBvK3Zw-8j6wbuTCWb2J5m_DsGcGACCJTcaUTGoEkreOBE78864gsy9LfK1ZAO9Ge66JtaKLzLEfgbdr4dG1XEGo6SW7muSF9rrE67v4TuSZshwQfP0N-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-06-24T18c42c59d994584p00c00"[39m
+        "-VBq-AABAAA_XsnPbTyvPYzGr0mNCY3759ZBSQcS0y2A02XPMr7PuRFm0h4HJfoh5WkY6mopBUtm_4xfG4_hkpR6nXS4-DIF-BADAADmd8Q1mtGQdFVhTGr5XKYGdY-dhORcwOd1Af2Yu0sNc-cD8UU_8Hkib-eF-JBNV5DORjFYw1J5HzFaJWeeqYAMABBtAfjzr8spBZdst0j0khZi7L42LzWSZK0kHbOCNZMHvtfrrQj3sPk85el1LDn43VWCXyUfBrDnSwgZqr51d0IIACAbSx-B3qKgWFOPAgexz2yNwr8Ma7bEejs3UCZSmGnMtHBvz4Urkdhvk7PYDwd8ksU1PJz5cbnP3S8elKoyUwsH-EAB0AAAAAAAAAAAAAAAAAAAAAAA1AAG2025-07-18T00c20c24d926728p00c00"
       ]
     }
 
 
-### Step 8: Issuer Receives Admit Notification
+### Step 7: Issuer Receives Admit Notification
 
 The Issuer, in turn, will receive a notification that the Holder has admitted the credential. The Issuer's client lists its notifications, finds the `admit` message, and marks it as read. This completes the issuance loop.
 
@@ -920,18 +966,18 @@ console.log(await issuerClient.notifications().list());
 
 
     {
-      start: [33m0[39m,
-      end: [33m0[39m,
-      total: [33m1[39m,
+      start: 0,
+      end: 0,
+      total: 1,
       notes: [
         {
-          i: [32m"0ADJTyJ2fNbF6lEULcV6n-iA"[39m,
-          dt: [32m"2025-06-24T18:43:05.453756+00:00"[39m,
-          r: [33mtrue[39m,
+          i: "0ABYvw7RdLb-uFEp7KYRtPQ9",
+          dt: "2025-07-18T00:20:30.374198+00:00",
+          r: true,
           a: {
-            r: [32m"/exn/ipex/admit"[39m,
-            d: [32m"EF0k5k_c8ARRhR0i8Yuq5TOQrU3gv1F0826r0-TgKR-d"[39m,
-            m: [32m""[39m
+            r: "/exn/ipex/admit",
+            d: "EHhpugqbltwwKI1tKOODD7ifmfXbQlOs66bLfDUQGA8Q",
+            m: ""
           }
         }
       ]
@@ -940,7 +986,7 @@ console.log(await issuerClient.notifications().list());
 
 **Cleanup (Optional)**
 
-Once the IPEX flow for issuance is complete and notifications have been processed, both parties can optionally delete these notifications from their local client stores.
+Once the IPEX flow for issuance is complete and notifications have been processed, both parties can optionally delete these notifications from their agent notification stores.
 
 
 ```typescript
@@ -958,11 +1004,24 @@ console.log(await holderClient.notifications().list());
     Issuer's notifications after deleting admit notification:
 
 
-    { start: [33m0[39m, end: [33m0[39m, total: [33m0[39m, notes: [] }
+    { start: 0, end: 0, total: 0, notes: [] }
 
 
     Holder's notifications after deleting grant notification:
 
 
-    { start: [33m0[39m, end: [33m0[39m, total: [33m0[39m, notes: [] }
+    { start: 0, end: 0, total: 0, notes: [] }
 
+
+<div class="alert alert-primary">
+<b>📝 SUMMARY</b><hr>
+This notebook demonstrated how to perform credential issuance using the Issuance and Presentation Exchange (IPEX) protocol.
+<ul>
+<li><b>Credential Registry:</b> before any credentials may be created for an issuer it must create a credential registry that will be referenced by a set of issued credentials. An issuer may make more than one registry and name them according to purpose.</li>
+<li><b>Schema Definition:</b> every credential must have a schema definition and this schema definition must be loaded into the issuer's local database prior to issuing the credential.</li>
+<li><b>Credential Issuance:</b> an issuer may create a credential targeted towards a particular subject, or an identifier that will be the holder of an ACDC credential. Credentials may also be untargeted.</li>
+<li><b>Sharing with Holder (subject):</b> following creation an issuer may share the ACDC credential with the subject of the newly created credential, the holder, using an IPEX Grant.</li>
+<li><b>IPEX action notifications:</b> as a convenience for the users of the IPEX process there are notifications sent of each IPEX action that begin as unread and may be marked as read once a notification receiver has processed the referenced action or event.</li>
+</ul>
+The ACDC credential issuance process with IPEX is a critical part of the overall value that the KERI suite of protocols stands to provide as it is the first step in allowing verifiable, provenanced data sharing between multiple parties. This training shows how to use IPEX to issue and share credentials.
+</div>

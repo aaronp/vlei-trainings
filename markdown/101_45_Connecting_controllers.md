@@ -279,7 +279,7 @@ print(f"Challenge Phrase B: {phrase_b}")
     Example challenge phrase:
 
 
-    noodle sample dice hood wolf family minor solve absorb utility stable caught
+    robot match tomato increase similar resist swap opinion lounge walnut strategy glove
 
 
     
@@ -287,10 +287,10 @@ print(f"Challenge Phrase B: {phrase_b}")
     
 
 
-    Challenge Phrase A: annual scare talk express sponsor chef spice sun harbor next comfort educate
+    Challenge Phrase A: banner worth air salad snow topic fresh feed razor decorate pair innocent
 
 
-    Challenge Phrase B: life skull nasty blossom coach news lend dose museum aunt fatal result
+    Challenge Phrase B: eagle truly sail depth cover faint essay hybrid identify link purity refuse
 
 
 Now, simulate the OOB exchange: `aid_b` sends `phrase_b` to `aid_a`, and `aid_a` sends `phrase_a` to `aid_b`. Each party then uses `kli challenge respond` to sign the phrase they received and `kli challenge verify` to check the response from the other party.
@@ -307,7 +307,7 @@ print(phrase_a)
     --recipient {aid_a}
 ```
 
-    annual scare talk express sponsor chef spice sun harbor next comfort educate
+    banner worth air salad snow topic fresh feed razor decorate pair innocent
 
 
 
@@ -323,7 +323,7 @@ print(phrase_a)
 
     .
     
-    Signer aid_b successfully responded to challenge words: '['annual', 'scare', 'talk', 'express', 'sponsor', 'chef', 'spice', 'sun', 'harbor', 'next', 'comfort', 'educate']'
+    Signer aid_b successfully responded to challenge words: '['banner', 'worth', 'air', 'salad', 'snow', 'topic', 'fresh', 'feed', 'razor', 'decorate', 'pair', 'innocent']'
     
 
 
@@ -338,7 +338,7 @@ print(phrase_b)
     --recipient {aid_b}
 ```
 
-    life skull nasty blossom coach news lend dose museum aunt fatal result
+    eagle truly sail depth cover faint essay hybrid identify link purity refuse
 
 
 
@@ -354,7 +354,7 @@ print(phrase_b)
 
     .
     
-    Signer aid_a successfully responded to challenge words: '['life', 'skull', 'nasty', 'blossom', 'coach', 'news', 'lend', 'dose', 'museum', 'aunt', 'fatal', 'result']'
+    Signer aid_a successfully responded to challenge words: '['eagle', 'truly', 'sail', 'depth', 'cover', 'faint', 'essay', 'hybrid', 'identify', 'link', 'purity', 'refuse']'
     
 
 

@@ -148,7 +148,7 @@ pr_continue()
     KERI Keystore created at: /usr/local/var/keri/ks/holder_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/holder_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/holder_presentation_ks
-    	aeid: BOKhLAo9ksJR4Z2srSd9MuLxF16UerT7HUvtSdWQQQXR
+    	aeid: BBBVRy6lcdnYQ9FnsGN6Q-Y6ldO6TbixkpjROvHynFrE
     
     Loading 3 OOBIs...
 
@@ -161,15 +161,15 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE
-    	Public key 1:  DOkK-tZVU8Vq2sBi4cP7gwGv2yYnt2tufLZq89dz7rno
+    Prefix  EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc
+    	Public key 1:  DCaCpFrgPhN2hauZ9JhrCC2KfnTXIAJtYzeLcy0sAfMG
     
 
 
     KERI Keystore created at: /usr/local/var/keri/ks/issuer_presentation_ks
     KERI Database created at: /usr/local/var/keri/db/issuer_presentation_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/issuer_presentation_ks
-    	aeid: BLXbP-nEZiu-cvhT-2LqOo5jGb8IwWapebUXFjbBfE3d
+    	aeid: BC_295BahyVc3cLyo4UpJZxB-8IPsgWhHnj1Bx_MxzCZ
     
     Loading 3 OOBIs...
 
@@ -182,8 +182,8 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
-    	Public key 1:  DNtlNSyrh5UXB5MYglyrLS9nKw1-0O120NbJL0KIKg27
+    Prefix  EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF
+    	Public key 1:  DNb4Svy4wFKFENR7UfwyzNTiKplUvq08tZpURpiMJ_YO
     
 
 
@@ -193,14 +193,14 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    Registry:  issuer_registry(ECbnWXZp_09-HCjP6rBoLyhsrPyFsKiH2cCvSnmtEFc4) 
-    	created for Identifier Prefix:  EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+    Registry:  issuer_registry(EOCl9YIwNcqXsGNs7k3hr61wmOukF_1GLf11l3SzvGUV) 
+    	created for Identifier Prefix:  EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF
 
 
-    http://witness-demo:5642/oobi/EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO/witness resolved
+    http://witness-demo:5642/oobi/EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF/witness resolved
 
 
-    http://witness-demo:5642/oobi/EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE/witness resolved
+    http://witness-demo:5642/oobi/EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc/witness resolved
 
 
     http://vlei-server:7723/oobi/EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK resolved
@@ -215,23 +215,23 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc has been created.
+    EKdFpsYHnxZiUiXefCuqKB0puQmfbRPUCJniDQ0uj9Gd has been created.
 
 
-    Sending message EHYsLwilWvh1CwnG3RQk9_NJn4Nf6o92BQ5QCJUrtYua to EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE
+    Sending message EHPK4Gm3V9D_EzzfXmG1watsWPOQlob0q2krPqYB5mA8 to EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc
 
 
     ... grant message sent
 
 
-    Sending admit message to EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+    Sending admit message to EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF
 
 
     ... admit message sent
 
 
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -249,24 +249,24 @@ First, confirm the Holder has the credential:
     --verbose
 ```
 
-    Current received credentials for holder_aid (EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE):
+    Current received credentials for holder_aid (EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc):
     
-    Credential #1: EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc
+    Credential #1: EKdFpsYHnxZiUiXefCuqKB0puQmfbRPUCJniDQ0uj9Gd
         Type: EventPass
-        Status: Issued [92m✔[0m
-        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
-        Issued on 2025-06-24T18:40:41.740030+00:00
+        Status: Issued ✔
+        Issued by EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF
+        Issued on 2025-07-18T00:18:06.956874+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc",
-    	  "i": "EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO",
-    	  "ri": "ECbnWXZp_09-HCjP6rBoLyhsrPyFsKiH2cCvSnmtEFc4",
+    	  "d": "EKdFpsYHnxZiUiXefCuqKB0puQmfbRPUCJniDQ0uj9Gd",
+    	  "i": "EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF",
+    	  "ri": "EOCl9YIwNcqXsGNs7k3hr61wmOukF_1GLf11l3SzvGUV",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "ED2LcOHWzqQfl02d-AiflVWfhshx-LU4TmmUuy5i_Ekb",
-    	    "i": "EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE",
-    	    "dt": "2025-06-24T18:40:41.740030+00:00",
+    	    "d": "EHEZ2ahUpRq8J5qrakEk_a4GrcDyR-aGhBzLv5lTGsJ2",
+    	    "i": "EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc",
+    	    "dt": "2025-07-18T00:18:06.956874+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -300,7 +300,7 @@ verifier_aid = "verifier_aid"
     KERI Keystore created at: /usr/local/var/keri/ks/verifier_ks
     KERI Database created at: /usr/local/var/keri/db/verifier_ks
     KERI Credential Store created at: /usr/local/var/keri/reg/verifier_ks
-    	aeid: BHgOwu5rL2OSwHajkwPxeSA8X_5EPNcKBYJzfR6jxwu-
+    	aeid: BKdWWKjMtQzNcZNNiWd5bvTB31jSwkqQSDjXWiT21jF-
     
     Loading 3 OOBIs...
 
@@ -313,8 +313,8 @@ verifier_aid = "verifier_aid"
     Waiting for witness receipts...
 
 
-    Prefix  EPeyjCgQ314pKpsWv6G97jeZLn_s7ECyQgoyLZgObAg-
-    	Public key 1:  DI4hh6fDke0Z84b_jkKFhTB3xY9813ez1tliEHGxxUYH
+    Prefix  EIZQZVLQVwebl4ME2viQKn-J0zZpK80_fVXYoiZ7rvak
+    	Public key 1:  DL9Bc9Ruvc2D5uZPOmXSNIWuK-PSMtwOCc7m4Bwqf1DW
     
 
 
@@ -339,10 +339,10 @@ verifier_oobi = exec(verifier_oobi_gen)
     --oobi-alias {holder_aid} --oobi {holder_oobi}
 ```
 
-    http://witness-demo:5642/oobi/EPeyjCgQ314pKpsWv6G97jeZLn_s7ECyQgoyLZgObAg-/witness resolved
+    http://witness-demo:5642/oobi/EIZQZVLQVwebl4ME2viQKn-J0zZpK80_fVXYoiZ7rvak/witness resolved
 
 
-    http://witness-demo:5642/oobi/EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE/witness resolved
+    http://witness-demo:5642/oobi/EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc/witness resolved
 
 
 ### Verifier Resolves Schema OOBI
@@ -391,7 +391,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending message EGAiDLoNe0VdxQqqaKtrw4EBv3CDv26kBtfpqggUL_r2 to EPeyjCgQ314pKpsWv6G97jeZLn_s7ECyQgoyLZgObAg-
+    Sending message EBamgKsfJURegxwVHiXgTzZwYGv_QPaIS-aq-erRkyCo to EIZQZVLQVwebl4ME2viQKn-J0zZpK80_fVXYoiZ7rvak
 
 
     ... grant message sent
@@ -421,9 +421,9 @@ print(ipex_said)
 pr_continue()
 ```
 
-    EGAiDLoNe0VdxQqqaKtrw4EBv3CDv26kBtfpqggUL_r2
+    EBamgKsfJURegxwVHiXgTzZwYGv_QPaIS-aq-erRkyCo
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -444,24 +444,24 @@ Before formally admitting the credential, the Verifier can inspect the received 
     
     Received IPEX Messages:
     
-    GRANT - SAID: EGAiDLoNe0VdxQqqaKtrw4EBv3CDv26kBtfpqggUL_r2
-    Credential EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc:
+    GRANT - SAID: EBamgKsfJURegxwVHiXgTzZwYGv_QPaIS-aq-erRkyCo
+    Credential EKdFpsYHnxZiUiXefCuqKB0puQmfbRPUCJniDQ0uj9Gd:
         Type: EventPass
-        Status: Issued [92m✔[0m
-        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
-        Issued on 2025-06-24T18:40:41.740030+00:00
-        Already responded? No [91m✘[0m
+        Status: Issued ✔
+        Issued by EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF
+        Issued on 2025-07-18T00:18:06.956874+00:00
+        Already responded? No ✘
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc",
-    	  "i": "EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO",
-    	  "ri": "ECbnWXZp_09-HCjP6rBoLyhsrPyFsKiH2cCvSnmtEFc4",
+    	  "d": "EKdFpsYHnxZiUiXefCuqKB0puQmfbRPUCJniDQ0uj9Gd",
+    	  "i": "EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF",
+    	  "ri": "EOCl9YIwNcqXsGNs7k3hr61wmOukF_1GLf11l3SzvGUV",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "ED2LcOHWzqQfl02d-AiflVWfhshx-LU4TmmUuy5i_Ekb",
-    	    "i": "EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE",
-    	    "dt": "2025-06-24T18:40:41.740030+00:00",
+    	    "d": "EHEZ2ahUpRq8J5qrakEk_a4GrcDyR-aGhBzLv5lTGsJ2",
+    	    "i": "EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc",
+    	    "dt": "2025-07-18T00:18:06.956874+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -491,7 +491,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending admit message to EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE
+    Sending admit message to EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc
 
 
     ... admit message sent
@@ -513,25 +513,25 @@ Finally, the Verifier can check the status of the received IPEX message again. T
     
     Received IPEX Messages:
     
-    GRANT - SAID: EGAiDLoNe0VdxQqqaKtrw4EBv3CDv26kBtfpqggUL_r2
-    Credential EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc:
+    GRANT - SAID: EBamgKsfJURegxwVHiXgTzZwYGv_QPaIS-aq-erRkyCo
+    Credential EKdFpsYHnxZiUiXefCuqKB0puQmfbRPUCJniDQ0uj9Gd:
         Type: EventPass
-        Status: Issued [92m✔[0m
-        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
-        Issued on 2025-06-24T18:40:41.740030+00:00
-        Already responded? Yes [92m✔[0m
-        Response: [92mAdmit[0m (EHJ4IF8xLyVjqAn1ZbJWLQtK370VsJpKSYQLCxPqd9L9)
+        Status: Issued ✔
+        Issued by EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF
+        Issued on 2025-07-18T00:18:06.956874+00:00
+        Already responded? Yes ✔
+        Response: Admit (EO7n6MMvrm9wGo-1gSYK0olfrqwUVAHjDYk5Y23T446E)
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c4_",
-    	  "d": "EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc",
-    	  "i": "EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO",
-    	  "ri": "ECbnWXZp_09-HCjP6rBoLyhsrPyFsKiH2cCvSnmtEFc4",
+    	  "d": "EKdFpsYHnxZiUiXefCuqKB0puQmfbRPUCJniDQ0uj9Gd",
+    	  "i": "EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF",
+    	  "ri": "EOCl9YIwNcqXsGNs7k3hr61wmOukF_1GLf11l3SzvGUV",
     	  "s": "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
     	  "a": {
-    	    "d": "ED2LcOHWzqQfl02d-AiflVWfhshx-LU4TmmUuy5i_Ekb",
-    	    "i": "EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE",
-    	    "dt": "2025-06-24T18:40:41.740030+00:00",
+    	    "d": "EHEZ2ahUpRq8J5qrakEk_a4GrcDyR-aGhBzLv5lTGsJ2",
+    	    "i": "EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc",
+    	    "dt": "2025-07-18T00:18:06.956874+00:00",
     	    "eventName": "GLEIF Summit",
     	    "accessLevel": "staff",
     	    "validDate": "2026-10-01"
@@ -575,13 +575,13 @@ Now, if the Issuer lists their issued credentials again, the status will reflect
     --issued
 ```
 
-    Current issued credentials for issuer_aid (EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO):
+    Current issued credentials for issuer_aid (EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF):
     
-    Credential #1: EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc
+    Credential #1: EKdFpsYHnxZiUiXefCuqKB0puQmfbRPUCJniDQ0uj9Gd
         Type: EventPass
-        Status: Revoked [91m✘[0m
-        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
-        Issued on 2025-06-24T18:41:09.527463+00:00
+        Status: Revoked ✘
+        Issued by EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF
+        Issued on 2025-07-18T00:18:34.227259+00:00
 
 
 ### Sharing the revoked credential status with the Holder.
@@ -629,7 +629,7 @@ time = exec("kli time")
     --time {time}
 ```
 
-    Sending message EN4bAI-uv4hIRQI2tZEeQJSHEeQ_DbTYqqIGUlFQtemU to EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE
+    Sending message EFO_4ByP6ShVL8Ug3KpZ6QRfeajBIn4ovZQ8inVP81Cf to EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc
 
 
     ... grant message sent
@@ -662,17 +662,17 @@ time = exec("kli time")
 pr_continue()
 ```
 
-    Found grant EN4bAI-uv4hIRQI2tZEeQJSHEeQ_DbTYqqIGUlFQtemU for revocation
+    Found grant EFO_4ByP6ShVL8Ug3KpZ6QRfeajBIn4ovZQ8inVP81Cf for revocation
 
 
-    Sending admit message to EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
+    Sending admit message to EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF
 
 
     ... admit message sent
 
 
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -685,13 +685,13 @@ The holder now sees the credential status as "Revoked" in their credential list 
     --alias {holder_aid}
 ```
 
-    Current received credentials for holder_aid (EG8cFcqloDx4qyan1S5s_t3_LOQgnvokhNDIAGPGOwRE):
+    Current received credentials for holder_aid (EF48bMpmEntCs7Dsa4ThI9ncQNpVk0RJcKxIhIOSEaUc):
     
-    Credential #1: EGUhqhOOvx1gi67-6U2EgV-qVfIvwYZLblhfKmB0rRrc
+    Credential #1: EKdFpsYHnxZiUiXefCuqKB0puQmfbRPUCJniDQ0uj9Gd
         Type: EventPass
-        Status: Revoked [91m✘[0m
-        Issued by EJ8_m6LRPqG9FTgv0yIoAJ6zl8uaeeTOzNT8ZTtHzvPO
-        Issued on 2025-06-24T18:41:09.527463+00:00
+        Status: Revoked ✘
+        Issued by EDrgzJ9CTI__UOzLxSQEjRcVn-WdCg0vr7H08rS8LDpF
+        Issued on 2025-07-18T00:18:34.227259+00:00
 
 
 Now that this credential is revoked it can similarly be presented to the verifier from either the issuer or the holder so that the verifier can learn of the revocation state of the credential. This would be a push-style workflow.

@@ -1,22 +1,23 @@
-# Signify-ts: Key Rotation
+# Signify TS: Key Rotation
 
 <div class="alert alert-primary">
 <b>🎯 OBJECTIVE</b><hr>
-This notebook demonstrates how to perform a single-signature key rotation for an Autonomic Identifier (AID) using the Signify-ts library. 
+This notebook demonstrates how to perform a single-signature key rotation for an Autonomic Identifier (AID) using the Signify TS library. 
 </ul>
 </div>
 
-## Introduction to Key Rotation with Signify-ts
+## Introduction to Key Rotation with Signify TS
+
 Key rotation is a fundamental security practice in KERI. It involves changing the cryptographic keys associated with an AID while preserving the identifier itself. This allows an identity to remain stable and persistent over time, even as its underlying keys are updated for security reasons (e.g., to mitigate key compromise or to upgrade cryptographic algorithms).
 
-In the KERIA/Signify architecture, the client (your application using Signify-ts) initiates and signs the rotation event. The KERIA agent then handles the dissemination of this event to witnesses and makes it available to other observers. This notebook illustrates the end-to-end process, showing how a rotation is performed by one client and observed by another.
+In the KERIA/Signify architecture, the client (your application using Signify TS) initiates and signs the rotation event. The KERIA agent then handles the dissemination of this event to witnesses and makes it available to others. This notebook illustrates the end-to-end process, showing how a rotation is performed by one client and observed by another.
 
 ## Controller and AID Setup
 
 First, we set up the environment for our demonstration. This involves:
 - Two `SignifyClient` instances:
     - `clientA` will act as the controller of the AID whose keys we will rotate.
-    - `clientB` will act as a remote observer who knows about the AID and will track its key state changes.
+    - `clientB` will act as a remote agent who knows about the AID and will track its key state changes.
 - AID Creation: `clientA` creates a new AID (`aidA`) that is transferable (i.e., its keys can be rotated).
 - OOBI Resolution: `clientB` resolves an Out-of-Band Introduction (OOBI) for `aidA` to establish contact and retrieve its initial Key Event Log (KEL).
 
@@ -58,25 +59,25 @@ console.log(`Client B resolved OOBI for AID: ${aidA.i}`);
 
 ```
 
-    Using Passcode (bran): AQ4u8qmZ6kYeLPE3HxDOL
+    Using Passcode (bran): D_PNwZhM1_uoAH4UBsIc1
 
 
     Client boot process initiated with KERIA agent.
 
 
-      Client AID Prefix:  EOhraUqyDjnt1CBZxmyUX9WNYjRoIzH7xyMgViedH95g
+      Client AID Prefix:  EOkc0Lot12bbeQDpGLJEaWTtQvePbdY6OXWCqWuXzffp
 
 
-      Agent AID Prefix:   ENsOA9wi6EGlMwuPjDiOvL9GgT10w1oMxBnzPxBrvbzJ
+      Agent AID Prefix:   EEDrzjMKTOe34W994F_trCgbT0QHDGJZLhol60dlU71E
 
 
     Initiating AID inception for alias: aidA
 
 
-    Successfully created AID with prefix: EOCHugj7bxSTRQ3Ii_tfdibzYrz5CNfq_817XOqZK7eA
+    Successfully created AID with prefix: EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7
 
 
-    Assigning 'agent' role to KERIA Agent ENsOA9wi6EGlMwuPjDiOvL9GgT10w1oMxBnzPxBrvbzJ for AID alias aidA
+    Assigning 'agent' role to KERIA Agent EEDrzjMKTOe34W994F_trCgbT0QHDGJZLhol60dlU71E for AID alias aidA
 
 
     Successfully assigned 'agent' role for AID alias aidA.
@@ -85,22 +86,22 @@ console.log(`Client B resolved OOBI for AID: ${aidA.i}`);
     Generating OOBI for AID alias aidA with role agent
 
 
-    Generated OOBI URL: http://keria:3902/oobi/EOCHugj7bxSTRQ3Ii_tfdibzYrz5CNfq_817XOqZK7eA/agent/ENsOA9wi6EGlMwuPjDiOvL9GgT10w1oMxBnzPxBrvbzJ
+    Generated OOBI URL: http://keria:3902/oobi/EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7/agent/EEDrzjMKTOe34W994F_trCgbT0QHDGJZLhol60dlU71E
 
 
-    Using Passcode (bran): BcPepRvzY8QgwNSiG_M95
+    Using Passcode (bran): Bfx2oZDxfeDwLbjavNWbx
 
 
     Client boot process initiated with KERIA agent.
 
 
-      Client AID Prefix:  EE1zS3Nq3utLp-rqBDkjb4JSurGUp5ulSd-5t4XFNP_P
+      Client AID Prefix:  EMI5ibqHucIzvCuCcCTYPafPDLXytGCO4gD5KEyQM8Qw
 
 
-      Agent AID Prefix:   EEKaErmg46jkFX5HfNZafYg-2pWkCk4D5hL-9B-pFsq_
+      Agent AID Prefix:   EHPHjDYmvgIqOUKxajaie6t1Atm5S27VtKpabPTTqvvd
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EOCHugj7bxSTRQ3Ii_tfdibzYrz5CNfq_817XOqZK7eA/agent/ENsOA9wi6EGlMwuPjDiOvL9GgT10w1oMxBnzPxBrvbzJ with alias aidA
+    Resolving OOBI URL: http://keria:3902/oobi/EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7/agent/EEDrzjMKTOe34W994F_trCgbT0QHDGJZLhol60dlU71E with alias aidA
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -112,10 +113,10 @@ console.log(`Client B resolved OOBI for AID: ${aidA.i}`);
     Client and AID setup complete.
 
 
-    Client A created AID: EOCHugj7bxSTRQ3Ii_tfdibzYrz5CNfq_817XOqZK7eA
+    Client A created AID: EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7
 
 
-    Client B resolved OOBI for AID: EOCHugj7bxSTRQ3Ii_tfdibzYrz5CNfq_817XOqZK7eA
+    Client B resolved OOBI for AID: EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7
 
 
 ## Initial State Verification
@@ -144,7 +145,7 @@ console.log("Are keystates initially in sync?", keystateA_before.s === keystateB
     Initial sequence number for clientB: 0
 
 
-    Are keystates initially in sync? [33mtrue[39m
+    Are keystates initially in sync? true
 
 
 ## The Key Rotation Process
@@ -157,9 +158,9 @@ The controller, `clientA`, initiates the key rotation using the `client.identifi
 - `clientAAidAlias`: The alias of the identifier to rotate.
 - `args`: A `RotateIdentifierArgs` object. For a simple rotation, this can be an empty object {}. It can also be used to specify changes to witnesses or other configuration during the rotation. **[see here for more details](https://weboftrust.github.io/signify-ts/interfaces/RotateIdentifierArgs.html)**
 
-Like other establishment events in Signify-ts, this is an asynchronous operation. The method returns a promise that resolves to an operation object, which we then wait on to confirm completion.
+The default for rotating a single signature identifier with Signify TS is to create only one new key. More keys can be created by specifying additional configuration properties in a `RotateIdentifierArgs` object.
 
-
+Like other establishment events in Signify TS, this is an asynchronous operation. The method returns a promise that resolves to an operation object, which we then wait on to confirm completion.
 
 
 ```typescript
@@ -218,17 +219,17 @@ console.log("New next-key digest:     ", keystateA_after.n);
 
 
     
-    Previous keys: [ [32m"DCOnqoTnU8JmkjuDbf2QNbSuIu35PsMiYlLgFL7kMzxv"[39m ]
+    Previous keys: [ "DGV_RzrcS1CTduuzzN_Rbi9BW4sDNf46d3cL0bXlpd96" ]
 
 
-    New keys:      [ [32m"DOqp_1UbvhJJ1_JHqapyPWnmohIPgxurPXqFiqHSCThu"[39m ]
+    New keys:      [ "DLEwcLHSfhJdJNgfDoRB8vZM4TGdV5VdTSLFkD-gVxWN" ]
 
 
     
-    Previous next-key digest: [ [32m"EOkdBgywGkVQeJqyx8BpioqdpIG7YdT-H7gveuUtUaQu"[39m ]
+    Previous next-key digest: [ "EDKZ9aVnJf0_CFGvTmWbtyHHMxP2FwGZJpg6DnpFomiY" ]
 
 
-    New next-key digest:      [ [32m"EJnR4PwAjs9gahLVnNCLbHdBeglywr9sMjEBHKythKFB"[39m ]
+    New next-key digest:      [ "EPJF07p6ozvfhUOzpj58TLjfQxomAQ42pwQYjFrjB95s" ]
 
 
 ### Step 3: Remote Synchronization and Verification
@@ -254,7 +255,7 @@ console.log("Are keystates in sync now?", keystateA_after.s === keystateB_stale.
     Remote observer's sequence number:  0
 
 
-    Are keystates in sync now? [33mfalse[39m
+    Are keystates in sync now? false
 
 
 To synchronize, `clientB` must query for the latest state of the AID's KEL. The `client.keyStates().query()` method is used for this purpose. It tells the client's KERIA agent to check the witnesses of the specified AID for any new events.
@@ -296,24 +297,19 @@ console.log("Are keystates in sync now?", keystateA_after.s === keystateB_synced
     Remote observer's sequence number:  1
 
 
-    Are keystates in sync now? [33mtrue[39m
+    Are keystates in sync now? true
 
 
 After the query, `clientB` has processed the `rot` event and its local key state for `aidA` is now consistent with `clientA`'s state. This demonstrates how KERI's distributed infrastructure maintains consistency across multiple parties.
 
 <div class="alert alert-primary">
 <b>📝 SUMMARY</b><hr>
-This notebook demonstrated the key rotation process for a single-signature AID using Signify-ts:
+This notebook demonstrated the key rotation process for a single-signature AID using Signify TS:
 <ul>
-<li><b>Initiation:</b> The controller of an AID (<code>clientA</code>) uses <code>client.identifiers().rotate()</code> to create and sign a rotation (<code>rot</code>) event. This is an asynchronous operation that is tracked by the KERIA agent.</li>
+<li><b>Initiation:</b> The controller of an AID (<code>clientA</code>) uses <code>client.identifiers().rotate()</code> to create and sign a rotation (<code>rot</code>) event. This event is sent to the KERIA agent and getting receipts on this rotation event is an asynchronous operation that is managed by the KERIA agent.</li>
 <li><b>Local Verification:</b> After the rotation operation completes, the controller's local key state is immediately updated. This is confirmed by observing an incremented sequence number (<code>s</code>), a new set of current keys (<code>k</code>), and a new pre-rotation commitment for the next keys (<code>n</code>).</li>
-<li><b>Remote Synchronization:</b> A remote observer (<code>clientB</code>) does not automatically see the rotation. They must explicitly query for the latest key state using <code>client.keyStates().query()</code>. This action prompts their KERIA agent to check the AID's witnesses for new events.</li>
-<li><b>Consistency:</b> After a successful query, the remote observer's local KEL is updated, and their view of the AID's key state becomes consistent with the controller's view.</li>
+<li><b>Remote Synchronization:</b> A remote agent (<code>clientB</code>) does not automatically see the rotation. They must explicitly query for the latest key state using <code>client.keyStates().query()</code>. This action prompts their KERIA agent to check the AID's witnesses for new events.</li>
+<li><b>Consistency:</b> After a successful query, the remote agent's local KEL is updated, and their view of the AID's key state becomes consistent with the controller's view.</li>
 </ul>
 This process validates KERI's core principles of forward security (old keys are retired) and distributed consistency, ensuring all parties can maintain a synchronized and verifiable view of an identity's evolution.
 </div>
-
-
-```typescript
-
-```

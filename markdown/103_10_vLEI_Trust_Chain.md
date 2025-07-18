@@ -2,12 +2,16 @@
 
 <div class="alert alert-primary">
 <b>🎯 OBJECTIVE</b><hr>
-To provide a practical, hands-on demonstration of the vLEI trust chain using Signify-ts. 
+To provide a practical, hands-on demonstration of the vLEI trust chain using SignifyTS. 
 </div>
 
 ## The simplified vLEI Trust Chain 
 
-To clearly explain the fundamentals of vLEI credentials and schemas, this notebook presents a simplified model of the credential issuance hierarchy. We will trace the flow of authority and the process of creating chained credentials using official vLEI schema definitions. For the sake of clarity, we have excluded the more advanced topics of multisignatures and delegated identifier structures, which are key components of the complete vLEI production trust chain. A practical, in-depth example of these advanced features can be found in the **[qvi-software repository](https://github.com/GLEIF-IT/qvi-software/tree/main/qvi-workflow)**
+To clearly explain the fundamentals of vLEI credentials and schemas, this notebook presents a simplified model of the credential issuance hierarchy. We will trace the flow of authority and the process of creating chained credentials using official vLEI schema definitions. For the sake of clarity, we have excluded the more advanced topics of multisignatures and delegated identifier structures, which are key components of the complete vLEI production trust chain. A practical, in-depth example of these advanced features can be found in the **[qvi-software repository](https://github.com/GLEIF-IT/qvi-software/tree/main/qvi-workflow)**.
+
+The outcome of this training is to produce a verification chain similar to the one shown below except that all identifiers are single signature identifiers instead of multi-signature identifiers.
+
+![vLEI Verification Chain](./images/vlei-verification-chain.png)
 
 ## Setup Phase
 
@@ -30,13 +34,14 @@ initializeSignify()
 // Create clients, AIDs and OOBIs.
 prTitle("Creating clients setup")
 
-// Fixed Bran to keep a consistent root of trust (DO NOT MODIFY)
+// Fixed Bran to keep a consistent root of trust (DO NOT MODIFY or else validation with the Sally verifier will break)
 const gleifBran = "Dm8Tmz05CF6_JLX9sVlFe" 
 const gleifAlias = 'gleif'
 const { client: gleifClient } = await initializeAndConnectClient(gleifBran)
 let gleifPrefix
 
-// GLEIF
+// GLEIF GEDA (GLEIF External Delegated AID) setup
+// uses try/catch to permit reusing existing GEDA upon re-run of this test file.
 try{
     const gleifAid = await gleifClient.identifiers().get(gleifAlias);
     gleifPrefix = gleifAid.prefix
@@ -99,10 +104,8 @@ await Promise.all([
 // Create Credential Registries
 prTitle("Creating Credential Registries")
 
-const { registrySaid: qviRegistrySaid } = await createCredentialRegistry(qviClient, qviAlias, 'qviRegistry')
-const { registrySaid: leRegistrySaid } = await createCredentialRegistry(leClient, leAlias, 'leRegistry')
-
-//GLEIF Registry
+// GLEIF GEDA Registry
+// uses try/catch to permit reusing existing GEDA upon re-run of this test file.
 let gleifRegistrySaid
 try{
     const registries = await gleifClient.registries().list(gleifAlias);
@@ -112,82 +115,85 @@ try{
     const { registrySaid: newRegistrySaid } = await createCredentialRegistry(gleifClient, gleifAlias, 'gleifRegistry')
     gleifRegistrySaid = newRegistrySaid
 }
+// QVI and LE registry
+const { registrySaid: qviRegistrySaid } = await createCredentialRegistry(qviClient, qviAlias, 'qviRegistry')
+const { registrySaid: leRegistrySaid } = await createCredentialRegistry(leClient, leAlias, 'leRegistry')
 
 prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Creating clients setup  [0m
+      Creating clients setup  
     
     Using Passcode (bran): Dm8Tmz05CF6_JLX9sVlFe
     Signify-ts library initialized.
     Client boot process initiated with KERIA agent.
       Client AID Prefix:  EAahBlwoMzpTutCwwyc8QitdbzrbLXhKLuydIbVOGjCM
-      Agent AID Prefix:   EBkzKIrx9k2OJBSnrbx_fcewGxpgTb8SnZ2dgN1DJ2Aw
+      Agent AID Prefix:   EK_qCRmuU45_q4QUr_paYswM302iNV_KNADxZWa9_hup
     
-    [1m[94mCreating GLEIF AID[0m
+    Creating GLEIF AID
     
     Initiating AID inception for alias: gleif
-    Successfully created AID with prefix: EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af
-    Assigning 'agent' role to KERIA Agent EBkzKIrx9k2OJBSnrbx_fcewGxpgTb8SnZ2dgN1DJ2Aw for AID alias gleif
+    Successfully created AID with prefix: EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22
+    Assigning 'agent' role to KERIA Agent EK_qCRmuU45_q4QUr_paYswM302iNV_KNADxZWa9_hup for AID alias gleif
     Successfully assigned 'agent' role for AID alias gleif.
     Generating OOBI for AID alias gleif with role agent
-    Generated OOBI URL: http://keria:3902/oobi/EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af/agent/EBkzKIrx9k2OJBSnrbx_fcewGxpgTb8SnZ2dgN1DJ2Aw
+    Generated OOBI URL: http://keria:3902/oobi/EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22/agent/EK_qCRmuU45_q4QUr_paYswM302iNV_KNADxZWa9_hup
     
-    [1m[94mGLEIF Prefix: EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af[0m
+    GLEIF Prefix: EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22
     
-    Using Passcode (bran): BtchPnOGvCMsj8k7f62-k
+    Using Passcode (bran): DODop2H7J8hD5ftVUJa_f
     Client boot process initiated with KERIA agent.
-      Client AID Prefix:  EHCI5OwDXjInVn7DgNeCEp_tZPiKkCpAGNIIDTdvGU85
-      Agent AID Prefix:   ELNInQmjpHNfgRvVhbD18mQeXl1LesfAmTF97mseudXz
+      Client AID Prefix:  EBlZaHK_OAIujHTD5d_ExnRHzhGJ3OMaFP88yJDSReri
+      Agent AID Prefix:   EKm8xdGrUIix7JZfb-Uo0kLYIpgG9vNIfXt2Xknme5UP
     Initiating AID inception for alias: qvi
-    Successfully created AID with prefix: EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj
-    Assigning 'agent' role to KERIA Agent ELNInQmjpHNfgRvVhbD18mQeXl1LesfAmTF97mseudXz for AID alias qvi
+    Successfully created AID with prefix: EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb
+    Assigning 'agent' role to KERIA Agent EKm8xdGrUIix7JZfb-Uo0kLYIpgG9vNIfXt2Xknme5UP for AID alias qvi
     Successfully assigned 'agent' role for AID alias qvi.
     Generating OOBI for AID alias qvi with role agent
-    Generated OOBI URL: http://keria:3902/oobi/EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj/agent/ELNInQmjpHNfgRvVhbD18mQeXl1LesfAmTF97mseudXz
+    Generated OOBI URL: http://keria:3902/oobi/EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb/agent/EKm8xdGrUIix7JZfb-Uo0kLYIpgG9vNIfXt2Xknme5UP
     
-    [1m[94mQVI Prefix: EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj[0m
+    QVI Prefix: EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb
     
-    Using Passcode (bran): CCka0sOjurA-c69C53iGV
+    Using Passcode (bran): B-5uJ3GH6ettWRz2JyByq
     Client boot process initiated with KERIA agent.
-      Client AID Prefix:  EMb35Cwpi5KpvJoY354GSh7oy_ovv2vCbO1bAG9-azIL
-      Agent AID Prefix:   EGIgbR9DRBLcmrnrSO05mw4cClzqY_e6co1eNS0OxKx6
+      Client AID Prefix:  EFI5zB2uKlqeVzCXGdanj-vbo9IZz1BApVy2WPaVNE_e
+      Agent AID Prefix:   EBIX_9LsD826eLCZuzSMNdf7AEwvkIjV6Linksg9NEOj
     Initiating AID inception for alias: le
-    Successfully created AID with prefix: EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k
-    Assigning 'agent' role to KERIA Agent EGIgbR9DRBLcmrnrSO05mw4cClzqY_e6co1eNS0OxKx6 for AID alias le
+    Successfully created AID with prefix: EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG
+    Assigning 'agent' role to KERIA Agent EBIX_9LsD826eLCZuzSMNdf7AEwvkIjV6Linksg9NEOj for AID alias le
     Successfully assigned 'agent' role for AID alias le.
     Generating OOBI for AID alias le with role agent
-    Generated OOBI URL: http://keria:3902/oobi/EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k/agent/EGIgbR9DRBLcmrnrSO05mw4cClzqY_e6co1eNS0OxKx6
+    Generated OOBI URL: http://keria:3902/oobi/EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG/agent/EBIX_9LsD826eLCZuzSMNdf7AEwvkIjV6Linksg9NEOj
     
-    [1m[94mLE Prefix: EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k[0m
+    LE Prefix: EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG
     
-    Using Passcode (bran): DNkFV0ZyFFKraynQdvgN5
+    Using Passcode (bran): B9IqWPGVA9olcdsSv1FDu
     Client boot process initiated with KERIA agent.
-      Client AID Prefix:  EKARukpYybII9JkGY5UkqrqAnT8xvsCSKa-lQ9aFXjpj
-      Agent AID Prefix:   EDY65J6bUJdD1uH2ZK1reF3Zb5mDktpDYPD4H-r6FfVz
+      Client AID Prefix:  EIbad3DE1QoPUB0ycEF5rmn0uPQLfrJfzjURbsEefs7I
+      Agent AID Prefix:   ENem7qd6RY4Kk1Nr0FFOVfq8l7qosxZ9dM3dBi7xBQ1Y
     Initiating AID inception for alias: role
-    Successfully created AID with prefix: EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs
-    Assigning 'agent' role to KERIA Agent EDY65J6bUJdD1uH2ZK1reF3Zb5mDktpDYPD4H-r6FfVz for AID alias role
+    Successfully created AID with prefix: EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD
+    Assigning 'agent' role to KERIA Agent ENem7qd6RY4Kk1Nr0FFOVfq8l7qosxZ9dM3dBi7xBQ1Y for AID alias role
     Successfully assigned 'agent' role for AID alias role.
     Generating OOBI for AID alias role with role agent
-    Generated OOBI URL: http://keria:3902/oobi/EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs/agent/EDY65J6bUJdD1uH2ZK1reF3Zb5mDktpDYPD4H-r6FfVz
+    Generated OOBI URL: http://keria:3902/oobi/EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD/agent/ENem7qd6RY4Kk1Nr0FFOVfq8l7qosxZ9dM3dBi7xBQ1Y
     
-    [1m[94mROLE Prefix: EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs[0m
+    ROLE Prefix: EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD
     
     
-    [1m[4m[44m[90m  Resolving OOBIs  [0m
+      Resolving OOBIs  
     
-    Resolving OOBI URL: http://keria:3902/oobi/EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj/agent/ELNInQmjpHNfgRvVhbD18mQeXl1LesfAmTF97mseudXz with alias qvi
-    Resolving OOBI URL: http://keria:3902/oobi/EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af/agent/EBkzKIrx9k2OJBSnrbx_fcewGxpgTb8SnZ2dgN1DJ2Aw with alias gleif
-    Resolving OOBI URL: http://keria:3902/oobi/EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k/agent/EGIgbR9DRBLcmrnrSO05mw4cClzqY_e6co1eNS0OxKx6 with alias le
-    Resolving OOBI URL: http://keria:3902/oobi/EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs/agent/EDY65J6bUJdD1uH2ZK1reF3Zb5mDktpDYPD4H-r6FfVz with alias role
-    Resolving OOBI URL: http://keria:3902/oobi/EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af/agent/EBkzKIrx9k2OJBSnrbx_fcewGxpgTb8SnZ2dgN1DJ2Aw with alias gleif
-    Resolving OOBI URL: http://keria:3902/oobi/EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj/agent/ELNInQmjpHNfgRvVhbD18mQeXl1LesfAmTF97mseudXz with alias qvi
-    Resolving OOBI URL: http://keria:3902/oobi/EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs/agent/EDY65J6bUJdD1uH2ZK1reF3Zb5mDktpDYPD4H-r6FfVz with alias role
-    Resolving OOBI URL: http://keria:3902/oobi/EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af/agent/EBkzKIrx9k2OJBSnrbx_fcewGxpgTb8SnZ2dgN1DJ2Aw with alias gleif
-    Resolving OOBI URL: http://keria:3902/oobi/EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k/agent/EGIgbR9DRBLcmrnrSO05mw4cClzqY_e6co1eNS0OxKx6 with alias le
-    Resolving OOBI URL: http://keria:3902/oobi/EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj/agent/ELNInQmjpHNfgRvVhbD18mQeXl1LesfAmTF97mseudXz with alias qvi
+    Resolving OOBI URL: http://keria:3902/oobi/EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb/agent/EKm8xdGrUIix7JZfb-Uo0kLYIpgG9vNIfXt2Xknme5UP with alias qvi
+    Resolving OOBI URL: http://keria:3902/oobi/EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22/agent/EK_qCRmuU45_q4QUr_paYswM302iNV_KNADxZWa9_hup with alias gleif
+    Resolving OOBI URL: http://keria:3902/oobi/EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG/agent/EBIX_9LsD826eLCZuzSMNdf7AEwvkIjV6Linksg9NEOj with alias le
+    Resolving OOBI URL: http://keria:3902/oobi/EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD/agent/ENem7qd6RY4Kk1Nr0FFOVfq8l7qosxZ9dM3dBi7xBQ1Y with alias role
+    Resolving OOBI URL: http://keria:3902/oobi/EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22/agent/EK_qCRmuU45_q4QUr_paYswM302iNV_KNADxZWa9_hup with alias gleif
+    Resolving OOBI URL: http://keria:3902/oobi/EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb/agent/EKm8xdGrUIix7JZfb-Uo0kLYIpgG9vNIfXt2Xknme5UP with alias qvi
+    Resolving OOBI URL: http://keria:3902/oobi/EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD/agent/ENem7qd6RY4Kk1Nr0FFOVfq8l7qosxZ9dM3dBi7xBQ1Y with alias role
+    Resolving OOBI URL: http://keria:3902/oobi/EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22/agent/EK_qCRmuU45_q4QUr_paYswM302iNV_KNADxZWa9_hup with alias gleif
+    Resolving OOBI URL: http://keria:3902/oobi/EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG/agent/EBIX_9LsD826eLCZuzSMNdf7AEwvkIjV6Linksg9NEOj with alias le
+    Resolving OOBI URL: http://keria:3902/oobi/EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb/agent/EKm8xdGrUIix7JZfb-Uo0kLYIpgG9vNIfXt2Xknme5UP with alias qvi
     Successfully resolved OOBI URL. Response: OK
     Successfully resolved OOBI URL. Response: OK
     Successfully resolved OOBI URL. Response: OK
@@ -200,28 +206,28 @@ prContinue()
     Successfully resolved OOBI URL. Response: OK
     Contact "gleif" added/updated.
     Contact "qvi" added/updated.
-    Contact "qvi" added/updated.
-    Contact "gleif" added/updated.
-    Contact "role" added/updated.
     Contact "le" added/updated.
     Contact "qvi" added/updated.
     Contact "role" added/updated.
     Contact "gleif" added/updated.
+    Contact "qvi" added/updated.
+    Contact "role" added/updated.
     Contact "le" added/updated.
+    Contact "gleif" added/updated.
     
-    [1m[4m[44m[90m  Creating Credential Registries  [0m
+      Creating Credential Registries  
     
-    Creating credential registry "qviRegistry" for AID alias "qvi"...
-    Successfully created credential registry: EEZXpqjCsXQszkRh9VO8KmNXJaGi7zTCgh9Xzi17Guwo
-    Creating credential registry "leRegistry" for AID alias "le"...
-    Successfully created credential registry: EEe46QMdH8JHZ6AppJ-NkDN31OM70CURQwzfmAy-pn0B
     
-    [1m[94mCreating GLEIF Registry[0m
+    Creating GLEIF Registry
     
     Creating credential registry "gleifRegistry" for AID alias "gleif"...
-    Successfully created credential registry: EHL34riBhZia4-m2nD7ZFYnSRRQLojE2V8xFAz4IKgp5
+    Successfully created credential registry: EMVSIrBzP0BuAnmuIcE2UwyG_5L8FAIAV3ChB6-PFmy2
+    Creating credential registry "qviRegistry" for AID alias "qvi"...
+    Successfully created credential registry: ECpgAt4SKlKvNL90AE-fkOZ1OH7mvhMP7iCmq_PNUM2r
+    Creating credential registry "leRegistry" for AID alias "le"...
+    Successfully created credential registry: EMASG0VnzsqD6M05aisJn_2WpiGtq-R60oTjC7V9db7K
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -264,44 +270,50 @@ const OOR_AUTH_SCHEMA_URL = `${SCHEMA_SERVER_HOST}/oobi/${OOR_AUTH_SCHEMA_SAID}`
 const OOR_SCHEMA_URL = `${SCHEMA_SERVER_HOST}/oobi/${OOR_SCHEMA_SAID}`;
 
 prTitle("Schema OOBIs")
-prMessage(`QVI_SCHEMA_URL: ${QVI_SCHEMA_URL}`)
-prMessage(`LE_SCHEMA_URL: ${LE_SCHEMA_URL}`)
-prMessage(`ECR_AUTH_SCHEMA_URL: ${ECR_AUTH_SCHEMA_URL}`)
-prMessage(`ECR_SCHEMA_URL: ${ECR_SCHEMA_URL}`)
-prMessage(`OOR_AUTH_SCHEMA_URL: ${OOR_AUTH_SCHEMA_URL}`)
-prMessage(`OOR_SCHEMA_URL: ${OOR_SCHEMA_URL}`)
+prMessage(`QVI_SCHEMA_URL:\n  - ${QVI_SCHEMA_URL}`)
+prMessage(`LE_SCHEMA_URL:\n  - ${LE_SCHEMA_URL}`)
+prMessage(`ECR_AUTH_SCHEMA_URL:\n  - ${ECR_AUTH_SCHEMA_URL}`)
+prMessage(`ECR_SCHEMA_URL:\n  - ${ECR_SCHEMA_URL}`)
+prMessage(`OOR_AUTH_SCHEMA_URL:\n  - ${OOR_AUTH_SCHEMA_URL}`)
+prMessage(`OOR_SCHEMA_URL:\n  - ${OOR_SCHEMA_URL}`)
 
 prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Schema OOBIs  [0m
+      Schema OOBIs  
     
     
-    [1m[94mQVI_SCHEMA_URL: http://vlei-server:7723/oobi/EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao[0m
+    QVI_SCHEMA_URL:
+      - http://vlei-server:7723/oobi/EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao
     
     
-    [1m[94mLE_SCHEMA_URL: http://vlei-server:7723/oobi/ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY[0m
+    LE_SCHEMA_URL:
+      - http://vlei-server:7723/oobi/ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY
     
     
-    [1m[94mECR_AUTH_SCHEMA_URL: http://vlei-server:7723/oobi/EH6ekLjSr8V32WyFbGe1zXjTzFs9PkTYmupJ9H65O14g[0m
+    ECR_AUTH_SCHEMA_URL:
+      - http://vlei-server:7723/oobi/EH6ekLjSr8V32WyFbGe1zXjTzFs9PkTYmupJ9H65O14g
     
     
-    [1m[94mECR_SCHEMA_URL: http://vlei-server:7723/oobi/EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw[0m
+    ECR_SCHEMA_URL:
+      - http://vlei-server:7723/oobi/EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw
     
     
-    [1m[94mOOR_AUTH_SCHEMA_URL: http://vlei-server:7723/oobi/EKA57bKBKxr_kN7iN5i7lMUxpMG-s19dRcmov1iDxz-E[0m
+    OOR_AUTH_SCHEMA_URL:
+      - http://vlei-server:7723/oobi/EKA57bKBKxr_kN7iN5i7lMUxpMG-s19dRcmov1iDxz-E
     
     
-    [1m[94mOOR_SCHEMA_URL: http://vlei-server:7723/oobi/EBNaNu-M9P5cgrnfl2Fvymy4E_jvxxyjb70PRtiANlJy[0m
+    OOR_SCHEMA_URL:
+      - http://vlei-server:7723/oobi/EBNaNu-M9P5cgrnfl2Fvymy4E_jvxxyjb70PRtiANlJy
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
 
-All clients now resolve all the necessary schemas.
+All clients now resolve all the necessary schemas in order to have knowledge of the schemas they use.
 
 
 ```typescript
@@ -335,7 +347,7 @@ prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Resolving Schemas  [0m
+      Resolving Schemas  
     
     Resolving OOBI URL: http://vlei-server:7723/oobi/EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao with alias undefined
     Resolving OOBI URL: http://vlei-server:7723/oobi/EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao with alias undefined
@@ -395,7 +407,7 @@ prContinue()
     Contact "undefined" added/updated.
     Contact "undefined" added/updated.
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -474,28 +486,28 @@ prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Issuing Credential  [0m
+      Issuing Credential  
     
-    Issuing credential from AID "gleif" to AID "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj"...
+    Issuing credential from AID "gleif" to AID "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb"...
     {
-      name: "credential.EMX_-55TpNEMsAAQ1sP_fgsJBOTZtBZ8uUBY1gHWn4Ir",
+      name: "credential.ELpnnEMY6qbGwb4aQJraUVyhjsDFb7ayByMq60C8I9an",
       metadata: {
         ced: {
           v: "ACDC10JSON000197_",
-          d: "EMX_-55TpNEMsAAQ1sP_fgsJBOTZtBZ8uUBY1gHWn4Ir",
-          i: "EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af",
-          ri: "EHL34riBhZia4-m2nD7ZFYnSRRQLojE2V8xFAz4IKgp5",
+          d: "ELpnnEMY6qbGwb4aQJraUVyhjsDFb7ayByMq60C8I9an",
+          i: "EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22",
+          ri: "EMVSIrBzP0BuAnmuIcE2UwyG_5L8FAIAV3ChB6-PFmy2",
           s: "EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao",
           a: {
-            d: "ENbPEr99fQhA4ubAZZ51mk5YhG-qpY4ZYRxXZP4BmjDi",
-            i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
+            d: "EO43S-TIuVUvT_XvE0QUyiT9zANM2FbPs22yGkvRB39l",
+            i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
             LEI: "254900OPPU84GM83MG36",
-            dt: "2025-06-24T19:28:06.520000+00:00"
+            dt: "2025-07-18T00:31:56.279000+00:00"
           }
         },
         depends: {
-          name: "witness.EDNh6dd9i8dC8NLCVsSVRT0Hptu6sYxgXpdjhE7dAxeK",
-          metadata: { pre: "EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af", sn: 2 },
+          name: "witness.EGUapx9fn_BYEaTANhwYfRyTMGHTtGz1bVPygSySNg3W",
+          metadata: { pre: "EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22", sn: 2 },
           done: false,
           error: null,
           response: null
@@ -506,40 +518,40 @@ prContinue()
       response: {
         ced: {
           v: "ACDC10JSON000197_",
-          d: "EMX_-55TpNEMsAAQ1sP_fgsJBOTZtBZ8uUBY1gHWn4Ir",
-          i: "EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af",
-          ri: "EHL34riBhZia4-m2nD7ZFYnSRRQLojE2V8xFAz4IKgp5",
+          d: "ELpnnEMY6qbGwb4aQJraUVyhjsDFb7ayByMq60C8I9an",
+          i: "EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22",
+          ri: "EMVSIrBzP0BuAnmuIcE2UwyG_5L8FAIAV3ChB6-PFmy2",
           s: "EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao",
           a: {
-            d: "ENbPEr99fQhA4ubAZZ51mk5YhG-qpY4ZYRxXZP4BmjDi",
-            i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
+            d: "EO43S-TIuVUvT_XvE0QUyiT9zANM2FbPs22yGkvRB39l",
+            i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
             LEI: "254900OPPU84GM83MG36",
-            dt: "2025-06-24T19:28:06.520000+00:00"
+            dt: "2025-07-18T00:31:56.279000+00:00"
           }
         }
       }
     }
-    Successfully issued credential with SAID: EMX_-55TpNEMsAAQ1sP_fgsJBOTZtBZ8uUBY1gHWn4Ir
+    Successfully issued credential with SAID: ELpnnEMY6qbGwb4aQJraUVyhjsDFb7ayByMq60C8I9an
     
-    [1m[4m[44m[90m  Granting Credential  [0m
+      Granting Credential  
     
-    AID "gleif" granting credential to AID "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj" via IPEX...
-    Successfully submitted IPEX grant from "gleif" to "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj".
+    AID "gleif" granting credential to AID "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb" via IPEX...
+    Successfully submitted IPEX grant from "gleif" to "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb".
     Waiting for notification with route "/exn/ipex/grant"...
     [Retry] Grant notification not found on attempt #1 of 5
     [Retry] Waiting 5000ms before next attempt...
     
-    [1m[4m[44m[90m  Admitting Grant  [0m
+      Admitting Grant  
     
-    AID "qvi" admitting IPEX grant "ENwrfkOO9SbI6KazXfKr-NMw02giqWz3oePneESH0x8G" from AID "EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af"...
-    Successfully submitted IPEX admit for grant "ENwrfkOO9SbI6KazXfKr-NMw02giqWz3oePneESH0x8G".
-    Marking notification "0ABAfWuT1savZxRAgcqY802o" as read...
-    Notification "0ABAfWuT1savZxRAgcqY802o" marked as read.
+    AID "qvi" admitting IPEX grant "ENvz5X-iphyW3KEZvfB_ZLwJeH43HjB5bDVmjHvkgSvT" from AID "EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22"...
+    Successfully submitted IPEX admit for grant "ENvz5X-iphyW3KEZvfB_ZLwJeH43HjB5bDVmjHvkgSvT".
+    Marking notification "0AChz-5XOMYg3E1-SHyhjecm" as read...
+    Notification "0AChz-5XOMYg3E1-SHyhjecm" marked as read.
     Waiting for notification with route "/exn/ipex/admit"...
-    Marking notification "0ACXq-gsPShb6IKYTXwp3tJd" as read...
-    Notification "0ACXq-gsPShb6IKYTXwp3tJd" marked as read.
+    Marking notification "0AD8ui7uQv7Z4SDJZFg0TSAY" as read...
+    Notification "0AD8ui7uQv7Z4SDJZFg0TSAY" marked as read.
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -626,28 +638,28 @@ prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Issuing Credential  [0m
+      Issuing Credential  
     
-    Issuing credential from AID "qvi" to AID "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k"...
+    Issuing credential from AID "qvi" to AID "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG"...
     {
-      name: "credential.EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
+      name: "credential.EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
       metadata: {
         ced: {
           v: "ACDC10JSON0005c8_",
-          d: "EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
-          i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
-          ri: "EEZXpqjCsXQszkRh9VO8KmNXJaGi7zTCgh9Xzi17Guwo",
+          d: "EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
+          i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
+          ri: "ECpgAt4SKlKvNL90AE-fkOZ1OH7mvhMP7iCmq_PNUM2r",
           s: "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY",
           a: {
-            d: "EIGxwpgaWf7pn-8OCu4Uxb5hUEunZjQWYdOBf1Gb1tsc",
-            i: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k",
+            d: "ENE7ovo4z4SZzchSzEgY0GWIYW2D54_6Xyfz1JiKEsPx",
+            i: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG",
             LEI: "875500ELOZEL05BVXV37",
-            dt: "2025-06-24T19:28:14.963000+00:00"
+            dt: "2025-07-18T00:32:04.753000+00:00"
           },
           e: {
-            d: "EJ3HU09tREilsDI4_D9fBHNoWxKT47Xx3VOLjZrFbTMX",
+            d: "EDgnY4jpaVFuz_Zr8prijPxDJDdytlrkBgQcslSF8DqZ",
             qvi: {
-              n: "EMX_-55TpNEMsAAQ1sP_fgsJBOTZtBZ8uUBY1gHWn4Ir",
+              n: "ELpnnEMY6qbGwb4aQJraUVyhjsDFb7ayByMq60C8I9an",
               s: "EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao"
             }
           },
@@ -662,8 +674,8 @@ prContinue()
           }
         },
         depends: {
-          name: "witness.EJMCBf6xmkCJbJubb-iArh1H3GiGNZ8Fr_qK5EkGHgOf",
-          metadata: { pre: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj", sn: 2 },
+          name: "witness.EDwyo79LSUBNwhjHJP_SKs6ebsiKLx7NvHnZeKRfUuDb",
+          metadata: { pre: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb", sn: 2 },
           done: false,
           error: null,
           response: null
@@ -674,20 +686,20 @@ prContinue()
       response: {
         ced: {
           v: "ACDC10JSON0005c8_",
-          d: "EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
-          i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
-          ri: "EEZXpqjCsXQszkRh9VO8KmNXJaGi7zTCgh9Xzi17Guwo",
+          d: "EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
+          i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
+          ri: "ECpgAt4SKlKvNL90AE-fkOZ1OH7mvhMP7iCmq_PNUM2r",
           s: "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY",
           a: {
-            d: "EIGxwpgaWf7pn-8OCu4Uxb5hUEunZjQWYdOBf1Gb1tsc",
-            i: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k",
+            d: "ENE7ovo4z4SZzchSzEgY0GWIYW2D54_6Xyfz1JiKEsPx",
+            i: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG",
             LEI: "875500ELOZEL05BVXV37",
-            dt: "2025-06-24T19:28:14.963000+00:00"
+            dt: "2025-07-18T00:32:04.753000+00:00"
           },
           e: {
-            d: "EJ3HU09tREilsDI4_D9fBHNoWxKT47Xx3VOLjZrFbTMX",
+            d: "EDgnY4jpaVFuz_Zr8prijPxDJDdytlrkBgQcslSF8DqZ",
             qvi: {
-              n: "EMX_-55TpNEMsAAQ1sP_fgsJBOTZtBZ8uUBY1gHWn4Ir",
+              n: "ELpnnEMY6qbGwb4aQJraUVyhjsDFb7ayByMq60C8I9an",
               s: "EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao"
             }
           },
@@ -703,27 +715,27 @@ prContinue()
         }
       }
     }
-    Successfully issued credential with SAID: EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy
+    Successfully issued credential with SAID: EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq
     
-    [1m[4m[44m[90m  Granting Credential  [0m
+      Granting Credential  
     
-    AID "qvi" granting credential to AID "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k" via IPEX...
-    Successfully submitted IPEX grant from "qvi" to "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k".
+    AID "qvi" granting credential to AID "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG" via IPEX...
+    Successfully submitted IPEX grant from "qvi" to "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG".
     Waiting for notification with route "/exn/ipex/grant"...
     [Retry] Grant notification not found on attempt #1 of 5
     [Retry] Waiting 5000ms before next attempt...
     
-    [1m[4m[44m[90m  Admitting Grant  [0m
+      Admitting Grant  
     
-    AID "le" admitting IPEX grant "EO5FFydeFpyTuxFGAphJgE8suKA5XT8BrhQcech7Ysrl" from AID "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj"...
-    Successfully submitted IPEX admit for grant "EO5FFydeFpyTuxFGAphJgE8suKA5XT8BrhQcech7Ysrl".
-    Marking notification "0AAOLWMCBBJ8iWiFUwjTLEyw" as read...
-    Notification "0AAOLWMCBBJ8iWiFUwjTLEyw" marked as read.
+    AID "le" admitting IPEX grant "EAq7_-f8j84vCS7gi-7yt3fA7PSLc23_vzgFFDhpN1C0" from AID "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb"...
+    Successfully submitted IPEX admit for grant "EAq7_-f8j84vCS7gi-7yt3fA7PSLc23_vzgFFDhpN1C0".
+    Marking notification "0AAzXfgoOf8-LLdWqhybq009" as read...
+    Notification "0AAzXfgoOf8-LLdWqhybq009" marked as read.
     Waiting for notification with route "/exn/ipex/admit"...
-    Marking notification "0AAbAhCfnveF8xdo8ip8L9iH" as read...
-    Notification "0AAbAhCfnveF8xdo8ip8L9iH" marked as read.
+    Marking notification "0AByAZ3_x_bYkOw07wC2ELR4" as read...
+    Notification "0AByAZ3_x_bYkOw07wC2ELR4" marked as read.
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -800,31 +812,31 @@ prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Issuing Credential  [0m
+      Issuing Credential  
     
-    Issuing credential from AID "le" to AID "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj"...
+    Issuing credential from AID "le" to AID "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb"...
     {
-      name: "credential.EKCJnq0kZpnOuRGf4fJOKb-nwE-JnoxaP-e1Z3D9gC0G",
+      name: "credential.EP6oTQDfrpVVFH0CAgpmNIoJmKC_-xYXgH1n6akLBy_g",
       metadata: {
         ced: {
           v: "ACDC10JSON000602_",
-          d: "EKCJnq0kZpnOuRGf4fJOKb-nwE-JnoxaP-e1Z3D9gC0G",
-          i: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k",
-          ri: "EEe46QMdH8JHZ6AppJ-NkDN31OM70CURQwzfmAy-pn0B",
+          d: "EP6oTQDfrpVVFH0CAgpmNIoJmKC_-xYXgH1n6akLBy_g",
+          i: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG",
+          ri: "EMASG0VnzsqD6M05aisJn_2WpiGtq-R60oTjC7V9db7K",
           s: "EKA57bKBKxr_kN7iN5i7lMUxpMG-s19dRcmov1iDxz-E",
           a: {
-            d: "EBw6ECiZoLcqpTZ2hDc8aGvGJOnxA1pTC_v9jDDSIaer",
-            i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
+            d: "EP9Q1ajBjgHtIGpP5ndWcHBDQL7NbTaE3ll4oQfcsNvk",
+            i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
             AID: "",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "Jane Doe",
             officialRole: "CEO",
-            dt: "2025-06-24T19:28:23.279000+00:00"
+            dt: "2025-07-18T00:32:13.066000+00:00"
           },
           e: {
-            d: "EBLcpP6yJD-71Hcgs_XmE4-gALyAktRkuFjDh_iESNv2",
+            d: "EJiyyaCGlPPGA3CvqtR_3SSYRFmZb7hwG2NU9_YniYEe",
             le: {
-              n: "EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
+              n: "EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
               s: "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
             }
           },
@@ -839,8 +851,8 @@ prContinue()
           }
         },
         depends: {
-          name: "witness.ENmLCePedmccHm3xXbpxqQmoytpisIj8Tlz-fLz2m2Zr",
-          metadata: { pre: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k", sn: 2 },
+          name: "witness.EIXxomNqrIh5QOMvmEZSOV33lLnNNQwOKksCTikvZGTU",
+          metadata: { pre: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG", sn: 2 },
           done: false,
           error: null,
           response: null
@@ -851,23 +863,23 @@ prContinue()
       response: {
         ced: {
           v: "ACDC10JSON000602_",
-          d: "EKCJnq0kZpnOuRGf4fJOKb-nwE-JnoxaP-e1Z3D9gC0G",
-          i: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k",
-          ri: "EEe46QMdH8JHZ6AppJ-NkDN31OM70CURQwzfmAy-pn0B",
+          d: "EP6oTQDfrpVVFH0CAgpmNIoJmKC_-xYXgH1n6akLBy_g",
+          i: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG",
+          ri: "EMASG0VnzsqD6M05aisJn_2WpiGtq-R60oTjC7V9db7K",
           s: "EKA57bKBKxr_kN7iN5i7lMUxpMG-s19dRcmov1iDxz-E",
           a: {
-            d: "EBw6ECiZoLcqpTZ2hDc8aGvGJOnxA1pTC_v9jDDSIaer",
-            i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
+            d: "EP9Q1ajBjgHtIGpP5ndWcHBDQL7NbTaE3ll4oQfcsNvk",
+            i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
             AID: "",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "Jane Doe",
             officialRole: "CEO",
-            dt: "2025-06-24T19:28:23.279000+00:00"
+            dt: "2025-07-18T00:32:13.066000+00:00"
           },
           e: {
-            d: "EBLcpP6yJD-71Hcgs_XmE4-gALyAktRkuFjDh_iESNv2",
+            d: "EJiyyaCGlPPGA3CvqtR_3SSYRFmZb7hwG2NU9_YniYEe",
             le: {
-              n: "EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
+              n: "EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
               s: "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
             }
           },
@@ -883,27 +895,27 @@ prContinue()
         }
       }
     }
-    Successfully issued credential with SAID: EKCJnq0kZpnOuRGf4fJOKb-nwE-JnoxaP-e1Z3D9gC0G
+    Successfully issued credential with SAID: EP6oTQDfrpVVFH0CAgpmNIoJmKC_-xYXgH1n6akLBy_g
     
-    [1m[4m[44m[90m  Granting Credential  [0m
+      Granting Credential  
     
-    AID "le" granting credential to AID "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj" via IPEX...
-    Successfully submitted IPEX grant from "le" to "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj".
+    AID "le" granting credential to AID "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb" via IPEX...
+    Successfully submitted IPEX grant from "le" to "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb".
     Waiting for notification with route "/exn/ipex/grant"...
     [Retry] Grant notification not found on attempt #1 of 5
     [Retry] Waiting 5000ms before next attempt...
     
-    [1m[4m[44m[90m  Admitting Grant  [0m
+      Admitting Grant  
     
-    AID "qvi" admitting IPEX grant "EK5zNJ109LddO0Y3eFdDdr5xG0i0d-QNWBDmGIR2Jjo6" from AID "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k"...
-    Successfully submitted IPEX admit for grant "EK5zNJ109LddO0Y3eFdDdr5xG0i0d-QNWBDmGIR2Jjo6".
-    Marking notification "0ADMM0B19VV8lc8Q1EkFHJTN" as read...
-    Notification "0ADMM0B19VV8lc8Q1EkFHJTN" marked as read.
+    AID "qvi" admitting IPEX grant "EFbLEhRyDozmgJ4Brxia5E1umotbIPIcJQ2XbqBwltwW" from AID "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG"...
+    Successfully submitted IPEX admit for grant "EFbLEhRyDozmgJ4Brxia5E1umotbIPIcJQ2XbqBwltwW".
+    Marking notification "0AD3prpxFkWoEKLgwHlcrNN0" as read...
+    Notification "0AD3prpxFkWoEKLgwHlcrNN0" marked as read.
     Waiting for notification with route "/exn/ipex/admit"...
-    Marking notification "0AAN4p3hjOtNKKllAJ4NA2WD" as read...
-    Notification "0AAN4p3hjOtNKKllAJ4NA2WD" marked as read.
+    Marking notification "0AAeKH9pb7rd_kzL85OXAWk4" as read...
+    Notification "0AAeKH9pb7rd_kzL85OXAWk4" marked as read.
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -980,30 +992,30 @@ prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Issuing Credential  [0m
+      Issuing Credential  
     
-    Issuing credential from AID "qvi" to AID "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs"...
+    Issuing credential from AID "qvi" to AID "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD"...
     {
-      name: "credential.EANGkhcjCzpnOgVHdJHH8Q7hAuh5Opko5_n2LaDYKKqx",
+      name: "credential.EMJh3p0CNQerrykfKNQ7HrXeT5ovyyMBcxH_QFSuNRjp",
       metadata: {
         ced: {
           v: "ACDC10JSON000605_",
-          d: "EANGkhcjCzpnOgVHdJHH8Q7hAuh5Opko5_n2LaDYKKqx",
-          i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
-          ri: "EEZXpqjCsXQszkRh9VO8KmNXJaGi7zTCgh9Xzi17Guwo",
+          d: "EMJh3p0CNQerrykfKNQ7HrXeT5ovyyMBcxH_QFSuNRjp",
+          i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
+          ri: "ECpgAt4SKlKvNL90AE-fkOZ1OH7mvhMP7iCmq_PNUM2r",
           s: "EBNaNu-M9P5cgrnfl2Fvymy4E_jvxxyjb70PRtiANlJy",
           a: {
-            d: "ECAvuwOzcqNxtoy_kJXWA972eDylUN1HUP11BRrekA8y",
-            i: "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs",
+            d: "EEMrzTpQrMB0gzAx8DWZoAQktvxSM41HTzKURY10pJwV",
+            i: "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "Jane Doe",
             officialRole: "CEO",
-            dt: "2025-06-24T19:28:31.676000+00:00"
+            dt: "2025-07-18T00:32:21.405000+00:00"
           },
           e: {
-            d: "EGswrWhV3qRiSS4hdFCH3qoWIXOn3UsZYGuo3M1R1F5b",
+            d: "EEE-W1E3oMbgt2tniVNCGz7VBYTfBh2Ebe7rM2ckOEwU",
             auth: {
-              n: "EKCJnq0kZpnOuRGf4fJOKb-nwE-JnoxaP-e1Z3D9gC0G",
+              n: "EP6oTQDfrpVVFH0CAgpmNIoJmKC_-xYXgH1n6akLBy_g",
               s: "EKA57bKBKxr_kN7iN5i7lMUxpMG-s19dRcmov1iDxz-E",
               o: "I2I"
             }
@@ -1019,8 +1031,8 @@ prContinue()
           }
         },
         depends: {
-          name: "witness.EPSa5iSXmD3Zo3GyyhI46r3MbRQHtnpNY_n0bWrOZ-lt",
-          metadata: { pre: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj", sn: 3 },
+          name: "witness.EI3a0iJaXTXyDKCtUVyBGUGQDXjV2pxilrf6h6X2N42B",
+          metadata: { pre: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb", sn: 3 },
           done: false,
           error: null,
           response: null
@@ -1031,22 +1043,22 @@ prContinue()
       response: {
         ced: {
           v: "ACDC10JSON000605_",
-          d: "EANGkhcjCzpnOgVHdJHH8Q7hAuh5Opko5_n2LaDYKKqx",
-          i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
-          ri: "EEZXpqjCsXQszkRh9VO8KmNXJaGi7zTCgh9Xzi17Guwo",
+          d: "EMJh3p0CNQerrykfKNQ7HrXeT5ovyyMBcxH_QFSuNRjp",
+          i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
+          ri: "ECpgAt4SKlKvNL90AE-fkOZ1OH7mvhMP7iCmq_PNUM2r",
           s: "EBNaNu-M9P5cgrnfl2Fvymy4E_jvxxyjb70PRtiANlJy",
           a: {
-            d: "ECAvuwOzcqNxtoy_kJXWA972eDylUN1HUP11BRrekA8y",
-            i: "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs",
+            d: "EEMrzTpQrMB0gzAx8DWZoAQktvxSM41HTzKURY10pJwV",
+            i: "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "Jane Doe",
             officialRole: "CEO",
-            dt: "2025-06-24T19:28:31.676000+00:00"
+            dt: "2025-07-18T00:32:21.405000+00:00"
           },
           e: {
-            d: "EGswrWhV3qRiSS4hdFCH3qoWIXOn3UsZYGuo3M1R1F5b",
+            d: "EEE-W1E3oMbgt2tniVNCGz7VBYTfBh2Ebe7rM2ckOEwU",
             auth: {
-              n: "EKCJnq0kZpnOuRGf4fJOKb-nwE-JnoxaP-e1Z3D9gC0G",
+              n: "EP6oTQDfrpVVFH0CAgpmNIoJmKC_-xYXgH1n6akLBy_g",
               s: "EKA57bKBKxr_kN7iN5i7lMUxpMG-s19dRcmov1iDxz-E",
               o: "I2I"
             }
@@ -1063,27 +1075,27 @@ prContinue()
         }
       }
     }
-    Successfully issued credential with SAID: EANGkhcjCzpnOgVHdJHH8Q7hAuh5Opko5_n2LaDYKKqx
+    Successfully issued credential with SAID: EMJh3p0CNQerrykfKNQ7HrXeT5ovyyMBcxH_QFSuNRjp
     
-    [1m[4m[44m[90m  Granting Credential  [0m
+      Granting Credential  
     
-    AID "qvi" granting credential to AID "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs" via IPEX...
-    Successfully submitted IPEX grant from "qvi" to "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs".
+    AID "qvi" granting credential to AID "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD" via IPEX...
+    Successfully submitted IPEX grant from "qvi" to "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD".
     Waiting for notification with route "/exn/ipex/grant"...
     [Retry] Grant notification not found on attempt #1 of 5
     [Retry] Waiting 5000ms before next attempt...
     
-    [1m[4m[44m[90m  Admitting Grant  [0m
+      Admitting Grant  
     
-    AID "role" admitting IPEX grant "EJbTD2HKb5URPnNDSrhtwUFfA4QUFJDYRwClz1tFsK5m" from AID "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj"...
-    Successfully submitted IPEX admit for grant "EJbTD2HKb5URPnNDSrhtwUFfA4QUFJDYRwClz1tFsK5m".
-    Marking notification "0ABtk0hea0sm8mQifhmg1Ulm" as read...
-    Notification "0ABtk0hea0sm8mQifhmg1Ulm" marked as read.
+    AID "role" admitting IPEX grant "ENd52fK--mCcKHvfJ2t3C-4CVMBxj1_MLapx-YazDX_n" from AID "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb"...
+    Successfully submitted IPEX admit for grant "ENd52fK--mCcKHvfJ2t3C-4CVMBxj1_MLapx-YazDX_n".
+    Marking notification "0AByMpKxGMt2RxzvzyV9fHOX" as read...
+    Notification "0AByMpKxGMt2RxzvzyV9fHOX" marked as read.
     Waiting for notification with route "/exn/ipex/admit"...
-    Marking notification "0ACeC9sVwEwhq0oWprIKHMv1" as read...
-    Notification "0ACeC9sVwEwhq0oWprIKHMv1" marked as read.
+    Marking notification "0ACnUuT14anZO2QGQ_9Ql9jZ" as read...
+    Notification "0ACnUuT14anZO2QGQ_9Ql9jZ" marked as read.
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -1172,31 +1184,31 @@ prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Issuing Credential  [0m
+      Issuing Credential  
     
-    Issuing credential from AID "le" to AID "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj"...
+    Issuing credential from AID "le" to AID "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb"...
     {
-      name: "credential.EJ2aTqu1cyfSboIX407oiDspkY0SqkV1Y_bGDugKxsV7",
+      name: "credential.EK6ZSkelhfJR2i1aKVOzMAaTLyJZZVaaNGVtm2qG3Ned",
       metadata: {
         ced: {
           v: "ACDC10JSON000816_",
-          d: "EJ2aTqu1cyfSboIX407oiDspkY0SqkV1Y_bGDugKxsV7",
-          i: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k",
-          ri: "EEe46QMdH8JHZ6AppJ-NkDN31OM70CURQwzfmAy-pn0B",
+          d: "EK6ZSkelhfJR2i1aKVOzMAaTLyJZZVaaNGVtm2qG3Ned",
+          i: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG",
+          ri: "EMASG0VnzsqD6M05aisJn_2WpiGtq-R60oTjC7V9db7K",
           s: "EH6ekLjSr8V32WyFbGe1zXjTzFs9PkTYmupJ9H65O14g",
           a: {
-            d: "EDZwOnJAEeKSyjUVHudL-Oq44_bskRT_4SQc1hzXckay",
-            i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
+            d: "EHHRh2UlhtwD5XAlKqWsqt4WyN576VtsH2EjcbgqIDND",
+            i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
             AID: "",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "John Doe",
             engagementContextRole: "Managing Director",
-            dt: "2025-06-24T19:28:40.032000+00:00"
+            dt: "2025-07-18T00:32:29.547000+00:00"
           },
           e: {
-            d: "EBLcpP6yJD-71Hcgs_XmE4-gALyAktRkuFjDh_iESNv2",
+            d: "EJiyyaCGlPPGA3CvqtR_3SSYRFmZb7hwG2NU9_YniYEe",
             le: {
-              n: "EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
+              n: "EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
               s: "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
             }
           },
@@ -1214,8 +1226,8 @@ prContinue()
           }
         },
         depends: {
-          name: "witness.EJVFx2AuTjHOYZDuBqoZFewCQVW05mPdrGySiva9CONM",
-          metadata: { pre: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k", sn: 3 },
+          name: "witness.EFeNczgi1epWleHR_h0fY0p4WvJBWGJVVQLdie5zuqA3",
+          metadata: { pre: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG", sn: 3 },
           done: false,
           error: null,
           response: null
@@ -1226,23 +1238,23 @@ prContinue()
       response: {
         ced: {
           v: "ACDC10JSON000816_",
-          d: "EJ2aTqu1cyfSboIX407oiDspkY0SqkV1Y_bGDugKxsV7",
-          i: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k",
-          ri: "EEe46QMdH8JHZ6AppJ-NkDN31OM70CURQwzfmAy-pn0B",
+          d: "EK6ZSkelhfJR2i1aKVOzMAaTLyJZZVaaNGVtm2qG3Ned",
+          i: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG",
+          ri: "EMASG0VnzsqD6M05aisJn_2WpiGtq-R60oTjC7V9db7K",
           s: "EH6ekLjSr8V32WyFbGe1zXjTzFs9PkTYmupJ9H65O14g",
           a: {
-            d: "EDZwOnJAEeKSyjUVHudL-Oq44_bskRT_4SQc1hzXckay",
-            i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
+            d: "EHHRh2UlhtwD5XAlKqWsqt4WyN576VtsH2EjcbgqIDND",
+            i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
             AID: "",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "John Doe",
             engagementContextRole: "Managing Director",
-            dt: "2025-06-24T19:28:40.032000+00:00"
+            dt: "2025-07-18T00:32:29.547000+00:00"
           },
           e: {
-            d: "EBLcpP6yJD-71Hcgs_XmE4-gALyAktRkuFjDh_iESNv2",
+            d: "EJiyyaCGlPPGA3CvqtR_3SSYRFmZb7hwG2NU9_YniYEe",
             le: {
-              n: "EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
+              n: "EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
               s: "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
             }
           },
@@ -1261,27 +1273,27 @@ prContinue()
         }
       }
     }
-    Successfully issued credential with SAID: EJ2aTqu1cyfSboIX407oiDspkY0SqkV1Y_bGDugKxsV7
+    Successfully issued credential with SAID: EK6ZSkelhfJR2i1aKVOzMAaTLyJZZVaaNGVtm2qG3Ned
     
-    [1m[4m[44m[90m  Granting Credential  [0m
+      Granting Credential  
     
-    AID "le" granting credential to AID "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj" via IPEX...
-    Successfully submitted IPEX grant from "le" to "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj".
+    AID "le" granting credential to AID "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb" via IPEX...
+    Successfully submitted IPEX grant from "le" to "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb".
     Waiting for notification with route "/exn/ipex/grant"...
     [Retry] Grant notification not found on attempt #1 of 5
     [Retry] Waiting 5000ms before next attempt...
     
-    [1m[4m[44m[90m  Admitting Grant  [0m
+      Admitting Grant  
     
-    AID "qvi" admitting IPEX grant "ELpYIuIs7kVoNzrjm81-Y_kTTCK0gttsC3jQ-Ho8QCxQ" from AID "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k"...
-    Successfully submitted IPEX admit for grant "ELpYIuIs7kVoNzrjm81-Y_kTTCK0gttsC3jQ-Ho8QCxQ".
-    Marking notification "0AA0n1CD-xqW1Xmg3Or-xfjz" as read...
-    Notification "0AA0n1CD-xqW1Xmg3Or-xfjz" marked as read.
+    AID "qvi" admitting IPEX grant "ENVYzw6LWYhvTNel4F3a8ukR67Ele0hCww_LN5koyQ1b" from AID "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG"...
+    Successfully submitted IPEX admit for grant "ENVYzw6LWYhvTNel4F3a8ukR67Ele0hCww_LN5koyQ1b".
+    Marking notification "0AA64v8WOwhvfEFzbeavKpRD" as read...
+    Notification "0AA64v8WOwhvfEFzbeavKpRD" marked as read.
     Waiting for notification with route "/exn/ipex/admit"...
-    Marking notification "0ACuCQMAvC7zKc2kvh0UIWT5" as read...
-    Notification "0ACuCQMAvC7zKc2kvh0UIWT5" marked as read.
+    Marking notification "0ACSfQaVk3tF4wdtYywLA-OA" as read...
+    Notification "0ACSfQaVk3tF4wdtYywLA-OA" marked as read.
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -1370,31 +1382,31 @@ prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Issuing Credential  [0m
+      Issuing Credential  
     
-    Issuing credential from AID "le" to AID "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs"...
+    Issuing credential from AID "le" to AID "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD"...
     {
-      name: "credential.EAuxDYPcWvdfUbTHMv-s2qWCXpyvSXqyM2CmFCpUQ8b1",
+      name: "credential.EPiJg8dr85f7gxsqS5aatchdXd7lUgWBvAzeyt5YQIAe",
       metadata: {
         ced: {
           v: "ACDC10JSON0007dc_",
-          d: "EAuxDYPcWvdfUbTHMv-s2qWCXpyvSXqyM2CmFCpUQ8b1",
-          u: "0AChjG1XlhKDy06p6xqPjIpq",
-          i: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k",
-          ri: "EEe46QMdH8JHZ6AppJ-NkDN31OM70CURQwzfmAy-pn0B",
+          d: "EPiJg8dr85f7gxsqS5aatchdXd7lUgWBvAzeyt5YQIAe",
+          u: "0AAR4PAjL6mV652tH6oElTeK",
+          i: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG",
+          ri: "EMASG0VnzsqD6M05aisJn_2WpiGtq-R60oTjC7V9db7K",
           s: "EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw",
           a: {
-            d: "EFmr85PqCDoBJk3XcUB3Iui0Ol5b7PEPDjSKisy7K3-8",
-            i: "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs",
+            d: "EF0DpTizv4UASZhTw28_ahP8nT2GQAxpcL1K-q9JV0-L",
+            i: "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "John Doe",
             engagementContextRole: "Managing Director",
-            dt: "2025-06-24T19:28:48.230000+00:00"
+            dt: "2025-07-18T00:32:37.263000+00:00"
           },
           e: {
-            d: "EBLcpP6yJD-71Hcgs_XmE4-gALyAktRkuFjDh_iESNv2",
+            d: "EJiyyaCGlPPGA3CvqtR_3SSYRFmZb7hwG2NU9_YniYEe",
             le: {
-              n: "EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
+              n: "EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
               s: "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
             }
           },
@@ -1412,8 +1424,8 @@ prContinue()
           }
         },
         depends: {
-          name: "witness.EGY7WcbPFSIZG8xmEommMC2m83NOjJHUivR7ZFXHCsQJ",
-          metadata: { pre: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k", sn: 4 },
+          name: "witness.EDF-9IqgR4PJY7wbHD-2AXkxnN6v3syzwHV-WNIOMtvK",
+          metadata: { pre: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG", sn: 4 },
           done: false,
           error: null,
           response: null
@@ -1424,23 +1436,23 @@ prContinue()
       response: {
         ced: {
           v: "ACDC10JSON0007dc_",
-          d: "EAuxDYPcWvdfUbTHMv-s2qWCXpyvSXqyM2CmFCpUQ8b1",
-          u: "0AChjG1XlhKDy06p6xqPjIpq",
-          i: "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k",
-          ri: "EEe46QMdH8JHZ6AppJ-NkDN31OM70CURQwzfmAy-pn0B",
+          d: "EPiJg8dr85f7gxsqS5aatchdXd7lUgWBvAzeyt5YQIAe",
+          u: "0AAR4PAjL6mV652tH6oElTeK",
+          i: "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG",
+          ri: "EMASG0VnzsqD6M05aisJn_2WpiGtq-R60oTjC7V9db7K",
           s: "EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw",
           a: {
-            d: "EFmr85PqCDoBJk3XcUB3Iui0Ol5b7PEPDjSKisy7K3-8",
-            i: "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs",
+            d: "EF0DpTizv4UASZhTw28_ahP8nT2GQAxpcL1K-q9JV0-L",
+            i: "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "John Doe",
             engagementContextRole: "Managing Director",
-            dt: "2025-06-24T19:28:48.230000+00:00"
+            dt: "2025-07-18T00:32:37.263000+00:00"
           },
           e: {
-            d: "EBLcpP6yJD-71Hcgs_XmE4-gALyAktRkuFjDh_iESNv2",
+            d: "EJiyyaCGlPPGA3CvqtR_3SSYRFmZb7hwG2NU9_YniYEe",
             le: {
-              n: "EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
+              n: "EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
               s: "ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY"
             }
           },
@@ -1459,27 +1471,27 @@ prContinue()
         }
       }
     }
-    Successfully issued credential with SAID: EAuxDYPcWvdfUbTHMv-s2qWCXpyvSXqyM2CmFCpUQ8b1
+    Successfully issued credential with SAID: EPiJg8dr85f7gxsqS5aatchdXd7lUgWBvAzeyt5YQIAe
     
-    [1m[4m[44m[90m  Granting Credential  [0m
+      Granting Credential  
     
-    AID "le" granting credential to AID "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs" via IPEX...
-    Successfully submitted IPEX grant from "le" to "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs".
+    AID "le" granting credential to AID "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD" via IPEX...
+    Successfully submitted IPEX grant from "le" to "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD".
     Waiting for notification with route "/exn/ipex/grant"...
     [Retry] Grant notification not found on attempt #1 of 5
     [Retry] Waiting 5000ms before next attempt...
     
-    [1m[4m[44m[90m  Admitting Grant  [0m
+      Admitting Grant  
     
-    AID "role" admitting IPEX grant "EHrmNq_VgQ3eX4-V4ZSw4to2QN5YWQYyWjK4NGy3ZLqp" from AID "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k"...
-    Successfully submitted IPEX admit for grant "EHrmNq_VgQ3eX4-V4ZSw4to2QN5YWQYyWjK4NGy3ZLqp".
-    Marking notification "0ADSNvaIqznW41jSE4Fk2ZCg" as read...
-    Notification "0ADSNvaIqznW41jSE4Fk2ZCg" marked as read.
+    AID "role" admitting IPEX grant "EE98D8N3Tx99IljSRWK9iYrc8VxvoYEWtdNDCba8IWts" from AID "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG"...
+    Successfully submitted IPEX admit for grant "EE98D8N3Tx99IljSRWK9iYrc8VxvoYEWtdNDCba8IWts".
+    Marking notification "0ACcGOvtuiQwlXY4wKZdcpeG" as read...
+    Notification "0ACcGOvtuiQwlXY4wKZdcpeG" marked as read.
     Waiting for notification with route "/exn/ipex/admit"...
-    Marking notification "0ADxUMasCrLdjrTAalrapuAb" as read...
-    Notification "0ADxUMasCrLdjrTAalrapuAb" marked as read.
+    Marking notification "0AAkd7dOY6wd0tqsnBada0do" as read...
+    Notification "0AAkd7dOY6wd0tqsnBada0do" marked as read.
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -1547,31 +1559,31 @@ prContinue()
 ```
 
     
-    [1m[4m[44m[90m  Issuing Credential  [0m
+      Issuing Credential  
     
-    Issuing credential from AID "qvi" to AID "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs"...
+    Issuing credential from AID "qvi" to AID "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD"...
     {
-      name: "credential.EN4_xSYyoT1rLQbLHVEWOpYpD-RyAhM-oMSOzYWQyGjT",
+      name: "credential.ECI7JLJXxHfbXa8tIKRpb7qAegNjOyRnGpppvc04Npx5",
       metadata: {
         ced: {
           v: "ACDC10JSON0007e8_",
-          d: "EN4_xSYyoT1rLQbLHVEWOpYpD-RyAhM-oMSOzYWQyGjT",
-          u: "0AArV-XKLILXt2kSmFSr6x_h",
-          i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
-          ri: "EEZXpqjCsXQszkRh9VO8KmNXJaGi7zTCgh9Xzi17Guwo",
+          d: "ECI7JLJXxHfbXa8tIKRpb7qAegNjOyRnGpppvc04Npx5",
+          u: "0AAVQUbEDuotWzToMzTaSOdr",
+          i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
+          ri: "ECpgAt4SKlKvNL90AE-fkOZ1OH7mvhMP7iCmq_PNUM2r",
           s: "EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw",
           a: {
-            d: "EIaj4B__w6Gmv1gKzRBBU36_5rTIj5cFYOSj5F-7xPK2",
-            i: "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs",
+            d: "EOPKWjQIdGxpuaZ0hCZsWIWZM5zPxPPByNw8cV_j4qEn",
+            i: "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "John Doe",
             engagementContextRole: "Managing Director",
-            dt: "2025-06-24T19:28:56.498000+00:00"
+            dt: "2025-07-18T00:32:44.767000+00:00"
           },
           e: {
-            d: "EIg3W_n_fwnCN0TZ_JM3MimrSCOZH-8OGjkZs5Snp09o",
+            d: "ENI6yPGvSOZliA6OtRWgD6da5JXZk1VpHi8SQWuTEx-p",
             auth: {
-              n: "EJ2aTqu1cyfSboIX407oiDspkY0SqkV1Y_bGDugKxsV7",
+              n: "EK6ZSkelhfJR2i1aKVOzMAaTLyJZZVaaNGVtm2qG3Ned",
               s: "EH6ekLjSr8V32WyFbGe1zXjTzFs9PkTYmupJ9H65O14g",
               o: "I2I"
             }
@@ -1590,8 +1602,8 @@ prContinue()
           }
         },
         depends: {
-          name: "witness.ED-ud1Ef0_1iul_5lH_O9dnFtxBKOjgtH7VKXJQllijM",
-          metadata: { pre: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj", sn: 4 },
+          name: "witness.EKMeHTsXwxQHzoSesLa-hIwFrrWTtvl3QT0VUywl8lIY",
+          metadata: { pre: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb", sn: 4 },
           done: false,
           error: null,
           response: null
@@ -1602,23 +1614,23 @@ prContinue()
       response: {
         ced: {
           v: "ACDC10JSON0007e8_",
-          d: "EN4_xSYyoT1rLQbLHVEWOpYpD-RyAhM-oMSOzYWQyGjT",
-          u: "0AArV-XKLILXt2kSmFSr6x_h",
-          i: "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
-          ri: "EEZXpqjCsXQszkRh9VO8KmNXJaGi7zTCgh9Xzi17Guwo",
+          d: "ECI7JLJXxHfbXa8tIKRpb7qAegNjOyRnGpppvc04Npx5",
+          u: "0AAVQUbEDuotWzToMzTaSOdr",
+          i: "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
+          ri: "ECpgAt4SKlKvNL90AE-fkOZ1OH7mvhMP7iCmq_PNUM2r",
           s: "EEy9PkikFcANV1l7EHukCeXqrzT1hNZjGlUk7wuMO5jw",
           a: {
-            d: "EIaj4B__w6Gmv1gKzRBBU36_5rTIj5cFYOSj5F-7xPK2",
-            i: "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs",
+            d: "EOPKWjQIdGxpuaZ0hCZsWIWZM5zPxPPByNw8cV_j4qEn",
+            i: "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD",
             LEI: "875500ELOZEL05BVXV37",
             personLegalName: "John Doe",
             engagementContextRole: "Managing Director",
-            dt: "2025-06-24T19:28:56.498000+00:00"
+            dt: "2025-07-18T00:32:44.767000+00:00"
           },
           e: {
-            d: "EIg3W_n_fwnCN0TZ_JM3MimrSCOZH-8OGjkZs5Snp09o",
+            d: "ENI6yPGvSOZliA6OtRWgD6da5JXZk1VpHi8SQWuTEx-p",
             auth: {
-              n: "EJ2aTqu1cyfSboIX407oiDspkY0SqkV1Y_bGDugKxsV7",
+              n: "EK6ZSkelhfJR2i1aKVOzMAaTLyJZZVaaNGVtm2qG3Ned",
               s: "EH6ekLjSr8V32WyFbGe1zXjTzFs9PkTYmupJ9H65O14g",
               o: "I2I"
             }
@@ -1638,27 +1650,27 @@ prContinue()
         }
       }
     }
-    Successfully issued credential with SAID: EN4_xSYyoT1rLQbLHVEWOpYpD-RyAhM-oMSOzYWQyGjT
+    Successfully issued credential with SAID: ECI7JLJXxHfbXa8tIKRpb7qAegNjOyRnGpppvc04Npx5
     
-    [1m[4m[44m[90m  Granting Credential  [0m
+      Granting Credential  
     
-    AID "qvi" granting credential to AID "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs" via IPEX...
-    Successfully submitted IPEX grant from "qvi" to "EO9yI1WhQCrZEMtPwJbq7is3D9jhMtzsEIncPcfCWENs".
+    AID "qvi" granting credential to AID "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD" via IPEX...
+    Successfully submitted IPEX grant from "qvi" to "EBH5kVgvQouoPqfTTcXPCkTbqeuWs4ECpndQucY6N3UD".
     Waiting for notification with route "/exn/ipex/grant"...
     [Retry] Grant notification not found on attempt #1 of 5
     [Retry] Waiting 5000ms before next attempt...
     
-    [1m[4m[44m[90m  Admitting Grant  [0m
+      Admitting Grant  
     
-    AID "role" admitting IPEX grant "EIw08vv5CHJiykdv6Pjlkfrxg9xlacAXscBqlC-UvTbd" from AID "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj"...
-    Successfully submitted IPEX admit for grant "EIw08vv5CHJiykdv6Pjlkfrxg9xlacAXscBqlC-UvTbd".
-    Marking notification "0AAo00yLIli-1LK2vtcXz5QP" as read...
-    Notification "0AAo00yLIli-1LK2vtcXz5QP" marked as read.
+    AID "role" admitting IPEX grant "ECJEoAxtCbhlOJmT-a3Sa5axCtsw77GtxCdDM40MNttr" from AID "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb"...
+    Successfully submitted IPEX admit for grant "ECJEoAxtCbhlOJmT-a3Sa5axCtsw77GtxCdDM40MNttr".
+    Marking notification "0ABaltHWBnhZ3XkQGpXrMiA_" as read...
+    Notification "0ABaltHWBnhZ3XkQGpXrMiA_" marked as read.
     Waiting for notification with route "/exn/ipex/admit"...
-    Marking notification "0ABx9D64VNnResjAm0uwUL2J" as read...
-    Notification "0ABx9D64VNnResjAm0uwUL2J" marked as read.
+    Marking notification "0ABJHytAegvmC4gT8kc4htzt" as read...
+    Notification "0ABJHytAegvmC4gT8kc4htzt" marked as read.
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -1669,14 +1681,14 @@ Once credentials like the ones created in this chain are issued and held by thei
 
 Sally acts as a direct-mode validator. It receives presentations of vLEI credentials (like the QVI, vLEI and OOR credentials), cryptographically verifies their structure and integrity, and then performs a POST request to a pre-configured webhook URL. This allows external systems to receive trusted, real-time notifications about credential presentations and revocations within the vLEI ecosystem.
 
-For more details about sally go to this **[repository](https://github.com/GLEIF-IT/sally)**
+For more details about Sally go to its Github **[repository](https://github.com/GLEIF-IT/sally)**.
 
-To continue with the example you need to start the sally service following the instructions below (⚠️ The command is programatically generated):
+To continue with the example you need to start the sally service following the instructions below (⚠️ The command is programatically generated) in the root directory of these training materials so the correct docker compose file is found.
 
 
 ```typescript
 // Ask user to start the sally service setting the proper root of trust for this run
-prAlert(`Please run this command on you local machine before continuing, and wait for the container to start:`)
+prAlert(`Please run this command on you local machine in the vlei-trainings directory before continuing, and wait for the container to start:`)
 
 prMessage(`GEDA_PRE=${gleifPrefix} docker compose up --build direct-sally -d`)
 
@@ -1690,10 +1702,10 @@ if (isReady) {
 ```
 
     
-    [1m[43m[94mPlease run this command on you local machine before continuing, and wait for the container to start:[0m
+    Please run this command on you local machine in the vlei-trainings directory before continuing, and wait for the container to start:
     
     
-    [1m[94mGEDA_PRE=EFsQnjOuzAPnQj37T65YvQqpyAgTTvLEkLPampLWr1af docker compose up --build direct-sally -d[0m
+    GEDA_PRE=EKOhpyKyDF4QV7lWP3ZQogr9U5ob2IAy7KrtFuNSio22 docker compose up --build direct-sally -d
     
 
 
@@ -1701,7 +1713,7 @@ if (isReady) {
 
 
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -1723,6 +1735,12 @@ The following code block performs the entire presentation flow in four main step
 3. **Presenting the Credential:** The `presentToSally()` function uses `ipexGrantCredential` to send the `leCredential` to Sally's AID. This action is the `signify-ts` equivalent of using `kli ipex grant` for credential presentation and initiates the verification process within Sally.
 4. **Verifying the Audit Report:** Finally, the `pollForCredential()` function simulates a webhook listener. Instead of running a full server, it simply polls the hook service where Sally sends its report. Upon receiving a successful `200 OK` response, it fetches and displays the JSON report, confirming that Sally received the presentation, successfully verified the trust chain, and dispatched its audit report.
 
+<div class="alert alert-danger">
+    <b>⚠️ BUG ALERT</b><hr>
+    <p>There is a known issue where Sally cannot process credential presentation on the first attempt. To work around this, run the code cell below twice</p>  
+    <p>For more details on this and other issues, please see the <a href="900_05_Known_Issues.ipynb">Known Issues Section</a></p>
+</div>
+
 
 ```typescript
 // Present to sally
@@ -1743,21 +1761,6 @@ async function presentToSally(){
 
 // Poll webhook for LE credential data
 const webhookUrl = `${"http://hook:9923"}/?holder=${lePrefix}`;
-
-// // Ipex presentation of LE credential
-// async function presentToSally(){
-//     prTitle("Presenting QVI Credential to sally")
-//     const grantResponse = await ipexGrantCredential(
-//         qviClient,  qviAlias, 
-//         sallyPrefix,
-//         qviCredential
-//     )
-// }
-
-// // Poll webhook for LE credential data
-// const webhookUrl = `${"http://hook:9923"}/?holder=${qviPrefix}`;
-
-//----------------------
 
 async function pollForCredential() {
 
@@ -1829,50 +1832,41 @@ prContinue()
     Successfully resolved OOBI URL. Response: OK
     Contact "sally" added/updated.
     
-    [1m[4m[44m[90m  Presenting vLEI Credential to sally  [0m
+      Presenting vLEI Credential to sally  
     
     AID "le" granting credential to AID "ECLwKe5b33BaV20x7HZWYi_KUXgY91S41fRL2uCaf4WQ" via IPEX...
     Successfully submitted IPEX grant from "le" to "ECLwKe5b33BaV20x7HZWYi_KUXgY91S41fRL2uCaf4WQ".
     
-    [1m[94mReceived 404 from Sally[0m
+    Received 404 from Sally
     
     
-    [1m[94mReceived 404 from Sally[0m
+    Received 404 from Sally
     
     
-    [1m[94mReceived 404 from Sally[0m
+    Received 404 from Sally
     
     
-    [1m[94mReceived 404 from Sally[0m
+    Received 404 from Sally
     
     
-    [1m[94mReceived 404 from Sally[0m
+    Received 200 from Sally
     
     
-    [1m[94mReceived 404 from Sally[0m
+      Fetching Credential Info...  
     
     
-    [1m[94mReceived 404 from Sally[0m
-    
-    
-    [1m[94mReceived 200 from Sally[0m
-    
-    
-    [1m[4m[44m[90m  Fetching Credential Info...  [0m
-    
-    
-    [1m[94m{
-      "credential": "EAJX9B1r2nC5alvdvAE4qskkoGdnxtJD2YtRVCsF8TAy",
+    {
+      "credential": "EBhRb6NzmCprA7p1TubnPfaDkqDIPbSwuG1sUh7DalWq",
       "type": "LE",
-      "issuer": "EFKblgHYtG05Q-BQu3IfiesWNKPCv5ybX4jdidamsMHj",
-      "holder": "EG-4h_mAPdwJ6DmaQRJqXgAepHVt0Csb1SXA_Ymn_M4k",
+      "issuer": "EF9f9EHcW2r42dxOe0nCe73-qmHEJaJJM9YhiC1M-uxb",
+      "holder": "EIAaw14n2zX8zfn6IkFLI6k_Gta26wCWV1B27CE9V6OG",
       "LEI": "875500ELOZEL05BVXV37",
       "personLegalName": "",
       "officialRole": ""
-    }[0m
+    }
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -1890,8 +1884,3 @@ This notebook provided a practical walkthrough of a simplified vLEI trust chain 
 </ul>
 This represents a functional, albeit simplified, model of how the vLEI ecosystem issues verifiable credentials for legal entities and their roles while maintaining a robust and verifiable chain of trust.
 </div>
-
-
-```typescript
-
-```

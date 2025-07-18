@@ -1,9 +1,15 @@
 # ACDC Issuance with KLI: Not-Issuer-To-Issuee
 
 <b>🎯 OBJECTIVE</b><hr>
-Demonstrate how to issue an ACDC that utilizes a Not-Issuer-To-Issuee (NI2I) edge, illustrating how to reference another credential for context without implying the issuer is the issuee of the linked ACDC. This notebook will also show how a rule can be embedded in the credential. We will implement the **"Linking to an External Training Course"** scenario.
+Demonstrate how to issue an ACDC that utilizes a Not-Issuer-To-Issuee (NI2I) edge, illustrating how to reference another parent credential for context without implying the issuer of the child is the issuee of the linked parent ACDC. This notebook will also show how a rule can be embedded in the credential. We will implement the **"Linking to an External Training Course"** scenario.
 </div>
 
+<div class="alert alert-danger">
+    <b>ℹ️⚠️ BUG ALERT</b><hr>
+    <p>Currently the <code>NI2I</code> operator does not work due to a bug. For more details on this and other issues, please see the <a href="900_05_Known_Issues.ipynb">Known Issues Section</a>.
+
+The material will be updated once the bug is resolved. For now you can skip this notebook.</p>
+</div>
 
 ## Scenario Recap: Linking to an External Training Course
 
@@ -19,7 +25,7 @@ This notebook focuses on the practical KLI commands for implementing an `NI2I` c
 We begin by setting up the three participants in our scenario:
 
 - Training Provider (`training_provider_aid`): The entity issuing the course credential.
-- Company (`company_aid`): The entity issuing the skill credential that references the first.
+- Company (`company_aid`): The entity issuing the skill credential that references the course credential.
 - Employee (`employee_aid`): The entity who is the subject (issuee) of both credentials.
 
 For each participant, we will:
@@ -144,88 +150,6 @@ pr_message("OOBI connections established.")
 pr_continue()
 ```
 
-    Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
-    ✅ Successfully removed: /usr/local/var/keri/
-    
-    [1m[4m[44m[90m  Initializing keystores  [0m
-    
-    KERI Keystore created at: /usr/local/var/keri/ks/training_provider_ks
-    KERI Database created at: /usr/local/var/keri/db/training_provider_ks
-    KERI Credential Store created at: /usr/local/var/keri/reg/training_provider_ks
-    
-    Loading 3 OOBIs...
-    http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
-    http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
-    http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
-    KERI Keystore created at: /usr/local/var/keri/ks/company_ks
-    KERI Database created at: /usr/local/var/keri/db/company_ks
-    KERI Credential Store created at: /usr/local/var/keri/reg/company_ks
-    
-    Loading 3 OOBIs...
-    http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
-    http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
-    http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
-    KERI Keystore created at: /usr/local/var/keri/ks/employee_ks
-    KERI Database created at: /usr/local/var/keri/db/employee_ks
-    KERI Credential Store created at: /usr/local/var/keri/reg/employee_ks
-    
-    Loading 3 OOBIs...
-    http://witness-demo:5642/oobi/BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha/controller?name=Wan&tag=witness succeeded
-    http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM/controller?name=Wes&tag=witness succeeded
-    http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX/controller?name=Wil&tag=witness succeeded
-    
-    [1m[4m[44m[90m  Initializing AIDs  [0m
-    
-    Waiting for witness receipts...
-    Prefix  EEDHBpqSRlpIKzc0_AhFx7H2HY0qiQawpJKPyXdS0Byk
-    	Public key 1:  DBiBnSAY0c77CS7c9o4BA_m2_alItNXU7qNIb6vkZ6dk
-    
-    Waiting for witness receipts...
-    Prefix  EPpmDTQVjjRSKPmuhWXVFYXTNSGh77eU8aK3M2aZ7v5b
-    	Public key 1:  DBP01fTRQwbV-k1Jyq4eNv8kSxLEK9qjK6M9N7aaCnXD
-    
-    Waiting for witness receipts...
-    Prefix  EDO67I_DFhg4ygUScUR_48t2D2R6CMH5oguTJqWMJr_u
-    	Public key 1:  DL_ROtcHdyiyWR_DhYl4CRIl71rk8dssEfssqIhg8zY6
-    
-    
-    [1m[4m[44m[90m  Initializing Credential Registries  [0m
-    
-    Waiting for TEL event witness receipts
-    Sending TEL events to witnesses
-    Registry:  training_provider_reg(EPFig-G01GQwfcR3T19tpnHYvi76qIcv1i5bxF7BDyvX) 
-    	created for Identifier Prefix:  EEDHBpqSRlpIKzc0_AhFx7H2HY0qiQawpJKPyXdS0Byk
-    Waiting for TEL event witness receipts
-    Sending TEL events to witnesses
-    Registry:  company_skill_reg(EBOYEMyb4K-vE-f-OYZ6wOlTICeZBS5O5M_byRQSSenT) 
-    	created for Identifier Prefix:  EPpmDTQVjjRSKPmuhWXVFYXTNSGh77eU8aK3M2aZ7v5b
-    
-    [1m[94mTraining Provider AID: EEDHBpqSRlpIKzc0_AhFx7H2HY0qiQawpJKPyXdS0Byk[0m
-    
-    
-    [1m[94mCompany AID: EPpmDTQVjjRSKPmuhWXVFYXTNSGh77eU8aK3M2aZ7v5b[0m
-    
-    
-    [1m[94mEmployee AID: EDO67I_DFhg4ygUScUR_48t2D2R6CMH5oguTJqWMJr_u[0m
-    
-    
-    [1m[4m[44m[90m  Generating and resolving OOBIs  [0m
-    
-    http://witness-demo:5642/oobi/EDO67I_DFhg4ygUScUR_48t2D2R6CMH5oguTJqWMJr_u/witness resolved
-    http://witness-demo:5642/oobi/EEDHBpqSRlpIKzc0_AhFx7H2HY0qiQawpJKPyXdS0Byk/witness resolved
-    http://witness-demo:5642/oobi/EDO67I_DFhg4ygUScUR_48t2D2R6CMH5oguTJqWMJr_u/witness resolved
-    http://witness-demo:5642/oobi/EPpmDTQVjjRSKPmuhWXVFYXTNSGh77eU8aK3M2aZ7v5b/witness resolved
-    http://witness-demo:5642/oobi/EEDHBpqSRlpIKzc0_AhFx7H2HY0qiQawpJKPyXdS0Byk/witness resolved
-    http://witness-demo:5642/oobi/EPpmDTQVjjRSKPmuhWXVFYXTNSGh77eU8aK3M2aZ7v5b/witness resolved
-    
-    [1m[94mOOBI connections established.[0m
-    
-    
-    [1m[42m[90m  You can continue ✅  [0m
-    
-    
-
-
 ## Schema Definitions
 
 For this scenario, we require two distinct ACDC schemas:
@@ -257,115 +181,6 @@ pr_message(f"Retrieving Schema from Server:")
 pr_continue()
 ```
 
-    
-    [1m[4m[44m[90m  Schema: config/schemas/course_completion_schema.json  [0m
-    
-    
-    [1m[94mSchema SAID: EF4BJfBb0xQhQke9yfoaepX6owHV9a5m2r-HjTLy59hS[0m
-    
-    
-    [1m[94mRetrieving Schema from Server:[0m
-    
-    [1;39m{
-      [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EF4BJfBb0xQhQke9yfoaepX6owHV9a5m2r-HjTLy59hS"[0m[1;39m,
-      [0m[34;1m"$schema"[0m[1;39m: [0m[0;32m"http://json-schema.org/draft-07/schema#"[0m[1;39m,
-      [0m[34;1m"title"[0m[1;39m: [0m[0;32m"CourseCompletionCredential"[0m[1;39m,
-      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential signifying the successful completion of a training course."[0m[1;39m,
-      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-      [0m[34;1m"credentialType"[0m[1;39m: [0m[0;32m"CourseCompletionCredential"[0m[1;39m,
-      [0m[34;1m"version"[0m[1;39m: [0m[0;32m"1.0.0"[0m[1;39m,
-      [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-        [0m[34;1m"v"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential Version String"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"u"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"One time use nonce"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"i"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuer AID (Training Provider's AID)"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"ri"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Registry SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"s"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Schema SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"a"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"oneOf"[0m[1;39m: [0m[1;39m[
-            [1;39m{
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes block SAID"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-            [1;39m}[0m[1;39m,
-            [1;39m{
-              [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EAZBHKYO89jH2XDisldRbTvkxJLPG-BQZngGYnp-MhaG"[0m[1;39m,
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes block"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-              [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes data SAID"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"i"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuee AID (Employee's AID)"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"dt"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuance date time"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                  [0m[34;1m"format"[0m[1;39m: [0m[0;32m"date-time"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"courseName"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"The name of the completed course."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"courseLevel"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"The level of the course."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"completionDate"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"The date the course was completed."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                  [0m[34;1m"format"[0m[1;39m: [0m[0;32m"date"[0m[1;39m
-                [1;39m}[0m[1;39m
-              [1;39m}[0m[1;39m,
-              [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-              [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                [0;32m"d"[0m[1;39m,
-                [0;32m"i"[0m[1;39m,
-                [0;32m"dt"[0m[1;39m,
-                [0;32m"courseName"[0m[1;39m,
-                [0;32m"courseLevel"[0m[1;39m,
-                [0;32m"completionDate"[0m[1;39m
-              [1;39m][0m[1;39m
-            [1;39m}[0m[1;39m
-          [1;39m][0m[1;39m
-        [1;39m}[0m[1;39m
-      [1;39m}[0m[1;39m,
-      [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-      [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-        [0;32m"v"[0m[1;39m,
-        [0;32m"d"[0m[1;39m,
-        [0;32m"i"[0m[1;39m,
-        [0;32m"ri"[0m[1;39m,
-        [0;32m"s"[0m[1;39m,
-        [0;32m"a"[0m[1;39m
-      [1;39m][0m[1;39m
-    [1;39m}[0m
-    
-    [1m[42m[90m  You can continue ✅  [0m
-    
-    
-
-
 ### Employee Skill Schema
 This schema defines the credential issued by the Company to the Employee. It includes an `e` (edges) section with an `NI2I` operator to reference the "Course Completion" credential and an `r` (rules) section for a verification policy.
 
@@ -384,200 +199,6 @@ pr_message(f"Retrieving Schema from Server:")
 
 pr_continue()
 ```
-
-    
-    [1m[4m[44m[90m  Schema: config/schemas/skill_certified_schema.json  [0m
-    
-    
-    [1m[94mSchema SAID: EHELMpJ9ZjbrjXh2tiyw6MRkyar8g_7cn4OjNMUTU1Qu[0m
-    
-    
-    [1m[94mRetrieving Schema from Server:[0m
-    
-    [1;39m{
-      [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EHELMpJ9ZjbrjXh2tiyw6MRkyar8g_7cn4OjNMUTU1Qu"[0m[1;39m,
-      [0m[34;1m"$schema"[0m[1;39m: [0m[0;32m"http://json-schema.org/draft-07/schema#"[0m[1;39m,
-      [0m[34;1m"title"[0m[1;39m: [0m[0;32m"EmployeeSkillCredential"[0m[1;39m,
-      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential signifying a validated employee skill, supported by external evidence."[0m[1;39m,
-      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-      [0m[34;1m"credentialType"[0m[1;39m: [0m[0;32m"EmployeeSkillCredential"[0m[1;39m,
-      [0m[34;1m"version"[0m[1;39m: [0m[0;32m"1.0.0"[0m[1;39m,
-      [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-        [0m[34;1m"v"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential Version String"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"u"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"One time use nonce"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"i"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuer AID (Company's AID)"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"ri"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Registry SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"s"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Schema SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"a"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"oneOf"[0m[1;39m: [0m[1;39m[
-            [1;39m{
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes block SAID"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-            [1;39m}[0m[1;39m,
-            [1;39m{
-              [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EOvGnWVRA0j_j6ZJvvTIMEWjemzfDWJUkQke5YX03CfB"[0m[1;39m,
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes block"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-              [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes data SAID"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"i"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuee AID (Employee's AID)"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"dt"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuance date time"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                  [0m[34;1m"format"[0m[1;39m: [0m[0;32m"date-time"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"skillName"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"The name of the certified skill."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"skillLevel"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"The proficiency level of the skill."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"assessmentDate"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"The date the skill was assessed."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                  [0m[34;1m"format"[0m[1;39m: [0m[0;32m"date"[0m[1;39m
-                [1;39m}[0m[1;39m
-              [1;39m}[0m[1;39m,
-              [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-              [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                [0;32m"d"[0m[1;39m,
-                [0;32m"i"[0m[1;39m,
-                [0;32m"dt"[0m[1;39m,
-                [0;32m"skillName"[0m[1;39m,
-                [0;32m"skillLevel"[0m[1;39m,
-                [0;32m"assessmentDate"[0m[1;39m
-              [1;39m][0m[1;39m
-            [1;39m}[0m[1;39m
-          [1;39m][0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"e"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"oneOf"[0m[1;39m: [0m[1;39m[
-            [1;39m{
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Edges block SAID"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-            [1;39m}[0m[1;39m,
-            [1;39m{
-              [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"ENG_fGLJf3AvDXPwNwH1d0zerxd0AXnpl-IKtRuRtTpT"[0m[1;39m,
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Edges block"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-              [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Edges block SAID"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"supporting_evidence"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Link to the Course Completion Credential that serves as supporting evidence."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-                  [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                    [0m[34;1m"n"[0m[1;39m: [0m[1;39m{
-                      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"SAID of the supporting Course Completion credential."[0m[1;39m,
-                      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                    [1;39m}[0m[1;39m,
-                    [0m[34;1m"s"[0m[1;39m: [0m[1;39m{
-                      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"SAID of the required schema for the supporting credential."[0m[1;39m,
-                      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                      [0m[34;1m"const"[0m[1;39m: [0m[0;32m"EF4BJfBb0xQhQke9yfoaepX6owHV9a5m2r-HjTLy59hS"[0m[1;39m
-                    [1;39m}[0m[1;39m,
-                    [0m[34;1m"o"[0m[1;39m: [0m[1;39m{
-                      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Operator indicating the issuer of this credential is NOT required to be the issuee of the linked credential."[0m[1;39m,
-                      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                      [0m[34;1m"const"[0m[1;39m: [0m[0;32m"NI2I"[0m[1;39m
-                    [1;39m}[0m[1;39m
-                  [1;39m}[0m[1;39m,
-                  [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-                  [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                    [0;32m"n"[0m[1;39m,
-                    [0;32m"s"[0m[1;39m,
-                    [0;32m"o"[0m[1;39m
-                  [1;39m][0m[1;39m
-                [1;39m}[0m[1;39m
-              [1;39m}[0m[1;39m,
-              [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-              [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                [0;32m"d"[0m[1;39m,
-                [0;32m"supporting_evidence"[0m[1;39m
-              [1;39m][0m[1;39m
-            [1;39m}[0m[1;39m
-          [1;39m][0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"r"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"oneOf"[0m[1;39m: [0m[1;39m[
-            [1;39m{
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Rules block SAID"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-            [1;39m}[0m[1;39m,
-            [1;39m{
-              [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EI1YuEH0lTqhQXKMdIqHke116RDkCweKWDi3yvJe2n0_"[0m[1;39m,
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Rules governing the verification of this skill credential."[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-              [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Rules block SAID"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"verification_policy"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Verification Policy"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-                  [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                    [0m[34;1m"l"[0m[1;39m: [0m[1;39m{
-                      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Associated legal language or policy text."[0m[1;39m,
-                      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                      [0m[34;1m"const"[0m[1;39m: [0m[0;32m"Verification of this skill certification requires checking the validity of supporting evidence."[0m[1;39m
-                    [1;39m}[0m[1;39m
-                  [1;39m}[0m[1;39m
-                [1;39m}[0m[1;39m
-              [1;39m}[0m[1;39m,
-              [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-              [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                [0;32m"d"[0m[1;39m,
-                [0;32m"verification_policy"[0m[1;39m
-              [1;39m][0m[1;39m
-            [1;39m}[0m[1;39m
-          [1;39m][0m[1;39m
-        [1;39m}[0m[1;39m
-      [1;39m}[0m[1;39m,
-      [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-      [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-        [0;32m"v"[0m[1;39m,
-        [0;32m"d"[0m[1;39m,
-        [0;32m"i"[0m[1;39m,
-        [0;32m"ri"[0m[1;39m,
-        [0;32m"s"[0m[1;39m,
-        [0;32m"a"[0m[1;39m
-      [1;39m][0m[1;39m
-    [1;39m}[0m
-    
-    [1m[42m[90m  You can continue ✅  [0m
-    
-    
-
 
 ## Resolving Schema OOBIs
 
@@ -620,26 +241,8 @@ pr_message("Schema OOBIs resolved.")
 pr_continue()
 ```
 
-    
-    [1m[4m[44m[90m  Resolving schema OOBIs  [0m
-    
-    http://vlei-server:7723/oobi/EF4BJfBb0xQhQke9yfoaepX6owHV9a5m2r-HjTLy59hS resolved
-    http://vlei-server:7723/oobi/EF4BJfBb0xQhQke9yfoaepX6owHV9a5m2r-HjTLy59hS resolved
-    http://vlei-server:7723/oobi/EF4BJfBb0xQhQke9yfoaepX6owHV9a5m2r-HjTLy59hS resolved
-    http://vlei-server:7723/oobi/EHELMpJ9ZjbrjXh2tiyw6MRkyar8g_7cn4OjNMUTU1Qu resolved
-    http://vlei-server:7723/oobi/EHELMpJ9ZjbrjXh2tiyw6MRkyar8g_7cn4OjNMUTU1Qu resolved
-    http://vlei-server:7723/oobi/EHELMpJ9ZjbrjXh2tiyw6MRkyar8g_7cn4OjNMUTU1Qu resolved
-    
-    [1m[94mSchema OOBIs resolved.[0m
-    
-    
-    [1m[42m[90m  You can continue ✅  [0m
-    
-    
-
-
 ## Issuing credentials
-Now that the setup is complete and the schemas are available, it's necessary to create the credential chain.
+Now that the setup is complete and the schemas are available, it's necessary to create the credential chain starting with the Course Completion credential and later the Employee Skill credential.
 
 ### Step 1: Course Completion Credential Issuance (Training Provider to Employee)
 First, the Training Provider issues the "Course Completion" credential to the Employee. This establishes the base credential that will be referenced later.
@@ -663,22 +266,8 @@ pr_title("Creating Course Completion credential data")
 pr_continue()
 ```
 
-    
-    [1m[4m[44m[90m  Creating Course Completion credential data  [0m
-    
-    [1;39m{
-      [0m[34;1m"courseName"[0m[1;39m: [0m[0;32m"Advanced Cryptographic Systems"[0m[1;39m,
-      [0m[34;1m"courseLevel"[0m[1;39m: [0m[0;32m"Expert"[0m[1;39m,
-      [0m[34;1m"completionDate"[0m[1;39m: [0m[0;32m"2024-09-15"[0m[1;39m
-    [1;39m}[0m
-    
-    [1m[42m[90m  You can continue ✅  [0m
-    
-    
-
-
 ### Training Provider Issues Credential
-The Training Provider uses kli vc create to issue the credential.
+The Training Provider uses `kli vc create` to issue the credential.
 
 
 ```python
@@ -699,24 +288,9 @@ pr_message(f"Course Credential SAID: {course_credential_said}")
 pr_continue()
 ```
 
-    
-    [1m[4m[44m[90m  Creating Course Completion credential  [0m
-    
-    Waiting for TEL event witness receipts
-    Sending TEL events to witnesses
-    EOtQygzZ-a72tRrKidZsvRf9W1Z1uxbPGJ4Awx6TN_Hi has been created.
-    
-    [1m[94mCourse Credential SAID: EOtQygzZ-a72tRrKidZsvRf9W1Z1uxbPGJ4Awx6TN_Hi[0m
-    
-    
-    [1m[42m[90m  You can continue ✅  [0m
-    
-    
-
-
 **IPEX Transfer: Training Provider Grants, Employee Admits**  
 
-The credential is transferred to the Employee using the standard IPEX grant/admit flow.
+The credential is then transferred to the Employee using the standard IPEX grant/admit flow.
 
 
 ```python
@@ -730,6 +304,7 @@ time = exec("kli time")
     --time {time}
 
 # Employee polls for the grant and admits it
+print("Polling mailboxes for IPEX Grant messages to admit...")
 employee_grant_msg_said = exec(f"kli ipex list --name {employee_keystore_name} --alias {employee_aid_alias} --poll --said")
 time = exec("kli time")
 !kli ipex admit --name {employee_keystore_name} \
@@ -745,50 +320,10 @@ pr_message("\nEmployee's received Course Completion Credential:")
 pr_continue()
 ```
 
-    
-    [1m[4m[44m[90m  Transferring Course Completion credential (IPEX)  [0m
-    
-    Sending message EN-qbMzDbUprGs3x4fs34bkV4wyhXfLsKqFRGVYP2i-4 to EDO67I_DFhg4ygUScUR_48t2D2R6CMH5oguTJqWMJr_u
-    ... grant message sent
-    Sending admit message to EEDHBpqSRlpIKzc0_AhFx7H2HY0qiQawpJKPyXdS0Byk
-    ... admit message sent
-    
-    [1m[94m
-    Employee's received Course Completion Credential:[0m
-    
-    Current received credentials for employee (EDO67I_DFhg4ygUScUR_48t2D2R6CMH5oguTJqWMJr_u):
-    
-    Credential #1: EOtQygzZ-a72tRrKidZsvRf9W1Z1uxbPGJ4Awx6TN_Hi
-        Type: CourseCompletionCredential
-        Status: Issued [92m✔[0m
-        Issued by EEDHBpqSRlpIKzc0_AhFx7H2HY0qiQawpJKPyXdS0Byk
-        Issued on 2025-06-24T20:04:12.427714+00:00
-        Full Credential:
-    	{
-    	  "v": "ACDC10JSON0001dd_",
-    	  "d": "EOtQygzZ-a72tRrKidZsvRf9W1Z1uxbPGJ4Awx6TN_Hi",
-    	  "i": "EEDHBpqSRlpIKzc0_AhFx7H2HY0qiQawpJKPyXdS0Byk",
-    	  "ri": "EPFig-G01GQwfcR3T19tpnHYvi76qIcv1i5bxF7BDyvX",
-    	  "s": "EF4BJfBb0xQhQke9yfoaepX6owHV9a5m2r-HjTLy59hS",
-    	  "a": {
-    	    "d": "EN0PV2OB2KCXIRkYFg7v11ViPzUCLItO08XCTJy_WFdP",
-    	    "i": "EDO67I_DFhg4ygUScUR_48t2D2R6CMH5oguTJqWMJr_u",
-    	    "dt": "2025-06-24T20:04:12.427714+00:00",
-    	    "courseName": "Advanced Cryptographic Systems",
-    	    "courseLevel": "Expert",
-    	    "completionDate": "2024-09-15"
-    	  }
-    	}
-    
-    [1m[42m[90m  You can continue ✅  [0m
-    
-    
-
-
 ### Step 2: Employee Skill Credential Issuance (Company to Employee)
 Now, the Company issues the "Employee Skill Certified" credential, which will link to the one the Employee just received.
 
-Create Data Blocks for Skill Credential
+Create Data Properties for Skill Credential
 We need to create three separate JSON files for the attributes, the NI2I edge, and the rule.
 
 **Attributes Data**   
@@ -812,16 +347,6 @@ with open(skill_cred_data_file_path, 'w') as f:
     
 !cat {skill_cred_data_file_path} | jq
 ```
-
-    
-    [1m[94mEmployee Skill Credential Attributes[0m
-    
-    [1;39m{
-      [0m[34;1m"skillName"[0m[1;39m: [0m[0;32m"Secure System Design"[0m[1;39m,
-      [0m[34;1m"skillLevel"[0m[1;39m: [0m[0;32m"Proficient"[0m[1;39m,
-      [0m[34;1m"assessmentDate"[0m[1;39m: [0m[0;32m"2025-01-20"[0m[1;39m
-    [1;39m}[0m
-
 
 **Edge Data (NI2I) and SAIDification**  
 
@@ -850,19 +375,6 @@ with open(skill_cred_edge_file_path, 'w') as f:
 !cat {skill_cred_edge_file_path} | jq
 ```
 
-    
-    [1m[94mEmployee Skill Credential Edges (NI2I)[0m
-    
-    [1;39m{
-      [0m[34;1m"d"[0m[1;39m: [0m[0;32m"ENp3KA9iSrGFX81-ltvDmR9f9Udjy6D1qlY5jghBrmLN"[0m[1;39m,
-      [0m[34;1m"supporting_evidence"[0m[1;39m: [0m[1;39m{
-        [0m[34;1m"n"[0m[1;39m: [0m[0;32m"EOtQygzZ-a72tRrKidZsvRf9W1Z1uxbPGJ4Awx6TN_Hi"[0m[1;39m,
-        [0m[34;1m"s"[0m[1;39m: [0m[0;32m"EF4BJfBb0xQhQke9yfoaepX6owHV9a5m2r-HjTLy59hS"[0m[1;39m,
-        [0m[34;1m"o"[0m[1;39m: [0m[0;32m"NI2I"[0m[1;39m
-      [1;39m}[0m[1;39m
-    [1;39m}[0m
-
-
 **Rule Data and SAIDification**  
 
 The rule data is created and SAIDified.
@@ -886,18 +398,8 @@ with open(skill_cred_rule_file_path, 'w') as f:
 !cat {skill_cred_rule_file_path} | jq
 ```
 
-    
-    [1m[94mEmployee Skill Credential Rules[0m
-    
-    [1;39m{
-      [0m[34;1m"d"[0m[1;39m: [0m[0;32m"EAz-6zu_GnWWvec9hxuUebTjDwlbOP00gmJi7VBpuBcO"[0m[1;39m,
-      [0m[34;1m"verification_policy"[0m[1;39m: [0m[1;39m{
-        [0m[34;1m"l"[0m[1;39m: [0m[0;32m"Verification of this skill certification requires checking the validity of supporting evidence."[0m[1;39m
-      [1;39m}[0m[1;39m
-    [1;39m}[0m
+#### Company Issues Skill Credential
 
-
-Company Issues Skill Credential
 The Company now creates the chained credential using kli vc create, supplying the attributes, edges, and rules files.
 
 
@@ -920,18 +422,6 @@ pr_message(f"Employee Skill Credential SAID: {skill_credential_said}")
 
 pr_continue()
 ```
-
-    Waiting for TEL event witness receipts
-    Sending TEL events to witnesses
-    ^C
-    
-    [1m[94mEmployee Skill Credential SAID: None[0m
-    
-    
-    [1m[42m[90m  You can continue ✅  [0m
-    
-    
-
 
 ### Step 3: Company Grants, Employee Admits Skill Credential
 
@@ -961,27 +451,6 @@ pr_message("\nEmployee's received Employee Skill Credential:")
 
 pr_continue()
 ```
-
-    
-    [1m[4m[44m[90m  Transferring Employee Skill Credential from Company to Employee  [0m
-    
-    ERR: no credential found with said None
-    
-    [1m[4m[44m[90m  Employee admitting Skill Credential  [0m
-    
-    Sending admit message to EEDHBpqSRlpIKzc0_AhFx7H2HY0qiQawpJKPyXdS0Byk
-    ERR: 'tuple' object does not support item deletion
-    
-    [1m[94m
-    Employee's received Employee Skill Credential:[0m
-    
-    usage: kli [-h] command ...
-    kli: error: unrecognized arguments: None
-    
-    [1m[42m[90m  You can continue ✅  [0m
-    
-    
-
 
 When you view the final "Employee Skill Credential" held by the Employee, you will see:
 

@@ -2,12 +2,18 @@
 
 <div class="alert alert-primary">
 <b>🎯 OBJECTIVE</b><hr>
-Demonstrate how to issue chained Authentic Chained Data Containers (ACDCs) using an Issuer-To-Issuee (<code>I2I</code>) edge relationship with the KERI Command Line Interface (KLI). It also illustrates how to embed a simple rule within an ACDC. We will implement the "Endorsement for Building Access" scenario.
+<p>Demonstrate how to issue chained Authentic Chained Data Containers (ACDCs) using an Issuer-To-Issuee (<code>I2I</code>) edge relationship with the KERI Command Line Interface (KLI).
+    
+<p>It also illustrates how to embed a simple rule within an ACDC. We will implement the "Endorsement for Building Access" scenario.</p>
 </div>
 
 ## Scenario Recap: Endorsement for Building Access
 
-This notebook focuses on the practical KLI commands for implementing an `I2I` chained credential scenario. For a detailed theoretical explanation of ACDC Edges, Edge Operators, and Rules, please refer to the "Advanced ACDC Features: Edges, Edge Operators, and Rules" notebook. To summarize: 
+Remember, the I2I operator enforces successive parent-child relationships across a chain of credential holders where the parent issuer of the current credential must be the child of the prior credential, if it has a parent. This is a strict constraint. Who enforces this strict constraint? Verifiers do, and usually within a set of rules for a credential ecosystem similar to how the vLEI Ecosystem Governance Framework (EGF) specifies the kind of credentials and their relationships to one another.
+
+This notebook focuses on the practical KLI commands for implementing an `I2I` chained credential scenario. For a detailed theoretical explanation of ACDC Edges, Edge Operators, and Rules, please refer to the "[Advanced ACDC Features: Edges, Edge Operators, and Rules](101_75_ACDC_Edges_and_Rules.ipynb)" notebook. 
+
+To summarize this scenario: 
 
 - **ACME Corp** issues a "Role Credential" to an Employee.
 - The **Employee**, by virtue of their "Role Credential", issues an "Access Credential" to a **Sub-contractor**.
@@ -18,7 +24,7 @@ This notebook focuses on the practical KLI commands for implementing an `I2I` ch
 ## Initial Setup: Keystores, AIDs, Registries, and OOBIs
 As usual, it is necessary to set up our participants:
 
-- Acme Corporation (`acme_aid`): The initial authority in this scenario, responsible for issuing the Role Credential.
+- Acme Corporation (`acme_aid`): The initial, or root, authority in this scenario, responsible for issuing the top level Role Credential.
 - Employee (`employee_aid`): This participant will first receive the Role Credential from Acme and subsequently issue the Access Credential.
 - Sub-contractor (`subcontractor_aid`): The recipient of the Access Credential.
 
@@ -144,7 +150,7 @@ pr_continue()
 
 
     
-    [1m[4m[44m[90m  Initializing keystores  [0m
+      Initializing keystores  
     
 
 
@@ -185,36 +191,36 @@ pr_continue()
 
 
     
-    [1m[4m[44m[90m  Initializing AIDs  [0m
+      Initializing AIDs  
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz
-    	Public key 1:  DKHRs7Wd209Elgel2ViMwz_m3SnzrkepQpkBRCy_WsRx
+    Prefix  EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
+    	Public key 1:  DGmTxyRL2YZ0SKV2oAPbSqE4fghV3IaezOagBIla7P2v
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
-    	Public key 1:  DOc81L67bvzNIxqZRU4XUhpXn41NbWrLdq5xs9WyA90_
+    Prefix  EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
+    	Public key 1:  DHOO7xIlDFvpX3ujEsWKOkHKnYS10jP_83nWkg_XX24v
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay
-    	Public key 1:  DApz759MW-c8v5D5AyZnDxBd1067vsDmhODzDnTHz62W
+    Prefix  EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1
+    	Public key 1:  DIYzoYzj3UqAKPhwXW7fb_O4mXK6p1n5D7TFD2TMOlWa
     
 
 
     
-    [1m[4m[44m[90m  Initializing Credential Registries  [0m
+      Initializing Credential Registries  
     
 
 
@@ -224,8 +230,8 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    Registry:  acme_mgr_registry(EEBjKMzLet2AGcTiEgPO1NHUDltu8ot45WQQ5pso2CzL) 
-    	created for Identifier Prefix:  EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz
+    Registry:  acme_mgr_registry(EFl1e1yNyxFhbaFAdBcQ6wea_cW-vYn4SCTS_35V4Dlr) 
+    	created for Identifier Prefix:  EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
 
 
     Waiting for TEL event witness receipts
@@ -234,54 +240,62 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    Registry:  employee_access_registry(EIxYAxNJaKLMrJ8YLqcekteR8cxCjDd8IrQm2EQ6mhZW) 
-    	created for Identifier Prefix:  EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
+    Registry:  employee_access_registry(EPExNQY4zWX9c5ujq6H9jSAaVJtP5Q2_J9cF966mMr80) 
+    	created for Identifier Prefix:  EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
 
 
     
-    [1m[94mACME AID: EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz[0m
+    ACME AID: EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
     
     
-    [1m[94mEmployee AID: EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU[0m
+    Employee AID: EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
     
     
-    [1m[94mSub-contractor AID: EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay[0m
+    Sub-contractor AID: EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1
     
     
-    [1m[4m[44m[90m  Generating and resolving OOBIs  [0m
+      Generating and resolving OOBIs  
     
 
 
-    http://witness-demo:5642/oobi/EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU/witness resolved
+    http://witness-demo:5642/oobi/EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z/witness resolved
 
 
-    http://witness-demo:5642/oobi/EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz/witness resolved
+    http://witness-demo:5642/oobi/EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno/witness resolved
 
 
-    http://witness-demo:5642/oobi/EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay/witness resolved
+    http://witness-demo:5642/oobi/EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1/witness resolved
 
 
-    http://witness-demo:5642/oobi/EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU/witness resolved
+    http://witness-demo:5642/oobi/EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z/witness resolved
 
 
     
-    [1m[94mOOBI connections established.[0m
+    OOBI connections established.
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
 
 ## Schema Definitions
 
-We need two ACDC schemas:
+We need two ACDC schemas as shown below. The non-metadata attributes are also shown below:
 - Role Schema (`role_schema.json`): For the credential ACME issues to the Employee.
+  - Attributes
+    - `roleTitle`
+    - `department` 
 - Access Schema (`access_schema.json`): For the credential the Employee issues to the Sub-contractor. This schema will include definitions for an `e` (edges) section to specify the I2I link and an `r` (rules) section.
+  - Attributes
+    - `buildingId`
+    - `accessLevel`
+  - Edges
+    - `manager_endorsement` (points to Role Schema ACDC)
 
 <div class="alert alert-info">
 <b>ℹ️ NOTE</b><hr>
-For this notebook,the schemas have been SAIDified and made available on a schema server. The SAIDification process was covered in the "SAIDifying ACDC Schemas" notebook.
+For this notebook,the schemas have been SAIDified and made available on a schema server (a simple webserver hosting schema files as JSON). The SAIDification process was covered in the "SAIDifying ACDC Schemas" notebook.
 
 ### Role Schema
 
@@ -297,115 +311,115 @@ pr_title(f"Schema: {role_schema_path}")
 role_schema_said = get_schema_said(role_schema_path)
 pr_message(f"Schema SAID: {role_schema_said}")
 
-pr_message(f"Retieving Schema from Server:")
+pr_message(f"Retrieving Role Schema from Server:")
 !curl -s http://vlei-server:7723/oobi/{role_schema_said} | jq
 
 pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Schema: config/schemas/role_schema.json  [0m
+      Schema: config/schemas/role_schema.json  
     
     
-    [1m[94mSchema SAID: ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw[0m
+    Schema SAID: ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw
     
     
-    [1m[94mRetieving Schema from Server:[0m
+    Retrieving Role Schema from Server:
     
 
 
-    [1;39m{
-      [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw"[0m[1;39m,
-      [0m[34;1m"$schema"[0m[1;39m: [0m[0;32m"http://json-schema.org/draft-07/schema#"[0m[1;39m,
-      [0m[34;1m"title"[0m[1;39m: [0m[0;32m"RoleCredential"[0m[1;39m,
-      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential signifying a role within an organization."[0m[1;39m,
-      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-      [0m[34;1m"credentialType"[0m[1;39m: [0m[0;32m"RoleCredential"[0m[1;39m,
-      [0m[34;1m"version"[0m[1;39m: [0m[0;32m"1.0.0"[0m[1;39m,
-      [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-        [0m[34;1m"v"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential Version String"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"u"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"One time use nonce"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"i"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuer AID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"ri"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Registry SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"s"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Schema SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"a"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"oneOf"[0m[1;39m: [0m[1;39m[
-            [1;39m{
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes block SAID"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-            [1;39m}[0m[1;39m,
-            [1;39m{
-              [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EFmgKWjhXaH2MYUmlNy5-t8Y6SHZ0InHriOkyAnI4777"[0m[1;39m,
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes block"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-              [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes data SAID"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"i"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuee AID (Employee's AID)"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"dt"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuance date time"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                  [0m[34;1m"format"[0m[1;39m: [0m[0;32m"date-time"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"roleTitle"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"The title of the role."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"department"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"The department the employee belongs to."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m
-              [1;39m}[0m[1;39m,
-              [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-              [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                [0;32m"d"[0m[1;39m,
-                [0;32m"i"[0m[1;39m,
-                [0;32m"dt"[0m[1;39m,
-                [0;32m"roleTitle"[0m[1;39m,
-                [0;32m"department"[0m[1;39m
-              [1;39m][0m[1;39m
-            [1;39m}[0m[1;39m
-          [1;39m][0m[1;39m
-        [1;39m}[0m[1;39m
-      [1;39m}[0m[1;39m,
-      [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-      [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-        [0;32m"v"[0m[1;39m,
-        [0;32m"d"[0m[1;39m,
-        [0;32m"i"[0m[1;39m,
-        [0;32m"ri"[0m[1;39m,
-        [0;32m"s"[0m[1;39m,
-        [0;32m"a"[0m[1;39m
-      [1;39m][0m[1;39m
-    [1;39m}[0m
+    {
+      "$id": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "RoleCredential",
+      "description": "Credential signifying a role within an organization.",
+      "type": "object",
+      "credentialType": "RoleCredential",
+      "version": "1.0.0",
+      "properties": {
+        "v": {
+          "description": "Credential Version String",
+          "type": "string"
+        },
+        "d": {
+          "description": "Credential SAID",
+          "type": "string"
+        },
+        "u": {
+          "description": "One time use nonce",
+          "type": "string"
+        },
+        "i": {
+          "description": "Issuer AID",
+          "type": "string"
+        },
+        "ri": {
+          "description": "Registry SAID",
+          "type": "string"
+        },
+        "s": {
+          "description": "Schema SAID",
+          "type": "string"
+        },
+        "a": {
+          "oneOf": [
+            {
+              "description": "Attributes block SAID",
+              "type": "string"
+            },
+            {
+              "$id": "EFmgKWjhXaH2MYUmlNy5-t8Y6SHZ0InHriOkyAnI4777",
+              "description": "Attributes block",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "description": "Attributes data SAID",
+                  "type": "string"
+                },
+                "i": {
+                  "description": "Issuee AID (Employee's AID)",
+                  "type": "string"
+                },
+                "dt": {
+                  "description": "Issuance date time",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "roleTitle": {
+                  "description": "The title of the role.",
+                  "type": "string"
+                },
+                "department": {
+                  "description": "The department the employee belongs to.",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "d",
+                "i",
+                "dt",
+                "roleTitle",
+                "department"
+              ]
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "d",
+        "i",
+        "ri",
+        "s",
+        "a"
+      ]
+    }
 
 
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -424,208 +438,208 @@ pr_title(f"Schema: {access_schema_path}")
 access_schema_said = get_schema_said(access_schema_path)
 pr_message(f"Schema SAID: {access_schema_said}")
 
-pr_message(f"Retieving Schema from Server:")
+pr_message(f"Retrieving Access Schema from Server:")
 !curl -s http://vlei-server:7723/oobi/{access_schema_said} | jq
 
 pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Schema: config/schemas/access_schema.json  [0m
+      Schema: config/schemas/access_schema.json  
     
     
-    [1m[94mSchema SAID: EF2zX3g5YDyHMSjgsK4OayZMFmLRMxcAJfW363JhBOfD[0m
+    Schema SAID: EF2zX3g5YDyHMSjgsK4OayZMFmLRMxcAJfW363JhBOfD
     
     
-    [1m[94mRetieving Schema from Server:[0m
+    Retrieving Access Schema from Server:
     
 
 
-    [1;39m{
-      [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EF2zX3g5YDyHMSjgsK4OayZMFmLRMxcAJfW363JhBOfD"[0m[1;39m,
-      [0m[34;1m"$schema"[0m[1;39m: [0m[0;32m"http://json-schema.org/draft-07/schema#"[0m[1;39m,
-      [0m[34;1m"title"[0m[1;39m: [0m[0;32m"AccessCredential"[0m[1;39m,
-      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential granting access to a specific building or area, endorsed by a manager."[0m[1;39m,
-      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-      [0m[34;1m"credentialType"[0m[1;39m: [0m[0;32m"AccessCredential"[0m[1;39m,
-      [0m[34;1m"version"[0m[1;39m: [0m[0;32m"1.0.0"[0m[1;39m,
-      [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-        [0m[34;1m"v"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential Version String"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Credential SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"u"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"One time use nonce"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"i"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuer AID (Employee's AID)"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"ri"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Registry SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"s"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Schema SAID"[0m[1;39m,
-          [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"a"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"oneOf"[0m[1;39m: [0m[1;39m[
-            [1;39m{
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes block SAID"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-            [1;39m}[0m[1;39m,
-            [1;39m{
-              [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EOxa7LAD2BoA9tk9n0CW4zH7nF91DP1g_Pjz1wC_FuNw"[0m[1;39m,
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes block"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-              [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Attributes data SAID"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"i"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuee AID (Sub-contractor's AID)"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"dt"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuance date time"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                  [0m[34;1m"format"[0m[1;39m: [0m[0;32m"date-time"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"buildingId"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Identifier for the building access is granted to."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"accessLevel"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Level of access granted."[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m
-              [1;39m}[0m[1;39m,
-              [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-              [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                [0;32m"d"[0m[1;39m,
-                [0;32m"i"[0m[1;39m,
-                [0;32m"dt"[0m[1;39m,
-                [0;32m"buildingId"[0m[1;39m,
-                [0;32m"accessLevel"[0m[1;39m
-              [1;39m][0m[1;39m
-            [1;39m}[0m[1;39m
-          [1;39m][0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"e"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"oneOf"[0m[1;39m: [0m[1;39m[
-            [1;39m{
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Edges block SAID"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-            [1;39m}[0m[1;39m,
-            [1;39m{
-              [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EI8RvTM23u-pQDK-KpDUBWOKbiOW8fpnzktVVBCLy55N"[0m[1;39m,
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Edges block"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-              [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Edges block SAID"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"manager_endorsement"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Link to the Manager Credential that endorses this access"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-                  [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                    [0m[34;1m"n"[0m[1;39m: [0m[1;39m{
-                      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Issuer credential SAID"[0m[1;39m,
-                      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                    [1;39m}[0m[1;39m,
-                    [0m[34;1m"s"[0m[1;39m: [0m[1;39m{
-                      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"SAID of required schema of the credential pointed to by this node"[0m[1;39m,
-                      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                      [0m[34;1m"const"[0m[1;39m: [0m[0;32m"ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw"[0m[1;39m
-                    [1;39m}[0m[1;39m,
-                    [0m[34;1m"o"[0m[1;39m: [0m[1;39m{
-                      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Operator indicating this node is the issuer"[0m[1;39m,
-                      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                      [0m[34;1m"const"[0m[1;39m: [0m[0;32m"I2I"[0m[1;39m
-                    [1;39m}[0m[1;39m
-                  [1;39m}[0m[1;39m,
-                  [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-                  [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                    [0;32m"n"[0m[1;39m,
-                    [0;32m"s"[0m[1;39m,
-                    [0;32m"o"[0m[1;39m
-                  [1;39m][0m[1;39m
-                [1;39m}[0m[1;39m
-              [1;39m}[0m[1;39m,
-              [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-              [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                [0;32m"d"[0m[1;39m,
-                [0;32m"manager_endorsement"[0m[1;39m
-              [1;39m][0m[1;39m
-            [1;39m}[0m[1;39m
-          [1;39m][0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"r"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"oneOf"[0m[1;39m: [0m[1;39m[
-            [1;39m{
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Rules block SAID"[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-            [1;39m}[0m[1;39m,
-            [1;39m{
-              [0m[34;1m"$id"[0m[1;39m: [0m[0;32m"EKDmqq14KgthMAV23sCbzgdFFjT-v9x01toUsyfyi2uU"[0m[1;39m,
-              [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Rules governing the use of this access credential."[0m[1;39m,
-              [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-              [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                [0m[34;1m"d"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Rules block SAID"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m
-                [1;39m}[0m[1;39m,
-                [0m[34;1m"usageDisclaimer"[0m[1;39m: [0m[1;39m{
-                  [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Usage Disclaimer"[0m[1;39m,
-                  [0m[34;1m"type"[0m[1;39m: [0m[0;32m"object"[0m[1;39m,
-                  [0m[34;1m"properties"[0m[1;39m: [0m[1;39m{
-                    [0m[34;1m"l"[0m[1;39m: [0m[1;39m{
-                      [0m[34;1m"description"[0m[1;39m: [0m[0;32m"Associated legal language"[0m[1;39m,
-                      [0m[34;1m"type"[0m[1;39m: [0m[0;32m"string"[0m[1;39m,
-                      [0m[34;1m"const"[0m[1;39m: [0m[0;32m"This mock credential grants no actual access. For illustrative use only."[0m[1;39m
-                    [1;39m}[0m[1;39m
-                  [1;39m}[0m[1;39m
-                [1;39m}[0m[1;39m
-              [1;39m}[0m[1;39m,
-              [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-              [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-                [0;32m"d"[0m[1;39m,
-                [0;32m"usageDisclaimer"[0m[1;39m
-              [1;39m][0m[1;39m
-            [1;39m}[0m[1;39m
-          [1;39m][0m[1;39m
-        [1;39m}[0m[1;39m
-      [1;39m}[0m[1;39m,
-      [0m[34;1m"additionalProperties"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-      [0m[34;1m"required"[0m[1;39m: [0m[1;39m[
-        [0;32m"v"[0m[1;39m,
-        [0;32m"d"[0m[1;39m,
-        [0;32m"i"[0m[1;39m,
-        [0;32m"ri"[0m[1;39m,
-        [0;32m"s"[0m[1;39m,
-        [0;32m"a"[0m[1;39m,
-        [0;32m"e"[0m[1;39m,
-        [0;32m"r"[0m[1;39m
-      [1;39m][0m[1;39m
-    [1;39m}[0m
+    {
+      "$id": "EF2zX3g5YDyHMSjgsK4OayZMFmLRMxcAJfW363JhBOfD",
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AccessCredential",
+      "description": "Credential granting access to a specific building or area, endorsed by a manager.",
+      "type": "object",
+      "credentialType": "AccessCredential",
+      "version": "1.0.0",
+      "properties": {
+        "v": {
+          "description": "Credential Version String",
+          "type": "string"
+        },
+        "d": {
+          "description": "Credential SAID",
+          "type": "string"
+        },
+        "u": {
+          "description": "One time use nonce",
+          "type": "string"
+        },
+        "i": {
+          "description": "Issuer AID (Employee's AID)",
+          "type": "string"
+        },
+        "ri": {
+          "description": "Registry SAID",
+          "type": "string"
+        },
+        "s": {
+          "description": "Schema SAID",
+          "type": "string"
+        },
+        "a": {
+          "oneOf": [
+            {
+              "description": "Attributes block SAID",
+              "type": "string"
+            },
+            {
+              "$id": "EOxa7LAD2BoA9tk9n0CW4zH7nF91DP1g_Pjz1wC_FuNw",
+              "description": "Attributes block",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "description": "Attributes data SAID",
+                  "type": "string"
+                },
+                "i": {
+                  "description": "Issuee AID (Sub-contractor's AID)",
+                  "type": "string"
+                },
+                "dt": {
+                  "description": "Issuance date time",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "buildingId": {
+                  "description": "Identifier for the building access is granted to.",
+                  "type": "string"
+                },
+                "accessLevel": {
+                  "description": "Level of access granted.",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "d",
+                "i",
+                "dt",
+                "buildingId",
+                "accessLevel"
+              ]
+            }
+          ]
+        },
+        "e": {
+          "oneOf": [
+            {
+              "description": "Edges block SAID",
+              "type": "string"
+            },
+            {
+              "$id": "EI8RvTM23u-pQDK-KpDUBWOKbiOW8fpnzktVVBCLy55N",
+              "description": "Edges block",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "description": "Edges block SAID",
+                  "type": "string"
+                },
+                "manager_endorsement": {
+                  "description": "Link to the Manager Credential that endorses this access",
+                  "type": "object",
+                  "properties": {
+                    "n": {
+                      "description": "Issuer credential SAID",
+                      "type": "string"
+                    },
+                    "s": {
+                      "description": "SAID of required schema of the credential pointed to by this node",
+                      "type": "string",
+                      "const": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw"
+                    },
+                    "o": {
+                      "description": "Operator indicating this node is the issuer",
+                      "type": "string",
+                      "const": "I2I"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "n",
+                    "s",
+                    "o"
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "d",
+                "manager_endorsement"
+              ]
+            }
+          ]
+        },
+        "r": {
+          "oneOf": [
+            {
+              "description": "Rules block SAID",
+              "type": "string"
+            },
+            {
+              "$id": "EKDmqq14KgthMAV23sCbzgdFFjT-v9x01toUsyfyi2uU",
+              "description": "Rules governing the use of this access credential.",
+              "type": "object",
+              "properties": {
+                "d": {
+                  "description": "Rules block SAID",
+                  "type": "string"
+                },
+                "usageDisclaimer": {
+                  "description": "Usage Disclaimer",
+                  "type": "object",
+                  "properties": {
+                    "l": {
+                      "description": "Associated legal language",
+                      "type": "string",
+                      "const": "This mock credential grants no actual access. For illustrative use only."
+                    }
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "d",
+                "usageDisclaimer"
+              ]
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "v",
+        "d",
+        "i",
+        "ri",
+        "s",
+        "a",
+        "e",
+        "r"
+      ]
+    }
 
 
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
 
 ## Resolving Schema OOBIs
-All parties need to resolve the OOBIs for these schemas from the schema server.
+All parties need to resolve the OOBIs for these schemas from the schema server to be able to either issue, receive, present, or receive presentations of credentials using these schemas.
 
 
 ```python
@@ -636,36 +650,31 @@ access_schema_oobi = f"http://vlei-server:7723/oobi/{access_schema_said}"
 
 # ACME Corp
 !kli oobi resolve --name {acme_keystore_name} \
-    --oobi-alias "role_schema" \
-    --oobi {role_schema_oobi}
+    --oobi-alias "role_schema" --oobi {role_schema_oobi}
 
 !kli oobi resolve --name {acme_keystore_name} \
-    --oobi-alias "access_schema" \
-    --oobi {access_schema_oobi}
+    --oobi-alias "access_schema" --oobi {access_schema_oobi}
 
 # Employee
 !kli oobi resolve --name {employee_keystore_name} \
     --oobi-alias "role_schema" --oobi {role_schema_oobi}
 
 !kli oobi resolve --name {employee_keystore_name} \
-    --oobi-alias "access_schema" \
-    --oobi {access_schema_oobi}
+    --oobi-alias "access_schema" --oobi {access_schema_oobi}
 
 # Sub-contractor
 !kli oobi resolve --name {subcontractor_keystore_name} \
-    --oobi-alias "role_schema" \
-    --oobi {role_schema_oobi}
+    --oobi-alias "role_schema" --oobi {role_schema_oobi}
 
 !kli oobi resolve --name {subcontractor_keystore_name} \
-    --oobi-alias "access_schema" \
-    --oobi {access_schema_oobi}
+    --oobi-alias "access_schema" --oobi {access_schema_oobi}
 
 pr_message("Schema OOBIs resolved.")
 pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Resolving schema OOBIs  [0m
+      Resolving schema OOBIs  
     
 
 
@@ -688,10 +697,10 @@ pr_continue()
 
 
     
-    [1m[94mSchema OOBIs resolved.[0m
+    Schema OOBIs resolved.
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -724,18 +733,18 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Creating role credential data  [0m
+      Creating role credential data  
     
 
 
-    [1;39m{
-      [0m[34;1m"roleTitle"[0m[1;39m: [0m[0;32m"Engineering Manager"[0m[1;39m,
-      [0m[34;1m"department"[0m[1;39m: [0m[0;32m"Technology Innovations"[0m[1;39m
-    [1;39m}[0m
+    {
+      "roleTitle": "Engineering Manager",
+      "department": "Technology Innovations"
+    }
 
 
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -764,7 +773,7 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Creating Role credential  [0m
+      Creating Role credential  
     
 
 
@@ -774,19 +783,19 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg has been created.
+    ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK has been created.
 
 
     
-    [1m[94mRole Credential SAID: EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg[0m
+    Role Credential SAID: ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
 
-**IPEX Transfer: ACME Grants, Employee Admits Manager Credential**
+**IPEX Transfer: ACME Grants, Engineering Manager Employee Admits Role Credential**
 
 Next, perform the IPEX transfer as done in previous ACDC issuance examples. Afterwards, the employee will have the role credential.
 
@@ -811,7 +820,7 @@ time = exec("kli time")
     --time {time}
 
 # Employee lists the received credential
-pr_message("\nEmployee's received Manager Credential:")
+pr_message("\nEngineering Manager Employee received Role Credential:")
 !kli vc list --name {employee_keystore_name} \
     --alias {employee_aid_alias} \
     --verbose
@@ -820,51 +829,51 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Transfering credential (ipex grant)  [0m
+      Transfering credential (ipex grant)  
     
 
 
-    Sending message EABDwmwue-EoZ5N1G1oCd0rOGqvNO0-iYZTjcJ4Jcwm9 to EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
+    Sending message EPwpXeXH3sJR6T_Q3ObQ0x8T9W9Jsjnrx9TzSsv-EmGO to EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
 
 
     ... grant message sent
 
 
     
-    [1m[4m[44m[90m  Admiting credential (ipex grant)  [0m
+      Admiting credential (ipex grant)  
     
 
 
-    Sending admit message to EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz
+    Sending admit message to EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
 
 
     ... admit message sent
 
 
     
-    [1m[94m
-    Employee's received Manager Credential:[0m
+    
+    Engineering Manager Employee received Role Credential:
     
 
 
-    Current received credentials for employee (EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU):
+    Current received credentials for employee (EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z):
     
-    Credential #1: EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg
+    Credential #1: ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK
         Type: RoleCredential
-        Status: Issued [92m✔[0m
-        Issued by EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz
-        Issued on 2025-06-24T18:41:54.790050+00:00
+        Status: Issued ✔
+        Issued by EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
+        Issued on 2025-07-18T00:19:18.083267+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c2_",
-    	  "d": "EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg",
-    	  "i": "EFlHT6xH-tJBer8dgp3Or_lN15gwVvwkHgqWbR8Lpqkz",
-    	  "ri": "EEBjKMzLet2AGcTiEgPO1NHUDltu8ot45WQQ5pso2CzL",
+    	  "d": "ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK",
+    	  "i": "EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno",
+    	  "ri": "EFl1e1yNyxFhbaFAdBcQ6wea_cW-vYn4SCTS_35V4Dlr",
     	  "s": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw",
     	  "a": {
-    	    "d": "EEQsaJquy8ZMwTHejV4HWeDBU78ZCEqwbRyLCAbRpxPN",
-    	    "i": "EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU",
-    	    "dt": "2025-06-24T18:41:54.790050+00:00",
+    	    "d": "EJRdBo-Vy5SF5lLVDdeifeXUKUDcC3h16jxkDGJ2xXGb",
+    	    "i": "EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z",
+    	    "dt": "2025-07-18T00:19:18.083267+00:00",
     	    "roleTitle": "Engineering Manager",
     	    "department": "Technology Innovations"
     	  }
@@ -872,19 +881,18 @@ pr_continue()
 
 
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
 
-### Step 2: Access Credential Data blocks
+### Step 2: Access Credential Data properties - edge, rules, and attributes
 
-The Employee, now holding the "Role Credential", issues the "Access Credential" to the Sub-contractor. This new credential will link to the Manager Credential via an `I2I` edge and include a "Usage Disclaimer" rule. For this is necessary to create JSON files for the attributes (`access_cred_data.json`), the edge (`access_cred_edge.json`), and the rule (`access_cred_rule.json`). The attributes, edges, and rules blocks are displayed below.
-
+The Employee, now holding the "Role Credential", issues the "Access Credential" to the Sub-contractor. This new credential will link to the Role Credential via an `I2I` edge and include a "Usage Disclaimer" rule. For this it is necessary to create JSON files for the attributes (`access_cred_data.json`), the edge (`access_cred_edge.json`), and the rule (`access_cred_rule.json`). The attributes, edges, and rules properties are displayed below.
 
 #### Attributes Data
 
-Generic mock data to represent an access claim.
+The attributes of the Role Credential include generic mock data to represent an access claim such as `buildingId` and `accessLevel` with sample data provided below.
 
 
 ```python
@@ -905,19 +913,19 @@ with open(access_cred_data_file_path, 'w') as f:
 ```
 
     
-    [1m[94mAcces Credential Attributes[0m
+    Acces Credential Attributes
     
 
 
-    [1;39m{
-      [0m[34;1m"buildingId"[0m[1;39m: [0m[0;32m"HQ-EastWing"[0m[1;39m,
-      [0m[34;1m"accessLevel"[0m[1;39m: [0m[0;32m"Level 2 - Common Areas & Labs"[0m[1;39m
-    [1;39m}[0m
+    {
+      "buildingId": "HQ-EastWing",
+      "accessLevel": "Level 2 - Common Areas & Labs"
+    }
 
 
 #### Edge Data and SAID Calculation
 
-When creating the Edge Data, the `manager_endorsement` edge is defined to link to the SAID of the `role_credential_said` (the credential issued by ACME to the Employee). The schema SAID `s` for this edge points to `role_schema_said`, and the operator `o` is set to `I2I`.
+When creating the Edge Data, the `manager_endorsement` edge is defined to link to the Role Credential ACDC by using the SAID of the Role Credential said, stored in the `role_credential_said` variable. The schema SAID `s` for this edge is the schema identifier, or SAID, of the Role Credential schema and is set to `role_schema_said`. The operator `o` is set to `I2I`.
 
 To make this edge block verifiable, the `!kli saidify --file` command is used. When this command is executed, KERI processes the JSON content of the specified file and calculates a Self-Addressing Identifier (SAID) for its entire content. Crucially, the command then modifies the input file in place:
 - It adds (or updates, if already present) a top-level field named `d` within the JSON structure of the file.
@@ -925,7 +933,7 @@ To make this edge block verifiable, the `!kli saidify --file` command is used. W
 
 
 ```python
-pr_message("Acces Credential Edges")
+pr_message("Access Credential Edges")
 
 access_cred_edge_file_path = "config/credential_data/access_cred_edge.json"
 
@@ -948,27 +956,27 @@ with open(access_cred_edge_file_path, 'w') as f:
 ```
 
     
-    [1m[94mAcces Credential Edges[0m
+    Access Credential Edges
     
 
 
-    [1;39m{
-      [0m[34;1m"d"[0m[1;39m: [0m[0;32m"EP1JQRj0CwhBHkmsQPjOi6yPbxcVRCb1GZ4qD7cwRyvY"[0m[1;39m,
-      [0m[34;1m"manager_endorsement"[0m[1;39m: [0m[1;39m{
-        [0m[34;1m"n"[0m[1;39m: [0m[0;32m"EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg"[0m[1;39m,
-        [0m[34;1m"s"[0m[1;39m: [0m[0;32m"ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw"[0m[1;39m,
-        [0m[34;1m"o"[0m[1;39m: [0m[0;32m"I2I"[0m[1;39m
-      [1;39m}[0m[1;39m
-    [1;39m}[0m
+    {
+      "d": "EJ1i7BbxkuSyKL0bHvc1P3aulLzLyPIVhTHwEVZqPILc",
+      "manager_endorsement": {
+        "n": "ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK",
+        "s": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw",
+        "o": "I2I"
+      }
+    }
 
 
 #### Rule Data
 
-The rule section `usageDisclaimer` contains a simple legal disclaimer. Take notice that this data block is also SAIDified.
+The rule section `usageDisclaimer` contains a simple legal disclaimer. Take notice that this data property is also SAIDified.
 
 
 ```python
-pr_message("Acces Credential Rules")
+pr_message("Access Credential Rules")
 
 access_cred_rule_file_path = "config/credential_data/access_cred_rule.json"
 
@@ -989,21 +997,21 @@ with open(access_cred_rule_file_path, 'w') as f:
 ```
 
     
-    [1m[94mAcces Credential Rules[0m
+    Access Credential Rules
     
 
 
-    [1;39m{
-      [0m[34;1m"d"[0m[1;39m: [0m[0;32m"EGVMk928-Fz4DK2NSvZgtG0JJrMlrpxvuxBKPvFxfPSQ"[0m[1;39m,
-      [0m[34;1m"usageDisclaimer"[0m[1;39m: [0m[1;39m{
-        [0m[34;1m"l"[0m[1;39m: [0m[0;32m"This mock credential grants no actual access. For illustrative use only."[0m[1;39m
-      [1;39m}[0m[1;39m
-    [1;39m}[0m
+    {
+      "d": "EGVMk928-Fz4DK2NSvZgtG0JJrMlrpxvuxBKPvFxfPSQ",
+      "usageDisclaimer": {
+        "l": "This mock credential grants no actual access. For illustrative use only."
+      }
+    }
 
 
-### Step3: Employee Creates Access Credential for Sub-contractor
+### Step 3: Employee Creates Access Credential for Sub-contractor
 
-Now, the Employee uses `kli vc create` with the attributes, SAIDified edges, and SAIDified rules files to issue the Access Credential. Notice the additional parameters `--edges` and `rules` to supply the data blocks to the command.
+Now, the Employee uses `kli vc create` with the attributes, SAIDified edges, and SAIDified rules files to issue the Access Credential. Notice the additional parameters `--edges` and `rules` to supply the data properties to the command.
 
 
 ```python
@@ -1031,19 +1039,21 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    ECcUJHcF9sCBhPJjhlH-u-hxgXVM0Kc85c9BnLzayvJY has been created.
+    ELua1B3m2YVVq-9ZASfJOxgS7fFPout65g6_AqrrBHQX has been created.
 
 
     
-    [1m[94mAccess Credential SAID: ECcUJHcF9sCBhPJjhlH-u-hxgXVM0Kc85c9BnLzayvJY[0m
+    Access Credential SAID: ELua1B3m2YVVq-9ZASfJOxgS7fFPout65g6_AqrrBHQX
     
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
 
 ### Step 4: Employee Grants, Sub-contractor Admits Access Credential
+
+The commands below show using IPEX to both grant the Access Credential from the manager employee and to admit the Access Credential as the sub-contractor. Finally the sub-contractor's credentials are listed with `kli vc list` to show that the Access Credential has been received.
 
 
 ```python
@@ -1058,7 +1068,8 @@ time = exec("kli time")
 
 pr_title("Sub-contractor admitting Access Credential")
 # Sub-contractor polls for the grant and admits it
-subcontractor_grant_msg_said = exec(f"kli ipex list --name {subcontractor_keystore_name} --alias {subcontractor_aid_alias} --poll --said")
+subcontractor_grant_msg_said = exec(f"kli ipex list --name {subcontractor_keystore_name} \
+    --alias {subcontractor_aid_alias} --poll --said")
 time = exec("kli time")
 !kli ipex admit --name {subcontractor_keystore_name} \
     --alias {subcontractor_aid_alias} \
@@ -1075,58 +1086,58 @@ pr_continue()
 ```
 
     
-    [1m[4m[44m[90m  Transfering Access Credential from Employee to Sub-contractor  [0m
+      Transfering Access Credential from Employee to Sub-contractor  
     
 
 
-    Sending message EHUD6v5UtQFA-MQCCzbXhmX5QDBDQBokIbGJJWPnwqMX to EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay
+    Sending message EAtdOseOjOZcXjpKzfnE0VH2l-QDE9KSyySFjsz5vJSh to EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1
 
 
     ... grant message sent
 
 
     
-    [1m[4m[44m[90m  Sub-contractor admitting Access Credential  [0m
+      Sub-contractor admitting Access Credential  
     
 
 
-    Sending admit message to EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
+    Sending admit message to EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
 
 
     ... admit message sent
 
 
     
-    [1m[94m
-    Sub-contractor's received Access Credential:[0m
+    
+    Sub-contractor's received Access Credential:
     
 
 
-    Current received credentials for subcontractor (EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay):
+    Current received credentials for subcontractor (EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1):
     
-    Credential #1: ECcUJHcF9sCBhPJjhlH-u-hxgXVM0Kc85c9BnLzayvJY
+    Credential #1: ELua1B3m2YVVq-9ZASfJOxgS7fFPout65g6_AqrrBHQX
         Type: AccessCredential
-        Status: Issued [92m✔[0m
-        Issued by EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU
-        Issued on 2025-06-24T18:42:08.670946+00:00
+        Status: Issued ✔
+        Issued by EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
+        Issued on 2025-07-18T00:19:31.832874+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON000320_",
-    	  "d": "ECcUJHcF9sCBhPJjhlH-u-hxgXVM0Kc85c9BnLzayvJY",
-    	  "i": "EMWDICLKydT4FYGkDH3FAAapbmCp-vXlmwLB9AbyU-TU",
-    	  "ri": "EIxYAxNJaKLMrJ8YLqcekteR8cxCjDd8IrQm2EQ6mhZW",
+    	  "d": "ELua1B3m2YVVq-9ZASfJOxgS7fFPout65g6_AqrrBHQX",
+    	  "i": "EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z",
+    	  "ri": "EPExNQY4zWX9c5ujq6H9jSAaVJtP5Q2_J9cF966mMr80",
     	  "s": "EF2zX3g5YDyHMSjgsK4OayZMFmLRMxcAJfW363JhBOfD",
     	  "a": {
-    	    "d": "EJHX6r7ajKfhgCv917Ev5OeXbd1pB1MtG6GzyoNbgboC",
-    	    "i": "EH-33vfBaEPEIQSYfIKG3IvQpnZTa4xTcWCP6vSQsTay",
-    	    "dt": "2025-06-24T18:42:08.670946+00:00",
+    	    "d": "EHVnxHfAgIRydQS7bbz3tTrB4ORzSwOAqsW9te2p3Ptj",
+    	    "i": "EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1",
+    	    "dt": "2025-07-18T00:19:31.832874+00:00",
     	    "buildingId": "HQ-EastWing",
     	    "accessLevel": "Level 2 - Common Areas & Labs"
     	  },
     	  "e": {
-    	    "d": "EP1JQRj0CwhBHkmsQPjOi6yPbxcVRCb1GZ4qD7cwRyvY",
+    	    "d": "EJ1i7BbxkuSyKL0bHvc1P3aulLzLyPIVhTHwEVZqPILc",
     	    "manager_endorsement": {
-    	      "n": "EAVl1sadJkkZLp1VYNlgXF-SqAcFplo9RXmk2-hyUrjg",
+    	      "n": "ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK",
     	      "s": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw",
     	      "o": "I2I"
     	    }
@@ -1141,7 +1152,7 @@ pr_continue()
 
 
     
-    [1m[42m[90m  You can continue ✅  [0m
+      You can continue ✅  
     
     
 
@@ -1175,5 +1186,5 @@ This notebook demonstrated the creation of a chained ACDC relationship using an 
 </li>
 <li><b>Verification:</b> The Sub-contractor's received Access Credential clearly displayed the attributes, the I2I edge linking to the Employee's Role Credential, and the embedded rule.</li>
 </ol>
-This process illustrates how KERI and ACDC can model real-world endorsement scenarios where the authority to issue a credential is derived from another, verifiable credential held by the issuer, and how additional conditions can be embedded using rules.
+This process illustrates how KERI and ACDC can model real-world endorsement scenarios where the authority to issue a credential is derived from another verifiable credential held by the issuer and how additional conditions can be embedded using rules.
 </div>

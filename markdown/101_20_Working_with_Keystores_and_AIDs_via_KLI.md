@@ -27,7 +27,7 @@ clear_keri()
 ```
 
     Proceeding with deletion of '/usr/local/var/keri/' without confirmation.
-    ✅ Successfully removed: /usr/local/var/keri/
+    ⚠️ Path not found: /usr/local/var/keri/. Nothing to remove.
 
 
 

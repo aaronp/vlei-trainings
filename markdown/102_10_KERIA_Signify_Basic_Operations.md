@@ -1,30 +1,27 @@
-# Signify-ts Basics: Client Setup and AID Management
+# Signify TS Basics: Client Setup and AID Management
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
-  Introduce basic operations using Signify-ts: creating a client, initializing (booting) an agent, connecting to an agent, and creating an Autonomic Identifier (AID).</li>
+  Introduce basic operations using the typescript implementation of Signify, Signify TS: creating a client, initializing (booting) an agent, connecting to an agent, and creating an Autonomic Identifier (AID).</li>
     </ul>
     Familiarity with core KERI concepts (AIDs, KELs, digital signatures, witnesses, OOBIs) is assumed.
 </div>
 
 ## Connecting to a KERIA Agent
 
-Now that we understand the architecture, let's see how to use the `signify-ts` library to establish a connection with a KERIA agent. This process involves three main steps:
-1.  Initializing the `signify-ts` library.
-2.  Creating a `SignifyClient` instance, which represents your application's connection to a specific KERIA agent.
-3.  Bootstrapping and connecting the client to the agent, which establishes the Client AID and the delegated Agent AID.
-
-
+Now that we understand the architecture, let's see how to use the [signify-ts](https://github.com/WebOfTrust/signify-ts) library to initialize a Signify controller and establish a connection with a KERIA agent. This process involves three main steps:
+1.  Initializing the `signify-ts` library, necessary since the dependency libsodium must be initialized in order to be used.
+2.  Creating a `SignifyClient` instance, creating your Client AID, which is where your cryptographic keypairs are stored in-memory, and contains your client's connection to a specific KERIA agent once bootstrapped.
+3.  Bootstrapping and connecting the client to a KERIA agent, which establishes the relationship Client AID and the delegated Agent AID in a specific KERIA instance.
 
 <div class="alert alert-info">
-    <b>ℹ️ Note</b><hr>This section assumes that a KERIA agent is running and its Boot and Admin interfaces are accessible at the specified URLs. In the context of these notebooks, KERIA is pre-configured and running as part of the Docker deployment.
+    <b>ℹ️ Note: KERIA should be available</b><hr>
+    <p>This section assumes that a KERIA agent is running and its Boot and Admin interfaces are accessible at the specified URLs. In the context of these notebooks, KERIA is pre-configured and running as part of the Docker deployment.</p>
 </div>
 
+### Initializing the Signify TS Library
 
-### Initializing the Signify-ts Library
-
-The `signify-ts` library contains components for cryptographic operations using libsodium. Before any of its functionalities can be used, these components must be initialized. This is achieved by calling and the `ready()` function.
-
+The `signify-ts` library contains components for cryptographic operations using libsodium. Before any of its functionalities can be used, these components must be initialized. This is achieved by calling and the `ready()` function. This function should be called at the initialization of your application before any functions or SignifyClient methods from `signify-ts` are used.
 
 
 ```typescript
@@ -42,8 +39,8 @@ console.log("Signify-ts library initialized and ready.");
 Once the library is initialized, you can create an instance of `SignifyClient`. This object will be your primary interface for all interactions with the KERIA agent. It requires several parameters:
 
 - **url**: The URL of the KERIA agent's Admin Interface. The client uses this for most command and control operations after the initial connection is established.
-- **bran**: A 21-character, high-entropy string, often referred to as a "passcode." This bran serves as the root salt for deriving the Client AID's signing and rotation keys via a Hierarchical Deterministic (HD) key algorithm. It is critical to treat the bran as securely as a private key. Losing it means losing control of the Client AID.
-- **tier**: The security tier for the passcode hashing algorithm. Tier.low, Tier.med, and Tier.high represent different computational costs for deriving keys from the bran. Higher tiers are more resistant to brute-force attacks but require more processing power and time.
+- **bran**: A 21-character, high-entropy string, often referred to as a "passcode." This bran serves as the root salt for deriving the Client AID's signing and rotation keys via a Hierarchical Deterministic (HD) key algorithm. It is critical to treat the bran as securely as a private key. Losing it means losing control of the Client AID and any identifiers or ACDCs created in the connected KERIA Agent, if any.
+- **tier**: The security tier for the passcode hashing algorithm. Tier.low, Tier.med, and Tier.high represent different computational costs for deriving keys from the bran. Higher tiers are more resistant to brute-force attacks but require more processing power and time. The high tier is appropriate for any use. The low tier is primarily used for unit testing so that tests will complete quickly.
 - **bootUrl**: The URL of the KERIA agent's Boot Interface. This is used for the initial setup and provisioning of the agent worker for this client.
 
 
@@ -52,7 +49,7 @@ const adminUrl = 'http://keria:3901'; // KERIA agent's Admin Interface URL
 const bootUrl = 'http://keria:3903';  // KERIA agent's Boot Interface URL
 
 // Generate a new random 21-character bran (passcode/salt)
-// In a real application, you would securely store and reuse this bran.
+// In a real application, you would securely store and reuse this bran by having the user reenter it on opening the application.
 const bran = randomPasscode();
 
 // Create the SignifyClient instance
@@ -70,33 +67,34 @@ console.log('Using Passcode (bran):', bran);
     SignifyClient instance created.
 
 
-    Using Passcode (bran): BG46LqnAx0D0vxbKXPZJS
+    Using Passcode (bran): BQ_y56Nf59ID_b7pzb796
 
 
 <div class="alert alert-info">
   <b>ℹ️ NOTE</b><hr>
-In a production environment, the <code>bran</code> must be securely generated and stored. For a given Client AID, you must consistently use the same bran to reconnect and derive the correct keys. Using <code>randomPasscode()</code> each time, as in this demo, will result in a new Client AID being created or an inability to connect to an existing one if the KERIA agent already has a state associated with a different bran for its controller.
+  <p>In a production environment, the <code>bran</code> must be securely generated and stored and should NOT be displayed on screen or in any log messages. It is displayed above for illustrative and training purposes only.</p>
+  <p>For a given Client AID, you must consistently use the same bran to reconnect and derive the correct private keys. Using <code>randomPasscode()</code> each time, as in this demo, will result in a new Client AID being created or an inability to connect to an existing one if the KERIA agent already has a state associated with a different bran for its controller.</p>
 </div>
 
 ### Bootstrapping and Connecting to the Agent
+
 With the `SignifyClient` instance created, the next step is to establish the initial connection and state with the KERIA agent. This involves two methods:
 
 - **`client.boot()`**: Initiates the bootstrapping process with the KERIA agent's Boot Interface:
   - The client generates its Client AID using the provided bran.
-  - It sends the Client AID's inception event to the KERIA agent's Boot Interface.
-  - The KERIA agent, upon successful verification, creates a delegated Agent AID and returns its inception event to the client. This step essentially provisions the necessary resources and establishes the delegated relationship on the KERIA agent for this specific client.
-
-- **`client.connect()`**: After `boot()` (or if the agent has been previously booted with the same bran), connect() establishes the active session with the KERIA agent via its Admin Interface.
-
+  - It sends the Client AID's inception event to the KERIA agent's Boot Interface, along with the KEL of the Client AID (also known as `caid`).
+  - The KERIA agent, upon successful verification of the client AID, creates a delegated Agent AID, that is delegated from the Client AID, and returns the delegated Agent AID inception event to the client.
+    - This step essentially provisions the necessary resources and partially the delegated relationship on the KERIA agent for this specific client.
+- **`client.connect()`**: After `boot()` (or if the agent has been previously booted with the same bran), connect() completes the delegation to the KERIA Agent AID via its Admin Interface on the first invocation of `.connect()`. All subsequent invocations reuse the existing Agent state and just read the existing key state from the already existing agent.
 
 
 ```typescript
 // Bootstrap the connection with the KERIA agent
 // This creates the Client AID and requests the Agent AID creation.
-await client.boot();
+await client.boot(); // Triggers a request to the /boot endpoint on the Boot URL from the initial SignifyClient configuration
 console.log('Client boot process initiated with KERIA agent.');
 
-// Establish the active connection and retrieve state
+// Completes the delegation, if needed, between the Client AID and the Agent AID, and initializes the SignifyClient dependencies.
 await client.connect();
 console.log('Client connected to KERIA agent.');
 
@@ -127,38 +125,38 @@ console.log('Agent AID Delegator:', state.agent.di); // Should be the Client AID
     -------------------------
 
 
-    Client AID Prefix:  EJvbl67WRZoTVEjrF4zpionxyOLHyDjE_nGwdarAFxD_
+    Client AID Prefix:  EA2GfmC5zd3xGSaQ7YKlSOPdJW_xbJPwwKde1skuqJK4
 
 
-    Client AID Keys:    [ [32m"DK-jLpdmFfDhzYJiCmJyI1Raxhea5x-CVKaHZFHZEZJh"[39m ]
+    Client AID Keys:    [ "DDFnKCWyYVvzbzkQMZdV1tUk9lUgFgIBSN0m6ldc8Sem" ]
 
 
-    Client AID Next Keys Digest:  [ [32m"ECeptGgBme9Y-TNdyLSiMuMEtCPk8FcvD5L4EgLaD7yp"[39m ]
+    Client AID Next Keys Digest:  [ "EB8oU5swFmt9h7G0G8xZkoDE49CqkFndRJ3S_-DakH8v" ]
 
 
     
 
 
-    Agent AID Prefix:    EKkMTmGIrflfWLOZ0n4PgQ1NoeuiTNBsH5RK8PRi8QCc
+    Agent AID Prefix:    EFSlxW9lxUHXMPBSFmNeMrVvR6z-HcPxyqeR65ePsd2W
 
 
     Agent AID Type:      dip
 
 
-    Agent AID Delegator: EJvbl67WRZoTVEjrF4zpionxyOLHyDjE_nGwdarAFxD_
+    Agent AID Delegator: EA2GfmC5zd3xGSaQ7YKlSOPdJW_xbJPwwKde1skuqJK4
 
 
 **Output Explanation:**
 
-- **Client AID Prefix:** The unique, self-certifying identifier for the client, tied to the bran.
+- **Client AID Prefix:** The unique, self-certifying identifier for the controller AID of the SignifyClient instance, tied to the bran.
 - **Client AID Keys:** The current public signing key(s) for the Client AID.
 - **Client AID Next Keys Digest:** The digest (hash) of the public key(s) pre-rotated for the next key rotation of the Client AID.
-- **Agent AID Prefix:** The unique identifier for the KERIA agent worker associated with your client.
-- **Agent AID Type:** dip indicates a "delegated inception" event, signifying that this Agent AID's authority is delegated by another AID.
+- **Agent AID Prefix:** The unique KERI AID of the KERIA agent worker associated with your client.
+- **Agent AID Type:** dip indicates a "delegated inception" event, signifying that this Agent AID's authority is delegated by another AID, in this case the Client AID of the SignifyClient instance.
 - **Agent AID Delegator:** This crucial field shows the prefix of the Client AID, confirming that the Agent AID is indeed delegated by your Client AID.
 
 ### Reconnecting to an Existing Agent
-If the KERIA agent has already been booted for a specific `bran` (Client AID), you don't need to call `client.boot()` again when using the same bran. You directly use `client.connect()`. Signify-ts will detect the existing state and reconnect.
+If the KERIA agent has already been booted for a specific `bran` (Client AID), you don't need to call `client.boot()` again when using the same bran. You directly use `client.connect()`. SignifyTS will detect and reuse the existing agent state.
 
 
 ```typescript
@@ -196,41 +194,41 @@ console.log('Agent AID Delegator:', state2.agent.di); // Should be the same Clie
     ---------------------------
 
 
-    Client AID Prefix:   EJvbl67WRZoTVEjrF4zpionxyOLHyDjE_nGwdarAFxD_
+    Client AID Prefix:   EA2GfmC5zd3xGSaQ7YKlSOPdJW_xbJPwwKde1skuqJK4
 
 
-    Agent AID Prefix:    EKkMTmGIrflfWLOZ0n4PgQ1NoeuiTNBsH5RK8PRi8QCc
+    Agent AID Prefix:    EFSlxW9lxUHXMPBSFmNeMrVvR6z-HcPxyqeR65ePsd2W
 
 
-    Agent AID Delegator: EJvbl67WRZoTVEjrF4zpionxyOLHyDjE_nGwdarAFxD_
+    Agent AID Delegator: EA2GfmC5zd3xGSaQ7YKlSOPdJW_xbJPwwKde1skuqJK4
 
 
 <div class="alert alert-primary">
 <b>📝 SUMMARY</b><hr>
-To connect to a KERIA agent using Signify-ts:
+To connect to a KERIA agent using SignifyTS:
 <ol>
 <li>Initialize the library with <code>await ready()</code>.</li>
 <li>Create a <code>SignifyClient</code> instance, providing the agent's Admin and Boot URLs, a unique 21-character <code>bran</code> (passcode/salt for key derivation), and a security <code>Tier</code>.</li>
 <li>For the first-time connection with a new <code>bran</code>, call <code>await client.boot()</code> to provision the Client AID and request the creation of a delegated Agent AID from KERIA.</li>
-<li>Call <code>await client.connect()</code> to establish the active session, retrieve the state (Client and Agent AIDs), and complete any delegation approvals. The Client AID delegates authority to the Agent AID, whose inception event (type <code>dip</code>) will list the Client AID as its delegator.</li>
+<li>Call <code>await client.connect()</code> to and retrieve the state of the Client and Agent AIDs and, on first invocation, complete any delegation approvals. The Client AID delegates authority to the Agent AID, whose inception event (type <code>dip</code>) will list the Client AID as its delegator.</li>
 <li>For subsequent connections using the same <code>bran</code>, skip <code>client.boot()</code> and directly use <code>client.connect()</code>.</li>
 </ol>
-The <code>bran</code> is critical for deriving the Client AID's keys and must be kept secure and reused consistently for the same identity.
+The <code>bran</code> is critical for deriving the Client AID's keys and must be kept secure and reused consistently in order to have the same identity across time.
 </div>
 
 ## Adding an Autonomic Identifier (AID)
 
-Once your Signify client is connected to the KERIA agent, you can instruct the agent to create and manage new Autonomic Identifiers (AIDs) on your behalf. These AIDs will be controlled by your Client AID (established during the `connect()` phase) through the delegation mechanism.
+Once your Signify client is initialized and connected to the KERIA agent you can create new AIDs and instruct the agent to store key events and key indexes for the new AIDs, called managed AIDs. These AIDs will be controlled by your Client AID (established during the `connect()` phase) through the delegation mechanism.
 
 ### Initiating AID Inception
 
-Creating a new AID is an asynchronous operation. When you request the KERIA agent to incept an AID, the agent starts the process, which might involve communicating with witnesses. The `signify-ts` library handles this by first giving you an "operation" object, which you can then use to poll for the completion of the inception process.
+Creating a new AID occurs locally yet storing its KEL and current key index are asynchronous operations. When you request the KERIA agent to store the inception event and key index of the new AID the agent starts the process and also obtains witness receipts from any witnesses stated in the inception event. The `signify-ts` library handles this asynchronous operation by returning an "operation" object in response to creating an AID which you can then use to poll for completion of the inception process.
 
 The `client.identifiers().create()` method is used to start the inception of a new AID.
 
 **Parameters Explained:**
 
-- **aidAlias (string):** This is a human-readable alias that you assign to the AID within your Signify client's local storage. It's used to refer to this AID in subsequent client operations. It's not part of the KERI protocol itself but a convenience for client-side management.
+- **aidAlias (string):** This is a human-readable alias that you assign to the AID within your Signify client's local storage. It is used to refer to this AID in subsequent client operations. It is not part of the KERI protocol itself but a convenience label for client-side management.
 - **inceptionArgs (object):** This object contains the configuration for the new AID:
   - **toad (number):** The Threshold of Accountable Duplicity. This is the minimum number of witness receipts the controller (your Client AID via KERIA) requires for this new AID's events to be considered accountable.
   - **wits (array of strings):** A list of AID prefixes of the witnesses that this new AID should use. These witnesses must be discoverable by your KERIA agent (e.g., pre-loaded during KERIA's startup or resolved via OOBIs by the client/agent).
@@ -252,7 +250,9 @@ const identifierArgs = {
     // Other parameters can be specified. If not, defaults are used.
 };
 
-// Send the inception request to the KERIA agent
+// Creates and sends the locally client-signed inception event to the KERIA agent, 
+//  - initializing to zero (0) the agent-stored key index for this AID.
+//  - causing the agent to obtain witness receipts for the event as needed
 const inceptionResult = await client.identifiers().create(aidAlias, identifierArgs);
 console.log(`AID inception initiated for alias: ${aidAlias}`);
 
@@ -270,11 +270,11 @@ console.log(inceptionOperation);
 
 
     {
-      name: [32m"witness.EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO"[39m,
-      metadata: { pre: [32m"EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO"[39m, sn: [33m0[39m },
-      done: [33mfalse[39m,
-      error: [1mnull[22m,
-      response: [1mnull[22m
+      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      done: false,
+      error: null,
+      response: null
     }
 
 
@@ -307,6 +307,11 @@ const newAidInceptionEvent = operationResponse.response;
 console.log(`\nSuccessfully created AID with prefix: ${newAidInceptionEvent.i}`);
 console.log(`Witnesses specified: ${JSON.stringify(newAidInceptionEvent.b)}`);
 
+console.log(`Icp op name: ${inceptionOperation.name}`);
+const icpOp = await client.operations().get(inceptionOperation.name);
+console.log("Inception operation");
+console.dir(icpOp);
+
 ```
 
     Waiting for inception operation to complete...
@@ -317,25 +322,25 @@ console.log(`Witnesses specified: ${JSON.stringify(newAidInceptionEvent.b)}`);
 
 
     {
-      name: [32m"witness.EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO"[39m,
-      metadata: { pre: [32m"EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO"[39m, sn: [33m0[39m },
-      done: [33mtrue[39m,
-      error: [1mnull[22m,
+      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      done: true,
+      error: null,
       response: {
-        v: [32m"KERI10JSON0001b7_"[39m,
-        t: [32m"icp"[39m,
-        d: [32m"EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO"[39m,
-        i: [32m"EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO"[39m,
-        s: [32m"0"[39m,
-        kt: [32m"1"[39m,
-        k: [ [32m"DBArb0d61i-FHFa9QWVvTID2vE7qWbWvzyfzoKiRydnu"[39m ],
-        nt: [32m"1"[39m,
-        n: [ [32m"EB28s6OrU4Ooewt9jmvER6T7aIXZIbgJ-Qb-ZNi76MlO"[39m ],
-        bt: [32m"2"[39m,
+        v: "KERI10JSON0001b7_",
+        t: "icp",
+        d: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        i: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        s: "0",
+        kt: "1",
+        k: [ "DBZMCILo9tIeKrLu7eT6yJ3m1wAmcj39zIIIJ5_N6F1q" ],
+        nt: "1",
+        n: [ "EGT65gwP7FXPirO43m42U2UYkAqeOR2HVzOX0UN8YImN" ],
+        bt: "2",
         b: [
-          [32m"BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"[39m,
-          [32m"BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM"[39m,
-          [32m"BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"[39m
+          "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
+          "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
+          "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
         ],
         c: [],
         a: []
@@ -344,28 +349,64 @@ console.log(`Witnesses specified: ${JSON.stringify(newAidInceptionEvent.b)}`);
 
 
     
-    Successfully created AID with prefix: EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO
+    Successfully created AID with prefix: EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy
 
 
     Witnesses specified: ["BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM","BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"]
 
 
+    Icp op name: witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy
+
+
+    Inception operation
+
+
+    {
+      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      done: true,
+      error: null,
+      response: {
+        v: "KERI10JSON0001b7_",
+        t: "icp",
+        d: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        i: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        s: "0",
+        kt: "1",
+        k: [ "DBZMCILo9tIeKrLu7eT6yJ3m1wAmcj39zIIIJ5_N6F1q" ],
+        nt: "1",
+        n: [ "EGT65gwP7FXPirO43m42U2UYkAqeOR2HVzOX0UN8YImN" ],
+        bt: "2",
+        b: [
+          "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
+          "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
+          "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
+        ],
+        c: [],
+        a: []
+      }
+    }
+
+
 **Completed Operation Output Explained:**
 
-- `done`: Now true, indicating the inception is complete on the KERIA agent's side.
-- `response`: This field now contains the actual signed inception event (`icp`) for the newly created AID (`newAid`).
-- `i`: The prefix of the newly created AID.
+- `done`: Now true, indicating the inception is received on the KERIA agent's side and has been witnessed (receipted and the agent received the receipts).
+- `response`: This field now contains the actual signed inception event (`icp`) for the newly created AID (`newAid`) originally submitted by the Client AID.
+- `i`: The prefix of the AID now receipted and stored locally in the KERIA agent's database.
 - `k`: The list of current public signing keys.
 - `n`: The list of digests of the next (pre-rotated) public keys.
 - `b`: The list of witness AIDs that this AID is configured to use.
 - `bt`: The Threshold of Accountable Duplicity (TOAD) specified during creation (matches toad: 2 from our request).
 
-The KERIA agent has successfully incepted the AID, and its KEL (starting with this inception event) is now managed by the agent and receipted by the specified witnesses.
+The KERIA agent has successfully received the AID from the Controller AID, has communicated with witnesses to have the event receipted, and has stored its KEL, starting with the s inception event, in the local agent database.
 
 ## Managing Agent Operations
-Signify-ts also provides methods to list and delete operations tracked by the KERIA agent for your client.
+
+SignifyTS also provides methods to list and delete operations tracked by the KERIA agent for your client. This is useful to show in user interfaces so that the user knows when there are any in-progress operations for one or more managed AIDs.
 
 ### Listing Operations
+
+Listing operations is agent-wide meaning all operations for all AIDs on this agent will be returned.
 
 
 ```typescript
@@ -381,9 +422,9 @@ console.log(JSON.stringify(operationsList, null, 2));
 
     [
       {
-        "name": "witness.EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO",
+        "name": "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
         "metadata": {
-          "pre": "EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO",
+          "pre": "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
           "sn": 0
         },
         "done": true,
@@ -391,16 +432,16 @@ console.log(JSON.stringify(operationsList, null, 2));
         "response": {
           "v": "KERI10JSON0001b7_",
           "t": "icp",
-          "d": "EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO",
-          "i": "EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO",
+          "d": "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+          "i": "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
           "s": "0",
           "kt": "1",
           "k": [
-            "DBArb0d61i-FHFa9QWVvTID2vE7qWbWvzyfzoKiRydnu"
+            "DBZMCILo9tIeKrLu7eT6yJ3m1wAmcj39zIIIJ5_N6F1q"
           ],
           "nt": "1",
           "n": [
-            "EB28s6OrU4Ooewt9jmvER6T7aIXZIbgJ-Qb-ZNi76MlO"
+            "EGT65gwP7FXPirO43m42U2UYkAqeOR2HVzOX0UN8YImN"
           ],
           "bt": "2",
           "b": [
@@ -415,7 +456,99 @@ console.log(JSON.stringify(operationsList, null, 2));
     ]
 
 
+### Get Single Operation
+
+A single operation may be retrieved by name in order to view its state. The name of an operation is formatted as `<role>.<digest>` and the example `witness.EF03TKpT68zTvOeFJM4pU64XEonLsZ29rxYFKN8u8AFO` shows that this operation is waiting on a witnessfor the `EF03TKpT68zTvOeFJM4pU64XEonLsZ29rxYFKN8u8AFO` identifier.
+
+
+```typescript
+console.log(`Icp op name: ${inceptionOperation.name}`);
+const icpOp = await client.operations().get(inceptionOperation.name);
+console.log("Inception operation");
+console.dir(icpOp);
+```
+
+    Icp op name: witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy
+
+
+    Inception operation
+
+
+    {
+      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      done: true,
+      error: null,
+      response: {
+        v: "KERI10JSON0001b7_",
+        t: "icp",
+        d: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        i: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        s: "0",
+        kt: "1",
+        k: [ "DBZMCILo9tIeKrLu7eT6yJ3m1wAmcj39zIIIJ5_N6F1q" ],
+        nt: "1",
+        n: [ "EGT65gwP7FXPirO43m42U2UYkAqeOR2HVzOX0UN8YImN" ],
+        bt: "2",
+        b: [
+          "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
+          "BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM",
+          "BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"
+        ],
+        c: [],
+        a: []
+      }
+    }
+
+
+### Waiting on an Operation
+
+An operation may be waited on to know when an operation completes. Internally the SignifyTS library uses the `setTimeout` built-in along with an `AbortSignal` to control the polling loop that checks with the Signify controller's KERIA agent to determine operation status.
+
+
+```typescript
+// this code sample focuses on operating waiting and is a simple version of what is shown above
+const aidAlias = 'waitAidExample';
+
+const icpArgs = {
+    toad: 1, 
+    wits: ['BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha']
+};
+
+const icpRes = await client.identifiers().create(aidAlias, icpArgs);
+const icpOp = await icpRes.op();
+console.log('Inception Operation Details:');
+console.log(inceptionOperation);
+
+// the wait command below
+console.log('Waiting for inception operation to complete...');
+const operationResponse = await client
+    .operations()
+    .wait(icpOp, AbortSignal.timeout(5000)); // Pass the operation name
+console.log("Inception operation complete");
+```
+
+    Inception Operation Details:
+
+
+    {
+      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      done: false,
+      error: null,
+      response: null
+    }
+
+
+    Waiting for inception operation to complete...
+
+
+    Inception operation complete
+
+
 ### Deleting Operations
+
+As you have seen above old operations stay in the operation list which may or may not be desirable. You may delete operations if you want to clean up the operations list using the Operation delete API as shown below. Run the code as many times as you need in order to clear out the list, running the `.list()` command to verify your operations are being removed from the long-running operations response list.
 
 
 ```typescript
@@ -426,18 +559,67 @@ console.log(`\nDeleted operation: ${opNameToDelete}`);
 ```
 
     
-    Deleted operation: witness.EF6UjgP_oCArF3D_lW31AQeJAthXFJRZNv0jAoMPtHEO
+    Deleted operation: witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy
+
+
+Now run the `client.operations().list()` function to see that the operations have been cleared out.
+
+
+```typescript
+// List all current long-running operations for this client
+const operationsList = await client.operations().list();
+console.log('\nCurrent Operations List:');
+console.log(JSON.stringify(operationsList, null, 2));
+```
+
+    
+    Current Operations List:
+
+
+    [
+      {
+        "name": "witness.ELbfbbLMcKinMyOrQMDm8kDBaxfqHRhruA1ZF7EZS4hF",
+        "metadata": {
+          "pre": "ELbfbbLMcKinMyOrQMDm8kDBaxfqHRhruA1ZF7EZS4hF",
+          "sn": 0
+        },
+        "done": true,
+        "error": null,
+        "response": {
+          "v": "KERI10JSON000159_",
+          "t": "icp",
+          "d": "ELbfbbLMcKinMyOrQMDm8kDBaxfqHRhruA1ZF7EZS4hF",
+          "i": "ELbfbbLMcKinMyOrQMDm8kDBaxfqHRhruA1ZF7EZS4hF",
+          "s": "0",
+          "kt": "1",
+          "k": [
+            "DFSyQ-vnJVrCk57iBZQbepk8wwKpyxjkP5Z1p6yvdKRi"
+          ],
+          "nt": "1",
+          "n": [
+            "EEj31OxmloZi8OL0PLPK20m_9I5yy7VGk5CCOV-aIuIk"
+          ],
+          "bt": "1",
+          "b": [
+            "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha"
+          ],
+          "c": [],
+          "a": []
+        }
+      }
+    ]
 
 
 <div class="alert alert-primary">
 <b>📝 SUMMARY</b><hr>
 To create a new AID using Signify-ts and a KERIA agent:
 <ol>
-<li>Use <code>client.identifiers().create(alias, config)</code>. Provide a client-side <code>alias</code> for the AID and a <code>config</code> object specifying parameters like <code>toad</code> (Threshold of Accountable Duplicity) and <code>wits</code> (list of witness AIDs).</li>
+<li>Use <code>client.identifiers().create(alias, config)</code> to create an inception event locally for a new AID and then send it to the KERIA agent for getting witness receipts and for storing the event and receipts in the agent database. Provide a client-side <code>alias</code> as a human-readable label for the AID and a <code>config</code> object specifying parameters like <code>toad</code> (Threshold of Accountable Duplicity) and <code>wits</code> (list of witness AIDs).</li>
 <li>The <code>create()</code> method returns an object from which you can get a long-running <code>operation</code> object using <code>.op()</code>. This operation is initially marked as not <code>done</code>.</li>
 <li>Use <code>client.operations().wait(operationName)</code> to poll the KERIA agent until the operation completes. The resolved object will have
 <code>done: true</code> and its <code>response</code> field will contain the signed inception event (<code>icp</code>) of the newly created AID.</li>
 <li>Operations can be listed with <code>client.operations().list()</code> and deleted with <code>client.operations().delete(operationName)</code>.</li>
+<li>Individual operations may be retrieved with <code>client.operations().get(name)</code>.</li>
 </ol>
 This process highlights the asynchronous nature of KERIA operations that involve agent-side processing and network interactions.
 </div>
