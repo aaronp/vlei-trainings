@@ -1,13 +1,13 @@
-  #!/usr/bin/env bash
+#!/usr/bin/env bash
 cd /app/notebooks
 
 # Array of notebook filenames to exclude from conversion
 EXCLUDE_NOTEBOOKS=(
     "000_Table_of_Contents.ipynb"
-    "101_48_Multisignature_Identifiers.ipynb"
-    "101_85_ACDC_Chained_Credentials_NI2I.ipynb"
-    "103_10_vLEI_Trust_Chain.ipynb"
+    "220_10_Integrating_Chainlink_CCID_with_vLEI.ipynb"
 )
+
+
 
 OUTPUT_DIR="/app/markdown"
 
@@ -21,9 +21,23 @@ for notebook in *.ipynb; do
         echo "Skipping excluded notebook: $notebook"
         continue
     fi
+    
 
     echo "Converting $notebook to Markdown in $OUTPUT_DIR"
-    jupyter nbconvert --to markdown --execute --output-dir="$OUTPUT_DIR" "$notebook"
+    jupyter nbconvert --to markdown --output-dir="$OUTPUT_DIR" "$notebook"
+    
+    # Get the generated markdown filename (remove .ipynb extension and add .md)
+    md_filename="${notebook%.ipynb}.md"
+    md_filepath="$OUTPUT_DIR/$md_filename"
+    
+    # Remove ANSI color escape sequences from the generated markdown file
+    if [[ -f "$md_filepath" ]]; then
+        echo "Cleaning ANSI escape sequences from $md_filename"
+        # Use sed to remove ANSI escape sequences
+        # Pattern matches: \x1b[ followed by any characters until 'm'
+        sed -i 's/\x1b\[[0-9;]*[mK]//g' "$md_filepath"
+    fi
+    
 done
 
 echo "Conversion complete."

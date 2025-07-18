@@ -1,4 +1,4 @@
-  #!/usr/bin/env bash
+#!/usr/bin/env bash
 cd /app/notebooks
 
 # Array of notebook filenames to exclude from conversion
@@ -7,6 +7,7 @@ EXCLUDE_NOTEBOOKS=(
     "101_48_Multisignature_Identifiers.ipynb"
     "101_85_ACDC_Chained_Credentials_NI2I.ipynb"
     "103_10_vLEI_Trust_Chain.ipynb"
+    "900_05_Known_Issues.ipynb"
 )
 
 
@@ -18,7 +19,7 @@ for notebook in *.ipynb; do
         continue
     fi
 
-    echo "Converting $notebook to Markdown in $OUTPUT_DIR"
+    echo "Executing $notebook"
     jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=-1 "$notebook"
 done
 
