@@ -46,7 +46,8 @@ To deploy the training environment, we use Docker to create a local instance of 
 ## Accessing the Environment
 
 1.  **Jupyter Lab:**
-    Open your web browser and navigate to [http://localhost:8888](http://localhost:8888).
+    a. Open your web browser and navigate to [http://localhost:8888](http://localhost:8888).
+    b. In the JupyterLab IDE site, navigate in its file browser to the ```jupyter/notebooks``` directory, then open the ```000_Table_of_Contents.ipynb``` notebook. 
 
 ## Quick Context for LLMs: `llm_context.md`
 
