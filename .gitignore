@@ -10,3 +10,6 @@ jupyter/notebooks/config/credential_data/skill_cred_data.json
 jupyter/notebooks/config/credential_data/skill_cred_edge.json
 jupyter/notebooks/config/credential_data/skill_cred_rule.json
 jupyter/notebooks/config/multisig/multisig_config.json
+/.vs
+/.ipynb_checkpoints
+/markdown/.ipynb_checkpoints
