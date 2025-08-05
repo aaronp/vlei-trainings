@@ -102,25 +102,26 @@ aid_alias = "my-first-aid"
 
 The `kli incept` command generated an AID, which is represented by a unique string, e.g., `BHt9Kw8oUgfB2kiyoj65B2VE5fZLr87S5MJP3l4JeRwC`, known as the Prefix. While closely related, they represent different aspects of the identifier:
 
-- AID: This is the formal concept of the self-governing identifier, representing the entity and its control.
+- AID: This is the formal concept of the self-governing identifier, representing the entity and its control. An entity may have multiple AIDs.
 - Prefix: This is the practical, usable string representation of the AID. It's derived directly from the AID's initial cryptographic keys and is constructed by combining:
     - A Derivation Code: Indicates the cryptographic suite (key type, signature algorithm, hashing algorithm) used.
-    - The Encoded Public Key: The public portion of the initially generated key pair associated with the AID.
+    - The Encoded Public Key: A string derived from the public portions of the initially generated key pairs associated with the AID.
 
 **Prefix Self-Certification:**  
-KERI AIDs are [self-certifying](https://trustoverip.github.io/tswg-keri-specification/#self-certifying-identifier-scid) in the sense that an AID does not rely on a trusted entity and instead relies only on the keys its identifier is derived from to provide verifiability for statements made (signed) by the controller of an AID. 
+KERI AIDs are [self-certifying](https://trustoverip.github.io/tswg-keri-specification/#self-certifying-identifier-scid) in the sense that an AID does not rely on a trusted entity and instead relies only on its public keys to provide verifiability for signed statements made by the controller of an AID. This self-certifying quality holds throughout the AID's lifecycle, from inception to all future events, such as rotations.
 
 This works because:
 1. The identifier's prefix is derived from the set of public keys that are included in the inception event. The prefix is the self addressing identifier (SAID), a kind of digest, of the inception event. This provides a strong cryptographic binding between the AID prefix and the keys used to generate the inception event.
-2. The inception event and initial keypairs, together with the key event log and any successive keypairs resulting from rotations, are sufficient to verify any signed statement made by the AID controller.
+2. As validated rotation events occur, the AID's KEL is appended, which changes its effective Key-State. Key-State is a set of data that is time-dependent and includes the valid public signing keys and related data at a given point in time. The Key-State at a given point in time is derived from the KEL.
+3. Given any signed statement made by the AID controller, the set of public keys and related data from the Key-State as of the time of that signed statement is sufficient to verify its authenticity.
 
-Because of this relationship between keypairs, the inception event, and the key event log, anyone who has the prefix and the KEL can cryptographically verify signatures made by a given AID with the matching private key from any given point in the history of a KEL. This verifiability establishes authenticity for all actions taken by an AID without needing to check with outside authorities or registries, meaning they are self-certifying. 
+Because of this relationship between keypairs, the inception event, and the key event log, anyone who has the prefix and the KEL can cryptographically verify signatures created by a given AID with the matching private keys (i.e., by the AID's controller) from any given point in the history of a KEL. This verifiability establishes authenticity for all actions taken by an AID without needing to check with outside authorities or registries, meaning they are self-certifying. 
 
 ### Security precaution for live transactions
 
-**Keep in mind, as a security precaution**, signature verification with a prefix and a KEL is most securely done with the most recent key that is currently authorized for the AID, as in the latest set of keys given the inception and all rotations. Key rotation changes the authorized key, requiring reference to the AID's KEL for up-to-date verification. Historical signatures may still be verified, yet to ensure proper security during a live transaction the latest controlling keypairs should always be used for signature verification. 
+**Keep in mind, as a security precaution**, signature verification with a prefix and a KEL is most securely done with the most recent keys that are currently authorized for the AID, as in the latest key-state (i.e., set of keys given the inception and all rotations). Key rotation changes the authorized keys, requiring reference to the AID's KEL for up-to-date verification. Historical signatures may still be verified, yet to ensure proper security during a live transaction the latest controlling keypairs (pubic portions) should always be used for signature verification. 
 
-This means signatures from old keypairs, during a live transaction, should always be rejected when verifying signatures of an in-progress transaction. Such an approach is appropriate because there is no way to know if an attacker has compromised old keypairs and is using old keys to sign the new transaction events. To adopt the highest security posture then usage of the latest keypair according to the KEL should **always** be required.
+This means signatures from old keypairs, during a live transaction, should always be rejected when verifying signatures of an in-progress transaction. Such an approach is appropriate because there is no way to know if an attacker has compromised old keypairs and is using old keys to sign the new transaction events. To adopt the highest security posture then usage of the latest keypairs according to the KEL should **always** be required.
 
 <div class="alert alert-prymary">
   <b>📝 SUMMARY</b><hr>
