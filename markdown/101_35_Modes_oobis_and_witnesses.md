@@ -13,7 +13,7 @@ KERI provides a secure way to manage identifiers and track control using verifia
 
 Direct Mode is a controller-to-controller communication approach, similar to a direct conversation, or like making an HTTP request from a client to a server.
 
-In this mode the source controller shares their Key Event Log directly with a destination controller through an HTTP or TCP request. Thedestination controlleracts as a validator by verifying the KEL events and their signatures to ensure integrity. 
+In this mode the source controller shares their Key Event Log directly with a destination controller through an HTTP or TCP request. The destination controller acts as a validator by verifying the KEL events and their signatures to ensure integrity. 
 
 The destination controller can choose to establish trust based solely on verifying the signatures of the source controller on its KEL. This is a lower security posture than relying on a watcher network, yet may be an appropriate choice for a use case. It is also a simple way to start using KERI and allows quick bootstrapping of nodes in a system because validators directly receive and verifies the KEL.
 
@@ -22,7 +22,7 @@ This mode is an option for interactions where both parties can connect directly,
 <div class="alert alert-info">
     <b>🧩 DID YOU KNOW?</b><hr>
     <h4>Future Note: Watcher Networks for Direct Mode Verification Thresholds</h4>
-    While watchers are not yet widely used in the KREI ecosystem landscape, using a watcher network
+    While watchers are not yet widely used in the KERI ecosystem landscape, using a watcher network
     to set a verification threshold is one way to increase the security of a direct mode installation. 
     A watcher or watcher network may be used by the validating controller to compare the KEL being
     received from the source controller with the view of the KEL that the watcher network has. 
@@ -44,7 +44,7 @@ Indirect Mode is the asyncronous approach leveraging mailboxes for communication
 
 It’s for scenarios where the controller may be sometimes offline or needs to serve many validators at once. Rather than relying on direct communication, it introduces infrastructure to both allow a controller to receive messages while offline, the mailbox, and to make the KEL reliably accessible from witnesses.
 
-Verifiability extends beyond the controller’s signature to signed event receipts produced by witnesses, called witness receipts. This additional verification capability relies on a network of Witnesses, chosen by the controller, that verify, return signed receits of, and store key events. When combined with the two factor authentication (2FA) capability then witnesses increase the security of an AID.
+Verifiability extends beyond the controller’s signature to signed event receipts produced by witnesses, called witness receipts. This additional verification capability relies on a network of Witnesses, chosen by the controller, that verify, return signed receipts of, and store key events. When combined with the two factor authentication (2FA) capability then witnesses increase the security of an AID.
 
 This mode is ideal for public identifiers used from mobile devices and web browsers, one-to-many interactions, or any situation where the controller can’t be constantly online. 
 
@@ -81,11 +81,11 @@ Controller OOBI with the specific role at the end:
 
 ### Kinds of OOBIs
 
-There are four similar kinds of OOBIs, controller OOBIs, witness OOBIs, agent OOBIs, and data OOBIs. For controller OOBIs there are three variants, the blind OOBI, the no-role OOBI, and the full OOBI.
+There are four similar kinds of OOBIs: controller OOBIs, witness OOBIs, agent OOBIs, and data OOBIs. For controller OOBIs there are three variants: the blind OOBI, the no-role OOBI, and the full OOBI.
 
 #### Controller OOBI
 
-A controller OOBI is a service endpoint that a controller uses to advertise where its KEL may be retrieved from and where it may receive data. This is typically used by a witness or a direct mode agent. When witnesses are declared in an inception event they will typically have had their controller OOBI resolved
+A controller OOBI is a service endpoint that a controller uses to advertise where its KEL may be retrieved from and where it may receive data. This is typically used by a witness or a direct mode agent. When witnesses are declared in an inception event they will typically have had their controller OOBI resolved.
 
 Examples:
 - Blind OOBI: `http://8.8.5.6:8080/oobi`
@@ -134,8 +134,8 @@ Mailboxes are a simple store and forward mechanism where one controller receives
 
 <div class="alert alert-info">
     <b>ℹ️ NOTE</b><hr>
-    Currently mailboxes are <b>combined with witnesses</b> in the KERIpy implementation of witnesses. 
-    When a transferable identifier <em>declares a witness</em> in the inception event then that <b><u>witness 
+    Currently, the KERIpy implementation of witnesses also provides mailboxes. 
+    When a transferable identifier <em>declares a witness</em> in the inception event, that <b><u>witness 
     will also be used as a mailbox</u></b> for the controller to receive messages from other controllers.
     <br/>
     Similarly, KERIA agents also serve as mailboxes for Signify Controllers.
@@ -145,8 +145,8 @@ To receive messages from mailboxes a controller polls all of its witness mailbox
 
 <div class="alert alert-info">
     <b>ℹ️ NOTE</b><hr>
-    When separate mailboxes are completed and supported in the KERIpy reference implementation then a controller may declare and use only one mailbox. 
-    This will simplify mailbox management for controllers that use more than one witness as there will be then only one mailbox and it will be deployed separately from the witness.
+    When the work to support separate mailboxes is completed and supported in the KERIpy reference implementation, then a controller may declare and use only one mailbox. 
+    This will simplify mailbox management for controllers that use more than one witness since there will be then only one mailbox, and it will be deployed separately from the witness.
 </div>
 
 
@@ -176,7 +176,7 @@ By gathering receipts that meet or exceed this controller-defined threshold (`to
 <b>📝 SUMMARY</b><hr>
 KERI provides two operational modes for sharing Key Event Logs (KELs).
 <ul>
-<li><strong>Direct Mode:</strong> A synchronous, controller-to-controller connection for sharing KELs, suitable for when both parties are online.</li>
+<li><strong>Direct Mode:</strong> The synchronous, controller-to-controller connection approach for sharing KELs, suitable for when both parties are online.</li>
 <li><strong>Indirect Mode:</strong> An asynchronous approach using key infrastructure, designed for high availability and for controllers that may be offline.</li>
 </ul>
 </li>

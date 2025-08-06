@@ -116,7 +116,7 @@ aid_b = "aid_b"
 
 ## OOBI Exchange for Discovery
 
-With your AIDs established, you need a way for them to find each other. Remember, each witness, in the current implementation, uses each of its witnesses both as a KEL publication mechanis and as a mailbox to receive messages on behalf of the controller. To tell other controllers where to find this witness mailbox the local controller must provide a way to connect to the witness and the mailbox. This is where Out-of-Band Introductions (OOBIs) come in. You have used OOBIs before; to recapitulate, an OOBI is a specialized URL associated with an AID and how to reach one of its endpoints (like a witness or mailbox). 
+With your AIDs established, you need a way for them to find each other. Remember, each witness, in the current implementation, uses each of its witnesses both as a KEL publication mechanism and as a mailbox to receive messages on behalf of the controller. To tell other controllers where to find this witness mailbox, the local controller must provide a way to connect to the witness and the mailbox. This is where Out-of-Band Introductions (OOBIs) come in. You have used OOBIs before; to recapitulate, an OOBI is a specialized URL associated with an AID and how to reach one of its endpoints (like a witness or mailbox). 
 
 
 ### Generating OOBI URLs

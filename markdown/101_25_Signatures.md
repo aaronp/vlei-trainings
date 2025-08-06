@@ -15,11 +15,11 @@ A digital signature is a cryptographic mechanism used to provide assurance about
 The process generally involves three stages:
 
 1.  **Signing:**
-    * The signer (e.g., an AID Controller) takes the information they want to sign.
-    * They create a condensed representation of the information, known as a digest, by using a hash function.
-      * A note on terminology: While "hash" is commonly used to refer to both the function and its output, for clarity in this text, we will use "hash function" to refer to the algorithm itself and "digest" to refer to its output.
-    * Using their unique private signing key, they apply a signing algorithm to the digest generated from the raw data. Signing means encrypting the digest of the raw data with the private key. The result is a digital signature of the digest.
-    * Only someone possessing the private key can generate a valid signature (digest) for that key.
+    * The signer (e.g., an AID Controller) begins with the information they want to sign.
+    * They then create a condensed, fixed-length representation of that information — called a digest — by applying a hash function.
+        * A note on terminology: While the term "hash" is often used to refer to both the function and its output, in this text we will use “hash function” to refer to the algorithm and “digest” to refer to its output.
+    * Next, the signer uses their unique private signing key to apply a digital signature algorithm to the digest. This process produces a digital signature — a cryptographic proof that the signer authorized the original data.
+    * Only someone with access to the private key can generate a valid signature for a given digest. 
 2.  **Attaching:**
     * The generated signature is typically attached to the original information. In the case of KERI this signature is encoded in the [Composable Event Streaming Representation](https://trustoverip.github.io/tswg-cesr-specification/) (CESR) encoding format.
 3.  **Verification:**
@@ -171,8 +171,8 @@ As expected, the verification fails. Even a tiny change invalidates the signatur
 <div class="alert alert-prymary">
 <b>📝 SUMMARY</b><hr>
 <ul>
-<li><strong>Digital Signature Process:</strong> Data is signed by first creating a condensed representation (a digest) using a hash function, and then encrypting that digest with a private key. The resulting encrypted digest is the digital signature.</li>
-<li><strong>Verification:</strong> To verify, a recipient uses the signer's public key to decrypt the signature, revealing the original digest. They then independently compute the digest of the received data. If the two digests match, the signature is valid.</li>
+<li><strong>Digital Signature Process:</strong> Data is signed by first creating a condensed representation (a digest) using a hash function, and then applying a signing algorithm to that digest using a private key. The result is a digital signature.</li>
+<li><strong>Verification:</strong> To verify a signature, the recipient uses the signer's public key and the signature to validate the digest. They also compute the digest of the received data independently. If the two digests match, the signature is valid.</li>
 <li><strong>Core Guarantees:</strong> A valid digital signature confirms <strong>authenticity</strong> (the message came from the key owner), <strong>integrity</strong> (the message wasn't altered), and <strong>non-repudiability</strong> (the signer cannot deny their action).</li>
 <li><strong>KERI's Key Management:</strong> In KERI, the crucial step for a verifier is finding the correct public key that was authoritative at the time of signing. This is accomplished by consulting the identifier's <strong>Key Event Log (KEL)</strong>, which provides the secure, verifiable history of key changes.</li>
 <li><strong>Practical Demonstration:</strong> The <code>kli sign</code> command generates a signature, while <code>kli verify</code> checks it. Even a minor alteration to the signature or the original data will cause the verification to fail, demonstrating the cryptographic security of the process.</li>
