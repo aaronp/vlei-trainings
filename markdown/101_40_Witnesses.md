@@ -2,7 +2,7 @@
 
 <div class="alert alert-primary">
   <b>🎯 OBJECTIVE</b><hr>
-Demonstrate how to configure witnesses and the Threshold of Accountable Duplicity (TOAD) in a configuration file and use it to create an AID 
+Demonstrate how to configure witnesses and the Threshold of Accountable Duplicity (TOAD) in a configuration file and use it to create an AID. 
 </div>
 
 ## Verifying the Demo Witness Network
@@ -14,7 +14,7 @@ Within the deployment of these notebooks, we have included a demo witness networ
 - `http://witness-demo:5643/oobi/BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM`
 - `http://witness-demo:5644/oobi/BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX`
 
-(These witnesses are predefined (**[wan.json](config/witness-demo-docker/wan.json), [wes.json](config/witness-demo-docker/wes.json), [wil.json](config/witness-demo-docker/wil.json)**); that's why we know the prefixes beforehand) 
+(These witnesses are predefined (**[wan.json](config/witness-demo-docker/wan.json), [wes.json](config/witness-demo-docker/wes.json), [wil.json](config/witness-demo-docker/wil.json)**); that's why we know the prefixes beforehand.) 
 
 To verify the witness network is working, let's query the KEL of one of them using its oobi and `curl`. 
 
