@@ -15,11 +15,11 @@ A digital signature is a cryptographic mechanism used to provide assurance about
 The process generally involves three stages:
 
 1.  **Signing:**
-    * The signer (e.g., an AID Controller) takes the information they want to sign.
-    * They create a condensed representation of the information, known as a digest, by using a hash function.
-      * A note on terminology: While "hash" is commonly used to refer to both the function and its output, for clarity in this text, we will use "hash function" to refer to the algorithm itself and "digest" to refer to its output.
-    * Using their unique private signing key, they apply a signing algorithm to the digest generated from the raw data. Signing means encrypting the digest of the raw data with the private key. The result is a digital signature of the digest.
-    * Only someone possessing the private key can generate a valid signature (digest) for that key.
+    * The signer (e.g., an AID Controller) begins with the information they want to sign.
+    * They then create a condensed, fixed-length representation of that information — called a digest — by applying a hash function.
+        * A note on terminology: While the term "hash" is often used to refer to both the function and its output, in this text we will use “hash function” to refer to the algorithm and “digest” to refer to its output.
+    * Next, the signer uses their unique private signing key to apply a digital signature algorithm to the digest. This process produces a digital signature — a cryptographic proof that the signer authorized the original data.
+    * Only someone with access to the private key can generate a valid signature for a given digest. 
 2.  **Attaching:**
     * The generated signature is typically attached to the original information. In the case of KERI this signature is encoded in the [Composable Event Streaming Representation](https://trustoverip.github.io/tswg-cesr-specification/) (CESR) encoding format.
 3.  **Verification:**
