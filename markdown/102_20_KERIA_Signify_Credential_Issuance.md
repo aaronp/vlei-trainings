@@ -381,7 +381,7 @@ Now the Issuer creates the actual ACDC. This involves:
       - `i`: The AID of the Issuee (the Holder, holderAid.i).
       - The actual `credentialClaims`.
 
-This `issue` command creates the ACDC locally within the Issuer's client and records an issuance event (e.g., `iss`) in the specified registry's TEL by sending the issued ACDC to the connected KERIA agent. The SAID of the newly created credential is then extracted from the response from KERIA..
+This `issue` command creates the ACDC locally within the Issuer's client and records an issuance event (e.g., `iss`) in the specified registry's TEL by sending the issued ACDC to the connected KERIA agent. The SAID of the newly created credential is then extracted from the response from KERIA.
 
 Use the code below to perform these actions.
 
