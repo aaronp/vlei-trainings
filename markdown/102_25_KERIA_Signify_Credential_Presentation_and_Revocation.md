@@ -1169,7 +1169,7 @@ As you see the ACDC has already been received by the verifier.
 
 This means that the verifier could act on the ACDC directly after receiving the Exchange message for the IPEX Grant containing the ACDC. Sending back an IPEX Admit message is entirely optional and is left up to the architectural design preferences of the individual application implementor. The [vLEI Reporting API verifier (sally)](https://github.com/GLEIF-IT/sally/) used by GLEIF in production follows the model of extracting the ACDC from the IPEX Grant `exn` and does not send back an IPEX Admit message because sending the admit, in this use case, does not yet provide business value. That might change in the future.
 
-This demonstration shows completing the entire formal IPEX workflow by using an IPEX Gdmit to respond to the IPEX Grant.
+This demonstration shows completing the entire formal IPEX workflow by using an IPEX Admit to respond to the IPEX Grant.
 
 ### Step 8: Verifier Sends IPEX Admit to the Holder
 
