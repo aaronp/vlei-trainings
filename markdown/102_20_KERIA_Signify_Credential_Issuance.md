@@ -526,8 +526,11 @@ console.log(issuerCredential)
 
 The credential has been created but currently resides with the Issuer. To transfer it to the Holder, the Issuer initiates an IPEX (Issuance and Presentation Exchange) grant. This process uses KERI `exn` (exchange) messages. The grant message effectively offers the credential to the Holder. 
 
-The `issuerClient.ipex().grant()` method prepares the grant message, including the ACDC itself (`acdc`), the issuance event from the registry (`iss`), and the anchoring event from the Issuer's KEL (`anc`) along with its signatures (`ancAttachment`).
-Then, `issuerClient.ipex().submitGrant()` sends this packaged grant message to the Holder's KERIA agent.
+The `issuerClient.ipex().grant()` method prepares the grant message, including the ACDC itself (`acdc`), the issuance event from the registry (`iss`), and the anchoring event from the Issuer's KEL (`anc`) along with its signatures (`ancAttachment`). 
+
+You'll notice in the code below calls to `Serder()`, which serves the purpose of packaging and parsing KERI events into their serialized forms (e.g. CESR-coded messages) for signing, verification, or transmission.
+
+The, `issuerClient.ipex().submitGrant()` sends this packaged grant message to the Holder's KERIA agent.
 
 Use the code below to perform the IPEX grant.
 
