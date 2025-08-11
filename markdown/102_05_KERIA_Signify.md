@@ -24,8 +24,8 @@ The idea behind this client-agent architecture is to enable "signing at the edge
 * Managing Key Event Logs (KELs) for edge AIDs
 * Creating, storing, issuing, revoking, presenting, and receiving ACDCs
 * Acting as a cloud mailbox to send and receive KERI and ACDC messages from
-* Interacting with witnesses
-* Exchanging messages with other KERI agents
+  * Interacting with witnesses
+  * Exchanging messages with other KERI agents
 
 The KERIA agent itself never has access to your private keys. All critical signing operations happen on the client, and the signed events are then sent to the KERIA agent for processing and dissemination.
 

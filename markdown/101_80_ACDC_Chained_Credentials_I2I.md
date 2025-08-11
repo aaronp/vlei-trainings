@@ -801,7 +801,7 @@ Next, perform the IPEX transfer as done in previous ACDC issuance examples. Afte
 
 
 ```python
-pr_title("Transfering credential (ipex grant)")
+pr_title("Transferring credential (ipex grant)")
 
 time = exec("kli time")
 !kli ipex grant --name {acme_keystore_name} \
@@ -810,7 +810,7 @@ time = exec("kli time")
     --recipient {employee_aid_prefix} \
     --time {time}
 
-pr_title("Admiting credential (ipex grant)")
+pr_title("Admitting credential (ipex admit)")
 # Employee polls for the grant and admits it
 employee_grant_msg_said = exec(f"kli ipex list --name {employee_keystore_name} --alias {employee_aid_alias} --poll --said")
 time = exec("kli time")
@@ -829,7 +829,7 @@ pr_continue()
 ```
 
     
-      Transfering credential (ipex grant)  
+      Transferring credential (ipex grant)  
     
 
 
@@ -1057,7 +1057,7 @@ The commands below show using IPEX to both grant the Access Credential from the 
 
 
 ```python
-pr_title("Transfering Access Credential from Employee to Sub-contractor")
+pr_title("Transferring Access Credential from Employee to Sub-contractor")
 
 time = exec("kli time")
 !kli ipex grant --name {employee_keystore_name} \
@@ -1086,7 +1086,7 @@ pr_continue()
 ```
 
     
-      Transfering Access Credential from Employee to Sub-contractor  
+      Transferring Access Credential from Employee to Sub-contractor  
     
 
 
