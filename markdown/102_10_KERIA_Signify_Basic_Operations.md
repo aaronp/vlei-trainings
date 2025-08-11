@@ -624,7 +624,3 @@ To create a new AID using Signify-ts and a KERIA agent:
 This process highlights the asynchronous nature of KERIA operations that involve agent-side processing and network interactions.
 </div>
 
-
-```typescript
-
-```
