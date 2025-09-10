@@ -4,11 +4,11 @@
 x-vlei-image: &vlei-image
   image: gleif/vlei:1.0.0
 x-witness-demo-image: &witness-demo-image
-  image: gleif/keri:1.2.8-rc5
+  image: gleif/keri:1.2.9
 x-keria-image: &keria-image
   image: gleif/keria:0.3.0
 x-sally-image: &sally-image
-  image: gleif/sally:1.0.0-rc1
+  image: gleif/sally:1.0.2
 
 x-healthcheck: &healthcheck
   interval: 15s
