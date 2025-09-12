@@ -59,25 +59,25 @@ console.log(`Client B resolved OOBI for AID: ${aidA.i}`);
 
 ```
 
-    Using Passcode (bran): D_PNwZhM1_uoAH4UBsIc1
+    Using Passcode (bran): CmftjcfYKRyzKJ4aZ3MzY
 
 
     Client boot process initiated with KERIA agent.
 
 
-      Client AID Prefix:  EOkc0Lot12bbeQDpGLJEaWTtQvePbdY6OXWCqWuXzffp
+      Client AID Prefix:  ECd0LdwLacFRO80n_hISu-xsEWotRPjA39dc4JvULXPu
 
 
-      Agent AID Prefix:   EEDrzjMKTOe34W994F_trCgbT0QHDGJZLhol60dlU71E
+      Agent AID Prefix:   ENYBj8F8aZnK7qWjChBVfwAUzfEnFrlrpAF0PIxXG2z1
 
 
     Initiating AID inception for alias: aidA
 
 
-    Successfully created AID with prefix: EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7
+    Successfully created AID with prefix: EEr8A5QFqPnxh3aKLaOf0V4DUBNGS0xa8Hhav1uNJYSm
 
 
-    Assigning 'agent' role to KERIA Agent EEDrzjMKTOe34W994F_trCgbT0QHDGJZLhol60dlU71E for AID alias aidA
+    Assigning 'agent' role to KERIA Agent ENYBj8F8aZnK7qWjChBVfwAUzfEnFrlrpAF0PIxXG2z1 for AID alias aidA
 
 
     Successfully assigned 'agent' role for AID alias aidA.
@@ -86,22 +86,22 @@ console.log(`Client B resolved OOBI for AID: ${aidA.i}`);
     Generating OOBI for AID alias aidA with role agent
 
 
-    Generated OOBI URL: http://keria:3902/oobi/EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7/agent/EEDrzjMKTOe34W994F_trCgbT0QHDGJZLhol60dlU71E
+    Generated OOBI URL: http://keria:3902/oobi/EEr8A5QFqPnxh3aKLaOf0V4DUBNGS0xa8Hhav1uNJYSm/agent/ENYBj8F8aZnK7qWjChBVfwAUzfEnFrlrpAF0PIxXG2z1
 
 
-    Using Passcode (bran): Bfx2oZDxfeDwLbjavNWbx
+    Using Passcode (bran): D9DpJ4BZ8eKdzVh5l97sb
 
 
     Client boot process initiated with KERIA agent.
 
 
-      Client AID Prefix:  EMI5ibqHucIzvCuCcCTYPafPDLXytGCO4gD5KEyQM8Qw
+      Client AID Prefix:  EOHevvKKwEbKz0tOQQur52mrHwZAkrifXo8dhbiylI7T
 
 
-      Agent AID Prefix:   EHPHjDYmvgIqOUKxajaie6t1Atm5S27VtKpabPTTqvvd
+      Agent AID Prefix:   EFdoky6hnR7lJrbBCbSPRLccuvoQwPFwjcO7ZWZWgvkR
 
 
-    Resolving OOBI URL: http://keria:3902/oobi/EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7/agent/EEDrzjMKTOe34W994F_trCgbT0QHDGJZLhol60dlU71E with alias aidA
+    Resolving OOBI URL: http://keria:3902/oobi/EEr8A5QFqPnxh3aKLaOf0V4DUBNGS0xa8Hhav1uNJYSm/agent/ENYBj8F8aZnK7qWjChBVfwAUzfEnFrlrpAF0PIxXG2z1 with alias aidA
 
 
     Successfully resolved OOBI URL. Response: OK
@@ -113,10 +113,10 @@ console.log(`Client B resolved OOBI for AID: ${aidA.i}`);
     Client and AID setup complete.
 
 
-    Client A created AID: EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7
+    Client A created AID: EEr8A5QFqPnxh3aKLaOf0V4DUBNGS0xa8Hhav1uNJYSm
 
 
-    Client B resolved OOBI for AID: EEXUwD91ZA0fAxySpV-3AuxEBWwN1DzUkrD_f-k5zgV7
+    Client B resolved OOBI for AID: EEr8A5QFqPnxh3aKLaOf0V4DUBNGS0xa8Hhav1uNJYSm
 
 
 ## Initial State Verification
@@ -219,17 +219,17 @@ console.log("New next-key digest:     ", keystateA_after.n);
 
 
     
-    Previous keys: [ "DGV_RzrcS1CTduuzzN_Rbi9BW4sDNf46d3cL0bXlpd96" ]
+    Previous keys: [ "DBV5pRtXng5HUKL2q94Tw_wJieYIQN6esqfu2aq0l0yt" ]
 
 
-    New keys:      [ "DLEwcLHSfhJdJNgfDoRB8vZM4TGdV5VdTSLFkD-gVxWN" ]
+    New keys:      [ "DAOuHbbGKFl5ClMDRlVeg_R8pBwEx72WL-v8iJBxJplH" ]
 
 
     
-    Previous next-key digest: [ "EDKZ9aVnJf0_CFGvTmWbtyHHMxP2FwGZJpg6DnpFomiY" ]
+    Previous next-key digest: [ "ED0BGBmwxUQGvJeG5vpGxwzGgag94s-FPgBhub8eD_G-" ]
 
 
-    New next-key digest:      [ "EPJF07p6ozvfhUOzpj58TLjfQxomAQ42pwQYjFrjB95s" ]
+    New next-key digest:      [ "EHo5FKa33tpMQ6wzYFF_yZ3UJVfq0YPP9YS1PWlimdse" ]
 
 
 ### Step 3: Remote Synchronization and Verification
@@ -313,3 +313,5 @@ This notebook demonstrated the key rotation process for a single-signature AID u
 </ul>
 This process validates KERI's core principles of forward security (old keys are retired) and distributed consistency, ensuring all parties can maintain a synchronized and verifiable view of an identity's evolution.
 </div>
+
+[<- Prev (KERIA Signify Connecting Clients)](102_15_KERIA_Signify_Connecting_Clients.ipynb) | [Next (KERIA Signify Credential Issuance) ->](102_20_KERIA_Signify_Credential_Issuance.ipynb)

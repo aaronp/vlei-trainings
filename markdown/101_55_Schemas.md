@@ -23,7 +23,7 @@ Schemas serve several purposes:
 
 ### Ordering of attributes
 
-It is essential to understand that ACDCs are **ordered field maps**, which means that the order in which fields appear in the JSON of an ACDC must be specific and deterministic. This design constraint is non-existent in much of the Javascript world and many other credential formats, and its an essential part of what makes ACDC secure. A deterministic ordering of fields must be used in order to enable cryptographic verifiability. A non-deterministic field order would mean digest (hashing) verification would fail because attribute order would be unpredictable. So, while initially seeming inconvenient, the ordered field maps provide predictability and cryptographic verifiability. 
+It is essential to understand that ACDCs are **ordered field maps**, which means that the order in which fields appear in the JSON of an ACDC must be specific and deterministic. This design constraint is non-existent in much of the Javascript world and many other credential formats, and its an essential part of what makes ACDC secure. A deterministic ordering of fields must be used in order to enable cryptographic verifiability. A non-deterministic field order would mean digest (hashing) verification would fail because attribute order would be unpredictable. So, while initially seeming inconvenient, the ordered field maps provide predictability and cryptographic verifiability.
 
 <div class="alert alert-info">
     <b>🔒 Security Note</b><hr>
@@ -94,7 +94,7 @@ These attributes describes the schema document itself.
 * `credentialType`: A specific name for this type of credential
 * `version`: A semantic version for this specific credential type (e.g., `"1.0.0"`) to manage schema evolution (Distinct from the ACDC instance's `v` field).
 * `additionalProperties`: Controls whether the ACDC may have extra properties in addition to what is defined in the JSON Schema. The default is true. If false then adding any properties beyond those defined in the schema will cause a validation error.
-* `required`: declares the attributes of the "properties" section that must have data values defined in the ACDC. If any of the required properties are missing in the resulting ACDC JSON, then validation will fail. 
+* `required`: declares the attributes of the "properties" section that must have data values defined in the ACDC. If any of the required properties are missing in the resulting ACDC JSON, then validation will fail.
 
 #### `properties` section (Top Level)
 
@@ -245,7 +245,7 @@ Each of the attributes are defined as follows:
     * **`i`**: The AID of the **Issuee** or subject of the credential – the entity the claims are *about*.
     * **`dt`**: An ISO 8601 date-time string indicating when the credential was issued.
     * **`claim`** (and other custom fields): These are the specific data fields defined by your schema. In this example, `"claim"` is a string representing the custom information this credential conveys. You would define all your specific credential attributes here.
-* **`additionalProperties`, `required`:** Standard JSON Schema fields controlling whether extra properties are allowed and which defined properties must be present. (See the complete schema [here](config/schemas/sample_schema.bak.json).)
+* **`additionalProperties`, `required`:** Standard JSON Schema fields controlling whether extra properties are allowed and which defined properties must be present. (see the complete schema [here](config/schemas/sample_schema.bak.json))
 
 <div class="alert alert-info">
   <b>ℹ️ NOTE</b><hr>
@@ -316,3 +316,5 @@ Key components include:
 
 **Remember**, all fields contained within an ACDC must be ordered according to **insertion order**, not lexicographic (alphabetical) order. This is essential for both cryptographic verifiability and security.  
 </div>
+
+[<- Prev (ACDC)](101_50_ACDC.ipynb) | [Next (Saidify schema) ->](101_60_Saidify_schema.ipynb)

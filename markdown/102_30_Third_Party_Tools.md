@@ -26,3 +26,5 @@ GitHub Repository: https://github.com/keri-foundation/wallet
 Veridian Wallet is an open-source application developed by the Cardano Foundation. It offers features for Identifier and credential management in a mobile app  (Android & iOS).
 
 GitHub Repository: https://github.com/cardano-foundation/veridian-wallet
+
+[<- Prev (KERIA Signify Credential Presentation and Revocation)](102_25_KERIA_Signify_Credential_Presentation_and_Revocation.ipynb) | [Next (vLEI Ecosystem) ->](103_05_vLEI_Ecosystem.ipynb)

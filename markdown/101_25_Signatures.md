@@ -12,29 +12,106 @@ Having explored KERI Identifiers (AIDs) and their management, we now focus on di
 
 A digital signature is a cryptographic mechanism used to provide assurance about the authenticity and integrity of digital data. It serves a similar purpose to a handwritten signature but offers significantly stronger guarantees through cryptography.
 
-The process generally involves three stages:
 
-1.  **Signing:**
+
+The process involves two stages:
+
+1.  **Signing:** (see SIGNING PROCESS diagram below)
     * The signer (e.g., an AID Controller) begins with the information they want to sign.
     * They then create a condensed, fixed-length representation of that information — called a digest — by applying a hash function.
         * A note on terminology: While the term "hash" is often used to refer to both the function and its output, in this text we will use “hash function” to refer to the algorithm and “digest” to refer to its output.
     * Next, the signer uses their unique private signing key to apply a digital signature algorithm to the digest. This process produces a digital signature — a cryptographic proof that the signer authorized the original data.
     * Only someone with access to the private key can generate a valid signature for a given digest. 
-2.  **Attaching:**
     * The generated signature is typically attached to the original information. In the case of KERI this signature is encoded in the [Composable Event Streaming Representation](https://trustoverip.github.io/tswg-cesr-specification/) (CESR) encoding format.
-3.  **Verification:**
+
+```mermaid
+graph TD
+
+    subgraph "COLOR LEGEND"
+        L1["📊 Input/Output Data"]
+        L2["⚙️ Algorithms/Functions"]
+        L4["🔐 Private Key"]
+        L5["🔑 Public Key"]
+    end
+    
+    style L1 fill:#e3f2fd
+    style L2 fill:#f3e5f5
+    style L4 fill:#ffcdd2
+    style L5 fill:#bbdefb
+    
+```
+
+```mermaid
+graph TD
+    subgraph "SIGNING PROCESS"
+        A["Original Message: 'Transfer $1000 to Alice'"] --> B["Hash Function: e.g., SHA-256"]
+        B --> C["Message Digest: '0x3b7e72...'"]
+        C --> D["Signing Algorithm"]
+        E["Private Key 🔐"] --> D
+        D --> F["Digital Signature"]
+        F --> G["Signature + Message"]
+        A -.-> G
+    end
+    
+    G --> H["📤 Transmitted over network"]
+    
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#e3f2fd
+    style D fill:#f3e5f5
+    style E fill:#ffcdd2
+    style F fill:#e3f2fd
+    style G fill:#e3f2fd
+    style H fill:#f5f5f5
+
+```
+
+2.  **Verification:**
     * Anyone receiving the information and signature can verify its validity using the signer's corresponding public key.
     * The verifier applies a verification algorithm using the original information, the signature, and the corresponding public key from the correct point in history of a KEL.
-    * This algorithm is the complement of the signing process. It uses the public key to mathematically check the signature against the digest of the raw information. This means using the public key to decrypt the signature to get back to the original digest. Then the digest from the decrypted signature is compared to the digest of the raw data. If the digests match then the verification succeeds and fails otherwise.
+    * This algorithm is the complement of the signing process. It uses the public key to mathematically validate that the signature corresponds to the digest of the raw information. The verification algorithm applies mathematical operations (which vary by signature scheme) to confirm the signature was created with the corresponding private key for the given digest. If the mathematical verification succeeds, the signature is valid; otherwise, it fails.
     * **Outcome:**
         * **Valid Signature:** If the signature verification succeeds, the verifier has high confidence in the information's authenticity, integrity, and non-repudiability and can trust the data and its originator.
         * **Invalid Signature:** If the signature fails verification the information may have been tampered with, the signature might be corrupt, or the legitimate holder of the private key didn't generate it. Thus the verifier should not trust the data.
+    * Successful verification confirms:
+        * **Authenticity:** The information originated from the owner of the key pair.
+        * **Integrity:** The information has not been altered since it was signed.
+        * **non-repudiability**: The signer cannot successfully deny signing the information. Because generating the signature requires the private key (which should be kept secret by the owner), a valid signature serves as strong evidence of the signer's action.
 
-Successful verification confirms:
+```mermaid
+graph TD
 
-* **Authenticity:** The information originated from the owner of the key pair.
-* **Integrity:** The information has not been altered since it was signed.
-* **non-repudiability**: The signer cannot successfully deny signing the information. Because generating the signature requires the private key (which should be kept secret by the owner), a valid signature serves as strong evidence of the signer's action.
+
+    
+    subgraph "VERIFICATION PROCESS"
+        H["📥 Received Message + Signature"] --> I["Separate Components"]
+        I --> J["Original Message: 'Transfer $1000 to Alice'"]
+        I --> K["Received Signature"]
+        J --> L["Hash Function: e.g., SHA-256"]
+        L --> M["Computed Digest: '0x3b7e72...'"]
+        M --> N["Verification Algorithm"]
+        K --> N
+        O["Public Key 🔑"] --> N
+        N --> P{Valid?}
+        P -->|Yes| Q["✅ Authentic, Unmodified, Non-repudiable"]
+        P -->|No| R["❌ Untrusted, Possibly tampered, or wrong key"]
+    end
+    
+    style H fill:#e3f2fd
+    style I fill:#f3e5f5
+    style J fill:#e3f2fd
+    style K fill:#e3f2fd
+    style L fill:#f3e5f5
+    style M fill:#e3f2fd
+    style N fill:#f3e5f5
+    style O fill:#bbdefb
+    style P fill:#f5f5f5
+    style Q fill:#c8e6c9
+    style R fill:#ffcdd2
+    
+```
+
+
 
 ## Verification Process in KERI
 

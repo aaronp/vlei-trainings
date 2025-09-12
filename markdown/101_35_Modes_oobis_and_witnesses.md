@@ -135,7 +135,7 @@ Mailboxes are a simple store and forward mechanism where one controller receives
 <div class="alert alert-info">
     <b>ℹ️ NOTE</b><hr>
     Currently, the KERIpy implementation of witnesses also provides mailboxes. 
-    When a transferable identifier <em>declares a witness</em> in the inception event, that <b><u>witness 
+    When a transferable identifier <em>declares a witness</em> in the inception event, that <b><u>witness
     will also be used as a mailbox</u></b> for the controller to receive messages from other controllers.
     <br/>
     Similarly, KERIA agents also serve as mailboxes for Signify Controllers.

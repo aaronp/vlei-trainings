@@ -198,24 +198,24 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
-    	Public key 1:  DGmTxyRL2YZ0SKV2oAPbSqE4fghV3IaezOagBIla7P2v
+    Prefix  EPRQCgop2CyHCC8tabtl9iJOw1ryr2eXofO6IF7NQtQ-
+    	Public key 1:  DH8BuO089xEDuARHaXAq4V9Uqv2w7Pz4wBnb4AM9ojSa
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
-    	Public key 1:  DHOO7xIlDFvpX3ujEsWKOkHKnYS10jP_83nWkg_XX24v
+    Prefix  EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB
+    	Public key 1:  DC3EVHqOWepm_r3wN33_IOlrNKsAuza6o0HLjMJdpdYn
     
 
 
     Waiting for witness receipts...
 
 
-    Prefix  EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1
-    	Public key 1:  DIYzoYzj3UqAKPhwXW7fb_O4mXK6p1n5D7TFD2TMOlWa
+    Prefix  ECfW_ag06odaG2HgGqggnP697j17ZU7nM3dRb4ixpc9B
+    	Public key 1:  DA9-YlRY7pXgaaKlhkppFTAZ88r4v68ooNc8s-FuW5hc
     
 
 
@@ -230,8 +230,8 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    Registry:  acme_mgr_registry(EFl1e1yNyxFhbaFAdBcQ6wea_cW-vYn4SCTS_35V4Dlr) 
-    	created for Identifier Prefix:  EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
+    Registry:  acme_mgr_registry(EONNB-EvoWMm7aXTQpFDsN7hGCk-ZvRQEzdd0AZxox2r) 
+    	created for Identifier Prefix:  EPRQCgop2CyHCC8tabtl9iJOw1ryr2eXofO6IF7NQtQ-
 
 
     Waiting for TEL event witness receipts
@@ -240,34 +240,34 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    Registry:  employee_access_registry(EPExNQY4zWX9c5ujq6H9jSAaVJtP5Q2_J9cF966mMr80) 
-    	created for Identifier Prefix:  EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
+    Registry:  employee_access_registry(ECBgjw1OO2ZVr4U0_513HpnyRNtXmCBQ-UIY-ttC0n1Y) 
+    	created for Identifier Prefix:  EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB
 
 
     
-    ACME AID: EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
+    ACME AID: EPRQCgop2CyHCC8tabtl9iJOw1ryr2eXofO6IF7NQtQ-
     
     
-    Employee AID: EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
+    Employee AID: EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB
     
     
-    Sub-contractor AID: EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1
+    Sub-contractor AID: ECfW_ag06odaG2HgGqggnP697j17ZU7nM3dRb4ixpc9B
     
     
       Generating and resolving OOBIs  
     
 
 
-    http://witness-demo:5642/oobi/EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z/witness resolved
+    http://witness-demo:5642/oobi/EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB/witness resolved
 
 
-    http://witness-demo:5642/oobi/EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno/witness resolved
+    http://witness-demo:5642/oobi/EPRQCgop2CyHCC8tabtl9iJOw1ryr2eXofO6IF7NQtQ-/witness resolved
 
 
-    http://witness-demo:5642/oobi/EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1/witness resolved
+    http://witness-demo:5642/oobi/ECfW_ag06odaG2HgGqggnP697j17ZU7nM3dRb4ixpc9B/witness resolved
 
 
-    http://witness-demo:5642/oobi/EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z/witness resolved
+    http://witness-demo:5642/oobi/EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB/witness resolved
 
 
     
@@ -783,11 +783,11 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK has been created.
+    EEy7jb0V3U8MucFutlRulbQ9eIYWNDrm7Jsbuzg144aZ has been created.
 
 
     
-    Role Credential SAID: ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK
+    Role Credential SAID: EEy7jb0V3U8MucFutlRulbQ9eIYWNDrm7Jsbuzg144aZ
     
     
       You can continue ✅  
@@ -833,18 +833,18 @@ pr_continue()
     
 
 
-    Sending message EPwpXeXH3sJR6T_Q3ObQ0x8T9W9Jsjnrx9TzSsv-EmGO to EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
+    Sending message ECQY9YW7oFmRqOi2AJ1Mw69xtuBLTQc4-W37jbvKStgQ to EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB
 
 
     ... grant message sent
 
 
     
-      Admiting credential (ipex grant)  
+      Admitting credential (ipex admit)  
     
 
 
-    Sending admit message to EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
+    Sending admit message to EPRQCgop2CyHCC8tabtl9iJOw1ryr2eXofO6IF7NQtQ-
 
 
     ... admit message sent
@@ -856,24 +856,24 @@ pr_continue()
     
 
 
-    Current received credentials for employee (EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z):
+    Current received credentials for employee (EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB):
     
-    Credential #1: ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK
+    Credential #1: EEy7jb0V3U8MucFutlRulbQ9eIYWNDrm7Jsbuzg144aZ
         Type: RoleCredential
         Status: Issued ✔
-        Issued by EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno
-        Issued on 2025-07-18T00:19:18.083267+00:00
+        Issued by EPRQCgop2CyHCC8tabtl9iJOw1ryr2eXofO6IF7NQtQ-
+        Issued on 2025-09-12T04:10:33.313202+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON0001c2_",
-    	  "d": "ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK",
-    	  "i": "EAhskCWZ12ZEP7mg305RK9hEURkRoqhy7ZD4KqgHubno",
-    	  "ri": "EFl1e1yNyxFhbaFAdBcQ6wea_cW-vYn4SCTS_35V4Dlr",
+    	  "d": "EEy7jb0V3U8MucFutlRulbQ9eIYWNDrm7Jsbuzg144aZ",
+    	  "i": "EPRQCgop2CyHCC8tabtl9iJOw1ryr2eXofO6IF7NQtQ-",
+    	  "ri": "EONNB-EvoWMm7aXTQpFDsN7hGCk-ZvRQEzdd0AZxox2r",
     	  "s": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw",
     	  "a": {
-    	    "d": "EJRdBo-Vy5SF5lLVDdeifeXUKUDcC3h16jxkDGJ2xXGb",
-    	    "i": "EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z",
-    	    "dt": "2025-07-18T00:19:18.083267+00:00",
+    	    "d": "EJZ5Ab5kkrz-hGU7-e5K7mV_LCpEFn1e1t7aNttCZwWu",
+    	    "i": "EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB",
+    	    "dt": "2025-09-12T04:10:33.313202+00:00",
     	    "roleTitle": "Engineering Manager",
     	    "department": "Technology Innovations"
     	  }
@@ -961,9 +961,9 @@ with open(access_cred_edge_file_path, 'w') as f:
 
 
     {
-      "d": "EJ1i7BbxkuSyKL0bHvc1P3aulLzLyPIVhTHwEVZqPILc",
+      "d": "EKkr7dXYEw4HFBpppP36I4hNmR6F_0XOHwduQSMGYTRF",
       "manager_endorsement": {
-        "n": "ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK",
+        "n": "EEy7jb0V3U8MucFutlRulbQ9eIYWNDrm7Jsbuzg144aZ",
         "s": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw",
         "o": "I2I"
       }
@@ -1039,11 +1039,11 @@ pr_continue()
     Sending TEL events to witnesses
 
 
-    ELua1B3m2YVVq-9ZASfJOxgS7fFPout65g6_AqrrBHQX has been created.
+    EA0-zXenxtqAZa5rjjCmxjAqhOVqFo-8WgqBmkvHUWEk has been created.
 
 
     
-    Access Credential SAID: ELua1B3m2YVVq-9ZASfJOxgS7fFPout65g6_AqrrBHQX
+    Access Credential SAID: EA0-zXenxtqAZa5rjjCmxjAqhOVqFo-8WgqBmkvHUWEk
     
     
       You can continue ✅  
@@ -1090,7 +1090,7 @@ pr_continue()
     
 
 
-    Sending message EAtdOseOjOZcXjpKzfnE0VH2l-QDE9KSyySFjsz5vJSh to EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1
+    Sending message EJ6irfCsL-VdfLeX2g2QlqfB8cljJJjAFiF65C0o7kin to ECfW_ag06odaG2HgGqggnP697j17ZU7nM3dRb4ixpc9B
 
 
     ... grant message sent
@@ -1101,7 +1101,7 @@ pr_continue()
     
 
 
-    Sending admit message to EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
+    Sending admit message to EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB
 
 
     ... admit message sent
@@ -1113,31 +1113,31 @@ pr_continue()
     
 
 
-    Current received credentials for subcontractor (EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1):
+    Current received credentials for subcontractor (ECfW_ag06odaG2HgGqggnP697j17ZU7nM3dRb4ixpc9B):
     
-    Credential #1: ELua1B3m2YVVq-9ZASfJOxgS7fFPout65g6_AqrrBHQX
+    Credential #1: EA0-zXenxtqAZa5rjjCmxjAqhOVqFo-8WgqBmkvHUWEk
         Type: AccessCredential
         Status: Issued ✔
-        Issued by EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z
-        Issued on 2025-07-18T00:19:31.832874+00:00
+        Issued by EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB
+        Issued on 2025-09-12T04:10:52.883270+00:00
         Full Credential:
     	{
     	  "v": "ACDC10JSON000320_",
-    	  "d": "ELua1B3m2YVVq-9ZASfJOxgS7fFPout65g6_AqrrBHQX",
-    	  "i": "EGQsbkjPbER_MnIpamrtLlQvqdkZ4m68_YwZR1B_jz0z",
-    	  "ri": "EPExNQY4zWX9c5ujq6H9jSAaVJtP5Q2_J9cF966mMr80",
+    	  "d": "EA0-zXenxtqAZa5rjjCmxjAqhOVqFo-8WgqBmkvHUWEk",
+    	  "i": "EGKtnumYK9aJ0aKtX6WS8TPcVt2W8tYrlTbFwvX9T-IB",
+    	  "ri": "ECBgjw1OO2ZVr4U0_513HpnyRNtXmCBQ-UIY-ttC0n1Y",
     	  "s": "EF2zX3g5YDyHMSjgsK4OayZMFmLRMxcAJfW363JhBOfD",
     	  "a": {
-    	    "d": "EHVnxHfAgIRydQS7bbz3tTrB4ORzSwOAqsW9te2p3Ptj",
-    	    "i": "EB-1kYg2xJYT3XLnEHpmgWs71Gl71UpqzzVlK6ZGugd1",
-    	    "dt": "2025-07-18T00:19:31.832874+00:00",
+    	    "d": "EEnD2_uJHltlMdRJ_XZYE9YtutyPIwdYWlErX9JUeMol",
+    	    "i": "ECfW_ag06odaG2HgGqggnP697j17ZU7nM3dRb4ixpc9B",
+    	    "dt": "2025-09-12T04:10:52.883270+00:00",
     	    "buildingId": "HQ-EastWing",
     	    "accessLevel": "Level 2 - Common Areas & Labs"
     	  },
     	  "e": {
-    	    "d": "EJ1i7BbxkuSyKL0bHvc1P3aulLzLyPIVhTHwEVZqPILc",
+    	    "d": "EKkr7dXYEw4HFBpppP36I4hNmR6F_0XOHwduQSMGYTRF",
     	    "manager_endorsement": {
-    	      "n": "ECXoqC0UGGr6DxHLDD3FoKympHyHZBjnxErRvGWJdgfK",
+    	      "n": "EEy7jb0V3U8MucFutlRulbQ9eIYWNDrm7Jsbuzg144aZ",
     	      "s": "ENWatfUaeryBqvGnG7VdILVcqk84_eoxmiaJYguJXaRw",
     	      "o": "I2I"
     	    }
@@ -1188,3 +1188,5 @@ This notebook demonstrated the creation of a chained ACDC relationship using an 
 </ol>
 This process illustrates how KERI and ACDC can model real-world endorsement scenarios where the authority to issue a credential is derived from another verifiable credential held by the issuer and how additional conditions can be embedded using rules.
 </div>
+
+[<- Prev (ACDC Edges and Rules)](101_75_ACDC_Edges_and_Rules.ipynb) | [Next (ACDC Chained Credentials NI2I) ->](101_85_ACDC_Chained_Credentials_NI2I.ipynb)

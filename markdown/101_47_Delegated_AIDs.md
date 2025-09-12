@@ -182,8 +182,8 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2
-    	Public key 1:  DA4Gn-CjpQplGo5LREh6roryZKLYstP7KVbF7UL2NEru
+    Prefix  EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB
+    	Public key 1:  DG7EhH42hjxj77O-InfYucbj7AacdEbZKnMw2qhKrarD
     
 
 
@@ -192,13 +192,13 @@ pr_continue()
     
 
 
-    Delegator OOBI: http://witness-demo:5642/oobi/EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2/witness
+    Delegator OOBI: http://witness-demo:5642/oobi/EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB/witness
     
       Resolving OOBIs  
     
 
 
-    http://witness-demo:5642/oobi/EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2/witness resolved
+    http://witness-demo:5642/oobi/EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB/witness resolved
 
 
     
@@ -249,8 +249,8 @@ pr_continue()
     Waiting for witness receipts...
 
 
-    Prefix  EKUQkfnFODqNp4sJiJcxz6UTgvEZR0DgMFLptzWoN7Zz
-    	Public key 1:  DCS7E310ClO3yU5eVTPZ0Zl5T-nN0lDc5HLkO1jUrv14
+    Prefix  ECIiDbnDdnPSDqCY4eewKF_6-ZcizO9fkIX6AMYmnr5z
+    	Public key 1:  DM864_xepY76KkPFfrOASZcGZ4kywBsiteRn2Gm55X8w
     
 
 
@@ -316,11 +316,11 @@ pr_continue()
 
 
     
-    Delegator prefix: EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2
+    Delegator prefix: EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB
     
     Command 
-    kli incept --name delegate_keystore     --alias delegate_alias     --icount 1     --isith 1     --ncount 1     --nsith 1     --wits BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha     --toad 1     --transferable     --delpre EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2     --proxy delegate_proxy_alias > ./logs/delegate_incept.log
-     started with PID: 696
+    kli incept --name delegate_keystore     --alias delegate_alias     --icount 1     --isith 1     --ncount 1     --nsith 1     --wits BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha     --toad 1     --transferable     --delpre EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB     --proxy delegate_proxy_alias > ./logs/delegate_incept.log
+     started with PID: 914
     
       You can continue ✅  
     
@@ -356,7 +356,7 @@ pr_continue()
 
 
     
-    ['Delegagtor Prefix  EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2', 'Delegate EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d inception Anchored at Seq. No.  1', 'Delegate EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d inception event committed.']
+    ['Delegagtor Prefix  EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB', 'Delegate EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7 inception Anchored at Seq. No.  1', 'Delegate EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7 inception event committed.']
     
     
       You can continue ✅  
@@ -378,10 +378,10 @@ pr_title(f"Delegated AID status")
 
 
     Alias: 	delegate_alias
-    Identifier: EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d
+    Identifier: EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7
     Seq No:	0
     Delegated Identifier
-        Delegator:  EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2 ✔ Anchored
+        Delegator:  EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB ✔ Anchored
     
     
     Witnesses:
@@ -390,7 +390,7 @@ pr_title(f"Delegated AID status")
     Threshold:	1
     
     Public Keys:	
-    	1. DD8GDUs2dHT3yIIMu697ibo6IhPp-V8-vD-NSMNNiUHs
+    	1. DB5PKs2yTLWkgoaboz2rR0g_im9FBkQF2g8VWcjt6oUP
     
     
     Witnesses:	
@@ -399,16 +399,16 @@ pr_title(f"Delegated AID status")
     {
      "v": "KERI10JSON00018d_",
      "t": "dip",
-     "d": "EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d",
-     "i": "EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d",
+     "d": "EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7",
+     "i": "EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7",
      "s": "0",
      "kt": "1",
      "k": [
-      "DD8GDUs2dHT3yIIMu697ibo6IhPp-V8-vD-NSMNNiUHs"
+      "DB5PKs2yTLWkgoaboz2rR0g_im9FBkQF2g8VWcjt6oUP"
      ],
      "nt": "1",
      "n": [
-      "EA5SaINE4c3uNjT7Pzj52onrWUVsmO4_R5WBDmFTWcdF"
+      "EPnrEmgwqaIp50GHyR9jplHipD5mOwn7sG5QkD7p2adM"
      ],
      "bt": "1",
      "b": [
@@ -416,7 +416,7 @@ pr_title(f"Delegated AID status")
      ],
      "c": [],
      "a": [],
-     "di": "EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2"
+     "di": "EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB"
     }
     
 
@@ -473,14 +473,14 @@ pr_continue()
     
     Command 
     kli rotate --name delegate_keystore     --alias delegate_alias     --proxy delegate_proxy_alias
-     started with PID: 706
+     started with PID: 946
 
 
     
     Rotation
     
     
-    ['Delegagtor Prefix  EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2', 'Delegate EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d rotation Anchored at Seq. No.  2', 'Delegate EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d rotation event committed.']
+    ['Delegagtor Prefix  EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB', 'Delegate EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7 rotation Anchored at Seq. No.  2', 'Delegate EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7 rotation event committed.']
     
     
       You can continue ✅  
@@ -502,10 +502,10 @@ pr_title(f"Delegated AID status")
 
 
     Alias: 	delegate_alias
-    Identifier: EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d
+    Identifier: EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7
     Seq No:	1
     Delegated Identifier
-        Delegator:  EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2 ✔ Anchored
+        Delegator:  EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB ✔ Anchored
     
     
     Witnesses:
@@ -514,7 +514,7 @@ pr_title(f"Delegated AID status")
     Threshold:	1
     
     Public Keys:	
-    	1. DN0BBIF8IpqKTD9Hy4w5D4Bh8o3pZW8-8cCkxDJe-ZjO
+    	1. DN4WorNlMd_93dpHTFMLZoKT2LUH2na3UyMy55JuXZvu
     
     
     Witnesses:	
@@ -523,16 +523,16 @@ pr_title(f"Delegated AID status")
     {
      "v": "KERI10JSON00018d_",
      "t": "dip",
-     "d": "EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d",
-     "i": "EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d",
+     "d": "EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7",
+     "i": "EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7",
      "s": "0",
      "kt": "1",
      "k": [
-      "DD8GDUs2dHT3yIIMu697ibo6IhPp-V8-vD-NSMNNiUHs"
+      "DB5PKs2yTLWkgoaboz2rR0g_im9FBkQF2g8VWcjt6oUP"
      ],
      "nt": "1",
      "n": [
-      "EA5SaINE4c3uNjT7Pzj52onrWUVsmO4_R5WBDmFTWcdF"
+      "EPnrEmgwqaIp50GHyR9jplHipD5mOwn7sG5QkD7p2adM"
      ],
      "bt": "1",
      "b": [
@@ -540,23 +540,23 @@ pr_title(f"Delegated AID status")
      ],
      "c": [],
      "a": [],
-     "di": "EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2"
+     "di": "EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB"
     }
     
     {
      "v": "KERI10JSON000160_",
      "t": "drt",
-     "d": "EOvoS5syNShgAyCJuyZfheZVfj_sFmeSg2-A4b7ngnTM",
-     "i": "EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d",
+     "d": "EPMRGelfgPh4Nzt3EnvE00iIfqLz8Gvc2e8XV1Xq_8Sx",
+     "i": "EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7",
      "s": "1",
-     "p": "EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d",
+     "p": "EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7",
      "kt": "1",
      "k": [
-      "DN0BBIF8IpqKTD9Hy4w5D4Bh8o3pZW8-8cCkxDJe-ZjO"
+      "DN4WorNlMd_93dpHTFMLZoKT2LUH2na3UyMy55JuXZvu"
      ],
      "nt": "1",
      "n": [
-      "ECUOlc3k73_LAHKmwC5vqmuWFCJfzMpk1mxesBDqoKEb"
+      "EGAdXMUkWeRBtcdMbQIJ--eNpbdktxX3UgC9D7-EaQqt"
      ],
      "bt": "1",
      "br": [],
@@ -587,7 +587,7 @@ pr_title(f"Delegator AID status")
 
 
     Alias: 	delegator_alias
-    Identifier: EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2
+    Identifier: EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB
     Seq No:	2
     
     Witnesses:
@@ -596,7 +596,7 @@ pr_title(f"Delegator AID status")
     Threshold:	2
     
     Public Keys:	
-    	1. DA4Gn-CjpQplGo5LREh6roryZKLYstP7KVbF7UL2NEru
+    	1. DG7EhH42hjxj77O-InfYucbj7AacdEbZKnMw2qhKrarD
     
     
     Witnesses:	
@@ -607,16 +607,16 @@ pr_title(f"Delegator AID status")
     {
      "v": "KERI10JSON0001b7_",
      "t": "icp",
-     "d": "EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2",
-     "i": "EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2",
+     "d": "EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB",
+     "i": "EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB",
      "s": "0",
      "kt": "1",
      "k": [
-      "DA4Gn-CjpQplGo5LREh6roryZKLYstP7KVbF7UL2NEru"
+      "DG7EhH42hjxj77O-InfYucbj7AacdEbZKnMw2qhKrarD"
      ],
      "nt": "1",
      "n": [
-      "ECSrFwSA_ComJ8NmA3YnNlcnf_3QPFRu-n_HmxUW1u6m"
+      "ECxpSF1SUwO0frr7yy_AiTwXgbHfMg16yy6c9_Uf7o0Q"
      ],
      "bt": "2",
      "b": [
@@ -631,15 +631,15 @@ pr_title(f"Delegator AID status")
     {
      "v": "KERI10JSON00013a_",
      "t": "ixn",
-     "d": "EC7R_F1iNqo4zefj4OXp80JgZOemdPjZrKQmdhrmpBTh",
-     "i": "EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2",
+     "d": "EFkNaQOyxLhMcXSdK4Vb_d5_ze_xua9hM9YQ02LO_wZY",
+     "i": "EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB",
      "s": "1",
-     "p": "EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2",
+     "p": "EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB",
      "a": [
       {
-       "i": "EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d",
+       "i": "EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7",
        "s": "0",
-       "d": "EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d"
+       "d": "EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7"
       }
      ]
     }
@@ -647,15 +647,15 @@ pr_title(f"Delegator AID status")
     {
      "v": "KERI10JSON00013a_",
      "t": "ixn",
-     "d": "EJwsmAWeE9Tu1xO5TTvl24M-oh5nazCnfRpINyzTzzjd",
-     "i": "EPV9d7NEl5d03F-gh8Zp7Xtfdjh5qDH01Ktt8TkgR0I2",
+     "d": "EGKBpLEeTiIelhhR79KwFUSUD5bwKpytkebovqwLCxXL",
+     "i": "EHDW4TgdyYTkUwxtZlIt03poPBA4Ouk5w4LJ6MTJJRLB",
      "s": "2",
-     "p": "EC7R_F1iNqo4zefj4OXp80JgZOemdPjZrKQmdhrmpBTh",
+     "p": "EFkNaQOyxLhMcXSdK4Vb_d5_ze_xua9hM9YQ02LO_wZY",
      "a": [
       {
-       "i": "EGTowFMZtQE_7IpLt9gGmhbScnKmVs0lkdbbpLTw3M5d",
+       "i": "EESIOsSAKBrCvozIIAKcj87hQvntj_wcWiTHuu7AZPI7",
        "s": "1",
-       "d": "EOvoS5syNShgAyCJuyZfheZVfj_sFmeSg2-A4b7ngnTM"
+       "d": "EPMRGelfgPh4Nzt3EnvE00iIfqLz8Gvc2e8XV1Xq_8Sx"
       }
      ]
     }
@@ -695,7 +695,4 @@ KERI delegation allows an AID (delegator) to authorize another AID (delegate) fo
 </ul>
 </div>
 
-
-```python
-
-```
+[<- Prev (Connecting Controllers)](101_45_Connecting_controllers.ipynb) | [Next (Multisignature Identifiers) ->](101_48_Multisignature_Identifiers.ipynb)

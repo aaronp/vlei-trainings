@@ -19,25 +19,7 @@ There is currently no known workaround for this issue.
 
 For more technical details and to track the status of this issue, please refer to:https://github.com/WebOfTrust/keripy/issues/1040 
 
-## Issue 2: Sally Webhook Fails on First Presentation
-The `sally` vLEI Reporting Agent may fail to send a webhook notification on the very first credential presentation it receives after being started.
-
-**Expected Behavior**
-
-Upon receiving and successfully validating a credential presentation, `sally` should immediately make a POST request to its pre-configured webhook URL.
-
-**Actual Behavior**
-
-On the first attempt to present a credential, sally's logs show multiple errors, and the webhook call is not made. However, on the second and all subsequent presentation attempts for the same or different credentials, `sally` processes the presentation correctly and successfully calls the webhook.
-
-**Workaround**
-
-If a webhook call is not received after the first presentation, simply perform the presentation again.
-
-For more technical details and to track the status of this issue, please refer to: https://github.com/GLEIF-IT/sally/issues/46
-
-
-## Issue 3: KERIA Multisig State Synchronization Lag
+## Issue 2: KERIA Multisig State Synchronization Lag
 In a multisig group managed by KERIA, members who are not required to sign an event (based on the signing threshold) may not have their local state updated after the event is completed by other members.
 
 **Expected Behavior**

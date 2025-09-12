@@ -81,9 +81,13 @@ console.log(`Client A AID Pre: ${aidA.i}\nClient B AID Pre: ${aidB.i}`)
 ```
 
     Signify library is ready.
+
+
     Agent delegated and ready
-    Client A AID Pre: EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA
-    Client B AID Pre: EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ
+
+
+    Client A AID Pre: EEf12hYPxR7v5S9IMEMia1v_lzowPBpGUgMr8sRw5DJU
+    Client B AID Pre: EFr4NDK3M7B28dMWZ0s8drzuuJ_dXg-W5SM1c2fnMXnN
 
 
 <div class="alert alert-info">
@@ -148,8 +152,10 @@ console.log(`Client B: Assigned '${agentRole}' role to KERIA Agent ${clientB.age
 
 ```
 
-    Client A: Assigned 'agent' role to KERIA Agent EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU for AID EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA
-    Client B: Assigned 'agent' role to KERIA Agent EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU for AID EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ
+    Client A: Assigned 'agent' role to KERIA Agent EMMKkxBz_28NGq5mmDCzBG7qPVbfNkiO3G25Mh53LI8t for AID EEf12hYPxR7v5S9IMEMia1v_lzowPBpGUgMr8sRw5DJU
+
+
+    Client B: Assigned 'agent' role to KERIA Agent EJMGsMkIMUzLZKLG2xMpfhu00H_vLEcKvqyc3uZJkBIa for AID EFr4NDK3M7B28dMWZ0s8drzuuJ_dXg-W5SM1c2fnMXnN
 
 
 ## Discovery via OOBIs
@@ -181,8 +187,10 @@ console.log(`Client B (Betty) generated OOBI for aidB: ${oobiB_url}`);
 
 ```
 
-    Client A (Alfred) generated OOBI for aidA: http://keria:3902/oobi/EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA/agent/EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU
-    Client B (Betty) generated OOBI for aidB: http://keria:3902/oobi/EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ/agent/EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU
+    Client A (Alfred) generated OOBI for aidA: http://keria:3902/oobi/EEf12hYPxR7v5S9IMEMia1v_lzowPBpGUgMr8sRw5DJU/agent/EMMKkxBz_28NGq5mmDCzBG7qPVbfNkiO3G25Mh53LI8t
+
+
+    Client B (Betty) generated OOBI for aidB: http://keria:3902/oobi/EFr4NDK3M7B28dMWZ0s8drzuuJ_dXg-W5SM1c2fnMXnN/agent/EJMGsMkIMUzLZKLG2xMpfhu00H_vLEcKvqyc3uZJkBIa
 
 
 ### Resolving OOBI URLs
@@ -219,9 +227,15 @@ console.log(`Client B resolved Alfred's OOBI. Response:`, BResolveResponse.respo
 
     
     Client A (Alfred) attempting to resolve Betty's OOBI...
+
+
     Client A resolved Betty's OOBI. Response: OK
+
+
     
     Client B (Betty) attempting to resolve Alfred's OOBI...
+
+
     Client B resolved Alfred's OOBI. Response: OK
 
 
@@ -242,14 +256,16 @@ console.log(BContacts);
 
     
     Verifying contacts...
+
+
     [
       {
         alias: "Betty_Contact_for_Alfred",
-        oobi: "http://keria:3902/oobi/EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ/agent/EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU",
-        id: "EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ",
+        oobi: "http://keria:3902/oobi/EFr4NDK3M7B28dMWZ0s8drzuuJ_dXg-W5SM1c2fnMXnN/agent/EJMGsMkIMUzLZKLG2xMpfhu00H_vLEcKvqyc3uZJkBIa",
+        id: "EFr4NDK3M7B28dMWZ0s8drzuuJ_dXg-W5SM1c2fnMXnN",
         ends: {
           agent: {
-            "EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU": { http: "http://keria:3902/" }
+            EJMGsMkIMUzLZKLG2xMpfhu00H_vLEcKvqyc3uZJkBIa: { http: "http://keria:3902/" }
           },
           witness: {
             "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha": {
@@ -270,14 +286,16 @@ console.log(BContacts);
         wellKnowns: []
       }
     ]
+
+
     [
       {
         alias: "Alfred_Contact_for_Betty",
-        oobi: "http://keria:3902/oobi/EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA/agent/EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU",
-        id: "EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA",
+        oobi: "http://keria:3902/oobi/EEf12hYPxR7v5S9IMEMia1v_lzowPBpGUgMr8sRw5DJU/agent/EMMKkxBz_28NGq5mmDCzBG7qPVbfNkiO3G25Mh53LI8t",
+        id: "EEf12hYPxR7v5S9IMEMia1v_lzowPBpGUgMr8sRw5DJU",
         ends: {
           agent: {
-            EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU: { http: "http://keria:3902/" }
+            EMMKkxBz_28NGq5mmDCzBG7qPVbfNkiO3G25Mh53LI8t: { http: "http://keria:3902/" }
           },
           witness: {
             "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha": {
@@ -336,20 +354,22 @@ console.log("Client B's challenge words for Alfred:", challengeWordsB.words);
 ```
 
     Client A's challenge words for Betty: [
-      "gaze",     "clever",
-      "install",  "jump",
-      "captain",  "piano",
-      "dignity",  "whale",
-      "elephant", "endorse",
-      "copper",   "trumpet"
+      "ghost",   "color",
+      "mandate", "nephew",
+      "cook",    "small",
+      "myth",    "door",
+      "lake",    "turkey",
+      "spare",   "what"
     ]
+
+
     Client B's challenge words for Alfred: [
-      "six",      "foil",
-      "pill",     "art",
-      "cinnamon", "indoor",
-      "warrior",  "slim",
-      "awful",    "rather",
-      "knife",    "advance"
+      "stable",  "salt",
+      "diesel",  "police",
+      "cancel",  "sell",
+      "portion", "twin",
+      "enjoy",   "appear",
+      "field",   "crystal"
     ]
 
 
@@ -399,20 +419,30 @@ console.log(AContactsAfterAuth)
 ```
 
     
-    Betty (aidB: EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ) responding to Alfred's (aidA: EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA) challenge...
+    Betty (aidB: EFr4NDK3M7B28dMWZ0s8drzuuJ_dXg-W5SM1c2fnMXnN) responding to Alfred's (aidA: EEf12hYPxR7v5S9IMEMia1v_lzowPBpGUgMr8sRw5DJU) challenge...
+
+
     Betty's response sent.
+
+
     
     Alfred (aidA) verifying Betty's (aidB) response...
-    Alfred: Betty's response verified. SAID of exn: EN5L5ZYljzorITTNpqk4Trsmsrs-3yadrVSrm2f7nGVM
+
+
+    Alfred: Betty's response verified. SAID of exn: EGaovC5tH_MqxM8E8-lOnp6wD-bw1kO-zqJHxogUUzx7
+
+
     Alfred: Marked Betty's contact as authenticated.
+
+
     [
       {
         alias: "Betty_Contact_for_Alfred",
-        oobi: "http://keria:3902/oobi/EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ/agent/EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU",
-        id: "EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ",
+        oobi: "http://keria:3902/oobi/EFr4NDK3M7B28dMWZ0s8drzuuJ_dXg-W5SM1c2fnMXnN/agent/EJMGsMkIMUzLZKLG2xMpfhu00H_vLEcKvqyc3uZJkBIa",
+        id: "EFr4NDK3M7B28dMWZ0s8drzuuJ_dXg-W5SM1c2fnMXnN",
         ends: {
           agent: {
-            "EFlcYHTOLZBoBETrCAE-xljLag8PgDCZTDtJuzo6_myU": { http: "http://keria:3902/" }
+            EJMGsMkIMUzLZKLG2xMpfhu00H_vLEcKvqyc3uZJkBIa: { http: "http://keria:3902/" }
           },
           witness: {
             "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha": {
@@ -431,16 +461,16 @@ console.log(AContactsAfterAuth)
         },
         challenges: [
           {
-            dt: "2025-07-18T00:27:43.369000+00:00",
+            dt: "2025-09-12T04:11:28.618000+00:00",
             words: [
-              "gaze",     "clever",
-              "install",  "jump",
-              "captain",  "piano",
-              "dignity",  "whale",
-              "elephant", "endorse",
-              "copper",   "trumpet"
+              "ghost",   "color",
+              "mandate", "nephew",
+              "cook",    "small",
+              "myth",    "door",
+              "lake",    "turkey",
+              "spare",   "what"
             ],
-            said: "EN5L5ZYljzorITTNpqk4Trsmsrs-3yadrVSrm2f7nGVM",
+            said: "EGaovC5tH_MqxM8E8-lOnp6wD-bw1kO-zqJHxogUUzx7",
             authenticated: true
           }
         ],
@@ -491,20 +521,30 @@ console.log(BContactsAfterAuth);
 ```
 
     
-    Alfred (aidA: EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA) responding to Betty's (aidB: EIGa_qsf1GLVT2NXnXteLCN_-B0DKmGaV39p57eNCAOQ) challenge...
+    Alfred (aidA: EEf12hYPxR7v5S9IMEMia1v_lzowPBpGUgMr8sRw5DJU) responding to Betty's (aidB: EFr4NDK3M7B28dMWZ0s8drzuuJ_dXg-W5SM1c2fnMXnN) challenge...
+
+
     Alfred's response sent.
+
+
     
     Betty (aidB) verifying Alfred's (aidA) response...
-    Betty: Alfred's response verified. SAID of exn: EEw1jfkIz0L1af2bsiLGC9f1WDOpxzit7glRWG4_dWfB
+
+
+    Betty: Alfred's response verified. SAID of exn: EGuHjc2voHRKPHwKRFO4H8wygZNBCHEpv3lMT2QfsxKX
+
+
     Betty: Marked Alfred's contact as authenticated.
+
+
     [
       {
         alias: "Alfred_Contact_for_Betty",
-        oobi: "http://keria:3902/oobi/EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA/agent/EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU",
-        id: "EABWImOm9hIeZT2STeaobbcZw7yt3ITw5uEEDsiwXPLA",
+        oobi: "http://keria:3902/oobi/EEf12hYPxR7v5S9IMEMia1v_lzowPBpGUgMr8sRw5DJU/agent/EMMKkxBz_28NGq5mmDCzBG7qPVbfNkiO3G25Mh53LI8t",
+        id: "EEf12hYPxR7v5S9IMEMia1v_lzowPBpGUgMr8sRw5DJU",
         ends: {
           agent: {
-            EPz83YNKcZ4yW9NcVvqAPGu5MVqf8K1NcZRMhGJOH5EU: { http: "http://keria:3902/" }
+            EMMKkxBz_28NGq5mmDCzBG7qPVbfNkiO3G25Mh53LI8t: { http: "http://keria:3902/" }
           },
           witness: {
             "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha": {
@@ -523,16 +563,16 @@ console.log(BContactsAfterAuth);
         },
         challenges: [
           {
-            dt: "2025-07-18T00:27:43.832000+00:00",
+            dt: "2025-09-12T04:11:29.215000+00:00",
             words: [
-              "six",      "foil",
-              "pill",     "art",
-              "cinnamon", "indoor",
-              "warrior",  "slim",
-              "awful",    "rather",
-              "knife",    "advance"
+              "stable",  "salt",
+              "diesel",  "police",
+              "cancel",  "sell",
+              "portion", "twin",
+              "enjoy",   "appear",
+              "field",   "crystal"
             ],
-            said: "EEw1jfkIz0L1af2bsiLGC9f1WDOpxzit7glRWG4_dWfB",
+            said: "EGuHjc2voHRKPHwKRFO4H8wygZNBCHEpv3lMT2QfsxKX",
             authenticated: true
           }
         ],
@@ -574,3 +614,5 @@ This notebook demonstrated the process of connecting two KERIA/Signify controlle
 </ol>
 Successful completion of both OOBI resolution and the mutual challenge-response protocol establishes a high degree of trust. Both controllers have verified each other's identity (KEL) and cryptographically confirmed that the other party has active control of their private keys. The <code>challengesAuthenticated</code> flag in their contact lists for each other should now be true.
 </div>
+
+[<- Prev (KERIA Signify Basic Operations)](102_10_KERIA_Signify_Basic_Operations.ipynb) | [Next (KERIA Signify Key Rotation) ->](102_17_KERIA_Signify_Key_Rotation.ipynb)

@@ -279,7 +279,7 @@ print(f"Challenge Phrase B: {phrase_b}")
     Example challenge phrase:
 
 
-    robot match tomato increase similar resist swap opinion lounge walnut strategy glove
+    wasp hire similar despair sausage deposit replace fame devote doll mosquito churn
 
 
     
@@ -287,10 +287,10 @@ print(f"Challenge Phrase B: {phrase_b}")
     
 
 
-    Challenge Phrase A: banner worth air salad snow topic fresh feed razor decorate pair innocent
+    Challenge Phrase A: boil remain myself vendor impact frog render monkey salad valve flower oxygen
 
 
-    Challenge Phrase B: eagle truly sail depth cover faint essay hybrid identify link purity refuse
+    Challenge Phrase B: all autumn copper leg midnight police legend labor keep salon frown innocent
 
 
 Now, simulate the OOB exchange: `aid_b` sends `phrase_b` to `aid_a`, and `aid_a` sends `phrase_a` to `aid_b`. Each party then uses `kli challenge respond` to sign the phrase they received and `kli challenge verify` to check the response from the other party.
@@ -307,7 +307,7 @@ print(phrase_a)
     --recipient {aid_a}
 ```
 
-    banner worth air salad snow topic fresh feed razor decorate pair innocent
+    boil remain myself vendor impact frog render monkey salad valve flower oxygen
 
 
 
@@ -323,7 +323,7 @@ print(phrase_a)
 
     .
     
-    Signer aid_b successfully responded to challenge words: '['banner', 'worth', 'air', 'salad', 'snow', 'topic', 'fresh', 'feed', 'razor', 'decorate', 'pair', 'innocent']'
+    Signer aid_b successfully responded to challenge words: '['boil', 'remain', 'myself', 'vendor', 'impact', 'frog', 'render', 'monkey', 'salad', 'valve', 'flower', 'oxygen']'
     
 
 
@@ -338,7 +338,7 @@ print(phrase_b)
     --recipient {aid_b}
 ```
 
-    eagle truly sail depth cover faint essay hybrid identify link purity refuse
+    all autumn copper leg midnight police legend labor keep salon frown innocent
 
 
 
@@ -353,8 +353,10 @@ print(phrase_b)
     Checking mailboxes for any challenge responses.
 
     .
+
     
-    Signer aid_a successfully responded to challenge words: '['eagle', 'truly', 'sail', 'depth', 'cover', 'faint', 'essay', 'hybrid', 'identify', 'link', 'purity', 'refuse']'
+    
+    Signer aid_a successfully responded to challenge words: '['all', 'autumn', 'copper', 'leg', 'midnight', 'police', 'legend', 'labor', 'keep', 'salon', 'frown', 'innocent']'
     
 
 
@@ -364,3 +366,5 @@ Successful verification on both sides mutually establishes cryptographically str
   <b>📝 SUMMARY</b><hr>
 After initial discovery (often via OOBIs), KERI controllers can enhance trust by verifying active control of private keys using a challenge-response protocol. This involves each controller generating a unique challenge phrase (kli challenge generate). One controller (aid_a) then responds to the other's challenge (phrase_b) by signing it (kli challenge respond), and the second controller (aid_b) verifies this response (kli challenge verify). This process is repeated reciprocally. Successful verification by both parties confirms they are interacting with the legitimate key holders for each AID.
 </div>
+
+[<- Prev (Witnesses)](101_40_Witnesses.ipynb) | [Next (Delegated AIDs) ->](101_47_Delegated_AIDs.ipynb)
