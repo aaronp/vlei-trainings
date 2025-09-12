@@ -382,10 +382,10 @@ pr_continue()
     
     Command 
     kli multisig incept --name party1_keystore     --alias party1_alias     --group multisig_group     --file ./config/multisig/multisig_inception_config.json > ./logs/multisig_event.log
-     started with PID: 2092
+     started with PID: 2386
     Command 
     kli multisig join --name party2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 2094
+     started with PID: 2387
     Waiting for multisig inception to complete...
     
     Waiting for multisig inception to complete...
@@ -584,10 +584,12 @@ pr_continue()
     
     Command 
     kli multisig interact --name party1_keystore     --alias multisig_group     --data '{"d": "arbitrary data"}' > ./logs/multisig_event.log
-     started with PID: 2113
+     started with PID: 2399
     Command 
     kli multisig join --name party2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 2114
+     started with PID: 2401
+    Waiting for multisig interaction to complete...
+    
     Waiting for multisig interaction to complete...
     
     Waiting for multisig interaction to complete...
@@ -883,10 +885,10 @@ pr_continue()
     
     Command 
     kli multisig rotate --name party1_keystore     --alias multisig_group     --smids ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY     --smids EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB     --rmids ELPvwxEI6nEv_Imtv89jgACiDvCFlgl50Ls6UatFtLyY     --rmids EOZIXcOdHPFkSEN_85QbeFC4GKo4nVqVx70RuDug-jBB     --isith '["1/2", "1/2"]'     --nsith '["1/2", "1/2"]' > ./logs/multisig_event.log
-     started with PID: 2159
+     started with PID: 2471
     Command 
     kli multisig join --name party2_keystore     --group multisig_group     --auto > ./logs/multisig_join.log
-     started with PID: 2160
+     started with PID: 2472
     Waiting for multisig rotation to complete...
     
     Waiting for multisig rotation to complete...
@@ -1096,3 +1098,5 @@ This notebook demonstrated the creation and management of a multi-signature (mul
 </ul>
 Throughout this process, KERI's cryptographic chaining and signature verification ensure the integrity and authenticity of the multisig group's key events.
 </div>
+
+[<- Prev (Delegated AIDs)](101_47_Delegated_AIDs.ipynb) | [Next (ACDC) ->](101_50_ACDC.ipynb)

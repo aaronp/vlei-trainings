@@ -3,7 +3,7 @@
 cd /app/markdown
 # Remove all.md if it already exists to ensure a clean merge
 if [ -f all.md ]; then
-  rm all.md
+  rm llm_context.md
 fi
 
 # Iterate over all .md files in the current directory and concatenate them into all.md

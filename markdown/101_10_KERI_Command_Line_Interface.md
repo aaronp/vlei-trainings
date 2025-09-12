@@ -57,7 +57,7 @@ What it means to be fully qualified is that the bytes in the cryptographic salt 
 !kli salt
 ```
 
-    0ADSwyz06mraopjjyazL_XKf
+    0AAkG1BmB7xnXBxo2Aasxrq9
 
 
 **Generate a passcode**: The passcode is used to encrypt your keystore, providing an additional layer of protection.
@@ -68,7 +68,7 @@ What it means to be fully qualified is that the bytes in the cryptographic salt 
 !kli passcode generate
 ```
 
-    v5yK8PGzjeYcKp5hxtvGZ
+    tbV7F3IPkvU7hHY1bgVsl
 
 
 **Print a timestamp**: Timestamps are typically used in operations involving multiple signers with what are called multi-signature (or "multisig") groups.
@@ -78,7 +78,7 @@ What it means to be fully qualified is that the bytes in the cryptographic salt 
 !kli time
 ```
 
-    2025-07-18T00:16:08.975712+00:00
+    2025-09-12T04:05:52.717998+00:00
 
 
 **Display help menu**

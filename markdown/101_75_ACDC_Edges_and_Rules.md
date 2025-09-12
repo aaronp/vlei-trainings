@@ -55,23 +55,63 @@ The core idea behind an I2I edge is to represent a direct chain of authority. Th
 
 I2I signifies: "My authority to issue this current ACDC may come from or otherwise involve the fact that I am the subject of the ACDC I am pointing to."
 
+
+
 ### I2I Scenario Examples
 
 1.  **Endorsement for Building Access:**
-    * **Scenario:** A company (ACME) issues a "Manager role" ACDC to an Employee. The Employee (now acting as an issuer by virtue of their managerial role) then issues an "Access" ACDC for a specific building to a sub-contractor they hired. The "Access" ACDC would have an I2I edge pointing back to the employee's "Manager role" ACDC.
-    * **Chain:** ACME (Root Issuer) ->
-      * Root issues "Manager role" ACDC -> Issuee: Employee
-        * Manager issues "Access ACDC" -> Issuee: Sub-contractor
-    * **Significance:** The I2I edge ensures the Manager issuing access is verifiably the same individual to whom ACME conferred managerial status.
+
+
+  
+* **Scenario:** A company (ACME) issues a "Manager role" ACDC to an Employee. The Employee (now acting as an issuer by virtue of their managerial role) then issues an "Access" ACDC for a specific building to a sub-contractor they hired. The "Access" ACDC would have an I2I edge pointing back to the employee's "Manager role" ACDC.
+
+| **Issuer** | **Issuee**      | **Credential** | **I2I Edge** |
+|------------|----------------|----------------|--------------|
+| ACME       | Employee       | Manager role   | N/A          |
+| Employee   | Sub-contractor | Access         | Manager role |
+
+* **Diagram representation:**
+```mermaid
+graph LR
+    subgraph "Credential Chain"
+        A[Access ACDC<br/>Issuer: Employee<br/>Issuee: Sub-contractor]
+        B[Manager Role ACDC<br/>Issuer: ACME<br/>Issuee: Employee]
+        A -->|I2I Edge| B
+    end
+```  
+
+* **Significance:** The I2I edge ensures the Manager issuing access is verifiably the same member to whom ACME conferred managerial status.
 
     In this case the door access management device acting as the **verifier** would check to ensure that the Access ACDC was issued with an I2I edge and that the *issuer* of the Access ACDC was indeed the *issuee* of the Manager role ACDC.
 
 2.  **Membership Level Endorsement for Event Access:**
-    * **Scenario:** An Organization issues a "Gold Member" ACDC to an individual. This individual (Gold Member) then wants to bring a guest to an exclusive event. The organization's policies (which are embedded in the `r` section of the "Gold Member" ACDC) allow Gold Members to issue "Guest Pass" ACDCs. The "Guest Pass" issued by the Gold Member would have an I2I edge pointing to their "Gold Member" ACDC.
-    * **Chain:** Organization (Issuer) -> "Gold Member" ACDC (Issuee: Individual) -> Individual (Issuer, using their Gold Member privilege) -> "Guest Pass" ACDC (Issuee: The Guest).
-    * **Significance:** The validity of the guest pass relies on the issuer being a verified Gold Member, as established by the I2I link, and governed by additional rules specified in the r section (e.g., limit on number of guest passes).
+
+
+
+* **Scenario:** An Organization issues a "Gold Member" ACDC to an member. This member (Gold Member) then wants to bring a guest to an exclusive event. The organization's policies (which are embedded in the `r` section of the "Gold Member" ACDC) allow Gold Members to issue "Guest Pass" ACDCs. The "Guest Pass" issued by the Gold Member would have an I2I edge pointing to their "Gold Member" ACDC.
+
+| **Issuer**   | **Isuee** | **Credential** | **I2I Edge** |
+|--------------|-----------|----------------|--------------|
+| Organization | Member    | Gold Member    | N/A          |
+| Member       | Guest     | Guest Pass     | Gold Member  |
+
+* **Diagram representation:**
+
+```mermaid
+graph LR
+    subgraph "Credential Chain"
+        A[Gold Member ACDC<br/>Issuer: Organization<br/>Issuee: Member]
+        B[Guest Pass ACDC<br/>Issuer: Member<br/>Issuee: Guest]
+        B -->|I2I Edge| A
+    end
+    
+```
+
+* **Significance:** The validity of the guest pass relies on the issuer being a verified Gold Member, as established by the I2I link, and governed by additional rules specified in the r section (e.g., limit on number of guest passes).
 
     In this case the door access point verifier would verify that the edge type was I2I and that the Gold Member was both the *issuer* of the Guest Pass ACDC and the *issuee* of the Gold Member ACDC.
+
+
 
 ### Use Cases for I2I
 
@@ -93,17 +133,56 @@ NI2I means that this ACDC I am pointing to provides relevant context, support, o
 
 This sort of relationship is more decoupled than I2I and is more applicable to scenarios where the issuer of the parent credential is not necessarily related to or affiliated with the issuer of the child credential or does not want a strict relationship between the parent and child credentials.
 
+
+
 ### NI2I Scenario Examples
 
 1.  **Linking to an External Training Course Completion Certificate:**
-    * **Scenario:** A Company issues an "Employee Skill Certified" ACDC to an employee after they complete an internal assessment. The employee also completed an external, third-party training course relevant to this skill. The "Employee Skill Certified" ACDC could have an NI2I edge pointing to the "Course Completion" ACDC issued by the external Training Provider.
-    * **Relationship:** Company (Issuer) -> "Employee Skill Certified" ACDC (Issuee: Employee) --NI2I Edge--> "Course Completion" ACDC (Issued by: Training Provider, Issuee: Employee).
-    * **Significance:** The company acknowledges the external training as supporting evidence. The `r` (rules) section of the "Employee Skill Certified" ACDC could specify how this external certification contributes to the overall skill validation (e.g., "External certification X fulfills requirement Y").
+
+
+
+* **Scenario:** A Company issues an "Skill Certified" ACDC to an employee after they complete an internal assessment. The employee also completed an external, third-party training course relevant to this skill. The "Skill Certified" ACDC could have an NI2I edge pointing to the "Course Completion" ACDC issued by the external Training Provider.
+
+| **Issuer**        | **Issuee** | **Credential**    | **NI2I Edge**     |
+|-------------------|-----------|-------------------|-------------------|
+| Training Provider | Employee  | Course Completion | N/A               |
+| Company           | Employee  | Skill Certified   | Course Completion |
+
+* **Diagram representation:**
+
+```mermaid
+graph LR
+    subgraph "Credential Reference"
+        A[Course Completion ACDC<br/>Issuer: Training Provider<br/>Issuee: Employee]
+        B[Skill Certified ACDC<br/>Issuer: Company<br/>Issuee: Employee]
+        B -.->|NI2I Edge<br/>references for context| A
+    end
+```
+ 
+* **Significance:** The company acknowledges the external training as supporting evidence. The `r` (rules) section of the "Skill Certified" ACDC could specify how this external certification contributes to the overall skill validation (e.g., "External certification X fulfills requirement Y").
 
 2.  **Proof of Insurance for a Rental Agreement:**
-    * **Scenario:** A Car Rental Agency issues a "Rental Agreement" ACDC to a Customer. The customer is required to have valid car insurance. The "Rental Agreement" ACDC could have an NI2I edge pointing to the Customer's "Proof of Insurance" ACDC, which was issued by an Insurance Company.
-    * **Relationship:** Rental Agency (Issuer) -> "Rental Agreement" ACDC (Issuee: Customer) --NI2I Edge--> "Proof of Insurance" ACDC (Issued by: Insurance Company, Issuee: Customer).
-    * **Significance:** The rental agreement relies on the existence of an insurance policy. The `r` section of the "Rental Agreement" ACDC would likely contain critical rules defining the terms of the rental, insurance coverage requirements (e.g., minimum liability), and consequences of non-compliance, which are legally binding.
+
+* **Scenario:** A Car Rental Agency issues a "Rental Agreement" ACDC to a Customer. The customer is required to have valid car insurance. The "Rental Agreement" ACDC could have an NI2I edge pointing to the Customer's "Proof of Insurance" ACDC, which was issued by an Insurance Company.
+
+| **Issuer**        | **Issuee** | **Credential**     | **NI2I Edge**      |
+|-------------------|-----------|--------------------|--------------------|
+| Insurance Company | Customer  | Proof of Insurance | N/A                |
+| Rental Agency     | Customer  | Rental Agreement   | Proof of Insurance |
+
+* **Diagram representation:**
+```mermaid
+graph LR
+    subgraph "Credential Reference"
+        A[Proof of Insurance ACDC<br/>Issuer: Insurance Company<br/>Issuee: Customer]
+        B[Rental Agreement ACDC<br/>Issuer: Rental Agency<br/>Issuee: Customer]
+        B -.->|NI2I Edge<br/>requires as evidence| A
+    end
+```
+
+* **Significance:** The rental agreement relies on the existence of an insurance policy. The `r` section of the "Rental Agreement" ACDC would likely contain critical rules defining the terms of the rental, insurance coverage requirements (e.g., minimum liability), and consequences of non-compliance, which are legally binding.
+
+
 
 ### Use Cases for NI2I
 
@@ -123,13 +202,40 @@ DI2I signifies: My authority to issue this current ACDC comes from the fact that
 
 ### DI2I Scenario Example
 
-1.  **Supply Chain: Quality Control Release by Delegated Plant Manager:**
-    * **Scenario:**
-        * A Manufacturing Conglomerate issues a "Plant Operations Authority" ACDC to the General Manager (GM) of Plant A (Issuee: `GM_PlantA_AID`). This grants the GM overall responsibility for Plant A's output.
-        * The GM of Plant A (AID: `GM_PlantA_AID`) delegates the authority for final quality control (QC) release of specific product lines (e.g., "Widget Model X") to the QC Shift Supervisor, Ms. Lee (AID: `QC_Lee_AID`), via KERI AID delegation.
-        * Ms. Lee's team completes QC checks on a batch of Widget Model X, and she issues a "Batch Quality Approved" ACDC.
-    * **Edge:** The "Batch Quality Approved" ACDC (issued by `QC_Lee_AID`) will have a DI2I edge pointing to the "Plant Operations Authority" ACDC (issuee: `GM_PlantA_AID`).
-    * **Significance (Why DI2I?):** Ms. Lee's authority is a verifiable delegation from the GM. The `r` (rules) section of the "Batch Quality Approved" ACDC might further specify the exact QC standards that must be met for the approval to be valid, linking the delegated action to concrete operational requirements.
+1.  **Supply Chain: Quality Control Release by Delegated QC Supervisor**
+
+* **Scenario:** A Manufacturing Conglomerate issues a "Plant Operations Authority" ACDC to the General Manager (GM) of Plant A. This grants the GM overall responsibility for Plant A's output.
+  * The GM of Plant A delegates the authority for final quality control (QC) release of specific product lines (e.g., "Widget Model X") to the QC Supervisor, via KERI AID delegation.
+  * QC Supervisor's team completes QC checks on a batch of Widget Model X, and the QC Supervisor issues a "Batch Quality Approved" ACDC.
+
+| **Issuer**                 | **Issuee** | **Credential**             | **DI2I Edge**              |
+|----------------------------|-----------|----------------------------|----------------------------|
+| Manufacturing Conglomerate | GM        | Plant Operations Authority | N/A                        |
+| QC Supervisor              | Batch     | Batch Quality Approved     | Plant Operations Authority |
+
+* **Diagram representation:**
+
+```mermaid
+graph TD
+    subgraph "Credential Chain (ACDCs)"
+        A["Plant Operations Authority ACDC<br/>Issuer: Manufacturing Conglomerate<br/>Issuee: GM"]
+        B["Batch Quality Approved ACDC<br/>Issuer:QC Supervisor<br/>Issuee: Batch Recipient"]
+        B -- "DI2I Edge<br/>(Points to Authority ACDC)" --> A
+    end
+    
+    subgraph "Identifier Relationship"
+        GM_AID["General Manager's AID<br/>(GM_PlantA_AID)"]
+        QC_AID["QC Supervisor's AID<br/>(QC_Supervisor_AID)"]
+        GM_AID -- "KERI Delegation Event" --> QC_AID
+    end
+
+    style GM_AID fill:#cde4ff,stroke:#333
+    style QC_AID fill:#cde4ff,stroke:#333
+```
+
+* **Significance (Why DI2I?):** QC Supervisor's authority is a verifiable delegation from the GM. The `r` (rules) section of the "Batch Quality Approved" ACDC might further specify the exact QC standards that must be met for the approval to be valid, linking the delegated action to concrete operational requirements.
+
+
 
 ### Use Cases for DI2I
 
@@ -148,3 +254,5 @@ ACDC Edges (<code>e</code> section) link ACDCs, with Edge Operators defining rel
 <li><b>DI2I (Delegated-Issuer-To-Issuee):</b> Use when the current ACDC's issuer is either the subject of the linked ACDC or a formally recognized delegate of that subject. Allows for flexible, multi-step delegation. Example: A QC Supervisor (delegate of Plant GM) issues a "Batch Approved" ACDC pointing to the GM's "Plant Authority" ACDC.</li>
 </ul>    
 </div>
+
+[<- Prev (ACDC Presentation and Revocation)](101_70_ACDC_Presentation_and_Revocation.ipynb) | [Next (ACDC Chained Credentials I2I) ->](101_80_ACDC_Chained_Credentials_I2I.ipynb)

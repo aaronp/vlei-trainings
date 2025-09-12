@@ -493,3 +493,5 @@ This notebook demonstrated the creation of a chained ACDC relationship using a N
 # process_schema_file("./config/schemas/course_completion_schema.bak.json", "./config/schemas/course_completion_schema.json", True)
 # process_schema_file("./config/schemas/skill_certified_schema.bak.json", "./config/schemas/skill_certified_schema.json", True)
 ```
+
+[<- Prev (ACDC Chained Credentials I2I)](101_80_ACDC_Chained_Credentials_I2I.ipynb) | [Next (KERIA Signify) ->](102_05_KERIA_Signify.ipynb)

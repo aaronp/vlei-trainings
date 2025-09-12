@@ -22,7 +22,7 @@ We have provided a sample schema and a utility function to help you SAIDfy the s
 
 ### Step 1: Write Schema JSON
 
-First, you will create a JSON file with the basic structure as seen in the previous notebook. Since we provide the schema, you don't need to worry about it. But review the file **[sample_credential_schema.json](config/schemas/sample_schema.bak.json)**, since it is the schema you will use, initially unprocessed. Notice the `$id` fields are initially empty strings `""`. 
+First, you will create a JSON file with the basic structure as seen in the previous notebook. Since we provide the schema, you don't need to worry about it. But review the file **[sample_credential_schema.json](config/schemas/sample_schema.bak.json)**, since it is the schema you will use, initially unprocessed. Notice the `$id` fields are initially empty strings `""`.  
 
 ### Step 2: Process and Embed SAIDs
 
@@ -76,7 +76,4 @@ In the next notebook, we'll use our SAIDified schema to set up a Credential Regi
     KERI uses Self-Addressing Identifiers (SAIDs) as unique, verifiable identifiers for ACDC schemas, embedded in the <code>&#36;id</code> field. A schema's SAID is a cryptographic digest of its content, guaranteeing integrity (tamper-evidence) and immutability (specific to that version). This process, called "SAIDifying," involves calculating and embedding SAIDs recursively from inner blocks outwards. Practically, tools or scripts (like the example <code>process_schema_file</code> or <code>kli saidify</code>) are used to populate the initially empty <code>&#36;id</code> fields in the schema JSON. Once SAIDified, the schema must be accessible (e.g., hosted on a server) so others can retrieve and verify it using its SAID.
 </div>
 
-
-```python
-
-```
+[<- Prev (Schemas)](101_55_Schemas.ipynb) | [Next (ACDC Issuance) ->](101_65_ACDC_Issuance.ipynb)

@@ -67,7 +67,7 @@ console.log('Using Passcode (bran):', bran);
     SignifyClient instance created.
 
 
-    Using Passcode (bran): BQ_y56Nf59ID_b7pzb796
+    Using Passcode (bran): DM4gMSUh1eELpAXSn7e7c
 
 
 <div class="alert alert-info">
@@ -125,25 +125,25 @@ console.log('Agent AID Delegator:', state.agent.di); // Should be the Client AID
     -------------------------
 
 
-    Client AID Prefix:  EA2GfmC5zd3xGSaQ7YKlSOPdJW_xbJPwwKde1skuqJK4
+    Client AID Prefix:  EH8QJKt2VvEKXuG11MkjXcHpINk0NurX20CnU2s5KYFw
 
 
-    Client AID Keys:    [ "DDFnKCWyYVvzbzkQMZdV1tUk9lUgFgIBSN0m6ldc8Sem" ]
+    Client AID Keys:    [ "DMh176ZFof98WEDQ3mTU4OUNls8jOIHxHssQB0QDtoYI" ]
 
 
-    Client AID Next Keys Digest:  [ "EB8oU5swFmt9h7G0G8xZkoDE49CqkFndRJ3S_-DakH8v" ]
+    Client AID Next Keys Digest:  [ "EPWeorrNy2yJcl0Yf5gbmUwjlwdSzgHIUbMnuL4B7nPf" ]
 
 
     
 
 
-    Agent AID Prefix:    EFSlxW9lxUHXMPBSFmNeMrVvR6z-HcPxyqeR65ePsd2W
+    Agent AID Prefix:    ED-3z7JwTpmFSC87Z_LRlrvdT2hyQW9VsKVDIlFpF755
 
 
     Agent AID Type:      dip
 
 
-    Agent AID Delegator: EA2GfmC5zd3xGSaQ7YKlSOPdJW_xbJPwwKde1skuqJK4
+    Agent AID Delegator: EH8QJKt2VvEKXuG11MkjXcHpINk0NurX20CnU2s5KYFw
 
 
 **Output Explanation:**
@@ -194,13 +194,13 @@ console.log('Agent AID Delegator:', state2.agent.di); // Should be the same Clie
     ---------------------------
 
 
-    Client AID Prefix:   EA2GfmC5zd3xGSaQ7YKlSOPdJW_xbJPwwKde1skuqJK4
+    Client AID Prefix:   EH8QJKt2VvEKXuG11MkjXcHpINk0NurX20CnU2s5KYFw
 
 
-    Agent AID Prefix:    EFSlxW9lxUHXMPBSFmNeMrVvR6z-HcPxyqeR65ePsd2W
+    Agent AID Prefix:    ED-3z7JwTpmFSC87Z_LRlrvdT2hyQW9VsKVDIlFpF755
 
 
-    Agent AID Delegator: EA2GfmC5zd3xGSaQ7YKlSOPdJW_xbJPwwKde1skuqJK4
+    Agent AID Delegator: EH8QJKt2VvEKXuG11MkjXcHpINk0NurX20CnU2s5KYFw
 
 
 <div class="alert alert-primary">
@@ -270,8 +270,8 @@ console.log(inceptionOperation);
 
 
     {
-      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
-      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      name: "witness.ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
+      metadata: { pre: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF", sn: 0 },
       done: false,
       error: null,
       response: null
@@ -322,20 +322,20 @@ console.dir(icpOp);
 
 
     {
-      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
-      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      name: "witness.ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
+      metadata: { pre: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF", sn: 0 },
       done: true,
       error: null,
       response: {
         v: "KERI10JSON0001b7_",
         t: "icp",
-        d: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
-        i: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        d: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
+        i: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
         s: "0",
         kt: "1",
-        k: [ "DBZMCILo9tIeKrLu7eT6yJ3m1wAmcj39zIIIJ5_N6F1q" ],
+        k: [ "DDIdUqYZKNw1tqQsqidDt_IOMQrxsCkjodATHT2-GRcT" ],
         nt: "1",
-        n: [ "EGT65gwP7FXPirO43m42U2UYkAqeOR2HVzOX0UN8YImN" ],
+        n: [ "EFfw_k3SV0jNDfJaBx40OMw3mPzWqzhisVy9II3L1gU_" ],
         bt: "2",
         b: [
           "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
@@ -349,33 +349,33 @@ console.dir(icpOp);
 
 
     
-    Successfully created AID with prefix: EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy
+    Successfully created AID with prefix: ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF
 
 
     Witnesses specified: ["BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha","BLskRTInXnMxWaGqcpSyMgo0nYbalW99cGZESrz3zapM","BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX"]
 
 
-    Icp op name: witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy
+    Icp op name: witness.ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF
 
 
     Inception operation
 
 
     {
-      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
-      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      name: "witness.ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
+      metadata: { pre: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF", sn: 0 },
       done: true,
       error: null,
       response: {
         v: "KERI10JSON0001b7_",
         t: "icp",
-        d: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
-        i: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        d: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
+        i: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
         s: "0",
         kt: "1",
-        k: [ "DBZMCILo9tIeKrLu7eT6yJ3m1wAmcj39zIIIJ5_N6F1q" ],
+        k: [ "DDIdUqYZKNw1tqQsqidDt_IOMQrxsCkjodATHT2-GRcT" ],
         nt: "1",
-        n: [ "EGT65gwP7FXPirO43m42U2UYkAqeOR2HVzOX0UN8YImN" ],
+        n: [ "EFfw_k3SV0jNDfJaBx40OMw3mPzWqzhisVy9II3L1gU_" ],
         bt: "2",
         b: [
           "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
@@ -422,9 +422,9 @@ console.log(JSON.stringify(operationsList, null, 2));
 
     [
       {
-        "name": "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        "name": "witness.ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
         "metadata": {
-          "pre": "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+          "pre": "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
           "sn": 0
         },
         "done": true,
@@ -432,16 +432,16 @@ console.log(JSON.stringify(operationsList, null, 2));
         "response": {
           "v": "KERI10JSON0001b7_",
           "t": "icp",
-          "d": "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
-          "i": "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+          "d": "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
+          "i": "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
           "s": "0",
           "kt": "1",
           "k": [
-            "DBZMCILo9tIeKrLu7eT6yJ3m1wAmcj39zIIIJ5_N6F1q"
+            "DDIdUqYZKNw1tqQsqidDt_IOMQrxsCkjodATHT2-GRcT"
           ],
           "nt": "1",
           "n": [
-            "EGT65gwP7FXPirO43m42U2UYkAqeOR2HVzOX0UN8YImN"
+            "EFfw_k3SV0jNDfJaBx40OMw3mPzWqzhisVy9II3L1gU_"
           ],
           "bt": "2",
           "b": [
@@ -468,27 +468,27 @@ console.log("Inception operation");
 console.dir(icpOp);
 ```
 
-    Icp op name: witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy
+    Icp op name: witness.ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF
 
 
     Inception operation
 
 
     {
-      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
-      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      name: "witness.ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
+      metadata: { pre: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF", sn: 0 },
       done: true,
       error: null,
       response: {
         v: "KERI10JSON0001b7_",
         t: "icp",
-        d: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
-        i: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
+        d: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
+        i: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
         s: "0",
         kt: "1",
-        k: [ "DBZMCILo9tIeKrLu7eT6yJ3m1wAmcj39zIIIJ5_N6F1q" ],
+        k: [ "DDIdUqYZKNw1tqQsqidDt_IOMQrxsCkjodATHT2-GRcT" ],
         nt: "1",
-        n: [ "EGT65gwP7FXPirO43m42U2UYkAqeOR2HVzOX0UN8YImN" ],
+        n: [ "EFfw_k3SV0jNDfJaBx40OMw3mPzWqzhisVy9II3L1gU_" ],
         bt: "2",
         b: [
           "BBilc4-L3tFUnfM_wJr4S4OJanAv_VmF_dJNN6vkf2Ha",
@@ -532,8 +532,8 @@ console.log("Inception operation complete");
 
 
     {
-      name: "witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy",
-      metadata: { pre: "EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy", sn: 0 },
+      name: "witness.ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF",
+      metadata: { pre: "ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF", sn: 0 },
       done: false,
       error: null,
       response: null
@@ -559,7 +559,7 @@ console.log(`\nDeleted operation: ${opNameToDelete}`);
 ```
 
     
-    Deleted operation: witness.EDwkavjyiOOSpOzHVyZZTtBNyI88EjdXTW_i1uaNC4vy
+    Deleted operation: witness.ECmTNMrQYlKin_gqj3kOtN0XwHO5TIYBz1-Gz2tnbixF
 
 
 Now run the `client.operations().list()` function to see that the operations have been cleared out.
@@ -578,9 +578,9 @@ console.log(JSON.stringify(operationsList, null, 2));
 
     [
       {
-        "name": "witness.ELbfbbLMcKinMyOrQMDm8kDBaxfqHRhruA1ZF7EZS4hF",
+        "name": "witness.EGH7tjO0WgOge87vFoghxigky8N4_RLZ_ZC_k5FWAW-F",
         "metadata": {
-          "pre": "ELbfbbLMcKinMyOrQMDm8kDBaxfqHRhruA1ZF7EZS4hF",
+          "pre": "EGH7tjO0WgOge87vFoghxigky8N4_RLZ_ZC_k5FWAW-F",
           "sn": 0
         },
         "done": true,
@@ -588,16 +588,16 @@ console.log(JSON.stringify(operationsList, null, 2));
         "response": {
           "v": "KERI10JSON000159_",
           "t": "icp",
-          "d": "ELbfbbLMcKinMyOrQMDm8kDBaxfqHRhruA1ZF7EZS4hF",
-          "i": "ELbfbbLMcKinMyOrQMDm8kDBaxfqHRhruA1ZF7EZS4hF",
+          "d": "EGH7tjO0WgOge87vFoghxigky8N4_RLZ_ZC_k5FWAW-F",
+          "i": "EGH7tjO0WgOge87vFoghxigky8N4_RLZ_ZC_k5FWAW-F",
           "s": "0",
           "kt": "1",
           "k": [
-            "DFSyQ-vnJVrCk57iBZQbepk8wwKpyxjkP5Z1p6yvdKRi"
+            "DEdcIv9efB03ts7Hah6tym0XbXaD9P2GwtNluo2DQZdr"
           ],
           "nt": "1",
           "n": [
-            "EEj31OxmloZi8OL0PLPK20m_9I5yy7VGk5CCOV-aIuIk"
+            "ECSf4N55OPixAdmKBwEIoZyZwKebtcEPZjxafH7iKX2L"
           ],
           "bt": "1",
           "b": [
@@ -624,3 +624,4 @@ To create a new AID using Signify-ts and a KERIA agent:
 This process highlights the asynchronous nature of KERIA operations that involve agent-side processing and network interactions.
 </div>
 
+[<- Prev (KERIA Signify)](102_05_KERIA_Signify.ipynb) | [Next (KERIA Signify Connecting Clients) ->](102_15_KERIA_Signify_Connecting_Clients.ipynb)

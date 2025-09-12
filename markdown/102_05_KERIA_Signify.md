@@ -123,3 +123,5 @@ SignifyPy, also known as "sigpy", is the Python implementation of the Signify cl
   </p>
     <p>SignifyTS and SignifyPy comprise the two implementations of the Signify client protocol that are usable with the recommendation being to use SignifyTS.</p>
 </div>
+
+[<- Prev (ACDC Chained Credentials NI2I)](101_85_ACDC_Chained_Credentials_NI2I.ipynb) | [Next (KERIA Signify Basic Operations) ->](102_10_KERIA_Signify_Basic_Operations.ipynb)

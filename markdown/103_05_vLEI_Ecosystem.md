@@ -126,3 +126,5 @@ The GLEIF vLEI ecosystem provides a robust framework for digital organizational 
 <br><br>
 Key principles include self-certifying AIDs, advanced key management (pre-rotation, multi-sig), cooperative delegation, and the use of KERI infrastructure like Witnesses and Watchers.  vLEIs and their schemas are SAID-ified for tamper-evidence and integrity.  The issuance and presentation of vLEIs utilize the IPEX protocol, with OOBI and challenge-response mechanisms ensuring secure discovery and authentication.  Rigorous identity verification processes are mandated for issuing credentials, particularly the Legal Entity vLEI Credential, involving DARs and LARs.  The system also includes defined processes for credential revocation. 
 </div>
+
+[<- Prev (Third Party Tools)](102_30_Third_Party_Tools.ipynb) | [Next (vLEI Trust Chain) ->](103_10_vLEI_Trust_Chain.ipynb)
