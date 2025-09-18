@@ -6,6 +6,9 @@ import { IssueVLEI } from './components/IssueVLEI';
 import { IssueCredential } from './components/IssueCredential';
 import { Organizations } from './components/Organizations';
 import { TailwindTest } from './components/TailwindTest';
+import { Wizard } from './pages/Wizard';
+import { IssuerWizard } from './pages/IssuerWizard';
+import { HolderWizard } from './pages/HolderWizard';
 
 const queryClient = new QueryClient();
 
@@ -20,6 +23,9 @@ function App() {
           <Route path="/issue-credential" element={<IssueCredential />} />
           <Route path="/organizations" element={<Organizations />} />
           <Route path="/test" element={<TailwindTest />} />
+          <Route path="/wizard" element={<Wizard />} />
+          <Route path="/wizard/issuer" element={<IssuerWizard />} />
+          <Route path="/wizard/holder" element={<HolderWizard />} />
         </Routes>
       </Router>
     </QueryClientProvider>

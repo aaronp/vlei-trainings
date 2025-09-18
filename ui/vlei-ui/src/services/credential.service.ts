@@ -211,3 +211,13 @@ export class CredentialService {
     return await this.keriaService.waitForOperation(admitOperation);
   }
 }
+
+// Create singleton instance
+let credentialServiceInstance: CredentialService | null = null;
+
+export const createCredentialService = (keriaService: KeriaService): CredentialService => {
+  if (!credentialServiceInstance) {
+    credentialServiceInstance = new CredentialService(keriaService);
+  }
+  return credentialServiceInstance;
+};

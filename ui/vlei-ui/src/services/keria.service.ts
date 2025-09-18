@@ -7,9 +7,26 @@ export class KeriaService {
   private bran: string;
   private isInitialized = false;
 
-  constructor(config: KeriConfig, bran: string) {
+  constructor(config: KeriConfig, bran?: string) {
     this.config = config;
-    this.bran = bran;
+    // Ensure bran is exactly 21 characters
+    this.bran = bran ? this.ensureBranLength(bran) : this.generateBran();
+  }
+
+  private ensureBranLength(bran: string): string {
+    if (bran.length === 21) return bran;
+    if (bran.length > 21) return bran.substring(0, 21);
+    return bran.padEnd(21, '0');
+  }
+
+  private generateBran(): string {
+    // Generate a random 21-character string
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < 21; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
   }
 
   async initialize(): Promise<void> {

@@ -60,6 +60,12 @@ export const Dashboard: React.FC = () => {
             </div>
             <div className="flex items-center space-x-4">
               <button
+                onClick={() => navigate('/wizard')}
+                className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
+              >
+                VLEI Wizard
+              </button>
+              <button
                 onClick={() => navigate('/issue')}
                 className="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700"
               >
