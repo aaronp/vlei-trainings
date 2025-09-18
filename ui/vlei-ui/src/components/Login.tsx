@@ -1,21 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { randomPasscode } from 'signify-ts';
 import { useKeriStore } from '../store/keriStore';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { initialize, bootstrap, connect, isInitialized, passcode: storedPasscode } = useKeriStore();
+  const { initialize, bootstrap, connect, isInitialized, passcode: storedPasscode, clearStore } = useKeriStore();
   
+  // Validate if passcode is UUID format
+  const isValidUUID = (str: string) => {
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    return uuidRegex.test(str);
+  };
+
+  // Clear stored passcode if it's not UUID format
+  useEffect(() => {
+    if (storedPasscode && !isValidUUID(storedPasscode)) {
+      clearStore();
+    }
+  }, [storedPasscode, clearStore]);
+
   const [adminUrl, setAdminUrl] = useState('http://localhost:3901');
   const [bootUrl, setBootUrl] = useState('http://localhost:3903');
-  const [passcode, setPasscode] = useState(storedPasscode || '');
-  const [isNewAgent, setIsNewAgent] = useState(!storedPasscode);
+  const [passcode, setPasscode] = useState(storedPasscode && isValidUUID(storedPasscode) ? storedPasscode : '');
+  const [isNewAgent, setIsNewAgent] = useState(!storedPasscode || !isValidUUID(storedPasscode));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showPasscode, setShowPasscode] = useState(false);
 
   const generateNewPasscode = () => {
-    const newPasscode = randomPasscode();
+    // Generate a UUID v4 format passcode
+    const newPasscode = crypto.randomUUID();
     setPasscode(newPasscode);
   };
 
@@ -23,6 +37,13 @@ export const Login: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    // Validate passcode format
+    if (!isValidUUID(passcode)) {
+      setError('Passcode must be in UUID format (e.g., 123e4567-e89b-12d3-a456-426614174000)');
+      setLoading(false);
+      return;
+    }
 
     try {
       // Initialize KERIA service
@@ -101,16 +122,22 @@ export const Login: React.FC = () => {
                 <input
                   id="passcode"
                   name="passcode"
-                  type="password"
+                  type={showPasscode ? "text" : "password"}
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-bl-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="21-character passcode"
+                  placeholder="UUID passcode (e.g., 123e4567-e89b-12d3-a456-426614174000)"
                   value={passcode}
                   onChange={(e) => setPasscode(e.target.value)}
                   disabled={loading}
-                  maxLength={21}
-                  minLength={21}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPasscode(!showPasscode)}
+                  className="relative inline-flex items-center px-3 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                  disabled={loading}
+                >
+                  {showPasscode ? 'Hide' : 'Show'}
+                </button>
                 <button
                   type="button"
                   onClick={generateNewPasscode}
@@ -156,7 +183,7 @@ export const Login: React.FC = () => {
           <div>
             <button
               type="submit"
-              disabled={loading || !passcode || passcode.length !== 21}
+              disabled={loading || !passcode || !isValidUUID(passcode)}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Connecting...' : (isNewAgent ? 'Bootstrap Agent' : 'Connect to Agent')}

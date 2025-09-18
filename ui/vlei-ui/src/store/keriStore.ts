@@ -132,10 +132,18 @@ export const useKeriStore = create<KeriStore>()(
         await keriaService.waitForOperation(op);
         await keriaService.deleteOperation(op.name);
         
-        // Add agent end role
-        const endRoleOp = await keriaService.addEndRole(alias, 'agent');
-        await keriaService.waitForOperation(endRoleOp);
-        await keriaService.deleteOperation(endRoleOp.name);
+        // Add agent end role - using the agent's identifier
+        const clientState = get().clientState;
+        if (clientState?.agent?.i) {
+          try {
+            const endRoleOp = await keriaService.addEndRole(alias, 'agent', clientState.agent.i);
+            await keriaService.waitForOperation(endRoleOp);
+            await keriaService.deleteOperation(endRoleOp.name);
+          } catch (error) {
+            console.warn('Failed to add end role:', error);
+            // Continue even if end role fails - AID was created successfully
+          }
+        }
         
         // Refresh AIDs
         await get().refreshAIDs();

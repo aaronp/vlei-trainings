@@ -87,7 +87,25 @@ export class KeriaService {
     
     const result = await this.client.identifiers().list();
     console.log('listAIDs result:', result);
-    return Array.isArray(result) ? result : [];
+    
+    // Handle paginated response format
+    if (result && typeof result === 'object' && 'aids' in result) {
+      // Map the API response to our AID interface
+      return result.aids.map((aid: any) => ({
+        i: aid.prefix,
+        name: aid.name
+      }));
+    }
+    
+    // Handle direct array response
+    if (Array.isArray(result)) {
+      return result.map((aid: any) => ({
+        i: aid.prefix || aid.i,
+        name: aid.name
+      }));
+    }
+    
+    return [];
   }
 
   async getAID(name: string): Promise<AID> {

@@ -19,6 +19,10 @@ export const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [newAidAlias, setNewAidAlias] = useState('');
   const [showCreateAid, setShowCreateAid] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+
+  // Debug state
+  console.log('Dashboard state:', { loading, newAidAlias, showCreateAid, aids });
 
   useEffect(() => {
     if (!isConnected) {
@@ -41,9 +45,23 @@ export const Dashboard: React.FC = () => {
       await createAID(newAidAlias);
       setNewAidAlias('');
       setShowCreateAid(false);
-    } catch (error) {
+      await refreshAIDs();
+      
+      // Show success message
+      setSuccessMessage(`Successfully created AID "${newAidAlias}"`);
+      setTimeout(() => setSuccessMessage(''), 3000);
+    } catch (error: any) {
       console.error('Failed to create AID:', error);
-      alert('Failed to create AID: ' + (error as Error).message);
+      
+      // Parse error message for better user feedback
+      let errorMessage = 'Failed to create AID';
+      if (error.message?.includes('already incepted')) {
+        errorMessage = `An AID with the name "${newAidAlias}" already exists. Please choose a different name.`;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      alert(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -86,6 +104,12 @@ export const Dashboard: React.FC = () => {
       </nav>
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        {/* Success Message */}
+        {successMessage && (
+          <div className="mb-4 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded relative">
+            <span className="block sm:inline">{successMessage}</span>
+          </div>
+        )}
         {/* Client Information */}
         <div className="bg-white overflow-hidden shadow rounded-lg mb-6">
           <div className="px-4 py-5 sm:px-6">
@@ -183,10 +207,17 @@ export const Dashboard: React.FC = () => {
         {showCreateAid && (
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-              <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+              <div 
+                className="fixed inset-0 transition-opacity" 
+                aria-hidden="true"
+                onClick={() => {
+                  setShowCreateAid(false);
+                  setNewAidAlias('');
+                }}
+              >
                 <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
               </div>
-              <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+              <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 relative z-20">
                 <div>
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
                     Create New AID
@@ -195,10 +226,19 @@ export const Dashboard: React.FC = () => {
                     <input
                       type="text"
                       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      placeholder="Enter AID alias"
+                      placeholder="Enter AID alias (e.g., my-aid)"
                       value={newAidAlias}
                       onChange={(e) => setNewAidAlias(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && newAidAlias.trim() && !loading) {
+                          handleCreateAID();
+                        } else if (e.key === 'Escape') {
+                          setShowCreateAid(false);
+                          setNewAidAlias('');
+                        }
+                      }}
                       disabled={loading}
+                      autoFocus
                     />
                   </div>
                 </div>
@@ -206,8 +246,8 @@ export const Dashboard: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleCreateAID}
-                    disabled={loading || !newAidAlias}
-                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm disabled:opacity-50"
+                    disabled={loading || !newAidAlias.trim()}
+                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? 'Creating...' : 'Create'}
                   </button>
