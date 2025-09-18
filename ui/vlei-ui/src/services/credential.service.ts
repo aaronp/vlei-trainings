@@ -210,6 +210,48 @@ export class CredentialService {
 
     return await this.keriaService.waitForOperation(admitOperation);
   }
+
+  async issueCredential(params: {
+    issuerAlias: string;
+    holderAid: string;
+    registryName: string;
+    schemaId: string;
+    attributes: Record<string, any>;
+  }): Promise<{ said: string; credential: any }> {
+    const client = this.keriaService.getClient();
+    if (!client) throw new Error('KERIA client not initialized');
+
+    // Find the registry
+    const registries = await this.listRegistries(params.issuerAlias);
+    const registry = registries.find(r => r.name === params.registryName);
+    if (!registry) {
+      throw new Error(`Registry ${params.registryName} not found`);
+    }
+
+    const issueResult = await client.credentials().issue(params.issuerAlias, {
+      ri: registry.regk,
+      s: params.schemaId,
+      a: {
+        i: params.holderAid,
+        dt: new Date().toISOString(),
+        ...params.attributes
+      }
+    });
+
+    const operation: Operation = typeof (issueResult as any).op === 'function'
+      ? await (issueResult as any).op()
+      : (issueResult as any);
+
+    await this.keriaService.waitForOperation(operation);
+    await this.keriaService.deleteOperation(operation.name);
+
+    // Return the credential SAID and data
+    const result = issueResult as any;
+    return {
+      said: result.d || result.acdc?.d || operation.response?.d,
+      credential: result.acdc || result
+    };
+  }
 }
 
 // Create singleton instance

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useKeriStore } from '../store/keriStore';
 
-// GLEIF VLEI Schema SAID (you'll need to replace this with the actual VLEI schema SAID)
-const VLEI_SCHEMA_SAID = 'EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK';
-const SCHEMA_SERVER_OOBI = `http://localhost:7723/oobi/${VLEI_SCHEMA_SAID}`;
+// Note: This component is deprecated - use the /wizard page for issuing credentials instead
 
 export const IssueVLEI: React.FC = () => {
   const navigate = useNavigate();
@@ -48,15 +46,8 @@ export const IssueVLEI: React.FC = () => {
       
       setRegistry(existingRegistry);
 
-      // Resolve schema OOBI
-      try {
-        const resolveOp = await keriaService.resolveOOBI(SCHEMA_SERVER_OOBI, 'vleiSchema');
-        await keriaService.waitForOperation(resolveOp);
-        await keriaService.deleteOperation(resolveOp.name);
-      } catch (oobiError) {
-        console.warn('VLEI Schema OOBI resolution failed:', oobiError);
-        // Continue anyway - the schema might already be resolved
-      }
+      // Note: Schema OOBI resolution should be done before issuing credentials
+      // This would typically be handled by the schema selection process
 
       setStep('form');
     } catch (error) {
@@ -76,7 +67,7 @@ export const IssueVLEI: React.FC = () => {
       const { credential, operation } = await credentialService.issueVLEI(
         selectedIssuer,
         registry.regk,
-        VLEI_SCHEMA_SAID,
+        '', // Schema SAID should be selected from available schemas
         recipientAid,
         vleiData
       );

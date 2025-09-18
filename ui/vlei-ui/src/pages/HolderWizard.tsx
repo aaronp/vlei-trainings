@@ -46,6 +46,29 @@ const StepIndicator: React.FC<{ steps: WizardStep[]; currentStep: number }> = ({
   </div>
 );
 
+const SelectedAIDIndicator: React.FC<{ selectedAid: string; aids: any[] }> = ({ selectedAid, aids }) => {
+  if (!selectedAid) return null;
+  
+  const aid = aids.find(a => a.name === selectedAid);
+  
+  return (
+    <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+      <div className="flex items-center">
+        <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        </svg>
+        <div>
+          <span className="text-sm font-medium text-green-900">Selected Holder AID: </span>
+          <span className="text-sm text-green-700 font-mono">{selectedAid}</span>
+          {aid && (
+            <div className="text-xs text-green-600 font-mono mt-1">{aid.i}</div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const SelectAIDStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoading }) => {
   const { aids, isConnected, refreshAIDs } = useKeriStore();
   const [selectedAid, setSelectedAid] = useState(state.selectedAid);
@@ -138,7 +161,7 @@ const SelectAIDStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoading }
 };
 
 const ConnectIssuerStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
-  const { keriaService } = useKeriStore();
+  const { keriaService, aids } = useKeriStore();
   const [issuerOOBI, setIssuerOOBI] = useState(state.issuerOOBI);
   const [loading, setLoading] = useState(false);
 
@@ -172,6 +195,8 @@ const ConnectIssuerStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Connect to Issuer</h2>
         <p className="text-gray-600">Resolve the issuer's OOBI to establish a secure connection</p>
       </div>
+
+      <SelectedAIDIndicator selectedAid={state.selectedAid} aids={aids} />
 
       <div className="space-y-4">
         <div>
@@ -219,7 +244,7 @@ const ConnectIssuerStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
 };
 
 const ReceiveGrantStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
-  const { keriaService } = useKeriStore();
+  const { keriaService, aids } = useKeriStore();
   const [grants, setGrants] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedGrant, setSelectedGrant] = useState<any>(null);
@@ -259,6 +284,8 @@ const ReceiveGrantStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Receive Offers</h2>
         <p className="text-gray-600">Check for incoming credential offers from the issuer</p>
       </div>
+
+      <SelectedAIDIndicator selectedAid={state.selectedAid} aids={aids} />
 
       <div className="flex justify-between items-center">
         <span className="text-sm text-gray-500">
@@ -337,7 +364,7 @@ const ReceiveGrantStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
 };
 
 const ReviewCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
-  const { keriaService } = useKeriStore();
+  const { keriaService, aids } = useKeriStore();
   const [credentialDetails, setCredentialDetails] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -357,20 +384,8 @@ const ReviewCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) =>
       setCredentialDetails(credential);
     } catch (error) {
       console.error('Failed to load credential details:', error);
-      // Use mock data for demo
-      setCredentialDetails({
-        v: "ACDC10JSON0001c4_",
-        d: state.selectedGrant.credentialSaid,
-        i: state.issuerAid,
-        s: "EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK",
-        a: {
-          i: state.selectedAid,
-          dt: new Date().toISOString(),
-          eventName: "GLEIF Summit",
-          accessLevel: "staff",
-          validDate: "2026-10-01"
-        }
-      });
+      // If we can't load the credential, we can't display it properly
+      setCredentialDetails(null);
     } finally {
       setLoading(false);
     }
@@ -386,6 +401,8 @@ const ReviewCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) =>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Review Credential</h2>
         <p className="text-gray-600">Examine the offered credential details before accepting</p>
       </div>
+
+      <SelectedAIDIndicator selectedAid={state.selectedAid} aids={aids} />
 
       {loading ? (
         <div className="flex justify-center py-8">
@@ -467,7 +484,7 @@ const ReviewCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) =>
 };
 
 const AdmitCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
-  const { keriaService } = useKeriStore();
+  const { keriaService, aids } = useKeriStore();
   const [loading, setLoading] = useState(false);
 
   const handleAdmit = async () => {
@@ -497,6 +514,8 @@ const AdmitCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) => 
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Accept Credential</h2>
         <p className="text-gray-600">Admit the credential to your wallet and send confirmation to issuer</p>
       </div>
+
+      <SelectedAIDIndicator selectedAid={state.selectedAid} aids={aids} />
 
       <div className="bg-green-50 border border-green-200 rounded-lg p-4">
         <h3 className="font-medium text-green-900 mb-2">Final Step</h3>
@@ -531,6 +550,7 @@ const AdmitCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) => 
 
 const CompletionStep: React.FC<StepProps> = ({ state }) => {
   const navigate = useNavigate();
+  const { aids } = useKeriStore();
   const nextSteps = wizardStateService.generateNextStepsForIssuer(state);
 
   return (
@@ -544,6 +564,8 @@ const CompletionStep: React.FC<StepProps> = ({ state }) => {
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Credential Received Successfully!</h2>
         <p className="text-gray-600">The credential has been admitted to your wallet</p>
       </div>
+
+      <SelectedAIDIndicator selectedAid={state.selectedAid} aids={aids} />
 
       <div className="bg-green-50 border border-green-200 rounded-lg p-4">
         <h3 className="font-medium text-green-900 mb-2">Credential Details</h3>

@@ -18,28 +18,25 @@ const StepIndicator: React.FC<{ steps: WizardStep[]; currentStep: number }> = ({
       {steps.map((step, index) => (
         <React.Fragment key={step.id}>
           <div className="flex items-center">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-              index < currentStep 
-                ? 'bg-green-500 text-white' 
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${index < currentStep
+                ? 'bg-green-500 text-white'
                 : index === currentStep
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-300 text-gray-600'
-            }`}>
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-300 text-gray-600'
+              }`}>
               {index < currentStep ? '✓' : index + 1}
             </div>
             <div className="ml-3">
-              <div className={`text-sm font-medium ${
-                index <= currentStep ? 'text-gray-900' : 'text-gray-500'
-              }`}>
+              <div className={`text-sm font-medium ${index <= currentStep ? 'text-gray-900' : 'text-gray-500'
+                }`}>
                 {step.title}
               </div>
               <div className="text-xs text-gray-500">{step.description}</div>
             </div>
           </div>
           {index < steps.length - 1 && (
-            <div className={`flex-1 h-0.5 mx-4 ${
-              index < currentStep ? 'bg-green-500' : 'bg-gray-300'
-            }`} />
+            <div className={`flex-1 h-0.5 mx-4 ${index < currentStep ? 'bg-green-500' : 'bg-gray-300'
+              }`} />
           )}
         </React.Fragment>
       ))}
@@ -47,7 +44,7 @@ const StepIndicator: React.FC<{ steps: WizardStep[]; currentStep: number }> = ({
   </div>
 );
 
-const SelectAIDStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoading }) => {
+const SelectAIDStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
   const { aids, isConnected, refreshAIDs } = useKeriStore();
   const [selectedAid, setSelectedAid] = useState(state.selectedAid);
   const [loading, setLoading] = useState(false);
@@ -138,7 +135,7 @@ const SelectAIDStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoading }
   );
 };
 
-const SetupRegistryStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoading }) => {
+const SetupRegistryStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
   const { keriaService } = useKeriStore();
   const [registryName, setRegistryName] = useState('');
   const [existingRegistries, setExistingRegistries] = useState<any[]>([]);
@@ -155,13 +152,13 @@ const SetupRegistryStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoadi
 
   const loadExistingRegistries = async () => {
     if (!state.selectedAid || !keriaService) return;
-    
+
     setLoadingRegistries(true);
     try {
       const credentialService = createCredentialService(keriaService);
       const registries = await credentialService.listRegistries(state.selectedAid);
       setExistingRegistries(registries);
-      
+
       // If there are existing registries, default to using existing
       if (registries.length > 0) {
         setUseExisting(true);
@@ -176,11 +173,11 @@ const SetupRegistryStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoadi
 
   const handleNext = async () => {
     if (!state.selectedAid || !keriaService) return;
-    
+
     setLoading(true);
     try {
       const credentialService = createCredentialService(keriaService);
-      
+
       let registry;
       if (useExisting && selectedRegistry) {
         registry = existingRegistries.find(r => r.name === selectedRegistry);
@@ -192,7 +189,7 @@ const SetupRegistryStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoadi
         // Refresh the list after creating
         await loadExistingRegistries();
       }
-      
+
       if (registry) {
         onNext({ registry });
       }
@@ -289,18 +286,76 @@ const SetupRegistryStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoadi
   );
 };
 
-const ChooseSchemaStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
-  const [schemas] = useState([
-    {
-      said: 'EGUPiCVO73M9worPwR3PfThAtC0AJnH5ZgwsXf6TzbVK',
-      name: 'Event Pass',
-      description: 'Schema for event access credentials'
-    }
-  ]);
+const ChooseSchemaStep: React.FC<StepProps> = ({ onNext, onBack }) => {
+  const [existingSchemas, setExistingSchemas] = useState<any[]>([]);
+  const [useExisting, setUseExisting] = useState(true);
   const [selectedSchema, setSelectedSchema] = useState('');
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [newSchemaName, setNewSchemaName] = useState('');
+  const [newSchemaDescription, setNewSchemaDescription] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    loadExistingSchemas();
+  }, []);
+
+  const loadExistingSchemas = () => {
+    try {
+      // Load schemas from localStorage (from SchemaManager)
+      const saved = localStorage.getItem('credentialSchemas');
+      const savedSchemas = saved ? JSON.parse(saved) : [];
+
+      setExistingSchemas(savedSchemas);
+
+      // If no schemas exist, default to create new
+      if (savedSchemas.length === 0) {
+        setUseExisting(false);
+      }
+    } catch (error) {
+      console.error('Failed to load schemas:', error);
+      setExistingSchemas([]);
+      setUseExisting(false);
+    }
+  };
+
+  const handleCreateNewSchema = () => {
+    setLoading(true);
+    try {
+      // This would normally create a schema using SchemaManager logic
+      // For now, create a simple mock schema
+      const newSchema = {
+        said: `E${Math.random().toString(36).substring(2, 15)}`, // Mock SAID
+        name: newSchemaName,
+        description: newSchemaDescription,
+        type: 'custom',
+        createdAt: new Date().toISOString()
+      };
+
+      // Add to existing schemas
+      const updatedSchemas = [...existingSchemas, newSchema];
+      setExistingSchemas(updatedSchemas);
+
+      // Save to localStorage
+      const customSchemas = updatedSchemas.filter(s => s.type === 'custom');
+      localStorage.setItem('credentialSchemas', JSON.stringify(customSchemas));
+
+      // Select the new schema
+      setSelectedSchema(newSchema.said);
+      setShowCreateForm(false);
+      setUseExisting(true);
+    } catch (error) {
+      console.error('Failed to create schema:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleNext = () => {
-    const schema = schemas.find(s => s.said === selectedSchema);
+    let schema;
+    if (useExisting && selectedSchema) {
+      schema = existingSchemas.find(s => s.said === selectedSchema);
+    }
+
     if (schema) {
       onNext({ schema });
     }
@@ -313,26 +368,112 @@ const ChooseSchemaStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
         <p className="text-gray-600">Select the credential type and schema for this issuance</p>
       </div>
 
-      <div className="space-y-3">
-        {schemas.map((schema) => (
-          <div key={schema.said} className="border rounded-lg p-4">
-            <label className="flex items-start cursor-pointer">
-              <input
-                type="radio"
-                name="selectedSchema"
-                value={schema.said}
-                checked={selectedSchema === schema.said}
-                onChange={(e) => setSelectedSchema(e.target.value)}
-                className="mr-3 mt-1"
-              />
+      <div className="space-y-4">
+
+        {/* Use Existing Schema */}
+        <div>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              checked={useExisting}
+              onChange={() => {
+                setUseExisting(true);
+                setShowCreateForm(false);
+              }}
+              className="mr-3"
+            />
+            <span className="font-medium">Use Existing Schema (Recommended)</span>
+          </label>
+          {useExisting && (
+            <div className="mt-3 ml-6 space-y-3">
+              {existingSchemas.length === 0 ? (
+                <p className="text-sm text-gray-500">No existing schemas found</p>
+              ) : (
+                existingSchemas.map((schema) => (
+                  <div key={schema.said} className="border rounded-lg p-4">
+                    <label className="flex items-start cursor-pointer">
+                      <input
+                        type="radio"
+                        name="selectedSchema"
+                        value={schema.said}
+                        checked={selectedSchema === schema.said}
+                        onChange={(e) => setSelectedSchema(e.target.value)}
+                        className="mr-3 mt-1"
+                      />
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium">{schema.name}</span>
+                          {schema.type === 'built-in' && (
+                            <span className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">Built-in</span>
+                          )}
+                          {schema.type === 'custom' && (
+                            <span className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded">Custom</span>
+                          )}
+                        </div>
+                        <div className="text-sm text-gray-600 mb-2">{schema.description}</div>
+                        <div className="text-xs text-gray-400 break-all">SAID: {schema.said}</div>
+                      </div>
+                    </label>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Create New Schema */}
+        <div>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              checked={!useExisting}
+              onChange={() => {
+                setUseExisting(false);
+                setShowCreateForm(true);
+              }}
+              className="mr-3"
+            />
+            <span className="font-medium">Create New Schema</span>
+          </label>
+          {showCreateForm && (
+            <div className="mt-3 ml-6 space-y-4 border rounded-lg p-4 bg-gray-50">
               <div>
-                <div className="font-medium">{schema.name}</div>
-                <div className="text-sm text-gray-600 mb-2">{schema.description}</div>
-                <div className="text-xs text-gray-400 break-all">SAID: {schema.said}</div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Schema Name
+                </label>
+                <input
+                  type="text"
+                  value={newSchemaName}
+                  onChange={(e) => setNewSchemaName(e.target.value)}
+                  placeholder="e.g., Employee Badge"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
               </div>
-            </label>
-          </div>
-        ))}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Description
+                </label>
+                <textarea
+                  value={newSchemaDescription}
+                  onChange={(e) => setNewSchemaDescription(e.target.value)}
+                  placeholder="Describe what this credential type is used for"
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <button
+                onClick={handleCreateNewSchema}
+                disabled={loading || !newSchemaName.trim()}
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm"
+              >
+                {loading ? 'Creating...' : 'Create Schema'}
+              </button>
+              <div className="text-xs text-gray-500">
+                Note: This creates a basic schema. For advanced schema design, use the Schema Manager.
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="flex justify-between pt-6">
@@ -344,7 +485,7 @@ const ChooseSchemaStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
         </button>
         <button
           onClick={handleNext}
-          disabled={!selectedSchema}
+          disabled={(useExisting && !selectedSchema) || (!useExisting && !showCreateForm)}
           className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
         >
           Next
@@ -354,34 +495,327 @@ const ChooseSchemaStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
   );
 };
 
-const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoading }) => {
-  const { keriaService } = useKeriStore();
-  const [credentialData, setCredentialData] = useState({
-    eventName: '',
-    accessLevel: 'attendee',
-    validDate: ''
-  });
+const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
+  const {
+    keriaService,
+    aids,
+    isConnected,
+    initialize,
+    connect,
+    passcode
+  } = useKeriStore();
+  const [credentialData, setCredentialData] = useState<Record<string, any>>({});
   const [holderAid, setHolderAid] = useState(state.holderAid);
+  const [holderAidInput, setHolderAidInput] = useState(state.holderAid);
+  const [useExistingAid, setUseExistingAid] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [schemaFields, setSchemaFields] = useState<any[]>([]);
+  const [error, setError] = useState<string>('');
+  const [serviceInitializing, setServiceInitializing] = useState(false);
+
+  useEffect(() => {
+    if (state.schema) {
+      loadSchemaFields();
+    }
+  }, [state.schema]);
+
+  useEffect(() => {
+    // Reinitialize KERIA service if it's missing but we have connection info
+    const initializeServiceIfNeeded = async () => {
+      if (!keriaService && passcode && !serviceInitializing) {
+        setServiceInitializing(true);
+        setError('');
+        try {
+          await initialize('http://localhost:3901', 'http://localhost:3903', passcode);
+          if (!isConnected) {
+            await connect();
+          }
+        } catch (error) {
+          console.error('Failed to reinitialize KERIA service:', error);
+          setError('Failed to reinitialize KERIA connection. Please go back to the dashboard and reconnect.');
+        } finally {
+          setServiceInitializing(false);
+        }
+      }
+    };
+
+    initializeServiceIfNeeded();
+  }, [keriaService, passcode, isConnected, serviceInitializing, initialize, connect]);
+
+  const loadSchemaFields = () => {
+    if (!state.schema) return;
+
+    // For all schemas, try to extract fields from the schema definition
+    loadCustomSchemaFields();
+  };
+
+  const loadCustomSchemaFields = () => {
+    if (!state.schema) return;
+
+    try {
+      // Load schema from localStorage if it's a custom schema
+      const saved = localStorage.getItem('credentialSchemas');
+      const savedSchemas = saved ? JSON.parse(saved) : [];
+      const fullSchema = savedSchemas.find((s: any) => s.said === state.schema!.said);
+
+      if (fullSchema && fullSchema.fields) {
+        // Use the fields from the custom schema
+        setSchemaFields(fullSchema.fields);
+
+        // Initialize with default values
+        const initialData: Record<string, any> = {};
+        fullSchema.fields.forEach((field: any) => {
+          if (field.type === 'select' && field.options) {
+            initialData[field.name] = field.options[0];
+          } else {
+            initialData[field.name] = '';
+          }
+        });
+        setCredentialData(initialData);
+      } else {
+        // Fallback: create generic fields for unknown schemas
+        const genericFields = [
+          {
+            name: 'title',
+            label: 'Title',
+            type: 'text',
+            required: true,
+            placeholder: 'Enter credential title'
+          },
+          {
+            name: 'description',
+            label: 'Description',
+            type: 'textarea',
+            required: false,
+            placeholder: 'Enter credential description'
+          }
+        ];
+        setSchemaFields(genericFields);
+        setCredentialData({ title: '', description: '' });
+      }
+    } catch (error) {
+      console.error('Failed to load custom schema fields:', error);
+      // Use generic fields as fallback
+      const genericFields = [
+        {
+          name: 'value',
+          label: 'Value',
+          type: 'text',
+          required: true,
+          placeholder: 'Enter credential value'
+        }
+      ];
+      setSchemaFields(genericFields);
+      setCredentialData({ value: '' });
+    }
+  };
+
+  const handleFieldChange = (fieldName: string, value: any) => {
+    setCredentialData(prev => ({
+      ...prev,
+      [fieldName]: value
+    }));
+  };
+
+  const renderField = (field: any) => {
+    const { name, label, type, required, placeholder, options } = field;
+
+    switch (type) {
+      case 'select':
+        return (
+          <div key={name}>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            <select
+              value={credentialData[name] || ''}
+              onChange={(e) => handleFieldChange(name, e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            >
+              {options?.map((option: string) => (
+                <option key={option} value={option}>
+                  {option.charAt(0).toUpperCase() + option.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+        );
+
+      case 'textarea':
+        return (
+          <div key={name}>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            <textarea
+              value={credentialData[name] || ''}
+              onChange={(e) => handleFieldChange(name, e.target.value)}
+              placeholder={placeholder}
+              rows={3}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        );
+
+      case 'date':
+        return (
+          <div key={name}>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            <input
+              type="date"
+              value={credentialData[name] || ''}
+              onChange={(e) => handleFieldChange(name, e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        );
+
+      case 'number':
+        return (
+          <div key={name}>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            <input
+              type="number"
+              value={credentialData[name] || ''}
+              onChange={(e) => handleFieldChange(name, e.target.value)}
+              placeholder={placeholder}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        );
+
+      default: // text
+        return (
+          <div key={name}>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {label} {required && <span className="text-red-500">*</span>}
+            </label>
+            <input
+              type="text"
+              value={credentialData[name] || ''}
+              onChange={(e) => handleFieldChange(name, e.target.value)}
+              placeholder={placeholder}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        );
+    }
+  };
+
+  const validateForm = () => {
+    if (!holderAid) return false;
+
+    // Check required fields
+    for (const field of schemaFields) {
+      if (field.required && (!credentialData[field.name] || credentialData[field.name].trim() === '')) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   const handleNext = async () => {
-    if (!state.selectedAid || !state.registry || !state.schema || !holderAid || !keriaService) return;
-    
+    setError('');
+
+    // Debug validation
+    console.log('CreateCredential handleNext called with:', {
+      selectedAid: state.selectedAid,
+      registry: state.registry,
+      schema: state.schema,
+      holderAid,
+      credentialData,
+      keriaService: !!keriaService
+    });
+
+    if (!state.selectedAid) {
+      setError('No issuer AID selected');
+      return;
+    }
+    if (!state.registry) {
+      setError('No registry selected');
+      return;
+    }
+    if (!state.schema) {
+      setError('No schema selected');
+      return;
+    }
+    if (!holderAid) {
+      setError('No holder AID specified');
+      return;
+    }
+    if (!keriaService) {
+      if (serviceInitializing) {
+        setError('KERIA service is initializing, please wait...');
+      } else {
+        setError('KERIA service not available. Please go back to the dashboard and reconnect.');
+      }
+      return;
+    }
+
     setLoading(true);
     try {
-      const credentialService = createCredentialService(keriaService);
-      
-      const credential = await credentialService.issueCredential({
+      // Resolve holder AID - if it's a name from our wallet, get the identifier
+      let resolvedHolderAid = holderAid;
+      if (useExistingAid) {
+        const holderAidObj = aids.find(aid => aid.name === holderAid);
+        if (holderAidObj) {
+          resolvedHolderAid = holderAidObj.i;
+        }
+      }
+
+      console.log('Creating credential with params:', {
         issuerAlias: state.selectedAid,
-        holderAid: holderAid,
+        holderAid: resolvedHolderAid,
         registryName: state.registry.name,
         schemaId: state.schema.said,
         attributes: credentialData
       });
-      
-      onNext({ credential, holderAid });
+
+      // Step 1: Resolve schema OOBI for all schemas
+      console.log('Resolving schema OOBI:', state.schema.said);
+
+      try {
+        // For all schemas, try to resolve OOBI
+        // This is a simplified approach - in a real app, schemas should be served properly
+        const schemaOOBI = `http://localhost:3001/oobi/${state.schema.said}`;
+        console.log('Attempting to resolve schema OOBI:', schemaOOBI);
+
+        await keriaService.resolveOOBI(schemaOOBI, `schema-${state.schema.said}`);
+        console.log('Schema OOBI resolved successfully');
+      } catch (oobiError) {
+        console.warn('Schema OOBI resolution failed, proceeding anyway:', oobiError);
+        // For demo purposes, we'll continue even if OOBI resolution fails
+        // In production, this should be properly handled
+      }
+
+      // Step 2: Create the credential
+      const credentialService = createCredentialService(keriaService);
+
+      const result = await credentialService.issueCredential({
+        issuerAlias: state.selectedAid,
+        holderAid: resolvedHolderAid,
+        registryName: state.registry.name,
+        schemaId: state.schema.said,
+        attributes: credentialData
+      });
+
+      console.log('Credential created successfully:', result);
+
+      onNext({ credential: { said: result.said, data: result.credential }, holderAid: resolvedHolderAid });
     } catch (error) {
       console.error('Failed to create credential:', error);
+
+      // Check if it's a schema OOBI error and provide helpful guidance
+      const errorMessage = (error as Error).message;
+      if (errorMessage.includes('not found. It must be loaded with data oobi')) {
+        setError(`Schema not available: The schema "${state.schema.name}" (${state.schema.said}) needs to be served via OOBI. This is a limitation of the demo - custom schemas need to be properly served by a schema server.`);
+      } else {
+        setError(`Failed to create credential: ${errorMessage}`);
+      }
     } finally {
       setLoading(false);
     }
@@ -394,59 +828,134 @@ const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack, isLo
         <p className="text-gray-600">Fill in the credential data and specify the holder</p>
       </div>
 
+      {/* Service Initialization Status */}
+      {serviceInitializing && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-start">
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600 mr-2 mt-0.5"></div>
+            <div>
+              <h3 className="text-sm font-medium text-blue-800">Initializing</h3>
+              <p className="text-sm text-blue-700 mt-1">Reconnecting to KERIA service...</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Error Display */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <div className="flex items-start">
+            <svg className="w-5 h-5 text-red-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <h3 className="text-sm font-medium text-red-800">Error</h3>
+              <p className="text-sm text-red-700 mt-1">{error}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="space-y-4">
+        {/* Holder AID Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 mb-3">
             Holder AID
           </label>
-          <input
-            type="text"
-            value={holderAid}
-            onChange={(e) => setHolderAid(e.target.value)}
-            placeholder="Enter holder's AID"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
+
+          <div className="space-y-3">
+            {/* Use Existing AID from your wallet */}
+            <div>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  checked={useExistingAid}
+                  onChange={() => {
+                    setUseExistingAid(true);
+                    if (aids.length > 0) {
+                      setHolderAid(aids[0].name);
+                    }
+                  }}
+                  className="mr-3"
+                />
+                <span className="font-medium">Select from my AIDs</span>
+              </label>
+              {useExistingAid && (
+                <div className="mt-2 ml-6">
+                  {aids.length === 0 ? (
+                    <p className="text-sm text-gray-500">No AIDs available in your wallet</p>
+                  ) : (
+                    <select
+                      value={holderAid}
+                      onChange={(e) => setHolderAid(e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    >
+                      {aids.map((aid) => (
+                        <option key={aid.name} value={aid.name}>
+                          {aid.name} ({aid.i?.substring(0, 12)}...)
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Enter AID manually */}
+            <div>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  checked={!useExistingAid}
+                  onChange={() => {
+                    setUseExistingAid(false);
+                    setHolderAid(holderAidInput);
+                  }}
+                  className="mr-3"
+                />
+                <span className="font-medium">Enter AID manually</span>
+              </label>
+              {!useExistingAid && (
+                <div className="mt-2 ml-6">
+                  <input
+                    type="text"
+                    value={holderAidInput}
+                    onChange={(e) => {
+                      setHolderAidInput(e.target.value);
+                      setHolderAid(e.target.value);
+                    }}
+                    placeholder="Enter holder's AID (e.g., EPqFKtQQ8kzLxPD943ytdj6a3JcXV_IDgYGu88PWNli0)"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    The holder should provide their AID to you via a secure channel
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Event Name
-          </label>
-          <input
-            type="text"
-            value={credentialData.eventName}
-            onChange={(e) => setCredentialData(prev => ({ ...prev, eventName: e.target.value }))}
-            placeholder="e.g., GLEIF Summit"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
+        {/* Schema Info */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h3 className="font-medium text-blue-900 mb-1">Schema: {state.schema?.name}</h3>
+          {(state.schema as any)?.description && (
+            <p className="text-xs text-blue-700">{(state.schema as any).description}</p>
+          )}
+          <p className="text-xs text-blue-600 font-mono mt-1">SAID: {state.schema?.said}</p>
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Access Level
-          </label>
-          <select
-            value={credentialData.accessLevel}
-            onChange={(e) => setCredentialData(prev => ({ ...prev, accessLevel: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="attendee">Attendee</option>
-            <option value="speaker">Speaker</option>
-            <option value="staff">Staff</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Valid Date
-          </label>
-          <input
-            type="date"
-            value={credentialData.validDate}
-            onChange={(e) => setCredentialData(prev => ({ ...prev, validDate: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
+        {/* Dynamic Schema Fields */}
+        {schemaFields.length > 0 ? (
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium text-gray-900">Credential Data</h3>
+            {schemaFields.map(field => renderField(field))}
+          </div>
+        ) : (
+          <div className="text-center py-4">
+            <p className="text-gray-500">Loading schema fields...</p>
+          </div>
+        )}
       </div>
 
       <div className="flex justify-between pt-6">
@@ -458,7 +967,7 @@ const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack, isLo
         </button>
         <button
           onClick={handleNext}
-          disabled={loading || !holderAid || !credentialData.eventName || !credentialData.validDate}
+          disabled={loading || !validateForm()}
           className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
         >
           {loading ? 'Creating...' : 'Create Credential'}
@@ -468,23 +977,23 @@ const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack, isLo
   );
 };
 
-const SendGrantStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoading }) => {
+const SendGrantStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
   const { keriaService } = useKeriStore();
   const [loading, setLoading] = useState(false);
 
   const handleSendGrant = async () => {
     if (!state.selectedAid || !state.credential || !state.holderAid || !keriaService) return;
-    
+
     setLoading(true);
     try {
       const ipexService = createIPEXService(keriaService);
-      
+
       const result = await ipexService.sendGrant(
         state.selectedAid,
         state.credential.said,
         state.holderAid
       );
-      
+
       onNext({ grantSaid: result.grantSaid });
     } catch (error) {
       console.error('Failed to send grant:', error);
@@ -530,7 +1039,7 @@ const SendGrantStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoading }
   );
 };
 
-const CompletionStep: React.FC<StepProps> = ({ state, onBack }) => {
+const CompletionStep: React.FC<StepProps> = ({ state }) => {
   const navigate = useNavigate();
   const nextSteps = wizardStateService.generateNextStepsForHolder(state);
 
@@ -585,8 +1094,7 @@ const CompletionStep: React.FC<StepProps> = ({ state, onBack }) => {
 export const IssuerWizard: React.FC = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<IssuerWizardState>(wizardStateService.getIssuerState());
-  const [isLoading, setIsLoading] = useState(false);
-  
+
   const steps = wizardStateService.getIssuerSteps();
 
   const handleNext = (stepData: any) => {
@@ -606,8 +1114,8 @@ export const IssuerWizard: React.FC = () => {
   };
 
   const renderCurrentStep = () => {
-    const stepProps = { state, onNext: handleNext, onBack: handleBack, isLoading };
-    
+    const stepProps = { state, onNext: handleNext, onBack: handleBack, isLoading: false };
+
     switch (state.currentStep) {
       case 0: return <SelectAIDStep {...stepProps} />;
       case 1: return <SetupRegistryStep {...stepProps} />;
@@ -627,9 +1135,9 @@ export const IssuerWizard: React.FC = () => {
             <h1 className="text-3xl font-bold text-gray-900">Issuer Wizard</h1>
             <p className="text-gray-600 mt-2">Issue a VLEI credential step by step</p>
           </div>
-          
+
           <StepIndicator steps={steps} currentStep={state.currentStep} />
-          
+
           {renderCurrentStep()}
         </div>
       </div>
