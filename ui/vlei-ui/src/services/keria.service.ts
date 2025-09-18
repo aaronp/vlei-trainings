@@ -85,7 +85,9 @@ export class KeriaService {
   async listAIDs(): Promise<AID[]> {
     if (!this.client) throw new Error('Client not initialized');
     
-    return await this.client.identifiers().list();
+    const result = await this.client.identifiers().list();
+    console.log('listAIDs result:', result);
+    return Array.isArray(result) ? result : [];
   }
 
   async getAID(name: string): Promise<AID> {

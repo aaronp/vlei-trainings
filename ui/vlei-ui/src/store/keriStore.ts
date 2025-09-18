@@ -101,8 +101,13 @@ export const useKeriStore = create<KeriStore>()(
         const { keriaService } = get();
         if (!keriaService) throw new Error('KERIA service not initialized');
         
-        const aids = await keriaService.listAIDs();
-        set({ aids });
+        try {
+          const aids = await keriaService.listAIDs();
+          set({ aids: aids || [] });
+        } catch (error) {
+          console.error('Failed to refresh AIDs:', error);
+          set({ aids: [] });
+        }
       },
 
       // Refresh credentials
