@@ -9,8 +9,18 @@ import { TailwindTest } from './components/TailwindTest';
 import { Wizard } from './pages/Wizard';
 import { IssuerWizard } from './pages/IssuerWizard';
 import { HolderWizard } from './pages/HolderWizard';
+import { SchemaManagement } from './components/SchemaManagement';
+import { initializeDefaultSchemaService } from './services/schema';
 
 const queryClient = new QueryClient();
+
+// Initialize schema service on app startup
+try {
+  initializeDefaultSchemaService();
+  console.log('Schema service initialized with localStorage provider');
+} catch (error) {
+  console.error('Failed to initialize schema service:', error);
+}
 
 function App() {
   return (
@@ -26,6 +36,7 @@ function App() {
           <Route path="/wizard" element={<Wizard />} />
           <Route path="/wizard/issuer" element={<IssuerWizard />} />
           <Route path="/wizard/holder" element={<HolderWizard />} />
+          <Route path="/schemas" element={<SchemaManagement />} />
         </Routes>
       </Router>
     </QueryClientProvider>

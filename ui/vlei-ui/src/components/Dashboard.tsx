@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useKeriStore } from '../store/keriStore';
 import { CreateAIDModal } from './CreateAIDModal';
+import { ConnectionGuard } from './ConnectionGuard';
 
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -23,17 +24,11 @@ export const Dashboard: React.FC = () => {
   console.log('Dashboard state:', { showCreateAid, aids });
 
   useEffect(() => {
-    if (!isConnected) {
-      navigate('/');
-    }
-  }, [isConnected, navigate]);
-
-  useEffect(() => {
     if (isConnected) {
       refreshAIDs();
       refreshCredentials();
     }
-  }, [isConnected]);
+  }, [isConnected, refreshAIDs, refreshCredentials]);
 
   const handleCreateAIDSuccess = () => {
     setSuccessMessage('Successfully created new AID');
@@ -47,10 +42,18 @@ export const Dashboard: React.FC = () => {
   };
 
   if (!clientState) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
+    <ConnectionGuard>
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -202,5 +205,6 @@ export const Dashboard: React.FC = () => {
         />
       </main>
     </div>
+    </ConnectionGuard>
   );
 };

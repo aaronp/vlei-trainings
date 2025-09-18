@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { createIPEXService } from '../services/ipex.service';
 import { wizardStateService, type HolderWizardState, type WizardStep } from '../services/wizardState.service';
 import { useKeriStore } from '../store/keriStore';
+import { ConnectionGuard } from '../components/ConnectionGuard';
 
 interface StepProps {
   state: HolderWizardState;
@@ -650,19 +651,21 @@ export const HolderWizard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Holder Wizard</h1>
-            <p className="text-gray-600 mt-2">Receive and manage VLEI credentials step by step</p>
+    <ConnectionGuard>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold text-gray-900">Holder Wizard</h1>
+              <p className="text-gray-600 mt-2">Receive and manage VLEI credentials step by step</p>
+            </div>
+            
+            <StepIndicator steps={steps} currentStep={state.currentStep} />
+            
+            {renderCurrentStep()}
           </div>
-          
-          <StepIndicator steps={steps} currentStep={state.currentStep} />
-          
-          {renderCurrentStep()}
         </div>
       </div>
-    </div>
+    </ConnectionGuard>
   );
 };

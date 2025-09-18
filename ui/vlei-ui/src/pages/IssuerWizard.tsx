@@ -4,6 +4,9 @@ import { createCredentialService } from '../services/credential.service';
 import { createIPEXService } from '../services/ipex.service';
 import { wizardStateService, type IssuerWizardState, type WizardStep } from '../services/wizardState.service';
 import { useKeriStore } from '../store/keriStore';
+import { ConnectionGuard } from '../components/ConnectionGuard';
+import { getSchemaService } from '../services/schema';
+import { schemaValidationService, type SchemaAvailability } from '../services/schemaValidation.service';
 
 interface StepProps {
   state: IssuerWizardState;
@@ -11,6 +14,37 @@ interface StepProps {
   onBack: () => void;
   isLoading: boolean;
 }
+
+const SchemaAvailabilityWarning: React.FC<{ schema?: any }> = ({ schema }) => {
+  const [schemaCheck, setSchemaCheck] = useState<SchemaAvailability | null>(null);
+
+  useEffect(() => {
+    if (schema?.said) {
+      schemaValidationService.checkSchemaAvailability(schema.said)
+        .then(setSchemaCheck)
+        .catch(console.error);
+    }
+  }, [schema?.said]);
+
+  if (!schema || !schemaCheck || schemaCheck.available || !schemaCheck.warning) {
+    return null;
+  }
+
+  return (
+    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+      <div className="flex">
+        <svg className="w-5 h-5 text-amber-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.876c1.72 0 3.159-1.24 3.457-2.917l.97-5.478c.376-2.123-1.236-4.105-3.457-4.105H3.137c-2.221 0-3.833 1.982-3.457 4.105l.97 5.478C.948 20.76 2.387 22 4.107 22z" />
+        </svg>
+        <div>
+          <h4 className="font-medium text-amber-900 mb-1">Schema Availability Warning</h4>
+          <p className="text-sm text-amber-700">{schemaCheck.warning}</p>
+          <p className="text-sm text-amber-700 mt-1">Selected schema: {schema.name} ({schemaCheck.source})</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const StepIndicator: React.FC<{ steps: WizardStep[]; currentStep: number }> = ({ steps, currentStep }) => (
   <div className="mb-8">
@@ -299,16 +333,26 @@ const ChooseSchemaStep: React.FC<StepProps> = ({ onNext, onBack }) => {
     loadExistingSchemas();
   }, []);
 
-  const loadExistingSchemas = () => {
+  const loadExistingSchemas = async () => {
     try {
-      // Load schemas from localStorage (from SchemaManager)
-      const saved = localStorage.getItem('credentialSchemas');
-      const savedSchemas = saved ? JSON.parse(saved) : [];
+      const schemaService = getSchemaService();
+      const result = await schemaService.listSchemas({
+        sortBy: 'updatedAt',
+        sortOrder: 'desc'
+      });
 
-      setExistingSchemas(savedSchemas);
+      // Convert to the format expected by the UI
+      const formattedSchemas = result.schemas.map(schema => ({
+        said: schema.metadata.said,
+        name: schema.metadata.name,
+        description: schema.metadata.description,
+        type: 'custom' // All schemas from the new service are custom
+      }));
+
+      setExistingSchemas(formattedSchemas);
 
       // If no schemas exist, default to create new
-      if (savedSchemas.length === 0) {
+      if (formattedSchemas.length === 0) {
         setUseExisting(false);
       }
     } catch (error) {
@@ -366,6 +410,23 @@ const ChooseSchemaStep: React.FC<StepProps> = ({ onNext, onBack }) => {
       <div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Choose Schema</h2>
         <p className="text-gray-600">Select the credential type and schema for this issuance</p>
+      </div>
+
+      {/* Schema Resolution Warning */}
+      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+        <div className="flex">
+          <svg className="w-5 h-5 text-amber-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.876c1.72 0 3.159-1.24 3.457-2.917l.97-5.478c.376-2.123-1.236-4.105-3.457-4.105H3.137c-2.221 0-3.833 1.982-3.457 4.105l.97 5.478C.948 20.76 2.387 22 4.107 22z" />
+          </svg>
+          <div>
+            <h4 className="font-medium text-amber-900 mb-1">Schema Server Required</h4>
+            <p className="text-sm text-amber-700">
+              Custom schemas need to be available via OOBI resolution from a schema server. 
+              In this demo environment, newly created schemas may not work unless a schema server is running. 
+              Consider using existing schemas that are already available in your KERIA instance.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-4">
@@ -775,21 +836,39 @@ const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) =>
         attributes: credentialData
       });
 
-      // Step 1: Resolve schema OOBI for all schemas
+      // Step 1: Resolve schema OOBI 
       console.log('Resolving schema OOBI:', state.schema.said);
-
+      
       try {
-        // For all schemas, try to resolve OOBI
-        // This is a simplified approach - in a real app, schemas should be served properly
-        const schemaOOBI = `http://localhost:3001/oobi/${state.schema.said}`;
-        console.log('Attempting to resolve schema OOBI:', schemaOOBI);
-
-        await keriaService.resolveOOBI(schemaOOBI, `schema-${state.schema.said}`);
-        console.log('Schema OOBI resolved successfully');
+        // Check if this is a locally created schema
+        const schemaService = getSchemaService();
+        const schemaExists = await schemaService.schemaExists(state.schema.said);
+        if (schemaExists) {
+          console.log('Schema is registered locally, attempting to use local schema server');
+          
+          // For locally created schemas, we need to provide them to KERIA differently
+          // Since we can't run a real HTTP server in the browser, we'll skip OOBI resolution
+          // and try to proceed directly. KERIA might have the schema cached already.
+          console.log('Skipping OOBI resolution for local schema');
+        } else {
+          // For external schemas, try to resolve OOBI
+          const schemaOOBI = `http://localhost:3001/oobi/${state.schema.said}`;
+          console.log('Attempting to resolve external schema OOBI:', schemaOOBI);
+          
+          await keriaService.resolveOOBI(schemaOOBI, `schema-${state.schema.said}`);
+          console.log('External schema OOBI resolved successfully');
+        }
       } catch (oobiError) {
-        console.warn('Schema OOBI resolution failed, proceeding anyway:', oobiError);
-        // For demo purposes, we'll continue even if OOBI resolution fails
-        // In production, this should be properly handled
+        console.warn('Schema OOBI resolution failed:', oobiError);
+        
+        // Check if it's a local schema and provide more helpful error message
+        const schemaService = getSchemaService();
+        const schemaExists = await schemaService.schemaExists(state.schema.said);
+        if (schemaExists) {
+          console.log('Local schema detected, this might work anyway if KERIA has it cached');
+        } else {
+          console.warn('External schema OOBI resolution failed - this will likely cause credential issuance to fail');
+        }
       }
 
       // Step 2: Create the credential
@@ -812,7 +891,13 @@ const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) =>
       // Check if it's a schema OOBI error and provide helpful guidance
       const errorMessage = (error as Error).message;
       if (errorMessage.includes('not found. It must be loaded with data oobi')) {
-        setError(`Schema not available: The schema "${state.schema.name}" (${state.schema.said}) needs to be served via OOBI. This is a limitation of the demo - custom schemas need to be properly served by a schema server.`);
+        const schemaService = getSchemaService();
+        const isLocalSchema = await schemaService.schemaExists(state.schema.said);
+        if (isLocalSchema) {
+          setError(`Schema Resolution Required: The schema "${state.schema.name}" was created locally but needs to be available to KERIA via OOBI resolution. In a production environment, this schema would need to be deployed to a schema server. For this demo, try using a pre-existing schema or ensure your KERIA instance has access to schema servers.`);
+        } else {
+          setError(`External Schema Unavailable: The schema "${state.schema.name}" (${state.schema.said}) is not available. Please ensure the schema server is running and accessible, or use a different schema that's already available in your KERIA instance.`);
+        }
       } else {
         setError(`Failed to create credential: ${errorMessage}`);
       }
@@ -840,6 +925,8 @@ const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) =>
           </div>
         </div>
       )}
+
+      <SchemaAvailabilityWarning schema={state.schema} />
 
       {/* Error Display */}
       {error && (
@@ -1128,19 +1215,21 @@ export const IssuerWizard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900">Issuer Wizard</h1>
-            <p className="text-gray-600 mt-2">Issue a VLEI credential step by step</p>
+    <ConnectionGuard>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold text-gray-900">Issuer Wizard</h1>
+              <p className="text-gray-600 mt-2">Issue a VLEI credential step by step</p>
+            </div>
+
+            <StepIndicator steps={steps} currentStep={state.currentStep} />
+
+            {renderCurrentStep()}
           </div>
-
-          <StepIndicator steps={steps} currentStep={state.currentStep} />
-
-          {renderCurrentStep()}
         </div>
       </div>
-    </div>
+    </ConnectionGuard>
   );
 };
