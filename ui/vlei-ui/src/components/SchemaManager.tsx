@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Saider } from 'signify-ts';
+import { schemaServerService } from '../services/schemaServer.service';
 
 export interface CredentialField {
   name: string;
@@ -16,6 +17,7 @@ export interface CredentialSchema {
   description?: string;
   fields: CredentialField[];
   createdAt: string;
+  jsonSchema?: any; // Store the complete JSON schema for OOBI resolution
 }
 
 interface SchemaManagerProps {
@@ -52,7 +54,7 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
     try {
       // Build the JSON Schema structure
       const jsonSchema = {
-        d: '', // Required empty field for SAID computation
+        $id: '', // Required empty field for SAID computation (use $id instead of d for JSON Schema)
         $schema: 'http://json-schema.org/draft-07/schema#',
         title: newSchema.name,
         description: newSchema.description || '',
@@ -97,20 +99,31 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
         required: ['v', 'd', 'i', 'ri', 's', 'a']
       };
 
-      // First, compute SAID for the attributes block
-      const attributesBlock = (jsonSchema.properties.a as any).oneOf[1];
-      const [, saidifiedAttributesBlock] = Saider.saidify(attributesBlock);
-      (jsonSchema.properties.a as any).oneOf[1] = saidifiedAttributesBlock;
+      // First, compute SAID for the attributes block using 'd' label
+      const attributesBlock = { 
+        d: '', // Required for SAID computation
+        ...(jsonSchema.properties.a as any).oneOf[1] 
+      };
+      delete attributesBlock.$id; // Remove $id before SAIDifying
+      const [, saidifiedAttributesBlock] = Saider.saidify(attributesBlock, undefined, undefined, 'd');
+      
+      // Update the attributes block in the schema with computed SAID in $id
+      (jsonSchema.properties.a as any).oneOf[1] = {
+        ...saidifiedAttributesBlock,
+        $id: saidifiedAttributesBlock.d // Move the SAID to $id for JSON Schema
+      };
+      delete (jsonSchema.properties.a as any).oneOf[1].d; // Remove d from attributes block
 
-      // Then compute SAID for the entire schema
-      const [saider, saidifiedSchema] = Saider.saidify(jsonSchema);
+      // Then compute SAID for the entire schema using '$id' label
+      const [saider, saidifiedSchema] = Saider.saidify(jsonSchema, undefined, undefined, '$id');
       
       const schema: CredentialSchema = {
         said: saider.qb64,
         name: newSchema.name,
         description: newSchema.description || '',
         fields: newSchema.fields || [],
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        jsonSchema: saidifiedSchema // Store the complete JSON schema
       };
 
       console.log('Generated JSON Schema:', saidifiedSchema);
@@ -118,6 +131,9 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
 
       const updatedSchemas = [...schemas, schema];
       saveSchemas(updatedSchemas);
+      
+      // Register the schema with the local schema service for serving
+      schemaServerService.registerSchema(schema);
       
       setNewSchema({ name: '', description: '', fields: [] });
       setShowCreateForm(false);
@@ -214,10 +230,21 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
                 </h3>
                 
                 <div className="space-y-4">
-                  <div className="bg-blue-50 border border-blue-200 p-3 rounded">
+                  <div className="bg-blue-50 border border-blue-200 p-3 rounded mb-4">
                     <p className="text-sm text-blue-700">
                       <strong>Note:</strong> The Schema SAID will be automatically computed from the schema structure using cryptographic hashing, similar to the 'kli saidify' command-line tool.
                     </p>
+                  </div>
+                  
+                  <div className="bg-amber-50 border border-amber-200 p-3 rounded">
+                    <p className="text-sm text-amber-700">
+                      <strong>Schema Serving:</strong> Custom schemas need to be served from a schema server (like vlei-server) to be accessible via OOBI resolution. This demo registers schemas locally, but in production you would need to:
+                    </p>
+                    <ul className="text-xs text-amber-600 mt-1 list-disc list-inside">
+                      <li>Deploy the schema to a schema server</li>
+                      <li>Make it available at: <code>http://server:port/oobi/[SCHEMA_SAID]</code></li>
+                      <li>Ensure KERIA can access the schema server</li>
+                    </ul>
                   </div>
                   
                   <div>

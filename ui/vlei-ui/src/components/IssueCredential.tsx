@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useKeriStore } from '../store/keriStore';
 import { SchemaManager, type CredentialSchema, type CredentialField } from './SchemaManager';
+import { schemaServerService } from '../services/schemaServer.service';
 
 // Component is now using imported types from SchemaManager
 
@@ -96,33 +97,50 @@ export const IssueCredential: React.FC = () => {
 
       setRegistry(existingRegistry);
 
-      // Resolve schema OOBI if schema has a SAID
+      // Load schema into KERIA if it's a custom schema
       if (selectedSchema && selectedSchema.said) {
-        const schemaOobi = `http://localhost:7723/oobi/${selectedSchema.said}`;
-        console.log('Resolving schema OOBI:', schemaOobi);
-
         try {
-          const resolveOp = await keriaService.resolveOOBI(schemaOobi, `${selectedSchema.name.toLowerCase().replace(/\s+/g, '-')}-schema`);
-          console.log('OOBI resolution operation:', resolveOp);
-
-          if (resolveOp.done) {
-            console.log('Schema OOBI resolved immediately');
+          if (selectedSchema.jsonSchema) {
+            // This is a custom schema - register it with the local schema service
+            console.log('Registering custom schema:', selectedSchema.said);
+            schemaServerService.registerSchema(selectedSchema);
+            
+            // For custom schemas, log that they need external serving
+            console.log(`Custom schema ${selectedSchema.said} registered locally.`);
+            console.log('Note: In production, this schema would need to be served from a schema server.');
+            console.log('Schema data:', selectedSchema.jsonSchema);
           } else {
-            console.log('Schema OOBI resolution started, will continue in background');
-          }
+            // This might be a well-known schema - try OOBI resolution
+            const schemaOobi = `http://localhost:7723/oobi/${selectedSchema.said}`;
+            console.log('Resolving schema OOBI:', schemaOobi);
 
-          // Background cleanup
-          if (resolveOp.name) {
-            setTimeout(async () => {
-              try {
-                await keriaService.deleteOperation(resolveOp.name);
-              } catch (e) {
-                console.log('Background cleanup completed');
+            try {
+              const resolveOp = await keriaService.resolveOOBI(schemaOobi, `${selectedSchema.name.toLowerCase().replace(/\s+/g, '-')}-schema`);
+              console.log('OOBI resolution operation:', resolveOp);
+
+              if (resolveOp.done) {
+                console.log('Schema OOBI resolved immediately');
+              } else {
+                console.log('Schema OOBI resolution started, will continue in background');
               }
-            }, 5000);
+
+              // Background cleanup
+              if (resolveOp.name) {
+                setTimeout(async () => {
+                  try {
+                    await keriaService.deleteOperation(resolveOp.name);
+                  } catch (e) {
+                    console.log('Background cleanup completed');
+                  }
+                }, 5000);
+              }
+            } catch (oobiError: unknown) {
+              console.warn('OOBI resolution failed, but proceeding:', oobiError);
+            }
           }
-        } catch (oobiError: unknown) {
-          console.warn('OOBI resolution failed, but proceeding:', oobiError);
+        } catch (schemaError: unknown) {
+          console.error('Failed to register schema:', schemaError);
+          throw new Error(`Failed to register schema: ${(schemaError as Error).message}`);
         }
       }
 

@@ -91,6 +91,7 @@ export class KeriaService {
     await this.client.operations().delete(name);
   }
 
+
   async listAIDs(): Promise<AID[]> {
     if (!this.client) throw new Error('Client not initialized');
     
