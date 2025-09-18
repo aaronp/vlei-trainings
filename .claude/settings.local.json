@@ -11,7 +11,8 @@
       "Bash(npm run dev:*)",
       "Bash(find:*)",
       "Bash(pkill:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(npm run preview:*)"
     ],
     "deny": []
   }

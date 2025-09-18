@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.build.tsbuildinfo",
+    /* Less strict settings for deployment build */
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strict": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
+    "noStrictGenericChecks": true,
+    "suppressImplicitAnyIndexErrors": true
+  }
+}

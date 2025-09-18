@@ -4,7 +4,7 @@ import { useKeriStore } from '../store/keriStore';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { initialize, bootstrap, connect, isInitialized, passcode: storedPasscode, clearStore } = useKeriStore();
+  const { initialize, bootstrap, connect, passcode: storedPasscode, clearStore } = useKeriStore();
   
   // Validate if passcode is UUID format
   const isValidUUID = (str: string) => {

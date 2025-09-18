@@ -112,12 +112,21 @@ export const useKeriStore = create<KeriStore>()(
 
       // Refresh credentials
       refreshCredentials: async () => {
-        const { credentialService } = get();
+        const { credentialService, aids } = get();
         if (!credentialService) throw new Error('Credential service not initialized');
         
         try {
-          const credentials = await credentialService.listCredentials();
-          set({ credentials });
+          // Get credentials for all AIDs
+          const allCredentials: any[] = [];
+          for (const aid of aids) {
+            try {
+              const aidCredentials = await credentialService.listCredentials(aid.name);
+              allCredentials.push(...aidCredentials);
+            } catch (error) {
+              console.warn(`Failed to get credentials for AID ${aid.name}:`, error);
+            }
+          }
+          set({ credentials: allCredentials });
         } catch (error) {
           console.error('Failed to refresh credentials:', error);
         }
@@ -128,7 +137,7 @@ export const useKeriStore = create<KeriStore>()(
         const { keriaService } = get();
         if (!keriaService) throw new Error('KERIA service not initialized');
         
-        const { aid, op } = await keriaService.createAID(alias);
+        const { op } = await keriaService.createAID(alias);
         await keriaService.waitForOperation(op);
         await keriaService.deleteOperation(op.name);
         

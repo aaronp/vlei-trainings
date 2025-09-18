@@ -69,7 +69,7 @@ const SelectedAIDIndicator: React.FC<{ selectedAid: string; aids: any[] }> = ({ 
   );
 };
 
-const SelectAIDStep: React.FC<StepProps> = ({ state, onNext, onBack, isLoading }) => {
+const SelectAIDStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
   const { aids, isConnected, refreshAIDs } = useKeriStore();
   const [selectedAid, setSelectedAid] = useState(state.selectedAid);
   const [loading, setLoading] = useState(false);
@@ -615,7 +615,7 @@ const CompletionStep: React.FC<StepProps> = ({ state }) => {
 export const HolderWizard: React.FC = () => {
   const navigate = useNavigate();
   const [state, setState] = useState<HolderWizardState>(wizardStateService.getHolderState());
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   
   const steps = wizardStateService.getHolderSteps();
 
