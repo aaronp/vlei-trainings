@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Saider } from 'signify-ts';
 
 export interface CredentialField {
   name: string;
@@ -26,7 +27,6 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
   const [schemas, setSchemas] = useState<CredentialSchema[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newSchema, setNewSchema] = useState<Partial<CredentialSchema>>({
-    said: '',
     name: '',
     description: '',
     fields: []
@@ -47,22 +47,85 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
   };
 
   const handleCreateSchema = () => {
-    if (!newSchema.said || !newSchema.name) return;
+    if (!newSchema.name) return;
 
-    const schema: CredentialSchema = {
-      said: newSchema.said,
-      name: newSchema.name,
-      description: newSchema.description || '',
-      fields: newSchema.fields || [],
-      createdAt: new Date().toISOString()
-    };
+    try {
+      // Build the JSON Schema structure
+      const jsonSchema = {
+        d: '', // Required empty field for SAID computation
+        $schema: 'http://json-schema.org/draft-07/schema#',
+        title: newSchema.name,
+        description: newSchema.description || '',
+        type: 'object',
+        credentialType: newSchema.name.replace(/\s+/g, ''),
+        version: '1.0.0',
+        properties: {
+          v: { description: 'Credential Version String', type: 'string' },
+          d: { description: 'Credential SAID', type: 'string' },
+          u: { description: 'One time use nonce', type: 'string' },
+          i: { description: 'Issuer AID', type: 'string' },
+          ri: { description: 'Registry SAID', type: 'string' },
+          s: { description: 'Schema SAID', type: 'string' },
+          a: {
+            oneOf: [
+              { description: 'Attributes block SAID', type: 'string' },
+              {
+                $id: '', // Will be computed for attributes block
+                description: 'Attributes block',
+                type: 'object',
+                properties: {
+                  d: { description: 'Attributes data SAID', type: 'string' },
+                  i: { description: 'Issuee AID', type: 'string' },
+                  dt: { description: 'Issuance date time', type: 'string', format: 'date-time' },
+                  // Add custom fields from form
+                  ...(newSchema.fields || []).reduce((props, field) => {
+                    props[field.name] = {
+                      description: field.label,
+                      type: field.type === 'select' ? 'string' : field.type,
+                      ...(field.options && { enum: field.options })
+                    };
+                    return props;
+                  }, {} as any)
+                },
+                additionalProperties: false,
+                required: ['d', 'i', 'dt', ...(newSchema.fields || []).filter(f => f.required).map(f => f.name)]
+              }
+            ]
+          }
+        },
+        additionalProperties: false,
+        required: ['v', 'd', 'i', 'ri', 's', 'a']
+      };
 
-    const updatedSchemas = [...schemas, schema];
-    saveSchemas(updatedSchemas);
-    
-    setNewSchema({ said: '', name: '', description: '', fields: [] });
-    setShowCreateForm(false);
-    onSchemaSelect(schema);
+      // First, compute SAID for the attributes block
+      const attributesBlock = (jsonSchema.properties.a as any).oneOf[1];
+      const [, saidifiedAttributesBlock] = Saider.saidify(attributesBlock);
+      (jsonSchema.properties.a as any).oneOf[1] = saidifiedAttributesBlock;
+
+      // Then compute SAID for the entire schema
+      const [saider, saidifiedSchema] = Saider.saidify(jsonSchema);
+      
+      const schema: CredentialSchema = {
+        said: saider.qb64,
+        name: newSchema.name,
+        description: newSchema.description || '',
+        fields: newSchema.fields || [],
+        createdAt: new Date().toISOString()
+      };
+
+      console.log('Generated JSON Schema:', saidifiedSchema);
+      console.log('Schema SAID:', saider.qb64);
+
+      const updatedSchemas = [...schemas, schema];
+      saveSchemas(updatedSchemas);
+      
+      setNewSchema({ name: '', description: '', fields: [] });
+      setShowCreateForm(false);
+      onSchemaSelect(schema);
+    } catch (error) {
+      console.error('Failed to compute schema SAID:', error);
+      alert('Failed to create schema: ' + (error as Error).message);
+    }
   };
 
   const addField = () => {
@@ -151,15 +214,10 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
                 </h3>
                 
                 <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Schema SAID</label>
-                    <input
-                      type="text"
-                      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                      value={newSchema.said || ''}
-                      onChange={(e) => setNewSchema({ ...newSchema, said: e.target.value })}
-                      placeholder="Enter schema SAID"
-                    />
+                  <div className="bg-blue-50 border border-blue-200 p-3 rounded">
+                    <p className="text-sm text-blue-700">
+                      <strong>Note:</strong> The Schema SAID will be automatically computed from the schema structure using cryptographic hashing, similar to the 'kli saidify' command-line tool.
+                    </p>
                   </div>
                   
                   <div>
@@ -263,7 +321,7 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
                 <button
                   type="button"
                   onClick={handleCreateSchema}
-                  disabled={!newSchema.said || !newSchema.name}
+                  disabled={!newSchema.name}
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
                 >
                   Create Schema
@@ -272,7 +330,7 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
                   type="button"
                   onClick={() => {
                     setShowCreateForm(false);
-                    setNewSchema({ said: '', name: '', description: '', fields: [] });
+                    setNewSchema({ name: '', description: '', fields: [] });
                   }}
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0"
                 >

@@ -121,7 +121,7 @@ export const IssueCredential: React.FC = () => {
               }
             }, 5000);
           }
-        } catch (oobiError) {
+        } catch (oobiError: unknown) {
           console.warn('OOBI resolution failed, but proceeding:', oobiError);
         }
       }
@@ -210,9 +210,13 @@ export const IssueCredential: React.FC = () => {
       });
 
       if (!issueResult) {
-        throw new Error('issueResult not found for ' + selectedIssuer)
+        throw new Error('issueResult not found for ' + selectedIssuer);
       }
-      const operation = await issueResult.op();
+      
+      // Handle the operation result properly
+      const operation = typeof (issueResult as any).op === 'function' 
+        ? await (issueResult as any).op() 
+        : (issueResult as any);
       const response = await keriaService.waitForOperation(operation);
 
       // Get the issued credential

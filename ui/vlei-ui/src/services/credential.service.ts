@@ -5,6 +5,7 @@ import type { Operation } from '../types/keri';
 export interface Registry {
   name: string;
   regk: string;
+  registryName?: string; // Optional property for compatibility with different KERIA versions
 }
 
 export class CredentialService {
