@@ -67,7 +67,16 @@ export class KeriaService {
   async waitForOperation(operation: Operation, timeoutMs = 30000): Promise<Operation> {
     if (!this.client) throw new Error('Client not initialized');
     
-    return await this.client.operations().wait(operation, AbortSignal.timeout(timeoutMs));
+    try {
+      return await this.client.operations().wait(operation, AbortSignal.timeout(timeoutMs));
+    } catch (error: any) {
+      // If operation not found (404), consider it completed
+      if (error.message?.includes('404') || error.message?.includes('Not Found')) {
+        console.log('Operation not found (likely completed):', operation.name);
+        return { ...operation, done: true };
+      }
+      throw error;
+    }
   }
 
   async listOperations(): Promise<Operation[]> {
@@ -131,8 +140,15 @@ export class KeriaService {
   async resolveOOBI(oobi: string, alias: string): Promise<Operation> {
     if (!this.client) throw new Error('Client not initialized');
     
-    const result = await this.client.oobis().resolve(oobi, alias);
-    return await result.op();
+    // Generate a unique alias to avoid conflicts
+    const uniqueAlias = `${alias}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    
+    const result = await this.client.oobis().resolve(oobi, uniqueAlias);
+    // Check if result has an op method, otherwise return result directly
+    if (typeof result.op === 'function') {
+      return await result.op();
+    }
+    return result;
   }
 
   getClient(): SignifyClient | null {

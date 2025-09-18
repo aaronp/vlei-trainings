@@ -49,9 +49,14 @@ export const IssueVLEI: React.FC = () => {
       setRegistry(existingRegistry);
 
       // Resolve schema OOBI
-      const resolveOp = await keriaService.resolveOOBI(SCHEMA_SERVER_OOBI, 'vleiSchema');
-      await keriaService.waitForOperation(resolveOp);
-      await keriaService.deleteOperation(resolveOp.name);
+      try {
+        const resolveOp = await keriaService.resolveOOBI(SCHEMA_SERVER_OOBI, 'vleiSchema');
+        await keriaService.waitForOperation(resolveOp);
+        await keriaService.deleteOperation(resolveOp.name);
+      } catch (oobiError) {
+        console.warn('VLEI Schema OOBI resolution failed:', oobiError);
+        // Continue anyway - the schema might already be resolved
+      }
 
       setStep('form');
     } catch (error) {

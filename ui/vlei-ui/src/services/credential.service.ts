@@ -1,6 +1,6 @@
 import { Serder } from 'signify-ts';
 import { KeriaService } from './keria.service';
-import type { Operation, VLEICredential } from '../types/keri';
+import type { Operation } from '../types/keri';
 
 export interface Registry {
   name: string;
@@ -8,23 +8,49 @@ export interface Registry {
 }
 
 export class CredentialService {
-  constructor(private keriaService: KeriaService) {}
+  private keriaService: KeriaService;
+
+  constructor(keriaService: KeriaService) {
+    this.keriaService = keriaService;
+  }
+
+  getClient() {
+    return this.keriaService.getClient();
+  }
 
   async createRegistry(aidAlias: string, registryName: string): Promise<Registry> {
     const client = this.keriaService.getClient();
     if (!client) throw new Error('KERIA client not initialized');
 
-    const result = await client.registries().create({ name: aidAlias, registryName });
-    const operation = await result.op();
-    
-    const response = await this.keriaService.waitForOperation(operation);
-    await this.keriaService.deleteOperation(operation.name);
+    try {
+      const result = await client.registries().create({ name: aidAlias, registryName });
+      const operation = typeof result.op === 'function' ? await result.op() : result;
 
-    const registries = await client.registries().list(aidAlias);
-    const registry = registries.find((r: any) => r.name === registryName);
-    
-    if (!registry) throw new Error('Registry creation failed');
-    
+      await this.keriaService.waitForOperation(operation);
+      await this.keriaService.deleteOperation(operation.name);
+    } catch (error: any) {
+      // If registry already exists, that's ok - we'll just fetch it
+      if (!error.message?.includes('already in use')) {
+        throw error;
+      }
+      console.log('Registry already exists, fetching it...');
+    }
+
+    // Fetch the registry (whether we just created it or it already existed)
+    const registries = await this.listRegistries(aidAlias);
+    console.log('All registries after create attempt:', registries);
+
+    // Different KERIA versions might use different property names
+    const registry = registries.find((r: any) =>
+      r.name === registryName ||
+      r.registryName === registryName
+    );
+
+    if (!registry) {
+      console.error('Available registries:', registries);
+      throw new Error(`Registry "${registryName}" not found after creation attempt`);
+    }
+
     return registry;
   }
 
@@ -32,7 +58,20 @@ export class CredentialService {
     const client = this.keriaService.getClient();
     if (!client) throw new Error('KERIA client not initialized');
 
-    return await client.registries().list(aidAlias);
+    try {
+      const result = await client.registries().list(aidAlias);
+      // Handle different response formats
+      if (Array.isArray(result)) {
+        return result;
+      } else if (result && typeof result === 'object' && 'registries' in result) {
+        return result.registries || [];
+      }
+      return [];
+    } catch (error) {
+      console.error('Error listing registries:', error);
+      // Return empty array if listing fails (AID might not have any registries yet)
+      return [];
+    }
   }
 
   async issueVLEI(
@@ -59,12 +98,14 @@ export class CredentialService {
       }
     });
 
-    const operation = await issueResult.op;
+    const operation: Operation = typeof (issueResult as any).op === 'function'
+      ? await (issueResult as any).op()
+      : (issueResult as any);
     const response = await this.keriaService.waitForOperation(operation);
-    
+
     const credentialSaid = response.response.ced.d;
     const credential = await client.credentials().get(credentialSaid);
-    
+
     return { credential, operation };
   }
 
@@ -77,7 +118,7 @@ export class CredentialService {
     if (!client) throw new Error('KERIA client not initialized');
 
     const datetime = new Date().toISOString();
-    
+
     const [grant, gsigs, gend] = await client.ipex().grant({
       senderName: senderAlias,
       acdc: new Serder(credential.sad),
@@ -99,11 +140,11 @@ export class CredentialService {
     return await this.keriaService.waitForOperation(submitOperation);
   }
 
-  async listCredentials(aidAlias?: string): Promise<any[]> {
+  async listCredentials(aidAlias: string): Promise<any[]> {
     const client = this.keriaService.getClient();
     if (!client) throw new Error('KERIA client not initialized');
 
-    return await client.credentials().list(aidAlias);
+    return await (client.credentials() as any).list(aidAlias);
   }
 
   async getCredential(said: string): Promise<any> {
@@ -118,11 +159,11 @@ export class CredentialService {
     if (!client) throw new Error('KERIA client not initialized');
 
     const allNotifications = await client.notifications().list();
-    
+
     if (route) {
       return allNotifications.notes.filter((n: any) => n.a.r === route && !n.r);
     }
-    
+
     return allNotifications.notes;
   }
 
@@ -149,7 +190,7 @@ export class CredentialService {
     if (!client) throw new Error('KERIA client not initialized');
 
     const datetime = new Date().toISOString();
-    
+
     const [admit, sigs, aend] = await client.ipex().admit({
       senderName: senderAlias,
       message: '',

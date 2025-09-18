@@ -93,6 +93,18 @@ export const Dashboard: React.FC = () => {
                 Issue VLEI
               </button>
               <button
+                onClick={() => navigate('/issue-credential')}
+                className="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700"
+              >
+                Issue Credential
+              </button>
+              <button
+                onClick={() => navigate('/organizations')}
+                className="bg-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-700"
+              >
+                Organizations
+              </button>
+              <button
                 onClick={handleLogout}
                 className="text-gray-500 hover:text-gray-700"
               >
