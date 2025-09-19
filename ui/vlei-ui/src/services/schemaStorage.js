@@ -244,6 +244,224 @@ export class LocalStorageSchemaProvider {
   }
 }
 
+// In-Memory Provider for server-side use
+export class InMemorySchemaProvider {
+  constructor() {
+    this.schemas = new Map();
+    this.metadata = {
+      totalSchemas: 0,
+      lastModified: new Date().toISOString()
+    };
+  }
+
+  async create(request) {
+    const id = request.id || `schema-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    
+    if (this.schemas.has(id)) {
+      throw new Error(`Schema with ID ${id} already exists`);
+    }
+
+    // Compute SAID
+    const said = this.computeSAID(request.jsonSchema);
+    
+    // Check if schema with this SAID already exists
+    for (const [existingId, existingSchema] of this.schemas) {
+      if (existingSchema.metadata.said === said) {
+        throw new Error(`Schema with SAID ${said} already exists with ID ${existingId}`);
+      }
+    }
+
+    const now = new Date().toISOString();
+    const schema = {
+      metadata: {
+        id,
+        said,
+        name: request.name,
+        description: request.description,
+        version: request.version || '1.0.0',
+        createdAt: now,
+        updatedAt: now,
+        tags: request.tags || [],
+        isPublic: request.isPublic || false
+      },
+      jsonSchema: { $id: said, ...request.jsonSchema },
+      fields: request.fields || []
+    };
+
+    this.schemas.set(id, schema);
+    this.metadata.totalSchemas = this.schemas.size;
+    this.metadata.lastModified = now;
+
+    console.log(`✅ Created schema in memory: ${schema.metadata.name} (${schema.metadata.said})`);
+    return schema;
+  }
+
+  async read(id) {
+    return this.schemas.get(id) || null;
+  }
+
+  async readBySaid(said) {
+    for (const schema of this.schemas.values()) {
+      if (schema.metadata.said === said) {
+        return schema;
+      }
+    }
+    return null;
+  }
+
+  async update(id, updates) {
+    const existing = this.schemas.get(id);
+    if (!existing) {
+      throw new Error(`Schema with ID ${id} not found`);
+    }
+
+    const now = new Date().toISOString();
+    
+    // If jsonSchema is being updated, recompute SAID
+    let newSaid = existing.metadata.said;
+    if (updates.jsonSchema) {
+      newSaid = this.computeSAID(updates.jsonSchema);
+      
+      // Check if new SAID conflicts with existing schemas
+      for (const [existingId, existingSchema] of this.schemas) {
+        if (existingId !== id && existingSchema.metadata.said === newSaid) {
+          throw new Error(`Schema with SAID ${newSaid} already exists with ID ${existingId}`);
+        }
+      }
+    }
+
+    const updated = {
+      metadata: {
+        ...existing.metadata,
+        ...updates.metadata,
+        id, // Preserve original ID
+        said: newSaid,
+        updatedAt: now
+      },
+      jsonSchema: updates.jsonSchema ? { $id: newSaid, ...updates.jsonSchema } : existing.jsonSchema,
+      fields: updates.fields !== undefined ? updates.fields : existing.fields
+    };
+
+    this.schemas.set(id, updated);
+    this.metadata.lastModified = now;
+
+    console.log(`📝 Updated schema in memory: ${updated.metadata.name} (${updated.metadata.said})`);
+    return updated;
+  }
+
+  async delete(id) {
+    const deleted = this.schemas.delete(id);
+    if (deleted) {
+      this.metadata.totalSchemas = this.schemas.size;
+      this.metadata.lastModified = new Date().toISOString();
+      console.log(`🗑️  Deleted schema from memory: ${id}`);
+    }
+    return deleted;
+  }
+
+  async list(query = {}) {
+    let schemas = Array.from(this.schemas.values());
+
+    // Apply search filter
+    if (query.search) {
+      const searchLower = query.search.toLowerCase();
+      schemas = schemas.filter(schema => 
+        schema.metadata.name.toLowerCase().includes(searchLower) ||
+        schema.metadata.description.toLowerCase().includes(searchLower) ||
+        schema.metadata.tags.some(tag => tag.toLowerCase().includes(searchLower))
+      );
+    }
+
+    // Apply sorting
+    const sortBy = query.sortBy || 'updatedAt';
+    const sortOrder = query.sortOrder || 'desc';
+    
+    schemas.sort((a, b) => {
+      let aVal = a.metadata[sortBy];
+      let bVal = b.metadata[sortBy];
+      
+      if (sortBy === 'createdAt' || sortBy === 'updatedAt') {
+        aVal = new Date(aVal);
+        bVal = new Date(bVal);
+      }
+      
+      if (aVal < bVal) return sortOrder === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortOrder === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    // Apply pagination
+    const limit = query.limit || 100;
+    const offset = query.offset || 0;
+    const total = schemas.length;
+    const paginatedSchemas = schemas.slice(offset, offset + limit);
+
+    return {
+      schemas: paginatedSchemas,
+      total,
+      hasMore: offset + limit < total,
+      offset,
+      limit
+    };
+  }
+
+  async exists(said) {
+    for (const schema of this.schemas.values()) {
+      if (schema.metadata.said === said) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  async bulkCreate(requests) {
+    const results = [];
+    for (const request of requests) {
+      results.push(await this.create(request));
+    }
+    return results;
+  }
+
+  async bulkDelete(ids) {
+    const results = [];
+    for (const id of ids) {
+      results.push(await this.delete(id));
+    }
+    return results;
+  }
+
+  async getSchemaForOOBI(said) {
+    const schema = await this.readBySaid(said);
+    return schema?.jsonSchema || null;
+  }
+
+  async isAvailable() {
+    return true; // In-memory is always available
+  }
+
+  getProviderInfo() {
+    return {
+      name: 'In-Memory Schema Provider',
+      type: 'memory',
+      version: '1.0.0',
+      capabilities: ['create', 'read', 'update', 'delete', 'list', 'bulk'],
+      schemaCount: this.schemas.size,
+      metadata: this.metadata
+    };
+  }
+
+  computeSAID(jsonSchema) {
+    try {
+      const schemaForSaid = { $id: '', ...jsonSchema };
+      const [saider] = Saider.saidify(schemaForSaid, undefined, undefined, '$id');
+      return saider.qb64;
+    } catch (error) {
+      console.error('Failed to compute SAID:', error);
+      throw error;
+    }
+  }
+}
+
 // Schema Service
 export class SchemaService {
   constructor(config) {
@@ -255,6 +473,8 @@ export class SchemaService {
     switch (type) {
       case 'localStorage':
         return new LocalStorageSchemaProvider();
+      case 'memory':
+        return new InMemorySchemaProvider();
       case 'remoteApi':
         throw new Error('Remote API provider not implemented in consolidated version');
       default:

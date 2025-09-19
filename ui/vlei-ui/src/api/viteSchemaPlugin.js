@@ -1,6 +1,20 @@
 // Vite plugin for schema API - uses schemaServer.service.ts
 import { SchemaServerService } from '../services/schemaServer.service.ts';
-import { getSchemaService } from '../services/schemaStorage.js';
+import { getSchemaService, initializeSchemaService } from '../services/schemaStorage.js';
+
+// Initialize schema service with in-memory storage for server context
+function initializeServerSchemaService() {
+  try {
+    console.log('🔧 Initializing server schema service with in-memory storage');
+    return initializeSchemaService({ provider: 'memory' });
+  } catch (error) {
+    console.error('Failed to initialize schema service:', error);
+    return null;
+  }
+}
+
+// Initialize schema service for server context
+const serverSchemaService = initializeServerSchemaService();
 
 // Create a schema server service instance for the API
 const schemaServerService = new SchemaServerService();
@@ -29,6 +43,16 @@ function setCorsHeaders(res) {
   res.setHeader('Content-Type', 'application/json');
 }
 
+// Safe schema service getter
+function getSafeSchemaService() {
+  try {
+    return getSchemaService();
+  } catch (error) {
+    console.error('Schema service not available:', error);
+    return null;
+  }
+}
+
 // Schema API handler using schemaServer.service.ts
 export async function handleSchemaAPI(req, res, next) {
   const url = new URL(req.url, `http://${req.headers.host}`);
@@ -52,6 +76,29 @@ export async function handleSchemaAPI(req, res, next) {
   console.log(`📡 Schema API: ${method} ${pathname}`);
 
   try {
+    // GET /api/schemas/info - API information (check first to avoid conflicts)
+    if (method === 'GET' && pathname === '/api/schemas/info') {
+      console.log('📋 Handling /api/schemas/info request');
+      const status = await schemaServerService.getServerStatus();
+      res.statusCode = 200;
+      res.end(JSON.stringify({
+        name: 'VLEI Schema API',
+        version: '2.0.0',
+        description: 'Integrated with SchemaService',
+        endpoints: [
+          'GET /api/schemas - List schemas',
+          'GET /api/schemas/:id - Get schema by ID',
+          'POST /api/schemas - Create schema',
+          'PUT /api/schemas/:id - Update schema',
+          'DELETE /api/schemas/:id - Delete schema',
+          'GET /oobi/:said - Serve schema for KERIA',
+          'GET /api/schemas/info - API information'
+        ],
+        ...status
+      }));
+      return;
+    }
+
     // GET /oobi/:said - Serve schema via OOBI for KERIA
     if (method === 'GET' && pathname.startsWith('/oobi/')) {
       const schemaSaid = pathname.split('/oobi/')[1];
@@ -80,7 +127,12 @@ export async function handleSchemaAPI(req, res, next) {
 
     // GET /api/schemas - List all schemas
     if (method === 'GET' && pathname === '/api/schemas') {
-      const schemaService = getSchemaService();
+      const schemaService = getSafeSchemaService();
+      if (!schemaService) {
+        res.statusCode = 503;
+        res.end(JSON.stringify({ error: 'Schema service unavailable' }));
+        return;
+      }
       const searchParams = url.searchParams;
       
       const query = {
@@ -101,7 +153,12 @@ export async function handleSchemaAPI(req, res, next) {
     // GET /api/schemas/:id - Get specific schema
     if (method === 'GET' && pathname.match(/^\/api\/schemas\/[^\/]+$/)) {
       const schemaId = pathname.split('/api/schemas/')[1];
-      const schemaService = getSchemaService();
+      const schemaService = getSafeSchemaService();
+      if (!schemaService) {
+        res.statusCode = 503;
+        res.end(JSON.stringify({ error: 'Schema service unavailable' }));
+        return;
+      }
       
       const schema = await schemaService.getSchema(schemaId);
       if (!schema) {
@@ -118,7 +175,12 @@ export async function handleSchemaAPI(req, res, next) {
     // POST /api/schemas - Create new schema
     if (method === 'POST' && pathname === '/api/schemas') {
       const requestData = await parseJsonBody(req);
-      const schemaService = getSchemaService();
+      const schemaService = getSafeSchemaService();
+      if (!schemaService) {
+        res.statusCode = 503;
+        res.end(JSON.stringify({ error: 'Schema service unavailable' }));
+        return;
+      }
       
       try {
         const createdSchema = await schemaService.createSchema(requestData);
@@ -140,7 +202,12 @@ export async function handleSchemaAPI(req, res, next) {
     if (method === 'PUT' && pathname.match(/^\/api\/schemas\/[^\/]+$/)) {
       const schemaId = pathname.split('/api/schemas/')[1];
       const requestData = await parseJsonBody(req);
-      const schemaService = getSchemaService();
+      const schemaService = getSafeSchemaService();
+      if (!schemaService) {
+        res.statusCode = 503;
+        res.end(JSON.stringify({ error: 'Schema service unavailable' }));
+        return;
+      }
 
       try {
         const updatedSchema = await schemaService.updateSchema(schemaId, requestData);
@@ -162,7 +229,12 @@ export async function handleSchemaAPI(req, res, next) {
     // DELETE /api/schemas/:id - Delete schema
     if (method === 'DELETE' && pathname.match(/^\/api\/schemas\/[^\/]+$/)) {
       const schemaId = pathname.split('/api/schemas/')[1];
-      const schemaService = getSchemaService();
+      const schemaService = getSafeSchemaService();
+      if (!schemaService) {
+        res.statusCode = 503;
+        res.end(JSON.stringify({ error: 'Schema service unavailable' }));
+        return;
+      }
 
       try {
         const deleted = await schemaService.deleteSchema(schemaId);
@@ -191,27 +263,6 @@ export async function handleSchemaAPI(req, res, next) {
       return;
     }
 
-    // GET /api/schemas/info - API information
-    if (method === 'GET' && pathname === '/api/schemas/info') {
-      const status = await schemaServerService.getServerStatus();
-      res.statusCode = 200;
-      res.end(JSON.stringify({
-        name: 'VLEI Schema API',
-        version: '2.0.0',
-        description: 'Integrated with SchemaService',
-        endpoints: [
-          'GET /api/schemas - List schemas',
-          'GET /api/schemas/:id - Get schema by ID',
-          'POST /api/schemas - Create schema',
-          'PUT /api/schemas/:id - Update schema',
-          'DELETE /api/schemas/:id - Delete schema',
-          'GET /oobi/:said - Serve schema for KERIA',
-          'GET /api/schemas/info - API information'
-        ],
-        ...status
-      }));
-      return;
-    }
 
     // 404 for unsupported endpoints
     res.statusCode = 404;
