@@ -1,6 +1,6 @@
 // Schema storage types and interfaces
 
-export interface SchemaMetadata {
+export type SchemaMetadata = {
   id: string;
   said: string;
   name: string;
@@ -13,13 +13,13 @@ export interface SchemaMetadata {
   isPublic?: boolean;
 }
 
-export interface SchemaData {
+export type SchemaData = {
   metadata: SchemaMetadata;
   jsonSchema: any; // The actual JSON schema content
   fields?: CredentialField[]; // UI field definitions for form generation
 }
 
-export interface CredentialField {
+export type CredentialField = {
   name: string;
   label: string;
   type: 'text' | 'select' | 'textarea' | 'date' | 'number' | 'boolean';
@@ -36,7 +36,7 @@ export interface CredentialField {
   };
 }
 
-export interface SchemaQuery {
+export type SchemaQuery = {
   search?: string;
   tags?: string[];
   createdBy?: string;
@@ -47,13 +47,13 @@ export interface SchemaQuery {
   sortOrder?: 'asc' | 'desc';
 }
 
-export interface SchemaSearchResult {
+export type SchemaSearchResult = {
   schemas: SchemaData[];
   total: number;
   hasMore: boolean;
 }
 
-export interface CreateSchemaRequest {
+export type CreateSchemaRequest = {
   name: string;
   description?: string;
   jsonSchema: any;
@@ -62,7 +62,7 @@ export interface CreateSchemaRequest {
   isPublic?: boolean;
 }
 
-export interface UpdateSchemaRequest {
+export type UpdateSchemaRequest = {
   name?: string;
   description?: string;
   jsonSchema?: any;
