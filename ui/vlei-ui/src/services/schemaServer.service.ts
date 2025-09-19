@@ -1,20 +1,20 @@
-// Simple local schema server service to serve custom schemas
+// Schema server service - integrates with SchemaService for REST API
 import type { CredentialSchema } from '../components/SchemaManager';
+import { getSchemaService } from './schemaStorage.js';
 
 export class SchemaServerService {
-  private schemas: Map<string, any> = new Map();
   private serverUrl: string;
 
-  constructor(serverUrl: string = 'http://localhost:3001') {
-    this.serverUrl = serverUrl;
+  constructor(serverUrl?: string) {
+    // Default to current origin in browser, fallback for Node.js
+    this.serverUrl = serverUrl || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173');
   }
 
-  // Register a schema for serving
+  // Register a schema for serving (legacy compatibility)
   registerSchema(schema: CredentialSchema): void {
-    if (schema.jsonSchema) {
-      this.schemas.set(schema.said, schema.jsonSchema);
-      console.log(`Registered schema ${schema.said} for local serving`);
-    }
+    // This method is now a no-op since schemas are automatically 
+    // available via the SchemaService integration
+    console.log(`Schema ${schema.said} is available via SchemaService`);
   }
 
   // Get OOBI URL for a schema
@@ -22,54 +22,88 @@ export class SchemaServerService {
     return `${this.serverUrl}/oobi/${schemaSaid}`;
   }
 
-  // Get all registered schemas
-  getRegisteredSchemas(): Map<string, any> {
-    return this.schemas;
+  // Get all registered schemas via SchemaService
+  async getRegisteredSchemas(): Promise<Map<string, any>> {
+    try {
+      const schemaService = getSchemaService();
+      const result = await schemaService.listSchemas();
+      const schemas = new Map();
+      
+      result.schemas.forEach(schema => {
+        schemas.set(schema.metadata.said, schema.jsonSchema);
+      });
+      
+      return schemas;
+    } catch (error) {
+      console.error('Failed to get schemas from SchemaService:', error);
+      return new Map();
+    }
   }
 
-  // Check if schema is registered
-  hasSchema(schemaSaid: string): boolean {
-    return this.schemas.has(schemaSaid);
+  // Check if schema is registered via SchemaService
+  async hasSchema(schemaSaid: string): Promise<boolean> {
+    try {
+      const schemaService = getSchemaService();
+      return await schemaService.schemaExists(schemaSaid);
+    } catch (error) {
+      console.error('Failed to check schema existence:', error);
+      return false;
+    }
   }
 
-  // Get schema data
-  getSchemaData(schemaSaid: string): any | null {
-    return this.schemas.get(schemaSaid) || null;
+  // Get schema data via SchemaService
+  async getSchemaData(schemaSaid: string): Promise<any | null> {
+    try {
+      const schemaService = getSchemaService();
+      const schema = await schemaService.getSchemaBySaid(schemaSaid);
+      return schema?.jsonSchema || null;
+    } catch (error) {
+      console.error('Failed to get schema data:', error);
+      return null;
+    }
   }
 
-  // Start a simple HTTP server for schemas (development only)
-  async startDevelopmentServer(): Promise<void> {
-    // Note: This would require a backend service in a real implementation
-    // For now, we'll use a different approach
-    console.log('Schema server would be available at:', this.serverUrl);
-    console.log('Registered schemas:', Array.from(this.schemas.keys()));
+  // Get server status and schema count
+  async getServerStatus(): Promise<{ available: boolean; schemaCount: number; serverUrl: string }> {
+    try {
+      const schemas = await this.getRegisteredSchemas();
+      return {
+        available: true,
+        schemaCount: schemas.size,
+        serverUrl: this.serverUrl
+      };
+    } catch (error) {
+      return {
+        available: false,
+        schemaCount: 0,
+        serverUrl: this.serverUrl
+      };
+    }
   }
 
-  // Create a mock OOBI response for a schema
-  createMockOOBIResponse(schemaSaid: string): any {
-    const schemaData = this.getSchemaData(schemaSaid);
+  // Create an OOBI response for a schema via SchemaService
+  async createOOBIResponse(schemaSaid: string): Promise<any> {
+    const schemaData = await this.getSchemaData(schemaSaid);
     if (!schemaData) {
       throw new Error(`Schema ${schemaSaid} not found`);
     }
 
     // Return the schema data in the format expected by OOBI resolution
-    return {
-      v: "KERI10JSON000000_",
-      t: "sch",
-      d: schemaSaid,
-      ...schemaData
-    };
+    return schemaData;
   }
 
-  // Alternative: Use fetch API to serve schema data directly
-  async getSchemaViaFetch(schemaSaid: string): Promise<any> {
-    const schemaData = this.getSchemaData(schemaSaid);
-    if (!schemaData) {
-      throw new Error(`Schema ${schemaSaid} not registered locally`);
+  // Get schema via REST API (for testing)
+  async getSchemaViaAPI(schemaSaid: string): Promise<any> {
+    try {
+      const response = await fetch(`${this.serverUrl}/oobi/${schemaSaid}`);
+      if (!response.ok) {
+        throw new Error(`Schema not found: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Failed to fetch schema via API:', error);
+      throw error;
     }
-
-    // Return the schema data directly
-    return schemaData;
   }
 }
 

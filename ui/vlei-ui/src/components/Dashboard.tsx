@@ -85,6 +85,12 @@ export const Dashboard: React.FC = () => {
                   Organizations
                 </button>
                 <button
+                  onClick={() => window.open('/api/schemas/info', '_blank')}
+                  className="bg-gray-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-700"
+                >
+                  API
+                </button>
+                <button
                   onClick={handleLogout}
                   className="text-gray-500 hover:text-gray-700"
                 >

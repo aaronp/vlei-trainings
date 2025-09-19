@@ -28,6 +28,9 @@ export class LocalStorageSchemaProvider {
     try {
       const data = Object.fromEntries(schemas);
       localStorage.setItem(this.storageKey, JSON.stringify(data));
+      
+      // Mark last sync time
+      localStorage.setItem('vlei-schemas-last-sync', new Date().toISOString());
     } catch (error) {
       console.error('Failed to save schemas to localStorage:', error);
       throw new Error('Failed to save schemas');

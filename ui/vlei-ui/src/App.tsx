@@ -11,6 +11,7 @@ import { IssuerWizard } from './pages/IssuerWizard';
 import { HolderWizard } from './pages/HolderWizard';
 import { SchemaManagement } from './components/SchemaManagement';
 import { initializeDefaultSchemaService } from './services/schemaStorage.js';
+import { setupAutoSync } from './services/schemaServerSync';
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,10 @@ const queryClient = new QueryClient();
 try {
   initializeDefaultSchemaService();
   console.log('Schema service initialized with localStorage provider');
+  
+  // Setup auto-sync with schema server
+  setupAutoSync();
+  console.log('Schema server auto-sync enabled');
 } catch (error) {
   console.error('Failed to initialize schema service:', error);
 }

@@ -55,10 +55,10 @@ const StepIndicator: React.FC<{ steps: WizardStep[]; currentStep: number }> = ({
         <React.Fragment key={step.id}>
           <div className="flex items-center">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${index < currentStep
-                ? 'bg-green-500 text-white'
-                : index === currentStep
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-300 text-gray-600'
+              ? 'bg-green-500 text-white'
+              : index === currentStep
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-300 text-gray-600'
               }`}>
               {index < currentStep ? '✓' : index + 1}
             </div>
@@ -351,23 +351,6 @@ const ChooseSchemaStep: React.FC<StepProps> = ({ onNext, onBack }) => {
         <p className="text-gray-600">Select the credential type and schema for this issuance</p>
       </div>
 
-      {/* Schema Resolution Warning */}
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-        <div className="flex">
-          <svg className="w-5 h-5 text-amber-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.876c1.72 0 3.159-1.24 3.457-2.917l.97-5.478c.376-2.123-1.236-4.105-3.457-4.105H3.137c-2.221 0-3.833 1.982-3.457 4.105l.97 5.478C.948 20.76 2.387 22 4.107 22z" />
-          </svg>
-          <div>
-            <h4 className="font-medium text-amber-900 mb-1">Schema Server Required</h4>
-            <p className="text-sm text-amber-700">
-              Custom schemas need to be available via OOBI resolution from a schema server. 
-              In this demo environment, newly created schemas may not work unless a schema server is running. 
-              Consider using existing schemas that are already available in your KERIA instance.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Selected Schema Display */}
       {selectedSchema && !showManagement && (
         <div className="bg-green-50 border border-green-200 rounded-lg p-4">
@@ -401,9 +384,9 @@ const ChooseSchemaStep: React.FC<StepProps> = ({ onNext, onBack }) => {
               You can select an existing schema or create a new one with custom fields.
             </p>
           </div>
-          
+
           <div className="border rounded-lg p-6 bg-gray-50">
-            <SchemaManagement 
+            <SchemaManagement
               onSchemaSelect={handleSchemaSelect}
               selectedSchemaId={selectedSchema?.metadata.id}
             />
@@ -711,29 +694,29 @@ const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) =>
 
       // Step 1: Resolve schema OOBI 
       console.log('Resolving schema OOBI:', state.schema.said);
-      
+
       try {
         // Check if this is a locally created schema
         const schemaService = getSchemaService();
         const schemaExists = await schemaService.schemaExists(state.schema.said);
         if (schemaExists) {
           console.log('Schema is registered locally, attempting to use local schema server');
-          
+
           // For locally created schemas, we need to provide them to KERIA differently
           // Since we can't run a real HTTP server in the browser, we'll skip OOBI resolution
           // and try to proceed directly. KERIA might have the schema cached already.
           console.log('Skipping OOBI resolution for local schema');
         } else {
-          // For external schemas, try to resolve OOBI
-          const schemaOOBI = `http://localhost:3001/oobi/${state.schema.said}`;
+          // For external schemas, try to resolve OOBI from same server
+          const schemaOOBI = `${window.location.origin}/oobi/${state.schema.said}`;
           console.log('Attempting to resolve external schema OOBI:', schemaOOBI);
-          
+
           await keriaService.resolveOOBI(schemaOOBI, `schema-${state.schema.said}`);
           console.log('External schema OOBI resolved successfully');
         }
       } catch (oobiError) {
         console.warn('Schema OOBI resolution failed:', oobiError);
-        
+
         // Check if it's a local schema and provide more helpful error message
         const schemaService = getSchemaService();
         const schemaExists = await schemaService.schemaExists(state.schema.said);
