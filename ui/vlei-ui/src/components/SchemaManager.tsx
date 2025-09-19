@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Saider } from 'signify-ts';
 import { schemaServerService } from '../services/schemaServer.service';
+import { getSchemaService, type SchemaData, type CredentialField, type CreateSchemaRequest } from '../services/schemaStorage.js';
 
-export interface CredentialField {
-  name: string;
-  label: string;
-  type: 'text' | 'select' | 'textarea' | 'date' | 'number';
-  required: boolean;
-  maxLength?: number;
-  options?: string[];
-}
-
+// Legacy interface for backward compatibility
 export interface CredentialSchema {
   said: string;
   name: string;
@@ -28,33 +21,53 @@ interface SchemaManagerProps {
 export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, selectedSchema }) => {
   const [schemas, setSchemas] = useState<CredentialSchema[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [newSchema, setNewSchema] = useState<Partial<CredentialSchema>>({
     name: '',
     description: '',
     fields: []
   });
 
-  // Load schemas from localStorage
+  // Load schemas from SchemaService
   useEffect(() => {
-    const saved = localStorage.getItem('credentialSchemas');
-    if (saved) {
-      setSchemas(JSON.parse(saved));
-    }
+    loadSchemas();
   }, []);
 
-  // Save schemas to localStorage
-  const saveSchemas = (updatedSchemas: CredentialSchema[]) => {
-    setSchemas(updatedSchemas);
-    localStorage.setItem('credentialSchemas', JSON.stringify(updatedSchemas));
+  const loadSchemas = async () => {
+    setLoading(true);
+    try {
+      const schemaService = getSchemaService();
+      const result = await schemaService.listSchemas({
+        sortBy: 'createdAt',
+        sortOrder: 'desc'
+      });
+
+      // Convert SchemaData to legacy CredentialSchema format
+      const legacySchemas: CredentialSchema[] = result.schemas.map(schema => ({
+        said: schema.metadata.said,
+        name: schema.metadata.name,
+        description: schema.metadata.description,
+        fields: schema.fields || [],
+        createdAt: schema.metadata.createdAt,
+        jsonSchema: schema.jsonSchema
+      }));
+
+      setSchemas(legacySchemas);
+    } catch (error) {
+      console.error('Failed to load schemas:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleCreateSchema = () => {
+  const handleCreateSchema = async () => {
     if (!newSchema.name) return;
 
+    setLoading(true);
     try {
       // Build the JSON Schema structure
       const jsonSchema = {
-        $id: '', // Required empty field for SAID computation (use $id instead of d for JSON Schema)
+        $id: '', // Required empty field for SAID computation
         $schema: 'http://json-schema.org/draft-07/schema#',
         title: newSchema.name,
         description: newSchema.description || '',
@@ -116,31 +129,51 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
 
       // Then compute SAID for the entire schema using '$id' label
       const [saider, saidifiedSchema] = Saider.saidify(jsonSchema, undefined, undefined, '$id');
-      
-      const schema: CredentialSchema = {
-        said: saider.qb64,
+
+      // Create schema request for the service
+      const createRequest: CreateSchemaRequest = {
         name: newSchema.name,
         description: newSchema.description || '',
+        jsonSchema: saidifiedSchema,
         fields: newSchema.fields || [],
-        createdAt: new Date().toISOString(),
-        jsonSchema: saidifiedSchema // Store the complete JSON schema
+        tags: [],
+        isPublic: false
       };
 
-      console.log('Generated JSON Schema:', saidifiedSchema);
-      console.log('Schema SAID:', saider.qb64);
+      // Use SchemaService to create the schema
+      const schemaService = getSchemaService();
+      const createdSchema = await schemaService.createSchema(createRequest);
 
-      const updatedSchemas = [...schemas, schema];
-      saveSchemas(updatedSchemas);
-      
+      console.log('Created schema:', createdSchema);
+
+      // Convert to legacy format for backward compatibility
+      const legacySchema: CredentialSchema = {
+        said: createdSchema.metadata.said,
+        name: createdSchema.metadata.name,
+        description: createdSchema.metadata.description || '',
+        fields: createdSchema.fields || [],
+        createdAt: createdSchema.metadata.createdAt,
+        jsonSchema: createdSchema.jsonSchema
+      };
+
       // Register the schema with the local schema service for serving
-      schemaServerService.registerSchema(schema);
+      try {
+        schemaServerService.registerSchema(legacySchema);
+      } catch (error) {
+        console.warn('Failed to register schema with server service:', error);
+      }
+      
+      // Reload schemas from service
+      await loadSchemas();
       
       setNewSchema({ name: '', description: '', fields: [] });
       setShowCreateForm(false);
-      onSchemaSelect(schema);
+      onSchemaSelect(legacySchema);
     } catch (error) {
-      console.error('Failed to compute schema SAID:', error);
+      console.error('Failed to create schema:', error);
       alert('Failed to create schema: ' + (error as Error).message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -186,21 +219,27 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Select Schema
         </label>
-        <select
-          className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
-          value={selectedSchema?.said || ''}
-          onChange={(e) => {
-            const schema = schemas.find(s => s.said === e.target.value);
-            if (schema) onSchemaSelect(schema);
-          }}
-        >
-          <option value="">Select a schema...</option>
-          {schemas.map((schema) => (
-            <option key={schema.said} value={schema.said}>
-              {schema.name}
-            </option>
-          ))}
-        </select>
+        {loading ? (
+          <div className="flex justify-center py-4">
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600"></div>
+          </div>
+        ) : (
+          <select
+            className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
+            value={selectedSchema?.said || ''}
+            onChange={(e) => {
+              const schema = schemas.find(s => s.said === e.target.value);
+              if (schema) onSchemaSelect(schema);
+            }}
+          >
+            <option value="">Select a schema...</option>
+            {schemas.map((schema) => (
+              <option key={schema.said} value={schema.said}>
+                {schema.name}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
 
       {selectedSchema && (
@@ -348,10 +387,17 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
                 <button
                   type="button"
                   onClick={handleCreateSchema}
-                  disabled={!newSchema.name}
+                  disabled={!newSchema.name || loading}
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
                 >
-                  Create Schema
+                  {loading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Creating...
+                    </>
+                  ) : (
+                    'Create Schema'
+                  )}
                 </button>
                 <button
                   type="button"

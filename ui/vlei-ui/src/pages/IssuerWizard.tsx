@@ -5,8 +5,10 @@ import { createIPEXService } from '../services/ipex.service';
 import { wizardStateService, type IssuerWizardState, type WizardStep } from '../services/wizardState.service';
 import { useKeriStore } from '../store/keriStore';
 import { ConnectionGuard } from '../components/ConnectionGuard';
-import { getSchemaService } from '../services/schema';
+import { getSchemaService } from '../services/schemaStorage.js';
 import { schemaValidationService, type SchemaAvailability } from '../services/schemaValidation.service';
+import { SchemaManagement } from '../components/SchemaManagement';
+import type { SchemaData } from '../services/schemaStorage.js';
 
 interface StepProps {
   state: IssuerWizardState;
@@ -321,87 +323,24 @@ const SetupRegistryStep: React.FC<StepProps> = ({ state, onNext, onBack }) => {
 };
 
 const ChooseSchemaStep: React.FC<StepProps> = ({ onNext, onBack }) => {
-  const [existingSchemas, setExistingSchemas] = useState<any[]>([]);
-  const [useExisting, setUseExisting] = useState(true);
-  const [selectedSchema, setSelectedSchema] = useState('');
-  const [showCreateForm, setShowCreateForm] = useState(false);
-  const [newSchemaName, setNewSchemaName] = useState('');
-  const [newSchemaDescription, setNewSchemaDescription] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [selectedSchema, setSelectedSchema] = useState<SchemaData | null>(null);
+  const [showManagement, setShowManagement] = useState(false);
 
-  useEffect(() => {
-    loadExistingSchemas();
-  }, []);
-
-  const loadExistingSchemas = async () => {
-    try {
-      const schemaService = getSchemaService();
-      const result = await schemaService.listSchemas({
-        sortBy: 'updatedAt',
-        sortOrder: 'desc'
-      });
-
-      // Convert to the format expected by the UI
-      const formattedSchemas = result.schemas.map(schema => ({
-        said: schema.metadata.said,
-        name: schema.metadata.name,
-        description: schema.metadata.description,
-        type: 'custom' // All schemas from the new service are custom
-      }));
-
-      setExistingSchemas(formattedSchemas);
-
-      // If no schemas exist, default to create new
-      if (formattedSchemas.length === 0) {
-        setUseExisting(false);
-      }
-    } catch (error) {
-      console.error('Failed to load schemas:', error);
-      setExistingSchemas([]);
-      setUseExisting(false);
-    }
-  };
-
-  const handleCreateNewSchema = () => {
-    setLoading(true);
-    try {
-      // This would normally create a schema using SchemaManager logic
-      // For now, create a simple mock schema
-      const newSchema = {
-        said: `E${Math.random().toString(36).substring(2, 15)}`, // Mock SAID
-        name: newSchemaName,
-        description: newSchemaDescription,
-        type: 'custom',
-        createdAt: new Date().toISOString()
-      };
-
-      // Add to existing schemas
-      const updatedSchemas = [...existingSchemas, newSchema];
-      setExistingSchemas(updatedSchemas);
-
-      // Save to localStorage
-      const customSchemas = updatedSchemas.filter(s => s.type === 'custom');
-      localStorage.setItem('credentialSchemas', JSON.stringify(customSchemas));
-
-      // Select the new schema
-      setSelectedSchema(newSchema.said);
-      setShowCreateForm(false);
-      setUseExisting(true);
-    } catch (error) {
-      console.error('Failed to create schema:', error);
-    } finally {
-      setLoading(false);
-    }
+  const handleSchemaSelect = (schema: SchemaData) => {
+    setSelectedSchema(schema);
+    setShowManagement(false);
   };
 
   const handleNext = () => {
-    let schema;
-    if (useExisting && selectedSchema) {
-      schema = existingSchemas.find(s => s.said === selectedSchema);
-    }
-
-    if (schema) {
-      onNext({ schema });
+    if (selectedSchema) {
+      // Convert to the format expected by the rest of the wizard
+      const schemaForWizard = {
+        said: selectedSchema.metadata.said,
+        name: selectedSchema.metadata.name,
+        description: selectedSchema.metadata.description,
+        type: 'custom'
+      };
+      onNext({ schema: schemaForWizard });
     }
   };
 
@@ -429,113 +368,48 @@ const ChooseSchemaStep: React.FC<StepProps> = ({ onNext, onBack }) => {
         </div>
       </div>
 
-      <div className="space-y-4">
-
-        {/* Use Existing Schema */}
-        <div>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              checked={useExisting}
-              onChange={() => {
-                setUseExisting(true);
-                setShowCreateForm(false);
-              }}
-              className="mr-3"
-            />
-            <span className="font-medium">Use Existing Schema (Recommended)</span>
-          </label>
-          {useExisting && (
-            <div className="mt-3 ml-6 space-y-3">
-              {existingSchemas.length === 0 ? (
-                <p className="text-sm text-gray-500">No existing schemas found</p>
-              ) : (
-                existingSchemas.map((schema) => (
-                  <div key={schema.said} className="border rounded-lg p-4">
-                    <label className="flex items-start cursor-pointer">
-                      <input
-                        type="radio"
-                        name="selectedSchema"
-                        value={schema.said}
-                        checked={selectedSchema === schema.said}
-                        onChange={(e) => setSelectedSchema(e.target.value)}
-                        className="mr-3 mt-1"
-                      />
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium">{schema.name}</span>
-                          {schema.type === 'built-in' && (
-                            <span className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded">Built-in</span>
-                          )}
-                          {schema.type === 'custom' && (
-                            <span className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded">Custom</span>
-                          )}
-                        </div>
-                        <div className="text-sm text-gray-600 mb-2">{schema.description}</div>
-                        <div className="text-xs text-gray-400 break-all">SAID: {schema.said}</div>
-                      </div>
-                    </label>
-                  </div>
-                ))
+      {/* Selected Schema Display */}
+      {selectedSchema && !showManagement && (
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="flex justify-between items-start">
+            <div>
+              <h4 className="font-medium text-green-900 mb-1">Selected Schema</h4>
+              <p className="text-sm text-green-800 font-medium">{selectedSchema.metadata.name}</p>
+              {selectedSchema.metadata.description && (
+                <p className="text-sm text-green-700 mt-1">{selectedSchema.metadata.description}</p>
               )}
+              <p className="text-xs text-green-600 mt-2 font-mono">SAID: {selectedSchema.metadata.said}</p>
             </div>
-          )}
+            <button
+              onClick={() => setShowManagement(true)}
+              className="text-sm text-green-700 hover:text-green-900 underline"
+            >
+              Change
+            </button>
+          </div>
         </div>
+      )}
 
-        {/* Create New Schema */}
+      {/* Schema Management Section */}
+      {(!selectedSchema || showManagement) && (
         <div>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              checked={!useExisting}
-              onChange={() => {
-                setUseExisting(false);
-                setShowCreateForm(true);
-              }}
-              className="mr-3"
+          <div className="mb-4">
+            <h3 className="text-lg font-medium text-gray-900">
+              {selectedSchema ? 'Change Schema' : 'Select or Create a Schema'}
+            </h3>
+            <p className="text-sm text-gray-600 mt-1">
+              You can select an existing schema or create a new one with custom fields.
+            </p>
+          </div>
+          
+          <div className="border rounded-lg p-6 bg-gray-50">
+            <SchemaManagement 
+              onSchemaSelect={handleSchemaSelect}
+              selectedSchemaId={selectedSchema?.metadata.id}
             />
-            <span className="font-medium">Create New Schema</span>
-          </label>
-          {showCreateForm && (
-            <div className="mt-3 ml-6 space-y-4 border rounded-lg p-4 bg-gray-50">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Schema Name
-                </label>
-                <input
-                  type="text"
-                  value={newSchemaName}
-                  onChange={(e) => setNewSchemaName(e.target.value)}
-                  placeholder="e.g., Employee Badge"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Description
-                </label>
-                <textarea
-                  value={newSchemaDescription}
-                  onChange={(e) => setNewSchemaDescription(e.target.value)}
-                  placeholder="Describe what this credential type is used for"
-                  rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                />
-              </div>
-              <button
-                onClick={handleCreateNewSchema}
-                disabled={loading || !newSchemaName.trim()}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 text-sm"
-              >
-                {loading ? 'Creating...' : 'Create Schema'}
-              </button>
-              <div className="text-xs text-gray-500">
-                Note: This creates a basic schema. For advanced schema design, use the Schema Manager.
-              </div>
-            </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="flex justify-between pt-6">
         <button
@@ -546,7 +420,7 @@ const ChooseSchemaStep: React.FC<StepProps> = ({ onNext, onBack }) => {
         </button>
         <button
           onClick={handleNext}
-          disabled={(useExisting && !selectedSchema) || (!useExisting && !showCreateForm)}
+          disabled={!selectedSchema}
           className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
         >
           Next
@@ -610,17 +484,16 @@ const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) =>
     loadCustomSchemaFields();
   };
 
-  const loadCustomSchemaFields = () => {
+  const loadCustomSchemaFields = async () => {
     if (!state.schema) return;
 
     try {
-      // Load schema from localStorage if it's a custom schema
-      const saved = localStorage.getItem('credentialSchemas');
-      const savedSchemas = saved ? JSON.parse(saved) : [];
-      const fullSchema = savedSchemas.find((s: any) => s.said === state.schema!.said);
+      // Load schema using the schema service
+      const schemaService = getSchemaService();
+      const fullSchema = await schemaService.getSchemaBySaid(state.schema.said);
 
       if (fullSchema && fullSchema.fields) {
-        // Use the fields from the custom schema
+        // Use the fields from the schema
         setSchemaFields(fullSchema.fields);
 
         // Initialize with default values
@@ -655,7 +528,7 @@ const CreateCredentialStep: React.FC<StepProps> = ({ state, onNext, onBack }) =>
         setCredentialData({ title: '', description: '' });
       }
     } catch (error) {
-      console.error('Failed to load custom schema fields:', error);
+      console.error('Failed to load schema fields:', error);
       // Use generic fields as fallback
       const genericFields = [
         {

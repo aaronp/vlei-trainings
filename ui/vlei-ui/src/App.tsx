@@ -10,7 +10,7 @@ import { Wizard } from './pages/Wizard';
 import { IssuerWizard } from './pages/IssuerWizard';
 import { HolderWizard } from './pages/HolderWizard';
 import { SchemaManagement } from './components/SchemaManagement';
-import { initializeDefaultSchemaService } from './services/schema';
+import { initializeDefaultSchemaService } from './services/schemaStorage.js';
 
 const queryClient = new QueryClient();
 

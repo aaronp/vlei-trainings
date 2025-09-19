@@ -1,5 +1,5 @@
 // Schema validation and availability service
-import { getSchemaService } from './schema';
+import { getSchemaService } from './schemaStorage.js';
 
 export interface SchemaAvailability {
   available: boolean;

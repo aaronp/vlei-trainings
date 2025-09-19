@@ -1,7 +1,6 @@
 // Advanced Schema Management component with CRUD operations
 import React, { useState, useEffect } from 'react';
-import { getSchemaService } from '../services/schema/schemaService';
-import { SchemaData, CreateSchemaRequest, CredentialField, SchemaQuery } from '../services/schema/types';
+import { getSchemaService, SchemaData, CreateSchemaRequest, CredentialField, SchemaQuery } from '../services/schemaStorage.js';
 import { Saider } from 'signify-ts';
 
 interface SchemaManagementProps {
