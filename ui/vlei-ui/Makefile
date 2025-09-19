@@ -6,15 +6,14 @@ help:
 	@echo "  make install           - Install npm dependencies"
 	@echo "  make start-ui          - Start the VLEI UI development server"
 	@echo "  make start-keria       - Start the KERIA API using Docker Compose"
-	@echo "  make start-schema-server - Start the basic schema server (legacy)"
-	@echo "  make start-schema-api  - Start the enhanced schema REST API server"
 	@echo "  make start-all         - Start UI, KERIA API, and schema API server"
 	@echo "  make stop-keria        - Stop the KERIA API Docker containers"
 	@echo "  make build             - Build the application for production"
 	@echo "  make deploy            - Deploy to Vercel (preview)"
 	@echo "  make deploy-prod       - Deploy to Vercel (production)"
 	@echo "  make clean             - Clean build artifacts"
-
+test:
+	npm run test:integration
 # Start the UI development server
 start-ui:
 	@echo "Starting VLEI UI development server..."
@@ -24,29 +23,6 @@ start-ui:
 start-keria:
 	@echo "Starting KERIA API via Docker Compose..."
 	cd ../.. && ./deploy.sh
-
-# Start the basic schema server (legacy)
-start-schema-server:
-	@echo "Starting basic schema server..."
-	@command -v node >/dev/null 2>&1 || { echo >&2 "Node.js not installed. Please install Node.js"; exit 1; }
-	node schema-server-example.js
-
-# Start the enhanced schema REST API server
-start-schema-api:
-	@echo "Starting enhanced schema REST API server..."
-	@command -v node >/dev/null 2>&1 || { echo >&2 "Node.js not installed. Please install Node.js"; exit 1; }
-	node schema-server.js
-
-# Start UI, KERIA API, and schema API server
-start-all:
-	@echo "Starting KERIA API, Schema API Server, and UI..."
-	$(MAKE) start-keria
-	@echo "Waiting for KERIA to be ready..."
-	@sleep 5
-	@echo "Starting schema API server in background..."
-	node schema-server.js &
-	@sleep 2
-	$(MAKE) start-ui
 
 # Stop KERIA Docker containers
 stop-keria:

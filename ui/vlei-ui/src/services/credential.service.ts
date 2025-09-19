@@ -23,13 +23,63 @@ export class CredentialService {
     const client = this.keriaService.getClient();
     if (!client) throw new Error('KERIA client not initialized');
 
-    try {
-      const result = await client.registries().create({ name: aidAlias, registryName });
-      const operation = typeof result.op === 'function' ? await result.op() : result;
+    console.log('Creating registry with params:', { aidAlias, registryName });
 
-      await this.keriaService.waitForOperation(operation);
+    // First check if the AID exists and is valid
+    try {
+      const aids = await this.keriaService.listAIDs();
+      const aid = aids.find(a => a.name === aidAlias);
+      if (!aid) {
+        throw new Error(`AID alias "${aidAlias}" not found. Available AIDs: ${aids.map(a => a.name).join(', ')}`);
+      }
+      console.log('Found AID for alias:', aidAlias, aid);
+    } catch (aidError) {
+      console.error('Failed to verify AID:', aidError);
+      throw aidError;
+    }
+
+    let completedOperation: any = null;
+
+    try {
+      const request = { name: aidAlias, registryName }
+      console.log(`creating registry ${request}`);
+      const result = await client.registries().create(request);
+      console.log('Registry create result:', result);
+      console.log('Registry create result type:', typeof result);
+      console.log('Registry create result keys:', Object.keys(result));
+
+      // Handle different result formats - check if it has an op function 
+      let operation;
+      console.log('Checking for op method...');
+      console.log('typeof result.op:', typeof result.op);
+      console.log('Result prototype methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(result)));
+
+      if (typeof result.op === 'function') {
+        console.log('Found op method, calling it...');
+        operation = await result.op();
+      } else {
+        // Check if we can find the operation data in the result object itself
+        console.log('No op function found, checking result structure...');
+
+        // The result might already contain the operation data
+        if (result.name && (result.done !== undefined || result.metadata)) {
+          console.log('Result appears to be an operation already');
+          operation = result;
+        } else {
+          throw new Error('Cannot find operation in registry creation result. Result structure: ' + JSON.stringify(result, null, 2));
+        }
+      }
+      console.log('Operation details:', operation);
+
+      completedOperation = await this.keriaService.waitForOperation(operation);
+      console.log('Completed operation:', completedOperation);
+      console.log('Operation response:', completedOperation.response);
+
       await this.keriaService.deleteOperation(operation.name);
+      console.log('Registry creation operation completed successfully');
     } catch (error: any) {
+      console.log('creating registry caught: ' + error);
+
       // If registry already exists, that's ok - we'll just fetch it
       if (!error.message?.includes('already in use')) {
         throw error;
@@ -37,19 +87,50 @@ export class CredentialService {
       console.log('Registry already exists, fetching it...');
     }
 
+    // Small delay to allow backend to process the registry creation
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     // Fetch the registry (whether we just created it or it already existed)
     const registries = await this.listRegistries(aidAlias);
     console.log('All registries after create attempt:', registries);
+    console.log('Looking for registry with name:', registryName);
+
+    // Log each registry structure for debugging
+    registries.forEach((r: any, index: number) => {
+      console.log(`Registry ${index}:`, JSON.stringify(r, null, 2));
+    });
+
+    // Try to get registry info from the completed operation response if list is empty
+    if (registries.length === 0 && completedOperation?.response) {
+      console.log('No registries found in list, checking operation response for registry info');
+      const opResponse = completedOperation.response;
+
+      // Check if the operation response contains registry information
+      if (opResponse.regk || opResponse.registry || opResponse.anchor) {
+        console.log('Found registry info in operation response:', opResponse);
+        const registryFromOp = {
+          name: registryName,
+          registryName: registryName,
+          regk: opResponse.regk || opResponse.anchor?.i || opResponse.registry?.regk,
+          ...opResponse
+        };
+        console.log('Created registry object from operation:', registryFromOp);
+        return registryFromOp;
+      }
+    }
 
     // Different KERIA versions might use different property names
     const registry = registries.find((r: any) =>
       r.name === registryName ||
-      r.registryName === registryName
+      r.registryName === registryName ||
+      r.rgy === registryName ||  // Try other possible property names
+      r.ri === registryName
     );
 
     if (!registry) {
       console.error('Available registries:', registries);
-      throw new Error(`Registry "${registryName}" not found after creation attempt`);
+      console.error('Registry property names found:', registries.map(r => Object.keys(r)));
+      throw new Error(`Registry "${registryName}" not found after creation attempt. Available registries: ${JSON.stringify(registries)}`);
     }
 
     return registry;
@@ -59,14 +140,32 @@ export class CredentialService {
     const client = this.keriaService.getClient();
     if (!client) throw new Error('KERIA client not initialized');
 
+    console.log('Listing registries for AID alias:', aidAlias);
+
     try {
       const result = await client.registries().list(aidAlias);
+      console.log('Raw registry list result:', result);
+      console.log('Result type:', typeof result);
+      console.log('Result keys:', result ? Object.keys(result) : 'null/undefined');
+
       // Handle different response formats
       if (Array.isArray(result)) {
+        console.log('Result is array with length:', result.length);
         return result;
       } else if (result && typeof result === 'object' && 'registries' in result) {
+        console.log('Result has registries property:', result.registries);
         return result.registries || [];
+      } else if (result && typeof result === 'object') {
+        console.log('Result is object, checking all properties:', Object.entries(result));
+        // Try to find registry data in other possible property names
+        const possibleArrays = Object.values(result).filter(Array.isArray);
+        if (possibleArrays.length > 0) {
+          console.log('Found possible registry array:', possibleArrays[0]);
+          return possibleArrays[0] as Registry[];
+        }
       }
+
+      console.log('No registries found in result, returning empty array');
       return [];
     } catch (error) {
       console.error('Error listing registries:', error);

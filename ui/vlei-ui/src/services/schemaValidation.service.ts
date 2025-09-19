@@ -8,7 +8,7 @@ export interface SchemaAvailability {
 }
 
 export class SchemaValidationService {
-  
+
   // Well-known schema SAIDs that might be available in KERIA
   private wellKnownSchemas = new Set([
     // Add any known schema SAIDs that are commonly available
@@ -23,12 +23,11 @@ export class SchemaValidationService {
       // Check if it's a locally registered schema
       const schemaService = getSchemaService();
       const hasSchema = await schemaService.schemaExists(schemaSaid);
-      
+
       if (hasSchema) {
         return {
-          available: false, // Not actually available due to OOBI resolution limitations
-          source: 'local',
-          warning: 'This schema was created locally but needs to be served via OOBI. Consider using an external schema server or pre-existing schemas.'
+          available: true,
+          source: 'external'
         };
       }
     } catch (error) {

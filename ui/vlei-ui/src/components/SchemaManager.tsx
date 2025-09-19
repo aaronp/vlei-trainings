@@ -113,13 +113,13 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
       };
 
       // First, compute SAID for the attributes block using 'd' label
-      const attributesBlock = { 
+      const attributesBlock = {
         d: '', // Required for SAID computation
-        ...(jsonSchema.properties.a as any).oneOf[1] 
+        ...(jsonSchema.properties.a as any).oneOf[1]
       };
       delete attributesBlock.$id; // Remove $id before SAIDifying
       const [, saidifiedAttributesBlock] = Saider.saidify(attributesBlock, undefined, undefined, 'd');
-      
+
       // Update the attributes block in the schema with computed SAID in $id
       (jsonSchema.properties.a as any).oneOf[1] = {
         ...saidifiedAttributesBlock,
@@ -162,10 +162,10 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
       } catch (error) {
         console.warn('Failed to register schema with server service:', error);
       }
-      
+
       // Reload schemas from service
       await loadSchemas();
-      
+
       setNewSchema({ name: '', description: '', fields: [] });
       setShowCreateForm(false);
       onSchemaSelect(legacySchema);
@@ -261,31 +261,20 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
             <div className="fixed inset-0 transition-opacity">
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
-            
+
             <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full sm:p-6 relative z-20">
               <div>
                 <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
                   Create New Schema
                 </h3>
-                
+
                 <div className="space-y-4">
                   <div className="bg-blue-50 border border-blue-200 p-3 rounded mb-4">
                     <p className="text-sm text-blue-700">
                       <strong>Note:</strong> The Schema SAID will be automatically computed from the schema structure using cryptographic hashing, similar to the 'kli saidify' command-line tool.
                     </p>
                   </div>
-                  
-                  <div className="bg-amber-50 border border-amber-200 p-3 rounded">
-                    <p className="text-sm text-amber-700">
-                      <strong>Schema Serving:</strong> Custom schemas need to be served from a schema server (like vlei-server) to be accessible via OOBI resolution. This demo registers schemas locally, but in production you would need to:
-                    </p>
-                    <ul className="text-xs text-amber-600 mt-1 list-disc list-inside">
-                      <li>Deploy the schema to a schema server</li>
-                      <li>Make it available at: <code>http://server:port/oobi/[SCHEMA_SAID]</code></li>
-                      <li>Ensure KERIA can access the schema server</li>
-                    </ul>
-                  </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Schema Name</label>
                     <input
@@ -296,7 +285,7 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
                       placeholder="Enter schema name"
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Description (optional)</label>
                     <textarea
@@ -318,7 +307,7 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
                         Add Field
                       </button>
                     </div>
-                    
+
                     {(newSchema.fields || []).map((field, index) => (
                       <div key={index} className="border p-3 rounded mb-2">
                         <div className="grid grid-cols-2 gap-2">
@@ -371,9 +360,9 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
                             placeholder="Options (comma-separated)"
                             className="mt-2 w-full border-gray-300 rounded text-xs"
                             value={field.options?.join(', ') || ''}
-                            onChange={(e) => updateField(index, { 
-                              ...field, 
-                              options: e.target.value.split(',').map(s => s.trim()) 
+                            onChange={(e) => updateField(index, {
+                              ...field,
+                              options: e.target.value.split(',').map(s => s.trim())
                             })}
                           />
                         )}
@@ -382,7 +371,7 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3">
                 <button
                   type="button"

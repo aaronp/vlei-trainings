@@ -8,7 +8,10 @@
     "build": "vite build",
     "build-check": "tsc -b tsconfig.build.json && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.13",
@@ -38,6 +41,8 @@
     "tailwindcss": "^4.1.13",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
-    "vite": "^7.1.2"
+    "vite": "^7.1.2",
+    "vitest": "^2.0.0",
+    "@vitest/ui": "^2.0.0"
   }
 }
