@@ -59,7 +59,7 @@ describe('Services Integration Tests', () => {
   });
 
   describe('AID Management', () => {
-    test.only('should create a new AID independently', async () => {
+    test('should create a new AID independently', async () => {
       // Generate unique test data for this test
       const testAidAlias = `test-aid-${Date.now()}-${Math.random().toString(36).substring(7)}`;
       console.log(`Creating AID with alias: ${testAidAlias}`);
@@ -92,8 +92,10 @@ describe('Services Integration Tests', () => {
       expect(result.aid).toBeDefined();
 
       // Get the created AID
-      const aids = await keriaService.listAIDs();
+
+      const aids = await keriaService.listAIDs(0, 1000);
       const createdAid = aids.find(aid => aid.name === testAidAlias);
+      console.log('createdAid:', createdAid);
       expect(createdAid).toBeDefined();
 
       // Get client state to get agent identifier
@@ -110,7 +112,6 @@ describe('Services Integration Tests', () => {
       );
 
       expect(endRoleName).toBeDefined();
-
 
       console.log(`Successfully added end role '${endRoleName}' to AID`);
     }, TEST_CONFIG.operationTimeout);

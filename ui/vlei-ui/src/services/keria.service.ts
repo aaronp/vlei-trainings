@@ -78,12 +78,12 @@ export class KeriaService {
 
       // Construct the AID object with the correct structure
       // After the operation completes, we need to get the AID identifier from the operation response
-      const aidIdentifier = completedOp.response?.anchor?.i || 
-                            completedOp.response?.i || 
-                            (result.aid as any).i || 
-                            (result.aid as any).prefix || 
-                            (result.aid as any).pre;
-                            
+      const aidIdentifier = completedOp.response?.anchor?.i ||
+        completedOp.response?.i ||
+        (result.aid as any).i ||
+        (result.aid as any).prefix ||
+        (result.aid as any).pre;
+
       if (!aidIdentifier) {
         throw new Error(`Could not determine AID identifier for ${alias}. Operation response: ${JSON.stringify(completedOp.response)}`);
       }
@@ -102,9 +102,9 @@ export class KeriaService {
         const existingAid = aids.find(aid => aid.name === alias);
         if (existingAid) {
           // Return the existing AID with a dummy operation
-          return { 
-            aid: existingAid, 
-            op: { name: 'existing-aid', done: true } as Operation 
+          return {
+            aid: existingAid,
+            op: { name: 'existing-aid', done: true } as Operation
           };
         } else {
           throw new Error(`AID ${alias} reported as existing but not found in list`);
@@ -163,26 +163,48 @@ export class KeriaService {
   }
 
 
-  async listAIDs(): Promise<AID[]> {
+  async listAIDs(start?: number, limit?: number): Promise<AID[]> {
     if (!this.client) throw new Error('Client not initialized');
 
-    let allAids: any[] = [];
-    let start = 0;
-    const limit = 25; // Default page size
-    
-    while (true) {
+    // If start and limit are provided, return a single page
+    if (start !== undefined && limit !== undefined) {
       const result = await this.client.identifiers().list(start, limit);
       console.log(`listAIDs result (start=${start}, limit=${limit}):`, result);
 
       // Handle paginated response format
       if (result && typeof result === 'object' && 'aids' in result) {
+        return result.aids.map((aid: any) => ({
+          i: aid.prefix || aid.i,
+          name: aid.name
+        }));
+      } else if (Array.isArray(result)) {
+        // Handle direct array response (non-paginated)
+        return result.map((aid: any) => ({
+          i: aid.prefix || aid.i,
+          name: aid.name
+        }));
+      }
+      return [];
+    }
+
+    // Default behavior: fetch all AIDs with pagination
+    let allAids: any[] = [];
+    let currentStart = 0;
+    const defaultLimit = 25; // Default page size
+
+    while (true) {
+      const result = await this.client.identifiers().list(currentStart, defaultLimit);
+      console.log(`listAIDs result (start=${currentStart}, limit=${defaultLimit}):`, result);
+
+      // Handle paginated response format
+      if (result && typeof result === 'object' && 'aids' in result) {
         allAids.push(...result.aids);
-        
+
         // Check if we've got all AIDs
-        if (result.aids.length < limit || allAids.length >= result.total) {
+        if (result.aids.length < defaultLimit || allAids.length >= result.total) {
           break;
         }
-        start += limit;
+        currentStart += defaultLimit;
       } else if (Array.isArray(result)) {
         // Handle direct array response (non-paginated)
         allAids = result;
@@ -272,16 +294,16 @@ export class KeriaService {
   async createQVI(alias: string): Promise<{ aid: AID; agentEndRole: string }> {
     // Create the AID
     const aidResult = await this.createAID(alias);
-    
+
     // Get agent identifier for end role
     const clientState = await this.getState();
     if (!clientState.agent?.i) {
       throw new Error('Agent identifier not found in client state');
     }
-    
+
     // Add agent end role
     const endRoleName = await this.addEndRole(alias, 'agent', clientState.agent.i);
-    
+
     return {
       aid: aidResult.aid,
       agentEndRole: endRoleName
@@ -304,7 +326,7 @@ export class KeriaService {
     registry: { name: string; regk: string };
   }> {
     const qvi = await this.createQVI(qviAlias);
-    
+
     // Create registry - we'll need to import CredentialService for this
     // For now, return the QVI and let the caller create the registry
     return {
@@ -320,14 +342,14 @@ export class KeriaService {
     const results = await Promise.all(
       operations.map(op => this.waitForOperation(op, timeoutMs))
     );
-    
+
     // Clean up completed operations
     await Promise.all(
-      operations.map(op => this.deleteOperation(op.name).catch(err => 
+      operations.map(op => this.deleteOperation(op.name).catch(err =>
         console.warn(`Failed to delete operation ${op.name}:`, err)
       ))
     );
-    
+
     return results;
   }
 
@@ -336,7 +358,7 @@ export class KeriaService {
    */
   async isSchemaLoaded(schemaSaid: string): Promise<boolean> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     try {
       // Try to get the schema from KERIA's schema registry
       const result = await this.client.schemas().get(schemaSaid);
@@ -353,7 +375,7 @@ export class KeriaService {
    */
   async listLoadedSchemas(): Promise<any[]> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     try {
       const result = await this.client.schemas().list();
       console.log(`Found ${Array.isArray(result) ? result.length : 'unknown'} schemas in KERIA`);
@@ -369,8 +391,8 @@ export class KeriaService {
    * Enhanced OOBI resolution with proper schema loading
    */
   async resolveSchemaOOBI(
-    oobi: string, 
-    schemaSaid: string, 
+    oobi: string,
+    schemaSaid: string,
     timeout: number = 3000
   ): Promise<{
     success: boolean;
@@ -388,13 +410,13 @@ export class KeriaService {
 
     try {
       console.log(`Resolving schema OOBI in KERIA: ${oobi}`);
-      
+
       // Generate a unique alias to avoid conflicts
       const uniqueAlias = `schema-${schemaSaid.slice(-8)}-${Date.now()}`;
       console.log(`Using OOBI alias: ${uniqueAlias}`);
-      
+
       const result = await this.client.oobis().resolve(oobi, uniqueAlias);
-      
+
       let operation: Operation;
       if (typeof result.op === 'function') {
         operation = await result.op();
@@ -410,20 +432,20 @@ export class KeriaService {
         try {
           const completedOperation = await this.waitForOperation(operation, timeout);
           console.log(`OOBI resolution completed: ${completedOperation.done}`);
-          
+
           // Clean up the operation
-          await this.deleteOperation(operation.name).catch(err => 
+          await this.deleteOperation(operation.name).catch(err =>
             console.warn(`Failed to cleanup OOBI operation:`, err)
           );
         } catch (waitError) {
           console.warn(`OOBI operation wait timed out after ${timeout}ms: ${waitError.message}`);
           console.log(`Attempting to clean up hanging operation: ${operation.name}`);
-          
+
           // Try to clean up the hanging operation
-          await this.deleteOperation(operation.name).catch(err => 
+          await this.deleteOperation(operation.name).catch(err =>
             console.warn(`Failed to cleanup hanging OOBI operation:`, err)
           );
-          
+
           // Don't throw immediately - maybe the schema is actually loaded despite the timeout
           console.log(`Continuing with schema verification despite operation timeout...`);
         }
