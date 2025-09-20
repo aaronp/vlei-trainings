@@ -15,7 +15,8 @@
       "Bash(npm run preview:*)",
       "Bash(npx tsc:*)",
       "Bash(node:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(make test:*)"
     ],
     "deny": []
   }

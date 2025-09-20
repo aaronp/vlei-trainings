@@ -91,7 +91,7 @@ export interface SchemaStorageProvider {
   };
 }
 
-export type SchemaProviderType = 'localStorage' | 'remoteApi';
+export type SchemaProviderType = 'localStorage' | 'remoteApi' | "memory";
 
 export interface SchemaServiceConfig {
   provider: SchemaProviderType;
