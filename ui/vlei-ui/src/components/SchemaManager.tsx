@@ -156,13 +156,6 @@ export const SchemaManager: React.FC<SchemaManagerProps> = ({ onSchemaSelect, se
         jsonSchema: createdSchema.jsonSchema
       };
 
-      // Register the schema with the local schema service for serving
-      try {
-        schemaServerService.registerSchema(legacySchema);
-      } catch (error) {
-        console.warn('Failed to register schema with server service:', error);
-      }
-
       // Reload schemas from service
       await loadSchemas();
 

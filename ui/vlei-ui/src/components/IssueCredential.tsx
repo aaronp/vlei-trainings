@@ -101,10 +101,7 @@ export const IssueCredential: React.FC = () => {
       if (selectedSchema && selectedSchema.said) {
         try {
           if (selectedSchema.jsonSchema) {
-            // This is a custom schema - register it with the local schema service
-            console.log('Registering custom schema:', selectedSchema.said);
-            schemaServerService.registerSchema(selectedSchema);
-            
+
             // For custom schemas, log that they need external serving
             console.log(`Custom schema ${selectedSchema.said} registered locally.`);
             console.log('Note: In production, this schema would need to be served from a schema server.');
@@ -230,10 +227,10 @@ export const IssueCredential: React.FC = () => {
       if (!issueResult) {
         throw new Error('issueResult not found for ' + selectedIssuer);
       }
-      
+
       // Handle the operation result properly
-      const operation = typeof (issueResult as any).op === 'function' 
-        ? await (issueResult as any).op() 
+      const operation = typeof (issueResult as any).op === 'function'
+        ? await (issueResult as any).op()
         : (issueResult as any);
       const response = await keriaService.waitForOperation(operation);
 

@@ -16,7 +16,9 @@
       "Bash(npx tsc:*)",
       "Bash(node:*)",
       "Bash(curl:*)",
-      "Bash(make test:*)"
+      "Bash(make test:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run test:integration:*)"
     ],
     "deny": []
   }

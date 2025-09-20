@@ -1,5 +1,4 @@
 // Schema server service - integrates with SchemaService for REST API
-import type { CredentialSchema } from '../components/SchemaManager';
 import { getSchemaService } from './schemaStorage.js';
 
 export class SchemaServerService {
