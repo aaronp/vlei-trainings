@@ -12,7 +12,7 @@
  */
 
 import { describe, test, expect, beforeAll, afterAll } from 'vitest';
-import { KeriaService } from '../src/services/keria.service';
+import { KeriaService, createConnectedKeriaService } from '../src/services/keria.service';
 import { CredentialService } from '../src/services/credential.service';
 import { SchemaServerService } from '../src/services/schemaServer.service';
 import { TEST_CONFIG } from './setup.integration';
@@ -32,13 +32,17 @@ describe('Services Integration Tests', () => {
   let testSchema: CredentialSchema;
 
   beforeAll(async () => {
-    // Initialize services
-    keriaService = new KeriaService(
+    // Initialize services using the new factory method
+    keriaService = await createConnectedKeriaService(
       {
         adminUrl: TEST_CONFIG.adminUrl,
         bootUrl: TEST_CONFIG.bootUrl
       },
-      TEST_CONFIG.passcode
+      TEST_CONFIG.passcode,
+      {
+        autoBootstrap: true,
+        logger: console.log
+      }
     );
 
     credentialService = new CredentialService(keriaService);
@@ -52,22 +56,6 @@ describe('Services Integration Tests', () => {
       // autoLoad: false,
       provider: 'memory'  // Use string for provider type
     });
-
-    // Initialize KERIA connection
-    console.log('Initializing KERIA connection...');
-    await keriaService.initialize();
-
-    try {
-      // Try to connect to existing agent first
-      await keriaService.connect();
-      console.log('Connected to existing KERIA agent');
-    } catch (error) {
-      // If no agent exists, bootstrap a new one
-      console.log('No existing agent found, bootstrapping new agent...');
-      await keriaService.boot();
-      await keriaService.connect();
-      console.log('Bootstrapped and connected to new KERIA agent');
-    }
 
     // Skip schema definition for now - we'll test without schema validation
     testSchema = {
@@ -96,16 +84,8 @@ describe('Services Integration Tests', () => {
       const initialCount = initialAids.length;
 
       // Create new AID
-      const { op } = await keriaService.createAID(testAidAlias);
-      expect(op).toBeDefined();
-      expect(op.name).toBeDefined();
-
-      // Wait for operation to complete
-      const completedOp = await keriaService.waitForOperation(op);
-      expect(completedOp.done).toBe(true);
-
-      // Clean up operation
-      await keriaService.deleteOperation(op.name);
+      const result = await keriaService.createAID(testAidAlias);
+      expect(result.aid).toBeDefined();
 
       // Verify AID was created
       const updatedAids = await keriaService.listAIDs();

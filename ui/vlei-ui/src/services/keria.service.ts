@@ -31,7 +31,7 @@ export class KeriaService {
 
   async initialize(): Promise<void> {
     if (this.isInitialized) return;
-    
+
     await ready();
     this.client = new SignifyClient(
       this.config.adminUrl,
@@ -44,25 +44,42 @@ export class KeriaService {
 
   async boot(): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     await this.client.boot();
   }
 
   async connect(): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     await this.client.connect();
   }
 
   async getState(): Promise<ClientState> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     return await this.client.state();
   }
 
   async createAID(alias: string, config?: any): Promise<{ aid: AID; op: Operation }> {
+    // Create new AID
+    const result = await this._createAIDFireAndForget(alias, config);
+    const { op } = result
+
+    // Wait for operation to complete
+    const completedOp = await this.waitForOperation(op);
+    if (!completedOp.done) {
+      throw new Error("creating AID is not done")
+    }
+
+    // Clean up operation
+    await this.deleteOperation(op.name);
+
+    return result;
+  }
+
+  async _createAIDFireAndForget(alias: string, config?: any): Promise<{ aid: AID; op: Operation }> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     const defaultConfig = {
       toad: 2,
       wits: [
@@ -71,10 +88,10 @@ export class KeriaService {
         'BIKKuvBwpmDVA4Ds-EpL5bt9OqPzWPja2LigFYZN2YfX'
       ]
     };
-    
+
     const result = await this.client.identifiers().create(alias, config || defaultConfig);
     const operation = await result.op();
-    
+
     return {
       aid: result,
       op: operation
@@ -83,7 +100,7 @@ export class KeriaService {
 
   async waitForOperation(operation: Operation, timeoutMs = 30000): Promise<Operation> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     try {
       return await this.client.operations().wait(operation, AbortSignal.timeout(timeoutMs));
     } catch (error: any) {
@@ -98,23 +115,23 @@ export class KeriaService {
 
   async listOperations(): Promise<Operation[]> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     return await this.client.operations().list();
   }
 
   async deleteOperation(name: string): Promise<void> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     await this.client.operations().delete(name);
   }
 
 
   async listAIDs(): Promise<AID[]> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     const result = await this.client.identifiers().list();
     console.log('listAIDs result:', result);
-    
+
     // Handle paginated response format
     if (result && typeof result === 'object' && 'aids' in result) {
       // Map the API response to our AID interface
@@ -123,7 +140,7 @@ export class KeriaService {
         name: aid.name
       }));
     }
-    
+
     // Handle direct array response
     if (Array.isArray(result)) {
       return result.map((aid: any) => ({
@@ -131,36 +148,36 @@ export class KeriaService {
         name: aid.name
       }));
     }
-    
+
     return [];
   }
 
   async getAID(name: string): Promise<AID> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     return await this.client.identifiers().get(name);
   }
 
   async addEndRole(name: string, role: string, eid?: string): Promise<Operation> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     const result = await this.client.identifiers().addEndRole(name, role, eid);
     return await result.op();
   }
 
   async generateOOBI(name: string, role: string): Promise<string> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     const result = await this.client.oobis().get(name, role);
     return result.oobis[0];
   }
 
   async resolveOOBI(oobi: string, alias: string): Promise<Operation> {
     if (!this.client) throw new Error('Client not initialized');
-    
+
     // Generate a unique alias to avoid conflicts
     const uniqueAlias = `${alias}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    
+
     const result = await this.client.oobis().resolve(oobi, uniqueAlias);
     // Check if result has an op method, otherwise return result directly
     if (typeof result.op === 'function') {
@@ -172,4 +189,64 @@ export class KeriaService {
   getClient(): SignifyClient | null {
     return this.client;
   }
+}
+
+// Factory method options
+export interface ConnectOptions {
+  autoBootstrap?: boolean; // Whether to automatically bootstrap if no agent exists (default: true)
+  logger?: (message: string) => void; // Optional logging function
+}
+
+/**
+ * Factory method to create and connect a KeriaService instance
+ * 
+ * This method encapsulates the common pattern of:
+ * 1. Creating a new KeriaService
+ * 2. Initializing the client
+ * 3. Attempting to connect to an existing agent
+ * 4. Optionally bootstrapping a new agent if none exists
+ * 
+ * @param config - KERIA configuration (adminUrl and bootUrl)
+ * @param bran - Passcode/brand for the agent (optional)
+ * @param options - Connection options
+ * @returns Promise<KeriaService> - A connected KeriaService instance
+ * 
+ * @example
+ * const keriaService = await createConnectedKeriaService(
+ *   { adminUrl: 'http://localhost:3901', bootUrl: 'http://localhost:3903' },
+ *   'my-passcode',
+ *   { autoBootstrap: true }
+ * );
+ */
+export async function createConnectedKeriaService(
+  config: KeriConfig,
+  bran?: string,
+  options: ConnectOptions = {}
+): Promise<KeriaService> {
+  const { autoBootstrap = true, logger = console.log } = options;
+
+  // Create the service instance
+  const keriaService = new KeriaService(config, bran);
+
+  // Initialize the client
+  logger('Initializing KERIA connection...');
+  await keriaService.initialize();
+
+  try {
+    // Try to connect to existing agent first
+    await keriaService.connect();
+    logger('Connected to existing KERIA agent');
+  } catch (error) {
+    if (!autoBootstrap) {
+      throw new Error('No existing agent found and autoBootstrap is disabled');
+    }
+
+    // If no agent exists, bootstrap a new one
+    logger('No existing agent found, bootstrapping new agent...');
+    await keriaService.boot();
+    await keriaService.connect();
+    logger('Bootstrapped and connected to new KERIA agent');
+  }
+
+  return keriaService;
 }

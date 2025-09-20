@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { ClientState, AID } from '../types/keri';
-import { KeriaService } from '../services/keria.service';
+import { KeriaService, createConnectedKeriaService } from '../services/keria.service';
 import { CredentialService } from '../services/credential.service';
 
 interface KeriStore {
@@ -198,14 +198,14 @@ export const useKeriStore = create<KeriStore>()(
         try {
           console.log('Restoring KERIA connection...');
           
-          // Reinitialize services
-          const keriaService = new KeriaService({ adminUrl, bootUrl }, passcode);
-          await keriaService.initialize();
+          // Use factory method to reinitialize and connect
+          const keriaService = await createConnectedKeriaService(
+            { adminUrl, bootUrl }, 
+            passcode,
+            { autoBootstrap: false } // Don't create new agent when restoring
+          );
           
           const credentialService = new CredentialService(keriaService);
-          
-          // Try to connect to existing agent
-          await keriaService.connect();
           
           const clientState = await keriaService.getState();
           const aids = await keriaService.listAIDs();
