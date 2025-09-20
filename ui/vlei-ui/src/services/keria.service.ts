@@ -158,7 +158,14 @@ export class KeriaService {
     return await this.client.identifiers().get(name);
   }
 
-  async addEndRole(name: string, role: string, eid?: string): Promise<Operation> {
+  async addEndRole(name: string, role: string, eid?: string): Promise<string> {
+    const endRoleOp = await this._addEndRole(name, role, eid);
+    await this.waitForOperation(endRoleOp);
+    await this.deleteOperation(endRoleOp.name);
+
+    return endRoleOp.name
+  }
+  async _addEndRole(name: string, role: string, eid?: string): Promise<Operation> {
     if (!this.client) throw new Error('Client not initialized');
 
     const result = await this.client.identifiers().addEndRole(name, role, eid);

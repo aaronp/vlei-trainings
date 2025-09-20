@@ -16,7 +16,7 @@ interface KeriStore {
   passcode: string | null;
   adminUrl: string | null;
   bootUrl: string | null;
-  
+
   // Actions
   initialize: (adminUrl: string, bootUrl: string, passcode: string) => Promise<void>;
   bootstrap: () => Promise<void>;
@@ -48,9 +48,9 @@ export const useKeriStore = create<KeriStore>()(
       initialize: async (adminUrl: string, bootUrl: string, passcode: string) => {
         const keriaService = new KeriaService({ adminUrl, bootUrl }, passcode);
         await keriaService.initialize();
-        
+
         const credentialService = new CredentialService(keriaService);
-        
+
         set({
           keriaService,
           credentialService,
@@ -65,10 +65,10 @@ export const useKeriStore = create<KeriStore>()(
       bootstrap: async () => {
         const { keriaService } = get();
         if (!keriaService) throw new Error('KERIA service not initialized');
-        
+
         await keriaService.boot();
         await keriaService.connect();
-        
+
         const clientState = await keriaService.getState();
         set({ clientState, isConnected: true });
       },
@@ -77,18 +77,18 @@ export const useKeriStore = create<KeriStore>()(
       connect: async () => {
         const { keriaService } = get();
         if (!keriaService) throw new Error('KERIA service not initialized');
-        
+
         await keriaService.connect();
-        
+
         const clientState = await keriaService.getState();
         const aids = await keriaService.listAIDs();
-        
-        set({ 
-          clientState, 
+
+        set({
+          clientState,
           isConnected: true,
           aids
         });
-        
+
         // Refresh credentials
         get().refreshCredentials();
       },
@@ -107,7 +107,7 @@ export const useKeriStore = create<KeriStore>()(
       refreshAIDs: async () => {
         const { keriaService } = get();
         if (!keriaService) throw new Error('KERIA service not initialized');
-        
+
         try {
           const aids = await keriaService.listAIDs();
           set({ aids: aids || [] });
@@ -121,7 +121,7 @@ export const useKeriStore = create<KeriStore>()(
       refreshCredentials: async () => {
         const { credentialService, aids } = get();
         if (!credentialService) throw new Error('Credential service not initialized');
-        
+
         try {
           // Get credentials for all AIDs
           const allCredentials: any[] = [];
@@ -143,24 +143,17 @@ export const useKeriStore = create<KeriStore>()(
       createAID: async (alias: string) => {
         const { keriaService } = get();
         if (!keriaService) throw new Error('KERIA service not initialized');
-        
+
         const { op } = await keriaService.createAID(alias);
         await keriaService.waitForOperation(op);
         await keriaService.deleteOperation(op.name);
-        
+
         // Add agent end role - using the agent's identifier
         const clientState = get().clientState;
         if (clientState?.agent?.i) {
-          try {
-            const endRoleOp = await keriaService.addEndRole(alias, 'agent', clientState.agent.i);
-            await keriaService.waitForOperation(endRoleOp);
-            await keriaService.deleteOperation(endRoleOp.name);
-          } catch (error) {
-            console.warn('Failed to add end role:', error);
-            // Continue even if end role fails - AID was created successfully
-          }
+          await keriaService.addEndRole(alias, 'agent', clientState.agent.i);
         }
-        
+
         // Refresh AIDs
         await get().refreshAIDs();
       },
@@ -184,41 +177,41 @@ export const useKeriStore = create<KeriStore>()(
       // Restore connection from persisted data
       restoreConnection: async () => {
         const { passcode, adminUrl, bootUrl, isConnected } = get();
-        
+
         // If already connected, no need to restore
         if (isConnected) {
           return true;
         }
-        
+
         // If no persisted connection data, can't restore
         if (!passcode || !adminUrl || !bootUrl) {
           return false;
         }
-        
+
         try {
           console.log('Restoring KERIA connection...');
-          
+
           // Use factory method to reinitialize and connect
           const keriaService = await createConnectedKeriaService(
-            { adminUrl, bootUrl }, 
+            { adminUrl, bootUrl },
             passcode,
             { autoBootstrap: false } // Don't create new agent when restoring
           );
-          
+
           const credentialService = new CredentialService(keriaService);
-          
+
           const clientState = await keriaService.getState();
           const aids = await keriaService.listAIDs();
-          
-          set({ 
+
+          set({
             keriaService,
             credentialService,
             isInitialized: true,
-            clientState, 
+            clientState,
             isConnected: true,
             aids
           });
-          
+
           console.log('KERIA connection restored successfully');
           return true;
         } catch (error) {
@@ -238,7 +231,7 @@ export const useKeriStore = create<KeriStore>()(
     }),
     {
       name: 'keri-store',
-      partialize: (state) => ({ 
+      partialize: (state) => ({
         passcode: state.passcode,
         adminUrl: state.adminUrl,
         bootUrl: state.bootUrl,
