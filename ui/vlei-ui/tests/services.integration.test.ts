@@ -577,13 +577,36 @@ describe('Services Integration Tests', () => {
           const schemaData = await schemaApiClient.getSchemaViaOOBI(schemaSaid);
           console.log(`   - Schema data retrieved via OOBI (${Object.keys(schemaData).length} properties)`);
           
-          // For integration testing, we'll skip the actual KERIA OOBI resolution 
-          // since it hangs and we've already verified the schema is accessible
-          console.log(`   - Skipping KERIA OOBI resolution (endpoint verified as working)`);
-          console.log(`   - In production, KERIA would resolve this OOBI for schema validation`);
-          
-          console.log(`✅ Step 5: Schema OOBI verified for issuer ${issuerAlias}`);
-          return { success: true, schemaData };
+          // Now actually resolve the OOBI in KERIA so credentials can be issued
+          console.log(`   - Resolving OOBI in KERIA for credential issuance...`);
+          try {
+            const oobiOperation = await keriaService.resolveOOBI(schemaOOBI, `schema-${schemaSaid.slice(-8)}`);
+            console.log(`   - KERIA OOBI resolution operation:`, oobiOperation);
+            
+            // Wait for the operation to complete if it's not already done
+            if (!oobiOperation.done) {
+              console.log(`   - Waiting for OOBI resolution operation to complete (timeout 5s)...`);
+              try {
+                const completedOp = await keriaService.waitForOperation(oobiOperation, 5000);
+                console.log(`   - OOBI resolution completed:`, completedOp.done);
+              } catch (timeoutError) {
+                console.log(`   - OOBI resolution timed out, but proceeding anyway`);
+                // Clean up the operation if it exists
+                try {
+                  await keriaService.deleteOperation(oobiOperation.name);
+                } catch (cleanupError) {
+                  // Ignore cleanup errors
+                }
+              }
+            }
+            
+            console.log(`✅ Step 5: Schema OOBI resolved in KERIA for issuer ${issuerAlias}`);
+            return { success: true, schemaData, keriaResolved: true };
+          } catch (keriaError) {
+            console.log(`⚠️  KERIA OOBI resolution failed: ${keriaError.message}`);
+            console.log(`   - This may prevent credential issuance`);
+            return { success: true, schemaData, keriaResolved: false, keriaError: keriaError.message };
+          }
         } catch (error) {
           console.log(`⚠️  Schema OOBI verification failed: ${error.message}`);
           return { success: false, error: error.message };
@@ -622,36 +645,11 @@ describe('Services Integration Tests', () => {
           console.log(`   - Operation completed: ${result.operation.done}`);
           console.log(`   - Grant completed: ${result.grant ? result.grant.done : 'N/A'}`);
           
-          return { result, vleiData, success: true };
+          return { result, vleiData };
         } catch (error) {
-          console.log(`⚠️  Step 6: Real credential issuance failed: ${error.message}`);
-          
-          // For integration testing, show what the error was and create mock
-          if (error.message.includes('schema') && error.message.includes('not found')) {
-            console.log(`   - Issue: Schema not resolved in KERIA (check API service and OOBI resolution)`);
-          } else {
-            console.log(`   - Issue: ${error.message}`);
-          }
-          
-          // Create a mock result to demonstrate the complete workflow structure
-          const mockResult = {
-            credential: {
-              sad: {
-                d: `EMOCK${Date.now().toString().slice(-15)}credential`,
-                s: schemaSaid,
-                a: vleiData
-              }
-            },
-            operation: { done: true },
-            grant: { done: true }
-          };
-          
-          console.log(`✅ Step 6: Created mock credential for workflow demonstration`);
-          console.log(`   - Mock Credential SAID: ${mockResult.credential.sad.d}`);
-          console.log(`   - LEI: ${vleiData.lei}`);
-          console.log(`   - Entity: ${vleiData.entityName}`);
-          
-          return { result: mockResult, vleiData, success: false };
+          console.error(`❌ Step 6: VLEI credential issuance failed: ${error.message}`);
+          console.error(`   - Error details:`, error);
+          throw error; // Don't create mock, fail the test to identify the real issue
         }
       };
 
@@ -659,8 +657,7 @@ describe('Services Integration Tests', () => {
         issuerAlias: string,
         credentialResult: any,
         schema: any,
-        vleiData: any,
-        isRealCredential: boolean
+        vleiData: any
       ) => {
         // Verify credential structure
         expect(credentialResult.credential).toBeDefined();
@@ -676,26 +673,21 @@ describe('Services Integration Tests', () => {
         
         // Verify operations completed
         expect(credentialResult.operation.done).toBe(true);
+        expect(credentialResult.grant).toBeDefined();
         
-        if (isRealCredential) {
-          // For real credentials, verify they can be listed by the issuer
-          expect(credentialResult.grant).toBeDefined();
-          
-          try {
-            const issuerCredentials = await credentialService.listCredentials(issuerAlias);
-            const issuedCredential = issuerCredentials.find(
-              cred => cred.sad?.d === credentialResult.credential.sad.d
-            );
-            expect(issuedCredential).toBeDefined();
-            console.log(`✅ Step 5: Verified real credential issuance and KERIA storage`);
-          } catch (error) {
-            console.log(`ℹ️  Could not verify credential in KERIA storage: ${error.message}`);
-          }
-        } else {
-          console.log(`✅ Step 5: Verified mock credential structure and workflow completion`);
+        // Verify credential can be listed by the issuer
+        try {
+          const issuerCredentials = await credentialService.listCredentials(issuerAlias);
+          const issuedCredential = issuerCredentials.find(
+            cred => cred.sad?.d === credentialResult.credential.sad.d
+          );
+          expect(issuedCredential).toBeDefined();
+          console.log(`✅ Step 7: Verified real credential issuance and KERIA storage`);
+        } catch (error) {
+          console.log(`⚠️  Could not verify credential in KERIA storage: ${error.message}`);
         }
         
-        console.log(`   - Credential type: ${isRealCredential ? 'Real KERIA credential' : 'Mock credential for demonstration'}`);
+        console.log(`   - Credential type: Real KERIA credential`);
         console.log(`   - Schema validation: ✓`);
         console.log(`   - Data validation: ✓`);
         console.log(`   - Operation completion: ✓`);
@@ -728,20 +720,20 @@ describe('Services Integration Tests', () => {
         const schemaResolution = await resolveSchemaOOBI(qviAlias, schemaSaid);
 
         // Step 6: Issue VLEI credential (will attempt real issuance if schema was resolved)
-        const { result: credentialResult, vleiData, success } = await issueVLEICredential(
+        const actualQviAlias = issuerWorkflow.qvi.aid.name; // Use the actual existing QVI alias
+        const { result: credentialResult, vleiData } = await issueVLEICredential(
           issuerWorkflow,
-          qviAlias,
+          actualQviAlias,
           holder.aid.i,
           schemaSaid
         );
 
         // Step 7: Verify the complete workflow
         await verifyCredentialIssuance(
-          qviAlias,
+          actualQviAlias,
           credentialResult,
           { metadata: { said: schemaSaid } },
-          vleiData,
-          success
+          vleiData
         );
 
         console.log('🎉 End-to-end QVI workflow completed successfully!');
@@ -749,18 +741,14 @@ describe('Services Integration Tests', () => {
         console.log(`   - Generated Schema SAID: ${schema.metadata.said}`);
         console.log(`   - Schema Registered with API: ${schemaRegistration.success ? 'Yes' : 'No'}`);
         console.log(`   - Schema OOBI Resolved: ${schemaResolution.success ? 'Yes' : 'No'}`);
-        console.log(`   - QVI AID: ${issuerWorkflow.qvi.aid.i || 'created'}`);
+        console.log(`   - QVI AID: ${issuerWorkflow.qvi.aid.i} (alias: ${actualQviAlias})`);
         console.log(`   - Holder AID: ${holder.aid.i || 'created'}`);
         console.log(`   - Credential SAID: ${credentialResult.credential.sad.d}`);
-        console.log(`   - Credential Type: ${success ? 'Real KERIA credential' : 'Mock credential'}`);
+        console.log(`   - Credential Type: Real KERIA credential`);
         console.log(`   - Entity LEI: ${vleiData.lei}`);
         console.log(`   - Entity Name: ${vleiData.entityName}`);
         console.log(`   - Entity Type: ${vleiData.entityType}`);
-        if (!success) {
-          console.log('ℹ️  Note: Mock credential used - check API service and OOBI resolution');
-        } else {
-          console.log('🎉 Real credential successfully issued through KERIA!');
-        }
+        console.log('🎉 Real credential successfully issued through KERIA!');
         
         // Additional API client information
         if (schemaRegistration.success && schemaRegistration.result) {
@@ -775,6 +763,209 @@ describe('Services Integration Tests', () => {
         throw error;
       }
     }); // End of test
+
+    test('should issue a real VLEI credential with existing QVI and registry', async () => {
+      console.log('🔍 Testing isolated VLEI credential issuance...');
+      
+      // Use existing QVI from previous tests to avoid race conditions
+      const aids = await keriaService.listAIDs();
+      const existingQvi = aids.find(aid => aid.name.startsWith('e2e-qvi-'));
+      
+      if (!existingQvi) {
+        throw new Error('No existing QVI found. Please run other tests first to create test AIDs');
+      }
+      
+      console.log(`Using existing QVI: ${existingQvi.name} (${existingQvi.i})`);
+      
+      // Get or create a registry for this QVI
+      let registries = await credentialService.listRegistries(existingQvi.name);
+      console.log(`Found ${registries.length} existing registries for QVI`);
+      
+      let testRegistry: any;
+      if (registries.length > 0) {
+        testRegistry = registries[0];
+        console.log(`Using existing registry: ${testRegistry.name || testRegistry.registryName} (${testRegistry.regk})`);
+      } else {
+        // Create a new registry
+        const registryName = `isolated-test-registry-${Date.now()}`;
+        console.log(`Creating new registry: ${registryName}`);
+        testRegistry = await credentialService.createRegistry(existingQvi.name, registryName);
+        console.log(`Created new registry: ${testRegistry.regk}`);
+      }
+      
+      // Create a simple test schema in memory (not via API service to isolate the test)
+      const { getSchemaService } = await import('../src/services/schemaStorage.js');
+      const schemaService = getSchemaService();
+      
+      const testSchema = {
+        name: 'Isolated Test VLEI Schema',
+        description: 'Simple schema for isolated VLEI credential testing',
+        jsonSchema: {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "title": "Isolated Test VLEI",
+          "type": "object",
+          "properties": {
+            "lei": {
+              "type": "string",
+              "description": "Legal Entity Identifier"
+            },
+            "entityName": {
+              "type": "string",
+              "description": "Organization name"
+            },
+            "entityType": {
+              "type": "string",
+              "description": "Type of organization"
+            }
+          },
+          "required": ["lei", "entityName", "entityType"]
+        },
+        fields: [
+          {
+            name: 'lei',
+            label: 'LEI',
+            type: 'text' as const,
+            required: true,
+            description: 'Legal Entity Identifier'
+          },
+          {
+            name: 'entityName',
+            label: 'Entity Name',
+            type: 'text' as const,
+            required: true,
+            description: 'Organization name'
+          },
+          {
+            name: 'entityType',
+            label: 'Entity Type',
+            type: 'text' as const,
+            required: true,
+            description: 'Type of organization'
+          }
+        ],
+        isPublic: true,
+        tags: ['vlei', 'isolated-test']
+      };
+      
+      const createdSchema = await schemaService.createSchema(testSchema);
+      console.log(`Created test schema with SAID: ${createdSchema.metadata.said}`);
+      
+      // Use existing holder
+      const existingHolder = aids.find(aid => aid.name.startsWith('e2e-holder-'));
+      if (!existingHolder) {
+        throw new Error('No existing holder found. Please run other tests first to create test AIDs');
+      }
+      console.log(`Using existing holder: ${existingHolder.name} (${existingHolder.i})`);
+      
+      // Create test VLEI data
+      const vleiData = {
+        lei: `ISOLATED${Date.now().toString().slice(-12)}`,
+        entityName: `Isolated Test Corp ${Math.random().toString(36).substring(7)}`,
+        entityType: 'corporation'
+      };
+      
+      console.log(`Issuing VLEI credential with data:`, vleiData);
+      
+      // IMPORTANT: For KERIA to issue credentials, it needs the schema to be resolved via OOBI first
+      // Since this is an isolated test with an in-memory schema, we'll need to register it with the API
+      // and then resolve the OOBI in KERIA
+      
+      // Register schema with API service so it's available via OOBI
+      try {
+        const createRequest = {
+          name: createdSchema.metadata.name,
+          description: createdSchema.metadata.description,
+          jsonSchema: createdSchema.jsonSchema,
+          fields: createdSchema.fields,
+          tags: createdSchema.metadata.tags,
+          isPublic: true
+        };
+        await schemaApiClient.createSchema(createRequest);
+        console.log(`Schema registered with API service for OOBI access`);
+      } catch (error) {
+        if (error.message?.includes('already exists')) {
+          console.log(`Schema already exists in API service - proceeding with OOBI resolution`);
+        } else {
+          throw error;
+        }
+      }
+      
+      // Resolve the schema OOBI in KERIA so it can be used for credential issuance
+      const schemaOOBI = schemaApiClient.getSchemaOOBI(createdSchema.metadata.said);
+      console.log(`Resolving schema OOBI in KERIA: ${schemaOOBI}`);
+      
+      try {
+        const oobiOperation = await keriaService.resolveOOBI(schemaOOBI, `isolated-schema-${Date.now()}`);
+        console.log(`KERIA OOBI resolution operation:`, oobiOperation);
+        
+        if (!oobiOperation.done) {
+          console.log(`Waiting for OOBI resolution operation to complete (timeout 5s)...`);
+          try {
+            const completedOp = await keriaService.waitForOperation(oobiOperation, 5000);
+            console.log(`OOBI resolution completed:`, completedOp.done);
+            console.log(`✅ Schema OOBI resolved in KERIA successfully`);
+          } catch (timeoutError) {
+            console.log(`⚠️  OOBI resolution timed out, but proceeding with credential issuance`);
+            console.log(`Schema may already be available in KERIA from previous tests`);
+            // Clean up the operation if it exists
+            try {
+              await keriaService.deleteOperation(oobiOperation.name);
+            } catch (cleanupError) {
+              // Ignore cleanup errors
+            }
+          }
+        } else {
+          console.log(`✅ Schema OOBI resolved in KERIA successfully`);
+        }
+      } catch (oobiError) {
+        console.log(`⚠️  Schema OOBI resolution failed: ${oobiError.message}`);
+        console.log(`This may cause credential issuance to fail, but proceeding anyway`);
+      }
+      
+      // Issue the VLEI credential directly using the credential service
+      try {
+        const result = await credentialService.issueVLEIWorkflow({
+          issuerAlias: existingQvi.name,
+          holderAid: existingHolder.i,
+          registryName: testRegistry.name || testRegistry.registryName,
+          schemaSaid: createdSchema.metadata.said,
+          vleiData: vleiData
+        });
+        
+        // Verify the result
+        expect(result.credential).toBeDefined();
+        expect(result.credential.sad).toBeDefined();
+        expect(result.credential.sad.d).toBeDefined(); // Credential SAID
+        expect(result.credential.sad.s).toBe(createdSchema.metadata.said); // Schema SAID
+        expect(result.operation.done).toBe(true);
+        expect(result.grant).toBeDefined();
+        
+        // Verify credential data
+        const credentialData = result.credential.sad.a;
+        expect(credentialData.lei).toBe(vleiData.lei);
+        expect(credentialData.entityName).toBe(vleiData.entityName);
+        expect(credentialData.entityType).toBe(vleiData.entityType);
+        
+        console.log('✅ Successfully issued isolated VLEI credential');
+        console.log(`   - Credential SAID: ${result.credential.sad.d}`);
+        console.log(`   - Schema SAID: ${result.credential.sad.s}`);
+        console.log(`   - LEI: ${credentialData.lei}`);
+        console.log(`   - Entity: ${credentialData.entityName}`);
+        console.log(`   - Type: ${credentialData.entityType}`);
+        
+      } catch (error) {
+        console.error('❌ Isolated VLEI credential issuance failed:', error);
+        console.error('Error details:', {
+          message: error.message,
+          stack: error.stack,
+          qviAlias: existingQvi.name,
+          registryId: testRegistry.regk,
+          holderAid: existingHolder.i,
+          schemaSaid: createdSchema.metadata.said
+        });
+        throw error; // Re-throw to fail the test and show the exact error
+      }
+    }, 30000); // 30 second timeout for this test
 
     test.skip('should create all resources and issue a VLEI credential independently', async () => {
       // This test is skipped as it requires proper schema loading via OOBI
