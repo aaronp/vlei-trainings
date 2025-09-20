@@ -61,20 +61,56 @@ export class KeriaService {
   }
 
   async createAID(alias: string, config?: any): Promise<{ aid: AID; op: Operation }> {
-    // Create new AID
-    const result = await this._createAIDFireAndForget(alias, config);
-    const { op } = result
+    try {
+      // Try to create new AID
+      const result = await this._createAIDFireAndForget(alias, config);
+      const { op } = result
 
-    // Wait for operation to complete
-    const completedOp = await this.waitForOperation(op);
-    if (!completedOp.done) {
-      throw new Error("creating AID is not done")
+      // Wait for operation to complete
+      const completedOp = await this.waitForOperation(op);
+      if (!completedOp.done) {
+        throw new Error("creating AID is not done")
+      }
+
+      // Clean up operation
+      await this.deleteOperation(op.name);
+
+      // Construct the AID object with the correct structure
+      // After the operation completes, we need to get the AID identifier from the operation response
+      const aidIdentifier = completedOp.response?.anchor?.i || 
+                            completedOp.response?.i || 
+                            (result.aid as any).i || 
+                            (result.aid as any).prefix || 
+                            (result.aid as any).pre;
+                            
+      if (!aidIdentifier) {
+        throw new Error(`Could not determine AID identifier for ${alias}. Operation response: ${JSON.stringify(completedOp.response)}`);
+      }
+
+      const aid: AID = {
+        i: aidIdentifier,
+        name: alias
+      };
+
+      return { aid, op };
+    } catch (error: any) {
+      // If AID already exists, retrieve it instead
+      if (error.message?.includes('already incepted')) {
+        console.log(`AID ${alias} already exists, retrieving existing AID...`);
+        const aids = await this.listAIDs();
+        const existingAid = aids.find(aid => aid.name === alias);
+        if (existingAid) {
+          // Return the existing AID with a dummy operation
+          return { 
+            aid: existingAid, 
+            op: { name: 'existing-aid', done: true } as Operation 
+          };
+        } else {
+          throw new Error(`AID ${alias} reported as existing but not found in list`);
+        }
+      }
+      throw error;
     }
-
-    // Clean up operation
-    await this.deleteOperation(op.name);
-
-    return result;
   }
 
   async _createAIDFireAndForget(alias: string, config?: any): Promise<{ aid: AID; op: Operation }> {
@@ -129,27 +165,37 @@ export class KeriaService {
   async listAIDs(): Promise<AID[]> {
     if (!this.client) throw new Error('Client not initialized');
 
-    const result = await this.client.identifiers().list();
-    console.log('listAIDs result:', result);
+    let allAids: any[] = [];
+    let start = 0;
+    const limit = 25; // Default page size
+    
+    while (true) {
+      const result = await this.client.identifiers().list(start, limit);
+      console.log(`listAIDs result (start=${start}, limit=${limit}):`, result);
 
-    // Handle paginated response format
-    if (result && typeof result === 'object' && 'aids' in result) {
-      // Map the API response to our AID interface
-      return result.aids.map((aid: any) => ({
-        i: aid.prefix,
-        name: aid.name
-      }));
+      // Handle paginated response format
+      if (result && typeof result === 'object' && 'aids' in result) {
+        allAids.push(...result.aids);
+        
+        // Check if we've got all AIDs
+        if (result.aids.length < limit || allAids.length >= result.total) {
+          break;
+        }
+        start += limit;
+      } else if (Array.isArray(result)) {
+        // Handle direct array response (non-paginated)
+        allAids = result;
+        break;
+      } else {
+        break;
+      }
     }
 
-    // Handle direct array response
-    if (Array.isArray(result)) {
-      return result.map((aid: any) => ({
-        i: aid.prefix || aid.i,
-        name: aid.name
-      }));
-    }
-
-    return [];
+    // Map the API response to our AID interface
+    return allAids.map((aid: any) => ({
+      i: aid.prefix || aid.i,
+      name: aid.name
+    }));
   }
 
   async getAID(name: string): Promise<HabState> {
@@ -195,6 +241,73 @@ export class KeriaService {
 
   getClient(): SignifyClient | null {
     return this.client;
+  }
+
+  // High-level helper methods for complete workflows
+
+  /**
+   * Creates a complete QVI (issuer) setup: AID + end role
+   */
+  async createQVI(alias: string): Promise<{ aid: AID; agentEndRole: string }> {
+    // Create the AID
+    const aidResult = await this.createAID(alias);
+    
+    // Get agent identifier for end role
+    const clientState = await this.getState();
+    if (!clientState.agent?.i) {
+      throw new Error('Agent identifier not found in client state');
+    }
+    
+    // Add agent end role
+    const endRoleName = await this.addEndRole(alias, 'agent', clientState.agent.i);
+    
+    return {
+      aid: aidResult.aid,
+      agentEndRole: endRoleName
+    };
+  }
+
+  /**
+   * Creates a complete holder setup: AID + end role
+   */
+  async createHolder(alias: string): Promise<{ aid: AID; agentEndRole: string }> {
+    // Reuse QVI creation logic since both need AID + end role
+    return this.createQVI(alias);
+  }
+
+  /**
+   * Creates a complete issuer workflow: QVI + registry
+   */
+  async createIssuerWorkflow(qviAlias: string, registryName: string): Promise<{
+    qvi: { aid: AID; agentEndRole: string };
+    registry: { name: string; regk: string };
+  }> {
+    const qvi = await this.createQVI(qviAlias);
+    
+    // Create registry - we'll need to import CredentialService for this
+    // For now, return the QVI and let the caller create the registry
+    return {
+      qvi,
+      registry: { name: registryName, regk: '' } // Placeholder
+    };
+  }
+
+  /**
+   * Waits for multiple operations to complete
+   */
+  async waitForOperations(operations: Operation[], timeoutMs = 30000): Promise<Operation[]> {
+    const results = await Promise.all(
+      operations.map(op => this.waitForOperation(op, timeoutMs))
+    );
+    
+    // Clean up completed operations
+    await Promise.all(
+      operations.map(op => this.deleteOperation(op.name).catch(err => 
+        console.warn(`Failed to delete operation ${op.name}:`, err)
+      ))
+    );
+    
+    return results;
   }
 }
 

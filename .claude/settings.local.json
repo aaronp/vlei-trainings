@@ -18,7 +18,8 @@
       "Bash(curl:*)",
       "Bash(make test:*)",
       "Bash(npm test:*)",
-      "Bash(npm run test:integration:*)"
+      "Bash(npm run test:integration:*)",
+      "Bash(npx vitest run:*)"
     ],
     "deny": []
   }

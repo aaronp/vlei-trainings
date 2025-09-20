@@ -62,9 +62,9 @@ export class CredentialService {
         console.log('No op function found, checking result structure...');
 
         // The result might already contain the operation data
-        if (result.name && (result.done !== undefined || result.metadata)) {
+        if ((result as any).name && ((result as any).done !== undefined || (result as any).metadata)) {
           console.log('Result appears to be an operation already');
-          operation = result;
+          operation = result as any;
         } else {
           throw new Error('Cannot find operation in registry creation result. Result structure: ' + JSON.stringify(result, null, 2));
         }
@@ -245,6 +245,71 @@ export class CredentialService {
     if (!client) throw new Error('KERIA client not initialized');
 
     return await (client.credentials() as any).list(aidAlias);
+  }
+
+  // High-level helper methods for complete workflows
+
+  /**
+   * Creates a complete issuer workflow: QVI + registry
+   */
+  async createIssuerWithRegistry(qviAlias: string, registryName: string): Promise<{
+    qvi: { aid: any; agentEndRole: string };
+    registry: Registry;
+  }> {
+    // Create QVI using the KeriaService helper
+    const qvi = await this.keriaService.createQVI(qviAlias);
+
+    // Create registry
+    const registry = await this.createRegistry(qviAlias, registryName);
+
+    return { qvi, registry };
+  }
+
+  /**
+   * Issues a VLEI credential with complete workflow
+   */
+  async issueVLEIWorkflow(params: {
+    issuerAlias: string;
+    holderAid: string;
+    registryName: string;
+    schemaSaid: string;
+    vleiData: { lei: string; entityName: string; entityType: string;[key: string]: any };
+  }): Promise<{
+    credential: any;
+    operation: any;
+    grant?: any;
+  }> {
+    // Get the registry for the issuer
+    const registries = await this.listRegistries(params.issuerAlias);
+    const registry = registries.find(r =>
+      r.name === params.registryName || r.registryName === params.registryName
+    );
+
+    if (!registry) {
+      throw new Error(`Registry ${params.registryName} not found for issuer ${params.issuerAlias}`);
+    }
+
+    // Issue the credential
+    const { credential, operation } = await this.issueVLEI(
+      params.issuerAlias,
+      registry.regk,
+      params.schemaSaid,
+      params.holderAid,
+      params.vleiData
+    );
+
+    // Grant the credential to the holder
+    const grantOperation = await this.grantCredential(
+      params.issuerAlias,
+      credential,
+      params.holderAid
+    );
+
+    return {
+      credential,
+      operation,
+      grant: grantOperation
+    };
   }
 
   async getCredential(said: string): Promise<any> {
