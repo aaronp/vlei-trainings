@@ -16,6 +16,7 @@ import { describe, test, expect, beforeEach, afterAll } from 'vitest';
 import { KeriaService, createConnectedKeriaService } from '../src/services/keria.service';
 import { CredentialService } from '../src/services/credential.service';
 import { SchemaServerService } from '../src/services/schemaServer.service';
+import { SchemaApiClient } from '../src/services/schemaApiClient.service';
 import { TEST_CONFIG } from './setup.integration';
 import type { CredentialSchema } from '../src/components/SchemaManager';
 import { initializeSchemaService } from '../src/services/schemaStorage.js';
@@ -25,6 +26,7 @@ describe('Services Integration Tests', () => {
   let keriaService: KeriaService;
   let credentialService: CredentialService;
   let schemaServerService: SchemaServerService;
+  let schemaApiClient: SchemaApiClient;
 
   beforeEach(async () => {
     // Initialize services for each test
@@ -42,6 +44,7 @@ describe('Services Integration Tests', () => {
 
     credentialService = new CredentialService(keriaService);
     schemaServerService = new SchemaServerService();
+    schemaApiClient = new SchemaApiClient('http://localhost:5173');
 
     // Initialize schema service with proper provider config
     console.log('Initializing schema service...');
@@ -519,7 +522,7 @@ describe('Services Integration Tests', () => {
         }
       };
 
-      const createVLEIHolder = async (alias: string) => {
+      const createVLEIHolder = async () => {
         // For this integration test demonstration, use an existing holder to avoid race conditions
         console.log(`   - Using existing holder for demonstration (race condition workaround)`);
         const aids = await keriaService.listAIDs();
@@ -535,50 +538,44 @@ describe('Services Integration Tests', () => {
       };
 
       const registerSchemaWithAPI = async (schema: any) => {
-        // Register the schema with the running API service at localhost:5173
-        const apiUrl = 'http://localhost:5173/api/schemas';
-        console.log(`   - Registering schema with API service: ${apiUrl}`);
+        // Register the schema with the running API service using SchemaApiClient
+        console.log(`   - Registering schema with API service using SchemaApiClient`);
         
         try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              name: schema.metadata.name,
-              description: schema.metadata.description,
-              jsonSchema: schema.jsonSchema,
-              fields: schema.fields,
-              tags: schema.metadata.tags
-            })
-          });
+          const createRequest = {
+            name: schema.metadata.name,
+            description: schema.metadata.description,
+            jsonSchema: schema.jsonSchema,
+            fields: schema.fields,
+            tags: schema.metadata.tags,
+            isPublic: true
+          };
 
-          if (!response.ok) {
-            throw new Error(`Failed to register schema: ${response.status} ${response.statusText}`);
-          }
-
-          const result = await response.json();
-          console.log(`✅ Schema registered with API service: ${result.id || schema.metadata.said}`);
-          return true;
+          const result = await schemaApiClient.createSchema(createRequest);
+          console.log(`✅ Schema registered with API service: ${result.id} (SAID: ${result.said})`);
+          return { success: true, result };
         } catch (error) {
           console.log(`⚠️  Could not register schema with API service: ${error.message}`);
-          return false;
+          return { success: false, error: error.message };
         }
       };
 
       const resolveSchemaOOBI = async (issuerAlias: string, schemaSaid: string) => {
-        // Use the running schema service OOBI endpoint
-        const schemaOOBI = `http://localhost:5173/oobi/${schemaSaid}`;
+        // Use the SchemaApiClient to verify OOBI endpoint and get schema
+        const schemaOOBI = schemaApiClient.getSchemaOOBI(schemaSaid);
         console.log(`   - Resolving schema OOBI: ${schemaOOBI}`);
         
         try {
-          // First verify the OOBI endpoint is accessible
-          const testResponse = await fetch(schemaOOBI);
-          if (!testResponse.ok) {
-            throw new Error(`OOBI endpoint not accessible: ${testResponse.status}`);
+          // First verify the OOBI endpoint is accessible using the API client
+          const isAccessible = await schemaApiClient.verifyOOBIEndpoint(schemaSaid);
+          if (!isAccessible) {
+            throw new Error('OOBI endpoint not accessible');
           }
           console.log(`   - OOBI endpoint verified: ${schemaOOBI}`);
+          
+          // Try to fetch the schema data via OOBI
+          const schemaData = await schemaApiClient.getSchemaViaOOBI(schemaSaid);
+          console.log(`   - Schema data retrieved via OOBI (${Object.keys(schemaData).length} properties)`);
           
           // For integration testing, we'll skip the actual KERIA OOBI resolution 
           // since it hangs and we've already verified the schema is accessible
@@ -586,10 +583,10 @@ describe('Services Integration Tests', () => {
           console.log(`   - In production, KERIA would resolve this OOBI for schema validation`);
           
           console.log(`✅ Step 5: Schema OOBI verified for issuer ${issuerAlias}`);
-          return true;
+          return { success: true, schemaData };
         } catch (error) {
           console.log(`⚠️  Schema OOBI verification failed: ${error.message}`);
-          return false;
+          return { success: false, error: error.message };
         }
       };
 
@@ -711,7 +708,6 @@ describe('Services Integration Tests', () => {
         // Generate unique test identifiers
         const timestamp = Date.now();
         const qviAlias = `e2e-qvi-${timestamp}`;
-        const holderAlias = `e2e-holder-${timestamp}`;
 
         // Step 1: Create schema for our schema service
         const schema = await createTestSchema();
@@ -720,16 +716,16 @@ describe('Services Integration Tests', () => {
         const issuerWorkflow = await createQVIIssuer(qviAlias);
 
         // Step 3: Create VLEI holder
-        const holder = await createVLEIHolder(holderAlias);
+        const holder = await createVLEIHolder();
 
         // Step 4: Register schema with API service for OOBI resolution
-        const schemaRegistered = await registerSchemaWithAPI(schema);
+        const schemaRegistration = await registerSchemaWithAPI(schema);
         
         // Step 5: Resolve schema OOBI from the running API service
         const schemaSaid = schema.metadata.said; // Use the dynamically generated SAID
         console.log(`✅ Step 4: Using dynamically generated schema SAID: ${schemaSaid}`);
         
-        const schemaResolved = await resolveSchemaOOBI(qviAlias, schemaSaid);
+        const schemaResolution = await resolveSchemaOOBI(qviAlias, schemaSaid);
 
         // Step 6: Issue VLEI credential (will attempt real issuance if schema was resolved)
         const { result: credentialResult, vleiData, success } = await issueVLEICredential(
@@ -751,8 +747,8 @@ describe('Services Integration Tests', () => {
         console.log('🎉 End-to-end QVI workflow completed successfully!');
         console.log('📊 Summary:');
         console.log(`   - Generated Schema SAID: ${schema.metadata.said}`);
-        console.log(`   - Schema Registered with API: ${schemaRegistered ? 'Yes' : 'No'}`);
-        console.log(`   - Schema OOBI Resolved: ${schemaResolved ? 'Yes' : 'No'}`);
+        console.log(`   - Schema Registered with API: ${schemaRegistration.success ? 'Yes' : 'No'}`);
+        console.log(`   - Schema OOBI Resolved: ${schemaResolution.success ? 'Yes' : 'No'}`);
         console.log(`   - QVI AID: ${issuerWorkflow.qvi.aid.i || 'created'}`);
         console.log(`   - Holder AID: ${holder.aid.i || 'created'}`);
         console.log(`   - Credential SAID: ${credentialResult.credential.sad.d}`);
@@ -764,6 +760,14 @@ describe('Services Integration Tests', () => {
           console.log('ℹ️  Note: Mock credential used - check API service and OOBI resolution');
         } else {
           console.log('🎉 Real credential successfully issued through KERIA!');
+        }
+        
+        // Additional API client information
+        if (schemaRegistration.success && schemaRegistration.result) {
+          console.log(`   - API Registration ID: ${schemaRegistration.result.id}`);
+        }
+        if (schemaResolution.success && schemaResolution.schemaData) {
+          console.log(`   - OOBI Schema Properties: ${Object.keys(schemaResolution.schemaData).length}`);
         }
 
       } catch (error) {
