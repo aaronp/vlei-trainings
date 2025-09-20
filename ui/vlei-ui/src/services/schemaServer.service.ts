@@ -10,12 +10,6 @@ export class SchemaServerService {
     this.serverUrl = serverUrl || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173');
   }
 
-  // Register a schema for serving (legacy compatibility)
-  registerSchema(schema: CredentialSchema): void {
-    // This method is now a no-op since schemas are automatically 
-    // available via the SchemaService integration
-    console.log(`Schema ${schema.said} is available via SchemaService`);
-  }
 
   // Get OOBI URL for a schema
   getSchemaOOBI(schemaSaid: string): string {

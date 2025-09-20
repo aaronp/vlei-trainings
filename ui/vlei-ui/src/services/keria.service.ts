@@ -1,4 +1,4 @@
-import { ready, SignifyClient, Tier } from 'signify-ts';
+import { ready, SignifyClient, Tier, type HabState } from 'signify-ts';
 import type { KeriConfig, ClientState, AID, Operation } from '../types/keri';
 
 export class KeriaService {
@@ -152,7 +152,7 @@ export class KeriaService {
     return [];
   }
 
-  async getAID(name: string): Promise<AID> {
+  async getAID(name: string): Promise<HabState> {
     if (!this.client) throw new Error('Client not initialized');
 
     return await this.client.identifiers().get(name);
