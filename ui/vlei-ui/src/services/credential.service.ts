@@ -20,8 +20,11 @@ export class CredentialService {
   }
 
   async createRegistry(aidAlias: string, registryName: string): Promise<Registry> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    // Ensure KERIA client is ready before proceeding
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     console.log('Creating registry with params:', { aidAlias, registryName });
 
@@ -137,8 +140,10 @@ export class CredentialService {
   }
 
   async listRegistries(aidAlias: string): Promise<Registry[]> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     console.log('Listing registries for AID alias:', aidAlias);
 
@@ -186,8 +191,10 @@ export class CredentialService {
       [key: string]: any;
     }
   ): Promise<{ credential: any; operation: Operation }> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     const issueResult = await client.credentials().issue(issuerAlias, {
       ri: registryId,
@@ -214,8 +221,10 @@ export class CredentialService {
     credential: any,
     recipientAid: string
   ): Promise<Operation> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     const datetime = new Date().toISOString();
 
@@ -241,8 +250,10 @@ export class CredentialService {
   }
 
   async listCredentials(aidAlias: string): Promise<any[]> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     return await (client.credentials() as any).list(aidAlias);
   }
@@ -313,15 +324,19 @@ export class CredentialService {
   }
 
   async getCredential(said: string): Promise<any> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     return await client.credentials().get(said);
   }
 
   async getNotifications(route?: string): Promise<any[]> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     const allNotifications = await client.notifications().list();
 
@@ -333,15 +348,19 @@ export class CredentialService {
   }
 
   async markNotificationAsRead(notificationId: string): Promise<void> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     await client.notifications().mark(notificationId);
   }
 
   async deleteNotification(notificationId: string): Promise<void> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     await client.notifications().delete(notificationId);
   }
@@ -351,8 +370,10 @@ export class CredentialService {
     grantSaid: string,
     recipientAid: string
   ): Promise<Operation> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     const datetime = new Date().toISOString();
 
@@ -382,8 +403,10 @@ export class CredentialService {
     schemaId: string;
     attributes: Record<string, any>;
   }): Promise<{ said: string; credential: any }> {
-    const client = this.keriaService.getClient();
-    if (!client) throw new Error('KERIA client not initialized');
+    if (!this.keriaService.isClientReady()) {
+      throw new Error('KERIA service not ready. Please ensure it is properly initialized and connected.');
+    }
+    const client = this.keriaService.getClientOrThrow();
 
     // Find the registry
     const registries = await this.listRegistries(params.issuerAlias);

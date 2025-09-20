@@ -1,5 +1,6 @@
 import { ready, SignifyClient, Tier, type HabState } from 'signify-ts';
 import type { KeriConfig, ClientState, AID, Operation } from '../types/keri';
+import { eventually } from '../utils/retry.js';
 
 export class KeriaService {
   private client: SignifyClient | null = null;
@@ -134,7 +135,7 @@ export class KeriaService {
     };
   }
 
-  async waitForOperation(operation: Operation, timeoutMs = 30000): Promise<Operation> {
+  async waitForOperation(operation: Operation, timeoutMs: number = 3000): Promise<Operation> {
     if (!this.client) throw new Error('Client not initialized');
 
     try {
@@ -243,6 +244,26 @@ export class KeriaService {
     return this.client;
   }
 
+  /**
+   * Ensures the client is initialized and connected, throws error if not
+   */
+  getClientOrThrow(): SignifyClient {
+    if (!this.client) {
+      throw new Error('KERIA client not initialized. Call initialize() and connect() first.');
+    }
+    if (!this.isInitialized) {
+      throw new Error('KERIA service not properly initialized. Call initialize() first.');
+    }
+    return this.client;
+  }
+
+  /**
+   * Checks if the client is ready for operations
+   */
+  isClientReady(): boolean {
+    return this.client !== null && this.isInitialized;
+  }
+
   // High-level helper methods for complete workflows
 
   /**
@@ -295,7 +316,7 @@ export class KeriaService {
   /**
    * Waits for multiple operations to complete
    */
-  async waitForOperations(operations: Operation[], timeoutMs = 30000): Promise<Operation[]> {
+  async waitForOperations(operations: Operation[], timeoutMs: number = 3000): Promise<Operation[]> {
     const results = await Promise.all(
       operations.map(op => this.waitForOperation(op, timeoutMs))
     );
@@ -308,6 +329,130 @@ export class KeriaService {
     );
     
     return results;
+  }
+
+  /**
+   * Checks if a schema is loaded in KERIA by attempting to retrieve it
+   */
+  async isSchemaLoaded(schemaSaid: string): Promise<boolean> {
+    if (!this.client) throw new Error('Client not initialized');
+    
+    try {
+      // Try to get the schema from KERIA's schema registry
+      const result = await this.client.schemas().get(schemaSaid);
+      return result !== null && result !== undefined;
+    } catch (error) {
+      // Schema not found in KERIA
+      console.log(`Schema ${schemaSaid} not found in KERIA:`, error.message);
+      return false;
+    }
+  }
+
+  /**
+   * List all schemas currently loaded in KERIA
+   */
+  async listLoadedSchemas(): Promise<any[]> {
+    if (!this.client) throw new Error('Client not initialized');
+    
+    try {
+      const result = await this.client.schemas().list();
+      console.log(`Found ${Array.isArray(result) ? result.length : 'unknown'} schemas in KERIA`);
+      return Array.isArray(result) ? result : [];
+    } catch (error) {
+      console.log(`Failed to list schemas in KERIA:`, error.message);
+      return [];
+    }
+  }
+
+
+  /**
+   * Enhanced OOBI resolution with proper schema loading
+   */
+  async resolveSchemaOOBI(
+    oobi: string, 
+    schemaSaid: string, 
+    timeout: number = 3000
+  ): Promise<{
+    success: boolean;
+    operation?: Operation;
+    error?: string;
+  }> {
+    if (!this.client) throw new Error('Client not initialized');
+
+    // First check if schema is already loaded
+    const isLoaded = await this.isSchemaLoaded(schemaSaid);
+    if (isLoaded) {
+      console.log(`Schema ${schemaSaid} already loaded in KERIA`);
+      return { success: true };
+    }
+
+    try {
+      console.log(`Resolving schema OOBI in KERIA: ${oobi}`);
+      
+      // Generate a unique alias to avoid conflicts
+      const uniqueAlias = `schema-${schemaSaid.slice(-8)}-${Date.now()}`;
+      console.log(`Using OOBI alias: ${uniqueAlias}`);
+      
+      const result = await this.client.oobis().resolve(oobi, uniqueAlias);
+      
+      let operation: Operation;
+      if (typeof result.op === 'function') {
+        operation = await result.op();
+      } else {
+        operation = result as Operation;
+      }
+
+      console.log(`OOBI resolution operation: ${operation.name} (done: ${operation.done})`);
+
+      // Wait for operation to complete if not already done
+      if (!operation.done) {
+        console.log(`Waiting for OOBI resolution operation to complete (${timeout}ms)...`);
+        try {
+          const completedOperation = await this.waitForOperation(operation, timeout);
+          console.log(`OOBI resolution completed: ${completedOperation.done}`);
+          
+          // Clean up the operation
+          await this.deleteOperation(operation.name).catch(err => 
+            console.warn(`Failed to cleanup OOBI operation:`, err)
+          );
+        } catch (waitError) {
+          console.warn(`OOBI operation wait timed out after ${timeout}ms: ${waitError.message}`);
+          console.log(`Attempting to clean up hanging operation: ${operation.name}`);
+          
+          // Try to clean up the hanging operation
+          await this.deleteOperation(operation.name).catch(err => 
+            console.warn(`Failed to cleanup hanging OOBI operation:`, err)
+          );
+          
+          // Don't throw immediately - maybe the schema is actually loaded despite the timeout
+          console.log(`Continuing with schema verification despite operation timeout...`);
+        }
+      }
+
+      // Use eventually to wait for the schema to be loaded
+      console.log(`Verifying schema is loaded in KERIA...`);
+      await eventually(
+        async () => {
+          const loaded = await this.isSchemaLoaded(schemaSaid);
+          if (!loaded) {
+            throw new Error(`Schema ${schemaSaid} not yet available in KERIA`);
+          }
+          return true;
+        },
+        {
+          timeout: Math.min(timeout, 3000), // Never exceed 3 seconds for verification
+          interval: 100,
+          description: 'Schema availability check'
+        }
+      );
+
+      console.log(`✅ Schema ${schemaSaid} successfully loaded in KERIA via OOBI`);
+      return { success: true, operation };
+
+    } catch (error) {
+      console.error(`❌ Failed to resolve schema OOBI in KERIA:`, error.message);
+      return { success: false, error: error.message };
+    }
   }
 }
 
@@ -366,6 +511,19 @@ export async function createConnectedKeriaService(
     await keriaService.boot();
     await keriaService.connect();
     logger('Bootstrapped and connected to new KERIA agent');
+  }
+
+  // Validate the connection is working
+  if (!keriaService.isClientReady()) {
+    throw new Error('KERIA service initialization failed: client not ready after connection');
+  }
+
+  // Test basic operations to ensure client is functional
+  try {
+    const state = await keriaService.getState();
+    logger(`KERIA connection validated. Agent: ${state.agent?.i || 'Not available'}`);
+  } catch (error) {
+    throw new Error(`KERIA connection validation failed: ${error.message}`);
   }
 
   return keriaService;

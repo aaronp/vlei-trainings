@@ -1,4 +1,4 @@
-.PHONY: help start-ui start-keria start-schema-server start-schema-api start-all stop-keria build deploy deploy-prod install clean
+.PHONY: help start-ui start-keria start-schema-server start-schema-api start-all stop-keria build deploy deploy-prod install clean test test-schemas test-keria-connection
 
 # Default target - show help
 help:
@@ -12,8 +12,17 @@ help:
 	@echo "  make deploy            - Deploy to Vercel (preview)"
 	@echo "  make deploy-prod       - Deploy to Vercel (production)"
 	@echo "  make clean             - Clean build artifacts"
+	@echo "  make test              - Run integration tests"
+
 test:
 	npm run test:integration
+
+test-schemas:
+	npm run test:integration -- -t "should create a unique test schema"
+
+test-keria-connection:
+	npm run test:integration -- -t "should verify KERIA connection"
+
 # Start the UI development server
 start-ui:
 	@echo "Starting VLEI UI development server..."

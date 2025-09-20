@@ -1,1 +1,2 @@
 - Tests should be self-contained and not rely on other tests
+- Always pass timeout parameters explicitly in signatures with default values

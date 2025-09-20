@@ -10,8 +10,8 @@ export const TEST_CONFIG = {
   // Use a predictable passcode for tests
   passcode: process.env.KERIA_TEST_PASSCODE || 'test-integration-passcode-123',
   // Test timeouts
-  operationTimeout: 15000,
-  connectionTimeout: 10000,
+  operationTimeout: 3000,
+  connectionTimeout: 3000,
 };
 
 console.log('Integration test setup initialized with config:', {

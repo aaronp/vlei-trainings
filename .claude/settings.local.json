@@ -21,7 +21,11 @@
       "Bash(npm run test:integration:*)",
       "Bash(npx vitest run:*)",
       "Bash(npm run typecheck:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(timeout 10s npm test:*)",
+      "Bash(cat:*)",
+      "Bash(sed:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }
