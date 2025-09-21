@@ -118,7 +118,7 @@ describe('Services Integration Tests', () => {
   });
 
   describe('Registry Management', () => {
-    test('should create an AID and registry independently', async () => {
+    test.only('should create an AID and registry independently', async () => {
       // Generate unique test data for this test
       const testAidAlias = `test-aid-reg-${Date.now()}-${Math.random().toString(36).substring(7)}`;
       const testRegistryName = `test-registry-${Date.now()}-${Math.random().toString(36).substring(7)}`;
@@ -130,6 +130,24 @@ describe('Services Integration Tests', () => {
 
       // Step 2: Create a registry for the AID
       console.log(`Creating registry "${testRegistryName}" for AID ${testAidAlias}`);
+
+
+      // First check if the AID exists and is valid
+      const foundAid = await eventually(
+        async () => {
+          console.log('Checking for alias:', testAidAlias, 'created with name:', aidResult.aid.name);
+          const found = await keriaService.findAIDByAlias(testAidAlias);
+          console.log('found:', found)
+          if (!found) {
+            throw new Error(`AID ${testAidAlias} not found yet`);
+          }
+          return found;
+        },
+        { timeout: 3000, interval: 100, description: 'List AIDs test' }
+      );
+      
+      expect(foundAid).toBeDefined();
+      expect(foundAid.name).toBe(testAidAlias);
 
       // Get initial registry count
       const initialRegistries = await credentialService.listRegistries(testAidAlias);

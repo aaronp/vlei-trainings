@@ -194,22 +194,25 @@ export class KeriaService {
 
     while (true) {
       const result = await this.client.identifiers().list(currentStart, defaultLimit);
-      console.log(`listAIDs result (start=${currentStart}, limit=${defaultLimit}):`, result);
+      console.log(`listAIDs result (currentStart=${currentStart}, limit=${defaultLimit}):`, result);
 
       // Handle paginated response format
       if (result && typeof result === 'object' && 'aids' in result) {
         allAids.push(...result.aids);
 
-        // Check if we've got all AIDs
-        if (result.aids.length < defaultLimit || allAids.length >= result.total) {
+        // Check if we've got all AIDs - use total count as authoritative
+        if (allAids.length >= result.total) {
+          console.log(`listing AIDs stopping after ${allAids.length} of ${result.total}`)
           break;
         }
         currentStart += defaultLimit;
       } else if (Array.isArray(result)) {
         // Handle direct array response (non-paginated)
+        console.log(`listing AIDs stopping after non-paginated result`)
         allAids = result;
         break;
       } else {
+        console.log(`listing AIDs stopping after result of '${result}', with all AIDs ${allAids.length} of ${result.total}`)
         break;
       }
     }
@@ -225,6 +228,26 @@ export class KeriaService {
     if (!this.client) throw new Error('Client not initialized');
 
     return await this.client.identifiers().get(name);
+  }
+
+  /**
+   * Helper function to find an AID by its alias
+   * @param aidAlias - The alias of the AID to find
+   * @returns The AID object if found
+   * @throws Error if AID not found or validation fails
+   */
+  async findAIDByAlias(aidAlias: string): Promise<AID | undefined> {
+    try {
+      const aids = await this.listAIDs();
+      const aid = aids.find(a => a.name === aidAlias);
+
+      console.log('Found AID for alias:', aidAlias, aid);
+
+      return aid;
+    } catch (aidError) {
+      console.error('Failed to verify AID:', aidError);
+      throw aidError;
+    }
   }
 
   async addEndRole(name: string, role: string, eid?: string): Promise<string> {

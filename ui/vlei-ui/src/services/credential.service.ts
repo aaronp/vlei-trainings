@@ -29,16 +29,9 @@ export class CredentialService {
     console.log('Creating registry with params:', { aidAlias, registryName });
 
     // First check if the AID exists and is valid
-    try {
-      const aids = await this.keriaService.listAIDs();
-      const aid = aids.find(a => a.name === aidAlias);
-      if (!aid) {
-        throw new Error(`AID alias "${aidAlias}" not found. Available AIDs: ${aids.map(a => a.name).join(', ')}`);
-      }
-      console.log('Found AID for alias:', aidAlias, aid);
-    } catch (aidError) {
-      console.error('Failed to verify AID:', aidError);
-      throw aidError;
+    const found = await this.keriaService.findAIDByAlias(aidAlias);
+    if (!found) {
+      throw new Error(`aid alias ${aidAlias} not found`)
     }
 
     let completedOperation: any = null;
@@ -91,17 +84,10 @@ export class CredentialService {
     }
 
     // Small delay to allow backend to process the registry creation
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 100));
 
     // Fetch the registry (whether we just created it or it already existed)
     const registries = await this.listRegistries(aidAlias);
-    console.log('All registries after create attempt:', registries);
-    console.log('Looking for registry with name:', registryName);
-
-    // Log each registry structure for debugging
-    registries.forEach((r: any, index: number) => {
-      console.log(`Registry ${index}:`, JSON.stringify(r, null, 2));
-    });
 
     // Try to get registry info from the completed operation response if list is empty
     if (registries.length === 0 && completedOperation?.response) {
