@@ -25,7 +25,10 @@
       "Bash(timeout 10s npm test:*)",
       "Bash(cat:*)",
       "Bash(sed:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(docker-compose restart:*)",
+      "Bash(docker exec:*)",
+      "Bash(docker network inspect:*)"
     ],
     "deny": []
   }

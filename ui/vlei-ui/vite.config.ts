@@ -20,5 +20,9 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['buffer']
+  },
+  server: {
+    host: '0.0.0.0', // Listen on all interfaces, making it accessible from Docker
+    port: 5173
   }
 })

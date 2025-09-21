@@ -103,6 +103,8 @@ services:
       - "3901:3901"
       - "3902:3902"
       - "3903:3903"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     entrypoint: [ 'keria', 'start', '--config-dir', '/keria/config', '--config-file', 'keria', '--name', 'agent', '--loglevel', 'INFO' ]
     depends_on:
       vlei-server:

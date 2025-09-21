@@ -167,6 +167,16 @@ export class SchemaApiClient {
   getSchemaOOBI(said: string): string {
     return `${this.baseUrl}/oobi/${said}`;
   }
+  
+  /**
+   * Get schema OOBI URL for KERIA (uses Docker bridge gateway when running in Docker)
+   */
+  getSchemaOOBIForKERIA(said: string): string {
+    // When KERIA is running in Docker and needs to access the host machine
+    // Use the Docker bridge gateway IP (172.22.0.1 for this network)
+    const keriaAccessibleUrl = this.baseUrl.replace('localhost', '172.22.0.1');
+    return `${keriaAccessibleUrl}/oobi/${said}`;
+  }
 
   /**
    * Fetch schema data via OOBI endpoint
