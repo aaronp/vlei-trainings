@@ -34,7 +34,11 @@
       "Bash(make:*)",
       "Bash(docker-compose build:*)",
       "Bash(docker-compose up:*)",
-      "Bash(docker-compose stop:*)"
+      "Bash(docker-compose stop:*)",
+      "Bash(docker ps:*)",
+      "Bash(docker volume inspect:*)",
+      "Bash(docker-compose:*)",
+      "Bash(docker volume:*)"
     ],
     "deny": []
   }

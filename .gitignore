@@ -13,3 +13,6 @@ jupyter/notebooks/config/multisig/multisig_config.json
 /.vs
 /.ipynb_checkpoints
 /markdown/.ipynb_checkpoints
+
+# Docker persistent data directory
+/data/

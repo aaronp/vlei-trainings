@@ -57,6 +57,8 @@ services:
       - PYTHONIOENCODING=UTF-8 # Ensure consistent logging encoding
     volumes:
       - ./jupyter/notebooks/config/schemas:/vLEI/schema
+      - ./data/vlei-server:/usr/local/var/keri
+      - ./data/schemas:/vLEI/runtime-schemas
     command: [ 'vLEI-server', '-s', '/vLEI/schema', '-c', '/vLEI/schema', '-o', '/vLEI/schema', '--loglevel', 'INFO' ]
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://127.0.0.1:7723/oobi/EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao" ]
@@ -76,6 +78,7 @@ services:
     command: witness demo --loglevel INFO
     volumes:
       - ./jupyter/notebooks/config/witness-demo-docker:/keripy/scripts/keri/cf/main
+      - ./data/witness:/usr/local/var/keri
     ports:
       - "5642:5642" # witness named wan
       - "5643:5643" # witness named wil
@@ -95,6 +98,7 @@ services:
       - PYTHONIOENCODING=UTF-8 # Ensure consistent logging encoding
     volumes:
       - ./jupyter/notebooks/config/keria/keria-docker.json:/keria/config/keri/cf/keria.json
+      - ./data/keria:/usr/local/var/keri
     command: --config-dir /keria/config --config-file keria --name agent --loglevel INFO
     healthcheck:
       test: [ "CMD", "wget", "--spider", "--tries=1", "--no-verbose", "http://127.0.0.1:3902/spec.yaml" ]
