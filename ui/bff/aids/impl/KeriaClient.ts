@@ -14,7 +14,8 @@ export class KeriaClient {
   }
 
   static async withClient<T>(
-    operation: (client: SignifyClient) => Promise<T>
+    operation: (client: SignifyClient) => Promise<T>,
+    timeoutMs: number = 2000
   ): Promise<T> {
     await ready();
     

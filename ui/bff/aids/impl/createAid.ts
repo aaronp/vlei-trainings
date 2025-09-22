@@ -4,7 +4,8 @@ import { KeriaClient } from './KeriaClient';
 
 export async function createAid(
   client: SignifyClient, 
-  request: CreateAIDRequest
+  request: CreateAIDRequest,
+  timeoutMs: number = 2000
 ): Promise<AID> {
   if (!request.alias || request.alias.length === 0) {
     throw new Error('Invalid AID alias - it cannot be empty');
@@ -29,7 +30,7 @@ export async function createAid(
     const operation = await result.op();
 
     // Wait for operation to complete
-    const completedOp = await client.operations().wait(operation, AbortSignal.timeout(3000));
+    const completedOp = await client.operations().wait(operation, { signal: AbortSignal.timeout(timeoutMs) });
     if (!completedOp.done) {
       throw new Error("Creating AID is not done");
     }
@@ -38,8 +39,9 @@ export async function createAid(
     await client.operations().delete(operation.name);
 
     // Get the AID identifier from the operation response
-    const aidIdentifier = completedOp.response?.anchor?.i ||
-      completedOp.response?.i ||
+    const response = completedOp.response as any;
+    const aidIdentifier = response?.anchor?.i ||
+      response?.i ||
       (result as any).i ||
       (result as any).prefix ||
       (result as any).pre;
@@ -87,6 +89,6 @@ export async function createAid(
   }
 }
 
-export async function createAidWithClient(request: CreateAIDRequest): Promise<AID> {
-  return KeriaClient.withClient(client => createAid(client, request));
+export async function createAidWithClient(request: CreateAIDRequest, timeoutMs: number = 2000): Promise<AID> {
+  return KeriaClient.withClient(client => createAid(client, request, timeoutMs), timeoutMs);
 }

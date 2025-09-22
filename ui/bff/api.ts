@@ -36,8 +36,8 @@ const app = new Elysia()
     set.headers["x-timestamp"] = String((new Date()).getTime());
     console.log(`${request.method} ${request.url} ...`)
   })
-  .onAfterResponse(({ request, set, headers }) => {
-    const started = headers["x-timestamp"];
+  .onAfterResponse(({ request, set }) => {
+    const started = set.headers["x-timestamp"];
     if (started) {
       const took = (new Date()).getTime() - Number(started)
       console.log(`${request.method} ${request.url} : ${set.status} took ${took}ms`)

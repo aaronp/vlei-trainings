@@ -9,9 +9,10 @@ import { aidContext } from './context';
 export const aidsRoutes = new Elysia({ prefix: '/aids' })
   .use(aidContext)
   // Create transferable AID
-  .post('/', async ({ body, aidRegistry }) => {
+  .post('/', async ({ body, aidRegistry, headers }) => {
     const request = body as CreateAIDRequest;
-    const aid = await aidRegistry.create(request);
+    const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
+    const aid = await aidRegistry.create(request, timeoutMs);
     return { aid };
   }, {
     body: CreateAIDRequestSchema,

@@ -3,14 +3,14 @@ import type { AID, CreateAIDRequest } from './types';
 import { createAidWithClient } from './impl/createAid';
 
 interface AIDRegistryStore {
-  create(request: CreateAIDRequest): Promise<AID>;
+  create(request: CreateAIDRequest, timeoutMs?: number): Promise<AID>;
 }
 
 function makeAIDRegistryStore(): AIDRegistryStore {
 
   return {
-    async create(request: CreateAIDRequest): Promise<AID> {
-      return await createAidWithClient(request);
+    async create(request: CreateAIDRequest, timeoutMs: number = 2000): Promise<AID> {
+      return await createAidWithClient(request, timeoutMs);
     },
 
   };
