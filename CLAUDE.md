@@ -2,3 +2,4 @@
 - Always pass timeout parameters explicitly in signatures with default values
 - Do not use mocks or fakes. All tests should use real services
 - Elysia routes should specify types like @https://github.com/aaronp/chain-as-a-service/blob/master/app/src/api/accounts.ts and use those types in the Eden client signatures
+- Timeout parameters should be passed directly, either through a config or settings object or just as a parameter on its own. HTTP requests should take timeout parameters as optional header parameters, defaulting to 2 seconds if none are provided
