@@ -190,8 +190,11 @@ export class KeriaService {
     let allAids: any[] = [];
     let currentStart = 0;
     const defaultLimit = 25; // Default page size
+    const maxIterations = 1000; // Safety limit to prevent infinite loops
+    let iterations = 0;
 
-    while (true) {
+    while (iterations < maxIterations) {
+      iterations++;
       const result = await this.client.identifiers().list(currentStart, defaultLimit);
       console.log(`listAIDs result (currentStart=${currentStart}, limit=${defaultLimit}):`, result);
 
@@ -204,6 +207,13 @@ export class KeriaService {
           console.log(`listing AIDs stopping after ${allAids.length} of ${result.total}`)
           break;
         }
+        
+        // Also break if we got no more results (empty page)
+        if (result.aids.length === 0) {
+          console.log(`listing AIDs stopping after empty page at start=${currentStart}`)
+          break;
+        }
+        
         currentStart += defaultLimit;
       } else if (Array.isArray(result)) {
         // Handle direct array response (non-paginated)
@@ -214,6 +224,11 @@ export class KeriaService {
         console.log(`listing AIDs stopping after result of '${result}', with all AIDs ${allAids.length} of ${result.total}`)
         break;
       }
+    }
+
+    // Warn if we hit the safety limit
+    if (iterations >= maxIterations) {
+      console.warn(`listAIDs hit safety limit of ${maxIterations} iterations. This may indicate a pagination bug.`);
     }
 
     // Map the API response to our AID interface
@@ -274,7 +289,7 @@ export class KeriaService {
     if (!this.client) throw new Error('Client not initialized');
 
     // Generate a unique alias to avoid conflicts
-    const uniqueAlias = `${alias}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const uniqueAlias = `${alias}-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
     const result = await this.client.oobis().resolve(oobi, uniqueAlias);
     // Check if result has an op method, otherwise return result directly
@@ -407,7 +422,7 @@ export class KeriaService {
       const result = await this.client.schemas().list();
       console.log(`Found ${Array.isArray(result) ? result.length : 'unknown'} schemas in KERIA`);
       return Array.isArray(result) ? result : [];
-    } catch (error) {
+    } catch (error: any) {
       console.log(`Failed to list schemas in KERIA:`, error.message);
       return [];
     }

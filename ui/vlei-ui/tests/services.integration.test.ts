@@ -620,7 +620,7 @@ describe('Services Integration Tests', () => {
       console.log(`✅ Test completed - documented OOBI resolution behavior`);
     });
 
-    test.only('should complete end-to-end QVI workflow: create schema, issue VLEI to holder', { timeout: 15000 }, async () => {
+    test('should complete end-to-end QVI workflow: create schema, issue VLEI to holder', { timeout: 15000 }, async () => {
       console.log('🚀 Starting end-to-end QVI workflow test...');
 
       // Helper functions for functional style test steps
