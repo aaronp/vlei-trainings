@@ -196,7 +196,7 @@ export class KeriaService {
     while (iterations < maxIterations) {
       iterations++;
       const result = await this.client.identifiers().list(currentStart, defaultLimit);
-      console.log(`listAIDs result (currentStart=${currentStart}, limit=${defaultLimit}):`, result);
+      // console.log(`listAIDs result (currentStart=${currentStart}, limit=${defaultLimit}):`, result);
 
       // Handle paginated response format
       if (result && typeof result === 'object' && 'aids' in result) {
@@ -207,13 +207,13 @@ export class KeriaService {
           console.log(`listing AIDs stopping after ${allAids.length} of ${result.total}`)
           break;
         }
-        
+
         // Also break if we got no more results (empty page)
         if (result.aids.length === 0) {
           console.log(`listing AIDs stopping after empty page at start=${currentStart}`)
           break;
         }
-        
+
         currentStart += defaultLimit;
       } else if (Array.isArray(result)) {
         // Handle direct array response (non-paginated)
@@ -496,12 +496,12 @@ export class KeriaService {
       // After OOBI resolution, the schema might not be immediately available in KERIA's schema registry
       // This is because OOBI resolution establishes the connection but doesn't necessarily load the schema
       console.log(`OOBI resolution completed, but schema may not be in KERIA's registry yet`);
-      
+
       // For now, we'll consider the OOBI resolution successful if the operation completed
       // The actual schema loading might happen when it's first used for credential issuance
       console.log(`✅ Schema OOBI ${schemaSaid} resolved successfully`);
       console.log(`Note: Schema may not appear in KERIA's schema registry until first use`);
-      
+
       // Try to verify schema availability but don't fail if it's not found
       try {
         const loaded = await this.isSchemaLoaded(schemaSaid);

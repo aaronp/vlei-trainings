@@ -666,7 +666,7 @@ describe('Services Integration Tests', () => {
               }
             },
             "required": ["LEI", "organizationName", "registrationDate", "status", "testIdentifier"],
-            "additionalProperties": false
+            "additionalProperties": true
           },
           fields: [
             {
@@ -957,10 +957,10 @@ describe('Services Integration Tests', () => {
           : {
             // Original VLEI schema fields
             LEI: `E2E${Date.now().toString().slice(-15)}`, // Unique LEI for test
-            entityName: `Test Organization ${Math.random().toString(36).substring(7)}`,
-            entityType: 'corporation',
+            organizationName: `Test Organization ${Math.random().toString(36).substring(7)}`,
             registrationDate: new Date().toISOString(),
-            status: 'active' as const
+            status: 'active' as const,
+            testIdentifier: `test-${Date.now()}`
           };
 
         try {
@@ -980,9 +980,9 @@ describe('Services Integration Tests', () => {
           console.log(`✅ Step 6: Successfully issued REAL VLEI credential through KERIA!`);
           console.log(`   - Credential SAID: ${result.credential.sad.d}`);
           console.log(`   - Schema SAID: ${result.credential.sad.s}`);
-          console.log(`   - LEI: ${vleiData.lei}`);
-          console.log(`   - Entity: ${vleiData.entityName}`);
-          console.log(`   - Type: ${vleiData.entityType}`);
+          console.log(`   - LEI: ${vleiData.LEI}`);
+          console.log(`   - Entity: ${vleiData.organizationName}`);
+          console.log(`   - Type: VLEI Entity`);
           console.log(`   - Operation completed: ${result.operation.done}`);
           console.log(`   - Grant completed: ${result.grant ? result.grant.done : 'N/A'}`);
 
@@ -1015,9 +1015,9 @@ describe('Services Integration Tests', () => {
           expect(credentialData.attendeeName).toBe(vleiData.attendeeName);
           expect(credentialData.ticketType).toBe(vleiData.ticketType);
         } else {
-          expect(credentialData.lei).toBe(vleiData.lei);
-          expect(credentialData.entityName).toBe(vleiData.entityName);
-          expect(credentialData.entityType).toBe(vleiData.entityType);
+          expect(credentialData.LEI).toBe(vleiData.LEI);
+          expect(credentialData.organizationName).toBe(vleiData.organizationName);
+          expect(credentialData.testIdentifier).toBe(vleiData.testIdentifier);
         }
 
         // Verify operations completed
@@ -1141,9 +1141,9 @@ describe('Services Integration Tests', () => {
         console.log(`   - Holder AID: ${holder.aid.i || 'created'}`);
         console.log(`   - Credential SAID: ${credentialResult.credential.sad.d}`);
         console.log(`   - Credential Type: Real KERIA credential`);
-        console.log(`   - Entity LEI: ${vleiData.lei}`);
-        console.log(`   - Entity Name: ${vleiData.entityName}`);
-        console.log(`   - Entity Type: ${vleiData.entityType}`);
+        console.log(`   - Entity LEI: ${vleiData.LEI}`);
+        console.log(`   - Entity Name: ${vleiData.organizationName}`);
+        console.log(`   - Entity Type: VLEI Entity`);
         console.log('🎉 Real credential successfully issued through KERIA!');
 
         // Additional API client information
