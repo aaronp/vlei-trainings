@@ -16,7 +16,7 @@
 
 ## AIDs
 
-### > POST /aids
+### ✅ POST /aids
 
  * Create a new transferable AID via KERIA (through signify-ts).
 
@@ -24,12 +24,12 @@
 
  * Returns: { "aid": "EA...", "oobi": "http(s)://.../oobi/EA...", "kel": {...} }
 
-### > GET /aids → list
+### ⏳ GET /aids → list
 
-### > GET /aids/{aid} → 
+### ⏳ GET /aids/{aid} → 
 details (alias, current keys/threshold, last sn, witnesses)
 
-### > POST /aids/{aid}/rotate
+### ⏳ POST /aids/{aid}/rotate
 
 Body: { "toad": 3, "adds": [], "cuts": [] }
 
