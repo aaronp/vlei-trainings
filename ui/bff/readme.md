@@ -1,5 +1,32 @@
 # Backend-for-frontend API for VLEIs
 
+# Actors & artefacts (quick primer)
+
+ * QVI (issuer) AID
+The issuing identity (in this MVP, we “act as” a QVI). 
+It’s a transferable KERI AID with a KEL (inception, rotations, receipts). 
+
+
+* Legal Entity (LE) AID: the organization’s own transferable AID.
+
+* Person AID: each individual’s transferable AID.
+
+* Credentials (ACDCs):
+
+  * Legal Entity vLEI Credential (issued by a QVI to the org). Reporting of issuances/revocations to GLEIF is required. 
+
+  * Role Credentials:
+
+    * OOR (Official Org Role) — issued by a QVI to a person in an official role. Reported to GLEIF. 
+
+    * ECR (Engagement Context Role) — issued either by the Legal Entity itself (if it holds a Legal Entity vLEI) or by a QVI as a value-added service. Best fit for routine hires/fires/role changes. 
+
+ * OOBIs: URLs that let others discover and fetch verifiable material (AID KELs, schema SAIDs, etc.). They bootstrap discovery; trust comes from KERI verification. 
+
+ * Schemas (ACDC): self-addressing, immutable (SAID-anchored). Verifiers fetch by SAID (often via an OOBI). 
+
+See [trustoverip.github.io](trustoverip.github.io)
+
 ## Resource Model:
 
  - AID                 (your controller identifiers)
