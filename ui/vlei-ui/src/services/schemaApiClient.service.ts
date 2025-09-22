@@ -169,12 +169,22 @@ export class SchemaApiClient {
   }
 
   /**
-   * Get schema OOBI URL for KERIA (uses Docker bridge gateway when running in Docker)
+   * Get schema OOBI URL for KERIA (uses container name when running in Docker Compose)
    */
   getSchemaOOBIForKERIA(said: string): string {
-    // When KERIA is running in Docker and needs to access the host machine
-    // Use the Docker bridge gateway IP (172.22.0.1 for this network)
-    const keriaAccessibleUrl = this.baseUrl.replace('localhost', '172.22.0.1');
+    // When KERIA is running in Docker Compose and needs to access the UI service
+    // Use the container name 'vlei-ui' instead of localhost/IP addresses
+    let keriaAccessibleUrl: string;
+    
+    if (this.baseUrl.includes('localhost') || this.baseUrl.includes('127.0.0.1')) {
+      // Running in Docker Compose - use container name
+      keriaAccessibleUrl = this.baseUrl.replace(/https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/, 'http://vlei-ui:3000');
+    } else {
+      // Running externally or with custom URL - use as-is
+      keriaAccessibleUrl = this.baseUrl;
+    }
+    
+    console.log(`OOBI URL for KERIA: ${keriaAccessibleUrl}/oobi/${said}`);
     return `${keriaAccessibleUrl}/oobi/${said}`;
   }
 

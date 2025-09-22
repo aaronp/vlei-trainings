@@ -3,6 +3,7 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { handleSchemaAPI } from './src/api/viteSchemaPlugin.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -28,37 +29,22 @@ app.options('*', (req, res) => {
   res.status(200).end();
 });
 
-// Simple schema API mock for production
-app.get('/api/schemas/info', (req, res) => {
-  console.log('📋 Handling /api/schemas/info request');
-  res.json({
-    name: 'VLEI Schema API',
-    version: '2.0.0',
-    description: 'Production build - API functionality limited',
-    endpoints: [
-      'GET /api/schemas/info - API information'
-    ],
-    status: 'running',
-    environment: 'production'
-  });
-});
-
-// Handle other schema API routes with a basic response
-app.use('/api/schemas*', (req, res) => {
-  console.log(`📡 Schema API: ${req.method} ${req.path}`);
-  res.status(503).json({ 
-    error: 'Schema service not available in production build',
-    message: 'Full schema API requires development server or custom implementation'
-  });
-});
-
-// Handle OOBI routes with a basic response
-app.use('/oobi/*', (req, res) => {
-  console.log(`📡 OOBI API: ${req.method} ${req.path}`);
-  res.status(503).json({ 
-    error: 'OOBI service not available in production build',
-    message: 'Full OOBI API requires development server or custom implementation'
-  });
+// Use the real schema API from the development server
+app.use(async (req, res, next) => {
+  // Only handle schema API routes with the real handler
+  if (req.path.startsWith('/api/schemas') || req.path.startsWith('/oobi/')) {
+    try {
+      await handleSchemaAPI(req, res, next);
+    } catch (error) {
+      console.error('❌ Schema API error:', error);
+      res.status(500).json({ 
+        error: 'Internal server error',
+        message: error.message 
+      });
+    }
+  } else {
+    next();
+  }
 });
 
 // Serve static files from dist directory

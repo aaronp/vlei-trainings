@@ -38,7 +38,8 @@
       "Bash(docker ps:*)",
       "Bash(docker volume inspect:*)",
       "Bash(docker-compose:*)",
-      "Bash(docker volume:*)"
+      "Bash(docker volume:*)",
+      "Bash(timeout 30 npm run test:integration)"
     ],
     "deny": []
   }

@@ -863,21 +863,21 @@ describe('Services Integration Tests', () => {
       };
 
 
-      const resolveSchemaOOBI = async (issuerAlias: string, schemaSaid: string) => {
+      const resolveSchemaOOBI = async (schemaSaid: string) => {
         // Use the SchemaApiClient to verify OOBI endpoint and get schema
         const schemaOOBI = schemaApiClient.getSchemaOOBIForKERIA(schemaSaid);
         console.log(`   - Resolving schema OOBI: ${schemaOOBI}`);
 
         try {
-          // First verify the OOBI endpoint is accessible using the API client
-          const isAccessible = await eventually(
-            () => schemaApiClient.verifyOOBIEndpoint(schemaSaid),
-            { timeout: 3000, interval: 100, description: 'OOBI endpoint verification' }
-          );
-          if (!isAccessible) {
-            throw new Error('OOBI endpoint not accessible');
+          // First verify the OOBI endpoint is accessible from the host (test runner)
+          // Use the localhost URL for verification since tests run from host
+          const hostOOBIUrl = `http://localhost:3000/oobi/${schemaSaid}`;
+          const verifyResponse = await fetch(hostOOBIUrl);
+          
+          if (!verifyResponse.ok) {
+            throw new Error(`OOBI endpoint not accessible: ${verifyResponse.status} ${verifyResponse.statusText}`);
           }
-          console.log(`   - OOBI endpoint verified: ${schemaOOBI}`);
+          console.log(`   - OOBI endpoint verified: ${hostOOBIUrl} (accessible from host)`);
 
           // Try to fetch the schema data via OOBI
           const schemaData = await eventually(
@@ -909,7 +909,7 @@ describe('Services Integration Tests', () => {
                   schemaOOBI
                 })
                 // Return a partial success - the OOBI endpoint works, just KERIA can't resolve it
-                return { success: true, error: e.message, partial: true }
+                return { success: true, error: e.message, partial: true } as any
               }
 
             },
@@ -918,12 +918,12 @@ describe('Services Integration Tests', () => {
 
 
 
-          if (!keriaResult.success && !keriaResult.partial) {
+          if (!keriaResult.success && !(keriaResult as any).partial) {
             console.log('OOBI resolution completely failed')
             throw new Error(`KERIA schema OOBI resolution failed: ${keriaResult.error}`);
           }
 
-          if (keriaResult.partial) {
+          if ((keriaResult as any).partial) {
             console.log(`⚠️ OOBI resolution partially succeeded - schema endpoint works but KERIA couldn't fully resolve it`);
             console.log(`This is expected in development environments where KERIA can't reach the local schema server`);
           }
@@ -1097,7 +1097,7 @@ describe('Services Integration Tests', () => {
         console.log(`⏳ Step 5: Resolving schema OOBI (SAID: ${schemaSaid})...`);
 
         const schemaResolution = await eventually(async () => {
-          const schemaResolution = await resolveSchemaOOBI(qviAlias, schemaSaid);
+          const schemaResolution = await resolveSchemaOOBI(schemaSaid);
           expect(schemaResolution).toBeDefined();
           return schemaResolution
         }, { timeout: 3000, interval: 100, description: 'OOBI resolution initiation' })
@@ -1150,7 +1150,7 @@ describe('Services Integration Tests', () => {
         if (schemaRegistration.success && schemaRegistration.result) {
           console.log(`   - API Registration ID: ${schemaRegistration.result.id}`);
         }
-        if (schemaResolution.success && !schemaResolution.skipped) {
+        if (schemaResolution.success && !(schemaResolution as any).skipped) {
           console.log(`   - OOBI resolution completed successfully`);
         }
 
