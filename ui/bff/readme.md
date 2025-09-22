@@ -37,7 +37,7 @@ Returns: rotation event + pending receipts
 
 ## OOBI
 
-### > POST /oobis/resolve
+### ✅ POST /oobis/resolve
 
  * Body: { "oobi": "http(s)://issuer.example/oobi/EA..." }
 
@@ -45,13 +45,13 @@ Returns: rotation event + pending receipts
 
  * Returns: controller AID, verified endpoints.
 
-### > GET /oobis/{aid} → where you learned this AID from
+### ⏳ GET /oobis/{aid} → where you learned this AID from
 
 ## Schemas
 
-### > GET /schemas → list of known schema SAIDs (vLEI root + roles)
+### ⏳ GET /schemas → list of known schema SAIDs (vLEI root + roles)
 
-### > POST /schemas
+### ⏳ POST /schemas
 
  * Body: { "label": "vLEI-LE-credential", "schema": { ...ACDC schema JSON... } }
 
@@ -61,7 +61,7 @@ Returns: rotation event + pending receipts
 
 ## Credentials (ACDC issuance & storage)
 
-### > POST /credentials/issue
+### ⏳ POST /credentials/issue
 
  * Issues a vLEI (an ACDC) from issuer AID to subject AID with a schema.
 
@@ -97,9 +97,9 @@ Server composes ACDC, computes SAID, anchors issuance via TEL (your issuer AID s
 }
 ```
 
-### > GET /credentials/{said} → return the ACDC + current TEL status
+### ⏳ GET /credentials/{said} → return the ACDC + current TEL status
 
-### > POST /credentials/{said}/revoke
+### ⏳ POST /credentials/{said}/revoke
 
  * Body: ```json { "issuer": "EA_ISSUER_QVI", "reason": "terminated" }```
 
@@ -107,7 +107,7 @@ Server composes ACDC, computes SAID, anchors issuance via TEL (your issuer AID s
 
 ## Presentations
 
-### > POST /presentations
+### ⏳ POST /presentations
 
  * Wrap a credential into a presentation for a verifier challenge (nonce, domain).
 
@@ -126,7 +126,7 @@ Returns: ```json { "presentation": {...}, "proof": {...}, "said": "EE_PRES_SAID"
 
 ## Verification
 
-### > POST /verify/credential
+### ⏳ POST /verify/credential
 
  * Body: ```json { "credential": { ...ACDC... } }```
 
@@ -153,7 +153,7 @@ Returns:
 }```
 
 
-### > POST /verify/presentation
+### ⏳ POST /verify/presentation
 
  * Body: ```json{ "presentation": {...}, "expected": { "nonce": "...", "aud": "..." } }```
 
@@ -161,17 +161,17 @@ Returns:
 
 ## Events & Receipts
 
-### > GET /events/kel/{aid}?since=sn → stream KEL events for an AID
+### ⏳ GET /events/kel/{aid}?since=sn → stream KEL events for an AID
 
-### > GET /events/tel/{aid}?since=ts → stream TEL status events for credentials issued by aid
+### ⏳ GET /events/tel/{aid}?since=ts → stream TEL status events for credentials issued by aid
 
-### > POST /webhooks/receipts
+### ⏳ POST /webhooks/receipts
 
 KERIA pushes witness receipts here (configure locally). You persist and correlate to pending events.
 
 ## Trust Roots
 
-### > GET /trust-roots → list accepted anchors (GLEIF AID, canonical OOBI)
+### ⏳ GET /trust-roots → list accepted anchors (GLEIF AID, canonical OOBI)
 
  * POST /trust-roots
 

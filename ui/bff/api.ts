@@ -1,6 +1,7 @@
 import { Elysia } from 'elysia';
 import { swagger } from '@elysiajs/swagger';
 import { aidsRoutes } from './aids';
+import { oobiRoutes } from './oobi';
 
 
 const app = new Elysia()
@@ -21,6 +22,10 @@ const app = new Elysia()
           {
             name: "AID",
             description: "AID routes",
+          },
+          {
+            name: "OOBI",
+            description: "Out-of-Band Introduction routes",
           },
         ],
       },
@@ -47,6 +52,7 @@ const app = new Elysia()
   })
   .get('/health', () => ({ status: 'ok' }))
   .use(aidsRoutes)
+  .use(oobiRoutes)
   .get("/", ({ set, request }) => {
     console.log("Redirecting to swagger docs at /docs from root");
     set.headers["Location"] = "/docs";
