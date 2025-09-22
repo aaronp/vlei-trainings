@@ -3,7 +3,7 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { handleSchemaAPI } from './src/api/viteSchemaPlugin.js';
+import { handleSchemaAPIRoutes } from './src/api/schemaApiRouter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,8 +13,23 @@ const port = process.env.PORT || 3000;
 
 console.log('🚀 Starting production server...');
 
-// Parse JSON bodies
-app.use(express.json());
+// Parse JSON bodies with limits and error handling
+app.use(express.json({ 
+  limit: '1mb',
+  strict: true,
+  verify: (req, res, buf, encoding) => {
+    console.log(`📝 Received ${buf.length} bytes for ${req.method} ${req.path}`);
+  }
+}));
+
+// JSON parsing error handler
+app.use((error, req, res, next) => {
+  if (error instanceof SyntaxError && error.status === 400 && 'body' in error) {
+    console.error('❌ JSON parsing error:', error.message);
+    return res.status(400).json({ error: 'Invalid JSON format' });
+  }
+  next();
+});
 
 // CORS headers
 app.use((req, res, next) => {
@@ -29,23 +44,8 @@ app.options('*', (req, res) => {
   res.status(200).end();
 });
 
-// Use the real schema API from the development server
-app.use(async (req, res, next) => {
-  // Only handle schema API routes with the real handler
-  if (req.path.startsWith('/api/schemas') || req.path.startsWith('/oobi/')) {
-    try {
-      await handleSchemaAPI(req, res, next);
-    } catch (error) {
-      console.error('❌ Schema API error:', error);
-      res.status(500).json({ 
-        error: 'Internal server error',
-        message: error.message 
-      });
-    }
-  } else {
-    next();
-  }
-});
+// Use unified schema API router
+app.use(handleSchemaAPIRoutes);
 
 // Serve static files from dist directory
 app.use(express.static(join(__dirname, 'dist')));

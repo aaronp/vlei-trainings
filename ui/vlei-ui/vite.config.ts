@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { handleSchemaAPI } from './src/api/viteSchemaPlugin.js'
+import { handleSchemaAPIRoutes } from './src/api/schemaApiRouter.js'
 
-// Schema API middleware plugin using schemaServer.service.ts
+// Unified Schema API middleware plugin
 function schemaApiPlugin() {
   return {
-    name: 'schema-api',
+    name: 'unified-schema-api',
     configureServer(server) {
-      server.middlewares.use(handleSchemaAPI);
+      server.middlewares.use(handleSchemaAPIRoutes);
     }
   }
 }

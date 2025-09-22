@@ -31,8 +31,13 @@ RUN npm ci --only=production
 # Copy built assets from builder stage
 COPY --from=builder /app/dist ./dist
 
-# Copy production server file
+# Copy production server and schema service files
 COPY production-server.js ./
+
+# Create directory structure and copy source files
+RUN mkdir -p ./src/api ./src/services
+COPY --from=builder /app/src/api/schemaApiRouter.js ./src/api/
+COPY --from=builder /app/src/services/schemaStorage.js ./src/services/
 
 # Set NODE_ENV to production
 ENV NODE_ENV=production
