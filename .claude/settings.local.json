@@ -40,7 +40,14 @@
       "Bash(docker-compose:*)",
       "Bash(docker volume:*)",
       "Bash(timeout 30 npm run test:integration)",
-      "Bash(docker run:*)"
+      "Bash(docker run:*)",
+      "Bash(docker restart:*)",
+      "Bash(docker compose restart:*)",
+      "Bash(docker compose:*)",
+      "Bash(docker image rm:*)",
+      "Bash(docker build:*)",
+      "Bash(docker system prune:*)",
+      "Bash(docker inspect:*)"
     ],
     "deny": []
   }

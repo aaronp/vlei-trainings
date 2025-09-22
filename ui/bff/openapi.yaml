@@ -1,0 +1,53 @@
+openapi: 3.0.3
+info:
+  title: vLEI MVP API
+  version: 0.1.0
+servers: [{ url: http://localhost:8787 }]
+paths:
+  /aids:
+    post:
+      summary: Create transferable AID
+      requestBody: { required: true, content: { application/json: { schema:
+        type: object
+        properties:
+          alias: { type: string }
+          wits: { type: array, items: { type: string } }
+          transferable: { type: boolean, default: true }
+          icount: { type: integer, default: 1 }
+          ncount: { type: integer, default: 1 }
+        required: [alias] } } }
+      responses:
+        '201': { description: Created }
+    get:
+      summary: List AIDs
+      responses: { '200': { description: OK } }
+  /aids/{aid}:
+    get: { summary: Get AID, parameters: [{ in: path, name: aid, required: true, schema: { type: string } }], responses: { '200': { description: OK } } }
+  /aids/{aid}/rotate:
+    post: { summary: Rotate AID, responses: { '200': { description: Rotated } } }
+  /oobis/resolve:
+    post: { summary: Resolve OOBI, responses: { '200': { description: Resolved } } }
+  /schemas:
+    get: { summary: List schemas, responses: { '200': { description: OK } } }
+    post: { summary: Add schema, responses: { '201': { description: Created } } }
+  /credentials/issue:
+    post: { summary: Issue vLEI credential, responses: { '201': { description: Issued } } }
+  /credentials/{said}:
+    get: { summary: Get credential, responses: { '200': { description: OK } } }
+  /credentials/{said}/revoke:
+    post: { summary: Revoke credential, responses: { '200': { description: Revoked } } }
+  /presentations:
+    post: { summary: Create presentation, responses: { '201': { description: Created } } }
+  /verify/credential:
+    post: { summary: Verify credential, responses: { '200': { description: Result } } }
+  /verify/presentation:
+    post: { summary: Verify presentation, responses: { '200': { description: Result } } }
+  /events/kel/{aid}:
+    get: { summary: KEL stream, responses: { '200': { description: OK } } }
+  /events/tel/{aid}:
+    get: { summary: TEL stream, responses: { '200': { description: OK } } }
+  /webhooks/receipts:
+    post: { summary: KERI receipts webhook, responses: { '204': { description: No Content } } }
+  /trust-roots:
+    get: { summary: Get trust roots, responses: { '200': { description: OK } } }
+    post: { summary: Add trust root, responses: { '201': { description: Created } } }

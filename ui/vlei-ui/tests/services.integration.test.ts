@@ -776,7 +776,7 @@ describe('Services Integration Tests', () => {
         console.log(`   - QVI AID: ${issuerWorkflow.qvi.aid.i}`);
         console.log(`   - Registry: ${issuerWorkflow.registry.regk}`);
         console.log(`   - End Role: ${endRoleName}`);
-        
+
         return issuerWorkflow;
       };
 
@@ -784,7 +784,7 @@ describe('Services Integration Tests', () => {
         // Generate unique holder alias
         const timestamp = Date.now();
         const holderAlias = `e2e-holder-${timestamp}`;
-        
+
         console.log(`   - Creating new VLEI holder with alias: ${holderAlias}`);
 
         // Step 1: Create a new AID for the holder
@@ -826,7 +826,7 @@ describe('Services Integration Tests', () => {
         console.log(`✅ Step 3: Created new VLEI holder "${holderAlias}"`);
         console.log(`   - Holder AID: ${createdAid.i}`);
         console.log(`   - End Role: ${endRoleName}`);
-        
+
         return { aid: createdAid, agentEndRole: endRoleName };
       };
 
@@ -868,7 +868,7 @@ describe('Services Integration Tests', () => {
           // Use the localhost URL for verification since tests run from host
           const hostOOBIUrl = `http://localhost:3000/oobi/${schemaSaid}`;
           const verifyResponse = await fetch(hostOOBIUrl);
-          
+
           if (!verifyResponse.ok) {
             throw new Error(`OOBI endpoint not accessible: ${verifyResponse.status} ${verifyResponse.statusText}`);
           }
