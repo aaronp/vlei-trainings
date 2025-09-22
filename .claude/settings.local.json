@@ -47,7 +47,8 @@
       "Bash(docker image rm:*)",
       "Bash(docker build:*)",
       "Bash(docker system prune:*)",
-      "Bash(docker inspect:*)"
+      "Bash(docker inspect:*)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": []
   }

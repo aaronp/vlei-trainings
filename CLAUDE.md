@@ -1,3 +1,4 @@
 - Tests should be self-contained and not rely on other tests
 - Always pass timeout parameters explicitly in signatures with default values
 - Do not use mocks or fakes. All tests should use real services
+- Elysia routes should specify types like @https://github.com/aaronp/chain-as-a-service/blob/master/app/src/api/accounts.ts and use those types in the Eden client signatures
