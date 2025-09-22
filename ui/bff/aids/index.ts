@@ -11,7 +11,7 @@ export const aidsRoutes = new Elysia({ prefix: '/aids' })
   // Create transferable AID
   .post('/', async ({ body, aidRegistry }) => {
     const request = body as CreateAIDRequest;
-    const aid = aidRegistry.create(request);
+    const aid = await aidRegistry.create(request);
     return { aid };
   }, {
     body: CreateAIDRequestSchema,

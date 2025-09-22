@@ -48,7 +48,8 @@
       "Bash(docker build:*)",
       "Bash(docker system prune:*)",
       "Bash(docker inspect:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(bun add:*)"
     ],
     "deny": []
   }
