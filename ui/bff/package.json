@@ -1,0 +1,15 @@
+{
+  "name": "vlei-api",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch index.ts"
+  },
+  "dependencies": {
+    "elysia": "^1.1.25",
+    "@elysiajs/swagger": "^1.1.6"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  }
+}
