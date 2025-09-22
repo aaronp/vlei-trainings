@@ -49,7 +49,7 @@ export class SchemaApiClient {
 
   constructor(baseUrl?: string) {
     // Default to current origin in browser, fallback for Node.js testing
-    this.baseUrl = baseUrl || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173');
+    this.baseUrl = baseUrl || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000');
   }
 
   /**
@@ -62,19 +62,19 @@ export class SchemaApiClient {
     tags?: string[];
   }): Promise<SchemaApiResponse> {
     const params = new URLSearchParams();
-    
+
     if (options?.offset !== undefined) params.set('offset', options.offset.toString());
     if (options?.limit !== undefined) params.set('limit', options.limit.toString());
     if (options?.search) params.set('search', options.search);
     if (options?.tags?.length) params.set('tags', options.tags.join(','));
 
     const url = `${this.baseUrl}/api/schemas${params.toString() ? `?${params}` : ''}`;
-    
+
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Failed to list schemas: ${response.status} ${response.statusText}`);
     }
-    
+
     return await response.json();
   }
 
@@ -83,15 +83,15 @@ export class SchemaApiClient {
    */
   async getSchema(said: string): Promise<SchemaApiResponse['schemas'][0] | null> {
     const response = await fetch(`${this.baseUrl}/api/schemas/${said}`);
-    
+
     if (response.status === 404) {
       return null;
     }
-    
+
     if (!response.ok) {
       throw new Error(`Failed to get schema: ${response.status} ${response.statusText}`);
     }
-    
+
     return await response.json();
   }
 
@@ -167,7 +167,7 @@ export class SchemaApiClient {
   getSchemaOOBI(said: string): string {
     return `${this.baseUrl}/oobi/${said}`;
   }
-  
+
   /**
    * Get schema OOBI URL for KERIA (uses Docker bridge gateway when running in Docker)
    */
@@ -183,11 +183,11 @@ export class SchemaApiClient {
    */
   async getSchemaViaOOBI(said: string): Promise<any> {
     const response = await fetch(this.getSchemaOOBI(said));
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch schema via OOBI: ${response.status} ${response.statusText}`);
     }
-    
+
     return await response.json();
   }
 
@@ -207,9 +207,9 @@ export class SchemaApiClient {
   /**
    * Get API server status
    */
-  async getServerStatus(): Promise<{ 
-    available: boolean; 
-    schemaCount: number; 
+  async getServerStatus(): Promise<{
+    available: boolean;
+    schemaCount: number;
     serverUrl: string;
     version?: string;
   }> {

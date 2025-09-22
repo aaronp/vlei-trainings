@@ -6,7 +6,7 @@ export class SchemaServerService {
 
   constructor(serverUrl?: string) {
     // Default to current origin in browser, fallback for Node.js
-    this.serverUrl = serverUrl || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173');
+    this.serverUrl = serverUrl || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000');
   }
 
 
@@ -21,11 +21,11 @@ export class SchemaServerService {
       const schemaService = getSchemaService();
       const result = await schemaService.listSchemas();
       const schemas = new Map();
-      
+
       result.schemas.forEach(schema => {
         schemas.set(schema.metadata.said, schema.jsonSchema);
       });
-      
+
       return schemas;
     } catch (error) {
       console.error('Failed to get schemas from SchemaService:', error);

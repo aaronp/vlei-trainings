@@ -1,7 +1,7 @@
 // Schema Server Sync Utility
 // Synchronizes schemas between frontend SchemaService and backend REST API
 
-const SCHEMA_SERVER_URL = window?.location?.origin || 'http://localhost:5173'; // Use same server as UI
+const SCHEMA_SERVER_URL = window?.location?.origin || 'http://localhost:3000'; // Use same server as UI
 
 export class SchemaServerSync {
   private baseUrl: string;
@@ -38,7 +38,7 @@ export class SchemaServerSync {
       }
 
       const schemas = JSON.parse(localStorageData);
-      
+
       const response = await fetch(`${this.baseUrl}/api/schemas/sync`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -52,14 +52,14 @@ export class SchemaServerSync {
 
       const result = await response.json();
       console.log('✅ Schemas synced to server:', result);
-      
+
       return { success: true, count: result.synced };
     } catch (error) {
       console.error('❌ Failed to sync schemas to server:', error);
-      return { 
-        success: false, 
-        count: 0, 
-        error: (error as Error).message 
+      return {
+        success: false,
+        count: 0,
+        error: (error as Error).message
       };
     }
   }
@@ -137,9 +137,9 @@ export const schemaServerSync = new SchemaServerSync();
 export function setupAutoSync() {
   // Listen for localStorage changes to auto-sync
   const originalSetItem = localStorage.setItem;
-  localStorage.setItem = function(key: string, value: string) {
+  localStorage.setItem = function (key: string, value: string) {
     originalSetItem.apply(this, [key, value]);
-    
+
     // Auto-sync when vlei-schemas changes
     if (key === 'vlei-schemas') {
       setTimeout(() => {
@@ -162,7 +162,7 @@ export async function getSyncStatus(): Promise<{
   lastSync?: string;
 }> {
   const serverAvailable = await schemaServerSync.isServerAvailable();
-  
+
   let localSchemas = 0;
   try {
     const localData = localStorage.getItem('vlei-schemas');

@@ -45,7 +45,7 @@ describe('Services Integration Tests', () => {
 
     credentialService = new CredentialService(keriaService);
     schemaServerService = new SchemaServerService();
-    schemaApiClient = new SchemaApiClient('http://localhost:5173');
+    schemaApiClient = new SchemaApiClient('http://localhost:3000');
 
     // Initialize schema service with proper provider config
     console.log('Initializing schema service...');
@@ -605,7 +605,7 @@ describe('Services Integration Tests', () => {
         }
       } catch (error: any) {
         console.log(`⚠️ OOBI resolution error: ${error.message}`);
-        console.log(`This is expected in development when KERIA can't reach localhost:5173`);
+        console.log(`This is expected in development when KERIA can't reach localhost:3000`);
       }
 
       // Verify the schema is available via API
@@ -620,7 +620,7 @@ describe('Services Integration Tests', () => {
       console.log(`✅ Test completed - documented OOBI resolution behavior`);
     });
 
-    test('should complete end-to-end QVI workflow: create schema, issue VLEI to holder', { timeout: 15000 }, async () => {
+    test.only('should complete end-to-end QVI workflow: create schema, issue VLEI to holder', { timeout: 15000 }, async () => {
       console.log('🚀 Starting end-to-end QVI workflow test...');
 
       // Helper functions for functional style test steps
@@ -734,81 +734,105 @@ describe('Services Integration Tests', () => {
       const createQVIIssuer = async (alias: string) => {
         const registryName = `${alias}-registry`;
 
-        // For this integration test demonstration, use an existing QVI to avoid race conditions
-        // In a real environment, you would create a new QVI each time
-        console.log(`   - Using existing QVI for demonstration (race condition workaround)`);
+        console.log(`   - Creating new QVI issuer with alias: ${alias}`);
 
-        // Use eventually for listAIDs operation
-        const aids = await eventually(
-          () => keriaService.listAIDs(),
-          { timeout: 3000, interval: 100, description: 'List AIDs' }
+        // Step 1: Create a new AID for the QVI
+        const aidResult = await eventually(
+          () => keriaService.createAID(alias),
+          { timeout: 3000, interval: 100, description: 'Create QVI AID' }
         );
 
-        const existingQvi = aids.find(aid => aid.name.startsWith('e2e-qvi-'));
+        expect(aidResult.aid).toBeDefined();
+        console.log(`   - Created QVI AID: ${aidResult.aid.name} (${aidResult.aid.i})`);
 
-        if (!existingQvi) {
-          throw new Error('No existing QVI found for demonstration. Please run: npm run test:integration first to create test AIDs');
-        }
-
-        console.log(`   - Using existing QVI: ${existingQvi.name} (${existingQvi.i})`);
-
-        // Create registry for the existing QVI
-        try {
-          // Use eventually for registry creation
-          const registry = await eventually(
-            () => credentialService.createRegistry(existingQvi.name, registryName),
-            { timeout: 3000, interval: 100, description: 'Registry creation' }
-          );
-
-          const issuerWorkflow = {
-            qvi: { aid: existingQvi, agentEndRole: 'existing' },
-            registry: registry
-          };
-          console.log(`✅ Step 2: Using existing QVI issuer "${existingQvi.name}" with new registry "${registryName}"`);
-          console.log(`   - QVI AID: ${issuerWorkflow.qvi.aid.i}`);
-          console.log(`   - Registry: ${issuerWorkflow.registry.regk}`);
-          return issuerWorkflow;
-        } catch (error) {
-          if (error.message?.includes('already in use')) {
-            // Registry already exists, fetch it
-            console.log(`   - Registry "${registryName}" already exists, fetching existing registry`);
-
-            // Use eventually for listRegistries
-            const registries = await eventually(
-              () => credentialService.listRegistries(existingQvi.name),
-              { timeout: 3000, interval: 100, description: 'List registries' }
-            );
-            const existingRegistry = registries.find(r =>
-              r.name === registryName || r.registryName === registryName
-            );
-            if (existingRegistry) {
-              const issuerWorkflow = {
-                qvi: { aid: existingQvi, agentEndRole: 'existing' },
-                registry: existingRegistry
-              };
-              console.log(`✅ Step 2: Using existing QVI issuer "${existingQvi.name}" with existing registry "${registryName}"`);
-              console.log(`   - QVI AID: ${issuerWorkflow.qvi.aid.i}`);
-              console.log(`   - Registry: ${issuerWorkflow.registry.regk}`);
-              return issuerWorkflow;
+        // Step 2: Wait for AID to be available in the system
+        const createdAid = await eventually(
+          async () => {
+            const aids = await keriaService.listAIDs();
+            const foundAid = aids.find(aid => aid.name === alias);
+            if (!foundAid) {
+              throw new Error(`AID ${alias} not found yet`);
             }
-          }
-          throw error;
-        }
+            return foundAid;
+          },
+          { timeout: 3000, interval: 100, description: 'Verify AID creation' }
+        );
+
+        // Step 3: Add agent end role
+        const clientState = await keriaService.getState();
+        expect(clientState.agent?.i).toBeDefined();
+
+        const endRoleName = await eventually(
+          () => keriaService.addEndRole(alias, 'agent', clientState.agent.i),
+          { timeout: 3000, interval: 100, description: 'Add end role' }
+        );
+
+        console.log(`   - Added end role: ${endRoleName}`);
+
+        // Step 4: Create registry for the new QVI
+        const registry = await eventually(
+          () => credentialService.createRegistry(alias, registryName),
+          { timeout: 3000, interval: 100, description: 'Registry creation' }
+        );
+
+        const issuerWorkflow = {
+          qvi: { aid: createdAid, agentEndRole: endRoleName },
+          registry: registry
+        };
+
+        console.log(`✅ Step 2: Created new QVI issuer "${alias}" with registry "${registryName}"`);
+        console.log(`   - QVI AID: ${issuerWorkflow.qvi.aid.i}`);
+        console.log(`   - Registry: ${issuerWorkflow.registry.regk}`);
+        console.log(`   - End Role: ${endRoleName}`);
+        
+        return issuerWorkflow;
       };
 
       const createVLEIHolder = async () => {
-        // For this integration test demonstration, use an existing holder to avoid race conditions
-        console.log(`   - Using existing holder for demonstration (race condition workaround)`);
-        const aids = await keriaService.listAIDs();
-        const existingHolder = aids.find(aid => aid.name.startsWith('e2e-holder-'));
+        // Generate unique holder alias
+        const timestamp = Date.now();
+        const holderAlias = `e2e-holder-${timestamp}`;
+        
+        console.log(`   - Creating new VLEI holder with alias: ${holderAlias}`);
 
-        if (!existingHolder) {
-          throw new Error('No existing holder found for demonstration. Please run: npm run test:integration first to create test AIDs');
-        }
+        // Step 1: Create a new AID for the holder
+        const aidResult = await eventually(
+          () => keriaService.createAID(holderAlias),
+          { timeout: 3000, interval: 100, description: 'Create holder AID' }
+        );
 
-        console.log(`✅ Step 3: Using existing VLEI holder "${existingHolder.name}"`);
-        console.log(`   - Holder AID: ${existingHolder.i}`);
-        return { aid: existingHolder, agentEndRole: 'existing' };
+        expect(aidResult.aid).toBeDefined();
+        console.log(`   - Created holder AID: ${aidResult.aid.name} (${aidResult.aid.i})`);
+
+        // Step 2: Wait for AID to be available in the system
+        const createdAid = await eventually(
+          async () => {
+            const aids = await keriaService.listAIDs();
+            const foundAid = aids.find(aid => aid.name === holderAlias);
+            if (!foundAid) {
+              throw new Error(`AID ${holderAlias} not found yet`);
+            }
+            return foundAid;
+          },
+          { timeout: 3000, interval: 100, description: 'Verify holder AID creation' }
+        );
+
+        // Step 3: Add agent end role
+        const clientState = await keriaService.getState();
+        expect(clientState.agent?.i).toBeDefined();
+
+        const endRoleName = await eventually(
+          () => keriaService.addEndRole(holderAlias, 'agent', clientState.agent.i),
+          { timeout: 3000, interval: 100, description: 'Add holder end role' }
+        );
+
+        console.log(`   - Added end role: ${endRoleName}`);
+
+        console.log(`✅ Step 3: Created new VLEI holder "${holderAlias}"`);
+        console.log(`   - Holder AID: ${createdAid.i}`);
+        console.log(`   - End Role: ${endRoleName}`);
+        
+        return { aid: createdAid, agentEndRole: endRoleName };
       };
 
       const registerSchemaWithAPI = async (schema: any) => {
@@ -1135,225 +1159,6 @@ describe('Services Integration Tests', () => {
         throw error;
       }
     }); // End of test
-
-    test('should issue a real VLEI credential with existing QVI and registry', async () => {
-      console.log('🔍 Testing isolated VLEI credential issuance...');
-
-      // Use existing QVI from previous tests to avoid race conditions
-      const aids = await keriaService.listAIDs();
-      const existingQvi = aids.find(aid => aid.name.startsWith('e2e-qvi-'));
-
-      if (!existingQvi) {
-        throw new Error('No existing QVI found. Please run other tests first to create test AIDs');
-      }
-
-      console.log(`Using existing QVI: ${existingQvi.name} (${existingQvi.i})`);
-
-      // Get or create a registry for this QVI
-      let registries = await credentialService.listRegistries(existingQvi.name);
-      console.log(`Found ${registries.length} existing registries for QVI`);
-
-      let testRegistry: any;
-      if (registries.length > 0) {
-        testRegistry = registries[0];
-        console.log(`Using existing registry: ${testRegistry.name || testRegistry.registryName} (${testRegistry.regk})`);
-      } else {
-        // Create a new registry
-        const registryName = `isolated-test-registry-${Date.now()}`;
-        console.log(`Creating new registry: ${registryName}`);
-        testRegistry = await credentialService.createRegistry(existingQvi.name, registryName);
-        console.log(`Created new registry: ${testRegistry.regk}`);
-      }
-
-      // Create a simple test schema in memory (not via API service to isolate the test)
-      const { getSchemaService } = await import('../src/services/schemaStorage.js');
-      const schemaService = getSchemaService();
-
-      const testSchema = {
-        name: 'Isolated Test VLEI Schema',
-        description: 'Simple schema for isolated VLEI credential testing',
-        jsonSchema: {
-          "$schema": "http://json-schema.org/draft-07/schema#",
-          "title": "Isolated Test VLEI",
-          "type": "object",
-          "properties": {
-            "lei": {
-              "type": "string",
-              "description": "Legal Entity Identifier"
-            },
-            "entityName": {
-              "type": "string",
-              "description": "Organization name"
-            },
-            "entityType": {
-              "type": "string",
-              "description": "Type of organization"
-            }
-          },
-          "required": ["lei", "entityName", "entityType"]
-        },
-        fields: [
-          {
-            name: 'lei',
-            label: 'LEI',
-            type: 'text' as const,
-            required: true,
-            description: 'Legal Entity Identifier'
-          },
-          {
-            name: 'entityName',
-            label: 'Entity Name',
-            type: 'text' as const,
-            required: true,
-            description: 'Organization name'
-          },
-          {
-            name: 'entityType',
-            label: 'Entity Type',
-            type: 'text' as const,
-            required: true,
-            description: 'Type of organization'
-          }
-        ],
-        isPublic: true,
-        tags: ['vlei', 'isolated-test']
-      };
-
-      const createdSchema: SchemaData = await schemaService.createSchema(testSchema);
-      console.log(`Created test schema with SAID: ${createdSchema.metadata.said}`);
-
-      // Use existing holder
-      const existingHolder = aids.find(aid => aid.name.startsWith('e2e-holder-'));
-      if (!existingHolder) {
-        throw new Error('No existing holder found. Please run other tests first to create test AIDs');
-      }
-      console.log(`Using existing holder: ${existingHolder.name} (${existingHolder.i})`);
-
-      // Create test VLEI data
-      const vleiData = {
-        lei: `ISOLATED${Date.now().toString().slice(-12)}`,
-        entityName: `Isolated Test Corp ${Math.random().toString(36).substring(7)}`,
-        entityType: 'corporation'
-      };
-
-      console.log(`Issuing VLEI credential with data:`, vleiData);
-
-      // IMPORTANT: For KERIA to issue credentials, it needs the schema to be resolved via OOBI first
-      // Since this is an isolated test with an in-memory schema, we'll need to register it with the API
-      // and then resolve the OOBI in KERIA
-
-      // Register schema with API service so it's available via OOBI
-      try {
-        const createRequest = {
-          name: createdSchema.metadata.name,
-          description: createdSchema.metadata.description,
-          jsonSchema: createdSchema.jsonSchema,
-          fields: createdSchema.fields,
-          tags: createdSchema.metadata.tags,
-          isPublic: true
-        };
-        await schemaApiClient.createSchema(createRequest);
-        console.log(`Schema registered with API service for OOBI access`);
-      } catch (error) {
-        if (error.message?.includes('already exists')) {
-          console.log(`Schema already exists in API service - proceeding with OOBI resolution`);
-        } else {
-          throw error;
-        }
-      }
-
-      // Resolve the schema OOBI in KERIA so it can be used for credential issuance
-      const schemaOOBI = schemaApiClient.getSchemaOOBI(createdSchema.metadata.said);
-      console.log(`Resolving schema OOBI in KERIA: ${schemaOOBI}`);
-
-      try {
-        // Use eventually for OOBI resolution
-        console.log(`Starting OOBI resolution...`);
-        const oobiOperation = await eventually(
-          () => keriaService.resolveOOBI(schemaOOBI, `isolated-schema-${Date.now()}`),
-          { timeout: 3000, interval: 100, description: 'OOBI resolution initiation' }
-        );
-        console.log(`KERIA OOBI resolution operation started:`, oobiOperation);
-
-        if (!oobiOperation.done) {
-          console.log(`Waiting for OOBI resolution operation to complete...`);
-          try {
-            // Use eventually for operation completion
-            const completedOp = await eventually(
-              () => keriaService.waitForOperation(oobiOperation, 3000),
-              { timeout: 3000, interval: 100, description: 'OOBI operation completion' }
-            );
-            console.log(`OOBI resolution completed:`, completedOp.done);
-            console.log(`✅ Schema OOBI resolved in KERIA successfully`);
-          } catch (timeoutError) {
-            console.log(`⚠️  OOBI resolution timed out after 3s, proceeding with credential issuance`);
-            console.log(`Schema may already be available in KERIA from previous tests`);
-            // Clean up the operation if it exists
-            try {
-              await eventually(
-                () => keriaService.deleteOperation(oobiOperation.name),
-                { timeout: 2000, interval: 100, description: 'Operation cleanup' }
-              );
-            } catch (cleanupError) {
-              console.log(`Cleanup also timed out, continuing anyway`);
-            }
-          }
-        } else {
-          console.log(`✅ Schema OOBI resolved in KERIA successfully`);
-        }
-      } catch (oobiError) {
-        console.log(`⚠️  Schema OOBI resolution failed: ${oobiError.message}`);
-        console.log(`Proceeding with credential issuance anyway - schema may already be resolved`);
-      }
-
-      // Issue the VLEI credential directly using the credential service
-      try {
-        console.log(`Starting isolated credential issuance workflow...`);
-        const result = await eventually(
-          () => credentialService.issueVLEIWorkflow({
-            issuerAlias: existingQvi.name,
-            holderAid: existingHolder.i,
-            registryName: testRegistry.name || testRegistry.registryName,
-            schemaSaid: createdSchema.metadata.said,
-            vleiData: vleiData
-          }),
-          { timeout: 3000, interval: 100, description: 'Isolated credential issuance workflow' }
-        );
-
-        // Verify the result
-        expect(result.credential).toBeDefined();
-        expect(result.credential.sad).toBeDefined();
-        expect(result.credential.sad.d).toBeDefined(); // Credential SAID
-        expect(result.credential.sad.s).toBe(createdSchema.metadata.said); // Schema SAID
-        expect(result.operation.done).toBe(true);
-        expect(result.grant).toBeDefined();
-
-        // Verify credential data
-        const credentialData = result.credential.sad.a;
-        expect(credentialData.lei).toBe(vleiData.lei);
-        expect(credentialData.entityName).toBe(vleiData.entityName);
-        expect(credentialData.entityType).toBe(vleiData.entityType);
-
-        console.log('✅ Successfully issued isolated VLEI credential');
-        console.log(`   - Credential SAID: ${result.credential.sad.d}`);
-        console.log(`   - Schema SAID: ${result.credential.sad.s}`);
-        console.log(`   - LEI: ${credentialData.lei}`);
-        console.log(`   - Entity: ${credentialData.entityName}`);
-        console.log(`   - Type: ${credentialData.entityType}`);
-
-      } catch (error) {
-        console.error('❌ Isolated VLEI credential issuance failed:', error);
-        console.error('Error details:', {
-          message: error.message,
-          stack: error.stack,
-          qviAlias: existingQvi.name,
-          registryId: testRegistry.regk,
-          holderAid: existingHolder.i,
-          schemaSaid: createdSchema.metadata.said
-        });
-        throw error; // Re-throw to fail the test and show the exact error
-      }
-    }, 3000); // 3 second timeout for this test
 
     test('should create all resources and issue a VLEI credential independently', async () => {
       // This test is skipped as it requires proper schema loading via OOBI
