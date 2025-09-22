@@ -956,7 +956,7 @@ describe('Services Integration Tests', () => {
           }
           : {
             // Original VLEI schema fields
-            lei: `E2E${Date.now().toString().slice(-15)}`, // Unique LEI for test
+            LEI: `E2E${Date.now().toString().slice(-15)}`, // Unique LEI for test
             entityName: `Test Organization ${Math.random().toString(36).substring(7)}`,
             entityType: 'corporation',
             registrationDate: new Date().toISOString(),
