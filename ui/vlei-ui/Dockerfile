@@ -19,17 +19,26 @@ RUN npm run build
 # Production stage
 FROM node:20-alpine
 
-# Install serve globally
-RUN npm install -g serve
-
 # Set working directory
 WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install production dependencies only
+RUN npm ci --only=production
 
 # Copy built assets from builder stage
 COPY --from=builder /app/dist ./dist
 
-# Expose port 3000 (serve default port)
+# Copy production server file
+COPY production-server.js ./
+
+# Set NODE_ENV to production
+ENV NODE_ENV=production
+
+# Expose port 3000
 EXPOSE 3000
 
-# Start the app with serve
-CMD ["serve", "-s", "dist", "-l", "3000"]
+# Start the app with our production server
+CMD ["node", "production-server.js"]
