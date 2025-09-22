@@ -1,4 +1,4 @@
-.PHONY: help start-ui start-keria start-schema-server start-schema-api start-all stop-keria build deploy deploy-prod install clean test test-schemas test-keria-connection
+.PHONY: help start-ui start-keria start-schema-server start-schema-api start-all stop-keria build deploy deploy-prod install clean test test-schemas test-keria-connection package run stop-ui
 
 # Default target - show help
 help:
@@ -13,6 +13,9 @@ help:
 	@echo "  make deploy-prod       - Deploy to Vercel (production)"
 	@echo "  make clean             - Clean build artifacts"
 	@echo "  make test              - Run integration tests"
+	@echo "  make package           - Build and package the app in a Docker container"
+	@echo "  make run               - Run the containerized app on port 3000"
+	@echo "  make stop-ui           - Stop and remove the containerized UI"
 
 test:
 	npm run test:integration
@@ -66,3 +69,25 @@ clean:
 	rm -rf dist
 	rm -rf node_modules
 	rm -rf .vercel
+
+# Package the app in a Docker container
+package: build
+	@echo "Building Docker image for VLEI UI..."
+	docker build -t vlei-ui:latest .
+
+# Run the containerized app
+run:
+	@echo "Checking for existing vlei-ui container..."
+	@docker stop vlei-ui 2>/dev/null || true
+	@docker rm vlei-ui 2>/dev/null || true
+	@echo "Running VLEI UI container on port 3000..."
+	docker run -d --name vlei-ui -p 3000:3000 vlei-ui:latest
+	@echo "VLEI UI is now running at http://localhost:3000"
+	@echo "To stop the container, run: make stop-ui"
+
+# Stop the containerized UI
+stop-ui:
+	@echo "Stopping VLEI UI container..."
+	@docker stop vlei-ui 2>/dev/null || true
+	@docker rm vlei-ui 2>/dev/null || true
+	@echo "VLEI UI container stopped and removed."

@@ -28,7 +28,10 @@
       "Bash(grep:*)",
       "Bash(docker-compose restart:*)",
       "Bash(docker exec:*)",
-      "Bash(docker network inspect:*)"
+      "Bash(docker network inspect:*)",
+      "Bash(ls:*)",
+      "Bash(docker logs:*)",
+      "Bash(make:*)"
     ],
     "deny": []
   }
