@@ -153,3 +153,23 @@ services:
     depends_on:
       vlei-server:
         condition: service_healthy
+
+  # VLEI UI Service
+  vlei-ui:
+    build:
+      context: ./ui/vlei-ui
+      dockerfile: Dockerfile
+    container_name: vlei-ui
+    environment:
+      # These will be accessible within the container for the serve process
+      - NODE_ENV=production
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "--tries=1", "--no-verbose", "http://127.0.0.1:3000" ]
+      <<: *healthcheck
+    ports:
+      - "3000:3000"
+    depends_on:
+      keria:
+        condition: service_healthy
+      vlei-server:
+        condition: service_healthy

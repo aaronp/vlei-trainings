@@ -6,8 +6,6 @@ help:
 	@echo "  make install           - Install npm dependencies"
 	@echo "  make start-ui          - Start the VLEI UI development server"
 	@echo "  make start-keria       - Start the KERIA API using Docker Compose"
-	@echo "  make start-all         - Start UI, KERIA API, and schema API server"
-	@echo "  make stop-keria        - Stop the KERIA API Docker containers"
 	@echo "  make build             - Build the application for production"
 	@echo "  make deploy            - Deploy to Vercel (preview)"
 	@echo "  make deploy-prod       - Deploy to Vercel (production)"

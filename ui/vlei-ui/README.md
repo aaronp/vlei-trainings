@@ -117,6 +117,41 @@ npm run build
 
 The built files will be in the `dist` directory.
 
+## Docker Support
+
+### Building and Running with Docker
+
+```bash
+# Build the Docker image
+make package
+
+# Run the container
+make run
+
+# Stop the container
+make stop-ui
+```
+
+The containerized app will be available at `http://localhost:3000`.
+
+### Docker Compose Integration
+
+The UI is integrated into the main docker-compose.yml file. When running with Docker Compose:
+
+```bash
+# From the root directory (not ui/vlei-ui)
+./deploy.sh
+```
+
+This will start all services including:
+- VLEI UI on port 3000
+- KERIA on ports 3901-3903
+- VLEI Server on port 7723
+- Witness services on ports 5642-5647
+- And other supporting services
+
+When using Docker Compose, the services communicate internally using container names. See `docker-urls.md` for the correct URLs to use.
+
 ## License
 
 See the parent project's license.
