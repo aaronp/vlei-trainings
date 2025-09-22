@@ -31,7 +31,9 @@
       "Bash(docker network inspect:*)",
       "Bash(ls:*)",
       "Bash(docker logs:*)",
-      "Bash(make:*)"
+      "Bash(make:*)",
+      "Bash(docker-compose build:*)",
+      "Bash(docker-compose up:*)"
     ],
     "deny": []
   }
