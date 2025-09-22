@@ -1,6 +1,8 @@
 import { Elysia } from 'elysia';
 import { swagger } from '@elysiajs/swagger';
 
+const port = process.env.PORT ? parseInt(process.env.PORT) : 3001;
+
 const app = new Elysia()
   .use(swagger({
     documentation: {
@@ -11,6 +13,6 @@ const app = new Elysia()
     }
   }))
   .get('/health', () => ({ status: 'ok' }))
-  .listen(3001);
+  .listen(port);
 
 console.log(`Server is running at ${app.server?.hostname}:${app.server?.port}`);
