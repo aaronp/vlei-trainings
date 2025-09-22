@@ -9,6 +9,9 @@ function makeAIDRegistryStore(): AIDRegistryStore {
 
   return {
     create(request: CreateAIDRequest): AID {
+      if (request.alias.length == 0) {
+        throw new Error("Invalid AID alias - it cannot be empty")
+      }
       const aid: AID = {
         prefix: `E${Math.random().toString(36).substring(2, 15)}`,
         alias: request.alias,

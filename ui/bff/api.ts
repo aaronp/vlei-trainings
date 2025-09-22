@@ -28,11 +28,22 @@ const app = new Elysia()
     }),
   )
 
-  .onRequest(({ set }) => {
+  .onRequest(({ set, request }) => {
     // Disable caching
     set.headers["Cache-Control"] = "no-store, no-cache, must-revalidate";
     set.headers["Pragma"] = "no-cache";
     set.headers["Expires"] = "0";
+    set.headers["x-timestamp"] = String((new Date()).getTime());
+    console.log(`${request.method} ${request.url} ...`)
+  })
+  .onAfterResponse(({ request, set, headers }) => {
+    const started = headers["x-timestamp"];
+    if (started) {
+      const took = (new Date()).getTime() - Number(started)
+      console.log(`${request.method} ${request.url} : ${set.status} took ${took}ms`)
+    } else {
+      console.log(`${request.method} ${request.url} not timed`)
+    }
   })
   .get('/health', () => ({ status: 'ok' }))
   .use(aidsRoutes)
