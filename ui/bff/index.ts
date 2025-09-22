@@ -27,26 +27,27 @@ function withLogging(handler: (req: Request) => Promise<Response> | Response) {
 
 const PORT = Number(process.env.PORT) || 3001;
 
-const server = serve({
-  hostname: "0.0.0.0", // Added to allow external access in Docker
-  port: PORT,
-  routes: {
-    // Serve index.html for all unmatched routes.
-    "/api": withLogging(async req => {
-      return await apiApp.handle(req);
-    }),
-    "/api/*": withLogging(async req => {
-      return await apiApp.handle(req);
-    })
-  },
+apiApp.listen(PORT)
+// const server = serve({
+//   hostname: "0.0.0.0", // Added to allow external access in Docker
+//   port: PORT,
+//   routes: {
+//     // Serve index.html for all unmatched routes.
+//     "/api": withLogging(async req => {
+//       return await apiApp.handle(req);
+//     }),
+//     "/api/*": withLogging(async req => {
+//       return await apiApp.handle(req);
+//     })
+//   },
 
-  development: process.env.NODE_ENV !== "production" && {
-    // Enable browser hot reloading in development
-    hmr: true,
+//   development: process.env.NODE_ENV !== "production" && {
+//     // Enable browser hot reloading in development
+//     hmr: true,
 
-    // Echo console logs from the browser to the server
-    console: true,
-  },
-});
+//     // Echo console logs from the browser to the server
+//     console: true,
+//   },
+// });
 
-console.log(`🚀 Server running at ${server.url}`);
+console.log(`🚀 Server running at http://localhost:${PORT}`);

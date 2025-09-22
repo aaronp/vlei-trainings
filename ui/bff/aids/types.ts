@@ -15,13 +15,6 @@ export interface AID {
   state: any;
 }
 
-export interface RotateAIDRequest {
-  wits?: string[];
-}
-
-export interface OOBIResolveRequest {
-  oobi: string;
-}
 
 // Request Schemas
 export const CreateAIDRequestSchema = t.Object({
@@ -32,13 +25,6 @@ export const CreateAIDRequestSchema = t.Object({
   ncount: t.Optional(t.Integer({ default: 1 }))
 });
 
-export const RotateAIDRequestSchema = t.Object({
-  wits: t.Optional(t.Array(t.String()))
-});
-
-export const OOBIResolveRequestSchema = t.Object({
-  oobi: t.String()
-});
 
 // Response Schemas
 export const AIDSchema = t.Object({
@@ -50,22 +36,4 @@ export const AIDSchema = t.Object({
 
 export const CreateAIDResponseSchema = t.Object({
   aid: AIDSchema
-});
-
-export const ListAIDsResponseSchema = t.Object({
-  aids: t.Array(AIDSchema)
-});
-
-export const GetAIDResponseSchema = t.Object({
-  aid: AIDSchema
-});
-
-export const RotateAIDResponseSchema = t.Object({
-  message: t.String(),
-  aid: AIDSchema
-});
-
-export const OOBIResolveResponseSchema = t.Object({
-  message: t.String(),
-  oobi: t.String()
 });

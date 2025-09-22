@@ -1,10 +1,9 @@
 import { treaty } from '@elysiajs/eden';
-import type { Elysia } from 'elysia';
-import type { aidsRoutes, oobiRoutes } from './index';
-import type { AID, CreateAIDRequest, RotateAIDRequest, OOBIResolveRequest } from './types';
+import type { aidsRoutes } from './index';
+import type { AID, CreateAIDRequest } from './types';
 
 // Type for the combined routes
-type AidApi = typeof aidsRoutes & typeof oobiRoutes;
+type AidApi = typeof aidsRoutes;
 
 export class AIDClient {
   private client: ReturnType<typeof treaty<AidApi>>;
@@ -16,54 +15,14 @@ export class AIDClient {
   // AID operations
   async createAID(request: CreateAIDRequest): Promise<{ aid: AID }> {
     const response = await this.client.aids.post(request);
-    
+
     if (response.error) {
       throw new Error(`Failed to create AID: ${response.error.value}`);
     }
-    
+
     return response.data;
   }
 
-  async listAIDs(): Promise<{ aids: AID[] }> {
-    const response = await this.client.aids.get();
-    
-    if (response.error) {
-      throw new Error(`Failed to list AIDs: ${response.error.value}`);
-    }
-    
-    return response.data;
-  }
-
-  async getAID(prefix: string): Promise<{ aid: AID }> {
-    const response = await this.client.aids[prefix].get();
-    
-    if (response.error) {
-      throw new Error(`Failed to get AID: ${response.error.value}`);
-    }
-    
-    return response.data;
-  }
-
-  async rotateAID(prefix: string, request: RotateAIDRequest): Promise<{ message: string; aid: AID }> {
-    const response = await this.client.aids[prefix].rotate.post(request);
-    
-    if (response.error) {
-      throw new Error(`Failed to rotate AID: ${response.error.value}`);
-    }
-    
-    return response.data;
-  }
-
-  // OOBI operations
-  async resolveOOBI(request: OOBIResolveRequest): Promise<{ message: string; oobi: string }> {
-    const response = await this.client.oobis.resolve.post(request);
-    
-    if (response.error) {
-      throw new Error(`Failed to resolve OOBI: ${response.error.value}`);
-    }
-    
-    return response.data;
-  }
 }
 
 // Factory function to create client

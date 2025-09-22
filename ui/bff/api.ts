@@ -1,17 +1,32 @@
 import { Elysia } from 'elysia';
 import { swagger } from '@elysiajs/swagger';
-import { aidsRoutes, oobiRoutes } from './aids';
+import { aidsRoutes } from './aids';
 
 
 const app = new Elysia()
-  .use(swagger({
-    documentation: {
-      info: {
-        title: 'vLEI Training API',
-        version: '1.0.0'
-      }
-    }
-  }))
+  .use(
+    swagger({
+      path: "/docs",
+      scalarConfig: {
+        forceDarkModeState: "dark",
+        // favicon: "/favicon.svg",
+      },
+      documentation: {
+        info: {
+          title: "vLEIs",
+          description: "vLEI API",
+          version: "0.0.1",
+        },
+        tags: [
+          {
+            name: "AID",
+            description: "AID routes",
+          },
+        ],
+      },
+      exclude: ["/docs", "/"], // exclude our own swagger docs, including the root redirect
+    }),
+  )
 
   .onRequest(({ set }) => {
     // Disable caching
@@ -21,17 +36,18 @@ const app = new Elysia()
   })
   .get('/health', () => ({ status: 'ok' }))
   .use(aidsRoutes)
-  .use(oobiRoutes)
   .get("/", ({ set, request }) => {
     console.log("Redirecting to swagger docs at /docs from root");
-    set.headers["Location"] = "/api/docs";
+    set.headers["Location"] = "/docs";
     set.status = 302; // 302 is for temporary redirection
     return "Redirecting to /docs...";
   }, { tags: ["Docs"] })
   .onError(({ code, error, request }) => {
-    console.error(
-      ` 💥 Unhandled error: ${code} for ${request.method} ${request.url} 💥 `,
-    );
+    if (!request.url.endsWith("favicon.ico")) {
+      console.error(
+        ` 💥 Unhandled error: ${code} for ${request.method} ${request.url} 💥 `,
+      );
+    }
     if ((error as any).stack) {
       console.error((error as any).stack);
     }
