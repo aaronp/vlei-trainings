@@ -29,9 +29,13 @@ export class CredentialService {
     console.log('Creating registry with params:', { aidAlias, registryName });
 
     // First check if the AID exists and is valid
-    const found = await this.keriaService.findAIDByAlias(aidAlias);
-    if (!found) {
-      throw new Error(`aid alias ${aidAlias} not found`)
+    try {
+      const aidState = await this.keriaService.getAID(aidAlias);
+      if (!aidState) {
+        throw new Error(`aid alias ${aidAlias} not found`);
+      }
+    } catch (error) {
+      throw new Error(`aid alias ${aidAlias} not found`);
     }
 
     let completedOperation: any = null;

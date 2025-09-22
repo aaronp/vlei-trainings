@@ -636,37 +636,26 @@ describe('Services Integration Tests', () => {
           name: `E2E VLEI Test Schema ${uniqueId}`,
           description: `End-to-end test schema for VLEI credential issuance - ${uniqueId}`,
           jsonSchema: {
-            "$schema": "http://json-schema.org/draft-07/schema#",
-            "title": `E2E VLEI Test Credential ${uniqueId}`,
-            "description": `Schema for end-to-end VLEI testing - ${uniqueId}`,
             "type": "object",
             "properties": {
               "LEI": {
-                "type": "string",
-                "format": "ISO 17442",
-                "description": "Legal Entity Identifier"
+                "type": "string"
               },
               "organizationName": {
-                "type": "string",
-                "description": "The legal name of the organization"
+                "type": "string"
               },
               "registrationDate": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Date when the organization was registered"
+                "type": "string"
               },
               "status": {
-                "type": "string",
-                "enum": ["active", "inactive", "pending"],
-                "description": "Current status of the legal entity"
+                "type": "string"
               },
               "testIdentifier": {
-                "type": "string",
-                "description": `Test run identifier: ${uniqueId}`
+                "type": "string"
               }
             },
-            "required": ["LEI", "organizationName", "registrationDate", "status", "testIdentifier"],
-            "additionalProperties": true
+            "additionalProperties": true,
+            "required": ["LEI", "organizationName", "registrationDate", "status", "testIdentifier"]
           },
           fields: [
             {
@@ -748,12 +737,15 @@ describe('Services Integration Tests', () => {
         // Step 2: Wait for AID to be available in the system
         const createdAid = await eventually(
           async () => {
-            const aids = await keriaService.listAIDs();
-            const foundAid = aids.find(aid => aid.name === alias);
-            if (!foundAid) {
+            try {
+              const aidState = await keriaService.getAID(alias);
+              if (!aidState) {
+                throw new Error(`AID ${alias} not found yet`);
+              }
+              return { i: aidState.i, name: alias };
+            } catch (error) {
               throw new Error(`AID ${alias} not found yet`);
             }
-            return foundAid;
           },
           { timeout: 3000, interval: 100, description: 'Verify AID creation' }
         );
@@ -807,12 +799,15 @@ describe('Services Integration Tests', () => {
         // Step 2: Wait for AID to be available in the system
         const createdAid = await eventually(
           async () => {
-            const aids = await keriaService.listAIDs();
-            const foundAid = aids.find(aid => aid.name === holderAlias);
-            if (!foundAid) {
+            try {
+              const aidState = await keriaService.getAID(holderAlias);
+              if (!aidState) {
+                throw new Error(`AID ${holderAlias} not found yet`);
+              }
+              return { i: aidState.i, name: holderAlias };
+            } catch (error) {
               throw new Error(`AID ${holderAlias} not found yet`);
             }
-            return foundAid;
           },
           { timeout: 3000, interval: 100, description: 'Verify holder AID creation' }
         );
