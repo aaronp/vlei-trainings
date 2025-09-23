@@ -3,6 +3,7 @@ import { swagger } from '@elysiajs/swagger';
 import { aidsRoutes } from './aids';
 import { oobiRoutes } from './oobi';
 import { schemasRoutes } from './schemas';
+import { credentialsRoutes } from './credentials';
 
 
 const app = new Elysia()
@@ -32,6 +33,10 @@ const app = new Elysia()
             name: "Schemas",
             description: "Schema management routes with SAID generation",
           },
+          {
+            name: "Credentials",
+            description: "Credential issuance and management routes using ACDC and IPEX protocols",
+          },
         ],
       },
       exclude: ["/docs", "/"], // exclude our own swagger docs, including the root redirect
@@ -59,6 +64,7 @@ const app = new Elysia()
   .use(aidsRoutes)
   .use(oobiRoutes)
   .use(schemasRoutes)
+  .use(credentialsRoutes)
   .get("/", ({ set, request }) => {
     console.log("Redirecting to swagger docs at /docs from root");
     set.headers["Location"] = "/docs";
