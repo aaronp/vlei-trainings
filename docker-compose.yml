@@ -177,3 +177,32 @@ services:
         condition: service_healthy
       vlei-server:
         condition: service_healthy
+
+  # VLEI BFF API Service
+  vlei-api:
+    build:
+      context: ./ui/bff
+      dockerfile: Dockerfile
+    container_name: vlei-api
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      # KERIA configuration for connecting to the containerized KERIA service
+      - KERIA_URL=http://keria:3901
+      - KERIA_BOOT_URL=http://keria:3903
+    volumes:
+      # Mount the entire BFF directory for hot-reload
+      - ./ui/bff:/app:delegated
+      # Exclude node_modules to avoid conflicts between host and container
+      - /app/node_modules
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "--tries=1", "--no-verbose", "http://127.0.0.1:3001/health" ]
+      <<: *healthcheck
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    depends_on:
+      keria:
+        condition: service_healthy
+      vlei-server:
+        condition: service_healthy

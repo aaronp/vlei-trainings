@@ -10,13 +10,18 @@ export async function issueCredential(
   request: IssueCredentialRequest,
   timeoutMs: number = 2000
 ): Promise<IssueCredentialResponse> {
+  const startTime = Date.now();
+  console.log(`🔧 [CREDENTIALS] Starting credential issuance for issuer: ${request.issuer}, subject: ${request.subject}, schema: ${request.schemaSaid}`);
+  
   try {
     // For this MVP implementation, we'll create the issuer AID if it doesn't exist
     // This simplifies the cross-client keystore management issue
     const issuerAlias = request.issuer;
+    console.log(`📝 [CREDENTIALS] Using issuer alias: ${issuerAlias}`);
     
     // Try to ensure the issuer exists - create if needed
     try {
+      console.log(`🆔 [CREDENTIALS] Creating issuer AID: ${issuerAlias}`);
       await client.identifiers().create(issuerAlias, {
         transferable: true,
         wits: [],
@@ -26,19 +31,25 @@ export async function issueCredential(
         isith: '1',
         nsith: '1'
       });
+      console.log(`✅ [CREDENTIALS] Successfully created issuer AID: ${issuerAlias}`);
     } catch (error: any) {
       // If already exists, that's fine
       if (!error.message?.includes('already incepted')) {
+        console.error(`❌ [CREDENTIALS] Failed to create issuer AID: ${error.message}`);
         throw error;
       }
+      console.log(`ℹ️  [CREDENTIALS] Issuer AID already exists: ${issuerAlias}`);
     }
     
     // Get or create registry for the issuer
+    console.log(`📋 [CREDENTIALS] Checking registries for issuer: ${issuerAlias}`);
     let registries;
     try {
       registries = await client.registries().list(issuerAlias);
+      console.log(`📋 [CREDENTIALS] Found ${registries.length} existing registries for issuer: ${issuerAlias}`);
     } catch (error: any) {
       // If the identifier doesn't exist in this client context, create it
+      console.error(`❌ [CREDENTIALS] Failed to list registries: ${error.message}`);
       throw new Error(`Issuer AID '${issuerAlias}' not found in current SignifyClient context. Please ensure the issuer AID is created first.`);
     }
     
@@ -47,6 +58,8 @@ export async function issueCredential(
     if (registries.length === 0) {
       // Create a default registry if none exists
       const registryName = `${issuerAlias}-registry`;
+      console.log(`🏗️  [CREDENTIALS] Creating new registry: ${registryName} for issuer: ${issuerAlias}`);
+      
       const result = await client.registries().create({
         name: issuerAlias,  // The AID alias that owns the registry
         registryName: registryName,  // Human-readable name for the registry
@@ -57,19 +70,26 @@ export async function issueCredential(
       
       // Check if operation exists and has required properties
       if (!operation || !operation.name) {
+        console.error(`❌ [CREDENTIALS] Invalid operation returned from registry creation: ${JSON.stringify(operation)}`);
         throw new Error(`Invalid operation returned from registry creation: ${JSON.stringify(operation)}`);
       }
       
+      console.log(`⏳ [CREDENTIALS] Waiting for registry creation operation: ${operation.name}`);
       const completedOp = await client.operations().wait(operation, { signal: AbortSignal.timeout(timeoutMs) });
       if (!completedOp.done) {
+        console.error(`❌ [CREDENTIALS] Registry creation operation not completed within ${timeoutMs}ms`);
         throw new Error("Creating registry is not done");
       }
+      
+      console.log(`🧹 [CREDENTIALS] Cleaning up operation: ${operation.name}`);
       await client.operations().delete(operation.name);
       
       const updatedRegistries = await client.registries().list(issuerAlias);
       registry = updatedRegistries[0];
+      console.log(`✅ [CREDENTIALS] Successfully created registry: ${registry?.regk || registry?.name}`);
     } else {
       registry = registries[0];
+      console.log(`ℹ️  [CREDENTIALS] Using existing registry: ${registry?.regk || registry?.name}`);
     }
 
     if (!registry) {
