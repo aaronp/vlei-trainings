@@ -45,7 +45,7 @@ export async function resolveOobi(
           { signal: AbortSignal.timeout(timeoutMs) }
         );
         
-        operation.done = completedOp.done;
+        operation.done = completedOp.done || false;
         operation.response = completedOp.response;
 
         // Clean up operation

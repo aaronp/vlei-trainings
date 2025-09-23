@@ -2,6 +2,7 @@ import { Elysia } from 'elysia';
 import { swagger } from '@elysiajs/swagger';
 import { aidsRoutes } from './aids';
 import { oobiRoutes } from './oobi';
+import { schemasRoutes } from './schemas';
 
 
 const app = new Elysia()
@@ -26,6 +27,10 @@ const app = new Elysia()
           {
             name: "OOBI",
             description: "Out-of-Band Introduction routes",
+          },
+          {
+            name: "Schemas",
+            description: "Schema management routes with SAID generation",
           },
         ],
       },
@@ -53,6 +58,7 @@ const app = new Elysia()
   .get('/health', () => ({ status: 'ok' }))
   .use(aidsRoutes)
   .use(oobiRoutes)
+  .use(schemasRoutes)
   .get("/", ({ set, request }) => {
     console.log("Redirecting to swagger docs at /docs from root");
     set.headers["Location"] = "/docs";

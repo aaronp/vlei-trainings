@@ -1,0 +1,81 @@
+import { Elysia, t } from 'elysia';
+import type { CreateSchemaRequest, GetSchemaRequest, ListSchemasRequest } from './types';
+import {
+  CreateSchemaRequestSchema,
+  SchemaSchema,
+  ListSchemasResponseSchema,
+} from './types';
+import { schemaContext } from './context';
+
+export const schemasRoutes = new Elysia({ prefix: '/schemas' })
+  .use(schemaContext)
+  // Create schema
+  .post('/', async ({ body, schemaRegistry, headers }) => {
+    const request = body as CreateSchemaRequest;
+    const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
+    const schema = await schemaRegistry.create(request, timeoutMs);
+    return { schema };
+  }, {
+    body: CreateSchemaRequestSchema,
+    response: {
+      201: t.Object({
+        schema: SchemaSchema
+      })
+    },
+    detail: {
+      tags: ['Schemas'],
+      description: 'Create a new schema and generate its SAID',
+    },
+  })
+  // Get schema by SAID
+  .get('/:said', async ({ params, schemaRegistry, headers }) => {
+    const request: GetSchemaRequest = { said: params.said };
+    const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
+    const schema = await schemaRegistry.get(request, timeoutMs);
+    
+    if (!schema) {
+      throw new Error('Schema not found');
+    }
+    
+    return { schema };
+  }, {
+    params: t.Object({
+      said: t.String({ description: 'The Self-Addressing Identifier (SAID) of the schema' })
+    }),
+    response: {
+      200: t.Object({
+        schema: SchemaSchema
+      }),
+      404: t.Object({
+        error: t.String()
+      })
+    },
+    detail: {
+      tags: ['Schemas'],
+      description: 'Get a schema by its SAID',
+    },
+  })
+  // List schemas
+  .get('/', async ({ query, schemaRegistry, headers }) => {
+    const request: ListSchemasRequest = {
+      limit: query.limit,
+      offset: query.offset
+    };
+    const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
+    const schemas = await schemaRegistry.list(request, timeoutMs);
+    return { schemas };
+  }, {
+    query: t.Object({
+      limit: t.Optional(t.Number({ default: 10, minimum: 1, maximum: 100 })),
+      offset: t.Optional(t.Number({ default: 0, minimum: 0 }))
+    }),
+    response: {
+      200: t.Object({
+        schemas: ListSchemasResponseSchema
+      })
+    },
+    detail: {
+      tags: ['Schemas'],
+      description: 'List all schemas with pagination',
+    },
+  });
