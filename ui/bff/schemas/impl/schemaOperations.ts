@@ -13,18 +13,18 @@ export async function createSchema(
 ): Promise<Schema> {
   // Validate the schema
   validateSchema(request.schema);
-  
+
   // Generate SAID for the schema
   const said = generateSAID(request.schema);
-  
+
   // Check if schema already exists
   if (schemaStore.has(said)) {
     return schemaStore.get(said)!;
   }
-  
+
   // Prepare schema with SAID embedded
   const schemaWithSAID = prepareSchemaWithSAID(request.schema);
-  
+
   try {
     // Check if schema already exists in KERIA
     try {
@@ -40,7 +40,7 @@ export async function createSchema(
         console.warn(`Error checking schema in KERIA: ${checkError.message}`);
       }
     }
-    
+
     // Create the schema object
     const schema: Schema = {
       said,
@@ -48,10 +48,10 @@ export async function createSchema(
       description: request.description,
       createdAt: new Date().toISOString()
     };
-    
+
     // Store the schema locally as well
     schemaStore.set(said, schema);
-    
+
     return schema;
   } catch (error: any) {
     if (error instanceof Error) {
@@ -67,7 +67,7 @@ export async function getSchema(
   _timeoutMs: number = 2000
 ): Promise<Schema | null> {
   const schema = schemaStore.get(request.said);
-  
+
   if (!schema) {
     // Try to fetch from KERIA if available
     try {
@@ -87,7 +87,7 @@ export async function getSchema(
     }
     return null;
   }
-  
+
   return schema;
 }
 
@@ -98,13 +98,13 @@ export async function listSchemas(
 ): Promise<ListSchemasResponse> {
   const limit = request.limit || 10;
   const offset = request.offset || 0;
-  
+
   // Get all schemas from the store
   const allSchemas = Array.from(schemaStore.values());
-  
+
   // Apply pagination
   const paginatedSchemas = allSchemas.slice(offset, offset + limit);
-  
+
   return {
     schemas: paginatedSchemas,
     total: allSchemas.length,

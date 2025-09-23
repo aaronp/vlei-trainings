@@ -76,9 +76,9 @@ Returns: rotation event + pending receipts
 
 ## Schemas
 
-### ⏳ GET /schemas → list of known schema SAIDs (vLEI root + roles)
+### ✅ GET /schemas → list of known schema SAIDs (vLEI root + roles)
 
-### ⏳ POST /schemas
+### ✅ POST /schemas
 
  * Body: { "label": "vLEI-LE-credential", "schema": { ...ACDC schema JSON... } }
 

@@ -1,4 +1,4 @@
-import { Saider, Saidify } from 'signify-ts';
+import { Saider } from 'signify-ts';
 
 /**
  * Generate a Self-Addressing Identifier (SAID) for a JSON schema
@@ -7,19 +7,16 @@ import { Saider, Saidify } from 'signify-ts';
  */
 export function generateSAID(schema: Record<string, any>): string {
   // Clone the schema to avoid mutating the original
-  const schemaWithLabel = JSON.parse(JSON.stringify(schema));
-  
-  // Add the $id field with placeholder for SAID if not present
-  if (!schemaWithLabel.$id) {
-    schemaWithLabel.$id = '';
-  }
-  
-  // Use Saidify to generate the saidified version with the SAID
-  const [, sad] = Saidify.saidify(schemaWithLabel);
-  
-  // Create Saider from the saidified data
-  const saider = new Saider({ sad });
-  
+  const clone = JSON.parse(JSON.stringify(schema));
+
+  // First, compute SAID for the attributes block using 'd' label
+  const attributesBlock = {
+    d: '', // Required for SAID computation
+    ...clone
+  };
+  delete attributesBlock.$id; // Remove $id before SAIDifying
+  const [saider, saidifiedAttributesBlock] = Saider.saidify(attributesBlock, undefined, undefined, 'd');
+
   return saider.qb64;
 }
 
@@ -32,12 +29,12 @@ export function validateSchema(schema: Record<string, any>): boolean {
   if (!schema || typeof schema !== 'object') {
     throw new Error('Schema must be a valid object');
   }
-  
+
   // Basic JSON Schema validation
   if (!schema.$schema && !schema.type && !schema.properties) {
     throw new Error('Schema must have at least one of: $schema, type, or properties');
   }
-  
+
   return true;
 }
 
@@ -49,9 +46,9 @@ export function validateSchema(schema: Record<string, any>): boolean {
 export function prepareSchemaWithSAID(schema: Record<string, any>): Record<string, any> {
   const said = generateSAID(schema);
   const schemaWithSAID = JSON.parse(JSON.stringify(schema));
-  
+
   // Set the $id field to the generated SAID
   schemaWithSAID.$id = said;
-  
+
   return schemaWithSAID;
 }
