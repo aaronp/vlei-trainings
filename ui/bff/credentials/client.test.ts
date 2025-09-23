@@ -8,24 +8,28 @@ describe('CredentialsClient Integration Tests', () => {
   const client = credentialsClient(serviceUrl);
   const aidsClient = aidClient(serviceUrl);
   
-  let issuerAid: string;
-  let subjectAid: string;
+  let issuerAlias: string;
+  let issuerPrefix: string;
+  let subjectAlias: string;
+  let subjectPrefix: string;
   
   beforeAll(async () => {
     console.log(`Running integration tests against ${serviceUrl}`);
     
     // Create issuer and subject AIDs for testing
+    issuerAlias = `issuer-qvi-${Date.now()}`;
     const issuerResponse = await aidsClient.createAID({
-      alias: `issuer-qvi-${Date.now()}`
+      alias: issuerAlias
     });
-    issuerAid = issuerResponse.aid.prefix;
+    issuerPrefix = issuerResponse.aid.prefix;
     
+    subjectAlias = `subject-le-${Date.now()}`;
     const subjectResponse = await aidsClient.createAID({
-      alias: `subject-le-${Date.now()}`
+      alias: subjectAlias
     });
-    subjectAid = subjectResponse.aid.prefix;
+    subjectPrefix = subjectResponse.aid.prefix;
     
-    console.log(`Created test AIDs - Issuer: ${issuerAid}, Subject: ${subjectAid}`);
+    console.log(`Created test AIDs - Issuer: ${issuerAlias} (${issuerPrefix}), Subject: ${subjectAlias} (${subjectPrefix})`);
   });
 
   describe('issueCredential', () => {
@@ -34,8 +38,8 @@ describe('CredentialsClient Integration Tests', () => {
       const testSchemaSaid = 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao';
       
       const request: IssueCredentialRequest = {
-        issuer: issuerAid,
-        subject: subjectAid,
+        issuer: issuerAlias,
+        subject: subjectPrefix,
         schemaSaid: testSchemaSaid,
         claims: {
           lei: "5493001KJTIIGC8Y1R12",
@@ -43,8 +47,8 @@ describe('CredentialsClient Integration Tests', () => {
           registeredCountry: "US"
         },
         edges: {
-          assertedBy: issuerAid,
-          authorizes: subjectAid
+          assertedBy: issuerPrefix,
+          authorizes: subjectPrefix
         }
       };
 
@@ -62,8 +66,8 @@ describe('CredentialsClient Integration Tests', () => {
       const testSchemaSaid = 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao';
       
       const request: IssueCredentialRequest = {
-        issuer: issuerAid,
-        subject: subjectAid,
+        issuer: issuerAlias,
+        subject: subjectPrefix,
         schemaSaid: testSchemaSaid,
         claims: {
           lei: "984500F0E7D3A9598B24",
@@ -71,9 +75,9 @@ describe('CredentialsClient Integration Tests', () => {
           registeredCountry: "GB"
         },
         edges: {
-          assertedBy: issuerAid,
-          authorizes: subjectAid,
-          chain: [issuerAid, "EA_LOU", "EA_GLEIF"]
+          assertedBy: issuerPrefix,
+          authorizes: subjectPrefix,
+          chain: [issuerPrefix, "EA_LOU", "EA_GLEIF"]
         },
         status: {
           tel: "internal",
@@ -94,8 +98,8 @@ describe('CredentialsClient Integration Tests', () => {
       const testSchemaSaid = 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao';
       
       const request: IssueCredentialRequest = {
-        issuer: issuerAid,
-        subject: subjectAid,
+        issuer: issuerAlias,
+        subject: subjectPrefix,
         schemaSaid: testSchemaSaid,
         claims: {
           simpleField: "test value"
@@ -112,7 +116,7 @@ describe('CredentialsClient Integration Tests', () => {
     it('should throw error with descriptive message on invalid issuer', async () => {
       const request: IssueCredentialRequest = {
         issuer: 'invalid-issuer-aid',
-        subject: subjectAid,
+        subject: subjectPrefix,
         schemaSaid: 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao',
         claims: {
           test: "data"
@@ -125,8 +129,8 @@ describe('CredentialsClient Integration Tests', () => {
     it('should handle network connectivity issues gracefully', async () => {
       const invalidClient = credentialsClient('http://localhost:9999');
       const request: IssueCredentialRequest = {
-        issuer: issuerAid,
-        subject: subjectAid,
+        issuer: issuerAlias,
+        subject: subjectPrefix,
         schemaSaid: 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao',
         claims: {
           test: "network-test"
@@ -147,7 +151,7 @@ describe('CredentialsClient Integration Tests', () => {
         });
         
         const request: IssueCredentialRequest = {
-          issuer: issuerAid,
+          issuer: issuerAlias,
           subject: subjectResponse.aid.prefix,
           schemaSaid: testSchemaSaid,
           claims: {
@@ -172,17 +176,19 @@ describe('CredentialsClient Integration Tests', () => {
       const testSchemaSaid = 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao';
       
       // Create new AIDs for clean workflow test
+      const qviAlias = `qvi-workflow-${Date.now()}`;
       const qviResponse = await aidsClient.createAID({
-        alias: `qvi-workflow-${Date.now()}`
+        alias: qviAlias
       });
+      const leAlias = `le-workflow-${Date.now()}`;
       const leResponse = await aidsClient.createAID({
-        alias: `le-workflow-${Date.now()}`
+        alias: leAlias
       });
       
       // Issue vLEI from QVI to Legal Entity
       const issueRequest: IssueCredentialRequest = {
-        issuer: qviResponse.aid.prefix,
-        subject: leResponse.aid.prefix,
+        issuer: qviAlias,  // Use alias for issuer
+        subject: leResponse.aid.prefix,  // Use prefix for subject
         schemaSaid: testSchemaSaid,
         claims: {
           lei: "984500WORKFLOW12345",
@@ -210,7 +216,7 @@ describe('CredentialsClient Integration Tests', () => {
       expect(response).toBeDefined();
       expect(response.id).toBeDefined();
       expect(response.acdc).toBeDefined();
-      expect(response.acdc.i).toBe(qviResponse.aid.prefix); // Issuer
+      expect(response.acdc.i).toBe(qviResponse.aid.prefix); // Issuer prefix in ACDC
       expect(response.acdc.a.i).toBe(leResponse.aid.prefix); // Subject
       expect(response.acdc.a.lei).toBe("984500WORKFLOW12345");
       expect(response.anchors.tel).toBeDefined();

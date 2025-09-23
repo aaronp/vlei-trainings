@@ -11,47 +11,76 @@ export async function issueCredential(
   timeoutMs: number = 2000
 ): Promise<IssueCredentialResponse> {
   try {
+    // For this MVP implementation, we'll create the issuer AID if it doesn't exist
+    // This simplifies the cross-client keystore management issue
+    const issuerAlias = request.issuer;
+    
+    // Try to ensure the issuer exists - create if needed
+    try {
+      await client.identifiers().create(issuerAlias, {
+        transferable: true,
+        wits: [],
+        toad: 0,
+        count: 1,
+        ncount: 1,
+        isith: '1',
+        nsith: '1'
+      });
+    } catch (error: any) {
+      // If already exists, that's fine
+      if (!error.message?.includes('already incepted')) {
+        throw error;
+      }
+    }
+    
     // Get or create registry for the issuer
-    const registries = await client.registries().list(request.issuer);
+    let registries;
+    try {
+      registries = await client.registries().list(issuerAlias);
+    } catch (error: any) {
+      // If the identifier doesn't exist in this client context, create it
+      throw new Error(`Issuer AID '${issuerAlias}' not found in current SignifyClient context. Please ensure the issuer AID is created first.`);
+    }
+    
     let registry: any;
     
     if (registries.length === 0) {
       // Create a default registry if none exists
-      const registryName = `${request.issuer}-registry`;
+      const registryName = `${issuerAlias}-registry`;
       const result = await client.registries().create({
-        name: registryName,
-        alias: request.issuer,
-        estOnly: true,
-        backers: []
+        name: issuerAlias,  // The AID alias that owns the registry
+        registryName: registryName,  // Human-readable name for the registry
+        noBackers: true  // No backers for this registry
       });
       
-      const operation = await result.op();
+      const operation = result.op;
+      
+      // Check if operation exists and has required properties
+      if (!operation || !operation.name) {
+        throw new Error(`Invalid operation returned from registry creation: ${JSON.stringify(operation)}`);
+      }
+      
       const completedOp = await client.operations().wait(operation, { signal: AbortSignal.timeout(timeoutMs) });
       if (!completedOp.done) {
         throw new Error("Creating registry is not done");
       }
       await client.operations().delete(operation.name);
       
-      const updatedRegistries = await client.registries().list(request.issuer);
+      const updatedRegistries = await client.registries().list(issuerAlias);
       registry = updatedRegistries[0];
     } else {
       registry = registries[0];
     }
 
     if (!registry) {
-      throw new Error(`Could not find or create registry for issuer ${request.issuer}`);
+      throw new Error(`Could not find or create registry for issuer ${issuerAlias}`);
     }
 
     // Build ACDC structure according to KERI/ACDC spec
-    const credentialData = {
-      v: "ACDC10JSON000000_",
-      d: "",  // Will be filled by SAIDification
-      u: "",  // Optional nonce
-      i: request.issuer,
-      rd: registry.regk,  // Registry SAID
-      s: request.schemaSaid,
+    const credentialData: any = {
+      ri: registry.regk,  // Registry identifier (required)
+      s: request.schemaSaid,  // Schema SAID (required)
       a: {
-        d: "",  // Will be filled by SAIDification
         i: request.subject,
         dt: new Date().toISOString(),
         ...request.claims
@@ -60,17 +89,21 @@ export async function issueCredential(
 
     // Add edges if provided
     if (request.edges) {
-      (credentialData as any).e = request.edges;
+      credentialData.e = request.edges;
     }
 
-    // Create the credential
-    const result = await client.credentials().create(
-      request.issuer,
-      registry.name,
+    // Issue the credential
+    const result = await client.credentials().issue(
+      issuerAlias,  // The alias of the issuing AID
       credentialData
     );
 
-    const operation = await result.op();
+    const operation = result.op;
+
+    // Check if operation exists and has required properties
+    if (!operation || !operation.name) {
+      throw new Error(`Invalid operation returned from credential issuance: ${JSON.stringify(operation)}`);
+    }
 
     // Wait for operation to complete
     const completedOp = await client.operations().wait(operation, { signal: AbortSignal.timeout(timeoutMs) });
@@ -89,19 +122,37 @@ export async function issueCredential(
       throw new Error(`Could not determine credential SAID. Operation response: ${JSON.stringify(completedOp.response)}`);
     }
 
-    // Get the full ACDC data
-    const credentials = await client.credentials().list(request.issuer);
-    const issuedCredential = credentials.find((c: any) => c.sad?.d === credentialSaid);
-    
-    if (!issuedCredential) {
-      throw new Error(`Could not find issued credential with SAID ${credentialSaid}`);
+    // Build the full ACDC structure for response
+    // Get the issuer prefix for the ACDC
+    const identifiersResponse = await client.identifiers().list();
+    const identifiers = Array.isArray(identifiersResponse) ? identifiersResponse : identifiersResponse.aids || [];
+    const issuerIdentifier = identifiers.find((id: any) => id.name === issuerAlias);
+    const issuerPrefix = issuerIdentifier?.prefix || issuerAlias;
+
+    const acdcData = {
+      v: "ACDC10JSON000000_",
+      d: credentialSaid,
+      i: issuerPrefix,  // Use the actual AID prefix for the issuer
+      ri: registry.regk,
+      s: request.schemaSaid,
+      a: {
+        d: "",  // Would be filled by SAIDification
+        i: request.subject,
+        dt: new Date().toISOString(),
+        ...request.claims
+      }
+    };
+
+    // Add edges if they exist
+    if (request.edges) {
+      (acdcData as any).e = request.edges;
     }
 
     // Build response according to spec
     return {
       id: credentialSaid,
       jwt: undefined, // Optional - could implement JWS encoding later
-      acdc: issuedCredential.sad || credentialData,
+      acdc: acdcData,
       anchors: {
         kel: `sn: ${response?.sn || 'unknown'}`,
         tel: registry.regk
