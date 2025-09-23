@@ -93,10 +93,12 @@ export async function issueCredential(
     }
 
     if (!registry) {
+      console.error(`❌ [CREDENTIALS] Could not find or create registry for issuer: ${issuerAlias}`);
       throw new Error(`Could not find or create registry for issuer ${issuerAlias}`);
     }
 
     // Build ACDC structure according to KERI/ACDC spec
+    console.log(`🏗️  [CREDENTIALS] Building ACDC structure with registry: ${registry.regk}`);
     const credentialData: any = {
       ri: registry.regk,  // Registry identifier (required)
       s: request.schemaSaid,  // Schema SAID (required)
@@ -110,9 +112,11 @@ export async function issueCredential(
     // Add edges if provided
     if (request.edges) {
       credentialData.e = request.edges;
+      console.log(`🔗 [CREDENTIALS] Added edges to credential: ${Object.keys(request.edges).join(', ')}`);
     }
 
     // Issue the credential
+    console.log(`🚀 [CREDENTIALS] Issuing credential from issuer: ${issuerAlias}`);
     const result = await client.credentials().issue(
       issuerAlias,  // The alias of the issuing AID
       credentialData
@@ -122,16 +126,20 @@ export async function issueCredential(
 
     // Check if operation exists and has required properties
     if (!operation || !operation.name) {
+      console.error(`❌ [CREDENTIALS] Invalid operation returned from credential issuance: ${JSON.stringify(operation)}`);
       throw new Error(`Invalid operation returned from credential issuance: ${JSON.stringify(operation)}`);
     }
 
     // Wait for operation to complete
+    console.log(`⏳ [CREDENTIALS] Waiting for credential issuance operation: ${operation.name}`);
     const completedOp = await client.operations().wait(operation, { signal: AbortSignal.timeout(timeoutMs) });
     if (!completedOp.done) {
+      console.error(`❌ [CREDENTIALS] Credential issuance operation not completed within ${timeoutMs}ms`);
       throw new Error("Creating credential is not done");
     }
 
     // Clean up operation
+    console.log(`🧹 [CREDENTIALS] Cleaning up credential operation: ${operation.name}`);
     await client.operations().delete(operation.name);
 
     // Get credential SAID from response
@@ -139,15 +147,20 @@ export async function issueCredential(
     const credentialSaid = response?.d || response?.acdc?.d || response?.anchor?.d;
     
     if (!credentialSaid) {
+      console.error(`❌ [CREDENTIALS] Could not determine credential SAID from response: ${JSON.stringify(completedOp.response)}`);
       throw new Error(`Could not determine credential SAID. Operation response: ${JSON.stringify(completedOp.response)}`);
     }
+    
+    console.log(`🎯 [CREDENTIALS] Generated credential SAID: ${credentialSaid}`);
 
     // Build the full ACDC structure for response
     // Get the issuer prefix for the ACDC
+    console.log(`🔍 [CREDENTIALS] Looking up issuer prefix for alias: ${issuerAlias}`);
     const identifiersResponse = await client.identifiers().list();
     const identifiers = Array.isArray(identifiersResponse) ? identifiersResponse : identifiersResponse.aids || [];
     const issuerIdentifier = identifiers.find((id: any) => id.name === issuerAlias);
     const issuerPrefix = issuerIdentifier?.prefix || issuerAlias;
+    console.log(`🆔 [CREDENTIALS] Issuer prefix: ${issuerPrefix}`);
 
     const acdcData = {
       v: "ACDC10JSON000000_",
@@ -168,6 +181,9 @@ export async function issueCredential(
       (acdcData as any).e = request.edges;
     }
 
+    const duration = Date.now() - startTime;
+    console.log(`✅ [CREDENTIALS] Successfully issued credential ${credentialSaid} in ${duration}ms`);
+
     // Build response according to spec
     return {
       id: credentialSaid,
@@ -179,6 +195,9 @@ export async function issueCredential(
       }
     };
   } catch (error: any) {
+    const duration = Date.now() - startTime;
+    console.error(`❌ [CREDENTIALS] Failed to issue credential after ${duration}ms: ${error.message}`);
+    
     if (error instanceof Error) {
       throw new Error(`Failed to issue credential via KERI: ${error.message}`);
     }
@@ -188,5 +207,13 @@ export async function issueCredential(
 
 // Client wrapper function
 export async function issueCredentialWithClient(request: IssueCredentialRequest, timeoutMs: number = 2000): Promise<IssueCredentialResponse> {
-  return KeriaClient.withClient(client => issueCredential(client, request, timeoutMs), timeoutMs);
+  console.log(`🔌 [CREDENTIALS] Creating KERIA client connection for credential issuance`);
+  try {
+    const result = await KeriaClient.withClient(client => issueCredential(client, request, timeoutMs), timeoutMs);
+    console.log(`✅ [CREDENTIALS] Successfully completed credential issuance via KERIA client`);
+    return result;
+  } catch (error: any) {
+    console.error(`❌ [CREDENTIALS] KERIA client connection failed: ${error.message}`);
+    throw error;
+  }
 }

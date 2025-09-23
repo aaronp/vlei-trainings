@@ -17,9 +17,14 @@ export class KeriaClient {
     operation: (client: SignifyClient) => Promise<T>,
     timeoutMs: number = 2000
   ): Promise<T> {
+    const startTime = Date.now();
+    console.log(`🔌 [KERIA] Initializing SignifyClient connection to ${this.KERIA_URL}`);
+    
     await ready();
     
     const bran = this.generateBran();
+    console.log(`🔑 [KERIA] Generated bran: ${bran.substring(0, 8)}...`);
+    
     const client = new SignifyClient(
       this.KERIA_URL,
       bran,
@@ -28,12 +33,28 @@ export class KeriaClient {
     );
     
     try {
+      console.log(`🚀 [KERIA] Booting SignifyClient...`);
       await client.boot();
+      
+      console.log(`🔗 [KERIA] Connecting to KERIA agent...`);
       await client.connect();
       
-      return await operation(client);
+      const connectTime = Date.now() - startTime;
+      console.log(`✅ [KERIA] Connected successfully in ${connectTime}ms`);
+      
+      const result = await operation(client);
+      
+      const totalTime = Date.now() - startTime;
+      console.log(`✅ [KERIA] Operation completed in ${totalTime}ms total`);
+      
+      return result;
+    } catch (error: any) {
+      const duration = Date.now() - startTime;
+      console.error(`❌ [KERIA] Connection or operation failed after ${duration}ms: ${error.message}`);
+      throw error;
     } finally {
       // SignifyClient doesn't have disconnect method, connection cleanup happens automatically
+      console.log(`🧹 [KERIA] Cleaning up SignifyClient connection`);
     }
   }
 }
