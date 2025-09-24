@@ -60,7 +60,8 @@
       "Bash(CREDENTIALS_SERVICE_URL=http://localhost:3001 bun test aids/client.test.ts --timeout 60000)",
       "Bash(timeout:*)",
       "WebFetch(domain:weboftrust.github.io)",
-      "Bash(bun:*)"
+      "Bash(bun:*)",
+      "Bash(chmod:*)"
     ],
     "deny": []
   }

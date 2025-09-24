@@ -1,0 +1,22 @@
+{
+  "name": "keri-aid-cli",
+  "version": "1.0.0",
+  "description": "Interactive CLI tool for KERI Autonomic Identifiers (AIDs)",
+  "type": "module",
+  "bin": {
+    "aid-cli": "./index.ts"
+  },
+  "scripts": {
+    "start": "bun run index.ts",
+    "dev": "bun run --watch index.ts"
+  },
+  "keywords": [
+    "keri",
+    "aid",
+    "cli",
+    "identifiers",
+    "credentials"
+  ],
+  "author": "VLEI Training",
+  "license": "MIT"
+}

@@ -1,5 +1,36 @@
 # Backend-for-frontend API for VLEIs
 
+## 🆔 Interactive CLI Tool
+
+This project includes an interactive CLI tool for managing KERI Autonomic Identifiers (AIDs) and credential issuance workflows.
+
+### Quick Start
+
+```bash
+# Run the interactive CLI
+bun run cli
+
+# Or directly from the CLI directory
+cd cli && bun run index.ts
+
+# Or use the launcher script
+./cli.sh
+```
+
+### CLI Features
+
+- 🆔 **Create AIDs**: Create transferable/non-transferable identifiers with witness support
+- 🔗 **Generate OOBIs**: First step in ACDC credential issuance workflow
+- ✍️ **Sign Messages**: KERI-compliant message signing using interaction events
+- 🔍 **Verify Signatures**: Cryptographic signature verification
+- 🔄 **Rotate Keys**: Secure key lifecycle management for transferable AIDs
+- 📋 **List Events**: Browse Key Event Log (KEL) entries
+- ⚙️ **Settings**: Configure service URL and session management
+
+See [cli/README.md](cli/README.md) for detailed CLI documentation.
+
+---
+
 # Actors & artefacts (quick primer)
 
  * QVI (issuer) AID
