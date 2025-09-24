@@ -9,6 +9,9 @@ dev:
 test:
 	bun run test:integration
 
+test-aid:
+	bun test ./aids/client.test.ts
+
 package:
 	docker build -t vlei-bff-api:latest . 
 

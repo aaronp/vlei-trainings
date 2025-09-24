@@ -1,10 +1,13 @@
 import { describe, expect, it, beforeAll } from 'bun:test';
 import { aidClient } from './client';
 import type { AID, CreateAIDRequest } from './types';
+import { KeriaClient } from './impl/KeriaClient';
 
 describe('AIDClient Integration Tests', () => {
   const serviceUrl = process.env.AID_SERVICE_URL || 'http://localhost:3001';
   const client = aidClient(serviceUrl);
+  const bran = KeriaClient.generateBran()
+  client.setBran(bran)
 
   beforeAll(() => {
     console.log(`Running integration tests against ${serviceUrl}`);

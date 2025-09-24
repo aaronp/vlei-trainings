@@ -32,11 +32,11 @@ function protectBran(bran: string, config: BranConfig): string {
   if (!config.salt || !config.passcode) {
     throw new Error('Protected mode requires both KERIA_KEYSTORE_SALT and KERIA_KEYSTORE_PASSCODE');
   }
-  
+
   const hmac = crypto.createHmac('sha256', config.passcode);
   hmac.update(bran + config.salt);
   const signature = hmac.digest('base64url');
-  
+
   // Return bran with signature
   return `${bran}.${signature}`;
 }
@@ -48,23 +48,23 @@ function validateProtectedBran(protectedBran: string, config: BranConfig): strin
   if (!config.salt || !config.passcode) {
     throw new Error('Protected mode requires both KERIA_KEYSTORE_SALT and KERIA_KEYSTORE_PASSCODE');
   }
-  
+
   const parts = protectedBran.split('.');
   if (parts.length !== 2) {
     return null;
   }
-  
+
   const [bran, signature] = parts;
-  
+
   // Verify signature
   const hmac = crypto.createHmac('sha256', config.passcode);
   hmac.update(bran + config.salt);
   const expectedSignature = hmac.digest('base64url');
-  
+
   if (signature === expectedSignature) {
     return bran;
   }
-  
+
   return null;
 }
 
@@ -82,14 +82,15 @@ function getBranConfig(): BranConfig {
 /**
  * Middleware that handles bran extraction and generation
  */
-export const branContext = new Elysia({ name: 'branContext' })
-  .derive(({ headers, set }) => {
+export const branContext = new Elysia({ name: 'branMiddleware' })
+  .derive({ as: "global" }, ({ headers, set }) => {
+    console.log('🔧 [BRAN] Middleware derive function called');
     const config = getBranConfig();
     const headerBran = headers['x-keria-bran'];
-    
+
     let bran: string | null = null;
     let isNewBran = false;
-    
+
     if (headerBran) {
       // Try to use the provided bran
       if (config.mode === 'protected') {
@@ -106,7 +107,7 @@ export const branContext = new Elysia({ name: 'branContext' })
         bran = headerBran;
       }
     }
-    
+
     // Generate new bran if needed
     if (!bran) {
       bran = generateBran();
@@ -115,15 +116,21 @@ export const branContext = new Elysia({ name: 'branContext' })
     } else {
       console.log(`🔑 [BRAN] Using existing bran: ${bran.substring(0, 8)}...`);
     }
-    
+
     // Set response header with bran
-    const responseBran = config.mode === 'protected' ? protectBran(bran, config) : bran;
+    let responseBran = bran;
+    try {
+      responseBran = config.mode === 'protected' ? protectBran(bran, config) : bran;
+    } catch (error: any) {
+      console.warn(`Failed to protect bran: ${error.message}, using simple mode`);
+      responseBran = bran;
+    }
     set.headers['x-keria-bran'] = responseBran;
-    
-    return {
-      branContext: {
-        bran,
-        isNewBran
-      } as BranContext
+
+    const result = {
+      bran,
+      isNewBran: isNewBran
     };
+    console.log('🔧 [BRAN] Returning from derive:', result);
+    return result;
   });

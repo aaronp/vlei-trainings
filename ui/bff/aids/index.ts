@@ -8,13 +8,14 @@ import { aidContext } from './context';
 import { branContext } from '../middleware/branContext';
 
 export const aidsRoutes = new Elysia({ prefix: '/aids' })
-  .use(branContext)
   .use(aidContext)
+  .use(branContext)
   // Create transferable AID
-  .post('/', async ({ body, aidRegistry, headers, branContext }) => {
+  .post('/', async ({ body, aidRegistry, headers, bran }) => {
     const request = body as CreateAIDRequest;
     const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
-    const aid = await aidRegistry.create(request, timeoutMs, branContext.bran);
+    // For now, pass undefined for bran to use auto-generated bran
+    const aid = await aidRegistry.create(request, timeoutMs, bran);
     return { aid };
   }, {
     body: CreateAIDRequestSchema,
