@@ -29,7 +29,17 @@ export async function signMessage(
     
     // Get the AID to ensure it exists
     console.log(`🔍 [SIGN] Listing identifiers to find alias: ${request.alias}`);
-    const aids = await client.identifiers().list();
+    let aids;
+    try {
+      const listResponse = await client.identifiers().list();
+      // Handle both object response and array response
+      aids = listResponse.aids || listResponse;
+      console.log(`📋 [SIGN] List response type: ${typeof listResponse}, has aids property: ${!!listResponse.aids}`);
+    } catch (listError: any) {
+      console.error(`❌ [SIGN] Error listing identifiers: ${listError.message}`);
+      throw new Error(`Failed to list identifiers: ${listError.message}`);
+    }
+    
     console.log(`📋 [SIGN] Found ${Array.isArray(aids) ? aids.length : 0} identifiers:`, aids);
     const aid = Array.isArray(aids) ? aids.find((a: any) => a.name === request.alias) : null;
     console.log(`🎯 [SIGN] Found matching AID:`, aid);

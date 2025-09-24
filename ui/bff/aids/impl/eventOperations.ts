@@ -22,7 +22,17 @@ export async function listAIDEvents(
     console.log(`🔍 [EVENTS] Retrieving AID information for alias: ${request.alias}`);
     
     // Get the AID to ensure it exists and get its prefix
-    const aids = await client.identifiers().list();
+    let aids;
+    try {
+      const listResponse = await client.identifiers().list();
+      // Handle both object response and array response
+      aids = listResponse.aids || listResponse;
+      console.log(`📋 [EVENTS] List response type: ${typeof listResponse}, has aids property: ${!!listResponse.aids}`);
+    } catch (listError: any) {
+      console.error(`❌ [EVENTS] Error listing identifiers: ${listError.message}`);
+      throw new Error(`Failed to list identifiers: ${listError.message}`);
+    }
+    
     console.log(`📋 [EVENTS] Found ${Array.isArray(aids) ? aids.length : 0} identifiers`);
     const aid = Array.isArray(aids) ? aids.find((a: any) => a.name === request.alias) : null;
     

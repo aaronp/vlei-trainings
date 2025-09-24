@@ -22,7 +22,17 @@ export async function rotateKeys(
     console.log(`🔄 [ROTATE] Performing key rotation for alias: ${request.alias}`);
     
     // Get the current AID to ensure it exists and is transferable
-    const aids = await client.identifiers().list();
+    let aids;
+    try {
+      const listResponse = await client.identifiers().list();
+      // Handle both object response and array response
+      aids = listResponse.aids || listResponse;
+      console.log(`📋 [ROTATE] List response type: ${typeof listResponse}, has aids property: ${!!listResponse.aids}`);
+    } catch (listError: any) {
+      console.error(`❌ [ROTATE] Error listing identifiers: ${listError.message}`);
+      throw new Error(`Failed to list identifiers: ${listError.message}`);
+    }
+    
     const aid = Array.isArray(aids) ? aids.find((a: any) => a.name === request.alias) : null;
     
     if (!aid) {
@@ -66,7 +76,15 @@ export async function rotateKeys(
 
     // Get the updated AID information
     console.log(`🔍 [ROTATE] Retrieving updated AID information`);
-    const updatedAids = await client.identifiers().list();
+    let updatedAids;
+    try {
+      const listResponse = await client.identifiers().list();
+      updatedAids = listResponse.aids || listResponse;
+    } catch (listError: any) {
+      console.error(`❌ [ROTATE] Error listing updated identifiers: ${listError.message}`);
+      throw new Error(`Failed to list updated identifiers: ${listError.message}`);
+    }
+    
     const updatedAid = Array.isArray(updatedAids) ? updatedAids.find((a: any) => a.name === request.alias) : null;
     
     if (!updatedAid) {
