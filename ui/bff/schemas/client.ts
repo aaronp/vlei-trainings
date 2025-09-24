@@ -1,6 +1,6 @@
 import { treaty } from '@elysiajs/eden';
 import type { schemasRoutes } from './index';
-import type { CreateSchemaRequest, Schema, GetSchemaRequest, ListSchemasRequest, ListSchemasResponse } from './types';
+import type { CreateSchemaRequest, Schema, GetSchemaRequest, ListSchemasRequest, ListSchemasResponse, ResolveSchemaOOBIRequest, ResolveSchemaOOBIResponse } from './types';
 
 // Type for the combined routes
 type SchemasApi = typeof schemasRoutes;
@@ -59,6 +59,21 @@ export class SchemasClient {
 
     if (response.error) {
       throw new Error(`Failed to list schemas: ${response.error.value}`);
+    }
+
+    return response.data;
+  }
+
+  async resolveSchemaOOBI(request: ResolveSchemaOOBIRequest, timeoutMs?: number): Promise<ResolveSchemaOOBIResponse> {
+    const headers: Record<string, string> = {};
+    if (timeoutMs) {
+      headers['x-timeout'] = timeoutMs.toString();
+    }
+
+    const response = await this.client.schemas['resolve-oobi'].post(request, { headers });
+
+    if (response.error) {
+      throw new Error(`Failed to resolve schema OOBI: ${response.error.value}`);
     }
 
     return response.data;

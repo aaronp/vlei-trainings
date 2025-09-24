@@ -1,9 +1,11 @@
 import { Elysia, t } from 'elysia';
-import type { CreateSchemaRequest, GetSchemaRequest, ListSchemasRequest } from './types';
+import type { CreateSchemaRequest, GetSchemaRequest, ListSchemasRequest, ResolveSchemaOOBIRequest } from './types';
 import {
   CreateSchemaRequestSchema,
   SchemaSchema,
   ListSchemasResponseSchema,
+  ResolveSchemaOOBIRequestSchema,
+  ResolveSchemaOOBIResponseSchema,
 } from './types';
 import { schemaContext } from './context';
 
@@ -77,5 +79,21 @@ export const schemasRoutes = new Elysia({ prefix: '/schemas' })
     detail: {
       tags: ['Schemas'],
       description: 'List all schemas with pagination',
+    },
+  })
+  // Resolve schema OOBI
+  .post('/resolve-oobi', async ({ body, schemaRegistry, headers }) => {
+    const request = body as ResolveSchemaOOBIRequest;
+    const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
+    const result = await schemaRegistry.resolveOOBI(request, timeoutMs);
+    return result;
+  }, {
+    body: ResolveSchemaOOBIRequestSchema,
+    response: {
+      200: ResolveSchemaOOBIResponseSchema
+    },
+    detail: {
+      tags: ['Schemas'],
+      description: 'Resolve a schema OOBI to load the schema into KERIA',
     },
   });

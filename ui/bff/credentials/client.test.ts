@@ -1,20 +1,38 @@
 import { describe, expect, it, beforeAll } from 'bun:test';
 import { credentialsClient } from './client';
 import { aidClient } from '../aids/client';
+import { oobiClient } from '../oobi/client';
 import type { IssueCredentialRequest } from './types';
 
 describe('CredentialsClient Integration Tests', () => {
   const serviceUrl = process.env.CREDENTIALS_SERVICE_URL || 'http://localhost:3001';
   const client = credentialsClient(serviceUrl);
   const aidsClient = aidClient(serviceUrl);
+  const oobiClientInstance = oobiClient(serviceUrl);
   
   let issuerAlias: string;
   let issuerPrefix: string;
   let subjectAlias: string;
   let subjectPrefix: string;
   
+  // Use the actual vLEI Legal Entity schema SAID
+  const testSchemaSaid = 'ENPXp1vQzRF6JwIuS-mp2U8Uf1MoADoP_GqQ62VsDZWY';
+  const vleiServerUrl = 'http://localhost:7723';
+  
   beforeAll(async () => {
     console.log(`Running integration tests against ${serviceUrl}`);
+    
+    // First resolve the schema OOBI so it's available for credential issuance
+    console.log(`Resolving schema OOBI for ${testSchemaSaid}...`);
+    try {
+      await oobiClientInstance.resolveOOBI({
+        oobi: `${vleiServerUrl}/oobi/${testSchemaSaid}`,
+        alias: `schema-${testSchemaSaid}`
+      });
+      console.log(`Successfully resolved schema OOBI`);
+    } catch (error) {
+      console.log(`OOBI resolution failed (might already be resolved): ${error}`);
+    }
     
     // Create issuer and subject AIDs for testing
     issuerAlias = `issuer-qvi-${Date.now()}`;
@@ -34,17 +52,16 @@ describe('CredentialsClient Integration Tests', () => {
 
   describe('issueCredential', () => {
     it('should successfully issue a vLEI credential', async () => {
-      // Using a test schema SAID - in real scenarios, this would come from a schema service
-      const testSchemaSaid = 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao';
+      // Using the actual vLEI Legal Entity schema SAID
       
       const request: IssueCredentialRequest = {
         issuer: issuerAlias,
         subject: subjectPrefix,
         schemaSaid: testSchemaSaid,
         claims: {
-          lei: "5493001KJTIIGC8Y1R12",
-          legalName: "Test Corp Ltd",
-          registeredCountry: "US"
+          LEI: "5493001KJTIIGC8Y1R12",
+          dt: new Date().toISOString(),
+          i: subjectPrefix
         },
         edges: {
           assertedBy: issuerPrefix,
@@ -63,16 +80,15 @@ describe('CredentialsClient Integration Tests', () => {
     });
 
     it('should issue credential with full vLEI chain edges', async () => {
-      const testSchemaSaid = 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao';
       
       const request: IssueCredentialRequest = {
         issuer: issuerAlias,
         subject: subjectPrefix,
         schemaSaid: testSchemaSaid,
         claims: {
-          lei: "984500F0E7D3A9598B24",
-          legalName: "Global Test Organization",
-          registeredCountry: "GB"
+          LEI: "984500F0E7D3A9598B24",
+          dt: new Date().toISOString(),
+          i: subjectPrefix
         },
         edges: {
           assertedBy: issuerPrefix,
@@ -91,18 +107,19 @@ describe('CredentialsClient Integration Tests', () => {
       expect(response.id).toBeDefined();
       expect(response.acdc).toBeDefined();
       expect(response.acdc.a).toBeDefined();
-      expect(response.acdc.a.lei).toBe("984500F0E7D3A9598B24");
+      expect(response.acdc.a.LEI).toBe("984500F0E7D3A9598B24");
     });
 
     it('should handle minimal credential issuance', async () => {
-      const testSchemaSaid = 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao';
       
       const request: IssueCredentialRequest = {
         issuer: issuerAlias,
         subject: subjectPrefix,
         schemaSaid: testSchemaSaid,
         claims: {
-          simpleField: "test value"
+          LEI: "TEST123456789012",
+          dt: new Date().toISOString(),
+          i: subjectPrefix
         }
       };
 
@@ -117,9 +134,11 @@ describe('CredentialsClient Integration Tests', () => {
       const request: IssueCredentialRequest = {
         issuer: 'invalid-issuer-aid',
         subject: subjectPrefix,
-        schemaSaid: 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao',
+        schemaSaid: testSchemaSaid,
         claims: {
-          test: "data"
+          LEI: "INVALID12345678901",
+          dt: new Date().toISOString(),
+          i: subjectPrefix
         }
       };
 
@@ -131,9 +150,11 @@ describe('CredentialsClient Integration Tests', () => {
       const request: IssueCredentialRequest = {
         issuer: issuerAlias,
         subject: subjectPrefix,
-        schemaSaid: 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao',
+        schemaSaid: testSchemaSaid,
         claims: {
-          test: "network-test"
+          LEI: "NETWORK12345678901",
+          dt: new Date().toISOString(),
+          i: subjectPrefix
         }
       };
 
@@ -141,7 +162,6 @@ describe('CredentialsClient Integration Tests', () => {
     });
 
     it('should issue multiple credentials to different subjects', async () => {
-      const testSchemaSaid = 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao';
       const credentialIds: string[] = [];
 
       for (let i = 0; i < 3; i++) {
@@ -155,9 +175,9 @@ describe('CredentialsClient Integration Tests', () => {
           subject: subjectResponse.aid.prefix,
           schemaSaid: testSchemaSaid,
           claims: {
-            lei: `549300${i}KJTIIGC8Y1R${i}`,
-            legalName: `Test Corp ${i}`,
-            registeredCountry: "US"
+            LEI: `549300${i}KJTIIGC8Y1R${i}`,
+            dt: new Date().toISOString(),
+            i: subjectResponse.aid.prefix
           }
         };
 
@@ -173,7 +193,6 @@ describe('CredentialsClient Integration Tests', () => {
 
   describe('full vLEI workflow', () => {
     it('should complete a full vLEI issuance workflow', async () => {
-      const testSchemaSaid = 'EBfdlu8R27Fbx-ehrqwImnK-8Cm79sqbAQ4MmvEAYqao';
       
       // Create new AIDs for clean workflow test
       const qviAlias = `qvi-workflow-${Date.now()}`;
@@ -191,10 +210,9 @@ describe('CredentialsClient Integration Tests', () => {
         subject: leResponse.aid.prefix,  // Use prefix for subject
         schemaSaid: testSchemaSaid,
         claims: {
-          lei: "984500WORKFLOW12345",
-          legalName: "Workflow Test Corporation",
-          registeredCountry: "DE",
-          registrationAuthority: "RA000598"
+          LEI: "984500WORKFLOW12345",
+          dt: new Date().toISOString(),
+          i: leResponse.aid.prefix
         },
         edges: {
           assertedBy: qviResponse.aid.prefix,
@@ -218,7 +236,7 @@ describe('CredentialsClient Integration Tests', () => {
       expect(response.acdc).toBeDefined();
       expect(response.acdc.i).toBe(qviResponse.aid.prefix); // Issuer prefix in ACDC
       expect(response.acdc.a.i).toBe(leResponse.aid.prefix); // Subject
-      expect(response.acdc.a.lei).toBe("984500WORKFLOW12345");
+      expect(response.acdc.a.LEI).toBe("984500WORKFLOW12345");
       expect(response.anchors.tel).toBeDefined();
     });
   });

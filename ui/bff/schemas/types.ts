@@ -28,6 +28,15 @@ export interface ListSchemasResponse {
   offset: number;
 }
 
+export interface ResolveSchemaOOBIRequest {
+  schemaSaid: string;
+}
+
+export interface ResolveSchemaOOBIResponse {
+  success: boolean;
+  message: string;
+}
+
 // Request Schemas
 export const CreateSchemaRequestSchema = t.Object({
   schema: t.Record(t.String(), t.Any(), { description: 'The JSON schema definition' }),
@@ -56,4 +65,13 @@ export const ListSchemasResponseSchema = t.Object({
   total: t.Number(),
   limit: t.Number(),
   offset: t.Number()
+});
+
+export const ResolveSchemaOOBIRequestSchema = t.Object({
+  schemaSaid: t.String({ description: 'The Self-Addressing Identifier (SAID) of the schema to resolve' })
+});
+
+export const ResolveSchemaOOBIResponseSchema = t.Object({
+  success: t.Boolean(),
+  message: t.String()
 });

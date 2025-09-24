@@ -13,6 +13,32 @@ export async function issueCredential(
   const startTime = Date.now();
   console.log(`🔧 [CREDENTIALS] Starting credential issuance for issuer: ${request.issuer}, subject: ${request.subject}, schema: ${request.schemaSaid}`);
   
+  // Ensure schema is loaded via our schemas service (which will resolve the OOBI)
+  console.log(`📡 [CREDENTIALS] Resolving schema OOBI via schemas service for ${request.schemaSaid}...`);
+  try {
+    const vleiServerUrl = process.env.VLEI_SERVER_URL || 'http://localhost:7723';
+    const uniqueAlias = `schema-${request.schemaSaid}-${Date.now()}`;
+    const result = await client.oobis().resolve(`${vleiServerUrl}/oobi/${request.schemaSaid}`, uniqueAlias);
+    
+    // Wait for OOBI operation to complete if it exists
+    if (result.op) {
+      const operation = await result.op();
+      if (!operation.done) {
+        console.log(`⏳ [CREDENTIALS] Waiting for schema OOBI operation: ${operation.name}`);
+        const completedOp = await client.operations().wait(operation, { signal: AbortSignal.timeout(timeoutMs) });
+        if (completedOp.done) {
+          await client.operations().delete(operation.name);
+          console.log(`✅ [CREDENTIALS] Schema OOBI operation completed successfully`);
+        } else {
+          console.log(`⚠️  [CREDENTIALS] Schema OOBI operation did not complete within timeout`);
+        }
+      }
+    }
+    console.log(`✅ [CREDENTIALS] Schema OOBI resolved successfully`);
+  } catch (error: any) {
+    console.log(`ℹ️  [CREDENTIALS] Schema OOBI resolution failed (might already be resolved): ${error.message}`);
+  }
+  
   try {
     // For this MVP implementation, we'll create the issuer AID if it doesn't exist
     // This simplifies the cross-client keystore management issue
@@ -43,7 +69,7 @@ export async function issueCredential(
     
     // Get or create registry for the issuer
     console.log(`📋 [CREDENTIALS] Checking registries for issuer: ${issuerAlias}`);
-    let registries;
+    let registries: any;
     try {
       registries = await client.registries().list(issuerAlias);
       console.log(`📋 [CREDENTIALS] Found ${registries.length} existing registries for issuer: ${issuerAlias}`);
@@ -66,7 +92,7 @@ export async function issueCredential(
         noBackers: true  // No backers for this registry
       });
       
-      const operation = result.op;
+      const operation = await result.op();
       
       // Check if operation exists and has required properties
       if (!operation || !operation.name) {
@@ -122,7 +148,7 @@ export async function issueCredential(
       credentialData
     );
 
-    const operation = result.op;
+    const operation = await result.op();
 
     // Check if operation exists and has required properties
     if (!operation || !operation.name) {

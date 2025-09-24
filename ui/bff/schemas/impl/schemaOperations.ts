@@ -1,5 +1,5 @@
 import type { SignifyClient } from 'signify-ts';
-import type { CreateSchemaRequest, Schema, GetSchemaRequest, ListSchemasRequest, ListSchemasResponse } from '../types';
+import type { CreateSchemaRequest, Schema, GetSchemaRequest, ListSchemasRequest, ListSchemasResponse, ResolveSchemaOOBIRequest, ResolveSchemaOOBIResponse } from '../types';
 import { KeriaClient } from '../../aids/impl/KeriaClient';
 import { generateSAID, validateSchema, prepareSchemaWithSAID } from './utils';
 
@@ -133,4 +133,61 @@ export async function listSchemasWithClient(
   timeoutMs: number = 2000
 ): Promise<ListSchemasResponse> {
   return KeriaClient.withClient(client => listSchemas(client, request, timeoutMs), timeoutMs);
+}
+
+export async function resolveSchemaOOBI(
+  client: SignifyClient,
+  request: ResolveSchemaOOBIRequest,
+  timeoutMs: number = 2000
+): Promise<ResolveSchemaOOBIResponse> {
+  const startTime = Date.now();
+  console.log(`📡 [SCHEMAS] Resolving schema OOBI for ${request.schemaSaid}...`);
+
+  try {
+    const vleiServerUrl = process.env.VLEI_SERVER_URL || 'http://localhost:7723';
+    const uniqueAlias = `schema-${request.schemaSaid}-${Date.now()}`;
+    const result = await client.oobis().resolve(`${vleiServerUrl}/oobi/${request.schemaSaid}`, uniqueAlias);
+    
+    // Wait for OOBI operation to complete if it exists
+    if (result.op) {
+      const operation = await result.op();
+      if (!operation.done) {
+        console.log(`⏳ [SCHEMAS] Waiting for schema OOBI operation: ${operation.name}`);
+        const completedOp = await client.operations().wait(operation, { signal: AbortSignal.timeout(timeoutMs) });
+        if (completedOp.done) {
+          await client.operations().delete(operation.name);
+          console.log(`✅ [SCHEMAS] Schema OOBI operation completed successfully`);
+        } else {
+          console.log(`⚠️  [SCHEMAS] Schema OOBI operation did not complete within timeout`);
+          return {
+            success: false,
+            message: `Schema OOBI operation did not complete within ${timeoutMs}ms`
+          };
+        }
+      }
+    }
+    
+    const duration = Date.now() - startTime;
+    console.log(`✅ [SCHEMAS] Schema OOBI resolved successfully in ${duration}ms`);
+    
+    return {
+      success: true,
+      message: `Schema OOBI resolved successfully for ${request.schemaSaid}`
+    };
+  } catch (error: any) {
+    const duration = Date.now() - startTime;
+    console.log(`ℹ️  [SCHEMAS] Schema OOBI resolution failed after ${duration}ms (might already be resolved): ${error.message}`);
+    
+    return {
+      success: false,
+      message: `Failed to resolve schema OOBI: ${error.message}`
+    };
+  }
+}
+
+export async function resolveSchemaOOBIWithClient(
+  request: ResolveSchemaOOBIRequest,
+  timeoutMs: number = 2000
+): Promise<ResolveSchemaOOBIResponse> {
+  return KeriaClient.withClient(client => resolveSchemaOOBI(client, request, timeoutMs), timeoutMs);
 }
