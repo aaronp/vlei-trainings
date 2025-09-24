@@ -1,6 +1,6 @@
 import { treaty } from '@elysiajs/eden';
 import type { aidsRoutes } from './index';
-import type { AID, CreateAIDRequest } from './types';
+import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest } from './types';
 
 // Type for the combined routes
 type AidApi = typeof aidsRoutes;
@@ -35,6 +35,81 @@ export class AIDClient {
 
     if (response.error) {
       throw new Error(`Failed to create AID: ${response.error.value}`);
+    }
+
+    // Extract bran from response headers if present
+    const responseBran = response.headers?.['x-keria-bran'];
+    if (responseBran) {
+      this.bran = responseBran; // Update stored bran
+    }
+
+    return {
+      ...response.data,
+      bran: responseBran
+    };
+  }
+
+  // Sign a message
+  async signMessage(request: SignRequest): Promise<{ signature: string; bran?: string }> {
+    const headers: Record<string, string> = {};
+    if (this.bran) {
+      headers['x-keria-bran'] = this.bran;
+    }
+
+    const response = await this.client.aids.sign.post(request, { headers });
+
+    if (response.error) {
+      throw new Error(`Failed to sign message: ${response.error.value}`);
+    }
+
+    // Extract bran from response headers if present
+    const responseBran = response.headers?.['x-keria-bran'];
+    if (responseBran) {
+      this.bran = responseBran; // Update stored bran
+    }
+
+    return {
+      ...response.data,
+      bran: responseBran
+    };
+  }
+
+  // Verify a signature
+  async verifySignature(request: VerifyRequest): Promise<{ valid: boolean; prefix: string; bran?: string }> {
+    const headers: Record<string, string> = {};
+    if (this.bran) {
+      headers['x-keria-bran'] = this.bran;
+    }
+
+    const response = await this.client.aids.verify.post(request, { headers });
+
+    if (response.error) {
+      throw new Error(`Failed to verify signature: ${response.error.value}`);
+    }
+
+    // Extract bran from response headers if present
+    const responseBran = response.headers?.['x-keria-bran'];
+    if (responseBran) {
+      this.bran = responseBran; // Update stored bran
+    }
+
+    return {
+      ...response.data,
+      bran: responseBran
+    };
+  }
+
+  // Rotate AID keys
+  async rotateKeys(request: RotateRequest): Promise<{ prefix: string; alias: string; sequence: number; publicKey: string; bran?: string }> {
+    const headers: Record<string, string> = {};
+    if (this.bran) {
+      headers['x-keria-bran'] = this.bran;
+    }
+
+    const response = await this.client.aids['rotate-key'].post(request, { headers });
+
+    if (response.error) {
+      throw new Error(`Failed to rotate keys: ${response.error.value}`);
     }
 
     // Extract bran from response headers if present
