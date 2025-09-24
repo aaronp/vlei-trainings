@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeAll } from 'bun:test';
 import { aidClient } from './client';
-import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest } from './types';
+import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest } from './types';
 import { KeriaClient } from './impl/KeriaClient';
 
 describe('AIDClient Integration Tests', () => {
@@ -317,6 +317,112 @@ describe('AIDClient Integration Tests', () => {
       };
 
       await expect(client.rotateKeys(request)).rejects.toThrow(/Failed to rotate keys/);
+    });
+  });
+
+  describe('listEvents', () => {
+    it('should successfully list events for an existing AID', async () => {
+      const request: EventsRequest = {
+        alias: testAID.alias
+      };
+
+      const response = await client.listEvents(request);
+
+      expect(response).toBeDefined();
+      expect(response.alias).toBe(testAID.alias);
+      expect(response.prefix).toBe(testAID.prefix);
+      expect(response.events).toBeDefined();
+      expect(Array.isArray(response.events)).toBe(true);
+      expect(response.total).toBeTypeOf('number');
+      expect(response.total).toBeGreaterThanOrEqual(0);
+    });
+
+    it('should list events with pagination', async () => {
+      const request: EventsRequest = {
+        alias: testAID.alias,
+        limit: 5,
+        offset: 0
+      };
+
+      const response = await client.listEvents(request);
+
+      expect(response).toBeDefined();
+      expect(response.events).toBeDefined();
+      expect(Array.isArray(response.events)).toBe(true);
+      expect(response.events.length).toBeLessThanOrEqual(5);
+      expect(response.total).toBeTypeOf('number');
+    });
+
+    it('should handle events listing with custom pagination parameters', async () => {
+      const request: EventsRequest = {
+        alias: transferableAID.alias,
+        limit: 10,
+        offset: 0
+      };
+
+      const response = await client.listEvents(request);
+
+      expect(response).toBeDefined();
+      expect(response.alias).toBe(transferableAID.alias);
+      expect(response.events).toBeDefined();
+      expect(response.events.length).toBeLessThanOrEqual(10);
+      
+      // Each event should have the expected structure
+      if (response.events.length > 0) {
+        const event = response.events[0];
+        expect(event).toBeDefined();
+        expect(event.sequence).toBeTypeOf('number');
+        expect(event.eventType).toBeTypeOf('string');
+        expect(event.digest).toBeTypeOf('string');
+        expect(Array.isArray(event.signatures)).toBe(true);
+        expect(event.data).toBeDefined();
+      }
+    });
+
+    it('should throw error for non-existent AID alias', async () => {
+      const request: EventsRequest = {
+        alias: 'non-existent-aid-for-events'
+      };
+
+      await expect(client.listEvents(request)).rejects.toThrow(/Failed to list events/);
+    });
+
+    it('should handle empty alias gracefully', async () => {
+      const request: EventsRequest = {
+        alias: ''
+      };
+
+      await expect(client.listEvents(request)).rejects.toThrow();
+    });
+
+    it('should list events after performing operations', async () => {
+      // Create a new AID for this test
+      const testAlias = `events-test-${Date.now()}`;
+      const createResponse = await client.createAID({
+        alias: testAlias,
+        transferable: true
+      });
+
+      expect(createResponse.aid).toBeDefined();
+
+      // List events immediately after creation
+      const eventsResponse = await client.listEvents({
+        alias: testAlias
+      });
+
+      expect(eventsResponse).toBeDefined();
+      expect(eventsResponse.alias).toBe(testAlias);
+      expect(eventsResponse.prefix).toBe(createResponse.aid.prefix);
+      expect(eventsResponse.events).toBeDefined();
+      expect(eventsResponse.total).toBeGreaterThan(0); // Should have at least the inception event
+      
+      // Check that we have at least one event (the inception)
+      expect(eventsResponse.events.length).toBeGreaterThan(0);
+      
+      // The first event should be an inception event
+      const firstEvent = eventsResponse.events[0];
+      expect(firstEvent.eventType).toMatch(/icp|inception/i);
+      expect(firstEvent.sequence).toBeGreaterThanOrEqual(0);
     });
   });
 });

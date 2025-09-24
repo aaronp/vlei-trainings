@@ -1,14 +1,16 @@
 import { Elysia } from 'elysia';
-import type { AID, CreateAIDRequest, SignRequest, SignResponse, VerifyRequest, VerifyResponse, RotateRequest, RotateResponse } from './types';
+import type { AID, CreateAIDRequest, SignRequest, SignResponse, VerifyRequest, VerifyResponse, RotateRequest, RotateResponse, EventsRequest, EventsResponse } from './types';
 import { createAidWithClient } from './impl/createAid';
 import { signMessageWithClient, verifyMessageWithClient } from './impl/signOperations';
 import { rotateKeysWithClient } from './impl/rotateOperations';
+import { listAIDEventsWithClient } from './impl/eventOperations';
 
 interface AIDRegistryStore {
   create(request: CreateAIDRequest, timeoutMs?: number, bran?: string): Promise<AID>;
   sign(request: SignRequest, timeoutMs?: number, bran?: string): Promise<SignResponse>;
   verify(request: VerifyRequest, timeoutMs?: number, bran?: string): Promise<VerifyResponse>;
   rotate(request: RotateRequest, timeoutMs?: number, bran?: string): Promise<RotateResponse>;
+  events(request: EventsRequest, timeoutMs?: number, bran?: string): Promise<EventsResponse>;
 }
 
 function makeAIDRegistryStore(): AIDRegistryStore {
@@ -28,6 +30,10 @@ function makeAIDRegistryStore(): AIDRegistryStore {
 
     async rotate(request: RotateRequest, timeoutMs: number = 2000, bran?: string): Promise<RotateResponse> {
       return await rotateKeysWithClient(request, timeoutMs, bran);
+    },
+
+    async events(request: EventsRequest, timeoutMs: number = 2000, bran?: string): Promise<EventsResponse> {
+      return await listAIDEventsWithClient(request, timeoutMs, bran);
     },
 
   };

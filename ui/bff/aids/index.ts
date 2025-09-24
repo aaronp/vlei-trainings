@@ -1,5 +1,5 @@
 import { Elysia, t } from 'elysia';
-import type { CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest } from './types';
+import type { CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest } from './types';
 import {
   CreateAIDRequestSchema,
   CreateAIDResponseSchema,
@@ -9,6 +9,8 @@ import {
   VerifyResponseSchema,
   RotateRequestSchema,
   RotateResponseSchema,
+  EventsRequestSchema,
+  EventsResponseSchema,
 } from './types';
 import { aidContext } from './context';
 import { branContext } from '../middleware/branContext';
@@ -78,6 +80,22 @@ export const aidsRoutes = new Elysia({ prefix: '/aids' })
     detail: {
       tags: ['AID'],
       description: 'Rotate the keys of a transferable AID',
+    },
+  })
+  // List AID events
+  .get('/events', async ({ query, aidRegistry, headers, bran }) => {
+    const request = query as EventsRequest;
+    const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
+    const result = await aidRegistry.events(request, timeoutMs, bran);
+    return result;
+  }, {
+    query: EventsRequestSchema,
+    response: {
+      200: EventsResponseSchema
+    },
+    detail: {
+      tags: ['AID'],
+      description: 'List events (Key Event Log) for an AID',
     },
   })
 

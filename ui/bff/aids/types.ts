@@ -116,3 +116,50 @@ export const RotateResponseSchema = t.Object({
   sequence: t.Integer(),
   publicKey: t.String()
 });
+
+// Events Request and Response
+export interface EventsRequest {
+  alias: string;
+  limit?: number;
+  offset?: number;
+}
+
+export interface AIDEvent {
+  sequence: number;
+  eventType: string;
+  digest: string;
+  timestamp?: string;
+  data: any;
+  signatures: string[];
+}
+
+export interface EventsResponse {
+  alias: string;
+  prefix: string;
+  events: AIDEvent[];
+  total: number;
+}
+
+// Request Schema for events
+export const EventsRequestSchema = t.Object({
+  alias: t.String(),
+  limit: t.Optional(t.Integer({ default: 100, minimum: 1, maximum: 1000 })),
+  offset: t.Optional(t.Integer({ default: 0, minimum: 0 }))
+});
+
+// Response Schema for events
+export const AIDEventSchema = t.Object({
+  sequence: t.Integer(),
+  eventType: t.String(),
+  digest: t.String(),
+  timestamp: t.Optional(t.String()),
+  data: t.Any(),
+  signatures: t.Array(t.String())
+});
+
+export const EventsResponseSchema = t.Object({
+  alias: t.String(),
+  prefix: t.String(),
+  events: t.Array(AIDEventSchema),
+  total: t.Integer()
+});
