@@ -1,6 +1,7 @@
 import type { SignifyClient } from 'signify-ts';
 import type { AID, CreateAIDRequest } from '../types';
 import { KeriaClient } from './KeriaClient';
+import { getValidatedIdentifierConfig } from '../../config/keri-template';
 
 export async function createAid(
   client: SignifyClient, 
@@ -16,19 +17,29 @@ export async function createAid(
   }
 
   try {
-    // Try to create new AID
-    const isTransferable = request.transferable ?? true;
-    const wits = request.wits || [];
-    console.log(`📝 [AIDS] Configuration - transferable: ${isTransferable}, witnesses: ${wits.length}`);
+    // Get the template configuration
+    const templateConfig = getValidatedIdentifierConfig();
+    console.log(`📋 [AIDS] Using KERI template configuration:`, templateConfig);
+    
+    // Merge request parameters with template, with request taking precedence
+    const isTransferable = request.transferable ?? templateConfig.transferable;
+    const wits = request.wits || (isTransferable ? templateConfig.wits : []);
+    const toad = isTransferable ? (wits.length > 0 ? templateConfig.toad : 0) : 0;
+    const icount = request.icount ?? templateConfig.icount;
+    const ncount = request.ncount ?? templateConfig.ncount;
+    const isith = templateConfig.isith;
+    const nsith = templateConfig.nsith;
+    
+    console.log(`📝 [AIDS] Final configuration - transferable: ${isTransferable}, witnesses: ${wits.length}, toad: ${toad}`);
     
     const defaultConfig = {
       transferable: isTransferable,
-      wits: isTransferable ? wits : [],
-      toad: isTransferable ? wits.length : 0,
-      count: isTransferable ? (request.icount ?? 1) : 1,
-      ncount: isTransferable ? (request.ncount ?? 1) : 1,
-      isith: '1',
-      nsith: '1'
+      wits: wits,
+      toad: toad,
+      count: icount,
+      ncount: ncount,
+      isith: isith,
+      nsith: nsith
     };
 
     console.log(`🚀 [AIDS] Creating AID with KERI identifiers service`);
