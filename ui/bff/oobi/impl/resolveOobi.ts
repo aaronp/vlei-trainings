@@ -74,7 +74,8 @@ export async function resolveOobi(
 
 export async function resolveOobiWithClient(
   request: ResolveOOBIRequest,
-  timeoutMs: number = 2000
+  timeoutMs: number = 2000,
+  bran?: string
 ): Promise<ResolveOOBIResponse> {
-  return KeriaClient.withClient(client => resolveOobi(client, request, timeoutMs), timeoutMs);
+  return KeriaClient.withClient(client => resolveOobi(client, request, timeoutMs), timeoutMs, bran);
 }

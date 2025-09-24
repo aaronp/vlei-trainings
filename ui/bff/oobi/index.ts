@@ -5,14 +5,16 @@ import {
   ResolveOOBIResponseSchema,
 } from './types';
 import { oobiContext } from './context';
+import { branContext } from '../middleware/branContext';
 
 export const oobiRoutes = new Elysia({ prefix: '/oobi' })
+  .use(branContext)
   .use(oobiContext)
   // Resolve OOBI
-  .post('/resolve', async ({ body, oobiRegistry, headers }) => {
+  .post('/resolve', async ({ body, oobiRegistry, headers, branContext }) => {
     const request = body as ResolveOOBIRequest;
     const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
-    const response = await oobiRegistry.resolve(request, timeoutMs);
+    const response = await oobiRegistry.resolve(request, timeoutMs, branContext.bran);
     return { response };
   }, {
     body: ResolveOOBIRequestSchema,

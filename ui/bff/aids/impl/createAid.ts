@@ -109,10 +109,10 @@ export async function createAid(
   }
 }
 
-export async function createAidWithClient(request: CreateAIDRequest, timeoutMs: number = 2000): Promise<AID> {
+export async function createAidWithClient(request: CreateAIDRequest, timeoutMs: number = 2000, bran?: string): Promise<AID> {
   console.log(`🔌 [AIDS] Creating KERIA client connection for AID creation`);
   try {
-    const result = await KeriaClient.withClient(client => createAid(client, request, timeoutMs), timeoutMs);
+    const result = await KeriaClient.withClient(client => createAid(client, request, timeoutMs), timeoutMs, bran);
     console.log(`✅ [AIDS] Successfully completed AID creation via KERIA client`);
     return result;
   } catch (error: any) {

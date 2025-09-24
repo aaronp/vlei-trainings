@@ -7,25 +7,51 @@ type AidApi = typeof aidsRoutes;
 
 export class AIDClient {
   private client: ReturnType<typeof treaty<AidApi>>;
+  private bran?: string;
 
-  constructor(url: string) {
+  constructor(url: string, bran?: string) {
     this.client = treaty<AidApi>(url);
+    this.bran = bran;
+  }
+
+  // Update the bran (useful after receiving it from response headers)
+  setBran(bran: string) {
+    this.bran = bran;
+  }
+
+  // Get the current bran
+  getBran(): string | undefined {
+    return this.bran;
   }
 
   // AID operations
-  async createAID(request: CreateAIDRequest): Promise<{ aid: AID }> {
-    const response = await this.client.aids.post(request);
+  async createAID(request: CreateAIDRequest): Promise<{ aid: AID; bran?: string }> {
+    const headers: Record<string, string> = {};
+    if (this.bran) {
+      headers['x-keria-bran'] = this.bran;
+    }
+
+    const response = await this.client.aids.post(request, { headers });
 
     if (response.error) {
       throw new Error(`Failed to create AID: ${response.error.value}`);
     }
 
-    return response.data;
+    // Extract bran from response headers if present
+    const responseBran = response.headers?.['x-keria-bran'];
+    if (responseBran) {
+      this.bran = responseBran; // Update stored bran
+    }
+
+    return {
+      ...response.data,
+      bran: responseBran
+    };
   }
 
 }
 
 // Factory function to create client
-export const aidClient = (url: string = 'http://localhost:3001'): AIDClient => {
-  return new AIDClient(url);
+export const aidClient = (url: string = 'http://localhost:3001', bran?: string): AIDClient => {
+  return new AIDClient(url, bran);
 };

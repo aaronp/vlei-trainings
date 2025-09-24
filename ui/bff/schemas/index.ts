@@ -8,14 +8,16 @@ import {
   ResolveSchemaOOBIResponseSchema,
 } from './types';
 import { schemaContext } from './context';
+import { branContext } from '../middleware/branContext';
 
 export const schemasRoutes = new Elysia({ prefix: '/schemas' })
+  .use(branContext)
   .use(schemaContext)
   // Create schema
-  .post('/', async ({ body, schemaRegistry, headers }) => {
+  .post('/', async ({ body, schemaRegistry, headers, branContext }) => {
     const request = body as CreateSchemaRequest;
     const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
-    const schema = await schemaRegistry.create(request, timeoutMs);
+    const schema = await schemaRegistry.create(request, timeoutMs, branContext.bran);
     return { schema };
   }, {
     body: CreateSchemaRequestSchema,
@@ -30,10 +32,10 @@ export const schemasRoutes = new Elysia({ prefix: '/schemas' })
     },
   })
   // Get schema by SAID
-  .get('/:said', async ({ params, schemaRegistry, headers }) => {
+  .get('/:said', async ({ params, schemaRegistry, headers, branContext }) => {
     const request: GetSchemaRequest = { said: params.said };
     const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
-    const schema = await schemaRegistry.get(request, timeoutMs);
+    const schema = await schemaRegistry.get(request, timeoutMs, branContext.bran);
     
     if (!schema) {
       throw new Error('Schema not found');
@@ -58,13 +60,13 @@ export const schemasRoutes = new Elysia({ prefix: '/schemas' })
     },
   })
   // List schemas
-  .get('/', async ({ query, schemaRegistry, headers }) => {
+  .get('/', async ({ query, schemaRegistry, headers, branContext }) => {
     const request: ListSchemasRequest = {
       limit: query.limit,
       offset: query.offset
     };
     const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
-    const schemas = await schemaRegistry.list(request, timeoutMs);
+    const schemas = await schemaRegistry.list(request, timeoutMs, branContext.bran);
     return { schemas };
   }, {
     query: t.Object({
@@ -82,10 +84,10 @@ export const schemasRoutes = new Elysia({ prefix: '/schemas' })
     },
   })
   // Resolve schema OOBI
-  .post('/resolve-oobi', async ({ body, schemaRegistry, headers }) => {
+  .post('/resolve-oobi', async ({ body, schemaRegistry, headers, branContext }) => {
     const request = body as ResolveSchemaOOBIRequest;
     const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
-    const result = await schemaRegistry.resolveOOBI(request, timeoutMs);
+    const result = await schemaRegistry.resolveOOBI(request, timeoutMs, branContext.bran);
     return result;
   }, {
     body: ResolveSchemaOOBIRequestSchema,

@@ -116,23 +116,26 @@ export async function listSchemas(
 // Wrapper functions that use KeriaClient
 export async function createSchemaWithClient(
   request: CreateSchemaRequest,
-  timeoutMs: number = 2000
+  timeoutMs: number = 2000,
+  bran?: string
 ): Promise<Schema> {
-  return KeriaClient.withClient(client => createSchema(client, request, timeoutMs), timeoutMs);
+  return KeriaClient.withClient(client => createSchema(client, request, timeoutMs), timeoutMs, bran);
 }
 
 export async function getSchemaWithClient(
   request: GetSchemaRequest,
-  timeoutMs: number = 2000
+  timeoutMs: number = 2000,
+  bran?: string
 ): Promise<Schema | null> {
-  return KeriaClient.withClient(client => getSchema(client, request, timeoutMs), timeoutMs);
+  return KeriaClient.withClient(client => getSchema(client, request, timeoutMs), timeoutMs, bran);
 }
 
 export async function listSchemasWithClient(
   request: ListSchemasRequest,
-  timeoutMs: number = 2000
+  timeoutMs: number = 2000,
+  bran?: string
 ): Promise<ListSchemasResponse> {
-  return KeriaClient.withClient(client => listSchemas(client, request, timeoutMs), timeoutMs);
+  return KeriaClient.withClient(client => listSchemas(client, request, timeoutMs), timeoutMs, bran);
 }
 
 export async function resolveSchemaOOBI(
@@ -187,7 +190,8 @@ export async function resolveSchemaOOBI(
 
 export async function resolveSchemaOOBIWithClient(
   request: ResolveSchemaOOBIRequest,
-  timeoutMs: number = 2000
+  timeoutMs: number = 2000,
+  bran?: string
 ): Promise<ResolveSchemaOOBIResponse> {
-  return KeriaClient.withClient(client => resolveSchemaOOBI(client, request, timeoutMs), timeoutMs);
+  return KeriaClient.withClient(client => resolveSchemaOOBI(client, request, timeoutMs), timeoutMs, bran);
 }

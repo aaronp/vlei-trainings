@@ -232,10 +232,10 @@ export async function issueCredential(
 }
 
 // Client wrapper function
-export async function issueCredentialWithClient(request: IssueCredentialRequest, timeoutMs: number = 2000): Promise<IssueCredentialResponse> {
+export async function issueCredentialWithClient(request: IssueCredentialRequest, timeoutMs: number = 2000, bran?: string): Promise<IssueCredentialResponse> {
   console.log(`🔌 [CREDENTIALS] Creating KERIA client connection for credential issuance`);
   try {
-    const result = await KeriaClient.withClient(client => issueCredential(client, request, timeoutMs), timeoutMs);
+    const result = await KeriaClient.withClient(client => issueCredential(client, request, timeoutMs), timeoutMs, bran);
     console.log(`✅ [CREDENTIALS] Successfully completed credential issuance via KERIA client`);
     return result;
   } catch (error: any) {

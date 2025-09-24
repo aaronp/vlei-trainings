@@ -5,15 +5,17 @@ import {
   IssueCredentialResponseSchema
 } from './types';
 import { credentialContext } from './context';
+import { branContext } from '../middleware/branContext';
 
 export const credentialsRoutes = new Elysia({ prefix: '/credentials' })
+  .use(branContext)
   .use(credentialContext)
   
   // Issue a credential (ACDC)
-  .post('/issue', async ({ body, credentialRegistry, headers }) => {
+  .post('/issue', async ({ body, credentialRegistry, headers, branContext }) => {
     const request = body as IssueCredentialRequest;
     const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
-    const result = await credentialRegistry.issueCredential(request, timeoutMs);
+    const result = await credentialRegistry.issueCredential(request, timeoutMs, branContext.bran);
     return result;
   }, {
     body: IssueCredentialRequestSchema,

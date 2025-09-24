@@ -15,19 +15,22 @@ export class KeriaClient {
 
   static async withClient<T>(
     operation: (client: SignifyClient) => Promise<T>,
-    timeoutMs: number = 2000
+    timeoutMs: number = 2000,
+    bran?: string
   ): Promise<T> {
     const startTime = Date.now();
     console.log(`🔌 [KERIA] Initializing SignifyClient connection to ${this.KERIA_URL}`);
     
     await ready();
     
-    const bran = this.generateBran();
-    console.log(`🔑 [KERIA] Generated bran: ${bran.substring(0, 8)}...`);
+    // Use provided bran or generate a new one
+    const clientBran = bran || this.generateBran();
+    const branSource = bran ? 'provided' : 'generated';
+    console.log(`🔑 [KERIA] Using ${branSource} bran: ${clientBran.substring(0, 8)}...`);
     
     const client = new SignifyClient(
       this.KERIA_URL,
-      bran,
+      clientBran,
       Tier.low,
       this.KERIA_BOOT_URL
     );

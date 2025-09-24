@@ -55,7 +55,8 @@
       "Bash(bun run:*)",
       "Bash(bun check:*)",
       "Bash(echo)",
-      "Bash(CREDENTIALS_SERVICE_URL=http://localhost:3001 bun test credentials/client.test.ts --timeout 60000)"
+      "Bash(CREDENTIALS_SERVICE_URL=http://localhost:3001 bun test credentials/client.test.ts --timeout 60000)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }
