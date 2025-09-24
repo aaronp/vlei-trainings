@@ -163,3 +163,27 @@ export const EventsResponseSchema = t.Object({
   events: t.Array(AIDEventSchema),
   total: t.Integer()
 });
+
+// OOBI Generation Request and Response
+export interface GenerateOOBIRequest {
+  alias: string;
+  role?: 'witness' | 'controller';
+}
+
+export interface GenerateOOBIResponse {
+  oobi: string;
+  alias: string;
+  prefix: string;
+}
+
+// OOBI Generation Schemas
+export const GenerateOOBIRequestSchema = t.Object({
+  alias: t.String(),
+  role: t.Optional(t.Union([t.Literal('witness'), t.Literal('controller')], { default: 'witness' }))
+});
+
+export const GenerateOOBIResponseSchema = t.Object({
+  oobi: t.String(),
+  alias: t.String(),
+  prefix: t.String()
+});

@@ -1,5 +1,5 @@
 import { Elysia, t } from 'elysia';
-import type { CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest } from './types';
+import type { CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest, GenerateOOBIRequest } from './types';
 import {
   CreateAIDRequestSchema,
   CreateAIDResponseSchema,
@@ -11,6 +11,8 @@ import {
   RotateResponseSchema,
   EventsRequestSchema,
   EventsResponseSchema,
+  GenerateOOBIRequestSchema,
+  GenerateOOBIResponseSchema,
 } from './types';
 import { aidContext } from './context';
 import { branContext } from '../middleware/branContext';
@@ -96,6 +98,22 @@ export const aidsRoutes = new Elysia({ prefix: '/aids' })
     detail: {
       tags: ['AID'],
       description: 'List events (Key Event Log) for an AID',
+    },
+  })
+  // Generate OOBI for an AID
+  .post('/oobi', async ({ body, aidRegistry, headers, bran }) => {
+    const request = body as GenerateOOBIRequest;
+    const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
+    const result = await aidRegistry.generateOobi(request, timeoutMs, bran);
+    return result;
+  }, {
+    body: GenerateOOBIRequestSchema,
+    response: {
+      200: GenerateOOBIResponseSchema
+    },
+    detail: {
+      tags: ['AID'],
+      description: 'Generate an Out-of-Band Introduction (OOBI) for an AID',
     },
   })
 

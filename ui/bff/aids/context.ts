@@ -1,9 +1,10 @@
 import { Elysia } from 'elysia';
-import type { AID, CreateAIDRequest, SignRequest, SignResponse, VerifyRequest, VerifyResponse, RotateRequest, RotateResponse, EventsRequest, EventsResponse } from './types';
+import type { AID, CreateAIDRequest, SignRequest, SignResponse, VerifyRequest, VerifyResponse, RotateRequest, RotateResponse, EventsRequest, EventsResponse, GenerateOOBIRequest, GenerateOOBIResponse } from './types';
 import { createAidWithClient } from './impl/createAid';
 import { signMessageWithClient, verifyMessageWithClient } from './impl/signOperations';
 import { rotateKeysWithClient } from './impl/rotateOperations';
 import { listAIDEventsWithClient } from './impl/eventOperations';
+import { generateOobiWithClient } from './impl/generateOobi';
 
 interface AIDRegistryStore {
   create(request: CreateAIDRequest, timeoutMs?: number, bran?: string): Promise<AID>;
@@ -11,6 +12,7 @@ interface AIDRegistryStore {
   verify(request: VerifyRequest, timeoutMs?: number, bran?: string): Promise<VerifyResponse>;
   rotate(request: RotateRequest, timeoutMs?: number, bran?: string): Promise<RotateResponse>;
   events(request: EventsRequest, timeoutMs?: number, bran?: string): Promise<EventsResponse>;
+  generateOobi(request: GenerateOOBIRequest, timeoutMs?: number, bran?: string): Promise<GenerateOOBIResponse>;
 }
 
 function makeAIDRegistryStore(): AIDRegistryStore {
@@ -34,6 +36,10 @@ function makeAIDRegistryStore(): AIDRegistryStore {
 
     async events(request: EventsRequest, timeoutMs: number = 2000, bran?: string): Promise<EventsResponse> {
       return await listAIDEventsWithClient(request, timeoutMs, bran);
+    },
+
+    async generateOobi(request: GenerateOOBIRequest, timeoutMs: number = 2000, bran?: string): Promise<GenerateOOBIResponse> {
+      return await generateOobiWithClient(request, timeoutMs, bran);
     },
 
   };

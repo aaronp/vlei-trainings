@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeAll } from 'bun:test';
 import { aidClient } from './client';
-import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest } from './types';
+import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest, GenerateOOBIRequest } from './types';
 import { KeriaClient } from './impl/KeriaClient';
 
 describe('AIDClient Integration Tests', () => {
@@ -575,13 +575,149 @@ describe('AIDClient Integration Tests', () => {
       expect(firstEvent.sequence).toBeGreaterThanOrEqual(0);
     });
   });
+
+  describe('generateOobi', () => {
+    it('should successfully generate OOBI for an existing AID', async () => {
+      // Create a fresh client with unique bran for this test
+      const client = aidClient(serviceUrl);
+      const bran = KeriaClient.generateBran();
+      client.setBran(bran);
+      
+      // Create a fresh AID for this test
+      const aidResponse = await client.createAID({
+        alias: `oobi-test-${Date.now()}`
+      });
+      
+      const request: GenerateOOBIRequest = {
+        alias: aidResponse.aid.alias
+      };
+
+      const response = await client.generateOobi(request);
+
+      expect(response).toBeDefined();
+      expect(response.oobi).toBeDefined();
+      expect(response.oobi).toBeTypeOf('string');
+      expect(response.oobi.length).toBeGreaterThan(0);
+      expect(response.alias).toBe(aidResponse.aid.alias);
+      expect(response.prefix).toBe(aidResponse.aid.prefix);
+    });
+
+    it('should generate OOBI with explicit witness role', async () => {
+      // Create a fresh client with unique bran for this test
+      const client = aidClient(serviceUrl);
+      const bran = KeriaClient.generateBran();
+      client.setBran(bran);
+      
+      // Create a fresh AID for this test
+      const aidResponse = await client.createAID({
+        alias: `oobi-witness-test-${Date.now()}`,
+        transferable: true
+      });
+      
+      const request: GenerateOOBIRequest = {
+        alias: aidResponse.aid.alias,
+        role: 'witness'
+      };
+
+      const response = await client.generateOobi(request);
+
+      expect(response).toBeDefined();
+      expect(response.oobi).toBeDefined();
+      expect(response.oobi).toBeTypeOf('string');
+      expect(response.oobi.length).toBeGreaterThan(0);
+      expect(response.alias).toBe(aidResponse.aid.alias);
+      expect(response.prefix).toBe(aidResponse.aid.prefix);
+    });
+
+    it('should handle controller role gracefully when not supported', async () => {
+      // Create a fresh client with unique bran for this test
+      const client = aidClient(serviceUrl);
+      const bran = KeriaClient.generateBran();
+      client.setBran(bran);
+      
+      // Create a fresh AID for this test
+      const aidResponse = await client.createAID({
+        alias: `oobi-controller-test-${Date.now()}`
+      });
+      
+      const request: GenerateOOBIRequest = {
+        alias: aidResponse.aid.alias,
+        role: 'controller'
+      };
+
+      // Controller role may not be supported in all configurations
+      // This should either succeed or fail gracefully
+      try {
+        const response = await client.generateOobi(request);
+        
+        expect(response).toBeDefined();
+        expect(response.oobi).toBeDefined();
+        expect(response.oobi).toBeTypeOf('string');
+        expect(response.oobi.length).toBeGreaterThan(0);
+        expect(response.alias).toBe(aidResponse.aid.alias);
+        expect(response.prefix).toBe(aidResponse.aid.prefix);
+      } catch (error: any) {
+        // Controller role may not be supported without HTTP endpoints configured
+        expect(error.message).toMatch(/Failed to generate OOBI|no http endpoint/);
+      }
+    });
+
+    it('should throw error for non-existent AID alias', async () => {
+      // Create a fresh client for this test
+      const client = aidClient(serviceUrl);
+      
+      const request: GenerateOOBIRequest = {
+        alias: 'non-existent-aid-for-oobi'
+      };
+
+      await expect(client.generateOobi(request)).rejects.toThrow(/Failed to generate OOBI/);
+    });
+
+    it('should handle empty alias gracefully', async () => {
+      // Create a fresh client for this test
+      const client = aidClient(serviceUrl);
+      
+      const request: GenerateOOBIRequest = {
+        alias: ''
+      };
+
+      await expect(client.generateOobi(request)).rejects.toThrow();
+    });
+
+    it('should validate OOBI URL format', async () => {
+      // Create a fresh client with unique bran for this test
+      const client = aidClient(serviceUrl);
+      const bran = KeriaClient.generateBran();
+      client.setBran(bran);
+      
+      // Create a fresh AID for this test
+      const aidResponse = await client.createAID({
+        alias: `oobi-format-test-${Date.now()}`
+      });
+      
+      const request: GenerateOOBIRequest = {
+        alias: aidResponse.aid.alias
+      };
+
+      const response = await client.generateOobi(request);
+
+      expect(response).toBeDefined();
+      expect(response.oobi).toBeDefined();
+      
+      // OOBI should be a valid URL format
+      expect(response.oobi).toMatch(/^https?:\/\//);
+      
+      // OOBI should contain the word 'oobi' (case insensitive)
+      expect(response.oobi.toLowerCase()).toContain('oobi');
+    });
+  });
 });
 
 // Additional integration test for complete workflow
 describe('AID Complete Workflow Integration', () => {
   const serviceUrl = process.env.AID_SERVICE_URL || 'http://localhost:3001';
 
-  it('should complete full AID lifecycle: create -> sign -> verify -> rotate', async () => {
+  it('should complete full AID lifecycle: create -> generate OOBI -> sign -> verify -> rotate', async () => {
     // Create a fresh client with unique bran for this test
     const client = aidClient(serviceUrl);
     const bran = KeriaClient.generateBran();
@@ -596,7 +732,17 @@ describe('AID Complete Workflow Integration', () => {
     expect(createResponse.aid).toBeDefined();
     const aid = createResponse.aid;
 
-    // Step 2: Sign a message
+    // Step 2: Generate OOBI for credential issuance
+    const oobiResponse = await client.generateOobi({
+      alias: aidAlias,
+      role: 'witness'
+    });
+
+    expect(oobiResponse.oobi).toBeDefined();
+    expect(oobiResponse.alias).toBe(aidAlias);
+    expect(oobiResponse.prefix).toBe(aid.prefix);
+
+    // Step 3: Sign a message
     const testMessage = 'Complete workflow test message';
     const signResponse = await client.signMessage({
       alias: aidAlias,
@@ -605,7 +751,7 @@ describe('AID Complete Workflow Integration', () => {
 
     expect(signResponse.signature).toBeDefined();
 
-    // Step 3: Verify the signature
+    // Step 4: Verify the signature
     const verifyResponse = await client.verifySignature({
       alias: aidAlias,
       text: testMessage,
@@ -615,7 +761,7 @@ describe('AID Complete Workflow Integration', () => {
     expect(verifyResponse.valid).toBe(true);
     expect(verifyResponse.prefix).toBe(aid.prefix);
 
-    // Step 4: Rotate keys
+    // Step 5: Rotate keys
     const rotateResponse = await client.rotateKeys({
       alias: aidAlias
     });
@@ -624,7 +770,7 @@ describe('AID Complete Workflow Integration', () => {
     expect(rotateResponse.sequence).toBe(1); // First rotation
     expect(rotateResponse.publicKey).toBeDefined();
 
-    // Step 5: Verify that old signature is still valid with original keys
+    // Step 6: Verify that old signature is still valid with original keys
     // (This might fail depending on KERI implementation details)
     const verifyAfterRotation = await client.verifySignature({
       alias: aidAlias,

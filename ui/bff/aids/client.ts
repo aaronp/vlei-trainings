@@ -1,6 +1,6 @@
 import { treaty } from '@elysiajs/eden';
 import type { aidsRoutes } from './index';
-import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest } from './types';
+import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest, GenerateOOBIRequest } from './types';
 
 // Type for the combined routes
 type AidApi = typeof aidsRoutes;
@@ -149,6 +149,31 @@ export class AIDClient {
 
     if (response.error) {
       throw new Error(`Failed to list events: ${response.error.value}`);
+    }
+
+    // Extract bran from response headers if present
+    const responseBran = response.headers?.['x-keria-bran'];
+    if (responseBran) {
+      this.bran = responseBran; // Update stored bran
+    }
+
+    return {
+      ...response.data,
+      bran: responseBran
+    };
+  }
+
+  // Generate OOBI for an AID
+  async generateOobi(request: GenerateOOBIRequest): Promise<{ oobi: string; alias: string; prefix: string; bran?: string }> {
+    const headers: Record<string, string> = {};
+    if (this.bran) {
+      headers['x-keria-bran'] = this.bran;
+    }
+
+    const response = await this.client.aids.oobi.post(request, { headers });
+
+    if (response.error) {
+      throw new Error(`Failed to generate OOBI: ${response.error.value}`);
     }
 
     // Extract bran from response headers if present
