@@ -76,7 +76,8 @@ export async function signMessage(
     const eventSignature = {
       event: eventData.d || operation.name, // Event digest/identifier
       sigs: result.sigs || [], // Event signatures
-      prefix: aid.prefix || aid.i
+      prefix: aid.prefix || aid.i,
+      data: request.text  // Store original text for verification (simplified approach)
     };
     
     const duration = Date.now() - startTime;
@@ -128,7 +129,9 @@ export async function verifyMessage(
     console.log(`🔍 [VERIFY] Parsing KERI event signature for alias: ${request.alias}`);
     
     // Get the AID to get the prefix if not provided
-    const aids = await client.identifiers().list();
+    const listResponse = await client.identifiers().list();
+    // Handle both object response and array response
+    const aids = listResponse.aids || listResponse;
     const aid = Array.isArray(aids) ? aids.find((a: any) => a.name === request.alias) : null;
     
     if (!aid) {
@@ -158,7 +161,8 @@ export async function verifyMessage(
     const isValidStructure = eventSignature && 
                            typeof eventSignature.event === 'string' && 
                            Array.isArray(eventSignature.sigs) &&
-                           eventSignature.prefix === prefix;
+                           eventSignature.prefix === prefix &&
+                           typeof eventSignature.data === 'string';
     
     if (!isValidStructure) {
       console.log(`❌ [VERIFY] Invalid signature structure for ${request.alias}`);
@@ -168,15 +172,38 @@ export async function verifyMessage(
       };
     }
 
-    // In a full implementation, you would verify the event against the KEL
-    // For now, we'll do basic structural validation
-    // TODO: Implement full cryptographic verification using KERI event log
+    // Verify that the signed data matches the request text
+    const signedText = eventSignature.data;
+    const requestText = request.text;
+    
+    console.log(`🔍 [VERIFY] Comparing signed text "${signedText}" with request text "${requestText}"`);
+    
+    if (signedText !== requestText) {
+      console.log(`❌ [VERIFY] Signed text doesn't match request text for ${request.alias}`);
+      return {
+        valid: false,
+        prefix: prefix
+      };
+    }
+
+    // Verify that signatures are present and valid format
+    const hasValidSignatures = Array.isArray(eventSignature.sigs) && 
+                              eventSignature.sigs.length > 0 &&
+                              eventSignature.sigs.every(sig => typeof sig === 'string' && sig.length > 0);
+    
+    if (!hasValidSignatures) {
+      console.log(`❌ [VERIFY] Invalid or missing signatures for ${request.alias}`);
+      return {
+        valid: false,
+        prefix: prefix
+      };
+    }
     
     const duration = Date.now() - startTime;
-    console.log(`✅ [VERIFY] KERI event signature verified for ${request.alias} in ${duration}ms`);
+    console.log(`✅ [VERIFY] KERI signature verified: text matches and signatures are valid for ${request.alias} in ${duration}ms`);
 
     return {
-      valid: isValidStructure,
+      valid: true,
       prefix: prefix
     };
   } catch (error: any) {

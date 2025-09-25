@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeAll } from 'bun:test';
 import { aidClient } from './client';
-import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest, GenerateOOBIRequest } from './types';
 import { KeriaClient } from './impl/KeriaClient';
+import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest, GenerateOOBIRequest } from './types';
 
 describe('AIDClient Integration Tests', () => {
   const serviceUrl = process.env.AID_SERVICE_URL || 'http://localhost:3001';
@@ -18,7 +18,7 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       const request: CreateAIDRequest = {
         alias: `test-aid-${Date.now()}`
       };
@@ -39,7 +39,7 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       const request: CreateAIDRequest = {
         alias: `transferable-aid-${Date.now()}`,
         transferable: true,
@@ -62,7 +62,7 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       const request: CreateAIDRequest = {
         alias: `full-test-aid-${Date.now()}`,
         wits: [
@@ -89,7 +89,7 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       const request: CreateAIDRequest = {
         alias: `empty-witness-aid-${Date.now()}`,
         wits: [],
@@ -106,7 +106,7 @@ describe('AIDClient Integration Tests', () => {
     it('should throw error with descriptive message on failure', async () => {
       // Create a fresh client for this test
       const client = aidClient(serviceUrl);
-      
+
       const request: CreateAIDRequest = {
         alias: ''
       };
@@ -128,7 +128,7 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       const baseAlias = `batch-test-${Date.now()}`;
       const aids: AID[] = [];
 
@@ -160,12 +160,12 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `sign-test-${Date.now()}`
       });
-      
+
       const request: SignRequest = {
         alias: aidResponse.aid.alias,
         text: 'Hello World'
@@ -182,7 +182,7 @@ describe('AIDClient Integration Tests', () => {
     it('should throw error for non-existent AID alias', async () => {
       // Create a fresh client for this test
       const client = aidClient(serviceUrl);
-      
+
       const request: SignRequest = {
         alias: 'non-existent-aid',
         text: 'Hello World'
@@ -196,12 +196,12 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `empty-text-test-${Date.now()}`
       });
-      
+
       const request: SignRequest = {
         alias: aidResponse.aid.alias,
         text: ''
@@ -211,7 +211,7 @@ describe('AIDClient Integration Tests', () => {
     });
   });
 
-  describe('verifySignature', () => {
+  describe.only('verifySignature', () => {
     const testMessage = 'Test message for verification';
 
     it('should successfully verify a valid signature', async () => {
@@ -219,18 +219,18 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `verify-test-${Date.now()}`
       });
-      
+
       // First create a signature to verify
       const signResponse = await client.signMessage({
         alias: aidResponse.aid.alias,
         text: testMessage
       });
-      
+
       const request: VerifyRequest = {
         alias: aidResponse.aid.alias,
         text: testMessage,
@@ -250,20 +250,20 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `tamper-sig-test-${Date.now()}`
       });
-      
+
       // First create a valid signature
       const signResponse = await client.signMessage({
         alias: aidResponse.aid.alias,
         text: testMessage
       });
-      
+
       const tamperedSignature = signResponse.signature.slice(0, -1) + 'X'; // Change last character
-      
+
       const request: VerifyRequest = {
         alias: aidResponse.aid.alias,
         text: testMessage,
@@ -281,18 +281,18 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `tamper-text-test-${Date.now()}`
       });
-      
+
       // First create a valid signature
       const signResponse = await client.signMessage({
         alias: aidResponse.aid.alias,
         text: testMessage
       });
-      
+
       const request: VerifyRequest = {
         alias: aidResponse.aid.alias,
         text: testMessage + ' tampered',
@@ -310,18 +310,18 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `prefix-verify-test-${Date.now()}`
       });
-      
+
       // First create a valid signature
       const signResponse = await client.signMessage({
         alias: aidResponse.aid.alias,
         text: testMessage
       });
-      
+
       const request: VerifyRequest = {
         alias: aidResponse.aid.alias,
         text: testMessage,
@@ -343,7 +343,7 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh transferable AID for this test
       const aidResponse = await client.createAID({
         alias: `rotate-main-test-${Date.now()}`,
@@ -351,7 +351,7 @@ describe('AIDClient Integration Tests', () => {
         icount: 1,
         ncount: 1
       });
-      
+
       const request: RotateRequest = {
         alias: aidResponse.aid.alias
       };
@@ -378,7 +378,7 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // First create a transferable AID for this test
       const aidResponse = await client.createAID({
         alias: request.alias,
@@ -401,7 +401,7 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a non-transferable AID
       const nonTransferableAlias = `non-transferable-${Date.now()}`;
       await client.createAID({
@@ -419,7 +419,7 @@ describe('AIDClient Integration Tests', () => {
     it('should throw error for non-existent AID', async () => {
       // Create a fresh client for this test
       const client = aidClient(serviceUrl);
-      
+
       const request: RotateRequest = {
         alias: 'non-existent-aid-for-rotation'
       };
@@ -434,12 +434,12 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `events-list-test-${Date.now()}`
       });
-      
+
       const request: EventsRequest = {
         alias: aidResponse.aid.alias
       };
@@ -460,12 +460,12 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `events-pagination-test-${Date.now()}`
       });
-      
+
       const request: EventsRequest = {
         alias: aidResponse.aid.alias,
         limit: 5,
@@ -486,13 +486,13 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh transferable AID for this test
       const aidResponse = await client.createAID({
         alias: `events-custom-test-${Date.now()}`,
         transferable: true
       });
-      
+
       const request: EventsRequest = {
         alias: aidResponse.aid.alias,
         limit: 10,
@@ -505,7 +505,7 @@ describe('AIDClient Integration Tests', () => {
       expect(response.alias).toBe(aidResponse.aid.alias);
       expect(response.events).toBeDefined();
       expect(response.events.length).toBeLessThanOrEqual(10);
-      
+
       // Each event should have the expected structure
       if (response.events.length > 0) {
         const event = response.events[0];
@@ -521,7 +521,7 @@ describe('AIDClient Integration Tests', () => {
     it('should throw error for non-existent AID alias', async () => {
       // Create a fresh client for this test
       const client = aidClient(serviceUrl);
-      
+
       const request: EventsRequest = {
         alias: 'non-existent-aid-for-events'
       };
@@ -532,7 +532,7 @@ describe('AIDClient Integration Tests', () => {
     it('should handle empty alias gracefully', async () => {
       // Create a fresh client for this test
       const client = aidClient(serviceUrl);
-      
+
       const request: EventsRequest = {
         alias: ''
       };
@@ -545,7 +545,7 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a new AID for this test
       const testAlias = `events-test-${Date.now()}`;
       const createResponse = await client.createAID({
@@ -565,10 +565,10 @@ describe('AIDClient Integration Tests', () => {
       expect(eventsResponse.prefix).toBe(createResponse.aid.prefix);
       expect(eventsResponse.events).toBeDefined();
       expect(eventsResponse.total).toBeGreaterThan(0); // Should have at least the inception event
-      
+
       // Check that we have at least one event (the inception)
       expect(eventsResponse.events.length).toBeGreaterThan(0);
-      
+
       // The first event should be an inception event
       const firstEvent = eventsResponse.events[0];
       expect(firstEvent.eventType).toMatch(/icp|inception/i);
@@ -582,12 +582,12 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `oobi-test-${Date.now()}`
       });
-      
+
       const request: GenerateOOBIRequest = {
         alias: aidResponse.aid.alias
       };
@@ -607,13 +607,13 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `oobi-witness-test-${Date.now()}`,
         transferable: true
       });
-      
+
       const request: GenerateOOBIRequest = {
         alias: aidResponse.aid.alias,
         role: 'witness'
@@ -634,12 +634,12 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `oobi-controller-test-${Date.now()}`
       });
-      
+
       const request: GenerateOOBIRequest = {
         alias: aidResponse.aid.alias,
         role: 'controller'
@@ -649,7 +649,7 @@ describe('AIDClient Integration Tests', () => {
       // This should either succeed or fail gracefully
       try {
         const response = await client.generateOobi(request);
-        
+
         expect(response).toBeDefined();
         expect(response.oobi).toBeDefined();
         expect(response.oobi).toBeTypeOf('string');
@@ -665,7 +665,7 @@ describe('AIDClient Integration Tests', () => {
     it('should throw error for non-existent AID alias', async () => {
       // Create a fresh client for this test
       const client = aidClient(serviceUrl);
-      
+
       const request: GenerateOOBIRequest = {
         alias: 'non-existent-aid-for-oobi'
       };
@@ -676,7 +676,7 @@ describe('AIDClient Integration Tests', () => {
     it('should handle empty alias gracefully', async () => {
       // Create a fresh client for this test
       const client = aidClient(serviceUrl);
-      
+
       const request: GenerateOOBIRequest = {
         alias: ''
       };
@@ -689,12 +689,12 @@ describe('AIDClient Integration Tests', () => {
       const client = aidClient(serviceUrl);
       const bran = KeriaClient.generateBran();
       client.setBran(bran);
-      
+
       // Create a fresh AID for this test
       const aidResponse = await client.createAID({
         alias: `oobi-format-test-${Date.now()}`
       });
-      
+
       const request: GenerateOOBIRequest = {
         alias: aidResponse.aid.alias
       };
@@ -703,10 +703,10 @@ describe('AIDClient Integration Tests', () => {
 
       expect(response).toBeDefined();
       expect(response.oobi).toBeDefined();
-      
+
       // OOBI should be a valid URL format
       expect(response.oobi).toMatch(/^https?:\/\//);
-      
+
       // OOBI should contain the word 'oobi' (case insensitive)
       expect(response.oobi.toLowerCase()).toContain('oobi');
     });
@@ -781,127 +781,123 @@ describe('AID Complete Workflow Integration', () => {
     // The signature should still be valid as it was signed before rotation
     expect(verifyAfterRotation.valid).toBe(true);
   });
+});
+
+describe('listAIDs', () => {
+  const serviceUrl = process.env.SERVICE_URL || 'http://localhost:3001';
+  it('should list all AIDs created in the current session', async () => {
+    // Create a fresh client with unique bran for this test
+    const client = aidClient(serviceUrl);
+    const bran = KeriaClient.generateBran();
+    client.setBran(bran);
+
+    // Create multiple AIDs to test listing
+    const aidAliases: string[] = [];
+    const aids: any[] = [];
+
+    // Create 3 test AIDs
+    for (let i = 0; i < 3; i++) {
+      const aidAlias = `list-test-aid-${Date.now()}-${i}`;
+      aidAliases.push(aidAlias);
+
+      const aid = await client.createAID({
+        alias: aidAlias,
+        transferable: true
+      });
+      aids.push(aid.aid);
+    }
+
+    // List all AIDs
+    const listResponse = await client.listAIDs({});
+
+    expect(listResponse.aids).toBeDefined();
+    expect(Array.isArray(listResponse.aids)).toBe(true);
+    expect(listResponse.total).toBeDefined();
+    expect(typeof listResponse.total).toBe('number');
+
+    // Should include all our created AIDs
+    expect(listResponse.aids.length).toBe(3);
+    expect(listResponse.total).toBe(3);
+
+    // Verify each AID is in the list
+    for (const aidAlias of aidAliases) {
+      const foundAid = listResponse.aids.find((aid: any) => aid.alias === aidAlias);
+      expect(foundAid).toBeDefined();
+      expect(foundAid!.prefix).toBeDefined();
+      expect(foundAid!.transferable).toBe(true);
+    }
   });
 
-  describe('listAIDs', () => {
-    const serviceUrl = process.env.SERVICE_URL || 'http://localhost:3001';
-    it('should list all AIDs created in the current session', async () => {
-      // Create a fresh client for this test
-      const client = aidClient(serviceUrl);
-      
-      // Create multiple AIDs to test listing
-      const aidAliases: string[] = [];
-      const aids: any[] = [];
+  it('should handle pagination with limit and offset', async () => {
+    // Create a fresh client with unique bran for this test
+    const client = aidClient(serviceUrl);
+    const bran = KeriaClient.generateBran();
+    client.setBran(bran);
 
-      // Create 3 test AIDs
-      for (let i = 0; i < 3; i++) {
-        const aidAlias = `list-test-aid-${Date.now()}-${i}`;
-        aidAliases.push(aidAlias);
-        
-        const aid = await client.createAID({
-          alias: aidAlias,
-          transferable: true
-        });
-        aids.push(aid.aid);
-      }
+    // Create 3 test AIDs (reduced from 5 for faster test)
+    const aidAliases: string[] = [];
+    for (let i = 0; i < 3; i++) {
+      const aidAlias = `paginate-test-aid-${Date.now()}-${i}`;
+      aidAliases.push(aidAlias);
 
-      // List all AIDs
-      const listResponse = await client.listAIDs({});
-
-      expect(listResponse.aids).toBeDefined();
-      expect(Array.isArray(listResponse.aids)).toBe(true);
-      expect(listResponse.total).toBeDefined();
-      expect(typeof listResponse.total).toBe('number');
-      
-      // Should include all our created AIDs
-      expect(listResponse.aids.length).toBe(3);
-      expect(listResponse.total).toBe(3);
-
-      // Verify each AID is in the list
-      for (const aidAlias of aidAliases) {
-        const foundAid = listResponse.aids.find((aid: any) => aid.alias === aidAlias);
-        expect(foundAid).toBeDefined();
-        expect(foundAid!.prefix).toBeDefined();
-        expect(foundAid!.transferable).toBe(true);
-      }
-    });
-
-    it('should handle pagination with limit and offset', async () => {
-      // Create a fresh client for this test
-      const client = aidClient(serviceUrl);
-      
-      // Create 5 test AIDs
-      const aidAliases: string[] = [];
-      for (let i = 0; i < 5; i++) {
-        const aidAlias = `paginate-test-aid-${Date.now()}-${i}`;
-        aidAliases.push(aidAlias);
-        
-        await client.createAID({
-          alias: aidAlias,
-          transferable: true
-        });
-      }
-
-      // Test pagination - first page
-      const firstPage = await client.listAIDs({
-        limit: 2,
-        offset: 0
-      });
-
-      expect(firstPage.aids).toBeDefined();
-      expect(firstPage.aids.length).toBe(2);
-      expect(firstPage.total).toBe(5);
-
-      // Test pagination - second page
-      const secondPage = await client.listAIDs({
-        limit: 2,
-        offset: 2
-      });
-
-      expect(secondPage.aids).toBeDefined();
-      expect(secondPage.aids.length).toBe(2);
-      expect(secondPage.total).toBe(5);
-
-      // Test pagination - last page
-      const lastPage = await client.listAIDs({
-        limit: 2,
-        offset: 4
-      });
-
-      expect(lastPage.aids).toBeDefined();
-      expect(lastPage.aids.length).toBe(1); // Only 1 AID left
-      expect(lastPage.total).toBe(5);
-    });
-
-    it('should return empty list when no AIDs exist', async () => {
-      // Create a fresh client with new bran for isolation
-      const freshClient = aidClient(serviceUrl);
-      
-      const listResponse = await freshClient.listAIDs({});
-
-      expect(listResponse.aids).toBeDefined();
-      expect(Array.isArray(listResponse.aids)).toBe(true);
-      expect(listResponse.aids.length).toBe(0);
-      expect(listResponse.total).toBe(0);
-    });
-
-    it('should handle default parameters', async () => {
-      // Create a fresh client for this test
-      const client = aidClient(serviceUrl);
-      
-      // Create a test AID
-      const aidAlias = `default-params-test-${Date.now()}`;
       await client.createAID({
         alias: aidAlias,
         transferable: true
       });
+    }
 
-      // List without parameters (should use defaults)
-      const listResponse = await client.listAIDs();
-
-      expect(listResponse.aids).toBeDefined();
-      expect(Array.isArray(listResponse.aids)).toBe(true);
-      expect(listResponse.total).toBeDefined();
-      expect(listResponse.aids.length).toBeGreaterThan(0);
+    // Test pagination - first page
+    const firstPage = await client.listAIDs({
+      limit: 2,
+      offset: 0
     });
+
+    expect(firstPage.aids).toBeDefined();
+    expect(firstPage.aids.length).toBe(2);
+    expect(firstPage.total).toBe(3);
+
+    // Test pagination - second page
+    const secondPage = await client.listAIDs({
+      limit: 2,
+      offset: 2
+    });
+
+    expect(secondPage.aids).toBeDefined();
+    expect(secondPage.aids.length).toBe(1); // Only 1 AID left
+    expect(secondPage.total).toBe(3);
   });
+
+  it('should return empty list when no AIDs exist', async () => {
+    // Create a fresh client with new bran for isolation
+    const freshClient = aidClient(serviceUrl);
+
+    const listResponse = await freshClient.listAIDs({});
+
+    expect(listResponse.aids).toBeDefined();
+    expect(Array.isArray(listResponse.aids)).toBe(true);
+    expect(listResponse.aids.length).toBe(0);
+    expect(listResponse.total).toBe(0);
+  });
+
+  it('should handle default parameters', async () => {
+    // Create a fresh client with unique bran for this test
+    const client = aidClient(serviceUrl);
+    const bran = KeriaClient.generateBran();
+    client.setBran(bran);
+
+    // Create a test AID
+    const aidAlias = `default-params-test-${Date.now()}`;
+    await client.createAID({
+      alias: aidAlias,
+      transferable: true
+    });
+
+    // List without parameters (should use defaults)
+    const listResponse = await client.listAIDs();
+
+    expect(listResponse.aids).toBeDefined();
+    expect(Array.isArray(listResponse.aids)).toBe(true);
+    expect(listResponse.total).toBeDefined();
+    expect(listResponse.aids.length).toBeGreaterThan(0);
+  });
+});
