@@ -781,4 +781,127 @@ describe('AID Complete Workflow Integration', () => {
     // The signature should still be valid as it was signed before rotation
     expect(verifyAfterRotation.valid).toBe(true);
   });
-});
+  });
+
+  describe('listAIDs', () => {
+    const serviceUrl = process.env.SERVICE_URL || 'http://localhost:3001';
+    it('should list all AIDs created in the current session', async () => {
+      // Create a fresh client for this test
+      const client = aidClient(serviceUrl);
+      
+      // Create multiple AIDs to test listing
+      const aidAliases: string[] = [];
+      const aids: any[] = [];
+
+      // Create 3 test AIDs
+      for (let i = 0; i < 3; i++) {
+        const aidAlias = `list-test-aid-${Date.now()}-${i}`;
+        aidAliases.push(aidAlias);
+        
+        const aid = await client.createAID({
+          alias: aidAlias,
+          transferable: true
+        });
+        aids.push(aid.aid);
+      }
+
+      // List all AIDs
+      const listResponse = await client.listAIDs({});
+
+      expect(listResponse.aids).toBeDefined();
+      expect(Array.isArray(listResponse.aids)).toBe(true);
+      expect(listResponse.total).toBeDefined();
+      expect(typeof listResponse.total).toBe('number');
+      
+      // Should include all our created AIDs
+      expect(listResponse.aids.length).toBe(3);
+      expect(listResponse.total).toBe(3);
+
+      // Verify each AID is in the list
+      for (const aidAlias of aidAliases) {
+        const foundAid = listResponse.aids.find((aid: any) => aid.alias === aidAlias);
+        expect(foundAid).toBeDefined();
+        expect(foundAid!.prefix).toBeDefined();
+        expect(foundAid!.transferable).toBe(true);
+      }
+    });
+
+    it('should handle pagination with limit and offset', async () => {
+      // Create a fresh client for this test
+      const client = aidClient(serviceUrl);
+      
+      // Create 5 test AIDs
+      const aidAliases: string[] = [];
+      for (let i = 0; i < 5; i++) {
+        const aidAlias = `paginate-test-aid-${Date.now()}-${i}`;
+        aidAliases.push(aidAlias);
+        
+        await client.createAID({
+          alias: aidAlias,
+          transferable: true
+        });
+      }
+
+      // Test pagination - first page
+      const firstPage = await client.listAIDs({
+        limit: 2,
+        offset: 0
+      });
+
+      expect(firstPage.aids).toBeDefined();
+      expect(firstPage.aids.length).toBe(2);
+      expect(firstPage.total).toBe(5);
+
+      // Test pagination - second page
+      const secondPage = await client.listAIDs({
+        limit: 2,
+        offset: 2
+      });
+
+      expect(secondPage.aids).toBeDefined();
+      expect(secondPage.aids.length).toBe(2);
+      expect(secondPage.total).toBe(5);
+
+      // Test pagination - last page
+      const lastPage = await client.listAIDs({
+        limit: 2,
+        offset: 4
+      });
+
+      expect(lastPage.aids).toBeDefined();
+      expect(lastPage.aids.length).toBe(1); // Only 1 AID left
+      expect(lastPage.total).toBe(5);
+    });
+
+    it('should return empty list when no AIDs exist', async () => {
+      // Create a fresh client with new bran for isolation
+      const freshClient = aidClient(serviceUrl);
+      
+      const listResponse = await freshClient.listAIDs({});
+
+      expect(listResponse.aids).toBeDefined();
+      expect(Array.isArray(listResponse.aids)).toBe(true);
+      expect(listResponse.aids.length).toBe(0);
+      expect(listResponse.total).toBe(0);
+    });
+
+    it('should handle default parameters', async () => {
+      // Create a fresh client for this test
+      const client = aidClient(serviceUrl);
+      
+      // Create a test AID
+      const aidAlias = `default-params-test-${Date.now()}`;
+      await client.createAID({
+        alias: aidAlias,
+        transferable: true
+      });
+
+      // List without parameters (should use defaults)
+      const listResponse = await client.listAIDs();
+
+      expect(listResponse.aids).toBeDefined();
+      expect(Array.isArray(listResponse.aids)).toBe(true);
+      expect(listResponse.total).toBeDefined();
+      expect(listResponse.aids.length).toBeGreaterThan(0);
+    });
+  });

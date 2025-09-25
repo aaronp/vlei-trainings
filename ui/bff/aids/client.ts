@@ -1,6 +1,6 @@
 import { treaty } from '@elysiajs/eden';
 import type { aidsRoutes } from './index';
-import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest, GenerateOOBIRequest } from './types';
+import type { AID, CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest, GenerateOOBIRequest, ListAIDsRequest } from './types';
 
 // Type for the combined routes
 type AidApi = typeof aidsRoutes;
@@ -35,6 +35,43 @@ export class AIDClient {
 
     if (response.error) {
       throw new Error(`Failed to create AID: ${response.error.value}`);
+    }
+
+    // Extract bran from response headers if present
+    const responseBran = response.headers?.['x-keria-bran'];
+    if (responseBran) {
+      this.bran = responseBran; // Update stored bran
+    }
+
+    return {
+      ...response.data,
+      bran: responseBran
+    };
+  }
+
+  // List all AIDs
+  async listAIDs(request: ListAIDsRequest = {}): Promise<{ aids: AID[]; total: number; bran?: string }> {
+    const headers: Record<string, string> = {};
+    if (this.bran) {
+      headers['x-keria-bran'] = this.bran;
+    }
+
+    const query: Record<string, string> = {};
+    
+    if (request.limit !== undefined) {
+      query.limit = request.limit.toString();
+    }
+    if (request.offset !== undefined) {
+      query.offset = request.offset.toString();
+    }
+
+    const response = await this.client.aids.get({ 
+      query: query as any,
+      headers 
+    });
+
+    if (response.error) {
+      throw new Error(`Failed to list AIDs: ${response.error.value}`);
     }
 
     // Extract bran from response headers if present

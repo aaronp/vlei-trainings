@@ -187,3 +187,25 @@ export const GenerateOOBIResponseSchema = t.Object({
   alias: t.String(),
   prefix: t.String()
 });
+
+// List AIDs Request and Response
+export interface ListAIDsRequest {
+  limit?: number;
+  offset?: number;
+}
+
+export interface ListAIDsResponse {
+  aids: AID[];
+  total: number;
+}
+
+// List AIDs Schemas
+export const ListAIDsRequestSchema = t.Object({
+  limit: t.Optional(t.Integer({ default: 100, minimum: 1, maximum: 1000 })),
+  offset: t.Optional(t.Integer({ default: 0, minimum: 0 }))
+});
+
+export const ListAIDsResponseSchema = t.Object({
+  aids: t.Array(AIDSchema),
+  total: t.Integer()
+});

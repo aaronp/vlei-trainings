@@ -1,5 +1,5 @@
 import { Elysia, t } from 'elysia';
-import type { CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest, GenerateOOBIRequest } from './types';
+import type { CreateAIDRequest, SignRequest, VerifyRequest, RotateRequest, EventsRequest, GenerateOOBIRequest, ListAIDsRequest } from './types';
 import {
   CreateAIDRequestSchema,
   CreateAIDResponseSchema,
@@ -13,6 +13,8 @@ import {
   EventsResponseSchema,
   GenerateOOBIRequestSchema,
   GenerateOOBIResponseSchema,
+  ListAIDsRequestSchema,
+  ListAIDsResponseSchema,
 } from './types';
 import { aidContext } from './context';
 import { branContext } from '../middleware/branContext';
@@ -20,6 +22,22 @@ import { branContext } from '../middleware/branContext';
 export const aidsRoutes = new Elysia({ prefix: '/aids' })
   .use(aidContext)
   .use(branContext)
+  // List all AIDs
+  .get('/', async ({ query, aidRegistry, headers, bran }) => {
+    const request = query as ListAIDsRequest;
+    const timeoutMs = headers['x-timeout'] ? parseInt(headers['x-timeout'] as string, 10) : 2000;
+    const result = await aidRegistry.listAids(request, timeoutMs, bran);
+    return result;
+  }, {
+    query: ListAIDsRequestSchema,
+    response: {
+      200: ListAIDsResponseSchema
+    },
+    detail: {
+      tags: ['AID'],
+      description: 'List all created Autonomic Identifiers',
+    },
+  })
   // Create transferable AID
   .post('/', async ({ body, aidRegistry, headers, bran }) => {
     const request = body as CreateAIDRequest;
