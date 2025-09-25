@@ -15,6 +15,9 @@ help:
 	@echo "  make run               - Run the containerized app on port 3000"
 	@echo "  make stop-ui           - Stop and remove the containerized UI"
 
+dev:
+	npm run dev
+
 test:
 	npm run test:integration
 

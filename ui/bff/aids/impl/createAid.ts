@@ -24,7 +24,10 @@ export async function createAid(
     // Merge request parameters with template, with request taking precedence
     const isTransferable = request.transferable ?? templateConfig.transferable;
     // Non-transferable AIDs cannot have witnesses
-    const wits = isTransferable ? (request.wits || templateConfig.wits) : [];
+    // Use template witnesses if request.wits is undefined or empty
+    const wits = isTransferable ? 
+      (request.wits !== undefined && request.wits.length > 0 ? request.wits : templateConfig.wits) : 
+      [];
     const toad = isTransferable && wits.length > 0 ? templateConfig.toad : 0;
     const icount = request.icount ?? templateConfig.icount;
     const ncount = request.ncount ?? templateConfig.ncount;
